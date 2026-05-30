@@ -365,7 +365,7 @@ function CasoPageContent() {
 
   const abas = [
     { id: "paciente" as const, label: "Paciente", icon: "💬" },
-    { id: "exame" as const, label: "Exame", icon: "🩺" },
+    { id: "exame" as const, label: "Exame", icon: "🥼" },
     { id: "exames" as const, label: "Exames", icon: "🧪" },
     { id: "soap" as const, label: "SOAP", icon: "📝" },
   ];

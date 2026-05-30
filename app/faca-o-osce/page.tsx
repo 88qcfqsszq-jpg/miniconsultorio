@@ -18,7 +18,7 @@ export default function FacaOOSCE() {
       <div className="max-w-2xl mx-auto px-4 py-10 sm:py-14">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🎯</div>
+          <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🩺</div>
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">
             Prova OSCE
           </h1>
@@ -38,7 +38,7 @@ export default function FacaOOSCE() {
           <div className="grid grid-cols-3 gap-3 mb-6">
             {[
               { icon: "💬", label: "Anamnese" },
-              { icon: "🩺", label: "Exame Físico" },
+              { icon: "🥼", label: "Exame Físico" },
               { icon: "🧠", label: "Diagnóstico" },
             ].map((item) => (
               <div key={item.label} className="bg-slate-50 rounded-xl p-3 text-center border border-slate-200">

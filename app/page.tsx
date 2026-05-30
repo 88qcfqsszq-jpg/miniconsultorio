@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const features = [
   { icon: "💬", label: "Paciente Virtual", desc: "Chat natural com IA treinada para responder como paciente real" },
-  { icon: "🩺", label: "Exame Físico", desc: "Manobras interativas por sistema: cardiovascular, respiratório e mais" },
+  { icon: "🥼", label: "Exame Físico", desc: "Manobras interativas por sistema: cardiovascular, respiratório e mais" },
   { icon: "🧪", label: "Exames Complementares", desc: "Solicite ECG, hemograma, troponina e receba resultados contextualizados" },
   { icon: "📊", label: "Feedback por IA", desc: "Análise detalhada de anamnese, raciocínio, conduta e comunicação" },
   { icon: "📚", label: "Plano de Estudo", desc: "Tópicos personalizados com base nos seus erros e lacunas" },
@@ -49,7 +49,7 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-12">
           <Link href="/faca-o-osce" className="group">
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 h-full hover:shadow-md hover:border-blue-200 transition-all">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mb-5">🎯</div>
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mb-5">🩺</div>
               <h2 className="text-xl font-bold text-slate-800 mb-2">Prova OSCE</h2>
               <p className="text-slate-500 text-sm leading-relaxed mb-5">
                 Paciente aleatório <strong className="text-slate-700">sem diagnóstico revelado</strong>. Anamnese real, exame físico, hipóteses e conduta — igual ao OSCE da faculdade.
