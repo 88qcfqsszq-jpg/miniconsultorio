@@ -216,7 +216,7 @@ export default function PainelGerarCaso({
 
       {/* Aviso */}
       <p className="mt-4 text-xs text-gray-600 text-center">
-        Cada caso é único e gerado por IA. A qualidade depende do OpenAI API.
+        Cada caso é único e gerado por IA.
       </p>
     </div>
   );
