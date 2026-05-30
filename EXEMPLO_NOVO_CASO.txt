@@ -1,0 +1,399 @@
+// EXEMPLO: Como Adicionar um Novo Caso
+// Copie e adapte esta estrutura para novos casos
+
+{
+  // ====== IDENTIFICAÇÃO ======
+  id: "4",
+  titulo: "Dispneia em Insuficiência Cardíaca",
+  sistema: "Cardiovascular",
+  tema: "Dispneia Aguda",
+  nivel: "avancado",
+  tipo_estacao: "integrada",
+  tempo_osce_minutos: 15,
+  objetivo_pedagogico: "Reconhecer sinais de descompensação cardíaca e iniciar terapia apropriada",
+
+  // ====== DADOS VISÍVEIS AO ESTUDANTE ======
+  dados_visiveis_ao_estudante: {
+    nome_paciente: "Maria Silva",
+    idade: 68,
+    sexo: "Feminino",
+    queixa_principal: "Falta de ar ao esforço há 1 semana",
+    historia_breve: "Paciente com história de infarto há 5 anos, agora com dispneia progressiva",
+  },
+
+  // ====== DADOS OCULTOS DO SISTEMA ======
+  dados_ocultos_do_sistema: {
+    diagnostico_principal: "Insuficiência Cardíaca Congestiva com Edema Pulmonar Agudo",
+    diagnosticos_diferenciais: [
+      "Embolia Pulmonar",
+      "Pneumonia",
+      "Asma",
+      "Pericardite",
+    ],
+    sindromes_associadas: ["Síndrome de Baixo Débito Cardíaco"],
+  },
+
+  // ====== DADOS DE COMPATIBILIDADE (sistema anterior) ======
+  descricaoBreve: "Paciente com insuficiência cardíaca descompensada",
+  categoria: "IC", // Pode usar novo valor
+  paciente: {
+    id: "pac-004",
+    nome: "Maria Silva",
+    idade: 68,
+    sexo: "F",
+    queixaPrincipal: "Falta de ar ao esforço há 1 semana",
+    historicoDoenca: "Infarto anterior, com redução de FEVE",
+    antecedentes: [
+      "Infarto do Miocárdio (2019)",
+      "Hipertensão",
+      "Diabetes tipo 2",
+    ],
+    profissao: "Aposentada",
+    estado_civil: "Viúva",
+    alergias: ["Penicilina"],
+    medicamentos_em_uso: [
+      "Enalapril 10mg",
+      "Carvedilol 25mg",
+      "Furosemida 40mg",
+    ],
+  },
+
+  // ====== RESPOSTAS DO PACIENTE VIRTUAL ======
+  respostas_do_paciente: {
+    inicial:
+      "Doutor/a, tô muito fraca, não consigo nem subir escada sem ficar muito cansada.",
+    dispneia:
+      "Sim, muito! Começo a respirar pesado logo que fico de pé ou faço qualquer esforço.",
+    noturno:
+      "Sim, acordo à noite com falta de ar, tenho que levantar e respirar fundo.",
+    inchaço:
+      "Meus pés e pernas estão inchadíssimos, principalmente à noite.",
+    ganho_peso: "Sim, ganhei 3 quilos em uma semana.",
+    tosse: "Tenho uma tosse seca à noite que me acorda.",
+    pressao: "Minha pressão sempre fica alta.",
+    fadiga: "Estou muito cansada para fazer as coisas.",
+    urinacao: "Estou urinando muito durante a noite.",
+  },
+  respostaPaciente: {
+    // compatibilidade
+    inicial:
+      "Doutor/a, tô muito fraca, não consigo nem subir escada sem ficar muito cansada.",
+    dispneia:
+      "Sim, muito! Começo a respirar pesado logo que fico de pé ou faço qualquer esforço.",
+  },
+
+  // ====== SINAIS VITAIS ======
+  sinais_vitais: {
+    corretos: {
+      pressaoArterial: "165/95 mmHg",
+      frequenciaCardiaca: 105,
+      frequenciaRespiratoria: 28,
+      temperatura: 36.8,
+      saturacaoOxigenio: 90,
+      peso: 78,
+      altura: 165,
+      imc: 28.6,
+    },
+    variacoes: {
+      baseline: {
+        pressaoArterial: "140/85 mmHg",
+        frequenciaCardiaca: 80,
+        frequenciaRespiratoria: 16,
+        temperatura: 36.5,
+        saturacaoOxigenio: 98,
+      },
+      apos_repouso: {
+        pressaoArterial: "150/90 mmHg",
+        frequenciaCardiaca: 92,
+        frequenciaRespiratoria: 20,
+        temperatura: 36.7,
+        saturacaoOxigenio: 94,
+      },
+    },
+  },
+  sinaisVitaisCorretos: {
+    pressaoArterial: "165/95 mmHg",
+    frequenciaCardiaca: 105,
+    frequenciaRespiratoria: 28,
+    temperatura: 36.8,
+    saturacaoOxigenio: 90,
+  },
+
+  // ====== EXAME FÍSICO ======
+  exame_fisico: {
+    correto: {
+      inspecao:
+        "Paciente dispneica, taquipneica, com leve cianose de extremidades. Edema de membros inferiores bilateral.",
+      palpacao:
+        "Pulso irregular, débil. Presença de edema 2+ em tornozelos. Hepatomegalia palpável.",
+      ausculta:
+        "Taquidispneia. Crepitações bibasais. Foco de segunda bulha reforçada. Sopro sistólico em ápice sugestivo de insuficiência mitral.",
+      percussao: "Macicez em bases pulmonares bilateralmente.",
+      observacoes:
+        "Sinais de congestão pulmonar aguda e insuficiência cardíaca descompensada",
+      regiao: "Precórdio e Pulmões",
+      achados_positivos: [
+        "Crepitações",
+        "Edema",
+        "Hepatomegalia",
+        "Sopro sistólico",
+      ],
+      achados_negativos: ["Estertores crepitantes finas", "Sibilos"],
+    },
+  },
+  exameFisicoCorreto: {
+    inspecao: "Paciente dispneica, edema bilateral de membros inferiores",
+    palpacao: "Hepatomegalia, edema periférico",
+    ausculta: "Crepitações bibasais, sopro sistólico",
+    percussao: "Macicez em bases",
+    observacoes: "Sinais de congestão pulmonar e IC descompensada",
+  },
+
+  // ====== EXAMES COMPLEMENTARES ======
+  exames_complementares_disponiveis: [
+    {
+      nome: "ECG (Eletrocardiograma)",
+      descricao: "12 derivações",
+      resultado:
+        "Fibrilação atrial, espaçamento atrioventricular discretamente prolongado",
+      valor_referencia: "Ritmo sinusal regular",
+      interpretacao: "Arritmia cardíaca",
+    },
+    {
+      nome: "Ecocardiograma",
+      descricao: "Ultrassom cardíaco com Doppler",
+      resultado: "FEVE 35%, dilatação de câmaras, insuficiência mitral moderada",
+      valor_referencia: "FEVE >50%, câmaras normais",
+      interpretacao: "Cardiomiopatia com disfunção sistólica",
+    },
+    {
+      nome: "BNP (Peptídeo Natriurético)",
+      descricao: "Marcador de falência cardíaca",
+      resultado: "580 pg/mL",
+      valor_referencia: "<100 pg/mL",
+      interpretacao: "Elevado, confirma IC",
+    },
+    {
+      nome: "Radiografia de Tórax",
+      descricao: "PA e perfil",
+      resultado: "Cardiomegalia, infiltrados pulmonares bilaterais, derrame pleural",
+      valor_referencia: "Normal",
+      interpretacao: "Edema pulmonar agudo",
+    },
+    {
+      nome: "Hemograma",
+      descricao: "Série de glóbulos",
+      resultado: "Hb 11.5 g/dL, Ht 36%, Leucócitos 7.500/mm³",
+      valor_referencia: "Hb 12-16 g/dL (F)",
+      interpretacao: "Anemia leve",
+    },
+  ],
+
+  // ====== HIPÓTESES DIAGNÓSTICAS ======
+  hipoteses_diagnosticas_esperadas: [
+    {
+      diagnostico: "Insuficiência Cardíaca Congestiva com Edema Pulmonar Agudo",
+      probabilidade: 95,
+      criterios_minimos: [
+        "Dispneia progressiva",
+        "Edema periférico",
+        "Crepitações bilaterais",
+        "BNP elevado",
+        "Cardiomegalia em RX",
+      ],
+    },
+  ],
+
+  // ====== DIAGNÓSTICOS DIFERENCIAIS ======
+  diagnosticos_diferenciais: [
+    {
+      diagnostico: "Embolia Pulmonar",
+      criterios_exclusao: [
+        "Edema periférico",
+        "Hepatomegalia",
+        "Cardiomegalia",
+      ],
+      achados_que_descartam: ["Crepitações bibasais"],
+    },
+  ],
+  examesIndicados: [
+    "ECG",
+    "Ecocardiograma",
+    "BNP",
+    "Radiografia de Tórax",
+  ],
+
+  // ====== CONDUTA ======
+  conduta_esperada: {
+    imediata: [
+      "Repouso em posição semi-recumbente",
+      "Oxigenioterapia para SpO2 >94%",
+      "Acesso IV",
+      "Diurético IV (furosemida 40-80mg)",
+      "Monitorização cardíaca contínua",
+    ],
+    curto_prazo: [
+      "Ajuste de medicações (IECA, betabloqueador)",
+      "Restrição hídrica (<1.5L/dia)",
+      "Restrição de sódio",
+      "Investigação de causas de descompensação",
+    ],
+    longo_prazo: [
+      "Seguimento cardiológico regular",
+      "Programa de reabilitação cardíaca",
+      "Educação do paciente sobre dieta e medicações",
+      "Investigação para transplante se avançado",
+    ],
+    encaminhamentos: ["Cardiologia", "Nursing de IC"],
+  },
+  condutaCorreta:
+    "Diurético IV, oxigenioterapia, posicionamento, monitorização contínua, ajuste medicamentoso",
+
+  // ====== CRITÉRIOS DE GRAVIDADE ======
+  criterios_de_gravidade: [
+    {
+      severidade: "grave",
+      sinais: ["SpO2 <85%", "Confusão mental", "Pressão sistólica <90"],
+      descricao: "Choque cardiogênico com insuficiência de órgãos",
+      recomendacao: "UTI, suporte inotrópico, possível ECMO",
+    },
+    {
+      severidade: "moderada",
+      sinais: ["SpO2 88-92%", "Crepitações bibasais", "Ortopneia"],
+      descricao: "Edema pulmonar agudo",
+      recomendacao: "Internação, diurético IV, oxigenioterapia",
+    },
+  ],
+
+  // ====== ERROS CRÍTICOS ======
+  erros_criticos: [
+    {
+      erro: "Não dar diurético",
+      descricao: "Diurético é essencial em IC descompensada",
+      penalidade: 2.5,
+      evitavel: true,
+    },
+    {
+      erro: "Não reconhecer sinais de edema pulmonar",
+      descricao: "Crepitações são sinal cardinal de congestão",
+      penalidade: 2,
+      evitavel: true,
+    },
+  ],
+
+  // ====== CHECKLIST OSCE ======
+  checklist_osce: [
+    {
+      item: "Perguntou sobre dispneia noturna",
+      realizado: false,
+      critico: true,
+    },
+    {
+      item: "Perguntou sobre ganho de peso recente",
+      realizado: false,
+      critico: true,
+    },
+    {
+      item: "Mediu sinais vitais com SpO2",
+      realizado: false,
+      critico: true,
+    },
+    { item: "Realizou palpação do fígado", realizado: false, critico: true },
+    { item: "Solicitou ECG", realizado: false, critico: true },
+    { item: "Solicitou ecocardiograma", realizado: false, critico: true },
+    { item: "Iniciou diurético", realizado: false, critico: true },
+    { item: "Explicou plano ao paciente", realizado: false, critico: false },
+  ],
+
+  // ====== RÚBRICA ======
+  rubrica_correcao: [
+    {
+      criterio: "Reconhecimento de IC",
+      peso: 20,
+      descricao: "Identificação da síndrome congestiva",
+      pontuacao_maxima: 20,
+    },
+    {
+      criterio: "Terapia Diurética",
+      peso: 25,
+      descricao: "Prescrição e dose apropriada",
+      pontuacao_maxima: 25,
+    },
+    {
+      criterio: "Exames Complementares",
+      peso: 20,
+      descricao: "Seleção apropriada",
+      pontuacao_maxima: 20,
+    },
+  ],
+
+  // ====== MODELO SOAP ======
+  modelo_soap: {
+    subjetivo: {
+      secao: "S",
+      componentes_obrigatorios: [
+        "Dispneia progressiva",
+        "Sintomas noturnos",
+        "Edema",
+        "História de IC anterior",
+      ],
+    },
+    objetivo: {
+      secao: "O",
+      componentes_obrigatorios: [
+        "Sinais vitais com SpO2",
+        "Edema periférico",
+        "Ausculta (crepitações, sopro)",
+        "ECG",
+        "BNP",
+      ],
+    },
+    avaliacao: {
+      secao: "A",
+      componentes_obrigatorios: [
+        "IC descompensada",
+        "FEVE reduzida",
+        "Cause investigação",
+      ],
+    },
+    plano: {
+      secao: "P",
+      componentes_obrigatorios: [
+        "Diurético",
+        "Oxigenioterapia",
+        "Restrição hídrica",
+        "Follow-up cardiologia",
+      ],
+    },
+  },
+
+  // ====== FEEDBACK ======
+  feedback_modelo: {
+    acertos_esperados: [
+      "Reconheceu sinais de congestão",
+      "Solicitou ecocardiograma",
+      "Iniciou diurético",
+      "Considerou fibrilação atrial",
+    ],
+    erros_comuns: [
+      "Não considerar causa da descompensação",
+      "Dose inadequada de diurético",
+      "Não reconhecer ortopneia",
+    ],
+    orientacoes_pedagogicas: [
+      "IC: Cardiomegalia, crepitações, edema, dispneia",
+      "Sempre solicite ecocardiograma para avaliar FEVE",
+      "Fibrilação atrial é causa comum de descompensação",
+      "Diurético é o primeiro passo terapêutico",
+    ],
+  },
+
+  // ====== COMPATIBILIDADE ======
+  feedbackPadrao: {
+    nota: 0,
+    acertos: ["Reconheceu sinais de congestão"],
+    erros: ["Não iniciou diurético"],
+    orientacaoDidata: "IC descompensada requer diurético IV urgente",
+  },
+  diagnosticoCorreto: "Insuficiência Cardíaca Congestiva",
+}

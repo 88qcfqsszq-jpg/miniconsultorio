@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏥 Mini Consultório OSCE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar-container">
+      <div class="navbar-brand">🏥 Mini Consultório OSCE</div>
+      <div class="navbar-links">
+        <button data-screen="home" class="active">Início</button>
+        <button data-screen="prova">Prova OSCE</button>
+        <button data-screen="treinamento">Treinamento</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Tela Home -->
+    <div id="tela-home" class="screen active">
+      <div class="hero">
+        <h1>🏥 Mini Consultório OSCE</h1>
+        <p>Ferramenta de treinamento para simulação clínica estruturada</p>
+      </div>
+
+      <div class="cta-buttons">
+        <div class="cta-card">
+          <h2>🎯 Prova OSCE</h2>
+          <p>Receba um paciente aleatório sem conhecer o diagnóstico. Conduza uma anamnese real, solicite exames e formule sua hipótese diagnóstica.</p>
+          <button class="btn" id="btn-prova">Iniciar Simulado Aleatório</button>
+        </div>
+
+        <div class="cta-card">
+          <h2>📚 Treinamento</h2>
+          <p>Escolha um caso específico por tema. Ideal para treino direcionado e aprofundamento em diagnósticos específicos.</p>
+          <button class="btn" id="btn-treinamento">Ver Casos Disponíveis</button>
+        </div>
+      </div>
+
+      <div style="background: white; padding: 2rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;">ℹ️ Sobre esta Versão</h3>
+        <p style="color: var(--text-light); margin-bottom: 0.5rem;">
+          Esta é uma versão estática do Mini Consultório OSCE para GitHub Pages. Funciona completamente no navegador sem depender de servidores.
+        </p>
+        <p style="color: var(--text-light);">
+          Os dados são simulados e o feedback é gerado localmente. Para a versão completa com IA, visite o projeto principal em Next.js.
+        </p>
+      </div>
+    </div>
+
+    <!-- Tela Prova (renderizada dinamicamente) -->
+    <div id="tela-prova" class="screen"></div>
+
+    <!-- Tela Treinamento -->
+    <div id="tela-treinamento" class="screen">
+      <h2>📚 Casos de Treinamento</h2>
+      <p style="color: var(--text-light); margin-bottom: 2rem;">Clique em um caso para começar a simulação.</p>
+      <div class="casos-grid" id="container-casos"></div>
+    </div>
+
+    <!-- Tela Atendimento -->
+    <div id="tela-atendimento" class="screen">
+      <h2 class="panel-title">Atendimento Clínico</h2>
+
+      <!-- Info do Paciente -->
+      <div style="background: #f0fdf4; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+        <strong id="info-paciente">Carregando...</strong>
+      </div>
+
+      <!-- Grid Principal -->
+      <div class="atendimento-grid">
+        <!-- Chat -->
+        <div class="panel">
+          <div class="panel-title">💬 Chat com o Paciente</div>
+          <div class="chat-container">
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input">
+              <input type="text" id="input-chat" placeholder="Faça uma pergunta...">
+              <button id="btn-microfone" class="btn-small" title="Clique para falar" style="display: none;">🎙️</button>
+              <button id="btn-enviar-chat" class="btn-small">Enviar</button>
+            </div>
+            <div id="msg-voz" style="display: none; margin-top: 0.5rem; padding: 0.5rem; background: #dbeafe; border: 1px solid #3b82f6; border-radius: 0.375rem; font-size: 0.875rem; color: #1e40af;"></div>
+          </div>
+        </div>
+
+        <!-- Sinais Vitais -->
+        <div class="panel">
+          <div class="panel-title">📊 Sinais Vitais</div>
+          <button class="btn btn-small" id="btn-solicitar-vitais" style="margin-bottom: 1rem;">Solicitar Sinais</button>
+          <div class="vitals-grid" id="vitals-container">
+            <p style="color: var(--text-light); grid-column: 1 / -1;">Clique para solicitar sinais vitais</p>
+          </div>
+        </div>
+
+        <!-- Exame Físico -->
+        <div class="panel">
+          <div class="panel-title">🔍 Exame Físico</div>
+          <div class="exam-input-group">
+            <select id="select-secao">
+              <option value="geral">Geral</option>
+              <option value="cardiovascular">Cardiovascular</option>
+              <option value="respiratorio">Respiratório</option>
+              <option value="abdominal">Abdominal</option>
+              <option value="membros">Membros</option>
+            </select>
+            <input type="text" id="input-manobra" placeholder="Digite a manobra...">
+            <button class="btn-small" id="btn-realizar-manobra">Realizar</button>
+          </div>
+          <div class="findings-list" id="findings-list"></div>
+        </div>
+      </div>
+
+      <!-- Formulário -->
+      <div class="panel" style="margin-top: 1.5rem;">
+        <div class="panel-title">📋 Avaliação Clínica</div>
+
+        <!-- SOAP -->
+        <h3 style="margin-top: 1rem; margin-bottom: 1rem;">SOAP (Método de Registro)</h3>
+
+        <div class="form-group">
+          <label>Subjetivo (O que o paciente relata)</label>
+          <textarea id="input-subjetivo" placeholder="Resuma o que o paciente contou..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Objetivo (O que você observou/mediu)</label>
+          <textarea id="input-objetivo" placeholder="Sinais vitais, achados do exame..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Avaliação (Sua interpretação)</label>
+          <textarea id="input-avaliacao" placeholder="O que você pensa que está acontecendo..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Plano (Como você vai proceder)</label>
+          <textarea id="input-plano" placeholder="Exames, tratamento, seguimento..."></textarea>
+        </div>
+
+        <!-- Diagnóstico -->
+        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Diagnóstico e Conduta</h3>
+
+        <div class="form-group">
+          <label>Hipótese Diagnóstica Principal *</label>
+          <input type="text" id="input-hipotese" placeholder="Ex: Síndrome Coronariana Aguda">
+        </div>
+
+        <div class="form-group">
+          <label>Diagnósticos Diferenciais</label>
+          <div class="exam-input-group">
+            <input type="text" id="input-diferencial" placeholder="Digite um diagnóstico...">
+            <button class="btn-small" id="btn-add-diferencial">Adicionar</button>
+          </div>
+          <div class="tags-container" id="tags-diferenciais"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Exames Complementares</label>
+          <div class="exam-input-group">
+            <input type="text" id="input-exame" placeholder="Ex: ECG, Troponina...">
+            <button class="btn-small" id="btn-add-exame">Adicionar</button>
+          </div>
+          <div class="tags-container" id="tags-exames"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Conduta *</label>
+          <textarea id="input-conduta" placeholder="Descreva seu plano de tratamento..."></textarea>
+        </div>
+
+        <button class="btn btn-success" id="btn-finalizar" style="margin-top: 1.5rem;">
+          Finalizar Atendimento e Ver Feedback
+        </button>
+      </div>
+
+      <!-- Feedback Container (renderizado dinamicamente) -->
+      <div id="feedback-container"></div>
+    </div>
+  </div>
+
+  <!-- Modal de Loading -->
+  <div id="loading-modal" class="modal">
+    <div class="modal-content">
+      <div class="spinner"></div>
+      <h2 style="margin-bottom: 1rem;">Gerando Feedback</h2>
+      <p id="loading-message">Iniciando análise...</p>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-text">0%</div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

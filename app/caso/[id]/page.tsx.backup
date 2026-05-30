@@ -1,0 +1,349 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { useParams, useSearchParams } from "next/navigation";
+import ChatPaciente from "@/components/ChatPaciente";
+import PainelExameFisico from "@/components/PainelExameFisico";
+import FormularioSOAP from "@/components/FormularioSOAP";
+import FeedbackOSCE from "@/components/FeedbackOSCE";
+import LoadingFeedback from "@/components/LoadingFeedback";
+import { casosOSCE } from "@/data/casos-osce";
+import type {
+  Caso,
+  MensagemChat,
+  DiagnosticoFormulario,
+  FormularioSOAP as FormularioSOAPType,
+  FeedbackOSCE as FeedbackOSCEType,
+  ManobraRealizada,
+} from "@/lib/types";
+
+type AtendimentoPhase = "anamnese" | "feedback";
+
+function CasoPageContent() {
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const casoId = params.id as string;
+  const modoOSCE = searchParams.get("modo") === "osce";
+
+  const [caso, setCaso] = useState<Caso | null>(null);
+  const [phase, setPhase] = useState<AtendimentoPhase>("anamnese");
+  const [tempoInicio, setTempoInicio] = useState<number>(Date.now());
+  const [tempoDecorrido, setTempoDecorrido] = useState<number>(0);
+  const [sinaisVitaisSolicitados, setSinaisVitaisSolicitados] =
+    useState(false);
+  const [manobrasSolicitadas, setManobrasSolicitadas] = useState<ManobraRealizada[]>([]);
+  const [feedback, setFeedback] = useState<FeedbackOSCEType | null>(null);
+  const [carregandoFeedback, setCarregandoFeedback] = useState(false);
+  const [mensagens, setMensagens] = useState<MensagemChat[]>([]);
+
+  const exameFisicoSolicitado = manobrasSolicitadas.length > 0;
+
+  const handleNovaManobra = useCallback((manobra: ManobraRealizada) => {
+    setManobrasSolicitadas(prev => [...prev, manobra]);
+  }, []);
+
+  // Carregar caso
+  useEffect(() => {
+    const casoEncontrado = casosOSCE.find((c) => c.id === casoId);
+    if (casoEncontrado) {
+      setCaso(casoEncontrado);
+      setTempoInicio(Date.now());
+    }
+  }, [casoId]);
+
+  // Timer do atendimento
+  useEffect(() => {
+    if (phase === "anamnese") {
+      const interval = setInterval(() => {
+        setTempoDecorrido(Math.floor((Date.now() - tempoInicio) / 1000));
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [phase, tempoInicio]);
+
+  const calcularNota = useCallback(
+    (soap: FormularioSOAPType, diagnostico: DiagnosticoFormulario): number => {
+      let nota = 6; // Base
+
+      if (!caso) return nota;
+
+      // Avaliação do Subjetivo
+      if (
+        soap.subjetivo
+          .toLowerCase()
+          .includes("dor") ||
+        soap.subjetivo.toLowerCase().includes("início")
+      ) {
+        nota += 0.5;
+      }
+
+      // Avaliação do Objetivo
+      if (sinaisVitaisSolicitados && exameFisicoSolicitado) {
+        nota += 1;
+      }
+
+      // Avaliação da Hipótese Diagnóstica
+      const diagCorreto = caso.diagnosticoCorreto || caso.dados_ocultos_do_sistema.diagnostico_principal;
+      if (
+        diagnostico.hipotesePrincipal.toLowerCase() ===
+        diagCorreto.toLowerCase()
+      ) {
+        nota += 2;
+      } else if (
+        diagnostico.diagnosticosDisferenciais
+          .join(" ")
+          .toLowerCase()
+          .includes(diagCorreto.toLowerCase())
+      ) {
+        nota += 1;
+      }
+
+      // Avaliação dos Exames
+      const examesIndicados = caso.examesIndicados || [];
+      const examesCorretos = examesIndicados.filter((exame) =>
+        diagnostico.examesIndicados
+          .join(" ")
+          .toLowerCase()
+          .includes(exame.toLowerCase())
+      );
+      nota += examesCorretos.length * 0.5;
+
+      // Avaliação da Conduta
+      if (
+        soap.plano.length > 50 &&
+        diagnostico.conduta.length > 50
+      ) {
+        nota += 1;
+      }
+
+      return Math.min(nota, 10);
+    },
+    [caso, sinaisVitaisSolicitados, manobrasSolicitadas]
+  );
+
+  const gerarFeedback = useCallback(
+    (soap: FormularioSOAPType, diagnostico: DiagnosticoFormulario) => {
+      const nota = calcularNota(soap, diagnostico);
+
+      const acertos: string[] = [];
+      const erros: string[] = [];
+
+      if (!caso) return { nota: 0, acertos, erros, orientacaoDidata: "", tempoAtendimento: 0 };
+
+      // Verificar acertos
+      if (sinaisVitaisSolicitados) {
+        acertos.push("Solicitou sinais vitais");
+      } else {
+        erros.push("Não solicitou sinais vitais");
+      }
+
+      if (exameFisicoSolicitado) {
+        acertos.push("Solicitou exame físico");
+      } else {
+        erros.push("Não solicitou exame físico");
+      }
+
+      if (
+        diagnostico.hipotesePrincipal.toLowerCase() ===
+        (caso.diagnosticoCorreto || caso.dados_ocultos_do_sistema.diagnostico_principal).toLowerCase()
+      ) {
+        acertos.push(
+          `Diagnóstico correto: ${caso.diagnosticoCorreto || caso.dados_ocultos_do_sistema.diagnostico_principal}`
+        );
+      } else {
+        erros.push(
+          `Diagnóstico esperado: ${caso.diagnosticoCorreto || caso.dados_ocultos_do_sistema.diagnostico_principal}`
+        );
+      }
+
+      if (diagnostico.examesIndicados.length > 0) {
+        acertos.push("Indicou exames complementares");
+      }
+
+      if (diagnostico.conduta.length > 50) {
+        acertos.push("Plano de conduta detalhado");
+      } else {
+        erros.push("Plano de conduta incompleto ou muito breve");
+      }
+
+      const feedbackPadrao: FeedbackOSCEType = {
+        nota,
+        percentual: Math.round(nota * 10),
+        classificacao: nota >= 9 ? "Excelente" : nota >= 7 ? "Bom" : nota >= 5 ? "Regular" : "Insuficiente",
+        justificativaNota: "Aguardando avaliação detalhada...",
+        tempoAtendimento: tempoDecorrido,
+        resumoCaso: { diagnosticoEsperado: "", sindromePrincipal: "", achadosChave: [], raciocinioEsperado: "" },
+        anamnese: { acertos, faltouPerguntar: [], perguntasPoucoUteis: [], comentario: "" },
+        exameFisico: { manobrasRealizadas: [], achadosEncontrados: [], manobrasEsquecidas: [], comentario: "" },
+        sinaisVitais: { interpretacao: "", pontosDeAlerta: [] },
+        raciocinioDiagnostico: { hipoteseDoEstudante: "", diagnosticoEsperado: "", avaliacao: "", diferenciaisAdequados: [], diferenciaisFaltantes: [], comentario: "" },
+        examesComplementares: { adequados: [], faltantes: [], desnecessarios: [], comentario: "" },
+        conduta: { adequada: [], incompleta: [], erros: [], condutaModelo: "" },
+        soap: { subjetivo: "", objetivo: "", avaliacao: "", plano: "", comentarioGeral: "" },
+        errosCriticos: [],
+        respostaModeloOSCE: "",
+        planoDeEstudo: [],
+      };
+
+      return feedbackPadrao;
+    },
+    [caso, sinaisVitaisSolicitados, manobrasSolicitadas, tempoDecorrido, calcularNota]
+  );
+
+  const handleFinalizarAtendimento = async (dados: {
+    soap: FormularioSOAPType;
+    diagnostico: DiagnosticoFormulario;
+  }) => {
+    setPhase("feedback");
+    setCarregandoFeedback(true);
+
+    // Chamar API para gerar feedback detalhado
+    try {
+      const response = await fetch("/api/corrigir", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          casoId: caso?.id,
+          historico: mensagens,
+          exameFisico: manobrasSolicitadas.map((m) => ({
+            categoria: m.categoria,
+            textDigitado: m.textDigitado,
+            resposta: m.resposta,
+          })),
+          sinaisVitaisSolicitados,
+          sinaisVitaisDoEstudante: sinaisVitaisSolicitados ? caso?.sinaisVitaisCorretos : undefined,
+          hipoteseDiagnostica: dados.diagnostico.hipotesePrincipal,
+          diagnosticosDiferenciais: dados.diagnostico.diagnosticosDisferenciais,
+          examesSolicitados: dados.diagnostico.examesIndicados,
+          conduta: dados.diagnostico.conduta,
+          soap: dados.soap,
+          tempoAtendimento: tempoDecorrido,
+        }),
+      });
+
+      if (response.ok) {
+        const feedbackDetalhado = await response.json();
+        setFeedback(feedbackDetalhado);
+        setCarregandoFeedback(false);
+      } else {
+        console.error("Erro ao obter feedback:", response.status);
+        setCarregandoFeedback(false);
+      }
+    } catch (error) {
+      console.error("Erro ao obter feedback detalhado:", error);
+      setCarregandoFeedback(false);
+    }
+  };
+
+  if (!caso) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="text-center">
+          <p className="text-xl text-gray-600">Carregando caso...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (phase === "feedback" && feedback) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <FeedbackOSCE
+            feedback={feedback}
+            nomePaciente={caso.paciente.nome}
+            tempoDecorrido={tempoDecorrido}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Aviso OSCE */}
+      {modoOSCE && (
+        <div className="bg-indigo-600 text-white p-3 text-center font-semibold">
+          🎯 Modo OSCE Aleatório - O diagnóstico será revelado ao finalizar
+        </div>
+      )}
+
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-6">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Se NÃO está em modo OSCE, mostrar o título completo */}
+          {!modoOSCE && (
+            <h1 className="text-3xl font-bold mb-2">{caso.titulo}</h1>
+          )}
+
+          {/* Se está em modo OSCE, mostrar apenas "Simulado OSCE" */}
+          {modoOSCE && (
+            <h1 className="text-3xl font-bold mb-4">🏥 Simulado OSCE</h1>
+          )}
+
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <p className="text-blue-100">
+                Paciente: <span className="font-semibold">{caso.paciente.nome}</span>
+              </p>
+              <p className="text-blue-100">
+                Idade: <span className="font-semibold">{caso.paciente.idade} anos</span>
+              </p>
+              <p className="text-blue-100">
+                Sexo: <span className="font-semibold">{caso.paciente.sexo === "M" ? "Masculino" : "Feminino"}</span>
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-blue-100">Tempo de atendimento:</p>
+              <p className="text-2xl font-bold">
+                {Math.floor(tempoDecorrido / 60)}m {tempoDecorrido % 60}s
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Conteúdo Principal */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Chat e Exame Físico (Esquerda/Centro) */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Chat */}
+            <div style={{ height: "500px" }}>
+              <ChatPaciente
+                nomePaciente={caso.paciente.nome}
+                casoId={casoId}
+                onMensagensChange={setMensagens}
+              />
+            </div>
+
+            {/* Exame Físico e Sinais */}
+            <PainelExameFisico
+              sinaisVitaisSolicitados={sinaisVitaisSolicitados}
+              sinaisVitaisData={
+                sinaisVitaisSolicitados ? caso.sinaisVitaisCorretos : undefined
+              }
+              onSolicitarSinaisVitais={() =>
+                setSinaisVitaisSolicitados(true)
+              }
+              caso={caso}
+              manobrasSolicitadas={manobrasSolicitadas}
+              onNovaManobra={handleNovaManobra}
+              modoOSCE={modoOSCE}
+            />
+          </div>
+
+          {/* Formulário SOAP (Direita) */}
+          <div className="lg:col-span-1">
+            <FormularioSOAP onSubmit={handleFinalizarAtendimento} />
+          </div>
+        </div>
+      </div>
+
+      {/* Loading Feedback Modal */}
+      <LoadingFeedback isVisible={carregandoFeedback} />
+    </div>
+  );
+}
+
+export default CasoPageContent;
