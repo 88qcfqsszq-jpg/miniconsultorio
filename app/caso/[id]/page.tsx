@@ -8,6 +8,7 @@ import FormularioSOAP from "@/components/FormularioSOAP";
 import FeedbackOSCE from "@/components/FeedbackOSCE";
 import LoadingRelatorio from "@/components/LoadingRelatorio";
 import PainelExamesComplementares from "@/components/PainelExamesComplementares";
+import ResumoAnamnese from "@/components/ResumoAnamnese";
 import { casosOSCE } from "@/data/casos-osce";
 import type {
   Caso,
@@ -337,6 +338,7 @@ function CasoPageContent() {
   };
 
   const [abaAtiva, setAbaAtiva] = useState<"paciente" | "exame" | "exames" | "soap">("paciente");
+  const [menuAtivo, setMenuAtivo] = useState<"paciente" | "exame" | "exames" | "soap" | "finalizar">("paciente");
 
   if (!caso) {
     return (
@@ -421,30 +423,99 @@ function CasoPageContent() {
 
       {/* Conteúdo Principal */}
       <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
-        {/* Layout Desktop: 2 colunas */}
-        <div className="hidden lg:grid lg:grid-cols-3 gap-5">
-          <div className="lg:col-span-2 space-y-4">
-            <div className="h-[480px] flex flex-col">
+        {/* Layout Desktop: Sidebar + Conteúdo */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-5">
+          {/* Sidebar Esquerda */}
+          <div className="space-y-4">
+            {/* Menu Atendimento */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Atendimento</p>
+              <div className="space-y-2">
+                {[
+                  { id: "paciente" as const, label: "Paciente", icon: "💬" },
+                  { id: "exame" as const, label: "Exame Físico", icon: "🥼" },
+                  { id: "exames" as const, label: "Exames", icon: "🧪" },
+                  { id: "soap" as const, label: "SOAP", icon: "📝" },
+                  { id: "finalizar" as const, label: "Finalizar", icon: "✅" },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setMenuAtivo(item.id)}
+                    className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                      menuAtivo === item.id
+                        ? "bg-blue-600 text-white shadow-sm"
+                        : "bg-slate-50 text-slate-700 hover:bg-slate-100"
+                    }`}
+                  >
+                    <span className="mr-2">{item.icon}</span>
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Exames Complementares Lateral */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Exames Rápidos</p>
+              <p className="text-xs text-slate-500 mb-3">Solicite exames conforme sua hipótese clínica.</p>
+              <div className="space-y-2">
+                <input
+                  type="text"
+                  placeholder="Ex: ECG, hemograma..."
+                  disabled={phase === "feedback"}
+                  className="w-full px-2.5 py-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-slate-100"
+                />
+                <button
+                  disabled={phase === "feedback"}
+                  className="w-full bg-violet-600 hover:bg-violet-700 disabled:bg-slate-300 text-white font-semibold py-2 px-3 rounded-lg text-xs transition-colors"
+                >
+                  Solicitar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Conteúdo Central */}
+          <div className="lg:col-span-3 space-y-4">
+            {/* Chat */}
+            <div className="h-[420px] flex flex-col">
               <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
             </div>
-            <PainelExameFisico
-              sinaisVitaisSolicitados={sinaisVitaisSolicitados}
-              sinaisVitaisData={sinaisVitaisSolicitados ? caso.sinaisVitaisCorretos : undefined}
-              onSolicitarSinaisVitais={() => setSinaisVitaisSolicitados(true)}
-              caso={caso}
-              manobrasSolicitadas={manobrasSolicitadas}
-              onNovaManobra={handleNovaManobra}
-              modoOSCE={modoOSCE}
-            />
-            <PainelExamesComplementares
-              casoId={casoId}
-              examesSolicitados={examesSolicitados}
-              onNovoExame={handleNovoExame}
-              desabilitado={phase === "feedback"}
-            />
-          </div>
-          <div className="lg:col-span-1">
-            <FormularioSOAP onSubmit={handleFinalizarAtendimento} />
+
+            {/* Conteúdo Dinâmico baseado no Menu */}
+            {menuAtivo === "paciente" && <ResumoAnamnese mensagens={mensagens} />}
+
+            {menuAtivo === "exame" && (
+              <PainelExameFisico
+                sinaisVitaisSolicitados={sinaisVitaisSolicitados}
+                sinaisVitaisData={sinaisVitaisSolicitados ? caso.sinaisVitaisCorretos : undefined}
+                onSolicitarSinaisVitais={() => setSinaisVitaisSolicitados(true)}
+                caso={caso}
+                manobrasSolicitadas={manobrasSolicitadas}
+                onNovaManobra={handleNovaManobra}
+                modoOSCE={modoOSCE}
+              />
+            )}
+
+            {menuAtivo === "exames" && (
+              <PainelExamesComplementares
+                casoId={casoId}
+                examesSolicitados={examesSolicitados}
+                onNovoExame={handleNovoExame}
+                desabilitado={phase === "feedback"}
+              />
+            )}
+
+            {menuAtivo === "soap" && (
+              <FormularioSOAP onSubmit={handleFinalizarAtendimento} />
+            )}
+
+            {menuAtivo === "finalizar" && (
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4">
+                <h3 className="font-bold text-slate-800">Finalizar Atendimento</h3>
+                <FormularioSOAP onSubmit={handleFinalizarAtendimento} />
+              </div>
+            )}
           </div>
         </div>
 
