@@ -423,9 +423,9 @@ function CasoPageContent() {
 
       {/* Conteúdo Principal */}
       <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
-        {/* Layout Desktop: Sidebar + Conteúdo */}
-        <div className="hidden lg:grid lg:grid-cols-4 gap-5">
-          {/* Sidebar Esquerda */}
+        {/* Layout Desktop: 3 colunas (Sidebar + Centro + Painel Direito) */}
+        <div className="hidden lg:grid lg:grid-cols-5 gap-5">
+          {/* Coluna 1: Sidebar Esquerda */}
           <div className="space-y-4">
             {/* Menu Atendimento */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
@@ -454,16 +454,44 @@ function CasoPageContent() {
               </div>
             </div>
 
+            {/* Sinais Vitais */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Sinais Vitais</p>
+              <button
+                onClick={() => setSinaisVitaisSolicitados(true)}
+                disabled={sinaisVitaisSolicitados || phase === "feedback"}
+                className={`w-full px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                  sinaisVitaisSolicitados
+                    ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                    : "bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
+                }`}
+              >
+                {sinaisVitaisSolicitados ? "✓ Coletado" : "Solicitar"}
+              </button>
+              {sinaisVitaisSolicitados && caso.sinaisVitaisCorretos && (
+                <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                  <div className="bg-emerald-50 p-2 rounded text-center">
+                    <p className="text-slate-500">PA</p>
+                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.pressaoArterial}</p>
+                  </div>
+                  <div className="bg-emerald-50 p-2 rounded text-center">
+                    <p className="text-slate-500">FC</p>
+                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.frequenciaCardiaca} bpm</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Exames Complementares Lateral */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Exames Rápidos</p>
-              <p className="text-xs text-slate-500 mb-3">Solicite exames conforme sua hipótese clínica.</p>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Exames Complementares</p>
+              <p className="text-xs text-slate-500 mb-3">Solicite conforme sua hipótese clínica.</p>
               <div className="space-y-2">
                 <input
                   type="text"
                   placeholder="Ex: ECG, hemograma..."
                   disabled={phase === "feedback"}
-                  className="w-full px-2.5 py-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-slate-100"
+                  className="w-full px-2.5 py-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-violet-500 focus:border-transparent disabled:bg-slate-100"
                 />
                 <button
                   disabled={phase === "feedback"}
@@ -475,8 +503,8 @@ function CasoPageContent() {
             </div>
           </div>
 
-          {/* Conteúdo Central */}
-          <div className="lg:col-span-3 space-y-4">
+          {/* Colunas 2-3: Conteúdo Central */}
+          <div className="lg:col-span-2 space-y-4">
             {/* Chat */}
             <div className="h-[420px] flex flex-col">
               <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
@@ -507,15 +535,24 @@ function CasoPageContent() {
             )}
 
             {menuAtivo === "soap" && (
-              <FormularioSOAP onSubmit={handleFinalizarAtendimento} />
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+                <p className="text-xs text-slate-400 mb-3">Preencha o formulário na coluna direita</p>
+              </div>
             )}
 
             {menuAtivo === "finalizar" && (
-              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4">
-                <h3 className="font-bold text-slate-800">Finalizar Atendimento</h3>
-                <FormularioSOAP onSubmit={handleFinalizarAtendimento} />
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+                <p className="text-sm font-semibold text-slate-800 mb-2">Antes de finalizar:</p>
+                <p className="text-xs text-slate-600 mb-4">Revise a Avaliação Clínica na coluna direita e clique no botão verde para finalizar.</p>
               </div>
             )}
+          </div>
+
+          {/* Coluna 4: Painel Direito Fixo (Avaliação Clínica) */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-20 space-y-4 max-h-[calc(100vh-120px)] overflow-y-auto">
+              <FormularioSOAP onSubmit={handleFinalizarAtendimento} desabilitado={phase === "feedback"} />
+            </div>
           </div>
         </div>
 
