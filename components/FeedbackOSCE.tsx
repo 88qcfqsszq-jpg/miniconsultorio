@@ -52,7 +52,7 @@ export default function FeedbackOSCE({
     }
   };
 
-  const renderCondicional = (dados: any[], label: string) => {
+  const renderCondicional = (dados: any[]) => {
     if (!dados || dados.length === 0) {
       return <p className="text-sm text-gray-500 italic">Não houve registro suficiente para avaliar este item.</p>;
     }
@@ -82,7 +82,7 @@ export default function FeedbackOSCE({
             </div>
             <div>
               <p className="font-semibold text-gray-700 mb-2">Achados-Chave:</p>
-              {renderCondicional(feedback.resumoCaso.achadosChave, "achados")}
+              {renderCondicional(feedback.resumoCaso.achadosChave)}
             </div>
             <div>
               <p className="font-semibold text-gray-700 mb-1">Raciocínio Esperado:</p>
@@ -98,11 +98,11 @@ export default function FeedbackOSCE({
               <>
                 <div>
                   <p className="font-semibold text-green-700 mb-2">✓ Acertos em Comunicação:</p>
-                  {renderCondicional(feedback.comunicacaoMedica.acertos, "acertos")}
+                  {renderCondicional(feedback.comunicacaoMedica.acertos)}
                 </div>
                 <div className="border-t pt-3">
                   <p className="font-semibold text-yellow-700 mb-2">⚠️ Pontos de Melhoria:</p>
-                  {renderCondicional(feedback.comunicacaoMedica.pontosDeMelhoria, "melhoria")}
+                  {renderCondicional(feedback.comunicacaoMedica.pontosDeMelhoria)}
                 </div>
                 <div className="border-t pt-3 bg-blue-50 p-3 rounded">
                   <p className="font-semibold text-gray-700 mb-1">Comentário:</p>
@@ -133,15 +133,15 @@ export default function FeedbackOSCE({
           <div className="space-y-3">
             <div>
               <p className="font-semibold text-green-700 mb-2">✓ Acertos:</p>
-              {renderCondicional(feedback.anamnese.acertos, "acertos")}
+              {renderCondicional(feedback.anamnese.acertos)}
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-red-700 mb-2">✗ Perguntas Esquecidas:</p>
-              {renderCondicional(feedback.anamnese.faltouPerguntar, "faltou")}
+              {renderCondicional(feedback.anamnese.faltouPerguntar)}
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-gray-700 mb-2">⚠️ Perguntas Pouco Úteis:</p>
-              {renderCondicional(feedback.anamnese.perguntasPoucoUteis, "pouco úteis")}
+              {renderCondicional(feedback.anamnese.perguntasPoucoUteis)}
             </div>
             <div className="border-t pt-3 bg-blue-50 p-3 rounded">
               <p className="font-semibold text-gray-700 mb-1">Comentário:</p>
@@ -155,15 +155,15 @@ export default function FeedbackOSCE({
           <div className="space-y-3">
             <div>
               <p className="font-semibold text-green-700 mb-2">✓ Manobras Realizadas:</p>
-              {renderCondicional(feedback.exameFisico.manobrasRealizadas, "realizadas")}
+              {renderCondicional(feedback.exameFisico.manobrasRealizadas)}
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-green-700 mb-2">✓ Achados Encontrados:</p>
-              {renderCondicional(feedback.exameFisico.achadosEncontrados, "achados")}
+              {renderCondicional(feedback.exameFisico.achadosEncontrados)}
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-red-700 mb-2">✗ Manobras Esquecidas:</p>
-              {renderCondicional(feedback.exameFisico.manobrasEsquecidas, "esquecidas")}
+              {renderCondicional(feedback.exameFisico.manobrasEsquecidas)}
             </div>
             <div className="border-t pt-3 bg-blue-50 p-3 rounded">
               <p className="font-semibold text-gray-700 mb-1">Comentário:</p>
@@ -181,7 +181,7 @@ export default function FeedbackOSCE({
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-red-700 mb-2">⚠️ Pontos de Alerta:</p>
-              {renderCondicional(feedback.sinaisVitais.pontosDeAlerta, "alertas")}
+              {renderCondicional(feedback.sinaisVitais.pontosDeAlerta)}
             </div>
           </div>
         );
@@ -205,11 +205,11 @@ export default function FeedbackOSCE({
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-green-700 mb-2">✓ Diferenciais Adequados:</p>
-              {renderCondicional(feedback.raciocinioDiagnostico.diferenciaisAdequados, "adequados")}
+              {renderCondicional(feedback.raciocinioDiagnostico.diferenciaisAdequados)}
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-red-700 mb-2">✗ Diferenciais Faltantes:</p>
-              {renderCondicional(feedback.raciocinioDiagnostico.diferenciaisFaltantes, "faltantes")}
+              {renderCondicional(feedback.raciocinioDiagnostico.diferenciaisFaltantes)}
             </div>
             <div className="border-t pt-3 bg-blue-50 p-3 rounded">
               <p className="font-semibold text-gray-700 mb-1">Comentário:</p>
@@ -223,15 +223,15 @@ export default function FeedbackOSCE({
           <div className="space-y-3">
             <div>
               <p className="font-semibold text-green-700 mb-2">✓ Exames Adequados:</p>
-              {renderCondicional(feedback.examesComplementares.adequados, "adequados")}
+              {renderCondicional(feedback.examesComplementares.adequados)}
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-red-700 mb-2">✗ Exames Faltantes:</p>
-              {renderCondicional(feedback.examesComplementares.faltantes, "faltantes")}
+              {renderCondicional(feedback.examesComplementares.faltantes)}
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-yellow-700 mb-2">⚠️ Exames Desnecessários:</p>
-              {renderCondicional(feedback.examesComplementares.desnecessarios, "desnecessários")}
+              {renderCondicional(feedback.examesComplementares.desnecessarios)}
             </div>
             <div className="border-t pt-3 bg-blue-50 p-3 rounded">
               <p className="font-semibold text-gray-700 mb-1">Comentário:</p>
@@ -245,15 +245,15 @@ export default function FeedbackOSCE({
           <div className="space-y-3">
             <div>
               <p className="font-semibold text-green-700 mb-2">✓ Condutas Adequadas:</p>
-              {renderCondicional(feedback.conduta.adequada, "adequada")}
+              {renderCondicional(feedback.conduta.adequada)}
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-yellow-700 mb-2">⚠️ Condutas Incompletas:</p>
-              {renderCondicional(feedback.conduta.incompleta, "incompleta")}
+              {renderCondicional(feedback.conduta.incompleta)}
             </div>
             <div className="border-t pt-3">
               <p className="font-semibold text-red-700 mb-2">✗ Erros de Conduta:</p>
-              {renderCondicional(feedback.conduta.erros, "erros")}
+              {renderCondicional(feedback.conduta.erros)}
             </div>
             <div className="border-t pt-3 bg-green-50 p-3 rounded">
               <p className="font-semibold text-gray-700 mb-1">Conduta Modelo:</p>
@@ -431,64 +431,81 @@ export default function FeedbackOSCE({
     }
   };
 
+  const badgeClassificacao: Record<string, string> = {
+    Excelente:   "bg-emerald-100 text-emerald-800 border-emerald-300",
+    Bom:         "bg-blue-100 text-blue-800 border-blue-300",
+    Regular:     "bg-amber-100 text-amber-800 border-amber-300",
+    Insuficiente:"bg-red-100 text-red-800 border-red-300",
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 sm:p-8 space-y-4 sm:space-y-6">
-      {/* Header com Nota */}
-      <div className="border-b pb-4 sm:pb-6">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">Feedback do Atendimento</h2>
-        <p className="text-sm sm:text-base text-gray-600 mb-4">
-          Paciente: <span className="font-semibold">{nomePaciente}</span> • Tempo:{" "}
-          <span className="font-semibold">
-            {minutos}m {segundos}s
-          </span>
-        </p>
-      </div>
-
-      {/* Nota Principal */}
-      <div
-        className={`rounded-lg p-6 sm:p-8 text-center border-2 ${getCorClassificacao(
-          feedback.classificacao
-        )}`}
-      >
-        <p className="text-xs sm:text-sm font-semibold opacity-75 mb-2">SUA NOTA</p>
-        <p className="text-5xl sm:text-6xl font-bold mb-2">{feedback.nota.toFixed(1)}</p>
-        <p className="text-base sm:text-lg font-bold mb-3">{feedback.classificacao}</p>
-        <p className="text-sm">{feedback.percentual}%</p>
-        <p className="text-xs sm:text-sm mt-3 leading-relaxed">{feedback.justificativaNota}</p>
-      </div>
-
-      {/* Seções do Feedback */}
-      <div className="space-y-3">
-        {SecoesCards.map((secao) => (
-          <div key={secao.id} className="border rounded-lg overflow-hidden">
-            <button
-              onClick={() => setAbertaSecao(abertaSecao === secao.id ? "none" : secao.id)}
-              className="w-full p-4 bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-150 flex items-center justify-between font-semibold text-gray-800"
-            >
-              <span>
-                {secao.icone} {secao.titulo}
-              </span>
-              <span className="text-sm">{abertaSecao === secao.id ? "▼" : "▶"}</span>
-            </button>
-            {abertaSecao === secao.id && (
-              <div className="p-6 bg-white space-y-3">
-                {renderSecao(secao.id)}
-              </div>
-            )}
+    <div className="space-y-5 animate-slideUp">
+      {/* Card da Nota */}
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800">Feedback do Atendimento</h2>
+            <p className="text-slate-500 text-sm mt-0.5">
+              {nomePaciente} • {minutos}m {segundos}s
+            </p>
           </div>
-        ))}
+          <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-bold border ${badgeClassificacao[feedback.classificacao] ?? "bg-slate-100 text-slate-700 border-slate-300"}`}>
+            {feedback.classificacao}
+          </span>
+        </div>
+
+        <div className={`rounded-xl p-5 border-2 ${getCorClassificacao(feedback.classificacao)} flex flex-col sm:flex-row sm:items-center gap-4`}>
+          <div className="text-center sm:text-left">
+            <p className="text-xs font-semibold opacity-60 uppercase tracking-wider mb-0.5">Nota Final</p>
+            <p className="text-5xl sm:text-6xl font-bold leading-none">{feedback.nota.toFixed(1)}</p>
+            <p className="text-sm opacity-70 mt-1">{feedback.percentual}%</p>
+          </div>
+          {feedback.justificativaNota && (
+            <p className="text-sm leading-relaxed flex-1 border-t sm:border-t-0 sm:border-l border-current border-opacity-20 sm:pl-4 pt-3 sm:pt-0 opacity-80">
+              {feedback.justificativaNota}
+            </p>
+          )}
+        </div>
       </div>
 
-      {/* Botões de Ação */}
-      <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t">
+      {/* Seções */}
+      <div className="space-y-2">
+        {SecoesCards.map((secao) => {
+          const isAberta = abertaSecao === secao.id;
+          return (
+            <div key={secao.id} className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+              <button
+                onClick={() => setAbertaSecao(isAberta ? "none" : secao.id)}
+                className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
+              >
+                <span className="flex items-center gap-2.5 font-semibold text-slate-700 text-sm">
+                  <span className="text-base">{secao.icone}</span>
+                  {secao.titulo}
+                </span>
+                <svg className={`w-4 h-4 text-slate-400 transition-transform shrink-0 ${isAberta ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {isAberta && (
+                <div className="px-5 pb-5 pt-1 border-t border-slate-100 space-y-3">
+                  {renderSecao(secao.id)}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Ações */}
+      <div className="flex flex-col sm:flex-row gap-3">
         <Link href="/" className="flex-1">
-          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-4 rounded-xl transition-colors text-sm active:scale-[0.98]">
             Voltar aos Casos
           </button>
         </Link>
         <button
           onClick={() => window.location.reload()}
-          className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+          className="flex-1 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-bold py-3.5 px-4 rounded-xl transition-colors text-sm active:scale-[0.98]"
         >
           Repetir Este Caso
         </button>

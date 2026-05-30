@@ -2,99 +2,94 @@
 
 import Link from "next/link";
 
+const features = [
+  { icon: "💬", label: "Paciente Virtual", desc: "Chat natural com IA treinada para responder como paciente real" },
+  { icon: "🩺", label: "Exame Físico", desc: "Manobras interativas por sistema: cardiovascular, respiratório e mais" },
+  { icon: "🧪", label: "Exames Complementares", desc: "Solicite ECG, hemograma, troponina e receba resultados contextualizados" },
+  { icon: "📊", label: "Feedback por IA", desc: "Análise detalhada de anamnese, raciocínio, conduta e comunicação" },
+  { icon: "📚", label: "Plano de Estudo", desc: "Tópicos personalizados com base nos seus erros e lacunas" },
+  { icon: "🤖", label: "Casos com IA", desc: "Gere novos casos clínicos únicos por sistema e dificuldade" },
+];
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900">
-      {/* Conteúdo Principal */}
-      <div className="max-w-7xl mx-auto px-4 py-20">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <h1 className="text-6xl font-bold text-white mb-6">
-            🏥 Mini Consultório OSCE
+    <div className="min-h-screen bg-slate-50">
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white">
+        <div className="max-w-5xl mx-auto px-4 py-14 sm:py-20 text-center">
+          <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur text-white text-xs font-semibold px-3 py-1.5 rounded-full mb-6 border border-white/20">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Simulação OSCE com IA — 3º Semestre de Medicina
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl font-bold mb-4 leading-tight tracking-tight">
+            Mini Consultório OSCE
           </h1>
-          <p className="text-2xl text-blue-100 max-w-3xl mx-auto">
-            Ferramenta de treinamento para simulação clínica estruturada (OSCE) do 3º semestre de Medicina
+          <p className="text-blue-100 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            Treine anamnese, exame físico, raciocínio clínico e receba feedback detalhado com IA.
           </p>
-        </div>
 
-        {/* Dois CTAs Principais */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {/* CTA 1: Prova OSCE - DESTAQUE MAIOR */}
-          <Link href="/faca-o-osce">
-            <div className="bg-white rounded-lg shadow-2xl p-12 hover:shadow-3xl transition-all transform hover:-translate-y-1 cursor-pointer h-full border-t-4 border-indigo-600">
-              <div className="flex flex-col items-center text-center">
-                <div className="text-7xl mb-6">🎯</div>
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  Prova OSCE
-                </h2>
-                <p className="text-gray-600 mb-8 flex-grow">
-                  Receba um paciente aleatório <strong>sem conhecer o diagnóstico</strong>.
-                  Conduzir uma anamnese real, solicite exames e formule sua hipótese diagnóstica.
-                </p>
-                <div className="bg-indigo-100 p-4 rounded-lg w-full mb-6">
-                  <p className="text-indigo-900 font-semibold text-sm">
-                    ✨ Modo desafiador e realista
-                  </p>
-                </div>
-                <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-colors w-full text-lg">
-                  Iniciar Simulado Aleatório →
-                </button>
-              </div>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/faca-o-osce">
+              <button className="w-full sm:w-auto bg-white text-blue-700 font-bold py-3.5 px-8 rounded-xl hover:bg-blue-50 transition-all shadow-lg text-base">
+                Iniciar Prova OSCE
+              </button>
+            </Link>
+            <Link href="/treinamento">
+              <button className="w-full sm:w-auto bg-white/15 border border-white/30 text-white font-bold py-3.5 px-8 rounded-xl hover:bg-white/25 transition-all text-base">
+                Ver Casos de Treino
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Cards principais */}
+      <section className="max-w-5xl mx-auto px-4 py-10 sm:py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-12">
+          <Link href="/faca-o-osce" className="group">
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 h-full hover:shadow-md hover:border-blue-200 transition-all">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mb-5">🎯</div>
+              <h2 className="text-xl font-bold text-slate-800 mb-2">Prova OSCE</h2>
+              <p className="text-slate-500 text-sm leading-relaxed mb-5">
+                Paciente aleatório <strong className="text-slate-700">sem diagnóstico revelado</strong>. Anamnese real, exame físico, hipóteses e conduta — igual ao OSCE da faculdade.
+              </p>
+              <span className="inline-flex items-center gap-1.5 text-blue-600 text-sm font-semibold group-hover:gap-2.5 transition-all">
+                Iniciar simulado <span>→</span>
+              </span>
             </div>
           </Link>
 
-          {/* CTA 2: Treinamento */}
-          <Link href="/treinamento">
-            <div className="bg-white rounded-lg shadow-xl p-12 hover:shadow-2xl transition-all transform hover:-translate-y-1 cursor-pointer h-full border-t-4 border-green-600">
-              <div className="flex flex-col items-center text-center">
-                <div className="text-7xl mb-6">📚</div>
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  Treinamento
-                </h2>
-                <p className="text-gray-600 mb-8 flex-grow">
-                  Escolha um caso específico por tema.
-                  Ideal para treino direcionado e aprofundamento em diagnósticos específicos.
-                </p>
-                <div className="bg-green-100 p-4 rounded-lg w-full mb-6">
-                  <p className="text-green-900 font-semibold text-sm">
-                    📋 Escolha o tema que quer treinar
-                  </p>
-                </div>
-                <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition-colors w-full text-lg">
-                  Ver Casos Disponíveis →
-                </button>
-              </div>
+          <Link href="/treinamento" className="group">
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 h-full hover:shadow-md hover:border-emerald-200 transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl mb-5">📚</div>
+              <h2 className="text-xl font-bold text-slate-800 mb-2">Treinamento Direcionado</h2>
+              <p className="text-slate-500 text-sm leading-relaxed mb-5">
+                Escolha o tema, sistema ou dificuldade. Ideal para aprofundamento e revisão antes de provas. Você sabe o diagnóstico antes de começar.
+              </p>
+              <span className="inline-flex items-center gap-1.5 text-emerald-600 text-sm font-semibold group-hover:gap-2.5 transition-all">
+                Ver casos disponíveis <span>→</span>
+              </span>
             </div>
           </Link>
         </div>
 
-        {/* Informações Adicionais */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-white border border-white/20">
-            <div className="text-4xl mb-3">💬</div>
-            <h3 className="font-bold text-lg mb-2">Chat Inteligente</h3>
-            <p className="text-blue-100 text-sm">
-              Converse naturalmente com o paciente virtual
-            </p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-white border border-white/20">
-            <div className="text-4xl mb-3">📊</div>
-            <h3 className="font-bold text-lg mb-2">Feedback Detalhado</h3>
-            <p className="text-blue-100 text-sm">
-              Receba análise completa do seu desempenho
-            </p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-white border border-white/20">
-            <div className="text-4xl mb-3">🔄</div>
-            <h3 className="font-bold text-lg mb-2">Repetição Ilimitada</h3>
-            <p className="text-blue-100 text-sm">
-              Pratique quantas vezes quiser
-            </p>
+        {/* Features grid */}
+        <div className="mb-6">
+          <h2 className="text-center text-slate-400 text-xs font-semibold uppercase tracking-widest mb-6">
+            O que você pode fazer
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+            {features.map((f) => (
+              <div key={f.label} className="bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-200 transition-colors">
+                <div className="text-2xl mb-2">{f.icon}</div>
+                <p className="text-slate-800 font-semibold text-sm mb-1">{f.label}</p>
+                <p className="text-slate-500 text-xs leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

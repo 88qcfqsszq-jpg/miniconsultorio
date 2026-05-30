@@ -336,11 +336,14 @@ function CasoPageContent() {
     }
   };
 
+  const [abaAtiva, setAbaAtiva] = useState<"paciente" | "exame" | "exames" | "soap">("paciente");
+
   if (!caso) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="text-center">
-          <p className="text-xl text-gray-600">Carregando caso...</p>
+      <div className="flex items-center justify-center min-h-screen bg-slate-50">
+        <div className="text-center space-y-3">
+          <div className="w-10 h-10 border-3 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="text-slate-500 text-sm">Carregando caso...</p>
         </div>
       </div>
     );
@@ -348,8 +351,8 @@ function CasoPageContent() {
 
   if (phase === "feedback" && feedback) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4">
+      <div className="min-h-screen bg-slate-50 py-6 sm:py-10">
+        <div className="max-w-4xl mx-auto px-4">
           <FeedbackOSCE
             feedback={feedback}
             nomePaciente={caso.paciente.nome}
@@ -360,80 +363,79 @@ function CasoPageContent() {
     );
   }
 
+  const abas = [
+    { id: "paciente" as const, label: "Paciente", icon: "💬" },
+    { id: "exame" as const, label: "Exame", icon: "🩺" },
+    { id: "exames" as const, label: "Exames", icon: "🧪" },
+    { id: "soap" as const, label: "SOAP", icon: "📝" },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-50">
       {/* Aviso OSCE */}
       {modoOSCE && (
-        <div className="bg-indigo-600 text-white p-3 text-center font-semibold">
-          🎯 Modo OSCE Aleatório - O diagnóstico será revelado ao finalizar
+        <div className="bg-blue-700 text-white py-2 px-4 text-center text-xs font-semibold">
+          🎯 Modo OSCE — Diagnóstico revelado ao finalizar
         </div>
       )}
 
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-6">
-        <div className="max-w-7xl mx-auto px-4">
-          {/* Se NÃO está em modo OSCE, mostrar o título completo */}
-          {!modoOSCE && (
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 break-words">{caso.titulo}</h1>
-          )}
-
-          {/* Se está em modo OSCE, mostrar apenas "Simulado OSCE" */}
-          {modoOSCE && (
-            <h1 className="text-2xl md:text-3xl font-bold mb-4">🏥 Simulado OSCE</h1>
-          )}
-
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <p className="text-blue-100 text-sm sm:text-base">
-                Paciente: <span className="font-semibold">{caso.paciente.nome}</span>
-              </p>
-              <p className="text-blue-100 text-sm sm:text-base">
-                Idade: <span className="font-semibold">{caso.paciente.idade} anos</span>
-              </p>
-              <p className="text-blue-100 text-sm sm:text-base">
-                Sexo: <span className="font-semibold">{caso.paciente.sexo === "M" ? "Masculino" : "Feminino"}</span>
-              </p>
-            </div>
-            <div className="text-left sm:text-right">
-              <p className="text-blue-100 text-sm sm:text-base">Tempo de atendimento:</p>
-              <p className="text-xl sm:text-2xl font-bold">
-                {Math.floor(tempoDecorrido / 60)}m {tempoDecorrido % 60}s
-              </p>
-            </div>
+      {/* Header compacto */}
+      <div className="bg-white border-b border-slate-200 px-4 py-3">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="min-w-0">
+            <p className="font-bold text-slate-800 text-sm truncate">
+              {modoOSCE ? "Simulado OSCE" : caso.titulo}
+            </p>
+            <p className="text-slate-500 text-xs">
+              {caso.paciente.nome} • {caso.paciente.idade} anos • {caso.paciente.sexo === "M" ? "M" : "F"}
+            </p>
+          </div>
+          <div className="text-right shrink-0">
+            <p className="text-xs text-slate-400">Tempo</p>
+            <p className="font-bold text-slate-700 tabular-nums text-sm">
+              {Math.floor(tempoDecorrido / 60).toString().padStart(2, "0")}:{(tempoDecorrido % 60).toString().padStart(2, "0")}
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Conteúdo Principal */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Chat e Exame Físico (Esquerda/Centro) */}
-          <div className="lg:col-span-2 space-y-4 md:space-y-6">
-            {/* Chat */}
-            <div className="min-h-96 sm:min-h-96 md:min-h-[500px] flex flex-col">
-              <ChatPaciente
-                nomePaciente={caso.paciente.nome}
-                casoId={casoId}
-                onMensagensChange={setMensagens}
-              />
-            </div>
+      {/* Abas — visível apenas em mobile */}
+      <div className="lg:hidden bg-white border-b border-slate-200 px-4">
+        <div className="flex gap-1 overflow-x-auto scrollbar-hide max-w-7xl mx-auto">
+          {abas.map((aba) => (
+            <button
+              key={aba.id}
+              onClick={() => setAbaAtiva(aba.id)}
+              className={`flex items-center gap-1.5 px-3 py-3 text-xs font-semibold whitespace-nowrap border-b-2 transition-colors shrink-0 ${
+                abaAtiva === aba.id
+                  ? "border-blue-600 text-blue-700"
+                  : "border-transparent text-slate-500 hover:text-slate-700"
+              }`}
+            >
+              <span>{aba.icon}</span>
+              {aba.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
-            {/* Exame Físico e Sinais */}
+      {/* Conteúdo Principal */}
+      <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
+        {/* Layout Desktop: 2 colunas */}
+        <div className="hidden lg:grid lg:grid-cols-3 gap-5">
+          <div className="lg:col-span-2 space-y-4">
+            <div className="h-[480px] flex flex-col">
+              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
+            </div>
             <PainelExameFisico
               sinaisVitaisSolicitados={sinaisVitaisSolicitados}
-              sinaisVitaisData={
-                sinaisVitaisSolicitados ? caso.sinaisVitaisCorretos : undefined
-              }
-              onSolicitarSinaisVitais={() =>
-                setSinaisVitaisSolicitados(true)
-              }
+              sinaisVitaisData={sinaisVitaisSolicitados ? caso.sinaisVitaisCorretos : undefined}
+              onSolicitarSinaisVitais={() => setSinaisVitaisSolicitados(true)}
               caso={caso}
               manobrasSolicitadas={manobrasSolicitadas}
               onNovaManobra={handleNovaManobra}
               modoOSCE={modoOSCE}
             />
-
-            {/* Exames Complementares */}
             <PainelExamesComplementares
               casoId={casoId}
               examesSolicitados={examesSolicitados}
@@ -441,11 +443,40 @@ function CasoPageContent() {
               desabilitado={phase === "feedback"}
             />
           </div>
-
-          {/* Formulário SOAP (Direita) */}
           <div className="lg:col-span-1">
             <FormularioSOAP onSubmit={handleFinalizarAtendimento} />
           </div>
+        </div>
+
+        {/* Layout Mobile: abas */}
+        <div className="lg:hidden">
+          {abaAtiva === "paciente" && (
+            <div className="h-[calc(100dvh-200px)] min-h-80 flex flex-col">
+              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
+            </div>
+          )}
+          {abaAtiva === "exame" && (
+            <PainelExameFisico
+              sinaisVitaisSolicitados={sinaisVitaisSolicitados}
+              sinaisVitaisData={sinaisVitaisSolicitados ? caso.sinaisVitaisCorretos : undefined}
+              onSolicitarSinaisVitais={() => setSinaisVitaisSolicitados(true)}
+              caso={caso}
+              manobrasSolicitadas={manobrasSolicitadas}
+              onNovaManobra={handleNovaManobra}
+              modoOSCE={modoOSCE}
+            />
+          )}
+          {abaAtiva === "exames" && (
+            <PainelExamesComplementares
+              casoId={casoId}
+              examesSolicitados={examesSolicitados}
+              onNovoExame={handleNovoExame}
+              desabilitado={phase === "feedback"}
+            />
+          )}
+          {abaAtiva === "soap" && (
+            <FormularioSOAP onSubmit={handleFinalizarAtendimento} />
+          )}
         </div>
       </div>
 

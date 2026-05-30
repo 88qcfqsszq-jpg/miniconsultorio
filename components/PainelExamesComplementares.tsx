@@ -62,67 +62,57 @@ export default function PainelExamesComplementares({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4">
-      <h3 className="font-bold text-lg mb-4 text-gray-800">
-        💊 Exames Complementares
-      </h3>
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-8 h-8 bg-violet-100 rounded-lg flex items-center justify-center text-base">🧪</div>
+        <h3 className="font-bold text-slate-800">Exames Complementares</h3>
+      </div>
 
-      {/* Formulário de solicitação */}
       <form onSubmit={solicitarExame} className="mb-4">
         <div className="flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ex: ECG, raio-X de tórax, hemograma, troponina..."
+            placeholder="ECG, hemograma, troponina, raio-X..."
             disabled={carregando || desabilitado}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 text-gray-900 placeholder-gray-500"
+            className="flex-1 px-3.5 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent disabled:bg-slate-100 text-slate-900 placeholder-slate-400 text-sm"
           />
           <button
             type="submit"
             disabled={carregando || desabilitado || !input.trim()}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+            className="bg-violet-600 hover:bg-violet-700 disabled:bg-slate-300 text-white font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm shrink-0 active:scale-[0.97]"
           >
-            {carregando ? "Processando..." : "Solicitar"}
+            {carregando ? "..." : "Solicitar"}
           </button>
         </div>
-
         {erro && (
-          <div className="mt-2 p-2 bg-red-100 border border-red-300 rounded text-sm text-red-700">
-            ⚠️ {erro}
-          </div>
+          <p className="mt-2 text-xs text-red-600 bg-red-50 px-3 py-1.5 rounded-lg border border-red-200">
+            {erro}
+          </p>
         )}
       </form>
 
-      {/* Histórico de exames */}
-      {examesSolicitados.length > 0 && (
-        <div className="space-y-3">
-          <p className="text-sm font-semibold text-gray-700 mb-2">
-            Exames Solicitados:
-          </p>
+      {examesSolicitados.length > 0 ? (
+        <div className="space-y-2.5">
           {examesSolicitados.map((exame, idx) => (
-            <div
-              key={idx}
-              className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded"
-            >
-              <p className="text-sm font-semibold text-blue-900 mb-1">
-                ✓ {exame.nome}
-              </p>
-              <p className="text-sm text-gray-700">{exame.resultado}</p>
-              <span className="text-xs text-gray-500 mt-1 block">
-                {exame.timestamp.toLocaleTimeString("pt-BR", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </span>
+            <div key={idx} className="bg-slate-50 rounded-xl border border-slate-200 p-3.5">
+              <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-4 h-4 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-xs font-bold">✓</span>
+                  <p className="text-sm font-semibold text-slate-800">{exame.nome}</p>
+                </div>
+                <span className="text-xs text-slate-400">
+                  {exame.timestamp.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
+                </span>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed pl-5">{exame.resultado}</p>
             </div>
           ))}
         </div>
-      )}
-
-      {examesSolicitados.length === 0 && (
-        <p className="text-sm text-gray-500 italic">
-          Nenhum exame solicitado ainda. Solicite exames conforme necessário.
+      ) : (
+        <p className="text-sm text-slate-400 text-center py-3">
+          Nenhum exame solicitado ainda
         </p>
       )}
     </div>

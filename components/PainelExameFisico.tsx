@@ -143,17 +143,22 @@ export default function PainelExameFisico({
   );
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-5">
       {/* Sinais Vitais */}
-      <div className="border-l-4 border-green-500 pl-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-bold text-gray-800">Sinais Vitais</h3>
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 bg-emerald-100 rounded-lg flex items-center justify-center text-sm">💚</div>
+            <h3 className="font-bold text-slate-800 text-sm">Sinais Vitais</h3>
+          </div>
           {sinaisVitaisSolicitados ? (
-            <span className="text-green-600 font-semibold">✓ Solicitado</span>
+            <span className="flex items-center gap-1 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+              ✓ Coletado
+            </span>
           ) : (
             <button
               onClick={onSolicitarSinaisVitais}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded text-sm transition-colors"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-1.5 px-3.5 rounded-lg text-xs transition-colors active:scale-[0.97]"
             >
               Solicitar
             </button>
@@ -161,167 +166,96 @@ export default function PainelExameFisico({
         </div>
 
         {sinaisVitaisData && (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3">
-            <div className="bg-green-50 p-2 rounded text-sm">
-              <p className="text-xs text-gray-600">PA</p>
-              <p className="font-semibold text-green-700">
-                {sinaisVitaisData.pressaoArterial}
-              </p>
-            </div>
-            <div className="bg-green-50 p-2 rounded text-sm">
-              <p className="text-xs text-gray-600">FC</p>
-              <p className="font-semibold text-green-700">
-                {sinaisVitaisData.frequenciaCardiaca} bpm
-              </p>
-            </div>
-            <div className="bg-green-50 p-2 rounded text-sm">
-              <p className="text-xs text-gray-600">FR</p>
-              <p className="font-semibold text-green-700">
-                {sinaisVitaisData.frequenciaRespiratoria} rpm
-              </p>
-            </div>
-            <div className="bg-green-50 p-2 rounded text-sm">
-              <p className="text-xs text-gray-600">Temp</p>
-              <p className="font-semibold text-green-700">
-                {sinaisVitaisData.temperatura}°C
-              </p>
-            </div>
-            <div className="bg-green-50 p-2 rounded text-sm">
-              <p className="text-xs text-gray-600">SpO₂</p>
-              <p className="font-semibold text-green-700">
-                {sinaisVitaisData.saturacaoOxigenio}%
-              </p>
-            </div>
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+            {[
+              { label: "PA", value: sinaisVitaisData.pressaoArterial, unit: "" },
+              { label: "FC", value: sinaisVitaisData.frequenciaCardiaca, unit: "bpm" },
+              { label: "FR", value: sinaisVitaisData.frequenciaRespiratoria, unit: "rpm" },
+              { label: "Temp", value: sinaisVitaisData.temperatura, unit: "°C" },
+              { label: "SpO₂", value: sinaisVitaisData.saturacaoOxigenio, unit: "%" },
+            ].map((sv) => (
+              <div key={sv.label} className="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-center">
+                <p className="text-xs text-slate-500 mb-0.5">{sv.label}</p>
+                <p className="font-bold text-emerald-700 text-sm leading-tight">{sv.value}{sv.unit}</p>
+              </div>
+            ))}
           </div>
         )}
       </div>
 
-      {/* Divisor */}
-      <div className="border-t-2 my-4"></div>
+      <div className="border-t border-slate-100"></div>
 
-      {/* Cards de Exame Físico */}
-      <div className="space-y-3">
-        <h3 className="text-lg font-bold text-gray-800 mb-4">Exame Físico</h3>
+      {/* Exame Físico */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-7 h-7 bg-blue-100 rounded-lg flex items-center justify-center text-sm">🔍</div>
+          <h3 className="font-bold text-slate-800 text-sm">Exame Físico</h3>
+        </div>
 
-        {CATEGORIAS.map((cat) => (
-          <div key={cat.id} className="border rounded-lg overflow-hidden">
-            {/* Header do Card */}
-            <button
-              onClick={() =>
-                setAbertaCategoria(
-                  abertaCategoria === cat.id ? null : cat.id
-                )
-              }
-              className="w-full p-4 bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-150 flex items-center justify-between font-semibold text-gray-800"
-            >
-              <span>
-                {cat.icone} {cat.nome}
-              </span>
-              <span className="text-sm">
-                {abertaCategoria === cat.id ? "▼" : "▶"}
-              </span>
-            </button>
+        {CATEGORIAS.map((cat) => {
+          const isAberta = abertaCategoria === cat.id;
+          const nManobras = manobrasPorCategoria[cat.id]?.length ?? 0;
+          return (
+            <div key={cat.id} className="border border-slate-200 rounded-xl overflow-hidden">
+              <button
+                onClick={() => setAbertaCategoria(isAberta ? null : cat.id)}
+                className="w-full px-4 py-3 bg-slate-50 hover:bg-slate-100 flex items-center justify-between transition-colors text-left"
+              >
+                <span className="flex items-center gap-2 font-semibold text-slate-700 text-sm">
+                  <span>{cat.icone}</span>
+                  {cat.nome}
+                  {nManobras > 0 && (
+                    <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full font-semibold">{nManobras}</span>
+                  )}
+                </span>
+                <svg className={`w-4 h-4 text-slate-400 transition-transform ${isAberta ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
 
-            {/* Conteúdo do Card */}
-            {abertaCategoria === cat.id && (
-              <div className="p-4 bg-white space-y-4">
-                {/* Orientação */}
-                <div>
-                  <p className="text-sm text-gray-700 font-semibold mb-2">
-                    {cat.orientacao}
-                  </p>
-                  <p className="text-xs text-gray-500">{cat.exemplos}</p>
-                </div>
+              {isAberta && (
+                <div className="p-4 space-y-3">
+                  <p className="text-xs text-slate-400">{cat.exemplos}</p>
 
-                {/* Input + Botão */}
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={inputs[cat.id]}
-                    onChange={(e) =>
-                      setInputs({
-                        ...inputs,
-                        [cat.id]: e.target.value,
-                      })
-                    }
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter") {
-                        handleRealizarManobra(
-                          cat.id as
-                            | "geral"
-                            | "cardiovascular"
-                            | "respiratorio"
-                            | "abdominal"
-                            | "membros"
-                        );
-                      }
-                    }}
-                    placeholder="Digite aqui e pressione Enter ou clique em Realizar"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900"
-                  />
-                  <button
-                    onClick={() =>
-                      handleRealizarManobra(
-                        cat.id as
-                          | "geral"
-                          | "cardiovascular"
-                          | "respiratorio"
-                          | "abdominal"
-                          | "membros"
-                      )
-                    }
-                    disabled={loadingCategoria === cat.id}
-                    className={`font-semibold py-2 px-4 rounded-lg transition-colors whitespace-nowrap ${
-                      loadingCategoria === cat.id
-                        ? "bg-gray-400 text-white cursor-not-allowed"
-                        : "bg-purple-600 hover:bg-purple-700 text-white"
-                    }`}
-                  >
-                    {loadingCategoria === cat.id ? "Carregando..." : "Realizar"}
-                  </button>
-                </div>
-
-                {/* Mensagem de Erro */}
-                {erroCategoria && loadingCategoria === cat.id === false && (
-                  <div className="bg-red-50 border border-red-200 p-3 rounded text-red-700 text-sm">
-                    ⚠️ {erroCategoria}
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={inputs[cat.id]}
+                      onChange={(e) => setInputs({ ...inputs, [cat.id]: e.target.value })}
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") handleRealizarManobra(cat.id as "geral" | "cardiovascular" | "respiratorio" | "abdominal" | "membros");
+                      }}
+                      placeholder="Descreva a manobra..."
+                      className="flex-1 px-3 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900 placeholder-slate-400 text-sm"
+                    />
+                    <button
+                      onClick={() => handleRealizarManobra(cat.id as "geral" | "cardiovascular" | "respiratorio" | "abdominal" | "membros")}
+                      disabled={loadingCategoria === cat.id || !inputs[cat.id].trim()}
+                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm shrink-0 active:scale-[0.97]"
+                    >
+                      {loadingCategoria === cat.id ? "..." : "Realizar"}
+                    </button>
                   </div>
-                )}
 
-                {/* Histórico da Categoria */}
-                {manobrasPorCategoria[cat.id]?.length > 0 && (
-                  <div className="border-t pt-4 mt-4">
-                    <p className="text-sm font-semibold text-gray-800 mb-3">
-                      Histórico ({manobrasPorCategoria[cat.id].length}):
-                    </p>
-                    <div className="space-y-3">
+                  {erroCategoria && loadingCategoria !== cat.id && (
+                    <p className="text-xs text-red-600 bg-red-50 px-3 py-1.5 rounded-lg border border-red-200">{erroCategoria}</p>
+                  )}
+
+                  {nManobras > 0 && (
+                    <div className="space-y-2 pt-1">
                       {manobrasPorCategoria[cat.id].map((manobra) => (
-                        <div
-                          key={manobra.id}
-                          className="bg-purple-50 p-3 rounded border-l-4 border-purple-500"
-                        >
-                          <p className="text-xs text-gray-600 mb-1">
-                            <span className="font-semibold">Manobra:</span>{" "}
-                            {manobra.textDigitado}
-                          </p>
-                          <p className="text-sm text-gray-800">
-                            {manobra.resposta}
-                          </p>
+                        <div key={manobra.id} className="bg-slate-50 rounded-xl border border-slate-200 p-3">
+                          <p className="text-xs text-slate-500 mb-1 font-medium">→ {manobra.textDigitado}</p>
+                          <p className="text-sm text-slate-700 leading-relaxed">{manobra.resposta}</p>
                         </div>
                       ))}
                     </div>
-                  </div>
-                )}
-
-                {manobrasPorCategoria[cat.id]?.length === 0 && (
-                  <p className="text-sm text-gray-500 italic text-center py-4">
-                    Nenhuma manobra realizada nesta categoria ainda
-                  </p>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

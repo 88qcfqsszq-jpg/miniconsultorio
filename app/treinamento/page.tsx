@@ -18,41 +18,39 @@ export default function Treinamento() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Conteúdo Principal */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="min-h-screen bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-800 mb-4">
-            📚 Treinamento Direcionado
+        <div className="mb-8 sm:mb-10">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-1">
+            Treinamento Direcionado
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Pratique casos específicos por tema. Ideal para aprofundamento em sistemas e diagnósticos específicos.
+          <p className="text-slate-500 text-sm sm:text-base">
+            Escolha um caso por tema. Você sabe o diagnóstico antes de começar.
           </p>
         </div>
 
-        {/* Seção de Gerador de Casos */}
-        {mostrarGerador && (
-          <div className="mb-12 animate-fadeIn">
+        {/* Gerador de Casos */}
+        {mostrarGerador ? (
+          <div className="mb-8 animate-fadeIn">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-gray-800">✨ Criar Novo Caso</h2>
+              <h2 className="text-lg font-bold text-slate-800">✨ Gerar Novo Caso com IA</h2>
               <button
                 onClick={() => setMostrarGerador(false)}
-                className="text-gray-500 hover:text-gray-700 text-2xl"
+                className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-200 transition-colors"
               >
-                ✕
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
             <PainelGerarCaso onCasoGerado={handleCasoGerado} />
           </div>
-        )}
-
-        {/* Botão para mostrar gerador */}
-        {!mostrarGerador && (
-          <div className="mb-12">
+        ) : (
+          <div className="mb-8">
             <button
               onClick={() => setMostrarGerador(true)}
-              className="w-full py-4 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-bold text-lg hover:from-purple-700 hover:to-pink-700 shadow-lg hover:shadow-xl transition-all"
+              className="w-full py-3.5 px-6 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-semibold text-sm sm:text-base hover:from-violet-700 hover:to-purple-700 shadow-sm hover:shadow-md transition-all active:scale-[0.99]"
             >
               🤖 Gerar Novo Caso com IA
             </button>
@@ -60,55 +58,29 @@ export default function Treinamento() {
         )}
 
         {/* Cards de Casos */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10">
           {casosOSCE.map((caso) => (
             <CasoCard key={caso.id} caso={caso} />
           ))}
         </div>
 
-        {/* Instruções */}
-        <div className="bg-white rounded-lg shadow-md p-8 space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">
-            Como Usar o Treinamento
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <div className="text-3xl mb-3">1️⃣</div>
-              <h3 className="font-bold text-gray-800 mb-2">Escolha um Tema</h3>
-              <p className="text-gray-600">
-                Selecione um caso clínico específico de um tema que deseja treinar.
-                Você verá o diagnóstico e sistema antes de começar.
-              </p>
-            </div>
-
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <div className="text-3xl mb-3">2️⃣</div>
-              <h3 className="font-bold text-gray-800 mb-2">Realize a Anamnese</h3>
-              <p className="text-gray-600">
-                Converse com o paciente virtual, faça perguntas sobre seus sintomas e solicite sinais vitais e exame físico.
-              </p>
-            </div>
-
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <div className="text-3xl mb-3">3️⃣</div>
-              <h3 className="font-bold text-gray-800 mb-2">Registre sua Avaliação</h3>
-              <p className="text-gray-600">
-                Preencha o formulário SOAP, estabeleça seus diagnósticos e conduta. Finalize e receba feedback.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-green-50 border-l-4 border-green-500 p-6">
-            <h3 className="font-bold text-green-800 mb-2">💡 Dicas Importantes</h3>
-            <ul className="text-green-800 space-y-2">
-              <li>✓ Use o conhecimento prévio do tema para focar sua investigação</li>
-              <li>✓ Aborde o paciente com empatia e profissionalismo</li>
-              <li>✓ Investigue completamente os sintomas antes de fazer diagnósticos</li>
-              <li>✓ Solicite exames e sinais vitais conforme necessário</li>
-              <li>✓ Mantenha diagnósticos diferenciais em mente</li>
-              <li>✓ Documente tudo de forma clara no registro SOAP</li>
-            </ul>
+        {/* Como usar */}
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+          <h2 className="text-lg font-bold text-slate-800 mb-5">Como usar</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+            {[
+              { n: "1", title: "Escolha um caso", desc: "Selecione o tema ou sistema que quer revisar." },
+              { n: "2", title: "Conduza o atendimento", desc: "Anamnese, exame físico e exames complementares." },
+              { n: "3", title: "Receba feedback", desc: "Diagnóstico, SOAP, comunicação e plano de estudo." },
+            ].map((step) => (
+              <div key={step.n} className="flex gap-3">
+                <div className="w-7 h-7 rounded-lg bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-xs shrink-0 mt-0.5">{step.n}</div>
+                <div>
+                  <p className="font-semibold text-slate-700 text-sm">{step.title}</p>
+                  <p className="text-slate-500 text-xs mt-0.5">{step.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

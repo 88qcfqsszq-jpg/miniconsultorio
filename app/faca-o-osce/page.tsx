@@ -14,102 +14,77 @@ export default function FacaOOSCE() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50">
-      {/* Conteúdo Principal */}
-      <div className="max-w-4xl mx-auto px-4 py-20">
+    <div className="min-h-screen bg-slate-50">
+      <div className="max-w-2xl mx-auto px-4 py-10 sm:py-14">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-indigo-900 mb-6">
-            🎯 Prova OSCE
+        <div className="text-center mb-8">
+          <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🎯</div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">
+            Prova OSCE
           </h1>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-4">
-            Teste suas habilidades clínicas em um simulado desafiador
+          <p className="text-slate-500 text-sm sm:text-base">
+            Simulado com paciente aleatório — sem diagnóstico revelado
           </p>
         </div>
 
         {/* Card Principal */}
-        <div className="bg-white rounded-lg shadow-2xl p-12 border-t-4 border-indigo-600 mb-12">
-          <div className="text-center">
-            <div className="text-6xl mb-6">🏥</div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              Simulado OSCE Aleatório
-            </h2>
-
-            <div className="bg-indigo-50 rounded-lg p-8 mb-8 border-l-4 border-indigo-600">
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Você receberá um <strong>paciente virtual sem diagnóstico revelado</strong>.
-                Conduza a anamnese, investigue os sintomas, solicite sinais vitais e exame físico,
-                formule suas hipóteses diagnósticas e registre sua avaliação em SOAP.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-blue-50 p-6 rounded-lg">
-                <div className="text-3xl mb-2">💬</div>
-                <h3 className="font-semibold text-gray-800 mb-2">Anamnese</h3>
-                <p className="text-sm text-gray-600">
-                  Converse livremente com o paciente virtual
-                </p>
-              </div>
-
-              <div className="bg-green-50 p-6 rounded-lg">
-                <div className="text-3xl mb-2">📋</div>
-                <h3 className="font-semibold text-gray-800 mb-2">Exame Físico</h3>
-                <p className="text-sm text-gray-600">
-                  Solicite sinais vitais e achados do exame
-                </p>
-              </div>
-
-              <div className="bg-purple-50 p-6 rounded-lg">
-                <div className="text-3xl mb-2">🧠</div>
-                <h3 className="font-semibold text-gray-800 mb-2">Diagnóstico</h3>
-                <p className="text-sm text-gray-600">
-                  Formule hipótese e diferenciais, registre SOAP
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-green-50 border-l-4 border-green-500 p-6 mb-8 text-left">
-              <h3 className="font-bold text-green-800 mb-3">💡 Dicas para o OSCE</h3>
-              <ul className="text-green-800 space-y-2 text-sm">
-                <li>✓ Aborde o paciente com empatia e profissionalismo</li>
-                <li>✓ Faça perguntas abertas seguidas de perguntas fechadas direcionadas</li>
-                <li>✓ Investigue completamente os sintomas antes de fazer diagnósticos</li>
-                <li>✓ Sempre solicite sinais vitais e exame físico quando apropriado</li>
-                <li>✓ Mantenha diagnósticos diferenciais em mente</li>
-                <li>✓ Documente tudo de forma clara no registro SOAP</li>
-              </ul>
-            </div>
-
-            <button
-              onClick={iniciarOSCEAleatorio}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-12 rounded-lg transition-colors text-lg shadow-lg"
-            >
-              🚀 Iniciar OSCE Aleatório
-            </button>
-
-            <p className="text-sm text-gray-500 mt-6">
-              Cada simulado é único. Você pode realizar quantas vezes quiser.
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 mb-6">
+          <div className="bg-blue-50 rounded-xl p-4 mb-6 border border-blue-100">
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed text-center">
+              Você receberá um <strong className="text-blue-700">paciente virtual sem diagnóstico revelado</strong>. Conduza a anamnese, solicite exames, formule hipóteses e registre em SOAP.
             </p>
           </div>
+
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            {[
+              { icon: "💬", label: "Anamnese" },
+              { icon: "🩺", label: "Exame Físico" },
+              { icon: "🧠", label: "Diagnóstico" },
+            ].map((item) => (
+              <div key={item.label} className="bg-slate-50 rounded-xl p-3 text-center border border-slate-200">
+                <div className="text-2xl mb-1">{item.icon}</div>
+                <p className="text-xs font-semibold text-slate-700">{item.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <ul className="space-y-2 mb-6">
+            {[
+              "Aborde o paciente com empatia e profissionalismo",
+              "Perguntas abertas → fechadas e direcionadas",
+              "Solicite sinais vitais e exame físico quando indicado",
+              "Mantenha diagnósticos diferenciais em mente",
+              "Documente tudo claramente no SOAP",
+            ].map((tip) => (
+              <li key={tip} className="flex items-start gap-2 text-sm text-slate-600">
+                <span className="text-emerald-500 font-bold mt-0.5 shrink-0">✓</span>
+                {tip}
+              </li>
+            ))}
+          </ul>
+
+          <button
+            onClick={iniciarOSCEAleatorio}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-sm text-base active:scale-[0.98]"
+          >
+            Iniciar OSCE Aleatório →
+          </button>
+          <p className="text-xs text-slate-400 text-center mt-3">
+            O diagnóstico só será revelado ao finalizar o atendimento
+          </p>
         </div>
 
-        {/* Informações Adicionais */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-blue-50 rounded-lg p-6 border-l-4 border-blue-500">
-            <h3 className="font-bold text-blue-900 mb-3">❓ O que esperar</h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              Você encontrará um caso clínico real sem conhecimento prévio sobre a doença.
-              Seu objetivo é diagnosticar e planejar a conduta baseado na abordagem clínica
-              adequada ao 3º semestre de Medicina.
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="bg-white rounded-xl border border-slate-200 p-4">
+            <p className="font-semibold text-slate-700 text-sm mb-1">❓ O que esperar</p>
+            <p className="text-slate-500 text-xs leading-relaxed">
+              Caso clínico real sem conhecimento prévio do diagnóstico. Você deve investigar, raciocinar e documentar como em uma situação real.
             </p>
           </div>
-
-          <div className="bg-purple-50 rounded-lg p-6 border-l-4 border-purple-500">
-            <h3 className="font-bold text-purple-900 mb-3">📊 Feedback</h3>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              Ao finalizar, você receberá feedback detalhado com o diagnóstico esperado,
-              diferenciais importantes, seus acertos e pontos de melhoria.
+          <div className="bg-white rounded-xl border border-slate-200 p-4">
+            <p className="font-semibold text-slate-700 text-sm mb-1">📊 Feedback pós-atendimento</p>
+            <p className="text-slate-500 text-xs leading-relaxed">
+              Diagnóstico esperado, diferenciais, acertos, pontos de melhoria, comunicação e plano de estudo personalizado.
             </p>
           </div>
         </div>

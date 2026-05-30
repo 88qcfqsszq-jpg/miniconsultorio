@@ -29,17 +29,13 @@ export default function ChatPaciente({
   const [ouvindo, setOuvindo] = useState(false);
   const [erroVoz, setErroVoz] = useState("");
   const [suportaVoz, setSuportaVoz] = useState(true);
-  const [isSafari, setIsSafari] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
-  // Inicializar: detectar Safari e validar suporte a Web Speech API
+  // Validar suporte a Web Speech API e registrar cleanup
   useEffect(() => {
     if (typeof window === "undefined") return;
-
-    const detectSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    setIsSafari(detectSafari);
 
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -208,43 +204,49 @@ export default function ChatPaciente({
   };
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-lg shadow-md border border-gray-200">
+    <div className="flex flex-col h-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
       {/* Header */}
-      <div className="bg-blue-600 text-white p-4 rounded-t-lg">
-        <h3 className="font-bold">Chat com o Paciente</h3>
-        <p className="text-sm text-blue-100">{nomePaciente}</p>
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 flex items-center gap-3">
+        <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold shrink-0">
+          {nomePaciente.charAt(0)}
+        </div>
+        <div>
+          <p className="font-semibold text-sm leading-tight">{nomePaciente}</p>
+          <p className="text-blue-200 text-xs">Paciente Virtual</p>
+        </div>
+        <div className="ml-auto flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span className="text-xs text-blue-200">Online</span>
+        </div>
       </div>
 
       {/* Mensagens */}
-      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50">
         {mensagens.map((msg) => (
           <div
             key={msg.id}
             className={`flex ${msg.tipo === "estudante" ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-xs sm:max-w-sm px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base ${
+              className={`max-w-[80%] sm:max-w-[72%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
                 msg.tipo === "estudante"
-                  ? "bg-blue-500 text-white rounded-br-none"
-                  : "bg-gray-200 text-gray-800 rounded-bl-none"
+                  ? "bg-blue-600 text-white rounded-br-sm"
+                  : "bg-white text-slate-800 rounded-bl-sm shadow-sm border border-slate-200"
               }`}
             >
-              <p className="text-sm">{msg.conteudo}</p>
-              <span className="text-xs opacity-70 mt-1 block">
-                {msg.timestamp.toLocaleTimeString("pt-BR", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+              <p>{msg.conteudo}</p>
+              <span className={`text-xs mt-1 block ${msg.tipo === "estudante" ? "text-blue-200" : "text-slate-400"}`}>
+                {msg.timestamp.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
               </span>
             </div>
           </div>
         ))}
         {carregando && (
           <div className="flex justify-start">
-            <div className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg rounded-bl-none">
-              <p className="text-sm text-gray-500">
-                Paciente está digitando...
-              </p>
+            <div className="bg-white border border-slate-200 px-4 py-3 rounded-2xl rounded-bl-sm shadow-sm flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+              <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+              <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
             </div>
           </div>
         )}
@@ -252,69 +254,50 @@ export default function ChatPaciente({
       </div>
 
       {/* Input */}
-      <form
-        onSubmit={enviarMensagem}
-        className="border-t border-gray-200 p-4 bg-gray-50 rounded-b-lg"
-      >
+      <form onSubmit={enviarMensagem} className="border-t border-slate-200 p-3 bg-white">
+        {ouvindo && (
+          <div className="mb-2 px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 flex items-center gap-2">
+            <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+            Ouvindo... fale agora
+          </div>
+        )}
+        {erroVoz && (
+          <div className="mb-2 px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700">
+            {erroVoz}
+          </div>
+        )}
         <div className="flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Faça uma pergunta ao paciente..."
+            placeholder="Digite sua pergunta..."
             disabled={carregando}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 text-gray-900 placeholder-gray-500"
+            className="flex-1 px-3.5 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-slate-100 text-slate-900 placeholder-slate-400 text-sm"
           />
-
           {suportaVoz && (
             <button
               type="button"
               onClick={iniciarTranscricao}
               disabled={carregando}
-              title={ouvindo ? "Ouvindo... Clique para parar" : "Clique para falar"}
-              className={`py-2 px-4 rounded-lg font-semibold transition-all ${
+              title={ouvindo ? "Parar" : "Falar"}
+              className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all shrink-0 ${
                 ouvindo
                   ? "bg-red-500 hover:bg-red-600 text-white animate-pulse"
-                  : "bg-gray-400 hover:bg-gray-500 text-white"
-              } disabled:opacity-50 disabled:cursor-not-allowed`}
+                  : "bg-slate-100 hover:bg-slate-200 text-slate-600"
+              } disabled:opacity-50`}
             >
               🎙️
             </button>
           )}
-
           <button
             type="submit"
             disabled={carregando || !input.trim()}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+            className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm shrink-0 active:scale-[0.97]"
           >
             Enviar
           </button>
         </div>
-
-        {erroVoz && (
-          <div className="mt-2 p-2 bg-red-100 border border-red-300 rounded text-sm text-red-700">
-            ⚠️ {erroVoz}
-          </div>
-        )}
-
-        {ouvindo && (
-          <div className="mt-2 p-2 bg-blue-100 border border-blue-300 rounded text-sm text-blue-700 flex items-center gap-2">
-            <span className="inline-block w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
-            Ouvindo... Fale sua pergunta agora.
-          </div>
-        )}
-
-        <p className="text-xs text-gray-500 mt-2">
-          {suportaVoz
-            ? "💡 Dica: Você pode digitar ou usar o microfone 🎙️ para transcrever sua pergunta"
-            : "💡 Dica: Pergunte sobre sintomas, histórico e solicite sinais vitais"}
-        </p>
-
-        {suportaVoz && isSafari && (
-          <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded p-2 mt-2">
-            ⚠️ O Safari pode não retornar transcrição neste ambiente. Para usar voz, teste no Google Chrome. A digitação continua disponível.
-          </p>
-        )}
       </form>
     </div>
   );
