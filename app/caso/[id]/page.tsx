@@ -67,6 +67,23 @@ function CasoPageContent() {
 
   // Carregar caso
   useEffect(() => {
+    // 1. Verificar sessionStorage primeiro (para casos gerados)
+    try {
+      const casoGerado = sessionStorage.getItem("casoGerado");
+      if (casoGerado) {
+        const caso = JSON.parse(casoGerado);
+        if (caso.id === casoId) {
+          setCaso(caso);
+          setTempoInicio(Date.now());
+          sessionStorage.removeItem("casoGerado");
+          return;
+        }
+      }
+    } catch (e) {
+      console.error("Erro ao carregar caso gerado:", e);
+    }
+
+    // 2. Se não achou em sessionStorage, procurar em casos estáticos
     const casoEncontrado = casosOSCE.find((c) => c.id === casoId);
     if (casoEncontrado) {
       setCaso(casoEncontrado);
