@@ -327,7 +327,7 @@ function CasoPageContent() {
         );
         setGerandoFeedback(false);
         setProgressoFeedback(0);
-        console.error("Erro ao obter feedback:", response.status);
+        console.error("Erro ao obter feedback:", response?.status || "unknown error");
       }
     } catch (error) {
       clearInterval(intervaloProgresso);
