@@ -335,8 +335,8 @@ function CasoPageContent() {
     }
   };
 
-  const [abaAtiva, setAbaAtiva] = useState<"paciente" | "exame" | "exames" | "soap">("paciente");
-  const [menuAtivo, setMenuAtivo] = useState<"paciente" | "exame" | "exames" | "soap" | "finalizar">("paciente");
+  const [abaAtiva, setAbaAtiva] = useState<"paciente" | "exame" | "exames" | "soap" | "sinaisVitais">("paciente");
+  const [menuAtivo, setMenuAtivo] = useState<"paciente" | "exame" | "exames" | "soap" | "sinaisVitais">("paciente");
   const [soap, setSOAP] = useState<FormularioSOAPType>({
     subjetivo: "",
     objetivo: "",
@@ -379,6 +379,7 @@ function CasoPageContent() {
     { id: "paciente" as const, label: "Paciente", icon: "💬" },
     { id: "exame" as const, label: "Exame", icon: "🥼" },
     { id: "exames" as const, label: "Exames", icon: "🧪" },
+    { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "📊" },
     { id: "soap" as const, label: "SOAP", icon: "📝" },
   ];
 
@@ -445,27 +446,12 @@ function CasoPageContent() {
                   { id: "paciente" as const, label: "Paciente", icon: "💬" },
                   { id: "exame" as const, label: "Exame Físico", icon: "🥼" },
                   { id: "exames" as const, label: "Exames", icon: "🧪" },
-                  { id: "finalizar" as const, label: "Finalizar", icon: "✅" },
+                  { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "📊" },
+                  { id: "soap" as const, label: "SOAP", icon: "📝" },
                 ].map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => {
-                      if (item.id === "finalizar") {
-                        if (
-                          soap.subjetivo.trim() &&
-                          soap.objetivo.trim() &&
-                          soap.avaliacao.trim() &&
-                          soap.plano.trim() &&
-                          diagnostico.hipotesePrincipal.trim()
-                        ) {
-                          handleFinalizarAtendimento();
-                        } else {
-                          alert("Por favor, preencha todos os campos da Avaliação Clínica antes de finalizar:\n- Subjetivo\n- Objetivo\n- Avaliação\n- Plano\n- Hipótese Diagnóstica Principal");
-                        }
-                      } else {
-                        setMenuAtivo(item.id);
-                      }
-                    }}
+                    onClick={() => setMenuAtivo(item.id)}
                     className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
                       menuAtivo === item.id
                         ? "bg-blue-600 text-white shadow-sm"
@@ -535,7 +521,7 @@ function CasoPageContent() {
           <div className="min-w-0 space-y-4">
             {/* Chat */}
             <div className="h-[420px] flex flex-col">
-              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
+              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} mensagens={mensagens} setMensagens={setMensagens} />
             </div>
 
             {/* Conteúdo Dinâmico baseado no Menu */}
@@ -559,11 +545,56 @@ function CasoPageContent() {
               />
             )}
 
-            {menuAtivo === "finalizar" && (
-              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-                <p className="text-sm font-semibold text-slate-800 mb-2">Antes de finalizar:</p>
-                <p className="text-xs text-slate-600 mb-4">Revise a Avaliação Clínica na coluna direita e clique no botão verde para finalizar.</p>
+            {menuAtivo === "sinaisVitais" && (
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">📊</span>
+                  <h3 className="font-bold text-slate-800">Sinais Vitais</h3>
+                </div>
+                <button
+                  onClick={() => setSinaisVitaisSolicitados(true)}
+                  disabled={sinaisVitaisSolicitados || phase === "feedback"}
+                  className={`w-full px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                    sinaisVitaisSolicitados
+                      ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                      : "bg-blue-600 hover:bg-blue-700 text-white border border-blue-600"
+                  }`}
+                >
+                  {sinaisVitaisSolicitados ? "✓ Coletado" : "Solicitar Sinais Vitais"}
+                </button>
+                {sinaisVitaisSolicitados && caso.sinaisVitaisCorretos && (
+                  <div className="grid grid-cols-3 gap-3 text-sm">
+                    <div className="bg-emerald-50 p-3 rounded text-center">
+                      <p className="text-slate-600 font-semibold">PA</p>
+                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.pressaoArterial}</p>
+                    </div>
+                    <div className="bg-emerald-50 p-3 rounded text-center">
+                      <p className="text-slate-600 font-semibold">FC</p>
+                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.frequenciaCardiaca}</p>
+                    </div>
+                    <div className="bg-emerald-50 p-3 rounded text-center">
+                      <p className="text-slate-600 font-semibold">FR</p>
+                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.frequenciaRespiratoria}</p>
+                    </div>
+                    <div className="bg-emerald-50 p-3 rounded text-center">
+                      <p className="text-slate-600 font-semibold">Temp</p>
+                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.temperatura}°C</p>
+                    </div>
+                    <div className="bg-emerald-50 p-3 rounded text-center">
+                      <p className="text-slate-600 font-semibold">SpO₂</p>
+                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.saturacaoOxigenio}%</p>
+                    </div>
+                    <div className="bg-emerald-50 p-3 rounded text-center">
+                      <p className="text-slate-600 font-semibold">Glicose</p>
+                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.glicemia ? `${caso.sinaisVitaisCorretos.glicemia} mg/dL` : "—"}</p>
+                    </div>
+                  </div>
+                )}
               </div>
+            )}
+
+            {menuAtivo === "soap" && (
+              <FormularioSOAP onSubmit={handleFinalizarAtendimento} onChange={setSOAP} desabilitado={phase === "feedback"} />
             )}
           </div>
 
@@ -579,7 +610,7 @@ function CasoPageContent() {
         <div className="lg:hidden">
           {abaAtiva === "paciente" && (
             <div className="h-[calc(100dvh-200px)] min-h-80 flex flex-col">
-              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
+              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} mensagens={mensagens} setMensagens={setMensagens} />
             </div>
           )}
           {abaAtiva === "exame" && (
@@ -599,7 +630,54 @@ function CasoPageContent() {
             />
           )}
           {abaAtiva === "soap" && (
-            <FormularioSOAP onSubmit={handleFinalizarAtendimento} />
+            <FormularioSOAP onSubmit={handleFinalizarAtendimento} onChange={setSOAP} desabilitado={phase === "feedback"} />
+          )}
+          {abaAtiva === "sinaisVitais" && (
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">📊</span>
+                <h3 className="font-bold text-slate-800">Sinais Vitais</h3>
+              </div>
+              <button
+                onClick={() => setSinaisVitaisSolicitados(true)}
+                disabled={sinaisVitaisSolicitados || phase === "feedback"}
+                className={`w-full px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                  sinaisVitaisSolicitados
+                    ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                    : "bg-blue-600 hover:bg-blue-700 text-white border border-blue-600"
+                }`}
+              >
+                {sinaisVitaisSolicitados ? "✓ Coletado" : "Solicitar Sinais Vitais"}
+              </button>
+              {sinaisVitaisSolicitados && caso.sinaisVitaisCorretos && (
+                <div className="grid grid-cols-3 gap-3 text-sm">
+                  <div className="bg-emerald-50 p-3 rounded text-center">
+                    <p className="text-slate-600 font-semibold">PA</p>
+                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.pressaoArterial}</p>
+                  </div>
+                  <div className="bg-emerald-50 p-3 rounded text-center">
+                    <p className="text-slate-600 font-semibold">FC</p>
+                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.frequenciaCardiaca}</p>
+                  </div>
+                  <div className="bg-emerald-50 p-3 rounded text-center">
+                    <p className="text-slate-600 font-semibold">FR</p>
+                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.frequenciaRespiratoria}</p>
+                  </div>
+                  <div className="bg-emerald-50 p-3 rounded text-center">
+                    <p className="text-slate-600 font-semibold">Temp</p>
+                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.temperatura}°C</p>
+                  </div>
+                  <div className="bg-emerald-50 p-3 rounded text-center">
+                    <p className="text-slate-600 font-semibold">SpO₂</p>
+                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.saturacaoOxigenio}%</p>
+                  </div>
+                  <div className="bg-emerald-50 p-3 rounded text-center">
+                    <p className="text-slate-600 font-semibold">Glicose</p>
+                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.glicemia ? `${caso.sinaisVitaisCorretos.glicemia} mg/dL` : "—"}</p>
+                  </div>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </div>

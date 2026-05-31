@@ -7,6 +7,8 @@ interface ChatPacienteProps {
   nomePaciente: string;
   casoId: string;
   onMensagensChange?: (mensagens: MensagemChat[]) => void;
+  mensagens?: MensagemChat[];
+  setMensagens?: (mensagens: MensagemChat[]) => void;
 }
 
 type SpeechRecognitionType = any;
@@ -15,8 +17,10 @@ export default function ChatPaciente({
   nomePaciente,
   casoId,
   onMensagensChange,
+  mensagens: propMensagens,
+  setMensagens: propSetMensagens,
 }: ChatPacienteProps) {
-  const [mensagens, setMensagens] = useState<MensagemChat[]>([
+  const [localMensagens, setLocalMensagens] = useState<MensagemChat[]>([
     {
       id: "1",
       tipo: "paciente",
@@ -24,6 +28,19 @@ export default function ChatPaciente({
       timestamp: new Date(),
     },
   ]);
+
+  // Usar props se fornecidas (estado centralizado do pai), senão usar estado local
+  const mensagens = propMensagens !== undefined ? propMensagens : localMensagens;
+
+  const setMensagens = (updater: MensagemChat[] | ((prev: MensagemChat[]) => MensagemChat[])) => {
+    const novasMensagens = typeof updater === 'function' ? updater(mensagens) : updater;
+    if (propSetMensagens) {
+      propSetMensagens(novasMensagens);
+    } else {
+      setLocalMensagens(novasMensagens);
+    }
+  };
+
   const [input, setInput] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [ouvindo, setOuvindo] = useState(false);
