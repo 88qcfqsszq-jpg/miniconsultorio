@@ -152,6 +152,60 @@ export default function FormularioSOAP({
         </div>
 
         <div>
+          <label className={labelClass}>Diagnósticos Diferenciais</label>
+          <div className="flex gap-2 mb-2">
+            <input
+              type="text"
+              value={novoDiferencial}
+              onChange={(e) => setNovoDiferencial(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAdicionarDiferencial(); } }}
+              placeholder="Adicionar diferencial..."
+              disabled={desabilitado}
+              className={inputClass}
+            />
+            <button type="button" onClick={handleAdicionarDiferencial} disabled={desabilitado || !novoDiferencial.trim()}
+              className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-semibold py-2.5 px-3.5 rounded-xl text-sm shrink-0 transition-colors">
+              +
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {diagnostico.diagnosticosDisferenciais.map((diff, idx) => (
+              <span key={idx} className="inline-flex items-center gap-1 bg-blue-50 text-blue-800 border border-blue-200 px-2.5 py-1 rounded-full text-xs font-semibold">
+                {diff}
+                <button type="button" onClick={() => handleRemoverDiferencial(idx)} disabled={desabilitado} className="text-blue-400 hover:text-blue-700 font-bold ml-0.5">×</button>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <label className={labelClass}>Exames Indicados</label>
+          <div className="flex gap-2 mb-2">
+            <input
+              type="text"
+              value={novoExame}
+              onChange={(e) => setNovoExame(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAdicionarExame(); } }}
+              placeholder="ECG, Troponina, Raio X..."
+              disabled={desabilitado}
+              className={inputClass}
+            />
+            <button type="button" onClick={handleAdicionarExame} disabled={desabilitado || !novoExame.trim()}
+              className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-semibold py-2.5 px-3.5 rounded-xl text-sm shrink-0 transition-colors">
+              +
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {diagnostico.examesIndicados.map((exame, idx) => (
+              <span key={idx} className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded-full text-xs font-semibold">
+                {exame}
+                <button type="button" onClick={() => handleRemoverExame(idx)} disabled={desabilitado} className="text-emerald-400 hover:text-emerald-700 font-bold ml-0.5">×</button>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div>
           <label className={labelClass}>Conduta <span className="text-red-500">*</span></label>
           <textarea
             value={diagnostico.conduta}
@@ -164,7 +218,7 @@ export default function FormularioSOAP({
         </div>
       </div>
 
-<button
+      <button
         type="submit"
         disabled={desabilitado}
         className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-bold py-3.5 px-4 rounded-xl transition-all text-sm shadow-sm active:scale-[0.98]"

@@ -91,7 +91,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 20,
       temperatura: 36.8,
       saturacaoOxigenio: 96,
-      glicemia: 125,
     },
 
     exame_fisico: {
@@ -449,7 +448,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 24,
       temperatura: 38.5,
       saturacaoOxigenio: 92,
-      glicemia: 110,
     },
 
     exame_fisico: {
@@ -798,7 +796,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 28,
       temperatura: 36.9,
       saturacaoOxigenio: 88,
-      glicemia: 145,
     },
 
     exame_fisico: {
@@ -1177,7 +1174,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 16,
       temperatura: 36.8,
       saturacaoOxigenio: 98,
-      glicemia: 98,
     },
 
     exame_fisico: {
@@ -1511,7 +1507,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 18,
       temperatura: 36.9,
       saturacaoOxigenio: 97,
-      glicemia: 115,
     },
 
     exame_fisico: {
@@ -1847,7 +1842,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 22,
       temperatura: 37.8,
       saturacaoOxigenio: 94,
-      glicemia: 130,
     },
 
     exame_fisico: {
@@ -2171,7 +2165,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 20,
       temperatura: 37.5,
       saturacaoOxigenio: 98,
-      glicemia: 105,
     },
 
     exame_fisico: {
@@ -2465,7 +2458,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 28,
       temperatura: 36.8,
       saturacaoOxigenio: 90,
-      glicemia: 155,
     },
 
     exame_fisico: {
@@ -2791,7 +2783,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 32,
       temperatura: 37.2,
       saturacaoOxigenio: 85,
-      glicemia: 180,
     },
 
     exame_fisico: {
@@ -3103,7 +3094,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 28,
       temperatura: 37.0,
       saturacaoOxigenio: 91,
-      glicemia: 120,
     },
 
     exame_fisico: {
@@ -3415,7 +3405,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 22,
       temperatura: 37.8,
       saturacaoOxigenio: 95,
-      glicemia: 100,
     },
 
     exame_fisico: {
@@ -3724,7 +3713,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 18,
       temperatura: 39.8,
       saturacaoOxigenio: 98,
-      glicemia: 110,
     },
 
     exame_fisico: {
@@ -4029,7 +4017,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 20,
       temperatura: 38.2,
       saturacaoOxigenio: 98,
-      glicemia: 112,
     },
 
     exame_fisico: {
@@ -4367,7 +4354,6 @@ export const casosOSCE: Caso[] = [
       frequenciaRespiratoria: 20,
       temperatura: 36.8,
       saturacaoOxigenio: 97,
-      glicemia: 135,
     },
 
     exame_fisico: {

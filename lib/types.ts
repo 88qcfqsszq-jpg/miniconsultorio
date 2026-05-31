@@ -18,7 +18,6 @@ export interface SinaisVitais {
   frequenciaRespiratoria: number;
   temperatura: number;
   saturacaoOxigenio: number;
-  glicemia?: number;
   peso?: number;
   altura?: number;
   imc?: number;

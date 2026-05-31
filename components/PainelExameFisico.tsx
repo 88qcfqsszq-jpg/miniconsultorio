@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { ManobraRealizada } from "@/lib/types";
+import { SinaisVitais, ManobraRealizada } from "@/lib/types";
 
 interface PainelExameFisicoProps {
+  sinaisVitaisSolicitados: boolean;
+  sinaisVitaisData?: SinaisVitais;
+  onSolicitarSinaisVitais: () => void;
   caso: any;
   manobrasSolicitadas: ManobraRealizada[];
   onNovaManobra: (m: ManobraRealizada) => void;
@@ -54,6 +57,9 @@ const CATEGORIAS = [
 ];
 
 export default function PainelExameFisico({
+  sinaisVitaisSolicitados,
+  sinaisVitaisData,
+  onSolicitarSinaisVitais,
   caso,
   manobrasSolicitadas,
   onNovaManobra,
@@ -138,6 +144,47 @@ export default function PainelExameFisico({
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-5">
+      {/* Sinais Vitais */}
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 bg-emerald-100 rounded-lg flex items-center justify-center text-sm">💚</div>
+            <h3 className="font-bold text-slate-800 text-sm">Sinais Vitais</h3>
+          </div>
+          {sinaisVitaisSolicitados ? (
+            <span className="flex items-center gap-1 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+              ✓ Coletado
+            </span>
+          ) : (
+            <button
+              onClick={onSolicitarSinaisVitais}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-1.5 px-3.5 rounded-lg text-xs transition-colors active:scale-[0.97]"
+            >
+              Solicitar
+            </button>
+          )}
+        </div>
+
+        {sinaisVitaisData && (
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+            {[
+              { label: "PA", value: sinaisVitaisData.pressaoArterial, unit: "" },
+              { label: "FC", value: sinaisVitaisData.frequenciaCardiaca, unit: "bpm" },
+              { label: "FR", value: sinaisVitaisData.frequenciaRespiratoria, unit: "rpm" },
+              { label: "Temp", value: sinaisVitaisData.temperatura, unit: "°C" },
+              { label: "SpO₂", value: sinaisVitaisData.saturacaoOxigenio, unit: "%" },
+            ].map((sv) => (
+              <div key={sv.label} className="bg-emerald-50 border border-emerald-100 rounded-xl p-2.5 text-center">
+                <p className="text-xs text-slate-500 mb-0.5">{sv.label}</p>
+                <p className="font-bold text-emerald-700 text-sm leading-tight">{sv.value}{sv.unit}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="border-t border-slate-100"></div>
+
       {/* Exame Físico */}
       <div className="space-y-2">
         <div className="flex items-center gap-2 mb-3">
