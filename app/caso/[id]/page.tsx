@@ -435,7 +435,6 @@ function CasoPageContent() {
                   { id: "paciente" as const, label: "Paciente", icon: "💬" },
                   { id: "exame" as const, label: "Exame Físico", icon: "🥼" },
                   { id: "exames" as const, label: "Exames", icon: "🧪" },
-                  { id: "soap" as const, label: "SOAP", icon: "📝" },
                   { id: "finalizar" as const, label: "Finalizar", icon: "✅" },
                 ].map((item) => (
                   <button
@@ -532,12 +531,6 @@ function CasoPageContent() {
                 onNovoExame={handleNovoExame}
                 desabilitado={phase === "feedback"}
               />
-            )}
-
-            {menuAtivo === "soap" && (
-              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-                <p className="text-xs text-slate-400 mb-3">Preencha o formulário na coluna direita</p>
-              </div>
             )}
 
             {menuAtivo === "finalizar" && (
