@@ -445,10 +445,17 @@ function CasoPageContent() {
                     key={item.id}
                     onClick={() => {
                       if (item.id === "finalizar") {
-                        if (dadosSOAP) {
+                        if (
+                          dadosSOAP &&
+                          dadosSOAP.soap.subjetivo.trim() &&
+                          dadosSOAP.soap.objetivo.trim() &&
+                          dadosSOAP.soap.avaliacao.trim() &&
+                          dadosSOAP.soap.plano.trim() &&
+                          dadosSOAP.diagnostico.hipotesePrincipal.trim()
+                        ) {
                           handleFinalizarAtendimento(dadosSOAP);
                         } else {
-                          alert("Por favor, preencha a Avaliação Clínica antes de finalizar.");
+                          alert("Por favor, preencha todos os campos da Avaliação Clínica antes de finalizar:\n- Subjetivo\n- Objetivo\n- Avaliação\n- Plano\n- Hipótese Diagnóstica Principal");
                         }
                       } else {
                         setMenuAtivo(item.id);
