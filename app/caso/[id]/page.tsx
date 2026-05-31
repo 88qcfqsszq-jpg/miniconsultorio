@@ -489,14 +489,30 @@ function CasoPageContent() {
                 {sinaisVitaisSolicitados ? "✓ Coletado" : "Solicitar"}
               </button>
               {sinaisVitaisSolicitados && caso.sinaisVitaisCorretos && (
-                <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
                   <div className="bg-emerald-50 p-2 rounded text-center">
                     <p className="text-slate-500">PA</p>
                     <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.pressaoArterial}</p>
                   </div>
                   <div className="bg-emerald-50 p-2 rounded text-center">
                     <p className="text-slate-500">FC</p>
-                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.frequenciaCardiaca} bpm</p>
+                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.frequenciaCardiaca}</p>
+                  </div>
+                  <div className="bg-emerald-50 p-2 rounded text-center">
+                    <p className="text-slate-500">FR</p>
+                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.frequenciaRespiratoria}</p>
+                  </div>
+                  <div className="bg-emerald-50 p-2 rounded text-center">
+                    <p className="text-slate-500">Temp</p>
+                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.temperatura}°C</p>
+                  </div>
+                  <div className="bg-emerald-50 p-2 rounded text-center">
+                    <p className="text-slate-500">SpO₂</p>
+                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.saturacaoOxigenio}%</p>
+                  </div>
+                  <div className="bg-emerald-50 p-2 rounded text-center">
+                    <p className="text-slate-500">Glicose</p>
+                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.glicemia ? `${caso.sinaisVitaisCorretos.glicemia} mg/dL` : "—"}</p>
                   </div>
                 </div>
               )}
