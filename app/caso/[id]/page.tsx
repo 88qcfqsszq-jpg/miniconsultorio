@@ -422,9 +422,9 @@ function CasoPageContent() {
       </div>
 
       {/* Conteúdo Principal */}
-      <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
-        {/* Layout Desktop: 3 colunas (Sidebar + Centro + Painel Direito) */}
-        <div className="hidden lg:grid lg:grid-cols-5 gap-5">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+        {/* Layout Desktop: 3 colunas proporcionais (Sidebar + Centro + Painel Direito) */}
+        <div className="hidden lg:grid lg:grid-cols-[280px_minmax(0,1fr)_360px] gap-6">
           {/* Coluna 1: Sidebar Esquerda */}
           <div className="space-y-4">
             {/* Menu Atendimento */}
@@ -503,8 +503,8 @@ function CasoPageContent() {
             </div>
           </div>
 
-          {/* Colunas 2-3: Conteúdo Central */}
-          <div className="lg:col-span-2 space-y-4">
+          {/* Coluna 2: Conteúdo Central */}
+          <div className="min-w-0 space-y-4">
             {/* Chat */}
             <div className="h-[420px] flex flex-col">
               <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
@@ -548,9 +548,9 @@ function CasoPageContent() {
             )}
           </div>
 
-          {/* Coluna 4: Painel Direito Fixo (Avaliação Clínica) */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-20 space-y-4 max-h-[calc(100vh-120px)] overflow-y-auto">
+          {/* Coluna 3: Painel Direito Fixo (Avaliação Clínica) */}
+          <div className="min-w-0">
+            <div className="sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
               <FormularioSOAP onSubmit={handleFinalizarAtendimento} desabilitado={phase === "feedback"} />
             </div>
           </div>
