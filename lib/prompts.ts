@@ -541,8 +541,9 @@ CONTEXTO DO CASO:
 - Paciente: ${caso.paciente.nome}, ${caso.paciente.idade} anos
 - Queixa: ${caso.paciente.queixaPrincipal}
 - Diagnóstico correto: ${caso.dados_ocultos_do_sistema.diagnostico_principal}
+- Diferenciais esperados: ${caso.dados_ocultos_do_sistema.diagnosticos_diferenciais.join(", ")}
 
-EXAMES DISPONÍVEIS PARA ESTE CASO:
+EXAMES IDEAIS PARA ESTE CASO:
 ${examesDisponiveisTexto}
 
 EXAMES JÁ SOLICITADOS:
@@ -553,19 +554,28 @@ EXAME SOLICITADO AGORA:
 
 INSTRUÇÕES:
 1. Interprete a solicitação do estudante para identificar qual exame foi pedido.
-2. Se o exame está disponível no caso, retorne o resultado de forma objetiva.
-3. Se o exame não está disponível, responda educadamente que não está disponível nesta simulação.
-4. Nunca revele o diagnóstico ou faça interpretações diagnósticas.
-5. Comece sempre com "Ok, ... solicitado:" ou similar.
-6. Seja conciso: máximo 2-3 frases por resultado.
-7. Se o estudante pediu algo vago, tente interpretar pelo contexto do caso.
-8. Não retorne todos os resultados de uma vez; apenas o solicitado.
+2. Se o exame está na lista ideal, retorne o resultado de forma objetiva com achados correspondentes ao caso.
+3. Se o exame NÃO está na lista ideal:
+   a. Retorne uma resposta GENÉRICA compatível com o diagnóstico esperado (sem dados específicos do caso)
+   b. A resposta genérica permite ao estudante explorar exames alternativos, mas o resultado será menos informativo
+   c. Exemplo genérico: "Ok, radiografia de tórax solicitada: achados compatíveis com processo inflamatório. Resultado dentro do esperado para este quadro clínico."
+4. NUNCA bloqueie ou negue um exame pedido — sempre retorne uma resposta.
+5. NUNCA revele o diagnóstico ou faça interpretações diagnósticas.
+6. Comece sempre com "Ok, ... solicitado:" ou similar.
+7. Seja conciso: máximo 2-3 frases por resultado.
+8. Se o estudante pediu algo vago, tente interpretar pelo contexto do caso.
+9. Não retorne todos os resultados de uma vez; apenas o solicitado.
+10. Diferencie claramente entre:
+    - Exames ideais (específicos, com dados reais do caso)
+    - Exames não-ideais (genéricos, compatíveis mas sem detalhes)
 
-EXEMPLO DE RESPOSTA CORRETA:
-"Ok, eletrocardiograma solicitado: ritmo sinusal, frequência cardíaca 102 bpm, sem supradesnivelamento do segmento ST."
+EXEMPLOS:
 
-EXEMPLO DE RESPOSTA INCORRETA:
-"Ok, seu ECG mostra infarto agudo do miocárdio." (NUNCA revele diagnóstico)
+RESPOSTA PARA EXAME IDEAL:
+"Ok, eletrocardiograma solicitado: ritmo sinusal, frequência cardíaca 102 bpm, supradesnivelamento de 2mm em DII/DIII/aVF, com inversão de onda T, compatível com lesão inferior."
+
+RESPOSTA PARA EXAME NÃO-IDEAL (MAS AINDA PERMITIDO):
+"Ok, teste ergométrico solicitado: exame realizado mas resultado não definido para este caso clínico específico neste momento. Concentre-se nos exames mais indicados."
 
 Retorne apenas a resposta do exame, sem explicações adicionais.`;
 }

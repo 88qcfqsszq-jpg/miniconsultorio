@@ -87,41 +87,74 @@ export default function PainelExameFisico({
       let categoria: "geral" | "cardiovascular" | "respiratorio" | "abdominal" | "membros" = "geral";
       const texto = textoManobra.toLowerCase();
 
+      // RESPIRATÓRIO - Verificar primeiro (mais específico)
       if (
-        texto.includes("ausculta") ||
-        texto.includes("focos") ||
-        texto.includes("ictus") ||
-        texto.includes("fremito") ||
-        texto.includes("pulso") ||
-        texto.includes("carotide") ||
-        texto.includes("jugular")
-      ) {
-        categoria = "cardiovascular";
-      } else if (
-        texto.includes("ausculta") ||
-        texto.includes("percuti") ||
-        texto.includes("frequencia") ||
-        texto.includes("expansion") ||
-        texto.includes("fremito") ||
+        texto.includes("pulmonar") ||
+        texto.includes("pulmonares") ||
+        texto.includes("campos pulmonares") ||
         texto.includes("apice") ||
-        texto.includes("base")
+        texto.includes("ápice") ||
+        texto.includes("base") ||
+        texto.includes("torax posterior") ||
+        texto.includes("tórax posterior") ||
+        texto.includes("expansibilidade") ||
+        texto.includes("fremito toracovocal") ||
+        texto.includes("frêmito toracovocal") ||
+        texto.includes("padrão respiratório") ||
+        texto.includes("padrao respiratorio") ||
+        texto.includes("murmúrio vesicular") ||
+        texto.includes("murmurio vesicular") ||
+        texto.includes("crepitação") ||
+        texto.includes("crepitacao") ||
+        texto.includes("estertor") ||
+        texto.includes("sibilo") ||
+        texto.includes("ronco") ||
+        texto.includes("atrito pleural")
       ) {
         categoria = "respiratorio";
-      } else if (
-        texto.includes("ausculta") ||
-        texto.includes("palpacao") ||
-        texto.includes("percuti") ||
+      }
+      // CARDIOVASCULAR - Só se não for respiratório
+      else if (
+        texto.includes("precordio") ||
+        texto.includes("precórdio") ||
+        texto.includes("ictus") ||
+        texto.includes("foco aortico") ||
+        texto.includes("foco aórtico") ||
+        texto.includes("foco tricuspide") ||
+        texto.includes("foco tricúspide") ||
+        texto.includes("foco mitral") ||
+        texto.includes("bulhas") ||
+        texto.includes("sopro") ||
+        texto.includes("turgencia jugular") ||
+        texto.includes("turgência jugular") ||
+        texto.includes("carotide") ||
+        texto.includes("carótida")
+      ) {
+        categoria = "cardiovascular";
+      }
+      // ABDOMINAL
+      else if (
+        texto.includes("abdome") ||
         texto.includes("blumberg") ||
         texto.includes("murphy") ||
-        texto.includes("hidroaereo")
+        texto.includes("hidroaereo") ||
+        texto.includes("hidroaéreo") ||
+        texto.includes("punho percussao") ||
+        texto.includes("punho percussão") ||
+        texto.includes("renal")
       ) {
         categoria = "abdominal";
-      } else if (
+      }
+      // MEMBROS
+      else if (
         texto.includes("edema") ||
-        texto.includes("pulso") ||
-        texto.includes("perfusao") ||
+        texto.includes("cacifo") ||
         texto.includes("panturrilha") ||
-        texto.includes("homans")
+        texto.includes("homans") ||
+        texto.includes("empastamento") ||
+        texto.includes("perfusao") ||
+        texto.includes("perfusão") ||
+        texto.includes("membros inferiores")
       ) {
         categoria = "membros";
       }
