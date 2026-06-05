@@ -37,38 +37,6 @@ const renderBullets = (items: string[], cor: "emerald" | "blue" | "purple" | "am
   );
 };
 
-const CircularProgress = ({ percentage }: { percentage: number }) => {
-  const radius = 70;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percentage / 100) * circumference;
-
-  return (
-    <div className="relative w-48 h-48 flex items-center justify-center">
-      <svg width="192" height="192" className="transform -rotate-90 absolute inset-0">
-        <circle cx="96" cy="96" r={radius} fill="none" stroke="#e2e8f0" strokeWidth="12" />
-        <circle
-          cx="96"
-          cy="96"
-          r={radius}
-          fill="none"
-          stroke="#60a5fa"
-          strokeWidth="12"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-          className="transition-all duration-1000"
-        />
-      </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <div className="text-center">
-          <p className="text-5xl font-black text-white">{percentage}%</p>
-          <p className="text-xs text-blue-200 mt-2 font-semibold">Desempenho</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const Confetes = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -139,71 +107,81 @@ export default function FeedbackOSCE({
     <main className="w-full bg-slate-50 min-h-screen p-4 md:p-8">
       <div className="mx-auto max-w-7xl space-y-8">
         {/* CARD PRINCIPAL */}
-        <section className="w-full rounded-2xl bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900 text-white shadow-2xl border border-blue-800/50 overflow-hidden relative">
-          {/* Título e subtítulo - fora do grid */}
-          <div className="px-8 md:px-12 pt-8 pb-6">
-            <h1 className="text-3xl md:text-4xl font-black text-white">Feedback do Atendimento</h1>
-            <p className="mt-2 text-sm md:text-base text-blue-100">👤 {nomePaciente} • ⏱️ {minutos}m {segundos}s</p>
+        <section className="w-full rounded-3xl bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white shadow-xl border border-blue-900/40 p-8 md:p-10 xl:p-12">
+
+          {/* TÍTULO */}
+          <div className="mb-8">
+            <h1 className="text-4xl md:text-5xl font-black text-white">
+              Feedback do Atendimento
+            </h1>
+            <p className="mt-2 text-base md:text-lg text-blue-100">
+              {nomePaciente} • {minutos}m {segundos}s
+            </p>
           </div>
 
-          {/* Grid: 4 Colunas com divisórias */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-0 items-stretch min-h-[320px]">
+          {/* GRID: 3 COLUNAS - Nota | Diagnóstico | Troféu */}
+          <div className="grid grid-cols-1 xl:grid-cols-[300px_minmax(0,1fr)_280px] gap-10 items-stretch">
 
             {/* COLUNA 1: NOTA FINAL */}
-            <div className="px-8 md:px-10 py-8 flex flex-col justify-center border-r border-blue-800/40">
-              <p className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-6">
+            <div className="rounded-3xl bg-white/10 border border-white/10 p-6 flex flex-col justify-center">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-200">
                 Nota final
               </p>
 
-              <div className="flex items-baseline gap-3 mb-6">
-                <span className="text-7xl md:text-8xl font-black leading-none text-white">
+              <div className="mt-4 flex items-end gap-2">
+                <span className="text-6xl md:text-7xl font-black leading-none">
                   {feedback.nota.toFixed(1)}
                 </span>
-                <span className="text-3xl font-bold text-blue-200">
+                <span className="mb-2 text-2xl font-bold text-blue-200">
                   /20
                 </span>
               </div>
 
-              <div className="inline-flex rounded-full bg-emerald-500 px-6 py-2.5 text-base font-bold text-white w-fit">
+              <div className="mt-5 inline-flex w-fit rounded-full bg-emerald-500 px-5 py-2 text-lg font-bold text-white">
                 {percentual}% de desempenho
               </div>
             </div>
 
-            {/* COLUNA 2: GRÁFICO CIRCULAR */}
-            <div className="px-8 md:px-10 py-8 flex items-center justify-center border-r border-blue-800/40">
-              <div className="relative flex h-44 w-44 items-center justify-center">
-                <CircularProgress percentage={percentual} />
-              </div>
-            </div>
-
-            {/* COLUNA 3: DIAGNÓSTICO */}
-            <div className="px-8 md:px-10 py-8 flex flex-col justify-center border-r border-blue-800/40 min-w-0">
-              <p className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-4">
+            {/* COLUNA 2: DIAGNÓSTICO - A MAIOR */}
+            <div className="min-w-0 rounded-3xl bg-white/10 border border-white/10 p-6 md:p-8">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-200">
                 Diagnóstico esperado
               </p>
 
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-white mb-6 break-words">
-                {feedback.resumoCaso?.diagnosticoEsperado || "—"}
-              </h2>
+              <p className="mt-3 text-3xl md:text-4xl xl:text-5xl font-black leading-tight text-white break-words whitespace-normal">
+                {feedback.resumoCaso?.diagnosticoEsperado || "Diagnóstico não informado"}
+              </p>
 
-              <p className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
-                Diagnóstico informado
-              </p>
-              <p className="text-base md:text-lg font-semibold text-blue-50 break-words">
-                {feedback.resumoCaso?.diagnosticoEsperado || "—"}
-              </p>
+              <div className="mt-6">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-200">
+                  Diagnóstico informado
+                </p>
+                <p className="mt-2 text-lg md:text-xl font-semibold leading-relaxed text-blue-100 break-words whitespace-normal">
+                  {feedback.resumoCaso?.diagnosticoEsperado || "Não informado"}
+                </p>
+              </div>
+
+              {feedback.justificativaNota && (
+                <div className="mt-6 rounded-2xl bg-slate-950/30 border border-white/10 px-5 py-4">
+                  <p className="text-base md:text-lg leading-relaxed text-blue-50 whitespace-normal">
+                    💡 {feedback.justificativaNota}
+                  </p>
+                </div>
+              )}
             </div>
 
-            {/* COLUNA 4: TROFÉU */}
-            <div className="px-8 md:px-10 py-8 flex flex-col items-center justify-center relative">
-              <Confetes />
-              <div className="text-9xl md:text-10xl leading-none drop-shadow-lg animate-bounce mb-4" style={{ animationDuration: "2s", textShadow: "0 8px 16px rgba(0,0,0,0.3)" }}>
-                🏆
+            {/* COLUNA 3: TROFÉU/CLASSIFICAÇÃO */}
+            <div className="rounded-3xl bg-white/10 border border-white/10 p-6 flex flex-col items-center justify-center text-center">
+              <div className="relative">
+                <Confetes />
+                <div className="text-7xl md:text-8xl leading-none animate-bounce" style={{ animationDuration: "2s" }}>
+                  🏆
+                </div>
               </div>
 
               {isAprovado && (
-                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-8 py-3 text-xl font-black text-white shadow-lg">
-                  <span className="text-2xl">✓</span>
+                <div className="mt-6 inline-flex items-center gap-3 rounded-full bg-emerald-500 px-6 py-3 text-2xl font-black text-white shadow-lg">
+                  <span>✓</span>
                   <span>{feedback.classificacao || "Aprovado"}</span>
                 </div>
               )}
