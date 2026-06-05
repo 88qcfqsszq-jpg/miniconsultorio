@@ -211,10 +211,8 @@ export default function FeedbackOSCE({
             {/* Exames */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
-                  <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-lg">
+                  🩻
                 </div>
                 <h3 className="text-lg font-bold text-emerald-900">Exames</h3>
               </div>
