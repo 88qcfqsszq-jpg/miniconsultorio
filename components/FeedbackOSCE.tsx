@@ -212,7 +212,7 @@ export default function FeedbackOSCE({
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-lg">
-                  🩻
+                  🔬
                 </div>
                 <h3 className="text-lg font-bold text-emerald-900">Exames</h3>
               </div>
