@@ -358,6 +358,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Coronariopatias/SCA",
+    subtopicosOSCE: [
+      "IAM com supra-ST (IAMCSST)",
+      "Troponina elevada",
+      "ECG com elevação de ST",
+      "Conduta emergencial",
+      "Tempo é músculo - reperfusão"
+    ],
     diagnosticoCorreto: "Síndrome Coronariana Aguda",
   },
 
@@ -703,6 +712,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Pneumonia",
+    subtopicosOSCE: [
+      "Tosse produtiva",
+      "Febre >3 dias",
+      "Consolidação em RX tórax",
+      "Hemograma com leucocitose",
+      "Antibióticoterapia empírica"
+    ],
     diagnosticoCorreto: "Pneumonia Adquirida na Comunidade",
   },
 
@@ -1089,6 +1107,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Asma",
+    subtopicosOSCE: [
+      "Dispneia aguda",
+      "Sibilância bilateral",
+      "Espirometria com redução de FEV1",
+      "Broncodilatador (SABA)",
+      "Corticosteroide sistêmico"
+    ],
     diagnosticoCorreto: "Asma Aguda",
   },
 
@@ -1424,6 +1451,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Coronariopatias/SCA",
+    subtopicosOSCE: [
+      "Angina estável",
+      "Dor ao esforço reproduzível",
+      "ECG positivo ao esforço",
+      "Teste ergométrico",
+      "Betabloqueador de primeira linha"
+    ],
     diagnosticoCorreto: "Angina Estável",
   },
 
@@ -1760,6 +1796,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "HAS / sinais vitais",
+    subtopicosOSCE: [
+      "Técnica de medida de PA",
+      "HAS estágio 1 (140-159/90-99)",
+      "Avaliação de órgãos-alvo (coração, rins)",
+      "ECG para HVE",
+      "Função renal (creatinina)"
+    ],
     diagnosticoCorreto: "Hipertensão Arterial Sistêmica Estágio 1",
   },
 
@@ -2084,6 +2129,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Pneumonia",
+    subtopicosOSCE: [
+      "Pneumonia atípica (Mycoplasma)",
+      "Tosse seca prolongada",
+      "Infiltrado intersticial em RX",
+      "Macrolídeos como primeira linha",
+      "Apresentação clínica diferente de PAC típica"
+    ],
     diagnosticoCorreto: "Pneumonia Atípica",
   },
 
@@ -2379,6 +2433,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Valvopatias",
+    subtopicosOSCE: [
+      "Pericardite aguda",
+      "Dor pleurítica com sopro de atrito",
+      "ECG com elevação difusa de ST",
+      "Ecocardiograma",
+      "Anti-inflamatórios como primeira linha"
+    ],
     diagnosticoCorreto: "Pericardite Aguda",
   },
 
@@ -2702,6 +2765,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Insuficiência Cardíaca",
+    subtopicosOSCE: [
+      "IC sistólica (redução de FEVE)",
+      "Congestão pulmonar (ortopneia, dispneia)",
+      "B3 (galope)",
+      "BNP/NT-proBNP elevado",
+      "Ecocardiograma com FEVE reduzida"
+    ],
     diagnosticoCorreto: "Insuficiência Cardíaca Sistólica",
   },
 
@@ -3016,6 +3088,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "TVP/TEP/Insuficiência venosa",
+    subtopicosOSCE: [
+      "Tromboembolismo pulmonar (TEP)",
+      "Dispneia súbita",
+      "Score de Wells >4",
+      "D-dímero elevado",
+      "AngioTC pulmonar"
+    ],
     diagnosticoCorreto: "DPOC em Exacerbação",
   },
 
@@ -3327,6 +3408,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Tuberculose",
+    subtopicosOSCE: [
+      "Tosse > 3 semanas",
+      "Febre vespertina",
+      "Baciloscopia positiva",
+      "Esquema RIPE (rifampicina, isoniazida, pirazinamida, etambutol)",
+      "Isolamento respiratório"
+    ],
     diagnosticoCorreto: "Tromboembolismo Pulmonar",
   },
 
@@ -3634,6 +3724,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "DPOC",
+    subtopicosOSCE: [
+      "Tabagismo crônico",
+      "Tosse crônica e bronquite",
+      "Espirometria com VEF1/CVF <0.7",
+      "Broquiodilatadores e corticoides inalados",
+      "Exacerbação aguda"
+    ],
     diagnosticoCorreto: "Tuberculose Pulmonar Ativa",
   },
 
@@ -3941,6 +4040,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Conteúdos transversais",
+    subtopicosOSCE: [
+      "Dengue - arbovirose",
+      "Sintomas sistêmicos (febre, mialgia)",
+      "Trombocitopenia",
+      "Manejo de febre",
+      "Suspeita de síndrome hemorrágica"
+    ],
     diagnosticoCorreto: "Dengue Grupo A",
   },
 
@@ -4281,6 +4389,15 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Conteúdos transversais",
+    subtopicosOSCE: [
+      "Endocardite infecciosa",
+      "Febre prolongada com sopro novo",
+      "Critérios de Duke",
+      "Hemoculturas antes de antibiótico",
+      "Antibiótico prolongado (4-6 semanas)"
+    ],
     diagnosticoCorreto: "Endocardite Infecciosa",
   },
 
@@ -4592,6 +4709,676 @@ export const casosOSCE: Caso[] = [
       ],
     },
 
+    
+    temaOSCE: "Valvopatias",
+    subtopicosOSCE: [
+      "Estenose mitral",
+      "Sopro diastólico em ruflar",
+      "P mitrale no ECG",
+      "Ecocardiograma com área <2.5 cm²",
+      "Febre reumática na etiologia"
+    ],
     diagnosticoCorreto: "Estenose Mitral",
   },
+
+  {
+    // ====== CASO 15: DAOP - Doença Arterial Obstrutiva Periférica ======
+    id: "15",
+    titulo: "Doença Arterial Obstrutiva Periférica",
+    sistema: "Cardiovascular",
+    tema: "Claudicação Intermitente",
+    nivel: "intermediario",
+    tipo_estacao: "integrada",
+    tempo_osce_minutos: 12,
+    objetivo_pedagogico: "Diagnosticar DAOP, avaliar grau de isquemia e estabelecer conduta terapêutica",
+
+    dados_visiveis_ao_estudante: {
+      nome_paciente: "José Santos",
+      idade: 68,
+      sexo: "Masculino",
+      queixa_principal: "Dor nas pernas ao caminhar",
+      historia_breve: "Sente dor nas panturrilhas após caminhar ~100m, melhora com repouso",
+    },
+
+    dados_ocultos_do_sistema: {
+      diagnostico_principal: "Doença Arterial Obstrutiva Periférica Estágio II (Claudicação)",
+      diagnosticos_diferenciais: ["Neuropatia diabética", "Insuficiência venosa", "Ciática"],
+      sindromes_associadas: ["Síndrome isquêmica de membros inferiores"],
+    },
+
+    descricaoBreve: "Paciente com claudicação intermitente, pulsos reduzidos, ITB alterado",
+    categoria: "DAOP",
+    paciente: {
+      id: "pac-015",
+      nome: "José Santos",
+      idade: 68,
+      sexo: "M",
+      queixaPrincipal: "Dor nas pernas ao caminhar",
+      historicoDoenca: "Claudicação: dor após 100m, melhora em repouso",
+      antecedentes: ["Hipertensão", "Diabetes tipo 2", "Ex-tabagista"],
+      profissao: "Aposentado",
+      estado_civil: "Casado",
+      alergias: [],
+      medicamentos_em_uso: ["Metformina 500mg", "Losartana 50mg"],
+    },
+
+    respostas_do_paciente: {
+      inicial: "Doutor, minha perna dói quando caminho.",
+      dor: "Aqui na panturrilha, tipo uma câimbra.",
+      distancia: "Uns 100-150 metros.",
+      repouso: "Sim, descansando passa.",
+      ferida: "Não, mas a pele fica mais escura.",
+      tabagismo: "Fumei, parei há 1 ano.",
+      diabetes: "Sim, tomo remédio.",
+    },
+    respostaPaciente: {
+      inicial: "Doutor, minha perna dói quando caminho.",
+      dor: "Aqui na panturrilha, tipo uma câimbra.",
+      distancia: "Uns 100-150 metros.",
+      repouso: "Sim, descansando passa.",
+      ferida: "Não, mas a pele fica mais escura.",
+      tabagismo: "Fumei, parei há 1 ano.",
+      diabetes: "Sim, tomo remédio.",
+    },
+
+    sinais_vitais: {
+      corretos: {
+        pressaoArterial: "155/95 mmHg",
+        frequenciaCardiaca: 82,
+        frequenciaRespiratoria: 16,
+        temperatura: 36.8,
+        saturacaoOxigenio: 96,
+      },
+    },
+    sinaisVitaisCorretos: {
+      pressaoArterial: "155/95 mmHg",
+      frequenciaCardiaca: 82,
+      frequenciaRespiratoria: 16,
+      temperatura: 36.8,
+      saturacaoOxigenio: 96,
+      glicemia: 145,
+    },
+
+    exame_fisico: {
+      correto: {
+        inspecao: "Pele dos membros inferiores com aspecto atrófico, cianose leve",
+        palpacao: "Pulsos femorais presentes, poplíteos reduzidos, distais ausentes",
+        ausculta: "Sopro sobre artérias ilíacas",
+        percussao: "Normal",
+        observacoes: "Critério: claudicação intermitente + pulsos distais ausentes",
+        regiao: "Membros inferiores",
+        achados_positivos: ["Claudicação", "Pulsos distais ausentes", "Cianose"],
+        achados_negativos: ["Úlcera ou gangrena"],
+      },
+    },
+    exameFisicoCorreto: {
+      inspecao: "Pele atrófica, cianose leve",
+      palpacao: "Pulsos poplíteos reduzidos, distais ausentes",
+      ausculta: "Sopro sobre artérias",
+      percussao: "Normal",
+      observacoes: "DAOP confirmada clinicamente",
+    },
+
+    exame_fisico_interativo: {
+      membros: {
+        pulsos: "Pulsos femorais palpáveis, poplíteos reduzidos, dorsais pedis ausentes bilateralmente",
+        perfusao: "Cianose em extremidades",
+        cianose: "Presente em dedos",
+        temperatura: "Extremidades mais frias",
+      },
+    },
+
+    exames_complementares_disponiveis: [
+      {
+        nome: "Índice Tornozelo-Braquial (ITB)",
+        descricao: "Razão PA tornozelo/braço",
+        resultado: "ITB 0.65 bilateralmente",
+        valor_referencia: ">0.9",
+        interpretacao: "DAOP moderada",
+      },
+      {
+        nome: "Ultrassom Doppler Membros Inferiores",
+        descricao: "Avaliação hemodinâmica",
+        resultado: "Estenose >70% em poplítea bilateralmente",
+        valor_referencia: "Sem estenose",
+        interpretacao: "DAOP confirmada",
+      },
+    ],
+
+    hipoteses_diagnosticas_esperadas: [
+      {
+        diagnostico: "Doença Arterial Obstrutiva Periférica Estágio II",
+        probabilidade: 95,
+        criterios_minimos: ["Claudicação", "Pulsos reduzidos", "ITB <0.9", "Doppler com estenose"],
+      },
+    ],
+
+    diagnosticos_diferenciais: [
+      {
+        diagnostico: "Neuropatia Diabética",
+        criterios_exclusao: ["ITB normal", "Pulsos presentes"],
+        achados_que_descartam: ["ITB reduzido"],
+      },
+    ],
+    examesIndicados: ["ITB", "Doppler", "ECG", "Lipidograma"],
+
+    conduta_esperada: {
+      imediata: ["Educação sobre tabagismo", "Cuidados com pés"],
+      curto_prazo: ["Aspirina 100mg/dia", "Cilostazol 100mg 2x/dia", "Controle HAS e DM"],
+      longo_prazo: ["Monitorização com ITB", "Angioplastia se limitante"],
+      encaminhamentos: ["Angiologia"],
+    },
+    condutaCorreta: "Antiagregante, cilostazol, reforço cessação tabágica, controle metabólico, angiologia",
+
+    criterios_de_gravidade: [
+      {
+        severidade: "moderada",
+        sinais: ["ITB 0.5-0.9", "Claudicação"],
+        descricao: "DAOP moderada",
+        recomendacao: "Terapia médica + avaliação vascular",
+      },
+    ],
+
+    erros_criticos: [
+      {
+        erro: "Não solicitar ITB",
+        descricao: "ITB é teste fundamental não-invasivo",
+        penalidade: 1.5,
+        evitavel: true,
+      },
+      {
+        erro: "Confundir com neuropatia diabética",
+        descricao: "DAOP tem pulsos reduzidos; neuropatia tem pulsos normais",
+        penalidade: 2,
+        evitavel: true,
+      },
+    ],
+
+    checklist_osce: [
+      { item: "Investigou padrão de claudicação", realizado: false, critico: true },
+      { item: "Palpou pulsos sistematicamente", realizado: false, critico: true },
+      { item: "Solicitou ITB", realizado: false, critico: true },
+      { item: "Solicitou ultrassom Doppler", realizado: false, critico: true },
+      { item: "Prescreveu antiagregante", realizado: false, critico: true },
+      { item: "Encaminhou para angiologia", realizado: false, critico: true },
+    ],
+
+    rubrica_correcao: [
+      { criterio: "Anamnese e Fatores de Risco", peso: 20, descricao: "Investigação de claudicação e tabagismo", pontuacao_maxima: 20 },
+      { criterio: "Exame Vascular", peso: 30, descricao: "Palpação de pulsos + ITB", pontuacao_maxima: 30 },
+      { criterio: "Diagnóstico", peso: 25, descricao: "Reconhecimento de DAOP", pontuacao_maxima: 25 },
+    ],
+
+    modelo_soap: {
+      subjetivo: { secao: "S", componentes_obrigatorios: ["Claudicação", "Fatores de risco", "Tabagismo"] },
+      objetivo: { secao: "O", componentes_obrigatorios: ["Pulsos", "ITB", "Doppler"] },
+      avaliacao: { secao: "A", componentes_obrigatorios: ["DAOP estágio II"] },
+      plano: { secao: "P", componentes_obrigatorios: ["Antiagregante", "Cilostazol", "Angiologia"] },
+    },
+
+    feedback_modelo: {
+      acertos_esperados: ["Investigou padrão de claudicação", "Palpou pulsos", "Solicitou ITB", "Prescreveu antiagregante"],
+      erros_comuns: ["Não examinar pulsos", "Confundir com neuropatia", "Não solicitar testes vasculares"],
+      orientacoes_pedagogicas: ["DAOP = vascular, não neurológico", "ITB <0.9 confirma DAOP", "Antiagregante é primeira linha"],
+    },
+
+    checklist_oculto_examinador: {
+      oQueProfessorQuer: "Reconhecer DAOP pela claudicação, examinar pulsos sistematicamente, solicitar ITB/Doppler. Não confundir com neuropatia.",
+      comunicacao: ["ouviu descrição de claudicação", "explicou próximos passos"],
+      anamnese: ["investigou padrão de claudicação", "perguntou sobre tabagismo", "investigou comorbidades"],
+      exame_fisico: ["palpou pulsos bilateralmente", "avaliou temperatura", "procurou sinais de isquemia"],
+      exames_complementares: ["solicitou ITB", "solicitou Doppler", "solicitou ECG"],
+      raciocinio: ["reconheceu DAOP", "diferenciou de neuropatia"],
+      conduta: ["prescreveu antiagregante", "encaminhou para angiologia"],
+      soap: ["documentou claudicação", "registrou pulsos reduzidos", "reconheceu DAOP"],
+    },
+
+    temaOSCE: "DAOP",
+    subtopicosOSCE: ["Claudicação intermitente", "ITB reduzido", "Pulsos periféricos", "Ultrassom Doppler", "Antiagregante"],
+    diagnosticoCorreto: "Doença Arterial Obstrutiva Periférica",
+  },
+
+  {
+    // ====== CASO 16: Derrame Pleural ======
+    id: "16",
+    titulo: "Derrame Pleural",
+    sistema: "Respiratório",
+    tema: "Síndrome Pleural",
+    nivel: "intermediario",
+    tipo_estacao: "integrada",
+    tempo_osce_minutos: 12,
+    objetivo_pedagogico: "Diagnosticar derrame pleural e identificar etiologia",
+
+    dados_visiveis_ao_estudante: {
+      nome_paciente: "Marina Silva",
+      idade: 45,
+      sexo: "Feminino",
+      queixa_principal: "Falta de ar e dor no peito",
+      historia_breve: "Dispneia progressiva há 1 semana, dor pleurítica, ausência de tosse produtiva",
+    },
+
+    dados_ocultos_do_sistema: {
+      diagnostico_principal: "Derrame Pleural (provável insuficiência cardíaca)",
+      diagnosticos_diferenciais: ["Pneumonia", "Tuberculose", "Malignidade", "Embolismo pulmonar"],
+      sindromes_associadas: ["Síndrome de desconforto respiratório"],
+    },
+
+    descricaoBreve: "Paciente com dispneia, redução do murmúrio vesicular unilateral, macicez à percussão",
+    categoria: "Derrame Pleural",
+    paciente: {
+      id: "pac-016",
+      nome: "Marina Silva",
+      idade: 45,
+      sexo: "F",
+      queixaPrincipal: "Falta de ar e dor no peito",
+      historicoDoenca: "Dispneia progressiva há 1 semana, dor ao respirar",
+      antecedentes: ["Insuficiência cardíaca", "Hipertensão"],
+      profissao: "Enfermeira",
+      estado_civil: "Divorciada",
+      alergias: [],
+      medicamentos_em_uso: ["Enalapril", "Furosemida"],
+    },
+
+    respostas_do_paciente: {
+      inicial: "Doutora, tô muito sem ar, começou de repente.",
+      respiracao: "Não consigo respirar bem, é muito incômodo.",
+      tosse: "Não, não tenho tosse.",
+      dor: "Sim, quando respiro fundo dói aqui no peito.",
+      inchaço: "Meus pés incham, tomo água demais acho.",
+      coracao: "Tenho insuficiência cardíaca diagnosticada.",
+    },
+    respostaPaciente: {
+      inicial: "Doutora, tô muito sem ar, começou de repente.",
+      respiracao: "Não consigo respirar bem.",
+      tosse: "Não, não tenho tosse.",
+      dor: "Dói ao respirar fundo.",
+      inchaço: "Pés inchados.",
+      coracao: "Tenho insuficiência cardíaca.",
+    },
+
+    sinais_vitais: {
+      corretos: {
+        pressaoArterial: "135/85 mmHg",
+        frequenciaCardiaca: 104,
+        frequenciaRespiratoria: 26,
+        temperatura: 36.9,
+        saturacaoOxigenio: 88,
+      },
+    },
+    sinaisVitaisCorretos: {
+      pressaoArterial: "135/85 mmHg",
+      frequenciaCardiaca: 104,
+      frequenciaRespiratoria: 26,
+      temperatura: 36.9,
+      saturacaoOxigenio: 88,
+    },
+
+    exame_fisico: {
+      correto: {
+        inspecao: "Paciente dispneica, taquipneica, ausência de movimentação do hemitórax direito",
+        palpacao: "Redução de expansão à direita, frêmito reduzido",
+        ausculta: "Redução de murmúrio vesicular à direita, ausência de sons respiratórios na base direita",
+        percussao: "Macicez à direita, redução de timpanismo",
+        observacoes: "Sinais clássicos de derrame pleural",
+        regiao: "Hemitórax direito",
+        achados_positivos: ["Macicez à percussão", "Redução de MV", "Taquipneia"],
+        achados_negativos: ["Crepitações", "Sibilos"],
+      },
+    },
+    exameFisicoCorreto: {
+      inspecao: "Assimetria torácica, taquipneia",
+      palpacao: "Redução de expansão à direita",
+      ausculta: "Redução de murmúrio à base direita",
+      percussao: "Macicez à direita",
+      observacoes: "Derrame pleural evidente",
+    },
+
+    exame_fisico_interativo: {
+      respiratorio: {
+        inspecao_torax: "Assimetria, taquipneia 26 ipm",
+        expansibilidade: "Reduzida à direita",
+        fremito_toracovocal: "Reduzido à direita",
+        percussao: "Macicez à base direita",
+        ausculta_pulmonar: "Murmúrio vesicular reduzido/ausente à base direita",
+      },
+    },
+
+    exames_complementares_disponiveis: [
+      {
+        nome: "Radiografia de Tórax PA e Perfil",
+        descricao: "Avaliação do derrame",
+        resultado: "Opacidade homogênea na base direita com menisco",
+        valor_referencia: "Normal",
+        interpretacao: "Derrame pleural unilateral",
+      },
+      {
+        nome: "Ultrassom Pleural",
+        descricao: "Quantificação do derrame",
+        resultado: "Derrame pleural 500-600 mL",
+        valor_referencia: "Ausência de derrame",
+        interpretacao: "Derrame moderado",
+      },
+      {
+        nome: "BNP",
+        descricao: "Marcador de insuficiência cardíaca",
+        resultado: "456 pg/mL",
+        valor_referencia: "<100 pg/mL",
+        interpretacao: "Elevado",
+      },
+    ],
+
+    hipoteses_diagnosticas_esperadas: [
+      {
+        diagnostico: "Derrame Pleural por Insuficiência Cardíaca",
+        probabilidade: 85,
+        criterios_minimos: ["Dispneia", "Redução de MV", "Macicez", "RX com derrame", "BNP elevado"],
+      },
+    ],
+
+    diagnosticos_diferenciais: [
+      {
+        diagnostico: "Tuberculose Pleural",
+        criterios_exclusao: ["BNP elevado", "Sem febre prolongada"],
+        achados_que_descartam: ["História cardíaca positiva"],
+      },
+    ],
+    examesIndicados: ["RX Tórax", "Ultrassom", "BNP", "Ecocardiograma"],
+
+    conduta_esperada: {
+      imediata: ["Oxigenioterapia", "Posicionamento sentado"],
+      curto_prazo: ["Otimizar diurético", "Ecocardiograma", "Considerar toracocentese se compressão"],
+      longo_prazo: ["Controle de insuficiência cardíaca", "Seguimento cardiológico"],
+      encaminhamentos: ["Cardiologia"],
+    },
+    condutaCorreta: "Oxigenioterapia, otimizar diurético, ecocardiograma, tratar IC subjacente",
+
+    criterios_de_gravidade: [
+      {
+        severidade: "moderada",
+        sinais: ["SpO2 88%", "FR 26"],
+        descricao: "Derrame com redução de oxigenação",
+        recomendacao: "Oxigenioterapia, considerar toracocentese",
+      },
+    ],
+
+    erros_criticos: [
+      {
+        erro: "Não solicitar radiografia de tórax",
+        descricao: "RX é fundamental para confirmar derrame",
+        penalidade: 1.5,
+        evitavel: true,
+      },
+      {
+        erro: "Não investigar etiologia",
+        descricao: "Identificar causa é essencial para tratamento",
+        penalidade: 2,
+        evitavel: true,
+      },
+    ],
+
+    checklist_osce: [
+      { item: "Investigou duração de sintomas", realizado: false, critico: true },
+      { item: "Realizou ausculta completa bilateralmente", realizado: false, critico: true },
+      { item: "Percutiu procurando macicez", realizado: false, critico: true },
+      { item: "Solicitou radiografia de tórax", realizado: false, critico: true },
+      { item: "Investigou etiologia", realizado: false, critico: true },
+      { item: "Indicou oxigenioterapia", realizado: false, critico: true },
+    ],
+
+    rubrica_correcao: [
+      { criterio: "Exame Físico", peso: 25, descricao: "Ausculta e percussão adequadas", pontuacao_maxima: 25 },
+      { criterio: "Diagnóstico", peso: 25, descricao: "Solicitação de RX e investigação de etiologia", pontuacao_maxima: 25 },
+      { criterio: "Conduta", peso: 20, descricao: "Oxigenioterapia e tratamento de causa", pontuacao_maxima: 20 },
+    ],
+
+    modelo_soap: {
+      subjetivo: { secao: "S", componentes_obrigatorios: ["Dispneia progressiva", "Dor pleurítica", "História cardíaca"] },
+      objetivo: { secao: "O", componentes_obrigatorios: ["SpO2 reduzida", "Redução de MV", "Macicez", "RX com derrame"] },
+      avaliacao: { secao: "A", componentes_obrigatorios: ["Derrame pleural", "Provável causa cardíaca"] },
+      plano: { secao: "P", componentes_obrigatorios: ["Oxigenioterapia", "Otimizar diurético", "Ecocardiograma"] },
+    },
+
+    feedback_modelo: {
+      acertos_esperados: ["Reconheceu redução de MV", "Procurou macicez", "Solicitou RX", "Indicou oxigenioterapia"],
+      erros_comuns: ["Não auscultar bilateralmente", "Não percutir procurando macicez"],
+      orientacoes_pedagogicas: ["Derrame: redução de MV + macicez + opacidade em RX", "Investigar causa (cardíaca, infecciosa, maligna)"],
+    },
+
+    checklist_oculto_examinador: {
+      oQueProfessorQuer: "Reconhecer derrame pleural clinicamente: redução de MV, macicez, dyspnea. Solicitar RX. Investigar causa. Oxigenioterapia.",
+      comunicacao: ["tranquilizou paciente dispneica", "explicou próximos passos"],
+      anamnese: ["investigou início e progressão", "perguntou sobre fatores de risco"],
+      exame_fisico: ["ausculta bilateral procurando MV reduzido", "percussão procurando macicez"],
+      exames_complementares: ["solicitou RX", "solicitou ultrassom/ecocardiograma"],
+      raciocinio: ["reconheceu derrame pleural"],
+      conduta: ["indicou oxigenioterapia", "investigou etiologia"],
+      soap: ["documentou redução de MV + macicez", "reconheceu derrame"],
+    },
+
+    temaOSCE: "Síndromes pleurais",
+    subtopicosOSCE: ["Derrame pleural", "Redução de murmúrio vesicular", "Macicez à percussão", "RX com opacidade", "Investigação de etiologia"],
+    diagnosticoCorreto: "Derrame Pleural",
+  },
+
+  {
+    // ====== CASO 17: Anemia Ferropriva ======
+    id: "17",
+    titulo: "Anemia Ferropriva",
+    sistema: "Hematológico",
+    tema: "Anemias",
+    nivel: "iniciante",
+    tipo_estacao: "integrada",
+    tempo_osce_minutos: 12,
+    objetivo_pedagogico: "Diagnosticar anemia ferropriva e identificar fonte de sangramento",
+
+    dados_visiveis_ao_estudante: {
+      nome_paciente: "Lucia Martins",
+      idade: 52,
+      sexo: "Feminino",
+      queixa_principal: "Fraqueza e cansaço",
+      historia_breve: "Sentindo fraqueza há 3 meses, cansaço ao realizar tarefas simples",
+    },
+
+    dados_ocultos_do_sistema: {
+      diagnostico_principal: "Anemia Ferropriva (Hemoglobina 8.5 g/dL, ferritina <15 ng/mL)",
+      diagnosticos_diferenciais: ["Anemia de doença crônica", "Anemia megaloblástica", "Hipotireoidismo"],
+      sindromes_associadas: ["Síndrome de deficiência de ferro"],
+    },
+
+    descricaoBreve: "Paciente com palidez, taquicardia, hemoglobina reduzida, indices microcíticos",
+    categoria: "Anemia",
+    paciente: {
+      id: "pac-017",
+      nome: "Lucia Martins",
+      idade: 52,
+      sexo: "F",
+      queixaPrincipal: "Fraqueza e cansaço",
+      historicoDoenca: "Fraqueza progressiva há 3 meses, cansaço ao subir escada",
+      antecedentes: ["Menstruações abundantes", "Sem antecedentes relevantes"],
+      profissao: "Secretária",
+      estado_civil: "Viúva",
+      alergias: [],
+      medicamentos_em_uso: [],
+    },
+
+    respostas_do_paciente: {
+      inicial: "Doutora, tô muito fraca, cansa rápido.",
+      cansaco: "Não consigo fazer tarefas simples, fico sem ar subindo escada.",
+      tontura: "Sim, tontura ao levantar rápido.",
+      sangramento: "Meu ciclo é muito abundante, tenho que trocar absorvente a cada hora.",
+      tarry_stool: "Não, não tenho isso não.",
+      alimentos: "Raramente como carne.",
+    },
+    respostaPaciente: {
+      inicial: "Doutora, tô muito fraca.",
+      cansaco: "Sem ar subindo escada.",
+      tontura: "Ao levantar rápido.",
+      sangramento: "Menstruação muito abundante.",
+      tarry_stool: "Não.",
+      alimentos: "Raramente como carne.",
+    },
+
+    sinais_vitais: {
+      corretos: {
+        pressaoArterial: "120/75 mmHg",
+        frequenciaCardiaca: 108,
+        frequenciaRespiratoria: 20,
+        temperatura: 36.8,
+        saturacaoOxigenio: 97,
+      },
+    },
+    sinaisVitaisCorretos: {
+      pressaoArterial: "120/75 mmHg",
+      frequenciaCardiaca: 108,
+      frequenciaRespiratoria: 20,
+      temperatura: 36.8,
+      saturacaoOxigenio: 97,
+    },
+
+    exame_fisico: {
+      correto: {
+        inspecao: "Paciente pálida, conjuntivas e palmas claras, sem icterícia",
+        palpacao: "Sem hepatoesplenomegalia",
+        ausculta: "Sopro sistólico leve (fluxo anêmico)",
+        percussao: "Normal",
+        observacoes: "Sinais de anemia crônica",
+        regiao: "Geral",
+        achados_positivos: ["Palidez palmar", "Conjuntivas claras", "Taquicardia"],
+        achados_negativos: ["Esplenomegalia", "Icterícia"],
+      },
+    },
+    exameFisicoCorreto: {
+      inspecao: "Palidez, conjuntivas claras",
+      palpacao: "Sem hepatoesplenomegalia",
+      ausculta: "Sopro sistólico leve (fluxo)",
+      percussao: "Normal",
+      observacoes: "Sinais de anemia",
+    },
+
+    exame_fisico_interativo: {
+      geral: {
+        coloracao: "Pálida, conjuntivas e leitos ungueais com redução de coloração",
+        estado_geral: "Leve desconforto, cansada",
+      },
+      cardiovascular: {
+        ausculta_cardiaca: "Sopro sistólico leve, frequência cardíaca elevada (compensatória)",
+      },
+    },
+
+    exames_complementares_disponiveis: [
+      {
+        nome: "Hemograma Completo",
+        descricao: "Série de glóbulos",
+        resultado: "Hemoglobina 8.5 g/dL, Hematócrito 28%, VCM 65 fL, HCM 22 pg",
+        valor_referencia: "Hb >12 g/dL, VCM 80-100 fL",
+        interpretacao: "Anemia microcítica hipocrômica",
+      },
+      {
+        nome: "Ferritina",
+        descricao: "Depósito de ferro",
+        resultado: "Ferritina 12 ng/mL",
+        valor_referencia: ">30 ng/mL",
+        interpretacao: "Ferro deficiente",
+      },
+      {
+        nome: "Ferro sérico e TIBC",
+        descricao: "Metabolismo de ferro",
+        resultado: "Ferro sérico 35 μg/dL, TIBC 450 μg/dL",
+        valor_referencia: "Ferro 60-170 μg/dL, TIBC <360",
+        interpretacao: "Ferro reduzido, TIBC elevada (deficiência)",
+      },
+    ],
+
+    hipoteses_diagnosticas_esperadas: [
+      {
+        diagnostico: "Anemia Ferropriva",
+        probabilidade: 95,
+        criterios_minimos: ["Hemoglobina <12", "Microcitose", "Ferritina <15", "Menstruações abundantes"],
+      },
+    ],
+
+    diagnosticos_diferenciais: [
+      {
+        diagnostico: "Anemia de Doença Crônica",
+        criterios_exclusao: ["Ferritina normal-elevada"],
+        achados_que_descartam: ["Ferritina baixa"],
+      },
+    ],
+    examesIndicados: ["Hemograma", "Ferritina", "Ferro sérico", "TIBC", "Endoscopia se >50 anos"],
+
+    conduta_esperada: {
+      imediata: ["Suplementação de ferro oral (sulfato ferroso 325mg)"],
+      curto_prazo: ["Investigação de causa de sangramento", "Repetir hemograma após 8 semanas"],
+      longo_prazo: ["Acompanhamento de menstruações", "Dieta rica em ferro"],
+      encaminhamentos: ["Ginecologia se menorragia persistente", "Gastroenterologia se sangramento GI"],
+    },
+    condutaCorreta: "Suplementação de ferro, investigação de sangramento, repetir hemograma, encaminhar se necessário",
+
+    criterios_de_gravidade: [
+      {
+        severidade: "moderada",
+        sinais: ["Hb 8-10 g/dL", "Taquicardia"],
+        descricao: "Anemia ferropriva moderada",
+        recomendacao: "Suplementação oral, investigação de fonte",
+      },
+    ],
+
+    erros_criticos: [
+      {
+        erro: "Não investigar origem do sangramento",
+        descricao: "Mulheres em idade fértil: menstruação; maiores: considerar sangramento GI",
+        penalidade: 2,
+        evitavel: true,
+      },
+      {
+        erro: "Prescrever ferro IV sem tentar oral",
+        descricao: "Ferro oral é primeira linha",
+        penalidade: 1.5,
+        evitavel: true,
+      },
+    ],
+
+    checklist_osce: [
+      { item: "Investigou sintomas de anemia", realizado: false, critico: true },
+      { item: "Perguntou sobre menstruações/sangramento", realizado: false, critico: true },
+      { item: "Solicitou hemograma", realizado: false, critico: true },
+      { item: "Solicitou ferritina", realizado: false, critico: true },
+      { item: "Identificou microcitose", realizado: false, critico: true },
+      { item: "Prescreveu sulfato ferroso", realizado: false, critico: true },
+    ],
+
+    rubrica_correcao: [
+      { criterio: "Anamnese", peso: 20, descricao: "Investigação de sangramento", pontuacao_maxima: 20 },
+      { criterio: "Exames", peso: 30, descricao: "Hemograma e ferritina", pontuacao_maxima: 30 },
+      { criterio: "Diagnóstico", peso: 20, descricao: "Reconhecimento de deficiência de ferro", pontuacao_maxima: 20 },
+    ],
+
+    modelo_soap: {
+      subjetivo: { secao: "S", componentes_obrigatorios: ["Fraqueza", "Cansaço ao esforço", "Menstruação abundante"] },
+      objetivo: { secao: "O", componentes_obrigatorios: ["Palidez", "Hemograma microcítico", "Ferritina <15"] },
+      avaliacao: { secao: "A", componentes_obrigatorios: ["Anemia ferropriva"] },
+      plano: { secao: "P", componentes_obrigatorios: ["Sulfato ferroso", "Investigação de sangramento"] },
+    },
+
+    feedback_modelo: {
+      acertos_esperados: ["Investigou menstruações", "Solicitou hemograma", "Identificou microcitose", "Prescreveu ferro"],
+      erros_comuns: ["Não investigar origem", "Prescrever ferro IV"],
+      orientacoes_pedagogicas: ["Anemia ferropriva: Hb baixa + MCV baixo + ferritina baixa", "Sempre investigue origem"],
+    },
+
+    checklist_oculto_examinador: {
+      oQueProfessorQuer: "Reconhecer anemia ferropriva: sintomas + palidez + hemograma microcítico + ferritina baixa. Investigar sangramento.",
+      comunicacao: ["perguntou sobre ciclo menstrual com empatia"],
+      anamnese: ["investigou duração de sintomas", "perguntou sobre menstruações", "perguntou sobre alimentação"],
+      exame_fisico: ["avaliou palidez", "ausculta para sopro"],
+      exames_complementares: ["solicitou hemograma", "solicitou ferritina"],
+      raciocinio: ["reconheceu microcitose = deficiência ferro"],
+      conduta: ["prescreveu ferro oral"],
+      soap: ["documentou palidez e fraqueza", "reconheceu anemia ferropriva"],
+    },
+
+    temaOSCE: "Anemias",
+    subtopicosOSCE: ["Anemia ferropriva", "Microcitose e hipocromia", "Ferritina sérica", "Fonte de sangramento", "Suplementação de ferro"],
+    diagnosticoCorreto: "Anemia Ferropriva",
+  }
 ];

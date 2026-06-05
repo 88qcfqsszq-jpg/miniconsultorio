@@ -149,135 +149,200 @@ export default function FeedbackOSCE({
           </div>
         </section>
 
-        {/* SEÇÃO: DESEMPENHO POR COMPETÊNCIA */}
+        {/* SEÇÃO: DESEMPENHO POR COMPETÊNCIA - Nova Rubrica */}
         <div>
           <div className="flex items-center gap-3 mb-6">
             <div className="text-3xl">🎯</div>
             <div>
               <h2 className="text-3xl font-bold text-slate-900">Desempenho por Competência</h2>
-              <p className="text-slate-600 text-sm">Veja onde você foi bem e quais pontos priorizar no próximo atendimento.</p>
+              <p className="text-slate-600 text-sm">Avaliação baseada em 6 competências (total 20 pontos)</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {/* Comunicação */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-bold text-blue-900">Comunicação</h3>
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
-                  {renderBullets(limitar(feedback.comunicacaoMedica?.acertos || [], 2), "emerald")}
-                </div>
-                {(feedback.comunicacaoMedica?.pontosDeMelhoria?.length || 0) > 0 && (
-                  <div className="border-t pt-3">
-                    <p className="text-sm font-bold text-blue-600 mb-2">Melhorar</p>
-                    {renderBullets(limitar(feedback.comunicacaoMedica?.pontosDeMelhoria || [], 2), "blue")}
-                  </div>
-                )}
-              </div>
-            </div>
+          {feedback.rubricaAvaliacao && feedback.rubricaAvaliacao.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {feedback.rubricaAvaliacao.map((competencia, idx) => {
+                const colorClasses = [
+                  { bg: "bg-blue-50", border: "border-blue-200", header: "text-blue-900", icon: "bg-blue-100 text-blue-600" },
+                  { bg: "bg-purple-50", border: "border-purple-200", header: "text-purple-900", icon: "bg-purple-100 text-purple-600" },
+                  { bg: "bg-green-50", border: "border-green-200", header: "text-green-900", icon: "bg-green-100 text-green-600" },
+                  { bg: "bg-amber-50", border: "border-amber-200", header: "text-amber-900", icon: "bg-amber-100 text-amber-600" },
+                  { bg: "bg-orange-50", border: "border-orange-200", header: "text-orange-900", icon: "bg-orange-100 text-orange-600" },
+                  { bg: "bg-rose-50", border: "border-rose-200", header: "text-rose-900", icon: "bg-rose-100 text-rose-600" },
+                ][idx] || { bg: "bg-slate-50", border: "border-slate-200", header: "text-slate-900", icon: "bg-slate-100 text-slate-600" };
 
-            {/* Exame Físico */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-lg">
-                  🫁
-                </div>
-                <h3 className="text-lg font-bold text-purple-900">Exame Físico</h3>
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
-                  {renderBullets(limitar(feedback.exameFisico?.manobrasRealizadas || [], 2), "emerald")}
-                </div>
-                {(feedback.exameFisico?.manobrasEsquecidas?.length || 0) > 0 && (
-                  <div className="border-t pt-3">
-                    <p className="text-sm font-bold text-purple-600 mb-2">Melhorar</p>
-                    {renderBullets(limitar(feedback.exameFisico?.manobrasEsquecidas || [], 2), "purple")}
-                  </div>
-                )}
-              </div>
-            </div>
+                return (
+                  <div key={idx} className={`${colorClasses.bg} rounded-2xl border ${colorClasses.border} p-6`}>
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className={`text-lg font-bold ${colorClasses.header}`}>
+                          {competencia.nome}
+                        </h3>
+                      </div>
+                      <div className={`${colorClasses.icon} rounded-lg px-3 py-1 text-sm font-bold`}>
+                        {competencia.pontosObtidos}/{competencia.pontosMaximos}
+                      </div>
+                    </div>
 
-            {/* Exames */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-lg">
-                  🔬
-                </div>
-                <h3 className="text-lg font-bold text-emerald-900">Exames</h3>
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
-                  {renderBullets(limitar(feedback.examesComplementares?.adequados || [], 2), "emerald")}
-                </div>
-                {(feedback.examesComplementares?.faltantes?.length || 0) > 0 && (
-                  <div className="border-t pt-3">
-                    <p className="text-sm font-bold text-emerald-600 mb-2">Melhorar</p>
-                    {renderBullets(limitar(feedback.examesComplementares?.faltantes || [], 2), "emerald")}
-                  </div>
-                )}
-              </div>
-            </div>
+                    {/* Barra de progresso */}
+                    <div className="mb-4">
+                      <div className="w-full bg-white rounded-full h-2 overflow-hidden border border-slate-200">
+                        <div
+                          className={`h-full transition-all ${
+                            competencia.pontosObtidos >= competencia.pontosMaximos * 0.8
+                              ? "bg-emerald-500"
+                              : competencia.pontosObtidos >= competencia.pontosMaximos * 0.5
+                              ? "bg-amber-500"
+                              : "bg-rose-500"
+                          }`}
+                          style={{
+                            width: `${(competencia.pontosObtidos / competencia.pontosMaximos) * 100}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
 
-            {/* Raciocínio */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-lg">
-                  🧠
+                    {/* Acertos */}
+                    {competencia.acertos.length > 0 && (
+                      <div className="mb-3">
+                        <p className="text-xs font-bold text-emerald-600 mb-2">Acertos</p>
+                        {renderBullets(limitar(competencia.acertos, 2), "emerald")}
+                      </div>
+                    )}
+
+                    {/* Melhorias */}
+                    {competencia.melhorias.length > 0 && (
+                      <div className="border-t pt-3">
+                        <p className="text-xs font-bold text-slate-600 mb-2">Melhorias</p>
+                        {renderBullets(limitar(competencia.melhorias, 2), "blue")}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            /* Fallback: mostrar seções antigas se rubricaAvaliacao não existir */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {/* Comunicação */}
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-bold text-blue-900">Comunicação</h3>
                 </div>
-                <h3 className="text-lg font-bold text-amber-900">Raciocínio</h3>
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
-                  {feedback.raciocinioDiagnostico?.hipoteseDoEstudante ? (
-                    <p className="text-sm text-slate-700">{feedback.raciocinioDiagnostico.hipoteseDoEstudante}</p>
-                  ) : (
-                    <p className="text-sm text-slate-500">—</p>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
+                    {renderBullets(limitar(feedback.comunicacaoMedica?.acertos || [], 2), "emerald")}
+                  </div>
+                  {(feedback.comunicacaoMedica?.pontosDeMelhoria?.length || 0) > 0 && (
+                    <div className="border-t pt-3">
+                      <p className="text-sm font-bold text-blue-600 mb-2">Melhorar</p>
+                      {renderBullets(limitar(feedback.comunicacaoMedica?.pontosDeMelhoria || [], 2), "blue")}
+                    </div>
                   )}
                 </div>
-                {(feedback.raciocinioDiagnostico?.diferenciaisFaltantes?.length || 0) > 0 && (
-                  <div className="border-t pt-3">
-                    <p className="text-sm font-bold text-amber-600 mb-2">Melhorar</p>
-                    {renderBullets(limitar(feedback.raciocinioDiagnostico?.diferenciaisFaltantes || [], 2), "amber")}
-                  </div>
-                )}
               </div>
-            </div>
 
-            {/* Conduta */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center">
-                  <svg className="w-6 h-6 text-rose-600" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-bold text-rose-900">Conduta</h3>
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
-                  {renderBullets(limitar(feedback.conduta?.adequada || [], 2), "emerald")}
-                </div>
-                {(feedback.conduta?.erros?.length || 0) > 0 && (
-                  <div className="border-t pt-3">
-                    <p className="text-sm font-bold text-rose-600 mb-2">Melhorar</p>
-                    {renderBullets(limitar(feedback.conduta?.erros || [], 2), "rose")}
+              {/* Exame Físico */}
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-lg">
+                    🫁
                   </div>
-                )}
+                  <h3 className="text-lg font-bold text-purple-900">Exame Físico</h3>
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
+                    {renderBullets(limitar(feedback.exameFisico?.manobrasRealizadas || [], 2), "emerald")}
+                  </div>
+                  {(feedback.exameFisico?.manobrasEsquecidas?.length || 0) > 0 && (
+                    <div className="border-t pt-3">
+                      <p className="text-sm font-bold text-purple-600 mb-2">Melhorar</p>
+                      {renderBullets(limitar(feedback.exameFisico?.manobrasEsquecidas || [], 2), "purple")}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Exames */}
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-lg">
+                    🔬
+                  </div>
+                  <h3 className="text-lg font-bold text-emerald-900">Exames</h3>
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
+                    {renderBullets(limitar(feedback.examesComplementares?.adequados || [], 2), "emerald")}
+                  </div>
+                  {(feedback.examesComplementares?.faltantes?.length || 0) > 0 && (
+                    <div className="border-t pt-3">
+                      <p className="text-sm font-bold text-emerald-600 mb-2">Melhorar</p>
+                      {renderBullets(limitar(feedback.examesComplementares?.faltantes || [], 2), "emerald")}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Raciocínio */}
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-lg">
+                    🧠
+                  </div>
+                  <h3 className="text-lg font-bold text-amber-900">Raciocínio</h3>
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
+                    {feedback.raciocinioDiagnostico?.hipoteseDoEstudante ? (
+                      <p className="text-sm text-slate-700">{feedback.raciocinioDiagnostico.hipoteseDoEstudante}</p>
+                    ) : (
+                      <p className="text-sm text-slate-500">—</p>
+                    )}
+                  </div>
+                  {(feedback.raciocinioDiagnostico?.diferenciaisFaltantes?.length || 0) > 0 && (
+                    <div className="border-t pt-3">
+                      <p className="text-sm font-bold text-amber-600 mb-2">Melhorar</p>
+                      {renderBullets(limitar(feedback.raciocinioDiagnostico?.diferenciaisFaltantes || [], 2), "amber")}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Conduta */}
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-rose-600" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-bold text-rose-900">Conduta</h3>
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm font-bold text-emerald-600 mb-2">Acertos</p>
+                    {renderBullets(limitar(feedback.conduta?.adequada || [], 2), "emerald")}
+                  </div>
+                  {(feedback.conduta?.erros?.length || 0) > 0 && (
+                    <div className="border-t pt-3">
+                      <p className="text-sm font-bold text-rose-600 mb-2">Melhorar</p>
+                      {renderBullets(limitar(feedback.conduta?.erros || [], 2), "rose")}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* CARDS INFERIORES */}

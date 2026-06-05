@@ -383,15 +383,46 @@ INSTRUÇÕES DE AVALIAÇÃO:
    "Não foi registrado" ou "O estudante não..."
    Nunca invente ações que não ocorreram.
 
-3. Calcule nota de 0-20 baseado em:
-   - Qualidade e completude da anamnese (até 4 pontos)
-   - Exame físico dirigido e achados (até 4 pontos)
-   - Sinais vitais (até 1 ponto)
-   - Hipótese diagnóstica correta (até 6 pontos) ← PESO PRINCIPAL
-   - Exames complementares adequados (até 3 pontos)
-   - Conduta segura e adequada (até 2 pontos)
+3. Calcule nota de 0-20 com a rubrica de 6 competências:
 
-REGRA ESPECIAL: Se a hipótese diagnóstica principal do aluno for clinicamente compatível com o diagnóstico esperado do caso, a nota final MÍNIMA OBRIGATÓRIA é 17/20. Mesmo que haja falhas em outras áreas, acertar o diagnóstico garante nota ≥ 17.
+   NOVA RUBRICA (total = 20 pontos):
+   - Comunicação e postura médica: 0-2 pontos
+     * 0: Não cumprimentou, tom inapropriado
+     * 1: Cumprimento e tom básicos, faltou profissionalismo
+     * 2: Comunicação profissional, respeitosa, com empatia
+
+   - Anamnese dirigida: 0-4 pontos
+     * 0: Não realizou anamnese
+     * 1: Apenas ouviu queixa principal
+     * 2: Anamnese parcial (história+alguns antecedentes)
+     * 3: Anamnese boa (história, antecedentes, medicamentos)
+     * 4: Anamnese completa e bem dirigida
+
+   - Exame físico: 0-4 pontos
+     * 0: Não realizou exame físico
+     * 1: Exame físico muito limitado (1-2 manobras)
+     * 2: Exame físico parcial (alguns sistemas)
+     * 3: Exame físico adequado ao caso (sistemas principais)
+     * 4: Exame físico completo e bem executado
+
+   - Exames complementares: 0-2 pontos
+     * 0: Nenhum exame relevante solicitado
+     * 1: Exames parciais ou incompletos
+     * 2: Exames adequados, priorizado e bem fundamentados
+
+   - Raciocínio diagnóstico: 0-5 pontos
+     * 0: Diagnóstico completamente errado
+     * 1: Diagnóstico vago ou muito afastado
+     * 2: Diagnóstico parcialmente correto
+     * 3: Diagnóstico próximo ao esperado
+     * 4: Diagnóstico correto
+     * 5: Diagnóstico correto com diferenciais bem estruturados
+
+   - Conduta: 0-3 pontos
+     * 0: Nenhuma conduta registrada ou completamente inadequada
+     * 1: Conduta incompleta ou parcialmente adequada
+     * 2: Conduta adequada mas com falta de priorização
+     * 3: Conduta correta, priorizada e bem fundamentada
 
 4. Classificação:
    - 0-11.9: Insuficiente
@@ -440,7 +471,50 @@ Retorne em JSON válido (sem markdown) com esta estrutura:
   "percentual": <0-100>,
   "classificacao": "<Excelente|Bom|Regular|Insuficiente>",
   "justificativaNota": "<uma linha explicando a nota>",
-  "diagnosticoCorreto": <true|false>,
+  "rubricaAvaliacao": [
+    {
+      "nome": "Comunicação e postura médica",
+      "pontosObtidos": <0-2>,
+      "pontosMaximos": 2,
+      "acertos": ["..."],
+      "melhorias": ["..."]
+    },
+    {
+      "nome": "Anamnese dirigida",
+      "pontosObtidos": <0-4>,
+      "pontosMaximos": 4,
+      "acertos": ["..."],
+      "melhorias": ["..."]
+    },
+    {
+      "nome": "Exame físico",
+      "pontosObtidos": <0-4>,
+      "pontosMaximos": 4,
+      "acertos": ["..."],
+      "melhorias": ["..."]
+    },
+    {
+      "nome": "Exames complementares",
+      "pontosObtidos": <0-2>,
+      "pontosMaximos": 2,
+      "acertos": ["..."],
+      "melhorias": ["..."]
+    },
+    {
+      "nome": "Raciocínio diagnóstico",
+      "pontosObtidos": <0-5>,
+      "pontosMaximos": 5,
+      "acertos": ["..."],
+      "melhorias": ["..."]
+    },
+    {
+      "nome": "Conduta",
+      "pontosObtidos": <0-3>,
+      "pontosMaximos": 3,
+      "acertos": ["..."],
+      "melhorias": ["..."]
+    }
+  ],
   "resumoCaso": {
     "diagnosticoEsperado": "...",
     "sindromePrincipal": "...",

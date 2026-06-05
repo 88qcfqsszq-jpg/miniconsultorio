@@ -81,6 +81,14 @@ export interface RubricaAvaliacao {
   pontuacao_maxima: number;
 }
 
+export interface CompetenciaAvaliacao {
+  nome: string;
+  pontosObtidos: number;
+  pontosMaximos: number;
+  acertos: string[];
+  melhorias: string[];
+}
+
 export interface ModeloSOAPItem {
   secao: "S" | "O" | "A" | "P";
   componentes_obrigatorios: string[];
@@ -138,6 +146,8 @@ export interface FeedbackOSCE {
   classificacao: "Excelente" | "Bom" | "Regular" | "Insuficiente";
   justificativaNota: string;
   tempoAtendimento: number;
+
+  rubricaAvaliacao?: CompetenciaAvaliacao[];
 
   resumoCaso: {
     diagnosticoEsperado: string;
@@ -332,6 +342,10 @@ export interface Caso {
 
   // Checklist oculto do examinador
   checklist_oculto_examinador?: ChecklistOcultoExaminador;
+
+  // Auditoria OSCE - Temas e subtópicos
+  temaOSCE?: string;
+  subtopicosOSCE?: string[];
 }
 
 export interface ExameFisicoInterativo {

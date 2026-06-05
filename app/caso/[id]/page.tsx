@@ -163,14 +163,6 @@ function CasoPageContent() {
         nota += 2;
       }
 
-      // Se diagnóstico correto, garantir mínimo 17
-      if (
-        diagnostico.hipotesePrincipal.toLowerCase() ===
-        diagCorreto.toLowerCase()
-      ) {
-        nota = Math.max(nota, 17);
-      }
-
       return Math.min(nota, 20);
     },
     [caso, sinaisVitaisSolicitados, manobrasSolicitadas]
