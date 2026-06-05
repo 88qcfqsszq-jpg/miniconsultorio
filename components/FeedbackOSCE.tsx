@@ -37,44 +37,6 @@ const renderBullets = (items: string[], cor: "emerald" | "blue" | "purple" | "am
   );
 };
 
-const Confetes = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(12)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute animate-pulse"
-          style={{
-            left: `${50 + Math.cos((i / 12) * Math.PI * 2) * 60}px`,
-            top: `${50 + Math.sin((i / 12) * Math.PI * 2) * 60}px`,
-            animation: `float ${2 + (i % 3)}s ease-in-out infinite`,
-            animationDelay: `${i * 0.1}s`,
-          }}
-        >
-          <div
-            className="w-3 h-3 rounded-sm"
-            style={{
-              backgroundColor: [
-                "#fbbf24",
-                "#60a5fa",
-                "#34d399",
-                "#f87171",
-                "#c084fc",
-              ][i % 5],
-            }}
-          />
-        </div>
-      ))}
-      <style>{`
-        @keyframes float {
-          0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
-          100% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
-        }
-      `}</style>
-    </div>
-  );
-};
-
 export default function FeedbackOSCE({
   feedback,
   nomePaciente,
@@ -172,11 +134,8 @@ export default function FeedbackOSCE({
 
             {/* COLUNA 3: ESTETOSCÓPIO/CLASSIFICAÇÃO */}
             <div className="rounded-3xl bg-white/10 border border-white/10 p-6 flex flex-col items-center justify-center text-center">
-              <div className="relative">
-                <Confetes />
-                <div className="text-7xl md:text-8xl leading-none animate-bounce" style={{ animationDuration: "2s", filter: "drop-shadow(0 0 20px #fbbf24) drop-shadow(0 0 40px #f59e0b)" }}>
-                  🩺
-                </div>
+              <div className="text-7xl md:text-8xl leading-none animate-bounce" style={{ animationDuration: "2s", filter: "drop-shadow(0 0 20px #fbbf24) drop-shadow(0 0 40px #f59e0b)" }}>
+                🩺
               </div>
 
               {isAprovado && (
