@@ -105,7 +105,7 @@ export default function FeedbackOSCE({
 
   return (
     <main className="w-full bg-slate-50 min-h-screen p-4 md:p-8">
-      <div className="mx-auto max-w-7xl space-y-8">
+      <div className="w-full max-w-none space-y-8">
         {/* CARD PRINCIPAL */}
         <section className="w-full rounded-3xl bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white shadow-xl border border-blue-900/40 p-8 md:p-10 xl:p-12">
 
