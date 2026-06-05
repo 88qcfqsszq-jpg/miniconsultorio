@@ -170,12 +170,12 @@ export default function FeedbackOSCE({
               )}
             </div>
 
-            {/* COLUNA 3: TROFÉU/CLASSIFICAÇÃO */}
+            {/* COLUNA 3: ESTETOSCÓPIO/CLASSIFICAÇÃO */}
             <div className="rounded-3xl bg-white/10 border border-white/10 p-6 flex flex-col items-center justify-center text-center">
               <div className="relative">
                 <Confetes />
                 <div className="text-7xl md:text-8xl leading-none animate-bounce" style={{ animationDuration: "2s" }}>
-                  🏆
+                  🩺
                 </div>
               </div>
 
