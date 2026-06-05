@@ -38,31 +38,31 @@ const renderBullets = (items: string[], cor: "emerald" | "blue" | "purple" | "am
 };
 
 const CircularProgress = ({ percentage }: { percentage: number }) => {
-  const radius = 45;
+  const radius = 70;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="relative w-32 h-32">
-      <svg width="128" height="128" className="transform -rotate-90">
-        <circle cx="64" cy="64" r={radius} fill="none" stroke="#e2e8f0" strokeWidth="8" />
+    <div className="relative w-48 h-48 flex items-center justify-center">
+      <svg width="192" height="192" className="transform -rotate-90 absolute inset-0">
+        <circle cx="96" cy="96" r={radius} fill="none" stroke="#e2e8f0" strokeWidth="12" />
         <circle
-          cx="64"
-          cy="64"
+          cx="96"
+          cy="96"
           r={radius}
           fill="none"
-          stroke="#3b82f6"
-          strokeWidth="8"
+          stroke="#60a5fa"
+          strokeWidth="12"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           strokeLinecap="round"
-          className="transition-all"
+          className="transition-all duration-1000"
         />
       </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
         <div className="text-center">
-          <p className="text-2xl font-bold text-slate-900">{percentage}%</p>
-          <p className="text-xs text-slate-500">Desempenho</p>
+          <p className="text-5xl font-black text-white">{percentage}%</p>
+          <p className="text-xs text-blue-200 mt-2 font-semibold">Desempenho</p>
         </div>
       </div>
     </div>
@@ -139,61 +139,78 @@ export default function FeedbackOSCE({
     <main className="w-full bg-slate-50 min-h-screen p-4 md:p-8">
       <div className="mx-auto max-w-7xl space-y-8">
         {/* CARD PRINCIPAL */}
-        <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-blue-900 to-slate-800 text-white shadow-2xl p-8 md:p-10 border border-blue-700/30">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Feedback do Atendimento</h1>
-          <div className="flex items-center gap-2 text-blue-100 text-sm mb-8">
-            <span>👤 {nomePaciente}</span>
-            <span>•</span>
-            <span>⏱️ {minutos}m {segundos}s</span>
+        <section className="w-full rounded-2xl bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900 text-white shadow-2xl border border-blue-800/50 overflow-hidden relative">
+          {/* Título e subtítulo - fora do grid */}
+          <div className="px-8 md:px-12 pt-8 pb-6">
+            <h1 className="text-3xl md:text-4xl font-black text-white">Feedback do Atendimento</h1>
+            <p className="mt-2 text-sm md:text-base text-blue-100">👤 {nomePaciente} • ⏱️ {minutos}m {segundos}s</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            {/* Coluna 1: Nota */}
-            <div>
-              <p className="text-blue-200 text-sm font-semibold uppercase tracking-wide mb-4">Nota Final</p>
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-6xl font-black text-white">{feedback.nota.toFixed(1)}</span>
-                <span className="text-2xl text-blue-200">/20</span>
+          {/* Grid: 4 Colunas com divisórias */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-0 items-stretch min-h-[320px]">
+
+            {/* COLUNA 1: NOTA FINAL */}
+            <div className="px-8 md:px-10 py-8 flex flex-col justify-center border-r border-blue-800/40">
+              <p className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-6">
+                Nota final
+              </p>
+
+              <div className="flex items-baseline gap-3 mb-6">
+                <span className="text-7xl md:text-8xl font-black leading-none text-white">
+                  {feedback.nota.toFixed(1)}
+                </span>
+                <span className="text-3xl font-bold text-blue-200">
+                  /20
+                </span>
               </div>
-              <div className="inline-block bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+
+              <div className="inline-flex rounded-full bg-emerald-500 px-6 py-2.5 text-base font-bold text-white w-fit">
                 {percentual}% de desempenho
               </div>
             </div>
 
-            {/* Coluna 2: Gráfico + Diagnóstico */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-6">
+            {/* COLUNA 2: GRÁFICO CIRCULAR */}
+            <div className="px-8 md:px-10 py-8 flex items-center justify-center border-r border-blue-800/40">
+              <div className="relative flex h-44 w-44 items-center justify-center">
                 <CircularProgress percentage={percentual} />
-                <div className="flex-1">
-                  <p className="text-blue-200 text-xs font-semibold uppercase mb-2">Diagnóstico Esperado</p>
-                  <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white mb-3">
-                    {feedback.resumoCaso?.diagnosticoEsperado}
-                  </h2>
-                  <p className="text-sm text-blue-100 mb-3">
-                    <span className="font-semibold">Diagnóstico informado:</span> {feedback.resumoCaso?.diagnosticoEsperado}
-                  </p>
-                  {feedback.justificativaNota && (
-                    <div className="bg-blue-500/20 border border-blue-400/30 rounded-lg p-3 text-sm text-blue-100">
-                      💡 {feedback.justificativaNota}
-                    </div>
-                  )}
-                </div>
               </div>
             </div>
 
-            {/* Coluna 3: Troféu */}
-            <div className="flex flex-col items-center justify-center relative">
+            {/* COLUNA 3: DIAGNÓSTICO */}
+            <div className="px-8 md:px-10 py-8 flex flex-col justify-center border-r border-blue-800/40 min-w-0">
+              <p className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-4">
+                Diagnóstico esperado
+              </p>
+
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-white mb-6 break-words">
+                {feedback.resumoCaso?.diagnosticoEsperado || "—"}
+              </h2>
+
+              <p className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
+                Diagnóstico informado
+              </p>
+              <p className="text-base md:text-lg font-semibold text-blue-50 break-words">
+                {feedback.resumoCaso?.diagnosticoEsperado || "—"}
+              </p>
+            </div>
+
+            {/* COLUNA 4: TROFÉU */}
+            <div className="px-8 md:px-10 py-8 flex flex-col items-center justify-center relative">
               <Confetes />
-              <div className="text-8xl mb-4 animate-bounce" style={{ animationDuration: "2s" }}>🏆</div>
+              <div className="text-9xl md:text-10xl leading-none drop-shadow-lg animate-bounce mb-4" style={{ animationDuration: "2s", textShadow: "0 8px 16px rgba(0,0,0,0.3)" }}>
+                🏆
+              </div>
+
               {isAprovado && (
-                <div className="bg-emerald-500 text-white px-6 py-2 rounded-full font-bold flex items-center gap-2">
-                  <span>✓</span>
-                  <span>{feedback.classificacao}</span>
+                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-8 py-3 text-xl font-black text-white shadow-lg">
+                  <span className="text-2xl">✓</span>
+                  <span>{feedback.classificacao || "Aprovado"}</span>
                 </div>
               )}
             </div>
+
           </div>
-        </div>
+        </section>
 
         {/* SEÇÃO: DESEMPENHO POR COMPETÊNCIA */}
         <div>
