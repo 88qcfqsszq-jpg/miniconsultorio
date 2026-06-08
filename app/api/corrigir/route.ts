@@ -111,6 +111,61 @@ function removerPenalizacoesIndevidasDeSOAP(
   return feedback;
 }
 
+// Detecta conteúdo clinicamente incoerente com o caso
+function textoProvavelmenteIncoerenteComCaso(texto: string, caso: any): boolean {
+  const t = String(texto || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
+
+  const diagnostico = String(
+    caso?.diagnosticoCorreto ||
+    caso?.dados_ocultos_do_sistema?.diagnostico_principal ||
+    caso?.titulo ||
+    ""
+  )
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
+
+  // Termos claramente incoerentes em padrões de diagnósticos
+  const termosRenais = [
+    "insuficiencia renal",
+    "doenca renal cronica",
+    "nefropatia",
+    "nefrologia",
+    "hemodialise",
+    "dialise",
+    "creatinina elevada permanente",
+  ];
+
+  const termosGastro = [
+    "gastrite",
+    "ulcera peptica",
+    "doenca inflamatoria intestinal",
+    "apendicite",
+    "nefrolitiase",
+  ];
+
+  const casoRenal =
+    diagnostico.includes("renal") ||
+    diagnostico.includes("nefro") ||
+    diagnostico.includes("dialise");
+  const casoGastro = diagnostico.includes("gastro") || diagnostico.includes("abdominal");
+
+  // Se o caso não é renal, mas tem termos renais, é incoerente
+  if (!casoRenal && termosRenais.some((termo) => t.includes(termo))) {
+    return true;
+  }
+
+  // Se o caso não é gastrointestinal, mas tem termos gastro, é incoerente
+  if (!casoGastro && termosGastro.some((termo) => t.includes(termo))) {
+    return true;
+  }
+
+  return false;
+}
+
 // Classifica a nota em categorias
 function classificarNota(
   nota: number
@@ -369,6 +424,21 @@ export async function POST(request: NextRequest) {
       soapObrigatorio
     );
 
+    // Detectar possível incoerência clínica
+    const possivelIncoerencia =
+      textoProvavelmenteIncoerenteComCaso(
+        String(hipoteseDiagnostica || ""),
+        caso
+      ) ||
+      textoProvavelmenteIncoerenteComCaso(
+        String(conduta || ""),
+        caso
+      );
+
+    const systemPromptAdicionado = possivelIncoerencia
+      ? "Você é um examinador OSCE rigoroso e justo. ALERTA: Foi detectado possível conteúdo incompatível com o diagnóstico esperado do caso. Avalie com MÁXIMO RIGOR e não marque como acerto hipóteses ou condutas sem relação clínica. Responda exclusivamente em JSON válido. Não use markdown. Não use ```json. Não escreva nenhum texto fora do JSON. Todos os campos obrigatórios devem existir. Todos os arrays devem existir, mesmo que vazios."
+      : "Você é um examinador OSCE rigoroso e justo. Responda exclusivamente em JSON válido. Não use markdown. Não use ```json. Não escreva nenhum texto fora do JSON. Todos os campos obrigatórios devem existir. Todos os arrays devem existir, mesmo que vazios.";
+
     // Chamar OpenAI com JSON obrigatório
     let respostaRaw: string | null = null;
 
@@ -379,8 +449,7 @@ export async function POST(request: NextRequest) {
           messages: [
             {
               role: "system",
-              content:
-                "Você é um examinador OSCE rigoroso e justo. Responda exclusivamente em JSON válido. Não use markdown. Não use ```json. Não escreva nenhum texto fora do JSON. Todos os campos obrigatórios devem existir. Todos os arrays devem existir, mesmo que vazios.",
+              content: systemPromptAdicionado,
             },
             {
               role: "user",

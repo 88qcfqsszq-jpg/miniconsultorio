@@ -405,6 +405,38 @@ REGRA IMPORTANTE SOBRE CONDUTA:
   * Orientação de retorno/reavaliação.
 - Se o aluno forneceu esses elementos no campo conduta ou durante o atendimento (chat), considerar conduta cheia ou quase cheia.
 
+REGRA CRÍTICA: COERÊNCIA CLÍNICA
+- AVALIE SEMANTICAMENTE a resposta do aluno. Não considere como acerto hipóteses ou condutas que não tenham relação clínica com o diagnóstico esperado.
+- Não basta o aluno preencher o campo com texto. O CONTEÚDO precisa ser clinicamente correto, coerente com o caso e compatível com o diagnóstico esperado.
+
+VALIDAÇÃO DE COERÊNCIA ANTES DE ATRIBUIR PONTOS:
+Antes de marcar acerto em Raciocínio diagnóstico ou Conduta, faça validação interna:
+1. A hipótese do aluno pertence ao MESMO SISTEMA CLÍNICO do caso? (respiratório, cardiovascular, renal, GI, etc)
+2. A hipótese explica os sintomas, exame físico e exames complementares do caso?
+3. A conduta proposta trata o diagnóstico esperado ou uma hipótese clinicamente PLAUSÍVEL?
+4. A conduta evitaria risco ao paciente naquele caso?
+
+SE RESPONDER "NÃO" A QUALQUER PERGUNTA: NÃO marque como acerto.
+
+EXEMPLOS DE INCOERÊNCIA (rejeitar como acerto):
+- Hipótese diagnóstica: "insuficiência renal crônica" em caso respiratório/cardiológico
+- Conduta: "encaminhar para nefrologia" em caso não renal
+- Diagnóstico: "gastrite" em caso de SCA (síndrome coronariana aguda)
+- Diagnóstico: "apendicite" em caso respiratório
+- Diagnóstico: "nefropatia" em caso de pneumonia (salvo se claramente como complicação)
+
+EXEMPLOS DE EQUIVALÊNCIA CLÍNICA (aceitar como acerto):
+- Se diagnóstico esperado é "pneumonia": aceitar "pneumonia", "pneumonia atípica", "pneumonia adquirida na comunidade", "infecção respiratória baixa"
+- Se diagnóstico é "angina estável": aceitar "angina estável", "doença arterial coronariana estável", "dor torácica anginosa estável"
+- Se diagnóstico é "endocardite": aceitar "endocardite infecciosa", "endocardite bacteriana", "endocardite subaguda"
+- Se diagnóstico é "DAOP": aceitar "doença arterial obstrutiva periférica", "claudicação intermitente", "insuficiência arterial periférica"
+
+PALAVRAS ALEATÓRIAS OU INCOERENTES:
+Se o aluno preencher campo com termos incompatíveis ou "palavras de dicionário" sem relação clínica:
+- NÃO marque como acerto apenas porque o campo foi preenchido.
+- Cite como "não cumprido" ou "parcialmente cumprido" na rubrica.
+- Na melhoria, explique: "A hipótese/conduta informada não é compatível clinicamente com este caso."
+
 CHECKLIST ESPERADO DO EXAMINADOR:
 ${caso.checklist_oculto_examinador ? `
 O QUE O PROFESSOR QUER:
