@@ -11,6 +11,8 @@ export default function Treinamento() {
   const [mostrarGerador, setMostrarGerador] = useState(false);
   const router = useRouter();
 
+  const casosAtivos = casosOSCE.filter((caso) => caso.ativo !== false);
+
   const handleCasoGerado = (caso: Caso) => {
     // Salvar na sessionStorage para acessar na página de caso
     sessionStorage.setItem("casoGerado", JSON.stringify(caso));
@@ -59,7 +61,7 @@ export default function Treinamento() {
 
         {/* Cards de Casos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10">
-          {casosOSCE.map((caso) => (
+          {casosAtivos.map((caso) => (
             <CasoCard key={caso.id} caso={caso} />
           ))}
         </div>

@@ -6,10 +6,12 @@ import { casosOSCE } from "@/data/casos-osce";
 export default function FacaOOSCE() {
   const router = useRouter();
 
-  const iniciarOSCEAleatorio = () => {
-    if (casosOSCE.length === 0) return;
+  const casosAtivos = casosOSCE.filter((caso) => caso.ativo !== false);
 
-    const casoAleatorio = casosOSCE[Math.floor(Math.random() * casosOSCE.length)];
+  const iniciarOSCEAleatorio = () => {
+    if (casosAtivos.length === 0) return;
+
+    const casoAleatorio = casosAtivos[Math.floor(Math.random() * casosAtivos.length)];
     router.push(`/caso/${casoAleatorio.id}?modo=osce`);
   };
 

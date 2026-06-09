@@ -357,6 +357,9 @@ export interface Caso {
   // Auditoria OSCE - Temas e subtópicos
   temaOSCE?: string;
   subtopicosOSCE?: string[];
+
+  // Status de ativação
+  ativo?: boolean;
 }
 
 export interface ExameFisicoInterativo {

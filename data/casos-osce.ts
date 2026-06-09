@@ -13089,7 +13089,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Formigamento nas mãos e pés, dificuldade em caminhar",
       historia_breve: "Vegetariano há muitos anos, cansaço crônico",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Deficiência de Vitamina B12",
@@ -13356,7 +13356,7 @@ export const casosOSCE: Caso[] = [
       "Vegetarianismo",
     ],
     diagnosticoCorreto: "Deficiência de Vitamina B12",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 47: POLICITEMIA VERA ======
@@ -13375,7 +13375,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Rubor facial, coceira na pele após banho",
       historia_breve: "Homem com face avermelhada, cianose de extremidades",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Policitemia Vera",
@@ -13640,7 +13640,7 @@ export const casosOSCE: Caso[] = [
       "Esplenomegalia",
     ],
     diagnosticoCorreto: "Policitemia Vera",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 48: MIELOMA MÚLTIPLO ======
@@ -13659,7 +13659,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Dor nas costas, anemia, fratura espontânea",
       historia_breve: "Idoso com fratura vertebral sem trauma, cansaço crônico",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Mieloma Múltiplo",
@@ -13951,7 +13951,7 @@ export const casosOSCE: Caso[] = [
       "Fatura patológica",
     ],
     diagnosticoCorreto: "Mieloma Múltiplo",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 49: LEUCEMIA LINFOBLÁSTICA AGUDA ======
@@ -13970,7 +13970,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Febre, hematomas, sangramento gengival",
       historia_breve: "Criança com sintomas agudos há 2 semanas",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Leucemia Linfoblástica Aguda",
@@ -14258,7 +14258,7 @@ export const casosOSCE: Caso[] = [
       "Emergência pediátrica",
     ],
     diagnosticoCorreto: "Leucemia Linfoblástica Aguda",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 50: COAGULAÇÃO DISSEMINADA ======
@@ -14277,7 +14277,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Feminino",
       queixa_principal: "Sangramento difuso, choque, confusão mental",
       historia_breve: "Mulher com sepse evoluindo para choque com coagulopatia",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Coagulação Intravascular Disseminada (CID)",
@@ -14581,7 +14581,7 @@ export const casosOSCE: Caso[] = [
       "Emergência máxima",
     ],
     diagnosticoCorreto: "Coagulação Intravascular Disseminada",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 51: HEMOFILIA A ======
@@ -14600,7 +14600,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Sangramento articular, hematomas fáceis",
       historia_breve: "Adolescente com sangramento recorrente em joelho",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Hemofilia A",
@@ -14868,7 +14868,7 @@ export const casosOSCE: Caso[] = [
       "Sangramento espontâneo",
     ],
     diagnosticoCorreto: "Hemofilia A",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 52: DEFICIÊNCIA DE VITAMINA K ======
@@ -14887,7 +14887,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Feminino",
       queixa_principal: "Equimoses fáceis, sangramento gengival",
       historia_breve: "Mulher idosa com icterícia e problemas de coagulação",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Deficiência de Vitamina K",
@@ -15155,7 +15155,7 @@ export const casosOSCE: Caso[] = [
       "Má absorção",
     ],
     diagnosticoCorreto: "Deficiência de Vitamina K",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 53: TALASSEMIA MAIOR ======
@@ -15174,7 +15174,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Cansaço, palidez, deformidades faciais",
       historia_breve: "Criança mediterrânea com anemia crônica desde pequeno",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Talassemia Maior",
@@ -15450,7 +15450,7 @@ export const casosOSCE: Caso[] = [
       "Alterações ósseas",
     ],
     diagnosticoCorreto: "Talassemia Maior",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 54: DIABETES MELLITUS COM COMPLICAÇÕES VASCULARES ======
@@ -15469,7 +15469,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Cansaço, formigamento nos pés, dificuldade visual",
       historia_breve: "Diabético mal controlado com múltiplas complicações",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Diabetes Mellitus Tipo 2 com Neuropatia e Retinopatia",
@@ -15761,7 +15761,7 @@ export const casosOSCE: Caso[] = [
       "Complicações vasculares",
     ],
     diagnosticoCorreto: "Diabetes Mellitus Tipo 2 com Complicações Microvasculares e Macrovasculares",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 55: INSUFICIÊNCIA RENAL CRÔNICA COM COMPLICAÇÕES ======
@@ -15780,7 +15780,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Feminino",
       queixa_principal: "Fadiga, edema, pressão alta, náusea",
       historia_breve: "Paciente com IRC progressiva há 10 anos",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Insuficiência Renal Crônica Estágio 4",
@@ -16072,7 +16072,7 @@ export const casosOSCE: Caso[] = [
       "Complicações sistêmicas",
     ],
     diagnosticoCorreto: "Insuficiência Renal Crônica Estágio 4",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 56: LÚPUS ERITEMATOSO SISTÊMICO ======
@@ -16091,7 +16091,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Feminino",
       queixa_principal: "Febre, artrite, edema facial, erupção em rosto",
       historia_breve: "Mulher jovem com sintomas multissistêmicos",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Lúpus Eritematoso Sistêmico com Nefrite Lúpica",
@@ -16378,7 +16378,7 @@ export const casosOSCE: Caso[] = [
       "Doença autoimune",
     ],
     diagnosticoCorreto: "Lúpus Eritematoso Sistêmico com Nefrite Lúpica",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 57: HIV/AIDS COM INFECÇÃO OPORTUNISTA ======
@@ -16397,7 +16397,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Falta de ar progressiva, tosse seca, febre",
       historia_breve: "Paciente HIV+ não aderente ao tratamento",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "HIV/AIDS com Pneumonia por Pneumocystis jirovecii",
@@ -16682,7 +16682,7 @@ export const casosOSCE: Caso[] = [
       "Emergência",
     ],
     diagnosticoCorreto: "HIV/AIDS com Pneumonia por Pneumocystis jirovecii",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 58: SÍNDROME METABÓLICA COM INFARTO ======
@@ -16701,7 +16701,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Dor no peito tipo aperto, sudorese, mal-estar",
       historia_breve: "Homem obeso com síndrome metabólica apresentando IAM",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Infarto Agudo do Miocárdio em Paciente com Síndrome Metabólica",
@@ -16985,7 +16985,7 @@ export const casosOSCE: Caso[] = [
       "Emergência",
     ],
     diagnosticoCorreto: "Infarto Agudo do Miocárdio com Supra de ST",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 59: SEPSE COM CHOQUE SÉPTICO ======
@@ -17004,7 +17004,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Feminino",
       queixa_principal: "Confusão mental, febre, pressão baixa",
       historia_breve: "Idosa com ITU evoluindo para sepse",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Sepse com Choque Séptico por Pielonefrite",
@@ -17289,7 +17289,7 @@ export const casosOSCE: Caso[] = [
       "Emergência máxima",
     ],
     diagnosticoCorreto: "Sepse com Choque Séptico",
-  },
+    ativo: false,    },
 
   {
     // ====== CASO 60: CETOACIDOSE DIABÉTICA ======
@@ -17308,7 +17308,7 @@ export const casosOSCE: Caso[] = [
       sexo: "Masculino",
       queixa_principal: "Respiração profunda rápida, náusea, dor abdominal, confusão",
       historia_breve: "Adolescente com diabetes tipo 1 de novo diagnóstico",
-    },
+  },
 
     dados_ocultos_do_sistema: {
       diagnostico_principal: "Cetoacidose Diabética",
@@ -17604,5 +17604,6 @@ export const casosOSCE: Caso[] = [
       "Emergência",
     ],
     diagnosticoCorreto: "Cetoacidose Diabética",
+    ativo: false,
   }
 ];
