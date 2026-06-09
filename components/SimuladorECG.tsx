@@ -137,78 +137,93 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
           </div>
 
           {/* Área principal de simulação */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Área de arrastar eletrodos */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Paciente virtual com eletrodos */}
             <div className="lg:col-span-2">
-              <div
-                ref={containerRef}
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-                className="bg-gradient-to-b from-blue-50 to-slate-50 border-3 border-dashed border-blue-300 rounded-lg p-4 min-h-[500px] relative cursor-grab active:cursor-grabbing flex items-center justify-center"
-              >
-                {/* Desenho esquemático do paciente */}
-                <svg
-                  viewBox="0 0 200 400"
-                  className="w-full h-full max-w-xs absolute inset-0 p-4"
-                  style={{ aspectRatio: '1/2' }}
+              <div className="bg-white rounded-lg border-2 border-slate-300 p-6 space-y-4">
+                <h3 className="text-lg font-bold text-slate-800">Paciente Virtual</h3>
+                <div
+                  ref={containerRef}
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop}
+                  className="relative bg-slate-50 border-2 border-slate-200 rounded-lg overflow-hidden cursor-grab active:cursor-grabbing"
+                  style={{ aspectRatio: '3/4', minHeight: '480px' }}
                 >
-                  {/* Cabeça */}
-                  <circle cx="100" cy="40" r="25" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
+                  {/* Boneco real frontal */}
+                  <img
+                    src="/images/boneco/boneco-frente.png"
+                    alt="Paciente"
+                    className="w-full h-full object-contain p-2"
+                    draggable={false}
+                  />
 
-                  {/* Corpo */}
-                  <ellipse cx="100" cy="100" rx="20" ry="50" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
+                  {/* SVG de cabos saindo dos eletrodos até a máquina (efeito visual) */}
+                  <svg
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    style={{ zIndex: 5 }}
+                  >
+                    {eletrodos
+                      .filter((el) => el.isPlaced)
+                      .map((el) => (
+                        <line
+                          key={`cable-${el.lead}`}
+                          x1={`${el.x}%`}
+                          y1={`${el.y}%`}
+                          x2="95%"
+                          y2="95%"
+                          stroke="#999"
+                          strokeWidth="1"
+                          opacity="0.6"
+                          strokeDasharray="3,3"
+                        />
+                      ))}
+                  </svg>
 
-                  {/* Braço direito */}
-                  <rect x="120" y="85" width="45" height="12" rx="6" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
-                  <circle cx="165" cy="91" r="10" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
+                  {/* Eletrodos posicionados */}
+                  {eletrodos
+                    .filter((el) => el.isPlaced)
+                    .map((el) => {
+                      const isVLead = el.lead.startsWith('V')
+                      const isMembroLead = ['RA', 'LA', 'RL', 'LL'].includes(el.lead)
+                      const bgColor = isVLead ? 'bg-red-500 border-red-700' : 'bg-blue-500 border-blue-700'
 
-                  {/* Braço esquerdo */}
-                  <rect x="35" y="85" width="45" height="12" rx="6" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
-                  <circle cx="35" cy="91" r="10" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
+                      return (
+                        <div
+                          key={el.lead}
+                          style={{
+                            position: 'absolute',
+                            left: `${el.x}%`,
+                            top: `${el.y}%`,
+                            transform: 'translate(-50%, -50%)',
+                          }}
+                          className={`w-7 h-7 ${bgColor} rounded-full border-2 flex items-center justify-center text-white text-[10px] font-bold cursor-move hover:scale-110 transition-transform shadow-lg z-10`}
+                          draggable
+                          onDragStart={(e) => handleDragStart(el.lead, e)}
+                          title={`${el.lead}`}
+                        >
+                          {el.lead}
+                        </div>
+                      )
+                    })}
+                </div>
 
-                  {/* Perna direita */}
-                  <rect x="95" y="160" width="10" height="90" rx="5" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
-                  <circle cx="100" cy="260" r="10" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
-
-                  {/* Perna esquerda */}
-                  <rect x="95" y="160" width="10" height="90" rx="5" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
-                  <circle cx="100" cy="260" r="10" fill="#fdbcb4" stroke="#333" strokeWidth="2" />
-                </svg>
-
-                {/* Eletrodos posicionados */}
-                {eletrodos
-                  .filter((el) => el.isPlaced)
-                  .map((el) => (
-                    <div
-                      key={el.lead}
-                      style={{
-                        position: 'absolute',
-                        left: `${(el.x / 100) * 100}%`,
-                        top: `${(el.y / 100) * 100}%`,
-                        transform: 'translate(-50%, -50%)',
-                      }}
-                      className="w-8 h-8 bg-red-500 rounded-full border-2 border-red-700 flex items-center justify-center text-white text-xs font-bold cursor-move hover:bg-red-600 transition-colors shadow-lg z-10"
-                      draggable
-                      onDragStart={(e) => handleDragStart(el.lead, e)}
-                      title={`${el.lead} @ (${el.x.toFixed(0)}%, ${el.y.toFixed(0)}%)`}
-                    >
-                      {el.lead}
-                    </div>
-                  ))}
+                <div className="text-xs text-slate-600 bg-blue-50 border border-blue-200 rounded p-2">
+                  <p>🔴 Vermelho: Derivações precordiais (V1–V6)</p>
+                  <p>🔵 Azul: Membros (RA, LA, RL, LL)</p>
+                  <p>✋ Arraste eletrodos da lista ao lado para posicionar</p>
+                </div>
               </div>
-
-              <p className="text-xs text-slate-600 mt-2">
-                ✋ Arraste eletrodos da lista abaixo. Posicione sobre o tórax e membros.
-              </p>
             </div>
 
-            {/* Painel direito: eletrodos + máquina */}
-            <div className="lg:col-span-2 space-y-4">
-              {/* Lista de eletrodos */}
-              <div className="bg-white rounded-lg border border-slate-200 p-4">
-                <h3 className="text-lg font-bold text-slate-800 mb-3">Eletrodos</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {LEADS.map((lead) => {
+            {/* Painel direito: eletrodos + máquina + status */}
+            <div className="lg:col-span-1 space-y-4">
+              {/* Precordiais - V1 a V6 */}
+              <div className="bg-white rounded-lg border border-slate-200 p-3">
+                <h4 className="text-xs font-bold text-slate-700 uppercase mb-2 flex items-center gap-1">
+                  <span className="w-2 h-2 bg-red-500 rounded-full"></span> Precordiais
+                </h4>
+                <div className="grid grid-cols-3 gap-1">
+                  {['V1', 'V2', 'V3', 'V4', 'V5', 'V6'].map((lead) => {
                     const el = eletrodos.find((e) => e.lead === lead)
                     const isPlaced = el?.isPlaced
 
@@ -216,14 +231,42 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
                       <div
                         key={lead}
                         draggable
-                        onDragStart={(e) => handleDragStart(lead, e)}
-                        className={`p-3 rounded-lg font-bold text-sm cursor-move transition-all ${
+                        onDragStart={(e) => handleDragStart(lead as ECGLead, e)}
+                        className={`p-2 rounded text-xs font-bold text-center cursor-move transition-all ${
                           isPlaced
                             ? 'bg-green-100 border border-green-400 text-green-800'
-                            : 'bg-slate-100 border border-slate-400 text-slate-800 hover:bg-slate-200'
+                            : 'bg-red-100 border border-red-300 text-red-700 hover:bg-red-200'
                         }`}
                       >
-                        {isPlaced ? '✅' : '⭕'} {lead}
+                        {lead}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* Membros - RA, LA, RL, LL */}
+              <div className="bg-white rounded-lg border border-slate-200 p-3">
+                <h4 className="text-xs font-bold text-slate-700 uppercase mb-2 flex items-center gap-1">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full"></span> Membros
+                </h4>
+                <div className="grid grid-cols-2 gap-1">
+                  {['RA', 'LA', 'RL', 'LL'].map((lead) => {
+                    const el = eletrodos.find((e) => e.lead === lead)
+                    const isPlaced = el?.isPlaced
+
+                    return (
+                      <div
+                        key={lead}
+                        draggable
+                        onDragStart={(e) => handleDragStart(lead as ECGLead, e)}
+                        className={`p-2 rounded text-xs font-bold text-center cursor-move transition-all ${
+                          isPlaced
+                            ? 'bg-green-100 border border-green-400 text-green-800'
+                            : 'bg-blue-100 border border-blue-300 text-blue-700 hover:bg-blue-200'
+                        }`}
+                      >
+                        {lead}
                       </div>
                     )
                   })}
@@ -231,17 +274,17 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
               </div>
 
               {/* Máquina de ECG */}
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg p-4 border-2 border-slate-700 text-white">
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg p-3 border-2 border-slate-700 text-white">
                 <div className="text-center mb-3">
-                  <p className="text-xs font-semibold text-slate-400 uppercase">ECG Machine</p>
-                  <p className="text-2xl font-mono mt-1">━━━━━━━━━</p>
+                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">ECG</p>
+                  <p className="text-xl font-mono mt-1 text-green-400">━━━━━━</p>
                 </div>
 
                 {/* Indicador de progresso */}
                 <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <p className="text-xs font-semibold">Eletrodos:</p>
-                    <p className="text-sm font-bold">{eletrodosColocados}/10</p>
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="font-semibold">Eletrodos</span>
+                    <span className="font-bold">{eletrodosColocados}/10</span>
                   </div>
                   <div className="bg-slate-700 rounded-full h-2">
                     <div
@@ -251,27 +294,27 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
                   </div>
 
                   {/* Status */}
-                  <div className="mt-3 p-2 bg-slate-700 rounded text-xs text-center">
+                  <div className="mt-2 p-2 bg-slate-700 rounded text-[11px] text-center font-semibold">
                     {eletrodosColocados < 8 ? (
-                      <p className="text-yellow-300">Posicione mais eletrodos</p>
+                      <p className="text-yellow-300">✓ {eletrodosColocados}/8 mínimo</p>
                     ) : (
-                      <p className="text-green-300">✓ Pronto para gerar ECG</p>
+                      <p className="text-green-300">✓ Pronto para gerar</p>
                     )}
                   </div>
                 </div>
 
                 {/* Botões */}
-                <div className="space-y-2 mt-4">
+                <div className="space-y-2 mt-3">
                   <button
                     onClick={gerarECG}
                     disabled={eletrodosColocados < 8}
-                    className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-2 px-3 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     📊 Gerar ECG
                   </button>
                   <button
                     onClick={resetarSimulador}
-                    className="w-full py-2 px-4 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition-colors"
+                    className="w-full py-2 px-3 bg-slate-600 text-white rounded-lg font-semibold text-sm hover:bg-slate-700 transition-colors"
                   >
                     🔄 Resetar
                   </button>
