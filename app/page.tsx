@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { event } from "@/lib/analytics";
 
 const features = [
   { icon: "💬", label: "Paciente Virtual", desc: "Chat natural com IA treinada para responder como paciente real" },
@@ -30,12 +31,12 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/faca-o-osce">
+            <Link href="/faca-o-osce" onClick={() => event("clicou_prova_osce")}>
               <button className="w-full sm:w-auto bg-white text-blue-700 font-bold py-3.5 px-8 rounded-xl hover:bg-blue-50 transition-all shadow-lg text-base">
                 Iniciar Prova OSCE
               </button>
             </Link>
-            <Link href="/treinamento">
+            <Link href="/treinamento" onClick={() => event("clicou_treinamento")}>
               <button className="w-full sm:w-auto bg-white/15 border border-white/30 text-white font-bold py-3.5 px-8 rounded-xl hover:bg-white/25 transition-all text-base">
                 Ver Casos de Treino
               </button>
@@ -47,7 +48,7 @@ export default function Home() {
       {/* Cards principais */}
       <section className="max-w-5xl mx-auto px-4 py-10 sm:py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-12">
-          <Link href="/faca-o-osce" className="group">
+          <Link href="/faca-o-osce" onClick={() => event("clicou_prova_osce")} className="group">
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 h-full hover:shadow-md hover:border-blue-200 transition-all">
               <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mb-5">🩺</div>
               <h2 className="text-xl font-bold text-slate-800 mb-2">Prova OSCE</h2>
@@ -60,7 +61,7 @@ export default function Home() {
             </div>
           </Link>
 
-          <Link href="/treinamento" className="group">
+          <Link href="/treinamento" onClick={() => event("clicou_treinamento")} className="group">
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 h-full hover:shadow-md hover:border-emerald-200 transition-all">
               <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl mb-5">📚</div>
               <h2 className="text-xl font-bold text-slate-800 mb-2">Treinamento Direcionado</h2>

@@ -11,6 +11,7 @@ import LoadingRelatorio from "@/components/LoadingRelatorio";
 import PainelExamesComplementares from "@/components/PainelExamesComplementares";
 import ResumoAnamnese from "@/components/ResumoAnamnese";
 import { casosOSCE } from "@/data/casos-osce";
+import { event } from "@/lib/analytics";
 import type {
   Caso,
   MensagemChat,
@@ -75,6 +76,11 @@ function CasoPageContent() {
         if (caso.id === casoId) {
           setCaso(caso);
           setTempoInicio(Date.now());
+          event("iniciou_caso", {
+            caso_id: caso.id,
+            caso_titulo: caso.titulo,
+            modo: "treinamento",
+          });
           sessionStorage.removeItem("casoGerado");
           return;
         }
@@ -88,6 +94,11 @@ function CasoPageContent() {
     if (casoEncontrado) {
       setCaso(casoEncontrado);
       setTempoInicio(Date.now());
+      event("iniciou_caso", {
+        caso_id: casoEncontrado.id,
+        caso_titulo: casoEncontrado.titulo,
+        modo: "prova",
+      });
     }
   }, [casoId]);
 
@@ -184,6 +195,19 @@ function CasoPageContent() {
 
         // Pequena pausa para efeito visual
         await new Promise((resolve) => setTimeout(resolve, 400));
+
+        // Disparar eventos de conclusão
+        event("finalizou_caso", {
+          caso_id: caso?.id,
+          caso_titulo: caso?.titulo,
+          modo: modoOSCE ? "prova" : "treinamento",
+        });
+
+        event("abriu_feedback", {
+          caso_id: caso?.id,
+          caso_titulo: caso?.titulo,
+          nota: feedbackDetalhado?.nota,
+        });
 
         // Mostrar feedback
         setFeedback(feedbackDetalhado);

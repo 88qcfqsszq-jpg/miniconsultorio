@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { AnalyticsPageView } from "@/components/AnalyticsPageView";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,6 +32,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <AnalyticsPageView />
+        </Suspense>
         <Navbar />
         {children}
       </body>
