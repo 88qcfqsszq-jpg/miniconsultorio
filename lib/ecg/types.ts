@@ -12,10 +12,14 @@ export interface ECGLeadPosition {
 export interface ECGPlacementResult {
   eletrodosCorretos: ECGLead[]
   eletrodosAusentes: ECGLead[]
+  eletrodosProximos: ECGLead[]
   eletrodosMalPosicionados: ECGLead[]
   percentualAcerto: number
   exameTecnicamenteAdequado: boolean
   mensagensTecnicas: string[]
+  temInversaoMembros: boolean
+  temPosicionamentoAltoV1V2: boolean
+  temTrocaOuDesordemPrecordiais: boolean
 }
 
 export interface ECGAchado {
@@ -37,6 +41,7 @@ export interface ECGPattern {
   derivacoesComSupra: string[]
   derivacoesComInfra: string[]
   derivacoesComInversaoT: string[]
+  derivacoesComQPatologica: string[]
   observacoesClinicas: string[]
 }
 
@@ -53,4 +58,5 @@ export interface ECGZone {
   x: { min: number; max: number }
   y: { min: number; max: number }
   descricao: string
+  tolerancia: number
 }
