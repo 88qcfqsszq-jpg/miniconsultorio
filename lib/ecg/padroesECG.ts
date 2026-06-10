@@ -20,6 +20,7 @@ export const PADROES_ECG: ECGPattern[] = [
     derivacoesComInversaoT: [],
     derivacoesComQPatologica: [],
     observacoesClinicas: ['ECG normal de repouso'],
+    imagem: '/images/ecg/01_ecg_normal.png',
   },
   {
     id: 'angina_estavel',
@@ -47,6 +48,7 @@ export const PADROES_ECG: ECGPattern[] = [
       'Sintomas desencadeados por esforço, aliviados em repouso',
       'Prova de esforço para confirmação',
     ],
+    imagem: '/images/ecg/02_angina_estavel.png',
   },
   {
     id: 'angina_instavel',
@@ -72,6 +74,7 @@ export const PADROES_ECG: ECGPattern[] = [
       'Hospitalização recomendada',
       'Cinecoronariografia urgente',
     ],
+    imagem: '/images/ecg/03_angina_instavel.png',
   },
   {
     id: 'iam_sem_supra',
@@ -97,6 +100,7 @@ export const PADROES_ECG: ECGPattern[] = [
       'Elevar vigilância clínica',
       'Angiocoronariografia recomendada',
     ],
+    imagem: '/images/ecg/04_iam_sem_supra_nstemi.png',
   },
   {
     id: 'iam_com_supra_inferior',
@@ -122,6 +126,7 @@ export const PADROES_ECG: ECGPattern[] = [
       'Avaliar envolvimento de ventrículo direito',
       'Urgência: Intervenção coronária percutânea',
     ],
+    imagem: '/images/ecg/05_iam_com_supra_inferior.png',
   },
   {
     id: 'iam_com_supra_anterior',
@@ -147,6 +152,7 @@ export const PADROES_ECG: ECGPattern[] = [
       'Risco de insuficiência cardíaca e arritmias',
       'Urgência: Reperfusão imediata indicada',
     ],
+    imagem: '/images/ecg/06_iam_com_supra_anterior.png',
   },
   {
     id: 'pericardite_aguda',
@@ -176,6 +182,7 @@ export const PADROES_ECG: ECGPattern[] = [
       'Atrito pericárdico ao exame',
       'Ecocardiografia para avaliar derrame',
     ],
+    imagem: '/images/ecg/07_pericardite_aguda.png',
   },
   {
     id: 'fibrilacao_atrial',
@@ -202,6 +209,7 @@ export const PADROES_ECG: ECGPattern[] = [
       'Anticoagulação recomendada',
       'Controle da frequência cardíaca necessário',
     ],
+    imagem: '/images/ecg/08_fibrilacao_atrial.png',
   },
   {
     id: 'tep_sobrecarga_direita',
@@ -228,6 +236,7 @@ export const PADROES_ECG: ECGPattern[] = [
       'Angio-TC de pulmão urgente',
       'Avaliação de risco para trombose',
     ],
+    imagem: '/images/ecg/09_tep_sobrecarga_vd.png',
   },
   {
     id: 'hve_has',
@@ -258,6 +267,7 @@ export const PADROES_ECG: ECGPattern[] = [
       'Investigar lesão de órgão-alvo',
       'Ecocardiografia para avaliar função sistólica',
     ],
+    imagem: '/images/ecg/10_hve_has.png',
   },
 ]
 

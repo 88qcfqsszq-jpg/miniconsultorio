@@ -43,6 +43,7 @@ export interface ECGPattern {
   derivacoesComInversaoT: string[]
   derivacoesComQPatologica: string[]
   observacoesClinicas: string[]
+  imagem?: string
 }
 
 export interface ECGData {
