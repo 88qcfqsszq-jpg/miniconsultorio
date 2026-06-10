@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { ECGLeadPosition, ECGLead } from '@/lib/ecg/types'
 import { validarPosicionamentoECG } from '@/lib/ecg/validarEletrodos'
 import { obterPadrao, PADROES_ECG } from '@/lib/ecg/padroesECG'
@@ -87,6 +87,21 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
   }
 
   const eletrodosColocados = eletrodos.filter((e) => e.isPlaced).length
+
+  // Fechar com tecla ESC
+  useEffect(() => {
+    if (!onClose) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        onClose()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [onClose])
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">

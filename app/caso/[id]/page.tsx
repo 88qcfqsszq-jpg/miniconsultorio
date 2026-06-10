@@ -492,7 +492,7 @@ function CasoPageContent() {
               </div>
             )}
 
-            {menuAtivo === "ecg" && <SimuladorECG padrao={caso?.ecg?.padrao} />}
+            {menuAtivo === "ecg" && <SimuladorECG padrao={caso?.ecg?.padrao} onClose={() => setMenuAtivo("paciente")} />}
           </div>
 
           {/* Coluna 3: Painel Direito Fixo (Avaliação Clínica) */}
