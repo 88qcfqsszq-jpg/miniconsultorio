@@ -17,7 +17,7 @@ export default function PernasInterativas({
       {/* Vista Frontal */}
       <MapaImagemMI
         titulo="Frontal"
-        src="/images/boneco/pernas_frontal_realista.png"
+        src="/images/boneco/pernas_frontal_base_hotspots.png"
         regioes={REGIOES_FRONTAIS_MEMBROS_INFERIORES}
         regiaoSelecionada={regiaoSelecionada}
         onSelecionarRegiao={onSelecionarRegiao}
@@ -26,7 +26,7 @@ export default function PernasInterativas({
       {/* Vista Posterior */}
       <MapaImagemMI
         titulo="Posterior"
-        src="/images/boneco/pernas_posterior_realista.png"
+        src="/images/boneco/pernas_posterior_hotspot.png"
         regioes={REGIOES_POSTERIORES_MEMBROS_INFERIORES}
         regiaoSelecionada={regiaoSelecionada}
         onSelecionarRegiao={onSelecionarRegiao}

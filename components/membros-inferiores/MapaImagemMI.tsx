@@ -35,7 +35,8 @@ export default function MapaImagemMI({
         <img
           src={src}
           alt={`Membros inferiores - ${titulo}`}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 w-full h-full"
+          style={{ objectFit: 'contain' }}
           onError={(e) => {
             // Fallback se imagem não carregar
             e.currentTarget.style.display = 'none'
@@ -50,7 +51,7 @@ export default function MapaImagemMI({
             title={regiao.label}
             aria-label={regiao.label}
             onClick={() => handleRegiao(regiao)}
-            className={`absolute rounded-xl border transition-all cursor-pointer ${
+            className={`absolute z-10 rounded-xl border transition-all cursor-pointer ${
               regiaoSelecionada === regiao.id
                 ? 'border-blue-500 bg-blue-500/25 shadow-md'
                 : 'border-transparent hover:border-blue-400/50 hover:bg-blue-400/15'
