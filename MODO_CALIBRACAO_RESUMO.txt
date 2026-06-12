@@ -1,122 +1,129 @@
 ═════════════════════════════════════════════════════════════════════════════
-  🎯 MODO CALIBRAÇÃO DE HOTSPOTS DO LACTENTE — RESUMO RÁPIDO
+  🎯 MODO CALIBRAÇÃO SEQUENCIAL — RESUMO RÁPIDO
 ═════════════════════════════════════════════════════════════════════════════
 
-ARQUIVO A MODIFICAR:
+ARQUIVO:
   components/pediatria/PacientePediatricoVisualAjustado.tsx
 
-1️⃣  ATIVAR O MODO:
+1️⃣  ATIVAR:
     ┌─────────────────────────────────────────────────────────────┐
-    │ const DEBUG_HOTSPOT_CALIBRATION = true;  (linha 16)         │
+    │ const DEBUG_HOTSPOT_CALIBRATION = true;                     │
     └─────────────────────────────────────────────────────────────┘
 
-2️⃣  ENTRAR NO APP:
+2️⃣  INICIAR:
     • npm run dev
-    • Acesse http://localhost:3000
-    • Escolha um caso pediátrico (lactente)
+    • Acesse um caso pediátrico (lactente)
     • Clique em "Exame Físico Pediátrico Visual"
+    • Overlay de calibração ativa automaticamente
 
-3️⃣  CALIBRAR OS HOTSPOTS:
+3️⃣  CALIBRAR SEQUENCIALMENTE (1 hotspot de cada vez):
 
-    Para cada um dos 10 boxes textuais:
+    Sistema mostra:
+      ┌─ Barra de progresso (ex: 2/10)
+      ├─ Card central: "Cabeça / Perímetro Cefálico"
+      ├─ Instruções: clique superior esquerdo / inferior direito
+      ├─ Overlay com cursor em crosshair
+      └─ Botões: ↻ Refazer | ⬅ Anterior | 📋 Copiar Array (ao final)
+
+4️⃣  PARA CADA HOTSPOT:
+
+    1. CLIQUE 1: canto superior esquerdo do box textual
+       → Bolinha amarela aparece
+       → Card mostra: "✓ Primeiro clique OK..."
+
+    2. CLIQUE 2: canto inferior direito do box textual
+       → Sistema valida o tamanho
+
+       ✅ Se OK:
+          • Retângulo amarelo → verde
+          • Avança automaticamente ao próximo
+
+       ⚠️  Se área muito grande:
+          • Aviso em vermelho: "Área muito grande!"
+          • Cliques descartados
+          • Clique novamente
+
+5️⃣  BOTÕES DISPONÍVEIS:
+
+    ┌─────────────────────────┬──────────────────────────────────┐
+    │ ↻ Refazer               │ Limpa cliques, tenta novamente   │
+    │ ⬅ Anterior (se não 1º)  │ Volta hotspot anterior (desfaz)  │
+    │ 📋 Copiar Array         │ Copia array inteiro (ao final)   │
+    └─────────────────────────┴──────────────────────────────────┘
+
+6️⃣  ATALHOS:
+
+    ESC: Limpa cliques atuais (igual a Refazer)
+
+7️⃣  AO TERMINAR OS 10 HOTSPOTS:
 
     ┌─────────────────────────────────────────────────────────────┐
-    │  CLIQUE 1: canto superior esquerdo do box                   │
-    │  CLIQUE 2: canto inferior direito do box                    │
+    │ Card mostra: 🎉 Calibração Completa!                        │
     │                                                              │
-    │  ✓ Um retângulo verde aparece automaticamente                │
-    │  ✓ Console exibe as coordenadas em % (copy/paste ready)    │
+    │ Clique: 📋 Copiar Array (Clipboard)                         │
+    │                                                              │
+    │ Array fica pronto no console (F12) e clipboard              │
     └─────────────────────────────────────────────────────────────┘
 
-    Ordem recomendada (top-left → bottom-right):
-      1. cabeca_perimetro      6. face_olhos
-      2. orofaringe            7. pescoco_linfonodos
-      3. torax_respiratorio    8. precordio
-      4. abdome                9. baco
-      5. figado               10. membros_perfusao
+8️⃣  ATUALIZAR O CÓDIGO:
 
-4️⃣  COLETAR AS COORDENADAS:
-
-    No Console do DevTools (F12), você verá:
-
-    ┌─────────────────────────────────────────────────────────────┐
-    │ {                                                             │
-    │   "id": "PREENCHER_ID",                                      │
-    │   "label": "PREENCHER_LABEL",                                │
-    │   "left": "25.3%",                                           │
-    │   "top": "15.2%",                                            │
-    │   "width": "22.5%",                                          │
-    │   "height": "8.7%"                                           │
-    │ }                                                             │
-    └─────────────────────────────────────────────────────────────┘
-
-    ✓ Copie o JSON completo
-    ✓ Anote em um arquivo (ou keep no terminal)
-
-5️⃣  LIMPAR ENTRE CALIBRAÇÕES:
-    ┌─────────────────────────────────────────────────────────────┐
-    │  Pressione ESC (ou clique "Limpar (ESC)")                   │
-    │  para resetar e calibrar o próximo hotspot                  │
-    └─────────────────────────────────────────────────────────────┘
-
-6️⃣  ATUALIZAR O CÓDIGO:
-
-    Após calibrar todos os 10, atualize o array:
-
-    Arquivo: components/pediatria/PacientePediatricoVisualAjustado.tsx
+    Cole o array no arquivo:
 
     ┌─────────────────────────────────────────────────────────────┐
     │ const LACTENTE_BOX_HOTSPOTS = [                              │
     │   {                                                           │
-    │     id: 'cabeca_perimetro',                                  │
+    │     id: 'cabeca',                                            │
     │     label: 'Cabeça / Perímetro Cefálico',                   │
-    │     left: '25.3%',      // ← SEUS VALORES CALIBRADOS        │
-    │     top: '15.2%',       // ← SEUS VALORES CALIBRADOS        │
-    │     width: '22.5%',     // ← SEUS VALORES CALIBRADOS        │
-    │     height: '8.7%',     // ← SEUS VALORES CALIBRADOS        │
+    │     left: 2.5,      // ← valores calibrados                 │
+    │     top: 8.5,       // ← sem %, números puros              │
+    │     width: 22.3,    // ← copiados do array                  │
+    │     height: 9.7,    // ← você recebe                        │
     │   },                                                          │
-    │   // ... repita para os outros 9 hotspots                   │
+    │   // ... 9 hotspots a mais                                  │
     │ ];                                                            │
     └─────────────────────────────────────────────────────────────┘
 
-7️⃣  VALIDAR VISUALMENTE:
+9️⃣  VALIDAR:
+
+    Mantenha as constantes:
+      DEBUG_HOTSPOT_CALIBRATION = true;
+      DEBUG_HOTSPOTS_PEDIATRIA = true;
+
+    Recarregue: você verá retângulos VERMELHOS sobre cada box
+    Deve bater EXATAMENTE com as áreas calibradas
+
+    Se desalinhado: use ⬅ Anterior para recalibrar
+
+🔟  FINALIZAR:
 
     ┌─────────────────────────────────────────────────────────────┐
-    │ Mantenha:                                                    │
-    │   const DEBUG_HOTSPOT_CALIBRATION = true;                   │
-    │   const DEBUG_HOTSPOTS_PEDIATRIA = true;                    │
-    │                                                              │
-    │ Recarregue (Cmd+R / Ctrl+R)                                  │
-    │                                                              │
-    │ Você deve ver retângulos VERMELHOS sobre os boxes textuais  │
-    │ exatamente onde calibrou                                     │
-    └─────────────────────────────────────────────────────────────┘
-
-8️⃣  FINALIZAR:
-
-    Quando tudo estiver correto:
-
-    ┌─────────────────────────────────────────────────────────────┐
-    │ const DEBUG_HOTSPOT_CALIBRATION = false;  // Desativar      │
-    │ const DEBUG_HOTSPOTS_PEDIATRIA = false;   // Desativar      │
+    │ const DEBUG_HOTSPOT_CALIBRATION = false;                    │
+    │ const DEBUG_HOTSPOTS_PEDIATRIA = false;                     │
     │                                                              │
     │ npm run build                                                │
     │ npm run dev                                                  │
     │                                                              │
-    │ Teste os cliques em desktop e mobile                        │
+    │ Teste cliques (hotspots invisíveis funcionam)               │
+    │ Teste mobile também                                         │
     └─────────────────────────────────────────────────────────────┘
 
 ═════════════════════════════════════════════════════════════════════════════
 
-CARACTERÍSTICAS DO MODO:
-  ✓ Overlay transparente sobre a imagem
-  ✓ Cursor em crosshair para precisão
-  ✓ Bolinha amarela marca cada clique
-  ✓ Retângulo verde mostra a área calibrada
-  ✓ Cálculo automático de percentuais (responsive)
-  ✓ JSON pronto para copiar no console
-  ✓ ESC limpa e permite próxima calibração
-  ✓ Usa getBoundingClientRect() — pega tamanho real da imagem
+CARACTERÍSTICAS:
+  ✓ Calibração sequencial (um hotspot de cada vez)
+  ✓ Barra de progresso (X/10)
+  ✓ Card central com instruções claras
+  ✓ Validação automática de tamanho (rejeita >40% x >20%)
+  ✓ Retângulos verdes (calibrados) sempre visíveis como referência
+  ✓ Bolinhas amarelas marcam os cliques
+  ✓ Botões Refazer / Anterior / Copiar Array
+  ✓ Array final pronto para copiar ao final
+  ✓ Usa getBoundingClientRect() — precisão 100%
+
+SE ALGO DER ERRADO:
+  • Recarregue página para resetar tudo
+  • Use ⬅ Anterior para voltar e recalibrar
+  • Abra DevTools (F12) para ver logs
 
 DOCUMENTAÇÃO COMPLETA:
   CALIBRACAO_HOTSPOTS_LACTENTE.md

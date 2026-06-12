@@ -15,6 +15,29 @@ const DEBUG_HOTSPOTS_PEDIATRIA = false;
 // Modo de calibração: ativa overlay para capturar coordenadas reais da imagem
 const DEBUG_HOTSPOT_CALIBRATION = true;
 
+// Lista sequencial de hotspots a calibrar
+const calibrationTargets = [
+  { id: 'cabeca', label: 'Cabeça / Perímetro Cefálico' },
+  { id: 'olhos_face', label: 'Olhos / Face' },
+  { id: 'orofaringe', label: 'Orofaringe' },
+  { id: 'pescoco_linfonodos', label: 'Pescoço / Linfonodos' },
+  { id: 'torax_respiratorio', label: 'Tórax Respiratório' },
+  { id: 'precordio', label: 'Precórdio' },
+  { id: 'abdome', label: 'Abdome' },
+  { id: 'figado', label: 'Fígado / Hipocôndrio D' },
+  { id: 'baco', label: 'Baço / Hipocôndrio E' },
+  { id: 'membros_perfusao', label: 'Membros / Perfusão / Pulsos / TEC' },
+];
+
+interface CalibrationResult {
+  id: string;
+  label: string;
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
+
 // Hotspots invisíveis sobre os boxes textuais do lactente
 const LACTENTE_BOX_HOTSPOTS = [
   {
@@ -124,14 +147,11 @@ export default function PacientePediatricoVisualAjustado({
   const [regioEmHover, setRegioEmHover] = useState<RegiaoPediatricaId | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
-  // Estado para calibração de hotspots
-  const [calibracaoCliques, setCalibracaoCliques] = useState<CalibracaoClique[]>([]);
-  const [calibracaoResultado, setCalibracaoResultado] = useState<{
-    left: number;
-    top: number;
-    width: number;
-    height: number;
-  } | null>(null);
+  // Estado para calibração sequencial de hotspots
+  const [currentCalibrationIndex, setCurrentCalibrationIndex] = useState(0);
+  const [calibrationClicks, setCalibrationClicks] = useState<CalibracaoClique[]>([]);
+  const [calibrationResults, setCalibrationResults] = useState<CalibrationResult[]>([]);
+  const [calibrationError, setCalibrationError] = useState<string | null>(null);
 
   const imagemPath = obterImagemPacientePediatrico(faixaEtaria);
   const descricaoFaixa = obterDescricaoFaixaEtaria(faixaEtaria);
@@ -149,83 +169,114 @@ export default function PacientePediatricoVisualAjustado({
     setErroImagem(true);
   }, [imagemPath]);
 
-  // Handler de calibração: captura cliques sobre a imagem
-  const handleCalibracaoClique = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+  // Handler de calibração sequencial
+  const handleCalibrationClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     if (!DEBUG_HOTSPOT_CALIBRATION || !imageRef.current) return;
+    if (currentCalibrationIndex >= calibrationTargets.length) return;
 
     const rect = imageRef.current.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
 
-    const novoClique: CalibracaoClique = { x, y, clientX: event.clientX, clientY: event.clientY };
-    const cliqueAtual = [...calibracaoCliques, novoClique];
+    const newClick: CalibracaoClique = { x, y, clientX: event.clientX, clientY: event.clientY };
+    const currentClicks = [...calibrationClicks, newClick];
 
-    console.log(`🔵 Clique ${cliqueAtual.length}: x=${x.toFixed(1)}, y=${y.toFixed(1)} (px)`);
+    console.log(`🔵 ${calibrationTargets[currentCalibrationIndex].label} - Clique ${currentClicks.length}: x=${x.toFixed(1)}, y=${y.toFixed(1)} (px)`);
 
-    if (cliqueAtual.length === 2) {
+    if (currentClicks.length === 2) {
       // Calcular coordenadas percentuais
-      const x1 = cliqueAtual[0].x;
-      const y1 = cliqueAtual[0].y;
-      const x2 = cliqueAtual[1].x;
-      const y2 = cliqueAtual[1].y;
+      const x1 = currentClicks[0].x;
+      const y1 = currentClicks[0].y;
+      const x2 = currentClicks[1].x;
+      const y2 = currentClicks[1].y;
 
-      const left = Math.min(x1, x2);
-      const top = Math.min(y1, y2);
-      const width = Math.abs(x2 - x1);
-      const height = Math.abs(y2 - y1);
+      const leftPx = Math.min(x1, x2);
+      const topPx = Math.min(y1, y2);
+      const widthPx = Math.abs(x2 - x1);
+      const heightPx = Math.abs(y2 - y1);
 
-      const leftPercent = (left / rect.width) * 100;
-      const topPercent = (top / rect.height) * 100;
-      const widthPercent = (width / rect.width) * 100;
-      const heightPercent = (height / rect.height) * 100;
+      const leftPercent = (leftPx / rect.width) * 100;
+      const topPercent = (topPx / rect.height) * 100;
+      const widthPercent = (widthPx / rect.width) * 100;
+      const heightPercent = (heightPx / rect.height) * 100;
 
-      const resultado = {
-        left: leftPercent,
-        top: topPercent,
-        width: widthPercent,
-        height: heightPercent,
+      // Validar tamanho (impede calibração da imagem inteira)
+      if (widthPercent > 40 || heightPercent > 20) {
+        setCalibrationError('⚠️ Área muito grande! Clique apenas nos cantos do box textual.');
+        console.warn('❌ Área rejeitada: W=%.1f%% H=%.1f%% (máx: 40%% x 20%%)', widthPercent, heightPercent);
+        setCalibrationClicks([]);
+        return;
+      }
+
+      setCalibrationError(null);
+
+      // Salvar resultado
+      const target = calibrationTargets[currentCalibrationIndex];
+      const result: CalibrationResult = {
+        id: target.id,
+        label: target.label,
+        left: parseFloat(leftPercent.toFixed(1)),
+        top: parseFloat(topPercent.toFixed(1)),
+        width: parseFloat(widthPercent.toFixed(1)),
+        height: parseFloat(heightPercent.toFixed(1)),
       };
 
-      setCalibracaoResultado(resultado);
+      const newResults = [...calibrationResults, result];
+      setCalibrationResults(newResults);
 
-      // Imprimir no console em formato pronto para copiar
       console.log('%c✅ HOTSPOT CALIBRADO', 'background: #10b981; color: white; padding: 5px; border-radius: 3px; font-weight: bold;');
-      const jsonFormatado = {
-        id: 'PREENCHER_ID',
-        label: 'PREENCHER_LABEL',
-        left: `${leftPercent.toFixed(1)}%`,
-        top: `${topPercent.toFixed(1)}%`,
-        width: `${widthPercent.toFixed(1)}%`,
-        height: `${heightPercent.toFixed(1)}%`,
-      };
-      console.log(JSON.stringify(jsonFormatado, null, 2));
-      console.log('Clique para copiar o JSON acima 👆');
+      console.log(JSON.stringify(result, null, 2));
 
-      // Resetar para próxima calibração
-      setCalibracaoCliques([]);
+      // Resetar cliques e avançar para próximo hotspot
+      setCalibrationClicks([]);
+      setCurrentCalibrationIndex(currentCalibrationIndex + 1);
     } else {
-      setCalibracaoCliques(cliqueAtual);
+      setCalibrationClicks(currentClicks);
     }
-  }, [calibracaoCliques]);
+  }, [currentCalibrationIndex, calibrationClicks, calibrationResults]);
 
-  // Limpar calibração com ESC
-  const handleLimparCalibacao = useCallback(() => {
-    setCalibracaoCliques([]);
-    setCalibracaoResultado(null);
-    console.log('🔄 Calibração limpa.');
-  }, []);
+  // Refazer hotspot atual
+  const handleRetakeCurrentHotspot = useCallback(() => {
+    setCalibrationClicks([]);
+    setCalibrationError(null);
+    console.log(`🔄 Refazendo: ${calibrationTargets[currentCalibrationIndex].label}`);
+  }, [currentCalibrationIndex]);
 
-  // Detectar tecla ESC para limpar calibração
+  // Voltar para hotspot anterior
+  const handlePreviousHotspot = useCallback(() => {
+    if (currentCalibrationIndex === 0) return;
+    const newResults = [...calibrationResults];
+    newResults.pop();
+    setCalibrationResults(newResults);
+    setCalibrationClicks([]);
+    setCalibrationError(null);
+    setCurrentCalibrationIndex(currentCalibrationIndex - 1);
+    console.log(`⬅️ Voltando para: ${calibrationTargets[currentCalibrationIndex - 1].label}`);
+  }, [currentCalibrationIndex, calibrationResults]);
+
+  // Copiar array final para clipboard
+  const handleCopyFinalArray = useCallback(() => {
+    if (calibrationResults.length === 0) return;
+
+    const arrayStr = `const lactenteHotspots = ${JSON.stringify(calibrationResults, null, 2)};`;
+    navigator.clipboard.writeText(arrayStr);
+    console.log('%c📋 Array copiado para clipboard!', 'background: #3b82f6; color: white; padding: 5px; border-radius: 3px; font-weight: bold;');
+    console.log(arrayStr);
+  }, [calibrationResults]);
+
+  // Detectar tecla ESC para limpar cliques atuais
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && DEBUG_HOTSPOT_CALIBRATION) {
-        handleLimparCalibacao();
+      if (event.key === 'Escape' && DEBUG_HOTSPOT_CALIBRATION && calibrationClicks.length > 0) {
+        setCalibrationClicks([]);
+        setCalibrationError(null);
+        console.log('🔄 Cliques atuais limpos.');
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleLimparCalibacao]);
+  }, [calibrationClicks]);
 
   // Ordenar regiões por zIndex para renderização correta
   const regioesOrdenadas = [...regioes].sort((a, b) => a.zIndex - b.zIndex);
@@ -250,7 +301,7 @@ export default function PacientePediatricoVisualAjustado({
       {/* Contêiner de imagem com hotspots */}
       <div className="relative flex-1 flex items-center justify-center p-4 overflow-hidden">
         {/* Imagem do paciente pediátrico */}
-        <div className="relative w-full h-full max-w-xs" onClick={handleCalibracaoClique}>
+        <div className="relative w-full h-full max-w-xs" onClick={handleCalibrationClick}>
           {/* Imagem com tratamento de erro */}
           <img
             ref={imageRef}
@@ -278,22 +329,124 @@ export default function PacientePediatricoVisualAjustado({
             </div>
           )}
 
-          {/* Overlay de calibração de hotspots */}
+          {/* Overlay de calibração sequencial */}
           {DEBUG_HOTSPOT_CALIBRATION && imagemCarregada && !erroImagem && (
-            <div className="absolute inset-0 bg-black/5 cursor-crosshair flex items-center justify-center">
-              {/* Instruções */}
-              <div className="absolute top-2 left-2 right-2 bg-white/95 px-3 py-2 rounded text-xs text-slate-700 shadow-sm z-50">
-                <div className="font-semibold text-amber-600">🎯 Modo Calibração</div>
-                <div className="text-slate-600 mt-1">
-                  Clique 1: canto superior esquerdo | Clique 2: canto inferior direito
+            <div className="absolute inset-0 bg-black/5 cursor-crosshair flex flex-col">
+              {/* Header com progresso */}
+              <div className="bg-white/98 px-4 py-3 border-b border-slate-200 shadow-sm z-50">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="font-semibold text-blue-700">
+                    🎯 Calibração de Hotspots
+                  </div>
+                  <div className="text-sm font-mono text-slate-600">
+                    {currentCalibrationIndex}/{calibrationTargets.length}
+                  </div>
                 </div>
-                {calibracaoCliques.length === 1 && (
-                  <div className="text-blue-600 mt-1 font-medium">✓ Primeiro clique capturado. Clique novamente para finalizar.</div>
+                <div className="w-full bg-slate-200 rounded-full h-1.5">
+                  <div
+                    className="bg-blue-500 h-1.5 rounded-full transition-all"
+                    style={{ width: `${(currentCalibrationIndex / calibrationTargets.length) * 100}%` }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Conteúdo central */}
+              <div className="flex-1 flex items-center justify-center">
+                {currentCalibrationIndex < calibrationTargets.length ? (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/98 px-6 py-4 rounded-lg shadow-lg z-50 text-center max-w-sm">
+                    <div className="text-lg font-bold text-slate-800 mb-2">
+                      {calibrationTargets[currentCalibrationIndex].label}
+                    </div>
+                    <div className="text-sm text-slate-600 mb-3">
+                      {calibrationClicks.length === 0 && 'Clique no canto SUPERIOR ESQUERDO do box textual'}
+                      {calibrationClicks.length === 1 && (
+                        <span className="text-blue-600 font-medium">
+                          ✓ Primeiro clique OK. Agora clique no canto INFERIOR DIREITO
+                        </span>
+                      )}
+                    </div>
+                    {calibrationError && (
+                      <div className="text-xs bg-red-50 text-red-700 px-3 py-2 rounded mb-3 border border-red-200">
+                        {calibrationError}
+                      </div>
+                    )}
+                    <div className="flex gap-2 justify-center">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRetakeCurrentHotspot();
+                        }}
+                        className="px-3 py-1.5 text-xs bg-amber-500 hover:bg-amber-600 text-white rounded font-medium"
+                      >
+                        ↻ Refazer
+                      </button>
+                      {currentCalibrationIndex > 0 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handlePreviousHotspot();
+                          }}
+                          className="px-3 py-1.5 text-xs bg-slate-500 hover:bg-slate-600 text-white rounded font-medium"
+                        >
+                          ⬅ Anterior
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-50 px-6 py-4 rounded-lg shadow-lg z-50 text-center max-w-sm border-2 border-green-400">
+                    <div className="text-2xl mb-2">🎉</div>
+                    <div className="text-lg font-bold text-green-800 mb-2">
+                      Calibração Completa!
+                    </div>
+                    <div className="text-sm text-green-700 mb-4">
+                      {calibrationResults.length} hotspots calibrados com sucesso
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCopyFinalArray();
+                      }}
+                      className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded font-medium text-sm mb-2"
+                    >
+                      📋 Copiar Array (Clipboard)
+                    </button>
+                    <div className="text-xs text-green-600 mt-2">
+                      Array também está disponível no Console do DevTools (F12)
+                    </div>
+                  </div>
                 )}
               </div>
 
-              {/* Marcadores dos cliques */}
-              {calibracaoCliques.map((clique, idx) => {
+              {/* Retângulos já calibrados (verde) */}
+              {calibrationResults.map((result) => (
+                <div
+                  key={result.id}
+                  className="absolute border-2 border-green-500 bg-green-500/5 pointer-events-none"
+                  style={{
+                    left: `${result.left}%`,
+                    top: `${result.top}%`,
+                    width: `${result.width}%`,
+                    height: `${result.height}%`,
+                  }}
+                ></div>
+              ))}
+
+              {/* Retângulo em marcação (amarelo) */}
+              {calibrationClicks.length === 2 && currentCalibrationIndex < calibrationTargets.length && (
+                <div
+                  className="absolute border-2 border-amber-500 bg-amber-500/10 pointer-events-none"
+                  style={{
+                    left: `${(Math.min(calibrationClicks[0].x, calibrationClicks[1].x) / (imageRef.current?.getBoundingClientRect().width || 1)) * 100}%`,
+                    top: `${(Math.min(calibrationClicks[0].y, calibrationClicks[1].y) / (imageRef.current?.getBoundingClientRect().height || 1)) * 100}%`,
+                    width: `${(Math.abs(calibrationClicks[1].x - calibrationClicks[0].x) / (imageRef.current?.getBoundingClientRect().width || 1)) * 100}%`,
+                    height: `${(Math.abs(calibrationClicks[1].y - calibrationClicks[0].y) / (imageRef.current?.getBoundingClientRect().height || 1)) * 100}%`,
+                  }}
+                ></div>
+              )}
+
+              {/* Marcadores dos cliques (bolinhas) */}
+              {calibrationClicks.map((clique, idx) => {
                 if (!imageRef.current) return null;
                 const rect = imageRef.current.getBoundingClientRect();
                 const percentLeft = (clique.x / rect.width) * 100;
@@ -314,38 +467,11 @@ export default function PacientePediatricoVisualAjustado({
                 );
               })}
 
-              {/* Retângulo calibrado */}
-              {calibracaoResultado && imageRef.current && (
-                <>
-                  <div
-                    className="absolute border-2 border-green-500 bg-green-500/10 pointer-events-none"
-                    style={{
-                      left: `${calibracaoResultado.left}%`,
-                      top: `${calibracaoResultado.top}%`,
-                      width: `${calibracaoResultado.width}%`,
-                      height: `${calibracaoResultado.height}%`,
-                    }}
-                  ></div>
-                  <div className="absolute bottom-2 right-2 bg-green-100 px-3 py-2 rounded text-xs text-green-800 shadow-sm z-50 font-mono">
-                    <div className="font-semibold">✅ Calibrado!</div>
-                    <div className="mt-1 text-green-700">
-                      L: {calibracaoResultado.left.toFixed(1)}% | T: {calibracaoResultado.top.toFixed(1)}%
-                    </div>
-                    <div className="text-green-700">
-                      W: {calibracaoResultado.width.toFixed(1)}% | H: {calibracaoResultado.height.toFixed(1)}%
-                    </div>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleLimparCalibacao();
-                      }}
-                      className="mt-2 w-full bg-green-600 hover:bg-green-700 text-white text-xs py-1 rounded"
-                    >
-                      Limpar (ESC)
-                    </button>
-                  </div>
-                </>
-              )}
+              {/* Info footer */}
+              <div className="bg-white/98 px-4 py-2 border-t border-slate-200 text-xs text-slate-600 text-center z-50">
+                {calibrationClicks.length > 0 && 'ESC limpa os cliques atuais'}
+                {calibrationClicks.length === 0 && 'Clique para começar'}
+              </div>
             </div>
           )}
 

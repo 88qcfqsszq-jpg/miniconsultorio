@@ -1,4 +1,4 @@
-# 🎯 Modo Calibração de Hotspots do Lactente
+# 🎯 Modo Calibração Sequencial de Hotspots do Lactente
 
 ## Ativação
 
@@ -9,7 +9,7 @@ const DEBUG_HOTSPOT_CALIBRATION = false;  // ❌ Desativado
 const DEBUG_HOTSPOT_CALIBRATION = true;   // ✅ Ativado
 ```
 
-Quando ativado, um overlay aparecerá sobre a imagem do lactente no modal de exame físico.
+Quando ativado, um **sistema guiado** aparecerá calibrando hotspots sequencialmente.
 
 ---
 
@@ -19,138 +19,130 @@ Quando ativado, um overlay aparecerá sobre a imagem do lactente no modal de exa
 1. Acesse um caso pediátrico (lactente)
 2. Clique no botão "Exame Físico Pediátrico Visual"
 3. O modal abre com a imagem do lactente
+4. O overlay de calibração ativa automaticamente
 
-### Passo 2: Calibrar um Hotspot
-Quando o modo calibração está ativo, você verá:
-- **Overlay transparente** sobre a imagem
-- **Instruções** no canto superior esquerdo
-- **Cursor em crosshair** (cruz)
+### Passo 2: Calibração Guiada (1 hotspot por vez)
 
-**Procedimento:**
-1. **Primeiro clique**: clique no **canto superior esquerdo** do box textual que você quer mapear
-   - Uma bolinha amarela aparecerá marcando o ponto
-   - Console mostrará: `🔵 Clique 1: x=XXX, y=YYY (px)`
+Você verá:
+- **Barra de progresso** no topo (ex: 1/10)
+- **Card central** mostrando qual hotspot está sendo calibrado
+- **Overlay transparente** sobre a imagem com cursor em crosshair
+- **Bolinhas amarelas** marcando os cliques
 
-2. **Segundo clique**: clique no **canto inferior direito** do mesmo box textual
-   - Outra bolinha amarela aparecerá
-   - Um **retângulo verde** será desenhado automaticamente cobrindo a área
-   - Console mostrará: `✅ HOTSPOT CALIBRADO` com o JSON formatado
+**Procedimento para cada hotspot:**
 
-### Passo 3: Copiar as Coordenadas
-O console mostrará algo assim:
+1. **Primeiro clique**: clique no **canto SUPERIOR ESQUERDO** do box textual
+   - Card mostra: "Clique no canto SUPERIOR ESQUERDO do box textual"
+   - Uma bolinha amarela marca o ponto
+   - Console: `🔵 [nome do hotspot] - Clique 1: x=XXX, y=YYY (px)`
 
-```json
-{
-  "id": "PREENCHER_ID",
-  "label": "PREENCHER_LABEL",
-  "left": "25.3%",
-  "top": "15.2%",
-  "width": "22.5%",
-  "height": "8.7%"
-}
-```
+2. **Segundo clique**: clique no **canto INFERIOR DIREITO** do mesmo box textual
+   - Card mostra: "✓ Primeiro clique OK. Agora clique no canto INFERIOR DIREITO"
+   - Outra bolinha amarela marca o segundo ponto
+   - Um **retângulo amarelo** mostra a área sendo marcada
+   - Sistema valida o tamanho automaticamente
 
-**Copie esse JSON** e anote em um arquivo.
+3. **Validação automática**:
+   - Se a área for muito grande (>40% largura ou >20% altura):
+     - ⚠️ Card mostra: "Área muito grande! Clique apenas nos cantos do box textual."
+     - Os cliques são descartados
+     - Você pode tentar novamente
+   - Se a área for válida:
+     - ✅ Console mostra: `HOTSPOT CALIBRADO`
+     - Retângulo fica **VERDE** (confirmado)
+     - Sistema **avança automaticamente** para o próximo hotspot
 
-### Passo 4: Limpar a Calibração
-Pressione **ESC** ou clique no botão "Limpar (ESC)" para resetar e calibrar o próximo hotspot.
+### Passo 3: Navegar na Calibração
 
----
+Durante a calibração, você tem três botões:
 
-## IDs a Calibrar (10 hotspots)
+| Botão | Função |
+|-------|--------|
+| **↻ Refazer** | Limpa os cliques atuais, permite tentar novamente o hotspot atual |
+| **⬅ Anterior** | Volta para o hotspot anterior (desfaz a última calibração) |
+| **📋 Copiar Array** | Aparece ao final — copia o array completo para clipboard |
 
-Calibre nesta ordem para cobrir toda a imagem do lactente (esquerda → direita, de cima para baixo):
-
-### Coluna Esquerda
-1. **`cabeca_perimetro`**  
-   Label: "Cabeça / Perímetro Cefálico"  
-   Localização: Box superior esquerdo
-
-2. **`orofaringe`**  
-   Label: "Orofaringe"  
-   Localização: Box intermediário esquerdo
-
-3. **`torax_respiratorio`**  
-   Label: "Tórax Respiratório"  
-   Localização: Box do meio esquerdo
-
-4. **`abdome`**  
-   Label: "Abdome"  
-   Localização: Box abaixo do tórax, esquerdo
-
-5. **`figado`**  
-   Label: "Fígado / Hipocôndrio D"  
-   Localização: Box inferior esquerdo
-
-### Coluna Direita
-6. **`face_olhos`**  
-   Label: "Olhos / Face"  
-   Localização: Box superior direito
-
-7. **`pescoco_linfonodos`**  
-   Label: "Pescoço / Linfonodos"  
-   Localização: Box intermediário direito
-
-8. **`precordio`**  
-   Label: "Precórdio"  
-   Localização: Box do meio direito
-
-9. **`baco`**  
-   Label: "Baço / Hipocôndrio E"  
-   Localização: Box direito abaixo do precórdio
-
-10. **`membros_perfusao`**  
-    Label: "Membros / Perfusão / Pulsos / TEC"  
-    Localização: Box inferior direito
+**Atalhos de teclado:**
+- **ESC**: Limpa os cliques atuais (mesmo efeito de refazer)
 
 ---
 
-## Onde Colar as Coordenadas
+## Sequência de Hotspots (10 no total)
 
-Após calibrar os 10 hotspots, você terá 10 JSONs.  
-Atualize o array `LACTENTE_BOX_HOTSPOTS` no arquivo:
+O sistema calibra nesta ordem automática:
+
+| # | ID | Label | Localização |
+|---|----|----|---|
+| 1 | `cabeca` | Cabeça / Perímetro Cefálico | Canto superior esquerdo |
+| 2 | `olhos_face` | Olhos / Face | Canto superior direito |
+| 3 | `orofaringe` | Orofaringe | Lateral esquerda (boca) |
+| 4 | `pescoco_linfonodos` | Pescoço / Linfonodos | Lateral direita (pescoço) |
+| 5 | `torax_respiratorio` | Tórax Respiratório | Meio esquerdo |
+| 6 | `precordio` | Precórdio | Meio direito |
+| 7 | `abdome` | Abdome | Abaixo do meio esquerdo |
+| 8 | `figado` | Fígado / Hipocôndrio D | Inferior esquerdo |
+| 9 | `baco` | Baço / Hipocôndrio E | Inferior direito |
+| 10 | `membros_perfusao` | Membros / Perfusão / Pulsos / TEC | Canto inferior direito |
+
+---
+
+## Após a Calibração Completa
+
+### 1️⃣ Copiar o Array
+
+Quando todos os 10 hotspots forem calibrados:
+
+- Card mostrará: **"🎉 Calibração Completa!"**
+- Clique no botão **"📋 Copiar Array (Clipboard)"**
+- O array inteiro é copiado automaticamente para seu clipboard
+
+### 2️⃣ Atualizar o Código
+
+Cole o array no arquivo:
 
 ```
 components/pediatria/PacientePediatricoVisualAjustado.tsx
 ```
 
-Substitua o array existente com as coordenadas calibradas:
+Localize a constante `LACTENTE_BOX_HOTSPOTS` e substitua pelo array completo:
 
 ```typescript
 const LACTENTE_BOX_HOTSPOTS = [
   {
-    id: 'cabeca_perimetro',
+    id: 'cabeca',
     label: 'Cabeça / Perímetro Cefálico',
-    left: '25.3%',    // ← seu valor calibrado
-    top: '15.2%',     // ← seu valor calibrado
-    width: '22.5%',   // ← seu valor calibrado
-    height: '8.7%',   // ← seu valor calibrado
+    left: 2.5,    // ← números sem %
+    top: 8.5,     // ← números sem %
+    width: 22.3,  // ← seus valores calibrados
+    height: 9.7,  // ← seus valores calibrados
   },
   // ... mais 9 hotspots
 ];
 ```
 
+**Nota:** O array copiado vem sem o `%`, apenas números decimais. Se preferir com `%`, use no template string.
+
 ---
 
-## Validação Visual
+## Validação Visual (Pós-Calibração)
 
-Após atualizar as coordenadas:
+Após atualizar o array `LACTENTE_BOX_HOTSPOTS`:
 
-1. **Mantenha `DEBUG_HOTSPOT_CALIBRATION = true`** — os retângulos calibrados continuam visíveis
-2. **Mude `DEBUG_HOTSPOTS_PEDIATRIA = true`** — os hotspots ficam vermelhos
+1. **Mantenha `DEBUG_HOTSPOT_CALIBRATION = true`** — continua mostrando os retângulos
+2. **Mude `DEBUG_HOTSPOTS_PEDIATRIA = true`** — os hotspots ficarão com borda vermelha
 3. **Recarregue a página** (Cmd+R / Ctrl+R)
-4. **Verifique se os retângulos vermelhos cobrem exatamente os boxes textuais**
+4. **Verifique se os retângulos vermelhos cobrem EXATAMENTE os boxes textuais**
 
-Se os retângulos não ficarem alinhados:
-- Os boxes podem ter sido deslocados pela imagem (responsividade)
-- A imagem pode estar em um tamanho diferente do esperado
-- **Recalibre** aquele hotspot específico
+### Se algo estiver desalinhado:
+- Clique em "⬅ Anterior" para voltar e recalibrar aquele hotspot
+- Ou use "↻ Refazer" para tentar novamente
+- Os retângulos verdes já calibrados permanecerão visíveis como referência
 
 ---
 
-## Próximos Passos
+## Finalização
 
-Após validar visualmente que todos os hotspots estão corretos:
+Quando todos os hotspots estiverem corretos (borda vermelha == box textual):
 
 1. **Desative o modo calibração:**
    ```typescript
@@ -162,63 +154,82 @@ Após validar visualmente que todos os hotspots estão corretos:
    const DEBUG_HOTSPOTS_PEDIATRIA = false;
    ```
 
-3. **Teste o clique nos hotspots:**
-   - Clique em cada canto de box
-   - Verifique se a região correta é selecionada no painel lateral
-   - Teste em desktop e mobile
-
-4. **Faça o build final:**
+3. **Faça o build:**
    ```bash
    npm run build
    ```
+
+4. **Teste o clique nos hotspots:**
+   - Clique em cada box textual
+   - Verifique se a região correta é selecionada no painel
+   - Teste em desktop e mobile
+   - Os retângulos não devem aparecer mais (invisible hotspots)
 
 ---
 
 ## Troubleshooting
 
-### "O overlay não aparece"
-- Verifique se `DEBUG_HOTSPOT_CALIBRATION = true`
-- A imagem está carregando? Aguarde alguns segundos
-- Abra o DevTools (F12) → Console para ver mensagens
+### "A calibração salta hotspots automaticamente"
+- ✅ Isso é normal! O sistema avança assim que um hotspot é calibrado com sucesso
+- Se você quiser tentar novamente, use o botão **"⬅ Anterior"**
 
-### "Os cliques não são capturados"
-- Verifique se está clicando **sobre a imagem** (não nas margens)
-- A imagem tem `object-fit: contain` e pode ter padding ao redor
+### "Meus cliques não aparecem (sem bolinhas amarelas)"
+- Verifique se está clicando **sobre a imagem renderizada** (não nas margens brancas)
+- A imagem usa `object-fit: contain`, então pode ter padding ao redor
 
-### "As coordenadas estão muito diferentes"
-- Isso é normal! A imagem atual pode estar em escala diferente
-- Calibre mesmo assim — o sistema recalcula percentualmente
+### "Aparece ⚠️ 'Área muito grande!'"
+- Isso significa você clicou muito longe (provavelmente perto das pontas opostas da imagem)
+- **Clique apenas nos cantos do box textual correspondente**, não na imagem inteira
+- Use **"↻ Refazer"** para tentar novamente
 
-### "Preciso recalibrar tudo"
-- Não há problema, pressione ESC para limpar e comece novamente
-- Cada calibração é independente
+### "Um hotspot foi calibrado errado"
+- Use **"⬅ Anterior"** para voltar
+- Recalibre apenas aquele hotspot
+- Os anteriores permanecerão salvos
+
+### "Quero recomeçar tudo do zero"
+- Recarregue a página (Cmd+R / Ctrl+R)
+- Todos os progressos serão resetados
+
+### "O array copiado tem números sem %"
+- ✅ Isso é esperado. O array vem em formato número puro (ex: `left: 2.5`)
+- Quando você renderizar com estilo, use: `style={{ left: '${result.left}%' }}`
 
 ---
 
-## Debug Console
+## Console (DevTools F12)
 
-Exemplos de saídas esperadas:
+Exemplos de saídas esperadas durante a calibração:
 
 ```javascript
 // Primeiro clique
-🔵 Clique 1: x=145.5, y=89.3 (px)
+🔵 Cabeça / Perímetro Cefálico - Clique 1: x=45.3, y=125.7 (px)
 
 // Segundo clique
-🔵 Clique 2: x=267.8, y=156.2 (px)
+🔵 Cabeça / Perímetro Cefálico - Clique 2: x=167.2, y=198.4 (px)
 
-// Resultado
+// Resultado (auto-avança para próximo)
 ✅ HOTSPOT CALIBRADO
 {
-  "id": "PREENCHER_ID",
-  "label": "PREENCHER_LABEL",
-  "left": "25.3%",
-  "top": "15.2%",
-  "width": "22.5%",
-  "height": "8.7%"
+  "id": "cabeca",
+  "label": "Cabeça / Perímetro Cefálico",
+  "left": 2.5,
+  "top": 8.5,
+  "width": 22.3,
+  "height": 9.7
 }
 
-// Limpeza
-🔄 Calibração limpa.
+// Se a área for muito grande
+❌ Área rejeitada: W=85.2% H=92.1% (máx: 40% x 20%)
+
+// Array final (ao clicar "Copiar Array")
+📋 Array copiado para clipboard!
+const lactenteHotspots = [
+  { id: "cabeca", label: "Cabeça / Perímetro Cefálico", left: 2.5, top: 8.5, width: 22.3, height: 9.7 },
+  { id: "olhos_face", label: "Olhos / Face", left: 74.1, top: 13.2, width: 24.5, height: 8.3 },
+  ...
+];
+```
 ```
 
 ---
