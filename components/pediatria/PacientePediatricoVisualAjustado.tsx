@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useRef, useEffect } from 'react';
 import {
   obterRegioesPediatricas,
   RegiaoPediatricaId,
@@ -11,6 +11,9 @@ import { obterImagemPacientePediatrico, obterDescricaoFaixaEtaria, obterInfoImag
 
 // Debug mode: mudar para true para ver bordas dos hotspots
 const DEBUG_HOTSPOTS_PEDIATRIA = false;
+
+// Modo de calibração: ativa overlay para capturar coordenadas reais da imagem
+const DEBUG_HOTSPOT_CALIBRATION = true;
 
 // Hotspots invisíveis sobre os boxes textuais do lactente
 const LACTENTE_BOX_HOTSPOTS = [
@@ -103,6 +106,13 @@ interface PacientePediatricoVisualAjustadoProps {
   desabilitarHotspots?: boolean; // Desabilitar cliques nos hotspots (para lactente com boxes laterais)
 }
 
+interface CalibracaoClique {
+  x: number;
+  y: number;
+  clientX: number;
+  clientY: number;
+}
+
 export default function PacientePediatricoVisualAjustado({
   faixaEtaria,
   regioSelecionada,
@@ -112,6 +122,16 @@ export default function PacientePediatricoVisualAjustado({
   const [imagemCarregada, setImagemCarregada] = useState(true);
   const [erroImagem, setErroImagem] = useState(false);
   const [regioEmHover, setRegioEmHover] = useState<RegiaoPediatricaId | null>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  // Estado para calibração de hotspots
+  const [calibracaoCliques, setCalibracaoCliques] = useState<CalibracaoClique[]>([]);
+  const [calibracaoResultado, setCalibracaoResultado] = useState<{
+    left: number;
+    top: number;
+    width: number;
+    height: number;
+  } | null>(null);
 
   const imagemPath = obterImagemPacientePediatrico(faixaEtaria);
   const descricaoFaixa = obterDescricaoFaixaEtaria(faixaEtaria);
@@ -128,6 +148,84 @@ export default function PacientePediatricoVisualAjustado({
     setImagemCarregada(false);
     setErroImagem(true);
   }, [imagemPath]);
+
+  // Handler de calibração: captura cliques sobre a imagem
+  const handleCalibracaoClique = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    if (!DEBUG_HOTSPOT_CALIBRATION || !imageRef.current) return;
+
+    const rect = imageRef.current.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const novoClique: CalibracaoClique = { x, y, clientX: event.clientX, clientY: event.clientY };
+    const cliqueAtual = [...calibracaoCliques, novoClique];
+
+    console.log(`🔵 Clique ${cliqueAtual.length}: x=${x.toFixed(1)}, y=${y.toFixed(1)} (px)`);
+
+    if (cliqueAtual.length === 2) {
+      // Calcular coordenadas percentuais
+      const x1 = cliqueAtual[0].x;
+      const y1 = cliqueAtual[0].y;
+      const x2 = cliqueAtual[1].x;
+      const y2 = cliqueAtual[1].y;
+
+      const left = Math.min(x1, x2);
+      const top = Math.min(y1, y2);
+      const width = Math.abs(x2 - x1);
+      const height = Math.abs(y2 - y1);
+
+      const leftPercent = (left / rect.width) * 100;
+      const topPercent = (top / rect.height) * 100;
+      const widthPercent = (width / rect.width) * 100;
+      const heightPercent = (height / rect.height) * 100;
+
+      const resultado = {
+        left: leftPercent,
+        top: topPercent,
+        width: widthPercent,
+        height: heightPercent,
+      };
+
+      setCalibracaoResultado(resultado);
+
+      // Imprimir no console em formato pronto para copiar
+      console.log('%c✅ HOTSPOT CALIBRADO', 'background: #10b981; color: white; padding: 5px; border-radius: 3px; font-weight: bold;');
+      const jsonFormatado = {
+        id: 'PREENCHER_ID',
+        label: 'PREENCHER_LABEL',
+        left: `${leftPercent.toFixed(1)}%`,
+        top: `${topPercent.toFixed(1)}%`,
+        width: `${widthPercent.toFixed(1)}%`,
+        height: `${heightPercent.toFixed(1)}%`,
+      };
+      console.log(JSON.stringify(jsonFormatado, null, 2));
+      console.log('Clique para copiar o JSON acima 👆');
+
+      // Resetar para próxima calibração
+      setCalibracaoCliques([]);
+    } else {
+      setCalibracaoCliques(cliqueAtual);
+    }
+  }, [calibracaoCliques]);
+
+  // Limpar calibração com ESC
+  const handleLimparCalibacao = useCallback(() => {
+    setCalibracaoCliques([]);
+    setCalibracaoResultado(null);
+    console.log('🔄 Calibração limpa.');
+  }, []);
+
+  // Detectar tecla ESC para limpar calibração
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && DEBUG_HOTSPOT_CALIBRATION) {
+        handleLimparCalibacao();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleLimparCalibacao]);
 
   // Ordenar regiões por zIndex para renderização correta
   const regioesOrdenadas = [...regioes].sort((a, b) => a.zIndex - b.zIndex);
@@ -152,9 +250,10 @@ export default function PacientePediatricoVisualAjustado({
       {/* Contêiner de imagem com hotspots */}
       <div className="relative flex-1 flex items-center justify-center p-4 overflow-hidden">
         {/* Imagem do paciente pediátrico */}
-        <div className="relative w-full h-full max-w-xs">
+        <div className="relative w-full h-full max-w-xs" onClick={handleCalibracaoClique}>
           {/* Imagem com tratamento de erro */}
           <img
+            ref={imageRef}
             src={imagemPath}
             alt={`Paciente pediátrico - ${descricaoFaixa}`}
             className="w-full h-full object-contain"
@@ -176,6 +275,77 @@ export default function PacientePediatricoVisualAjustado({
                 </p>
                 <p className="text-xs text-slate-400">Os hotspots continuam funcionando</p>
               </div>
+            </div>
+          )}
+
+          {/* Overlay de calibração de hotspots */}
+          {DEBUG_HOTSPOT_CALIBRATION && imagemCarregada && !erroImagem && (
+            <div className="absolute inset-0 bg-black/5 cursor-crosshair flex items-center justify-center">
+              {/* Instruções */}
+              <div className="absolute top-2 left-2 right-2 bg-white/95 px-3 py-2 rounded text-xs text-slate-700 shadow-sm z-50">
+                <div className="font-semibold text-amber-600">🎯 Modo Calibração</div>
+                <div className="text-slate-600 mt-1">
+                  Clique 1: canto superior esquerdo | Clique 2: canto inferior direito
+                </div>
+                {calibracaoCliques.length === 1 && (
+                  <div className="text-blue-600 mt-1 font-medium">✓ Primeiro clique capturado. Clique novamente para finalizar.</div>
+                )}
+              </div>
+
+              {/* Marcadores dos cliques */}
+              {calibracaoCliques.map((clique, idx) => {
+                if (!imageRef.current) return null;
+                const rect = imageRef.current.getBoundingClientRect();
+                const percentLeft = (clique.x / rect.width) * 100;
+                const percentTop = (clique.y / rect.height) * 100;
+
+                return (
+                  <div
+                    key={idx}
+                    className="absolute w-4 h-4 border-2 border-amber-500 rounded-full pointer-events-none z-40"
+                    style={{
+                      left: `${percentLeft}%`,
+                      top: `${percentTop}%`,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  >
+                    <div className="absolute inset-1 bg-amber-500 rounded-full animate-pulse"></div>
+                  </div>
+                );
+              })}
+
+              {/* Retângulo calibrado */}
+              {calibracaoResultado && imageRef.current && (
+                <>
+                  <div
+                    className="absolute border-2 border-green-500 bg-green-500/10 pointer-events-none"
+                    style={{
+                      left: `${calibracaoResultado.left}%`,
+                      top: `${calibracaoResultado.top}%`,
+                      width: `${calibracaoResultado.width}%`,
+                      height: `${calibracaoResultado.height}%`,
+                    }}
+                  ></div>
+                  <div className="absolute bottom-2 right-2 bg-green-100 px-3 py-2 rounded text-xs text-green-800 shadow-sm z-50 font-mono">
+                    <div className="font-semibold">✅ Calibrado!</div>
+                    <div className="mt-1 text-green-700">
+                      L: {calibracaoResultado.left.toFixed(1)}% | T: {calibracaoResultado.top.toFixed(1)}%
+                    </div>
+                    <div className="text-green-700">
+                      W: {calibracaoResultado.width.toFixed(1)}% | H: {calibracaoResultado.height.toFixed(1)}%
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleLimparCalibacao();
+                      }}
+                      className="mt-2 w-full bg-green-600 hover:bg-green-700 text-white text-xs py-1 rounded"
+                    >
+                      Limpar (ESC)
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           )}
 

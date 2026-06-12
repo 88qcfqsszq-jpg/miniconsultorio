@@ -1,0 +1,124 @@
+═════════════════════════════════════════════════════════════════════════════
+  🎯 MODO CALIBRAÇÃO DE HOTSPOTS DO LACTENTE — RESUMO RÁPIDO
+═════════════════════════════════════════════════════════════════════════════
+
+ARQUIVO A MODIFICAR:
+  components/pediatria/PacientePediatricoVisualAjustado.tsx
+
+1️⃣  ATIVAR O MODO:
+    ┌─────────────────────────────────────────────────────────────┐
+    │ const DEBUG_HOTSPOT_CALIBRATION = true;  (linha 16)         │
+    └─────────────────────────────────────────────────────────────┘
+
+2️⃣  ENTRAR NO APP:
+    • npm run dev
+    • Acesse http://localhost:3000
+    • Escolha um caso pediátrico (lactente)
+    • Clique em "Exame Físico Pediátrico Visual"
+
+3️⃣  CALIBRAR OS HOTSPOTS:
+
+    Para cada um dos 10 boxes textuais:
+
+    ┌─────────────────────────────────────────────────────────────┐
+    │  CLIQUE 1: canto superior esquerdo do box                   │
+    │  CLIQUE 2: canto inferior direito do box                    │
+    │                                                              │
+    │  ✓ Um retângulo verde aparece automaticamente                │
+    │  ✓ Console exibe as coordenadas em % (copy/paste ready)    │
+    └─────────────────────────────────────────────────────────────┘
+
+    Ordem recomendada (top-left → bottom-right):
+      1. cabeca_perimetro      6. face_olhos
+      2. orofaringe            7. pescoco_linfonodos
+      3. torax_respiratorio    8. precordio
+      4. abdome                9. baco
+      5. figado               10. membros_perfusao
+
+4️⃣  COLETAR AS COORDENADAS:
+
+    No Console do DevTools (F12), você verá:
+
+    ┌─────────────────────────────────────────────────────────────┐
+    │ {                                                             │
+    │   "id": "PREENCHER_ID",                                      │
+    │   "label": "PREENCHER_LABEL",                                │
+    │   "left": "25.3%",                                           │
+    │   "top": "15.2%",                                            │
+    │   "width": "22.5%",                                          │
+    │   "height": "8.7%"                                           │
+    │ }                                                             │
+    └─────────────────────────────────────────────────────────────┘
+
+    ✓ Copie o JSON completo
+    ✓ Anote em um arquivo (ou keep no terminal)
+
+5️⃣  LIMPAR ENTRE CALIBRAÇÕES:
+    ┌─────────────────────────────────────────────────────────────┐
+    │  Pressione ESC (ou clique "Limpar (ESC)")                   │
+    │  para resetar e calibrar o próximo hotspot                  │
+    └─────────────────────────────────────────────────────────────┘
+
+6️⃣  ATUALIZAR O CÓDIGO:
+
+    Após calibrar todos os 10, atualize o array:
+
+    Arquivo: components/pediatria/PacientePediatricoVisualAjustado.tsx
+
+    ┌─────────────────────────────────────────────────────────────┐
+    │ const LACTENTE_BOX_HOTSPOTS = [                              │
+    │   {                                                           │
+    │     id: 'cabeca_perimetro',                                  │
+    │     label: 'Cabeça / Perímetro Cefálico',                   │
+    │     left: '25.3%',      // ← SEUS VALORES CALIBRADOS        │
+    │     top: '15.2%',       // ← SEUS VALORES CALIBRADOS        │
+    │     width: '22.5%',     // ← SEUS VALORES CALIBRADOS        │
+    │     height: '8.7%',     // ← SEUS VALORES CALIBRADOS        │
+    │   },                                                          │
+    │   // ... repita para os outros 9 hotspots                   │
+    │ ];                                                            │
+    └─────────────────────────────────────────────────────────────┘
+
+7️⃣  VALIDAR VISUALMENTE:
+
+    ┌─────────────────────────────────────────────────────────────┐
+    │ Mantenha:                                                    │
+    │   const DEBUG_HOTSPOT_CALIBRATION = true;                   │
+    │   const DEBUG_HOTSPOTS_PEDIATRIA = true;                    │
+    │                                                              │
+    │ Recarregue (Cmd+R / Ctrl+R)                                  │
+    │                                                              │
+    │ Você deve ver retângulos VERMELHOS sobre os boxes textuais  │
+    │ exatamente onde calibrou                                     │
+    └─────────────────────────────────────────────────────────────┘
+
+8️⃣  FINALIZAR:
+
+    Quando tudo estiver correto:
+
+    ┌─────────────────────────────────────────────────────────────┐
+    │ const DEBUG_HOTSPOT_CALIBRATION = false;  // Desativar      │
+    │ const DEBUG_HOTSPOTS_PEDIATRIA = false;   // Desativar      │
+    │                                                              │
+    │ npm run build                                                │
+    │ npm run dev                                                  │
+    │                                                              │
+    │ Teste os cliques em desktop e mobile                        │
+    └─────────────────────────────────────────────────────────────┘
+
+═════════════════════════════════════════════════════════════════════════════
+
+CARACTERÍSTICAS DO MODO:
+  ✓ Overlay transparente sobre a imagem
+  ✓ Cursor em crosshair para precisão
+  ✓ Bolinha amarela marca cada clique
+  ✓ Retângulo verde mostra a área calibrada
+  ✓ Cálculo automático de percentuais (responsive)
+  ✓ JSON pronto para copiar no console
+  ✓ ESC limpa e permite próxima calibração
+  ✓ Usa getBoundingClientRect() — pega tamanho real da imagem
+
+DOCUMENTAÇÃO COMPLETA:
+  CALIBRACAO_HOTSPOTS_LACTENTE.md
+
+═════════════════════════════════════════════════════════════════════════════
