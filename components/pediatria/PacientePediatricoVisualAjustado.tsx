@@ -12,6 +12,90 @@ import { obterImagemPacientePediatrico, obterDescricaoFaixaEtaria, obterInfoImag
 // Debug mode: mudar para true para ver bordas dos hotspots
 const DEBUG_HOTSPOTS_PEDIATRIA = false;
 
+// Hotspots invisíveis sobre os boxes textuais do lactente
+const LACTENTE_BOX_HOTSPOTS = [
+  {
+    id: 'cabeca_perimetro',
+    label: 'Cabeça / Perímetro Cefálico',
+    left: '2.5%',
+    top: '8.5%',
+    width: '26%',
+    height: '10.5%',
+  },
+  {
+    id: 'face_olhos',
+    label: 'Olhos / Face',
+    left: '74%',
+    top: '13%',
+    width: '24%',
+    height: '8.5%',
+  },
+  {
+    id: 'orofaringe',
+    label: 'Orofaringe',
+    left: '2.5%',
+    top: '23%',
+    width: '26%',
+    height: '8.5%',
+  },
+  {
+    id: 'pescoco_linfonodos',
+    label: 'Pescoço / Linfonodos',
+    left: '74.5%',
+    top: '26%',
+    width: '24%',
+    height: '10%',
+  },
+  {
+    id: 'torax_respiratorio',
+    label: 'Tórax Respiratório',
+    left: '2%',
+    top: '38%',
+    width: '25%',
+    height: '10%',
+  },
+  {
+    id: 'precordio',
+    label: 'Precórdio',
+    left: '76.5%',
+    top: '42%',
+    width: '22.5%',
+    height: '11%',
+  },
+  {
+    id: 'abdome',
+    label: 'Abdome',
+    left: '2%',
+    top: '54%',
+    width: '22%',
+    height: '8.5%',
+  },
+  {
+    id: 'figado',
+    label: 'Fígado / Hipocôndrio D',
+    left: '2%',
+    top: '65%',
+    width: '22%',
+    height: '10%',
+  },
+  {
+    id: 'baco',
+    label: 'Baço / Hipocôndrio E',
+    left: '77%',
+    top: '57%',
+    width: '21.5%',
+    height: '11%',
+  },
+  {
+    id: 'membros_perfusao',
+    label: 'Membros / Perfusão / Pulsos / TEC',
+    left: '77%',
+    top: '73%',
+    width: '22%',
+    height: '12%',
+  },
+];
+
 interface PacientePediatricoVisualAjustadoProps {
   faixaEtaria?: string;
   regioSelecionada?: RegiaoPediatricaId;
@@ -93,6 +177,31 @@ export default function PacientePediatricoVisualAjustado({
                 <p className="text-xs text-slate-400">Os hotspots continuam funcionando</p>
               </div>
             </div>
+          )}
+
+          {/* Hotspots invisíveis sobre boxes textuais do lactente */}
+          {(faixaEtaria === 'lactente' || faixaEtaria === 'neonato') && (
+            <>
+              {LACTENTE_BOX_HOTSPOTS.map((hotspot) => (
+                <button
+                  key={hotspot.id}
+                  className={`absolute z-20 cursor-pointer rounded-xl transition-all ${
+                    DEBUG_HOTSPOTS_PEDIATRIA
+                      ? 'bg-red-500/20 hover:bg-red-500/30'
+                      : 'bg-transparent hover:bg-blue-500/10'
+                  } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                  style={{
+                    left: hotspot.left,
+                    top: hotspot.top,
+                    width: hotspot.width,
+                    height: hotspot.height,
+                  }}
+                  onClick={() => onRegioClicada(hotspot.id as RegiaoPediatricaId)}
+                  aria-label={hotspot.label}
+                  title={hotspot.label}
+                />
+              ))}
+            </>
           )}
 
           {/* SVG overlay com hotspots clicáveis */}
