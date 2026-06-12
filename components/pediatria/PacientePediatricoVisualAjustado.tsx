@@ -51,7 +51,7 @@ export default function PacientePediatricoVisualAjustado({
           <img
             src={imagemPath}
             alt={`Paciente pediátrico - ${descricaoFaixa}`}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain scale-300"
             onLoad={handleImagemCarregada}
             onError={handleErroImagem}
             style={{ display: imagemCarregada && !erroImagem ? 'block' : 'none' }}
