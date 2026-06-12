@@ -133,8 +133,8 @@ export const DROP_ZONES: Record<string, {
   },
   'left-hypochondrium': {
     label: 'Hipocôndrio Esquerdo',
-    left: 30,
-    top: 48,
+    left: 58,
+    top: 43,
     width: 12,
     height: 15,
   },
