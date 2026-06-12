@@ -15,7 +15,7 @@ const DEBUG_HOTSPOTS_PEDIATRIA = false;
 // Modo de calibração: ativa overlay para capturar coordenadas reais da imagem
 const DEBUG_HOTSPOT_CALIBRATION = true;
 
-// Lista sequencial de hotspots a calibrar
+// ✅ NOVA LISTA DE CALIBRAÇÃO (13 hotspots — do zero, sem dados antigos)
 const calibrationTargets = [
   { id: 'cabeca', label: 'Cabeça / Perímetro Cefálico' },
   { id: 'olhos_face', label: 'Olhos / Face' },
@@ -27,6 +27,9 @@ const calibrationTargets = [
   { id: 'figado', label: 'Fígado / Hipocôndrio D' },
   { id: 'baco', label: 'Baço / Hipocôndrio E' },
   { id: 'membros_perfusao', label: 'Membros / Perfusão / Pulsos / TEC' },
+  { id: 'pele_mucosas', label: 'Pele / Mucosas' },
+  { id: 'desenvolvimento_interacao', label: 'Desenvolvimento / Interação' },
+  { id: 'estado_geral', label: 'Estado Geral' },
 ];
 
 interface CalibrationResult {
@@ -38,89 +41,16 @@ interface CalibrationResult {
   height: number;
 }
 
-// Hotspots invisíveis sobre os boxes textuais do lactente
-const LACTENTE_BOX_HOTSPOTS = [
-  {
-    id: 'cabeca_perimetro',
-    label: 'Cabeça / Perímetro Cefálico',
-    left: '2.5%',
-    top: '8.5%',
-    width: '26%',
-    height: '10.5%',
-  },
-  {
-    id: 'face_olhos',
-    label: 'Olhos / Face',
-    left: '74%',
-    top: '13%',
-    width: '24%',
-    height: '8.5%',
-  },
-  {
-    id: 'orofaringe',
-    label: 'Orofaringe',
-    left: '2.5%',
-    top: '23%',
-    width: '26%',
-    height: '8.5%',
-  },
-  {
-    id: 'pescoco_linfonodos',
-    label: 'Pescoço / Linfonodos',
-    left: '74.5%',
-    top: '26%',
-    width: '24%',
-    height: '10%',
-  },
-  {
-    id: 'torax_respiratorio',
-    label: 'Tórax Respiratório',
-    left: '2%',
-    top: '38%',
-    width: '25%',
-    height: '10%',
-  },
-  {
-    id: 'precordio',
-    label: 'Precórdio',
-    left: '76.5%',
-    top: '42%',
-    width: '22.5%',
-    height: '11%',
-  },
-  {
-    id: 'abdome',
-    label: 'Abdome',
-    left: '2%',
-    top: '54%',
-    width: '22%',
-    height: '8.5%',
-  },
-  {
-    id: 'figado',
-    label: 'Fígado / Hipocôndrio D',
-    left: '2%',
-    top: '65%',
-    width: '22%',
-    height: '10%',
-  },
-  {
-    id: 'baco',
-    label: 'Baço / Hipocôndrio E',
-    left: '77%',
-    top: '57%',
-    width: '21.5%',
-    height: '11%',
-  },
-  {
-    id: 'membros_perfusao',
-    label: 'Membros / Perfusão / Pulsos / TEC',
-    left: '77%',
-    top: '73%',
-    width: '22%',
-    height: '12%',
-  },
-];
+// ✅ ARRAY VAZIO — SEM DADOS ANTIGOS
+// Será preenchido apenas durante a calibração sequencial
+const LACTENTE_BOX_HOTSPOTS: Array<{
+  id: string;
+  label: string;
+  left: string | number;
+  top: string | number;
+  width: string | number;
+  height: string | number;
+}> = [];
 
 interface PacientePediatricoVisualAjustadoProps {
   faixaEtaria?: string;
@@ -264,6 +194,16 @@ export default function PacientePediatricoVisualAjustado({
     console.log(arrayStr);
   }, [calibrationResults]);
 
+  // Limpar TODOS os hotspots e recomeçar do zero
+  const handleClearAllCalibration = useCallback(() => {
+    setCurrentCalibrationIndex(0);
+    setCalibrationClicks([]);
+    setCalibrationResults([]);
+    setCalibrationError(null);
+    console.log('%c🔄 CALIBRAÇÃO COMPLETA RESETADA!', 'background: #ef4444; color: white; padding: 5px; border-radius: 3px; font-weight: bold;');
+    console.log('Começando do zero: ' + calibrationTargets[0].label);
+  }, []);
+
   // Detectar tecla ESC para limpar cliques atuais
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -370,7 +310,7 @@ export default function PacientePediatricoVisualAjustado({
                         {calibrationError}
                       </div>
                     )}
-                    <div className="flex gap-2 justify-center">
+                    <div className="flex gap-2 justify-center flex-wrap">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -378,7 +318,7 @@ export default function PacientePediatricoVisualAjustado({
                         }}
                         className="px-3 py-1.5 text-xs bg-amber-500 hover:bg-amber-600 text-white rounded font-medium"
                       >
-                        ↻ Refazer
+                        ↻ Refazer atual
                       </button>
                       {currentCalibrationIndex > 0 && (
                         <button
@@ -389,6 +329,19 @@ export default function PacientePediatricoVisualAjustado({
                           className="px-3 py-1.5 text-xs bg-slate-500 hover:bg-slate-600 text-white rounded font-medium"
                         >
                           ⬅ Anterior
+                        </button>
+                      )}
+                      {calibrationResults.length > 0 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (window.confirm('⚠️ Tem certeza? Isso vai limpar TODOS os hotspots e recomeçar do zero.')) {
+                              handleClearAllCalibration();
+                            }
+                          }}
+                          className="px-3 py-1.5 text-xs bg-red-500 hover:bg-red-600 text-white rounded font-medium"
+                        >
+                          🗑 Limpar tudo
                         </button>
                       )}
                     </div>
@@ -411,9 +364,20 @@ export default function PacientePediatricoVisualAjustado({
                     >
                       📋 Copiar Array (Clipboard)
                     </button>
-                    <div className="text-xs text-green-600 mt-2">
+                    <div className="text-xs text-green-600 mt-2 mb-3">
                       Array também está disponível no Console do DevTools (F12)
                     </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (window.confirm('⚠️ Recalibrar tudo? Isso vai apagar o progresso e recomeçar do primeiro hotspot.')) {
+                          handleClearAllCalibration();
+                        }
+                      }}
+                      className="w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded font-medium text-sm"
+                    >
+                      🗑 Recalibrar tudo
+                    </button>
                   </div>
                 )}
               </div>
