@@ -12,6 +12,7 @@ import {
   converterAchadoVisualParaSistema,
 } from '@/lib/pediatria/achados-visual';
 import { Caso } from '@/lib/types';
+import { LACTENTE_REGIONS, DROP_ZONES, PlacedRegion } from '@/lib/pediatria/lactente-drop-zones';
 
 interface ExameFisicoPediatricoVisualProps {
   caso: Caso;
@@ -81,23 +82,6 @@ function obterDescricaoAcao(acaoId: string): string {
   return ACOES_LABELS[acaoId]?.descricao || '';
 }
 
-// Regiões arrastáveis para drag-and-drop
-const LACTENTE_REGIOES_DRAG = [
-  { id: 'cabeca', label: 'Cabeça / Perímetro Cefálico' },
-  { id: 'olhos_face', label: 'Olhos / Face' },
-  { id: 'orofaringe', label: 'Orofaringe' },
-  { id: 'pescoco_linfonodos', label: 'Pescoço / Linfonodos' },
-  { id: 'torax_respiratorio', label: 'Tórax Respiratório' },
-  { id: 'precordio', label: 'Precórdio' },
-  { id: 'abdome', label: 'Abdome' },
-  { id: 'figado', label: 'Fígado / Hipocôndrio D' },
-  { id: 'baco', label: 'Baço / Hipocôndrio E' },
-  { id: 'membros_perfusao', label: 'Membros / Perfusão / Pulsos / TEC' },
-  { id: 'pele_mucosas', label: 'Pele / Mucosas' },
-  { id: 'desenvolvimento_interacao', label: 'Desenvolvimento / Interação' },
-  { id: 'estado_geral', label: 'Estado Geral' },
-];
-
 export default function ExameFisicoPediatricoVisual({
   caso,
   onAchadoEncontrado,
@@ -107,7 +91,8 @@ export default function ExameFisicoPediatricoVisual({
   const [regioSelecionada, setRegioSelecionada] = useState<RegiaoPediatricaId | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [draggedRegion, setDraggedRegion] = useState<string | null>(null);
-  const [regioesConcluidas, setRegioesConcluidas] = useState<Set<string>>(new Set());
+  const [placedRegions, setPlacedRegions] = useState<PlacedRegion[]>([]);
+  const [feedback, setFeedback] = useState<string | null>(null);
 
   const regioesAjustadas = obterRegioesPediatricas(caso.paciente.dadosPediatricos?.faixaEtaria);
   const regiao = regioSelecionada ? regioesAjustadas.find((r) => r.id === regioSelecionada) : null;
@@ -158,10 +143,11 @@ export default function ExameFisicoPediatricoVisual({
     [caso, onAchadoEncontrado]
   );
 
-  // Handlers para drag-and-drop
-  const handleDragStart = useCallback((e: React.DragEvent<HTMLDivElement>, regioId: string) => {
-    setDraggedRegion(regioId);
+  // Handlers para drag-and-drop com hotspots dinâmicos
+  const handleDragStart = useCallback((e: React.DragEvent<HTMLDivElement>, regionId: string) => {
+    setDraggedRegion(regionId);
     e.dataTransfer.effectAllowed = 'move';
+    setFeedback(null);
   }, []);
 
   const handleDragEnd = useCallback(() => {
@@ -177,21 +163,58 @@ export default function ExameFisicoPediatricoVisual({
     e.preventDefault();
     if (!draggedRegion) return;
 
-    // Encontrar a região correspondente
-    const regiao = regioesAjustadas.find((r) => r.id === draggedRegion);
-    if (!regiao) return;
+    // Encontrar a região arrastada
+    const region = LACTENTE_REGIONS.find((r) => r.id === draggedRegion);
+    if (!region) {
+      setDraggedRegion(null);
+      return;
+    }
 
-    // Selecionar a região (simular que foi colocada corretamente)
-    setRegioSelecionada(regiao.id as RegiaoPediatricaId);
+    // Obter as coordenadas do drop
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
 
-    // Marcar como concluída
-    setRegioesConcluidas((prev) => new Set([...prev, draggedRegion]));
+    // Verificar se caiu em uma zona válida
+    const targetZone = region.targetZone;
+    const zone = DROP_ZONES[targetZone];
 
-    // Mostrar feedback
-    console.log(`✓ Região "${regiao.label}" colocada no local correto`);
+    if (!zone) {
+      setFeedback(`Zona de drop não configurada para "${region.label}"`);
+      setDraggedRegion(null);
+      return;
+    }
 
+    // Validar se o drop está dentro da zona
+    const isInZone =
+      x >= zone.left &&
+      x <= zone.left + zone.width &&
+      y >= zone.top &&
+      y <= zone.top + zone.height;
+
+    if (!isInZone) {
+      setFeedback('Posicione a região no local anatômico correspondente.');
+      setDraggedRegion(null);
+      return;
+    }
+
+    // Drop válido: adicionar região posicionada
+    setPlacedRegions((prev) => [
+      ...prev.filter((item) => item.id !== region.id),
+      {
+        id: region.id,
+        label: region.label,
+        targetZone: region.targetZone,
+        x,
+        y,
+      },
+    ]);
+
+    // Selecionar região e abrir ações
+    setRegioSelecionada(region.id as RegiaoPediatricaId);
+    setFeedback(null);
     setDraggedRegion(null);
-  }, [draggedRegion, regioesAjustadas]);
+  }, [draggedRegion]);
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
@@ -222,13 +245,35 @@ export default function ExameFisicoPediatricoVisual({
         {/* Conteúdo */}
         <div className="flex-1 overflow-y-auto p-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
-            {/* Coluna 1: Imagem */}
-            <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 overflow-hidden" onDragOver={handleDragOver} onDrop={handleDrop}>
+            {/* Coluna 1: Imagem com Hotspots Dinâmicos */}
+            <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 overflow-hidden relative" onDragOver={handleDragOver} onDrop={handleDrop}>
               <PacientePediatricoVisualAjustado
                 faixaEtaria={caso.paciente.dadosPediatricos?.faixaEtaria}
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
               />
+
+              {/* Hotspots Dinâmicos - criados após posicionamento correto */}
+              {placedRegions.map((placedRegion) => (
+                <button
+                  key={placedRegion.id}
+                  className={`absolute z-20 rounded-lg text-xs px-2 py-1 font-medium shadow cursor-pointer transition-all ${
+                    regioSelecionada === placedRegion.id
+                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      : 'bg-slate-300 text-slate-800 hover:bg-slate-400'
+                  }`}
+                  style={{
+                    left: `${placedRegion.x}%`,
+                    top: `${placedRegion.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onClick={() => setRegioSelecionada(placedRegion.id as RegiaoPediatricaId)}
+                  title={`Clique para abrir ações de ${placedRegion.label}`}
+                >
+                  {placedRegion.label.split(' / ')[0]}
+                </button>
+              ))}
             </div>
 
             {/* Coluna 2: Lista de Regiões Arrastáveis (apenas para lactente) */}
@@ -236,26 +281,31 @@ export default function ExameFisicoPediatricoVisual({
             caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? (
               <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col">
                 <h3 className="font-bold text-slate-800 text-sm">Regiões do exame</h3>
-                <p className="text-xs text-slate-500">Arraste para o corpo</p>
+                <p className="text-xs text-slate-500">Arraste para o corpo correto</p>
+                {feedback && (
+                  <div className="text-xs bg-orange-50 text-orange-700 px-3 py-2 rounded border border-orange-200">
+                    ⚠️ {feedback}
+                  </div>
+                )}
                 <div className="flex-1 overflow-y-auto space-y-2">
-                  {LACTENTE_REGIOES_DRAG.map((r) => {
-                    const isConcluida = regioesConcluidas.has(r.id);
+                  {LACTENTE_REGIONS.map((r) => {
+                    const isPlaced = placedRegions.some((pr) => pr.id === r.id);
                     return (
                       <div
                         key={r.id}
-                        draggable={!isConcluida}
-                        onDragStart={(e) => !isConcluida && handleDragStart(e, r.id)}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, r.id)}
                         onDragEnd={handleDragEnd}
                         className={`w-full text-left p-3 rounded-lg border transition-all text-sm font-medium cursor-move select-none ${
                           draggedRegion === r.id
                             ? 'opacity-50 bg-amber-100 border-amber-500'
-                            : isConcluida
-                              ? 'bg-green-100 border-green-500 opacity-60 cursor-default'
+                            : isPlaced
+                              ? 'bg-green-100 border-green-500 opacity-75'
                               : 'bg-white border-slate-200 text-slate-700 hover:bg-blue-50 hover:border-blue-400 hover:shadow-sm'
                         }`}
                       >
                         <div className="flex items-center gap-2">
-                          {isConcluida && <span className="text-green-600 font-bold text-lg">✓</span>}
+                          {isPlaced && <span className="text-green-600 font-bold text-lg">✓</span>}
                           <span>{r.label}</span>
                         </div>
                       </div>
