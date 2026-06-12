@@ -174,6 +174,10 @@ export default function ExameFisicoPediatricoVisual({
                 faixaEtaria={caso.paciente.dadosPediatricos?.faixaEtaria}
                 regioSelecionada={regioSelecionada || undefined}
                 onRegioClicada={(regioId) => setRegioSelecionada(regioId)}
+                desabilitarHotspots={
+                  caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' ||
+                  caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato'
+                }
               />
             </div>
 
@@ -182,20 +186,21 @@ export default function ExameFisicoPediatricoVisual({
             caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? (
               <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col">
                 <h3 className="font-bold text-slate-800 text-sm">Regiões do exame</h3>
+                <p className="text-xs text-slate-500">Clique para selecionar</p>
                 <div className="flex-1 overflow-y-auto space-y-2">
                   {regioesAjustadas.map((r) => (
                     <button
                       key={r.id}
                       onClick={() => setRegioSelecionada(r.id)}
-                      className={`w-full text-left p-3 rounded-lg border transition-all text-sm font-medium ${
+                      className={`w-full text-left p-3 rounded-lg border transition-all text-sm font-medium cursor-pointer ${
                         regioSelecionada === r.id
-                          ? 'bg-blue-100 border-blue-500 text-blue-800 shadow-sm'
-                          : 'bg-white border-slate-200 text-slate-700 hover:bg-blue-50 hover:border-blue-300'
+                          ? 'bg-blue-100 border-blue-500 text-blue-800 shadow-md'
+                          : 'bg-white border-slate-200 text-slate-700 hover:bg-blue-50 hover:border-blue-400 hover:shadow-sm hover:scale-[1.02]'
                       }`}
                     >
                       <div className="flex items-center gap-2">
                         {regioSelecionada === r.id && (
-                          <span className="text-blue-600 font-bold">✓</span>
+                          <span className="text-blue-600 font-bold text-lg">✓</span>
                         )}
                         <span>{r.label}</span>
                       </div>

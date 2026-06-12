@@ -16,12 +16,14 @@ interface PacientePediatricoVisualAjustadoProps {
   faixaEtaria?: string;
   regioSelecionada?: RegiaoPediatricaId;
   onRegioClicada: (regioId: RegiaoPediatricaId) => void;
+  desabilitarHotspots?: boolean; // Desabilitar cliques nos hotspots (para lactente com boxes laterais)
 }
 
 export default function PacientePediatricoVisualAjustado({
   faixaEtaria,
   regioSelecionada,
   onRegioClicada,
+  desabilitarHotspots = false,
 }: PacientePediatricoVisualAjustadoProps) {
   const [imagemCarregada, setImagemCarregada] = useState(true);
   const [erroImagem, setErroImagem] = useState(false);
@@ -98,7 +100,7 @@ export default function PacientePediatricoVisualAjustado({
             className="absolute inset-0 w-full h-full"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
-            style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+            style={{ cursor: desabilitarHotspots ? 'default' : 'pointer', pointerEvents: desabilitarHotspots ? 'none' : 'auto' }}
           >
             {/* Renderizar hotspots ordenados por zIndex */}
             {regioesOrdenadas.map((regiao) => {
