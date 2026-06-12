@@ -1,4 +1,5 @@
 import { Caso } from "@/lib/types";
+import { casosPediatricos } from "./casos-pediatricos";
 
 export const casosOSCE: Caso[] = [
   {
@@ -17605,5 +17606,6 @@ export const casosOSCE: Caso[] = [
     ],
     diagnosticoCorreto: "Cetoacidose Diabética",
     ativo: false,
-  }
+  },
+  ...casosPediatricos,
 ];

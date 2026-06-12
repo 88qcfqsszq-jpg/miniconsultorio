@@ -7,46 +7,71 @@ export function criarPromptPaciente(
 ): string {
   const paciente = caso.paciente;
   const dadosOcultos = caso.dados_ocultos_do_sistema;
+  const isPediatrico = caso.tipoPaciente === "pediatrico" || paciente.tipoPaciente === "pediatrico";
+  const dadosPed = paciente.dadosPediatricos;
 
   const historicoChatFormatado = historico
     .map((msg) => {
-      const remetente = msg.tipo === "estudante" ? "ESTUDANTE" : "PACIENTE";
+      const remetente = msg.tipo === "estudante" ? "ESTUDANTE" : "PACIENTE/RESPONSÁVEL";
       return `${remetente}: ${msg.conteudo}`;
     })
     .join("\n");
 
-  return `Você é um paciente virtual em uma estação OSCE de 3º semestre de medicina.
+  const infoResponsavel = isPediatrico && dadosPed ? `
+- Responsável: ${dadosPed.responsavel.nome} (${dadosPed.responsavel.parentesco})
+- Faixa etária: ${dadosPed.faixaEtaria}
+- Peso: ${dadosPed.peso || "não informado"}
+- Estatura: ${dadosPed.estatura || "não informada"}
+- Perímetro cefálico: ${dadosPed.perimetroCefalico || "não informado"}
+- Estado vacinal: ${dadosPed.estadoVacinal || "não informado"}
+- Gestação/Parto: ${dadosPed.gestacaoParto || "não informado"}
+- Desenvolvimento: ${dadosPed.desenvolvimento || "não informado"}
+- Alimentação: ${dadosPed.alimentacao || "não informada"}` : "";
+
+  const instrucoesSpeciais = isPediatrico ? `
+ESPECIAL PARA CASOS PEDIÁTRICOS:
+- Para lactentes e crianças pequenas (até 5 anos), responda como o RESPONSÁVEL (${dadosPed?.responsavel.parentesco || "mãe/pai"})
+- Para crianças maiores (escolar/adolescente), a criança pode responder perguntas simples, mas o responsável complementa
+- Identifique suas respostas: "Responsável: ..." ou "Criança: ..." quando apropriado
+- Responda sempre de forma natural, como o responsável ou criança faria em consulta real
+- O responsável é a fonte principal da história para lactentes/pré-escolares` : `
+ESPECIAL PARA CASOS ADULTOS:
+- Responda apenas como o próprio paciente adulto`;
+
+  return `Você é um paciente virtual (ou responsável de criança) em uma estação OSCE de 3º semestre de medicina.
 
 INFORMAÇÕES DO PACIENTE (confidencial, use internamente):
 - Nome: ${paciente.nome}
-- Idade: ${paciente.idade} anos
+- Idade: ${paciente.idade}${isPediatrico ? ` anos (${dadosPed?.faixaEtaria})` : " anos"}
 - Sexo: ${paciente.sexo}
+- Tipo: ${isPediatrico ? "PEDIÁTRICO" : "ADULTO"}
 - Queixa principal: ${paciente.queixaPrincipal}
 - Histórico: ${paciente.historicoDoenca}
 - Antecedentes: ${paciente.antecedentes?.join(", ") || "Nenhum relatado"}
 - Medicamentos em uso: ${paciente.medicamentos_em_uso?.join(", ") || "Nenhum"}
-- Alergias: ${paciente.alergias?.join(", ") || "Nenhuma relatada"}
+- Alergias: ${paciente.alergias?.join(", ") || "Nenhuma relatada"}${infoResponsavel}
 
 DIAGNÓSTICO (NÃO REVELE):
 - Principal: ${dadosOcultos.diagnostico_principal}
 - Diferenciais: ${dadosOcultos.diagnosticos_diferenciais.join(", ")}
 
-RESPOSTAS PRÉ-PREPARADAS DO PACIENTE:
+RESPOSTAS PRÉ-PREPARADAS DO PACIENTE/RESPONSÁVEL:
 ${Object.entries(caso.respostas_do_paciente)
   .map(([chave, valor]) => `- ${chave}: ${valor}`)
   .join("\n")}
 
 REGRAS PARA RESPONDER:
-1. SEMPRE responda como paciente em linguagem LEIGA (como um paciente real falaria)
+1. SEMPRE responda em linguagem LEIGA (como paciente ou responsável real falaria)
 2. NUNCA revele o diagnóstico
 3. NUNCA explique fisiopatologia ou mecanismos médicos
 4. NUNCA fale como professor ou médico
 5. Responda APENAS à pergunta feita, não ofereça informações não solicitadas
 6. NÃO mencione sinais vitais, exame físico ou exames complementares a menos que perguntado especificamente
-7. Se perguntado sobre algo que o paciente não saberia, responda realistically: "não sei", "não lembro", "não tenho certeza"
+7. Se perguntado sobre algo que não saberia, responda realistically: "não sei", "não lembro", "não tenho certeza"
 8. Use as respostas pré-preparadas como referência, mas adapte naturalmente à conversa
 9. Mantenha coerência com o histórico da conversa
-10. Se o estudante pedir para medir algo (PA, FC, etc), diga que não pode fazer isso sozinho: "você precisa medir"
+10. Se perguntado para medir algo (PA, FC, etc), diga que não pode fazer isso sozinho: "você precisa medir"
+${instrucoesSpeciais}
 
 HISTÓRICO DA CONVERSA:
 ${historicoChatFormatado || "Conversa começando agora"}
@@ -54,7 +79,7 @@ ${historicoChatFormatado || "Conversa começando agora"}
 NOVA MENSAGEM DO ESTUDANTE:
 ${novaMensagem}
 
-Responda apenas com o que o paciente diria, sem adicionar explicações ou metadados.`;
+Responda apenas com o que o paciente ou responsável diria, sem adicionar explicações ou metadados.`;
 }
 
 export function criarPromptAvaliador(

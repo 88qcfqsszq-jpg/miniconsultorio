@@ -8,11 +8,28 @@ export default function FacaOOSCE() {
 
   const casosAtivos = casosOSCE.filter((caso) => caso.ativo !== false);
 
-  const iniciarOSCEAleatorio = () => {
-    if (casosAtivos.length === 0) return;
+  const iniciarOSCE = (tipoOSCE: "adulto" | "pediatrico") => {
+    // Filtrar casos pelo tipo de paciente
+    let casosFiltrados = casosAtivos;
 
-    const casoAleatorio = casosAtivos[Math.floor(Math.random() * casosAtivos.length)];
-    router.push(`/caso/${casoAleatorio.id}?modo=osce`);
+    if (tipoOSCE === "pediatrico") {
+      casosFiltrados = casosAtivos.filter(
+        (caso) => caso.tipoPaciente === "pediatrico" || caso.paciente?.tipoPaciente === "pediatrico"
+      );
+    } else {
+      // Adulto: casos sem tipoPaciente (padrão adulto) ou explicitamente marcados como adulto
+      casosFiltrados = casosAtivos.filter(
+        (caso) => !caso.tipoPaciente || caso.tipoPaciente === "adulto" || !caso.paciente?.tipoPaciente || caso.paciente?.tipoPaciente === "adulto"
+      );
+    }
+
+    if (casosFiltrados.length === 0) {
+      alert(`Nenhum caso ${tipoOSCE} disponível no momento.`);
+      return;
+    }
+
+    const casoAleatorio = casosFiltrados[Math.floor(Math.random() * casosFiltrados.length)];
+    router.push(`/caso/${casoAleatorio.id}?modo=osce&tipo=${tipoOSCE}`);
   };
 
   return (
@@ -65,13 +82,41 @@ export default function FacaOOSCE() {
             ))}
           </ul>
 
-          <button
-            onClick={iniciarOSCEAleatorio}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-sm text-base active:scale-[0.98]"
-          >
-            Iniciar OSCE Aleatório →
-          </button>
-          <p className="text-xs text-slate-400 text-center mt-3">
+          {/* Seção de escolha de modalidade */}
+          <div className="mb-6">
+            <p className="text-sm font-semibold text-slate-700 mb-4 text-center">Escolha a modalidade</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Card OSCE Adulto */}
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border-2 border-blue-200 p-5 flex flex-col">
+                <h3 className="font-bold text-slate-800 mb-2 text-lg">OSCE Adulto</h3>
+                <p className="text-slate-600 text-sm mb-4 flex-grow">
+                  Casos clínicos de pacientes adultos para anamnese, exame físico, hipóteses, exames e SOAP.
+                </p>
+                <button
+                  onClick={() => iniciarOSCE("adulto")}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-sm text-sm active:scale-[0.98]"
+                >
+                  Iniciar OSCE Adulto →
+                </button>
+              </div>
+
+              {/* Card OSCE Pediátrico */}
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl border-2 border-purple-200 p-5 flex flex-col">
+                <h3 className="font-bold text-slate-800 mb-2 text-lg">OSCE Pediátrico</h3>
+                <p className="text-slate-600 text-sm mb-4 flex-grow">
+                  Casos pediátricos com foco em criança, responsável, exame físico pediátrico e raciocínio clínico específico.
+                </p>
+                <button
+                  onClick={() => iniciarOSCE("pediatrico")}
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-sm text-sm active:scale-[0.98]"
+                >
+                  Iniciar OSCE Pediátrico →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs text-slate-400 text-center">
             O diagnóstico só será revelado ao finalizar o atendimento
           </p>
         </div>

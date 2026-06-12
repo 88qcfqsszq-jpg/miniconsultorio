@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import ChatPaciente from "@/components/ChatPaciente";
 import PainelExameFisico from "@/components/PainelExameFisico";
+import ExameFisicoPediatrico from "@/components/pediatria/ExameFisicoPediatrico";
+import IndicadorInterlocutorPediatrico from "@/components/pediatria/IndicadorInterlocutorPediatrico";
 import FormularioSOAP from "@/components/FormularioSOAP";
 import PainelDiagnostico from "@/components/PainelDiagnostico";
 import FeedbackOSCE from "@/components/FeedbackOSCE";
@@ -300,6 +302,12 @@ function CasoPageContent() {
             </p>
             <p className="text-slate-500 text-xs">
               {caso.paciente.nome} • {caso.paciente.idade} anos • {caso.paciente.sexo === "M" ? "M" : "F"}
+              {caso.tipoPaciente === "pediatrico" && caso.paciente.dadosPediatricos && (
+                <>
+                  {" • "}
+                  Responsável: {caso.paciente.dadosPediatricos.responsavel.nome}
+                </>
+              )}
             </p>
           </div>
           <div className="text-right shrink-0">
@@ -418,6 +426,9 @@ function CasoPageContent() {
 
           {/* Coluna 2: Conteúdo Central */}
           <div className="min-w-0 space-y-4">
+            {/* Indicador de Interlocutor Pediátrico */}
+            <IndicadorInterlocutorPediatrico caso={caso} />
+
             {/* Chat */}
             <div className="h-[420px] flex flex-col">
               <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
@@ -427,12 +438,23 @@ function CasoPageContent() {
             {menuAtivo === "paciente" && <ResumoAnamnese mensagens={mensagens} />}
 
             {menuAtivo === "exame" && (
-              <PainelExameFisico
-                caso={caso}
-                manobrasSolicitadas={manobrasSolicitadas}
-                onNovaManobra={handleNovaManobra}
-                modoOSCE={modoOSCE}
-              />
+              <>
+                {caso.tipoPaciente === "pediatrico" ? (
+                  <ExameFisicoPediatrico
+                    caso={caso}
+                    onAchadoEncontrado={handleNovaManobra}
+                    achadosEncontrados={manobrasSolicitadas}
+                    onFechar={() => setMenuAtivo("paciente")}
+                  />
+                ) : (
+                  <PainelExameFisico
+                    caso={caso}
+                    manobrasSolicitadas={manobrasSolicitadas}
+                    onNovaManobra={handleNovaManobra}
+                    modoOSCE={modoOSCE}
+                  />
+                )}
+              </>
             )}
 
             {menuAtivo === "exames" && (
@@ -506,6 +528,9 @@ function CasoPageContent() {
         {/* Layout Mobile: abas dinâmicas */}
         <div className="lg:hidden space-y-4">
           <div className={abaAtiva === "paciente" ? "block" : "hidden"}>
+            {/* Indicador de Interlocutor Pediátrico Mobile */}
+            <IndicadorInterlocutorPediatrico caso={caso} />
+
             <div className="h-[calc(100dvh-200px)] min-h-80 flex flex-col">
               <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
             </div>

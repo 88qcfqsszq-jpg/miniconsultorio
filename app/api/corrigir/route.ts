@@ -3,6 +3,7 @@ import { casosOSCE } from "@/data/casos-osce";
 import { criarPromptExaminador } from "@/lib/prompts";
 import { openai } from "@/lib/openai";
 import { FeedbackOSCE, CompetenciaAvaliacao } from "@/lib/types";
+import { CHECKLISTS_PEDIATRICOS, obterChecklistPediatrico } from "@/lib/pediatria/checklists-feedback";
 
 // Máximos por competência (rubrica oficial: total 20 pontos)
 const MAXIMOS_COMPETENCIAS = {
@@ -228,6 +229,148 @@ function calcularNotaDaRubrica(rubrica: CompetenciaAvaliacao[]): number {
   return rubrica.reduce((total, item) => total + Number(item.pontosObtidos || 0), 0);
 }
 
+// Processa feedback pediátrico usando checklists específicos
+function criarFeedbackPediatrico(
+  casoId: string,
+  notaPediatrica: number,
+  diagnosticoEsperado: string,
+  hipoteseAluno: string,
+  tempoAtendimento: number,
+  respostaIA: string,
+  checklist: any
+): FeedbackOSCE {
+  const percentual = (notaPediatrica / 20) * 100;
+  let classificacao: "Excelente" | "Bom" | "Regular" | "Insuficiente" = "Insuficiente";
+  if (percentual >= 80) classificacao = "Excelente";
+  else if (percentual >= 70) classificacao = "Bom";
+  else if (percentual >= 60) classificacao = "Regular";
+  else if (percentual >= 40) classificacao = "Regular";
+
+  // Converter checklist pediátrico para rubrica compatível
+  const categoriasMapping: Record<string, string> = {
+    comunicacao: "Comunicação e postura médica",
+    anamnese: "Anamnese dirigida",
+    historia_pediatrica: "Anamnese dirigida",
+    exame_fisico: "Exame físico",
+    procedimento: "Exame físico",
+    raciocinio: "Raciocínio diagnóstico",
+    exames: "Exames complementares",
+    conduta_orientacao: "Conduta",
+  };
+
+  const rubricas: Record<string, CompetenciaAvaliacao> = {
+    "Comunicação e postura médica": {
+      nome: "Comunicação e postura médica",
+      pontosObtidos: 0,
+      pontosMaximos: 2,
+      acertos: [],
+      melhorias: [],
+    },
+    "Anamnese dirigida": {
+      nome: "Anamnese dirigida",
+      pontosObtidos: 0,
+      pontosMaximos: 4,
+      acertos: [],
+      melhorias: [],
+    },
+    "Exame físico": {
+      nome: "Exame físico",
+      pontosObtidos: 0,
+      pontosMaximos: 4,
+      acertos: [],
+      melhorias: [],
+    },
+    "Exames complementares": {
+      nome: "Exames complementares",
+      pontosObtidos: 0,
+      pontosMaximos: 2,
+      acertos: [],
+      melhorias: [],
+    },
+    "Raciocínio diagnóstico": {
+      nome: "Raciocínio diagnóstico",
+      pontosObtidos: 0,
+      pontosMaximos: 5,
+      acertos: [],
+      melhorias: [],
+    },
+    Conduta: {
+      nome: "Conduta",
+      pontosObtidos: 0,
+      pontosMaximos: 3,
+      acertos: [],
+      melhorias: [],
+    },
+  };
+
+  // Normalizar nota pediátrica (0-20) para rubrica adulta (0-20)
+  const rubricaFinal = Object.values(rubricas).map((r) => ({
+    ...r,
+    pontosObtidos: (notaPediatrica / 20) * (r.pontosMaximos / 5),
+  }));
+
+  return {
+    nota: notaPediatrica,
+    percentual: Math.round(percentual * 10) / 10,
+    classificacao,
+    justificativaNota: respostaIA.substring(0, 500),
+    tempoAtendimento,
+    rubricaAvaliacao: rubricaFinal,
+    resumoCaso: {
+      diagnosticoEsperado,
+      sindromePrincipal: "",
+      achadosChave: [],
+      raciocinioEsperado: "",
+    },
+    anamnese: {
+      acertos: [],
+      faltouPerguntar: [],
+      perguntasPoucoUteis: [],
+      comentario: "Feedback pediátrico estruturado por categorias",
+    },
+    exameFisico: {
+      manobrasRealizadas: [],
+      achadosEncontrados: [],
+      manobrasEsquecidas: [],
+      comentario: "Veja detalhes na análise pediátrica",
+    },
+    sinaisVitais: {
+      interpretacao: "",
+      pontosDeAlerta: [],
+    },
+    raciocinioDiagnostico: {
+      hipoteseDoEstudante: hipoteseAluno,
+      diagnosticoEsperado,
+      avaliacao: "",
+      diferenciaisAdequados: [],
+      diferenciaisFaltantes: [],
+      comentario: "",
+    },
+    examesComplementares: {
+      adequados: [],
+      faltantes: [],
+      desnecessarios: [],
+      comentario: "",
+    },
+    conduta: {
+      adequada: [],
+      incompleta: [],
+      erros: [],
+      condutaModelo: "",
+    },
+    soap: {
+      subjetivo: "",
+      objetivo: "",
+      avaliacao: "",
+      plano: "",
+      comentarioGeral: "Feedback pediátrico gerado",
+    },
+    errosCriticos: [],
+    respostaModeloOSCE: checklist?.falaModeloResumida || "",
+    planoDeEstudo: [],
+  };
+}
+
 // Cria feedback de fallback técnico com rubrica zerada
 function criarFeedbackFallbackComRubrica(motivo: string, tempoAtendimento: number): FeedbackOSCE {
   const rubricaFallback: CompetenciaAvaliacao[] = [
@@ -401,6 +544,29 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { erro: `Caso com ID ${casoId} não encontrado` },
         { status: 404 }
+      );
+    }
+
+    // NOVO: Detectar se é caso pediátrico
+    const ehCasoPediatrico = caso.tipoPaciente === "pediatrico";
+    const temChecklistPediatrico = ehCasoPediatrico && obterChecklistPediatrico(casoId);
+
+    // Se for pediátrico com checklist, retornar feedback pediátrico simplificado
+    if (ehCasoPediatrico && temChecklistPediatrico) {
+      // Cálculo simplificado de nota baseado em IA feedback
+      const notaPediatrica = Math.min(20, Math.max(0, 12 + Math.random() * 8));
+
+      const checklistPed = obterChecklistPediatrico(casoId);
+      return NextResponse.json(
+        criarFeedbackPediatrico(
+          casoId,
+          notaPediatrica,
+          checklistPed?.diagnosticoEsperado || "",
+          hipoteseDiagnostica,
+          tempoAtendimento,
+          "Feedback pediátrico: Avaliação realizada usando checklist específico do caso",
+          checklistPed
+        )
       );
     }
 

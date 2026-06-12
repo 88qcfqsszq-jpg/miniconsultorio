@@ -1,3 +1,21 @@
+export interface DadosPediatricos {
+  idadeMeses?: number;
+  idadeAnos?: number;
+  faixaEtaria: "neonato" | "lactente" | "pre_escolar" | "escolar" | "adolescente";
+  responsavel: {
+    nome: string;
+    parentesco: "mãe" | "pai" | "avó" | "responsável";
+  };
+  peso?: string;
+  estatura?: string;
+  perimetroCefalico?: string;
+  estadoVacinal?: string;
+  gestacaoParto?: string;
+  desenvolvimento?: string;
+  alimentacao?: string;
+  aberturaResponsavel?: string;
+}
+
 export interface Paciente {
   id: string;
   nome: string;
@@ -10,6 +28,8 @@ export interface Paciente {
   estado_civil?: string;
   alergias?: string[];
   medicamentos_em_uso?: string[];
+  tipoPaciente?: "adulto" | "pediatrico";
+  dadosPediatricos?: DadosPediatricos;
 }
 
 export interface SinaisVitais {
@@ -241,6 +261,7 @@ export interface Caso {
   tipo_estacao: "entrevista" | "exame_fisico" | "procedimento" | "integrada";
   tempo_osce_minutos: number;
   objetivo_pedagogico: string;
+  tipoPaciente?: "adulto" | "pediatrico";
 
   // Dados visíveis ao estudante
   dados_visiveis_ao_estudante: {
