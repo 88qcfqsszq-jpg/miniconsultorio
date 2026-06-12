@@ -167,8 +167,8 @@ export default function ExameFisicoPediatricoVisual({
 
         {/* Conteúdo */}
         <div className="flex-1 overflow-y-auto p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
-            {/* Coluna 1: Imagem e Regiões */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
+            {/* Coluna 1: Imagem */}
             <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
               <PacientePediatricoVisualAjustado
                 faixaEtaria={caso.paciente.dadosPediatricos?.faixaEtaria}
@@ -177,8 +177,36 @@ export default function ExameFisicoPediatricoVisual({
               />
             </div>
 
-            {/* Coluna 2: Ações e Detalhes da Região */}
-            <div className="lg:col-span-1 space-y-4">
+            {/* Coluna 2: Lista de Regiões (apenas para lactente) */}
+            {caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' ||
+            caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? (
+              <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col">
+                <h3 className="font-bold text-slate-800 text-sm">Regiões do exame</h3>
+                <div className="flex-1 overflow-y-auto space-y-2">
+                  {regioesAjustadas.map((r) => (
+                    <button
+                      key={r.id}
+                      onClick={() => setRegioSelecionada(r.id)}
+                      className={`w-full text-left p-3 rounded-lg border transition-all text-sm font-medium ${
+                        regioSelecionada === r.id
+                          ? 'bg-blue-100 border-blue-500 text-blue-800 shadow-sm'
+                          : 'bg-white border-slate-200 text-slate-700 hover:bg-blue-50 hover:border-blue-300'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        {regioSelecionada === r.id && (
+                          <span className="text-blue-600 font-bold">✓</span>
+                        )}
+                        <span>{r.label}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {/* Coluna 3: Ações e Detalhes da Região */}
+            <div className={`space-y-4 ${caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' || caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? 'lg:col-span-1' : 'lg:col-span-2'}`}>
               {regiao ? (
                 <>
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -232,13 +260,13 @@ export default function ExameFisicoPediatricoVisual({
                 </>
               ) : (
                 <div className="bg-slate-100 rounded-lg p-4 text-center text-slate-500 text-sm">
-                  Clique em uma região na imagem para avaliar
+                  Clique em uma região para selecionar
                 </div>
               )}
             </div>
 
-            {/* Coluna 3: Achados Registrados */}
-            <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col">
+            {/* Coluna 4: Achados Registrados */}
+            <div className={`bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col ${caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' || caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? 'lg:col-span-1' : 'lg:col-span-1'}`}>
               <h3 className="font-bold text-slate-800 text-sm">Achados Registrados</h3>
               <div className="flex-1 overflow-y-auto space-y-2">
                 {achadosEncontrados.filter((a) => a.categoria === 'exame_fisico_visual').length > 0 ? (
@@ -285,7 +313,7 @@ export default function ExameFisicoPediatricoVisual({
         {/* Info */}
         <div className="bg-sky-50 border-t border-sky-200 p-4">
           <p className="text-xs text-sky-700">
-            <strong>ℹ️ Dica:</strong> Clique nas regiões do paciente para ver as ações disponíveis. Os achados serão registrados automaticamente.
+            <strong>ℹ️ Dica:</strong> Clique nos boxes das regiões ou nos pontos da imagem para selecionar a área do exame. Selecione uma região e depois escolha a ação desejada. O achado só será registrado após clicar em uma ação.
           </p>
         </div>
       </div>
