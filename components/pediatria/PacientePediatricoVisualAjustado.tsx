@@ -239,148 +239,20 @@ export default function PacientePediatricoVisualAjustado({
       </div>
 
       {/* Contêiner de imagem com hotspots */}
-      <div className="relative flex-1 flex items-center justify-center p-4 overflow-hidden">
-        {/* Imagem do paciente pediátrico */}
-        <div className="relative w-full h-full max-w-xs" onClick={handleCalibrationClick}>
-          {/* Imagem com tratamento de erro */}
-          <img
-            ref={imageRef}
-            src={imagemPath}
-            alt={`Paciente pediátrico - ${descricaoFaixa}`}
-            className="w-full h-full object-contain"
-            onLoad={handleImagemCarregada}
-            onError={handleErroImagem}
-            style={{ display: imagemCarregada && !erroImagem ? 'block' : 'none' }}
-          />
-
-          {/* Fallback visual se imagem não carregar */}
-          {(!imagemCarregada || erroImagem) && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-slate-100 to-slate-50 border-2 border-dashed border-slate-300 rounded">
-              <div className="text-center space-y-3 px-4">
-                <p className="text-slate-600 text-sm font-semibold">📷 Imagem não carregada</p>
-                <p className="text-xs text-slate-500">
-                  Arquivo esperado:<br />
-                  <code className="text-xs font-mono bg-slate-200 px-2 py-1 rounded">
-                    {infoImagem.nome}
-                  </code>
-                </p>
-                <p className="text-xs text-slate-400">Os hotspots continuam funcionando</p>
-              </div>
-            </div>
-          )}
-
-          {/* Overlay de calibração sequencial */}
-          {DEBUG_HOTSPOT_CALIBRATION && imagemCarregada && !erroImagem && (
-            <div className="absolute inset-0 bg-black/5 cursor-crosshair flex flex-col">
-              {/* Header com progresso */}
-              <div className="bg-white/98 px-4 py-3 border-b border-slate-200 shadow-sm z-50">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="font-semibold text-blue-700">
-                    🎯 Calibração de Hotspots
-                  </div>
-                  <div className="text-sm font-mono text-slate-600">
-                    {currentCalibrationIndex}/{calibrationTargets.length}
-                  </div>
-                </div>
-                <div className="w-full bg-slate-200 rounded-full h-1.5">
-                  <div
-                    className="bg-blue-500 h-1.5 rounded-full transition-all"
-                    style={{ width: `${(currentCalibrationIndex / calibrationTargets.length) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-
-              {/* Conteúdo central */}
-              <div className="flex-1 flex items-center justify-center">
-                {currentCalibrationIndex < calibrationTargets.length ? (
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/98 px-6 py-4 rounded-lg shadow-lg z-50 text-center max-w-sm">
-                    <div className="text-lg font-bold text-slate-800 mb-2">
-                      {calibrationTargets[currentCalibrationIndex].label}
-                    </div>
-                    <div className="text-sm text-slate-600 mb-3">
-                      {calibrationClicks.length === 0 && 'Clique no canto SUPERIOR ESQUERDO do box textual'}
-                      {calibrationClicks.length === 1 && (
-                        <span className="text-blue-600 font-medium">
-                          ✓ Primeiro clique OK. Agora clique no canto INFERIOR DIREITO
-                        </span>
-                      )}
-                    </div>
-                    {calibrationError && (
-                      <div className="text-xs bg-red-50 text-red-700 px-3 py-2 rounded mb-3 border border-red-200">
-                        {calibrationError}
-                      </div>
-                    )}
-                    <div className="flex gap-2 justify-center flex-wrap">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleRetakeCurrentHotspot();
-                        }}
-                        className="px-3 py-1.5 text-xs bg-amber-500 hover:bg-amber-600 text-white rounded font-medium"
-                      >
-                        ↻ Refazer atual
-                      </button>
-                      {currentCalibrationIndex > 0 && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handlePreviousHotspot();
-                          }}
-                          className="px-3 py-1.5 text-xs bg-slate-500 hover:bg-slate-600 text-white rounded font-medium"
-                        >
-                          ⬅ Anterior
-                        </button>
-                      )}
-                      {calibrationResults.length > 0 && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (window.confirm('⚠️ Tem certeza? Isso vai limpar TODOS os hotspots e recomeçar do zero.')) {
-                              handleClearAllCalibration();
-                            }
-                          }}
-                          className="px-3 py-1.5 text-xs bg-red-500 hover:bg-red-600 text-white rounded font-medium"
-                        >
-                          🗑 Limpar tudo
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-50 px-6 py-4 rounded-lg shadow-lg z-50 text-center max-w-sm border-2 border-green-400">
-                    <div className="text-2xl mb-2">🎉</div>
-                    <div className="text-lg font-bold text-green-800 mb-2">
-                      Calibração Completa!
-                    </div>
-                    <div className="text-sm text-green-700 mb-4">
-                      {calibrationResults.length} hotspots calibrados com sucesso
-                    </div>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCopyFinalArray();
-                      }}
-                      className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded font-medium text-sm mb-2"
-                    >
-                      📋 Copiar Array (Clipboard)
-                    </button>
-                    <div className="text-xs text-green-600 mt-2 mb-3">
-                      Array também está disponível no Console do DevTools (F12)
-                    </div>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (window.confirm('⚠️ Recalibrar tudo? Isso vai apagar o progresso e recomeçar do primeiro hotspot.')) {
-                          handleClearAllCalibration();
-                        }
-                      }}
-                      className="w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded font-medium text-sm"
-                    >
-                      🗑 Recalibrar tudo
-                    </button>
-                  </div>
-                )}
-              </div>
+      {DEBUG_HOTSPOT_CALIBRATION && imagemCarregada && !erroImagem ? (
+        // Layout para calibração: imagem (esquerda) + painel (direita)
+        <div className="relative flex-1 flex gap-4 p-4 overflow-hidden">
+          {/* COLUNA ESQUERDA: Imagem do lactente — 100% livre para clicar */}
+          <div className="flex-1 flex items-center justify-center">
+            <div className="relative w-full h-full bg-slate-50 rounded-lg border border-slate-200 overflow-hidden" onClick={handleCalibrationClick}>
+              <img
+                ref={imageRef}
+                src={imagemPath}
+                alt={`Paciente pediátrico - ${descricaoFaixa}`}
+                className="w-full h-full object-contain display-block"
+                onLoad={handleImagemCarregada}
+                onError={handleErroImagem}
+              />
 
               {/* Retângulos já calibrados (verde) */}
               {calibrationResults.map((result) => (
@@ -393,10 +265,10 @@ export default function PacientePediatricoVisualAjustado({
                     width: `${result.width}%`,
                     height: `${result.height}%`,
                   }}
-                ></div>
+                />
               ))}
 
-              {/* Retângulo em marcação (amarelo) */}
+              {/* Retângulo sendo calibrado (amarelo) */}
               {calibrationClicks.length === 2 && currentCalibrationIndex < calibrationTargets.length && (
                 <div
                   className="absolute border-2 border-amber-500 bg-amber-500/10 pointer-events-none"
@@ -406,149 +278,282 @@ export default function PacientePediatricoVisualAjustado({
                     width: `${(Math.abs(calibrationClicks[1].x - calibrationClicks[0].x) / (imageRef.current?.getBoundingClientRect().width || 1)) * 100}%`,
                     height: `${(Math.abs(calibrationClicks[1].y - calibrationClicks[0].y) / (imageRef.current?.getBoundingClientRect().height || 1)) * 100}%`,
                   }}
-                ></div>
+                />
               )}
 
-              {/* Marcadores dos cliques (bolinhas) */}
+              {/* Bolinhas dos cliques */}
               {calibrationClicks.map((clique, idx) => {
                 if (!imageRef.current) return null;
                 const rect = imageRef.current.getBoundingClientRect();
-                const percentLeft = (clique.x / rect.width) * 100;
-                const percentTop = (clique.y / rect.height) * 100;
-
                 return (
                   <div
                     key={idx}
-                    className="absolute w-4 h-4 border-2 border-amber-500 rounded-full pointer-events-none z-40"
+                    className="absolute w-4 h-4 border-2 border-amber-500 rounded-full pointer-events-none"
                     style={{
-                      left: `${percentLeft}%`,
-                      top: `${percentTop}%`,
+                      left: `${(clique.x / rect.width) * 100}%`,
+                      top: `${(clique.y / rect.height) * 100}%`,
                       transform: 'translate(-50%, -50%)',
                     }}
                   >
-                    <div className="absolute inset-1 bg-amber-500 rounded-full animate-pulse"></div>
+                    <div className="absolute inset-1 bg-amber-500 rounded-full animate-pulse" />
                   </div>
                 );
               })}
+            </div>
+          </div>
 
-              {/* Info footer */}
-              <div className="bg-white/98 px-4 py-2 border-t border-slate-200 text-xs text-slate-600 text-center z-50">
-                {calibrationClicks.length > 0 && 'ESC limpa os cliques atuais'}
-                {calibrationClicks.length === 0 && 'Clique para começar'}
+          {/* COLUNA DIREITA: Painel de instruções (fixo, NÃO sobre a imagem) */}
+          <div className="w-80 flex flex-col gap-4">
+            {/* Progresso */}
+            <div className="bg-white px-4 py-3 rounded-lg border border-slate-200 shadow-sm">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-semibold text-blue-700">🎯 Calibração</span>
+                <span className="text-sm font-mono text-slate-600">{currentCalibrationIndex}/{calibrationTargets.length}</span>
+              </div>
+              <div className="w-full bg-slate-200 rounded-full h-1.5">
+                <div
+                  className="bg-blue-500 h-1.5 rounded-full transition-all"
+                  style={{ width: `${(currentCalibrationIndex / calibrationTargets.length) * 100}%` }}
+                />
               </div>
             </div>
-          )}
 
-          {/* Hotspots invisíveis sobre boxes textuais do lactente */}
-          {(faixaEtaria === 'lactente' || faixaEtaria === 'neonato') && (
-            <>
-              {LACTENTE_BOX_HOTSPOTS.map((hotspot) => (
+            {/* Instrução */}
+            {currentCalibrationIndex < calibrationTargets.length ? (
+              <div className="bg-white px-4 py-3 rounded-lg border border-slate-200 shadow-sm space-y-3">
+                <div className="font-bold text-slate-800 text-sm">
+                  {calibrationTargets[currentCalibrationIndex].label}
+                </div>
+                <div className="text-xs text-slate-600 space-y-2">
+                  {calibrationClicks.length === 0 && (
+                    <p>Clique no <strong>canto SUPERIOR ESQUERDO</strong> do box textual.</p>
+                  )}
+                  {calibrationClicks.length === 1 && (
+                    <p className="text-blue-600 font-medium">
+                      ✓ OK! Agora clique no <strong>canto INFERIOR DIREITO</strong> do box.
+                    </p>
+                  )}
+                </div>
+                {calibrationError && (
+                  <div className="text-xs bg-red-50 text-red-700 px-2 py-1.5 rounded border border-red-200">
+                    {calibrationError}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="bg-green-50 px-4 py-3 rounded-lg border-2 border-green-400 shadow-sm text-center space-y-2">
+                <div className="text-lg">🎉</div>
+                <div className="font-bold text-green-800 text-sm">Pronto!</div>
+                <p className="text-xs text-green-700">{calibrationResults.length} hotspots calibrados</p>
+              </div>
+            )}
+
+            {/* Botões */}
+            <div className="flex flex-col gap-2">
+              {currentCalibrationIndex < calibrationTargets.length && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRetakeCurrentHotspot();
+                    }}
+                    className="w-full px-3 py-2 text-xs bg-amber-500 hover:bg-amber-600 text-white rounded font-medium transition"
+                  >
+                    ↻ Refazer atual
+                  </button>
+                  {currentCalibrationIndex > 0 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handlePreviousHotspot();
+                      }}
+                      className="w-full px-3 py-2 text-xs bg-slate-500 hover:bg-slate-600 text-white rounded font-medium transition"
+                    >
+                      ⬅ Anterior
+                    </button>
+                  )}
+                </>
+              )}
+
+              {calibrationResults.length > 0 && (
                 <button
-                  key={hotspot.id}
-                  className={`absolute z-20 cursor-pointer rounded-xl transition-all ${
-                    DEBUG_HOTSPOTS_PEDIATRIA
-                      ? 'bg-red-500/20 hover:bg-red-500/30'
-                      : 'bg-transparent hover:bg-blue-500/10'
-                  } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                  style={{
-                    left: hotspot.left,
-                    top: hotspot.top,
-                    width: hotspot.width,
-                    height: hotspot.height,
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (window.confirm('⚠️ Limpar tudo e recomeçar?')) {
+                      handleClearAllCalibration();
+                    }
                   }}
-                  onClick={() => onRegioClicada(hotspot.id as RegiaoPediatricaId)}
-                  aria-label={hotspot.label}
-                  title={hotspot.label}
-                />
-              ))}
-            </>
-          )}
-
-          {/* SVG overlay com hotspots clicáveis */}
-          <svg
-            className="absolute inset-0 w-full h-full"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            style={{ cursor: desabilitarHotspots ? 'default' : 'pointer', pointerEvents: desabilitarHotspots ? 'none' : 'auto' }}
-          >
-            {/* Renderizar hotspots ordenados por zIndex */}
-            {regioesOrdenadas.map((regiao) => {
-              const isSelected = regioSelecionada === regiao.id;
-              const isHover = regioEmHover === regiao.id;
-
-              return (
-                <g
-                  key={regiao.id}
-                  onMouseEnter={() => setRegioEmHover(regiao.id as RegiaoPediatricaId)}
-                  onMouseLeave={() => setRegioEmHover(null)}
-                  style={{ cursor: 'pointer' }}
+                  className="w-full px-3 py-2 text-xs bg-red-500 hover:bg-red-600 text-white rounded font-medium transition"
                 >
-                  {/* Retângulo clicável com estilos dinâmicos */}
-                  <rect
-                    x={regiao.coordenadas.x}
-                    y={regiao.coordenadas.y}
-                    width={regiao.coordenadas.width}
-                    height={regiao.coordenadas.height}
-                    fill={
-                      DEBUG_HOTSPOTS_PEDIATRIA
-                        ? 'rgba(59, 130, 246, 0.1)'
-                        : isSelected
-                          ? 'rgba(59, 130, 246, 0.3)'
-                          : isHover
-                            ? 'rgba(59, 130, 246, 0.15)'
-                            : 'rgba(100, 116, 139, 0.02)'
-                    }
-                    stroke={
-                      DEBUG_HOTSPOTS_PEDIATRIA
-                        ? 'rgba(239, 68, 68, 0.8)'
-                        : isSelected
-                          ? 'rgba(59, 130, 246, 1)'
-                          : isHover
-                            ? 'rgba(59, 130, 246, 0.6)'
-                            : 'rgba(100, 116, 139, 0.1)'
-                    }
-                    strokeWidth={DEBUG_HOTSPOTS_PEDIATRIA ? '0.8' : isSelected ? '1' : '0.3'}
-                    className="transition-all"
-                    onClick={() => onRegioClicada(regiao.id as RegiaoPediatricaId)}
-                    style={{ pointerEvents: 'auto', cursor: 'pointer' }}
-                  />
+                  🗑 Limpar tudo
+                </button>
+              )}
 
-                  {/* Label da região (visível em debug ou selecionada) */}
-                  {(DEBUG_HOTSPOTS_PEDIATRIA || isSelected) && (
-                    <text
-                      x={regiao.coordenadas.x + regiao.coordenadas.width / 2}
-                      y={regiao.coordenadas.y + regiao.coordenadas.height / 2}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="font-bold pointer-events-none select-none"
-                      fontSize={DEBUG_HOTSPOTS_PEDIATRIA ? '1.5' : '1.2'}
-                      fill={DEBUG_HOTSPOTS_PEDIATRIA ? 'rgba(239, 68, 68, 0.9)' : 'rgba(59, 130, 246, 0.9)'}
-                    >
-                      {DEBUG_HOTSPOTS_PEDIATRIA ? `${regiao.id} (z:${regiao.zIndex})` : regiao.label.split(' ')[0]}
-                    </text>
-                  )}
+              {currentCalibrationIndex >= calibrationTargets.length && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCopyFinalArray();
+                    }}
+                    className="w-full px-3 py-2 text-xs bg-green-600 hover:bg-green-700 text-white rounded font-medium transition"
+                  >
+                    📋 Copiar Array
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (window.confirm('⚠️ Recalibrar tudo?')) {
+                        handleClearAllCalibration();
+                      }
+                    }}
+                    className="w-full px-3 py-2 text-xs bg-red-500 hover:bg-red-600 text-white rounded font-medium transition"
+                  >
+                    🗑 Recalibrar tudo
+                  </button>
+                </>
+              )}
+            </div>
 
-                  {/* Coordenadas em debug */}
-                  {DEBUG_HOTSPOTS_PEDIATRIA && (
-                    <text
-                      x={regiao.coordenadas.x + regiao.coordenadas.width / 2}
-                      y={regiao.coordenadas.y + regiao.coordenadas.height / 2 + 3}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="pointer-events-none select-none"
-                      fontSize="0.8"
-                      fill="rgba(239, 68, 68, 0.7)"
-                      fontFamily="monospace"
-                    >
-                      {`x:${regiao.coordenadas.x} y:${regiao.coordenadas.y}`}
-                    </text>
-                  )}
-                </g>
-              );
-            })}
-          </svg>
+            <div className="text-xs text-slate-500 text-center border-t border-slate-200 pt-2">
+              <p>ESC limpa cliques</p>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        // Layout normal (sem calibração)
+        <div className="relative flex-1 flex items-center justify-center p-4 overflow-hidden">
+          <div className="relative w-full h-full max-w-xs">
+            <img
+              ref={imageRef}
+              src={imagemPath}
+              alt={`Paciente pediátrico - ${descricaoFaixa}`}
+              className="w-full h-full object-contain"
+              onLoad={handleImagemCarregada}
+              onError={handleErroImagem}
+              style={{ display: imagemCarregada && !erroImagem ? 'block' : 'none' }}
+            />
+
+            {(!imagemCarregada || erroImagem) && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-slate-100 to-slate-50 border-2 border-dashed border-slate-300 rounded">
+                <div className="text-center space-y-3 px-4">
+                  <p className="text-slate-600 text-sm font-semibold">📷 Imagem não carregada</p>
+                  <p className="text-xs text-slate-500">
+                    Arquivo esperado:<br />
+                    <code className="text-xs font-mono bg-slate-200 px-2 py-1 rounded">
+                      {infoImagem.nome}
+                    </code>
+                  </p>
+                  <p className="text-xs text-slate-400">Os hotspots continuam funcionando</p>
+                </div>
+              </div>
+            )}
+
+            {(faixaEtaria === 'lactente' || faixaEtaria === 'neonato') && (
+              <>
+                {LACTENTE_BOX_HOTSPOTS.map((hotspot) => (
+                  <button
+                    key={hotspot.id}
+                    className={`absolute z-20 cursor-pointer rounded-xl transition-all ${
+                      DEBUG_HOTSPOTS_PEDIATRIA
+                        ? 'bg-red-500/20 hover:bg-red-500/30'
+                        : 'bg-transparent hover:bg-blue-500/10'
+                    } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    style={{
+                      left: hotspot.left,
+                      top: hotspot.top,
+                      width: hotspot.width,
+                      height: hotspot.height,
+                    }}
+                    onClick={() => onRegioClicada(hotspot.id as RegiaoPediatricaId)}
+                    aria-label={hotspot.label}
+                    title={hotspot.label}
+                  />
+                ))}
+              </>
+            )}
+
+            <svg
+              className="absolute inset-0 w-full h-full"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              style={{ cursor: desabilitarHotspots ? 'default' : 'pointer', pointerEvents: desabilitarHotspots ? 'none' : 'auto' }}
+            >
+              {regioesOrdenadas.map((regiao) => {
+                const isSelected = regioSelecionada === regiao.id;
+                const isHover = regioEmHover === regiao.id;
+
+                return (
+                  <g
+                    key={regiao.id}
+                    onMouseEnter={() => setRegioEmHover(regiao.id as RegiaoPediatricaId)}
+                    onMouseLeave={() => setRegioEmHover(null)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <rect
+                      x={regiao.coordenadas.x}
+                      y={regiao.coordenadas.y}
+                      width={regiao.coordenadas.width}
+                      height={regiao.coordenadas.height}
+                      fill={
+                        DEBUG_HOTSPOTS_PEDIATRIA
+                          ? 'rgba(59, 130, 246, 0.1)'
+                          : isSelected
+                            ? 'rgba(59, 130, 246, 0.3)'
+                            : isHover
+                              ? 'rgba(59, 130, 246, 0.15)'
+                              : 'rgba(100, 116, 139, 0.02)'
+                      }
+                      stroke={
+                        DEBUG_HOTSPOTS_PEDIATRIA
+                          ? 'rgba(239, 68, 68, 0.8)'
+                          : isSelected
+                            ? 'rgba(59, 130, 246, 1)'
+                            : isHover
+                              ? 'rgba(59, 130, 246, 0.6)'
+                              : 'rgba(100, 116, 139, 0.1)'
+                      }
+                      strokeWidth={DEBUG_HOTSPOTS_PEDIATRIA ? '0.8' : isSelected ? '1' : '0.3'}
+                      className="transition-all"
+                      onClick={() => onRegioClicada(regiao.id as RegiaoPediatricaId)}
+                      style={{ pointerEvents: 'auto', cursor: 'pointer' }}
+                    />
+
+                    {(DEBUG_HOTSPOTS_PEDIATRIA || isSelected) && (
+                      <text
+                        x={regiao.coordenadas.x + regiao.coordenadas.width / 2}
+                        y={regiao.coordenadas.y + regiao.coordenadas.height / 2}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        className="font-bold pointer-events-none select-none"
+                        fontSize={DEBUG_HOTSPOTS_PEDIATRIA ? '1.5' : '1.2'}
+                        fill={DEBUG_HOTSPOTS_PEDIATRIA ? 'rgba(239, 68, 68, 0.9)' : 'rgba(59, 130, 246, 0.9)'}
+                      >
+                        {DEBUG_HOTSPOTS_PEDIATRIA ? `${regiao.id} (z:${regiao.zIndex})` : regiao.label.split(' ')[0]}
+                      </text>
+                    )}
+
+                    {DEBUG_HOTSPOTS_PEDIATRIA && (
+                      <text
+                        x={regiao.coordenadas.x + regiao.coordenadas.width / 2}
+                        y={regiao.coordenadas.y + regiao.coordenadas.height / 2 + 3}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        className="pointer-events-none select-none"
+                        fontSize="0.8"
+                        fill="rgba(239, 68, 68, 0.7)"
+                        fontFamily="monospace"
+                      >
+                        {`x:${regiao.coordenadas.x} y:${regiao.coordenadas.y}`}
+                      </text>
+                    )}
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+        </div>
+      )}
 
       {/* Info/Dica */}
       <div className="px-4 py-2 bg-sky-50 border-t border-sky-200 text-xs text-sky-700">
