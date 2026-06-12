@@ -217,8 +217,8 @@ export default function ExameFisicoPediatricoVisual({
   }, [draggedRegion]);
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-7xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2">
+      <div className="bg-white rounded-2xl w-[95vw] h-[95vh] shadow-2xl flex flex-col">
         {/* Header */}
         <div className="sticky top-0 bg-gradient-to-r from-sky-600 to-blue-600 text-white p-6 flex justify-between items-center z-10">
           <div>
@@ -243,10 +243,10 @@ export default function ExameFisicoPediatricoVisual({
         </div>
 
         {/* Conteúdo */}
-        <div className="flex-1 overflow-y-auto p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
+        <div className="flex-1 overflow-hidden p-6">
+          <div className="grid grid-cols-[1.5fr_280px_1fr_280px] gap-6 h-full">
             {/* Coluna 1: Imagem com Hotspots Dinâmicos */}
-            <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 overflow-hidden relative" onDragOver={handleDragOver} onDrop={handleDrop}>
+            <div className="bg-white rounded-lg border border-slate-200 overflow-visible relative flex flex-col" onDragOver={handleDragOver} onDrop={handleDrop}>
               <PacientePediatricoVisualAjustado
                 faixaEtaria={caso.paciente.dadosPediatricos?.faixaEtaria}
                 onDragOver={handleDragOver}
@@ -279,7 +279,7 @@ export default function ExameFisicoPediatricoVisual({
             {/* Coluna 2: Lista de Regiões Arrastáveis (apenas para lactente) */}
             {caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' ||
             caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? (
-              <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col">
+              <div className="bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col overflow-y-auto min-h-0">
                 <h3 className="font-bold text-slate-800 text-sm">Regiões do exame</h3>
                 <p className="text-xs text-slate-500">Arraste para o corpo correto</p>
                 {feedback && (
@@ -316,7 +316,7 @@ export default function ExameFisicoPediatricoVisual({
             ) : null}
 
             {/* Coluna 3: Ações e Detalhes da Região */}
-            <div className={`space-y-4 ${caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' || caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? 'lg:col-span-1' : 'lg:col-span-2'}`}>
+            <div className="space-y-4 overflow-y-auto min-h-0">
               {regiao ? (
                 <>
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -376,7 +376,7 @@ export default function ExameFisicoPediatricoVisual({
             </div>
 
             {/* Coluna 4: Achados Registrados */}
-            <div className={`bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col ${caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' || caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? 'lg:col-span-1' : 'lg:col-span-1'}`}>
+            <div className="bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col overflow-y-auto min-h-0">
               <h3 className="font-bold text-slate-800 text-sm">Achados Registrados</h3>
               <div className="flex-1 overflow-y-auto space-y-2">
                 {achadosEncontrados.filter((a) => a.categoria === 'exame_fisico_visual').length > 0 ? (

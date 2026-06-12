@@ -33,51 +33,40 @@ export default function PacientePediatricoVisualAjustado({
   }, [imagemPath]);
 
   return (
-    <div className="relative w-full h-full bg-slate-50 rounded-lg border border-slate-200 overflow-hidden flex flex-col">
-      {/* Header com faixa etária */}
-      <div className="px-4 py-2 bg-slate-100 border-b border-slate-200 text-xs text-slate-600">
-        <span className="font-semibold">{descricaoFaixa}</span>
-        {erroImagem && (
-          <span className="ml-2 text-orange-600">
-            ⚠️ Imagem não encontrada: <code className="text-xs">{infoImagem.nome}</code>
-          </span>
-        )}
-      </div>
-
-      {/* Contêiner de imagem — centralizado e livre */}
-      <div className="relative flex-1 flex items-center justify-center p-8 overflow-auto" onDragOver={onDragOver} onDrop={onDrop}>
-        <div className="relative w-full h-full flex items-center justify-center">
-          {/* Imagem do paciente pediátrico — LIMPA, SEM HOTSPOTS */}
+    <div className="relative w-full h-full bg-white rounded-lg border border-slate-200 overflow-hidden flex flex-col">
+      {/* Imagem do bebê — centralizada e inteira */}
+      <div
+        className="relative flex-1 flex items-center justify-center overflow-auto bg-white"
+        onDragOver={onDragOver}
+        onDrop={onDrop}
+        style={{ minHeight: 0 }}
+      >
+        <div className="relative w-full max-w-sm mx-auto">
+          {/* Imagem — sem corte, proporcional */}
           <img
             src={imagemPath}
             alt={`Paciente pediátrico - ${descricaoFaixa}`}
-            className="w-full h-full object-contain scale-300"
+            className="w-full h-auto object-contain block mx-auto"
             onLoad={handleImagemCarregada}
             onError={handleErroImagem}
-            style={{ display: imagemCarregada && !erroImagem ? 'block' : 'none' }}
+            style={{
+              display: imagemCarregada && !erroImagem ? 'block' : 'none',
+              maxHeight: 'calc(100vh - 260px)',
+            }}
           />
 
-          {/* Fallback visual se imagem não carregar */}
+          {/* Fallback visual */}
           {(!imagemCarregada || erroImagem) && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-slate-100 to-slate-50 border-2 border-dashed border-slate-300 rounded">
+            <div className="flex items-center justify-center bg-gradient-to-b from-slate-100 to-slate-50 border-2 border-dashed border-slate-300 rounded aspect-square">
               <div className="text-center space-y-3 px-4">
                 <p className="text-slate-600 text-sm font-semibold">📷 Imagem não carregada</p>
                 <p className="text-xs text-slate-500">
-                  Arquivo esperado:<br />
-                  <code className="text-xs font-mono bg-slate-200 px-2 py-1 rounded">
-                    {infoImagem.nome}
-                  </code>
+                  {infoImagem.nome}
                 </p>
-                <p className="text-xs text-slate-400">Arraste as regiões sobre o corpo</p>
               </div>
             </div>
           )}
         </div>
-      </div>
-
-      {/* Info/Dica */}
-      <div className="px-4 py-2 bg-sky-50 border-t border-sky-200 text-xs text-sky-700">
-        💡 Arraste as regiões para o local correto do corpo
       </div>
     </div>
   );
