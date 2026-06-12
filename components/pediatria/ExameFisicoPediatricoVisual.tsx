@@ -220,7 +220,7 @@ export default function ExameFisicoPediatricoVisual({
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2">
       <div className="bg-white rounded-2xl w-[95vw] h-[95vh] shadow-2xl flex flex-col">
         {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-sky-600 to-blue-600 text-white p-6 flex justify-between items-center z-10">
+        <div className="bg-gradient-to-r from-sky-600 to-blue-600 text-white p-6 flex justify-between items-center shrink-0">
           <div>
             <h2 className="text-2xl font-bold">Exame Físico Pediátrico Visual</h2>
             <p className="text-sm text-sky-100 mt-1">
