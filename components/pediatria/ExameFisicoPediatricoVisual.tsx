@@ -81,6 +81,23 @@ function obterDescricaoAcao(acaoId: string): string {
   return ACOES_LABELS[acaoId]?.descricao || '';
 }
 
+// Regiões arrastáveis para drag-and-drop
+const LACTENTE_REGIOES_DRAG = [
+  { id: 'cabeca', label: 'Cabeça / Perímetro Cefálico' },
+  { id: 'olhos_face', label: 'Olhos / Face' },
+  { id: 'orofaringe', label: 'Orofaringe' },
+  { id: 'pescoco_linfonodos', label: 'Pescoço / Linfonodos' },
+  { id: 'torax_respiratorio', label: 'Tórax Respiratório' },
+  { id: 'precordio', label: 'Precórdio' },
+  { id: 'abdome', label: 'Abdome' },
+  { id: 'figado', label: 'Fígado / Hipocôndrio D' },
+  { id: 'baco', label: 'Baço / Hipocôndrio E' },
+  { id: 'membros_perfusao', label: 'Membros / Perfusão / Pulsos / TEC' },
+  { id: 'pele_mucosas', label: 'Pele / Mucosas' },
+  { id: 'desenvolvimento_interacao', label: 'Desenvolvimento / Interação' },
+  { id: 'estado_geral', label: 'Estado Geral' },
+];
+
 export default function ExameFisicoPediatricoVisual({
   caso,
   onAchadoEncontrado,
@@ -89,6 +106,8 @@ export default function ExameFisicoPediatricoVisual({
 }: ExameFisicoPediatricoVisualProps) {
   const [regioSelecionada, setRegioSelecionada] = useState<RegiaoPediatricaId | null>(null);
   const [erro, setErro] = useState<string | null>(null);
+  const [draggedRegion, setDraggedRegion] = useState<string | null>(null);
+  const [regioesConcluidas, setRegioesConcluidas] = useState<Set<string>>(new Set());
 
   const regioesAjustadas = obterRegioesPediatricas(caso.paciente.dadosPediatricos?.faixaEtaria);
   const regiao = regioSelecionada ? regioesAjustadas.find((r) => r.id === regioSelecionada) : null;
@@ -139,6 +158,41 @@ export default function ExameFisicoPediatricoVisual({
     [caso, onAchadoEncontrado]
   );
 
+  // Handlers para drag-and-drop
+  const handleDragStart = useCallback((e: React.DragEvent<HTMLDivElement>, regioId: string) => {
+    setDraggedRegion(regioId);
+    e.dataTransfer.effectAllowed = 'move';
+  }, []);
+
+  const handleDragEnd = useCallback(() => {
+    setDraggedRegion(null);
+  }, []);
+
+  const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (!draggedRegion) return;
+
+    // Encontrar a região correspondente
+    const regiao = regioesAjustadas.find((r) => r.id === draggedRegion);
+    if (!regiao) return;
+
+    // Selecionar a região (simular que foi colocada corretamente)
+    setRegioSelecionada(regiao.id as RegiaoPediatricaId);
+
+    // Marcar como concluída
+    setRegioesConcluidas((prev) => new Set([...prev, draggedRegion]));
+
+    // Mostrar feedback
+    console.log(`✓ Região "${regiao.label}" colocada no local correto`);
+
+    setDraggedRegion(null);
+  }, [draggedRegion, regioesAjustadas]);
+
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl max-w-7xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col">
@@ -169,43 +223,47 @@ export default function ExameFisicoPediatricoVisual({
         <div className="flex-1 overflow-y-auto p-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
             {/* Coluna 1: Imagem */}
-            <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+            <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 overflow-hidden" onDragOver={handleDragOver} onDrop={handleDrop}>
               <PacientePediatricoVisualAjustado
                 faixaEtaria={caso.paciente.dadosPediatricos?.faixaEtaria}
                 regioSelecionada={regioSelecionada || undefined}
                 onRegioClicada={(regioId) => setRegioSelecionada(regioId)}
-                desabilitarHotspots={
-                  caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' ||
-                  caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato'
-                }
+                desabilitarHotspots={true}
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
               />
             </div>
 
-            {/* Coluna 2: Lista de Regiões (apenas para lactente) */}
+            {/* Coluna 2: Lista de Regiões Arrastáveis (apenas para lactente) */}
             {caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' ||
             caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? (
               <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col">
                 <h3 className="font-bold text-slate-800 text-sm">Regiões do exame</h3>
-                <p className="text-xs text-slate-500">Clique para selecionar</p>
+                <p className="text-xs text-slate-500">Arraste para o corpo</p>
                 <div className="flex-1 overflow-y-auto space-y-2">
-                  {regioesAjustadas.map((r) => (
-                    <button
-                      key={r.id}
-                      onClick={() => setRegioSelecionada(r.id)}
-                      className={`w-full text-left p-3 rounded-lg border transition-all text-sm font-medium cursor-pointer ${
-                        regioSelecionada === r.id
-                          ? 'bg-blue-100 border-blue-500 text-blue-800 shadow-md'
-                          : 'bg-white border-slate-200 text-slate-700 hover:bg-blue-50 hover:border-blue-400 hover:shadow-sm hover:scale-[1.02]'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        {regioSelecionada === r.id && (
-                          <span className="text-blue-600 font-bold text-lg">✓</span>
-                        )}
-                        <span>{r.label}</span>
+                  {LACTENTE_REGIOES_DRAG.map((r) => {
+                    const isConcluida = regioesConcluidas.has(r.id);
+                    return (
+                      <div
+                        key={r.id}
+                        draggable={!isConcluida}
+                        onDragStart={(e) => !isConcluida && handleDragStart(e, r.id)}
+                        onDragEnd={handleDragEnd}
+                        className={`w-full text-left p-3 rounded-lg border transition-all text-sm font-medium cursor-move select-none ${
+                          draggedRegion === r.id
+                            ? 'opacity-50 bg-amber-100 border-amber-500'
+                            : isConcluida
+                              ? 'bg-green-100 border-green-500 opacity-60 cursor-default'
+                              : 'bg-white border-slate-200 text-slate-700 hover:bg-blue-50 hover:border-blue-400 hover:shadow-sm'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          {isConcluida && <span className="text-green-600 font-bold text-lg">✓</span>}
+                          <span>{r.label}</span>
+                        </div>
                       </div>
-                    </button>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ) : null}
