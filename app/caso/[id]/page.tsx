@@ -431,7 +431,7 @@ function CasoPageContent() {
 
             {/* Chat */}
             <div className="h-[420px] flex flex-col">
-              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
+              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} />
             </div>
 
             {/* Conteúdo Dinâmico baseado no Menu */}
@@ -532,7 +532,7 @@ function CasoPageContent() {
             <IndicadorInterlocutorPediatrico caso={caso} />
 
             <div className="h-[calc(100dvh-200px)] min-h-80 flex flex-col">
-              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} onMensagensChange={setMensagens} />
+              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} />
             </div>
           </div>
           <div className={abaAtiva === "exame" ? "block" : "hidden"}>

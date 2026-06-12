@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MensagemChat } from "@/lib/types";
+import { MensagemChat, Caso } from "@/lib/types";
+import { gerarMensagemInicial } from "@/lib/pediatria/chat-regras";
 
 interface ChatPacienteProps {
   nomePaciente: string;
   casoId: string;
+  caso?: Caso; // Opcional: caso completo para contexto pediátrico
   onMensagensChange?: (mensagens: MensagemChat[]) => void;
 }
 
@@ -14,13 +16,17 @@ type SpeechRecognitionType = any;
 export default function ChatPaciente({
   nomePaciente,
   casoId,
+  caso,
   onMensagensChange,
 }: ChatPacienteProps) {
+  // Gerar mensagem inicial correta (pediátrica ou adulta)
+  const mensagemInicial = caso ? gerarMensagemInicial(caso) : `Oi doutor/doutora, tudo bem? Meu nome é ${nomePaciente}, tô aqui porque não tô me sentindo bem.`;
+
   const [mensagens, setMensagens] = useState<MensagemChat[]>([
     {
       id: "1",
       tipo: "paciente",
-      conteudo: `Oi doutor/doutora, tudo bem? Meu nome é ${nomePaciente}, tô aqui porque não tô me sentindo bem.`,
+      conteudo: mensagemInicial,
       timestamp: new Date(),
     },
   ]);
