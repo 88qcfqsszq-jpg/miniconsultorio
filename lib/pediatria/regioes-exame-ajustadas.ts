@@ -339,7 +339,7 @@ export const REGIOES_PEDIATRICAS_CRIANCA: RegiaoPediatricaAjustada[] = [
     id: "pele_mucosas",
     label: "Pele / Mucosas",
     descricao: "Avaliação cutânea geral",
-    coordenadas: { x: 24, y: 18, width: 28, height: 60 },
+    coordenadas: { x: 10, y: 25, width: 12, height: 35 },
     acoes: [
       "palidez",
       "cianose",
@@ -354,7 +354,7 @@ export const REGIOES_PEDIATRICAS_CRIANCA: RegiaoPediatricaAjustada[] = [
     id: "desenvolvimento",
     label: "Desenvolvimento / Interação",
     descricao: "Avaliação neurodesenvolvimento",
-    coordenadas: { x: 18, y: 8, width: 36, height: 82 },
+    coordenadas: { x: 5, y: 15, width: 10, height: 70 },
     acoes: [
       "marcos_desenvolvimento",
       "postura",
