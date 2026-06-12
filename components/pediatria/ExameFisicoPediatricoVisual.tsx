@@ -226,9 +226,6 @@ export default function ExameFisicoPediatricoVisual({
             <div className="lg:col-span-1 bg-slate-50 rounded-lg border border-slate-200 overflow-hidden" onDragOver={handleDragOver} onDrop={handleDrop}>
               <PacientePediatricoVisualAjustado
                 faixaEtaria={caso.paciente.dadosPediatricos?.faixaEtaria}
-                regioSelecionada={regioSelecionada || undefined}
-                onRegioClicada={(regioId) => setRegioSelecionada(regioId)}
-                desabilitarHotspots={true}
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
               />

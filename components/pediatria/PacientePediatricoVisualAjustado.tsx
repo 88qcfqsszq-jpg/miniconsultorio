@@ -1,39 +1,25 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import {
-  obterRegioesPediatricas,
-  RegiaoPediatricaId,
-} from '@/lib/pediatria/regioes-exame-ajustadas';
 import { obterImagemPacientePediatrico, obterDescricaoFaixaEtaria, obterInfoImagem } from '@/lib/pediatria/imagens';
-
-const DEBUG_HOTSPOTS_PEDIATRIA = false;
 
 interface PacientePediatricoVisualAjustadoProps {
   faixaEtaria?: string;
-  regioSelecionada?: RegiaoPediatricaId;
-  onRegioClicada: (regioId: RegiaoPediatricaId) => void;
-  desabilitarHotspots?: boolean;
   onDragOver?: (e: React.DragEvent<HTMLDivElement>) => void;
   onDrop?: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
 export default function PacientePediatricoVisualAjustado({
   faixaEtaria,
-  regioSelecionada,
-  onRegioClicada,
-  desabilitarHotspots = false,
   onDragOver,
   onDrop,
 }: PacientePediatricoVisualAjustadoProps) {
   const [imagemCarregada, setImagemCarregada] = useState(true);
   const [erroImagem, setErroImagem] = useState(false);
-  const [regioEmHover, setRegioEmHover] = useState<RegiaoPediatricaId | null>(null);
 
   const imagemPath = obterImagemPacientePediatrico(faixaEtaria);
   const descricaoFaixa = obterDescricaoFaixaEtaria(faixaEtaria);
   const infoImagem = obterInfoImagem(imagemPath);
-  const regioes = obterRegioesPediatricas(faixaEtaria);
 
   const handleImagemCarregada = useCallback(() => {
     setImagemCarregada(true);
@@ -45,8 +31,6 @@ export default function PacientePediatricoVisualAjustado({
     setImagemCarregada(false);
     setErroImagem(true);
   }, [imagemPath]);
-
-  const regioesOrdenadas = [...regioes].sort((a, b) => a.zIndex - b.zIndex);
 
   return (
     <div className="relative w-full h-full bg-slate-50 rounded-lg border border-slate-200 overflow-hidden flex flex-col">
@@ -63,11 +47,11 @@ export default function PacientePediatricoVisualAjustado({
       {/* Contêiner de imagem — centralizado e livre */}
       <div className="relative flex-1 flex items-center justify-center p-4 overflow-hidden" onDragOver={onDragOver} onDrop={onDrop}>
         <div className="relative w-full h-full max-w-xs">
-          {/* Imagem do paciente pediátrico */}
+          {/* Imagem do paciente pediátrico — LIMPA, SEM HOTSPOTS */}
           <img
             src={imagemPath}
             alt={`Paciente pediátrico - ${descricaoFaixa}`}
-            className="w-full h-full object-contain display-block"
+            className="w-full h-full object-contain"
             onLoad={handleImagemCarregada}
             onError={handleErroImagem}
             style={{ display: imagemCarregada && !erroImagem ? 'block' : 'none' }}
@@ -88,90 +72,6 @@ export default function PacientePediatricoVisualAjustado({
               </div>
             </div>
           )}
-
-          {/* SVG overlay com hotspots clicáveis (para modo não-drag) */}
-          <svg
-            className="absolute inset-0 w-full h-full"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            style={{ cursor: desabilitarHotspots ? 'default' : 'pointer', pointerEvents: desabilitarHotspots ? 'none' : 'auto' }}
-          >
-            {/* Renderizar hotspots ordenados por zIndex */}
-            {regioesOrdenadas.map((regiao) => {
-              const isSelected = regioSelecionada === regiao.id;
-              const isHover = regioEmHover === regiao.id;
-
-              return (
-                <g
-                  key={regiao.id}
-                  onMouseEnter={() => setRegioEmHover(regiao.id as RegiaoPediatricaId)}
-                  onMouseLeave={() => setRegioEmHover(null)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {/* Retângulo clicável com estilos dinâmicos */}
-                  <rect
-                    x={regiao.coordenadas.x}
-                    y={regiao.coordenadas.y}
-                    width={regiao.coordenadas.width}
-                    height={regiao.coordenadas.height}
-                    fill={
-                      DEBUG_HOTSPOTS_PEDIATRIA
-                        ? 'rgba(59, 130, 246, 0.1)'
-                        : isSelected
-                          ? 'rgba(59, 130, 246, 0.3)'
-                          : isHover
-                            ? 'rgba(59, 130, 246, 0.15)'
-                            : 'rgba(100, 116, 139, 0.02)'
-                    }
-                    stroke={
-                      DEBUG_HOTSPOTS_PEDIATRIA
-                        ? 'rgba(239, 68, 68, 0.8)'
-                        : isSelected
-                          ? 'rgba(59, 130, 246, 1)'
-                          : isHover
-                            ? 'rgba(59, 130, 246, 0.6)'
-                            : 'rgba(100, 116, 139, 0.1)'
-                    }
-                    strokeWidth={DEBUG_HOTSPOTS_PEDIATRIA ? '0.8' : isSelected ? '1' : '0.3'}
-                    className="transition-all"
-                    onClick={() => onRegioClicada(regiao.id as RegiaoPediatricaId)}
-                    style={{ pointerEvents: 'auto', cursor: 'pointer' }}
-                  />
-
-                  {/* Label da região (visível em debug ou selecionada) */}
-                  {(DEBUG_HOTSPOTS_PEDIATRIA || isSelected) && (
-                    <text
-                      x={regiao.coordenadas.x + regiao.coordenadas.width / 2}
-                      y={regiao.coordenadas.y + regiao.coordenadas.height / 2}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="font-bold pointer-events-none select-none"
-                      fontSize={DEBUG_HOTSPOTS_PEDIATRIA ? '1.5' : '1.2'}
-                      fill={DEBUG_HOTSPOTS_PEDIATRIA ? 'rgba(239, 68, 68, 0.9)' : 'rgba(59, 130, 246, 0.9)'}
-                    >
-                      {DEBUG_HOTSPOTS_PEDIATRIA ? `${regiao.id} (z:${regiao.zIndex})` : regiao.label.split(' ')[0]}
-                    </text>
-                  )}
-
-                  {/* Coordenadas em debug */}
-                  {DEBUG_HOTSPOTS_PEDIATRIA && (
-                    <text
-                      x={regiao.coordenadas.x + regiao.coordenadas.width / 2}
-                      y={regiao.coordenadas.y + regiao.coordenadas.height / 2 + 3}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="pointer-events-none select-none"
-                      fontSize="0.8"
-                      fill="rgba(239, 68, 68, 0.7)"
-                      fontFamily="monospace"
-                    >
-                      {`x:${regiao.coordenadas.x} y:${regiao.coordenadas.y}`}
-                    </text>
-                  )}
-                </g>
-              );
-            })}
-          </svg>
         </div>
       </div>
 
