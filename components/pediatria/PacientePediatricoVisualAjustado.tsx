@@ -46,7 +46,7 @@ export default function PacientePediatricoVisualAjustado({
 
       {/* Contêiner de imagem — centralizado e livre */}
       <div className="relative flex-1 flex items-center justify-center p-8 overflow-auto" onDragOver={onDragOver} onDrop={onDrop}>
-        <div className="relative w-full h-full max-w-4xl flex items-center justify-center">
+        <div className="relative w-full h-full max-w-7xl flex items-center justify-center">
           {/* Imagem do paciente pediátrico — LIMPA, SEM HOTSPOTS */}
           <img
             src={imagemPath}
