@@ -126,7 +126,7 @@ export const DROP_ZONES: Record<string, {
   },
   'right-hypochondrium': {
     label: 'Hipocôndrio Direito',
-    left: 58,
+    left: 30,
     top: 48,
     width: 12,
     height: 15,
