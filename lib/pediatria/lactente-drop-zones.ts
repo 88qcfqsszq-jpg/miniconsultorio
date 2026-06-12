@@ -22,7 +22,7 @@ export const LACTENTE_REGIONS = [
   },
   {
     id: 'torax_respiratorio',
-    label: 'Tórax Respiratório',
+    label: 'Tórax',
     targetZone: 'thorax',
   },
   {
