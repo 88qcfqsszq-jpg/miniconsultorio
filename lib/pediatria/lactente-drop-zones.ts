@@ -120,7 +120,7 @@ export const DROP_ZONES: Record<string, {
   abdomen: {
     label: 'Abdome',
     left: 30,
-    top: 53,
+    top: 45,
     width: 40,
     height: 18,
   },
