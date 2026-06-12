@@ -367,7 +367,7 @@ export const REGIOES_PEDIATRICAS_CRIANCA: RegiaoPediatricaAjustada[] = [
     id: "estado_geral",
     label: "Estado Geral",
     descricao: "Observação geral da criança",
-    coordenadas: { x: 18, y: 8, width: 36, height: 82 },
+    coordenadas: { x: 20, y: 92, width: 32, height: 8 },
     acoes: [
       "estado_geral",
       "nivel_atividade",
