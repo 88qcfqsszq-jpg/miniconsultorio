@@ -276,44 +276,56 @@ export default function ExameFisicoPediatricoVisual({
               ))}
             </div>
 
-            {/* Coluna 2: Lista de Regiões Arrastáveis (apenas para lactente) */}
-            {caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' ||
-            caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato' ? (
-              <div className="bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col overflow-y-auto min-h-0">
-                <h3 className="font-bold text-slate-800 text-sm">Regiões do exame</h3>
-                <p className="text-xs text-slate-500">Arraste para o corpo correto</p>
-                {feedback && (
-                  <div className="text-xs bg-orange-50 text-orange-700 px-3 py-2 rounded border border-orange-200">
-                    ⚠️ {feedback}
-                  </div>
-                )}
-                <div className="flex-1 overflow-y-auto space-y-2">
-                  {LACTENTE_REGIONS.map((r) => {
-                    const isPlaced = placedRegions.some((pr) => pr.id === r.id);
-                    return (
-                      <div
-                        key={r.id}
-                        draggable
-                        onDragStart={(e) => handleDragStart(e, r.id)}
-                        onDragEnd={handleDragEnd}
-                        className={`w-full text-left p-3 rounded-lg border transition-all text-sm font-medium cursor-move select-none ${
-                          draggedRegion === r.id
-                            ? 'opacity-50 bg-amber-100 border-amber-500'
+            {/* Coluna 2: Lista de Regiões do Exame */}
+            <div className="bg-slate-50 rounded-lg border border-slate-200 p-4 space-y-3 flex flex-col overflow-y-auto min-h-0">
+              <h3 className="font-bold text-slate-800 text-sm">Regiões do exame</h3>
+              <p className="text-xs text-slate-500">
+                {caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' ||
+                caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato'
+                  ? 'Arraste para o corpo correto'
+                  : 'Clique para selecionar'}
+              </p>
+              {feedback && (
+                <div className="text-xs bg-orange-50 text-orange-700 px-3 py-2 rounded border border-orange-200">
+                  ⚠️ {feedback}
+                </div>
+              )}
+              <div className="flex-1 overflow-y-auto space-y-2">
+                {regioesAjustadas.map((r) => {
+                  const isPlaced = placedRegions.some((pr) => pr.id === r.id);
+                  const isLactente = caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' ||
+                                     caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato';
+                  const lactenteregiao = LACTENTE_REGIONS.find((lr) => lr.id === r.id);
+
+                  return (
+                    <div
+                      key={r.id}
+                      draggable={isLactente && !!lactenteregiao}
+                      onDragStart={(e) => isLactente && lactenteregiao && handleDragStart(e, r.id)}
+                      onDragEnd={handleDragEnd}
+                      onClick={() => setRegioSelecionada(r.id)}
+                      className={`w-full text-left p-3 rounded-lg border transition-all text-sm font-medium select-none ${
+                        isLactente && !!lactenteregiao ? 'cursor-move' : 'cursor-pointer'
+                      } ${
+                        draggedRegion === r.id
+                          ? 'opacity-50 bg-amber-100 border-amber-500'
+                          : regioSelecionada === r.id
+                            ? 'bg-blue-100 border-blue-500 text-blue-800 shadow-md'
                             : isPlaced
                               ? 'bg-green-100 border-green-500 opacity-75'
                               : 'bg-white border-slate-200 text-slate-700 hover:bg-blue-50 hover:border-blue-400 hover:shadow-sm'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2">
-                          {isPlaced && <span className="text-green-600 font-bold text-lg">✓</span>}
-                          <span>{r.label}</span>
-                        </div>
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        {isPlaced && <span className="text-green-600 font-bold text-lg">✓</span>}
+                        {regioSelecionada === r.id && !isPlaced && <span className="text-blue-600 font-bold text-lg">→</span>}
+                        <span>{r.label}</span>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
-            ) : null}
+            </div>
 
             {/* Coluna 3: Ações e Detalhes da Região */}
             <div className="space-y-4 overflow-y-auto min-h-0">
