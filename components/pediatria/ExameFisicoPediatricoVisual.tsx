@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import PacientePediatricoVisualAjustado from './PacientePediatricoVisualAjustado';
 import {
   obterRegioesPediatricas,
@@ -96,6 +96,18 @@ export default function ExameFisicoPediatricoVisual({
 
   const regioesAjustadas = obterRegioesPediatricas(caso.paciente.dadosPediatricos?.faixaEtaria);
   const regiao = regioSelecionada ? regioesAjustadas.find((r) => r.id === regioSelecionada) : null;
+
+  // Inicializar hotspots com as regiões ajustadas (coordenadas padrão)
+  useEffect(() => {
+    const initialPlacedRegions: PlacedRegion[] = regioesAjustadas.map((r) => ({
+      id: r.id,
+      label: r.label,
+      targetZone: r.targetZone || '',
+      x: r.coordenadas.x + r.coordenadas.width / 2,
+      y: r.coordenadas.y + r.coordenadas.height / 2,
+    }));
+    setPlacedRegions(initialPlacedRegions);
+  }, [caso.id]);
 
   // Converter ações em acoes pediátricas
   const acoes = regiao
