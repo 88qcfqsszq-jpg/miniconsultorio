@@ -134,6 +134,19 @@ export default function ExameFisicoPediatricoVisual({
     [achadosEncontrados]
   );
 
+  // Verificar se uma ação tem achado válido (visual ou fallback)
+  const temAchadoValido = useCallback(
+    (acaoId: string): boolean => {
+      const achado = obterAchadoVisualPediatricoComFallback(
+        caso.id,
+        acaoId as AcaoPediatricaId,
+        caso
+      );
+      return achado !== null;
+    },
+    [caso]
+  );
+
   // Executar ação
   const handleRealizarAcao = useCallback(
     (acaoId: string) => {
@@ -270,26 +283,23 @@ export default function ExameFisicoPediatricoVisual({
                 onDrop={handleDrop}
               />
 
-              {/* Hotspots Dinâmicos - criados após posicionamento correto */}
+              {/* Hotspots Dinâmicos - Marcadores discretos sobre o corpo */}
               {placedRegions.map((placedRegion) => (
                 <button
                   key={placedRegion.id}
-                  className={`absolute z-20 rounded-lg text-xs px-2 py-1 font-medium shadow cursor-pointer transition-all ${
+                  className={`absolute z-20 rounded-full w-5 h-5 border-2 cursor-pointer transition-all hover:scale-110 ${
                     regioSelecionada === placedRegion.id
-                      ? 'bg-blue-600 text-white hover:bg-blue-700'
-                      : 'bg-slate-300 text-slate-800 hover:bg-slate-400'
+                      ? 'border-blue-600 bg-blue-100 shadow-md'
+                      : 'border-slate-400 bg-white/60 hover:border-blue-400'
                   }`}
                   style={{
                     left: `${placedRegion.x}%`,
                     top: `${placedRegion.y}%`,
                     transform: 'translate(-50%, -50%)',
-                    whiteSpace: 'nowrap',
                   }}
                   onClick={() => setRegioSelecionada(placedRegion.id as RegiaoPediatricaId)}
-                  title={`Clique para abrir ações de ${placedRegion.label}`}
-                >
-                  {placedRegion.label.split(' / ')[0]}
-                </button>
+                  title={placedRegion.label}
+                />
               ))}
             </div>
 
@@ -363,32 +373,43 @@ export default function ExameFisicoPediatricoVisual({
                     <h4 className="font-semibold text-slate-700 text-sm">Ações disponíveis:</h4>
                     <div className="space-y-2 max-h-96 overflow-y-auto">
                       {acoes.length > 0 ? (
-                        acoes.map((acao) => {
-                          const jaRealizada = acaoJaRealizada(acao.id as string);
-                          return (
-                            <button
-                              key={acao.id}
-                              onClick={() => handleRealizarAcao(acao.id as string)}
-                              disabled={jaRealizada}
-                              className={`w-full text-left p-3 rounded-lg border transition-all text-sm ${
-                                jaRealizada
-                                  ? 'bg-blue-50 border-blue-300 opacity-50 cursor-default'
-                                  : 'bg-blue-50 border-blue-200 hover:bg-blue-100 cursor-pointer'
-                              }`}
-                            >
-                              <div className="flex items-start gap-2">
-                                <span className="text-lg shrink-0 mt-0.5">🔍</span>
-                                <div className="flex-grow">
-                                  <p className="font-semibold text-slate-800 text-sm">{acao.label}</p>
-                                  <p className="text-xs text-slate-600 mt-0.5">{acao.descricao}</p>
-                                </div>
-                                {jaRealizada && (
-                                  <span className="text-xs font-bold text-blue-600 shrink-0 mt-1">✓</span>
-                                )}
-                              </div>
-                            </button>
+                        (() => {
+                          // Filtrar apenas ações com achado válido
+                          const acoesValidas = acoes.filter(acao => temAchadoValido(acao.id as string));
+
+                          return acoesValidas.length > 0 ? (
+                            acoesValidas.map((acao) => {
+                              const jaRealizada = acaoJaRealizada(acao.id as string);
+                              return (
+                                <button
+                                  key={acao.id}
+                                  onClick={() => handleRealizarAcao(acao.id as string)}
+                                  disabled={jaRealizada}
+                                  className={`w-full text-left p-3 rounded-lg border transition-all text-sm ${
+                                    jaRealizada
+                                      ? 'bg-blue-50 border-blue-300 opacity-50 cursor-default'
+                                      : 'bg-blue-50 border-blue-200 hover:bg-blue-100 cursor-pointer'
+                                  }`}
+                                >
+                                  <div className="flex items-start gap-2">
+                                    <span className="text-lg shrink-0 mt-0.5">🔍</span>
+                                    <div className="flex-grow">
+                                      <p className="font-semibold text-slate-800 text-sm">{acao.label}</p>
+                                      <p className="text-xs text-slate-600 mt-0.5">{acao.descricao}</p>
+                                    </div>
+                                    {jaRealizada && (
+                                      <span className="text-xs font-bold text-blue-600 shrink-0 mt-1">✓</span>
+                                    )}
+                                  </div>
+                                </button>
+                              );
+                            })
+                          ) : (
+                            <p className="text-slate-500 text-xs text-center py-4">
+                              Nenhuma ação disponível para esta região neste caso.
+                            </p>
                           );
-                        })
+                        })()
                       ) : (
                         <p className="text-slate-500 text-xs text-center py-4">
                           Nenhuma ação disponível.
