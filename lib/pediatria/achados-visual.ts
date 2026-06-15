@@ -3,6 +3,7 @@
 
 import { Caso } from "@/lib/types";
 import { AcaoPediatricaId } from "./regioes-exame";
+import { obterAchadoExameFisicoPed, AchadoExameFisicoPed } from "./achados-exame-fisico";
 
 export interface AchadoVisualPediatrico {
   id: string;
@@ -12,6 +13,11 @@ export interface AchadoVisualPediatrico {
   acaoRealizada: string;
 }
 
+export interface AchadoVisualPediatricoComCaso extends AchadoVisualPediatrico {
+  casoId: string;
+  origem: "visual" | "fallback_exame_fisico";
+}
+
 // Função central para obter achado bruto baseado na ação e no caso
 export function obterAchadoVisualPediatrico(
   casoId: string,
@@ -19,7 +25,7 @@ export function obterAchadoVisualPediatrico(
   caso?: Caso
 ): AchadoVisualPediatrico | null {
   // Mapeamento de achados por caso
-  const achadosPorCaso: Record<string, Record<AcaoPediatricaId, AchadoVisualPediatrico>> = {
+  const achadosPorCaso: Record<string, Record<string, AchadoVisualPediatrico>> = {
     // ===== CASO PED-01: FEBRE EM CRIANÇA DE 4 ANOS =====
     "ped-01": {
       estado_geral: {
@@ -366,6 +372,388 @@ export function obterAchadoVisualPediatrico(
         acaoRealizada: "Fala e interação",
       },
     },
+
+    // ===== CASOS DE LACTENTE: ped-02, ped-04, ped-05, ped-07, ped-08 =====
+    // Achados padrão objetivos para lactente em bom estado geral
+    "ped-02": {
+      estado_geral: { id: "ped-02-eg", titulo: "Estado Geral", descricao: "Lactente em regular estado geral, ativo, reativo ao manuseio.", regiao: "estado_geral", acaoRealizada: "Avaliar estado geral" },
+      nivel_atividade: { id: "ped-02-na", titulo: "Nível de Atividade", descricao: "Lactente ativo, responsivo a estímulos, choro vigoroso.", regiao: "estado_geral", acaoRealizada: "Avaliar nível de atividade" },
+      irritabilidade: { id: "ped-02-irr", titulo: "Irritabilidade", descricao: "Sem irritabilidade exagerada, consolável.", regiao: "estado_geral", acaoRealizada: "Avaliar irritabilidade" },
+      interacao_responsavel: { id: "ped-02-int", titulo: "Interação com Responsável", descricao: "Lactente interage com o responsável de forma compatível com a idade.", regiao: "estado_geral", acaoRealizada: "Interação com responsável" },
+      palidez: { id: "ped-02-pal", titulo: "Palidez", descricao: "Pele corada, sem palidez evidente.", regiao: "pele_mucosas", acaoRealizada: "Avaliar palidez" },
+      cianose: { id: "ped-02-cia", titulo: "Cianose", descricao: "Sem cianose central ou periférica.", regiao: "pele_mucosas", acaoRealizada: "Avaliar cianose" },
+      hidratacao_mucosas: { id: "ped-02-hid", titulo: "Hidratação de Mucosas", descricao: "Mucosas úmidas, turgor preservado, lágrimas presentes.", regiao: "pele_mucosas", acaoRealizada: "Hidratação de mucosas" },
+      exantema: { id: "ped-02-exa", titulo: "Exantema", descricao: "Sem exantema difuso evidente no momento.", regiao: "pele_mucosas", acaoRealizada: "Avaliar exantema" },
+      petequias: { id: "ped-02-pet", titulo: "Petéquias", descricao: "Sem petéquias aparentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar petéquias" },
+      equimoses: { id: "ped-02-equ", titulo: "Equimoses", descricao: "Sem equimoses evidentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar equimoses" },
+      perimetro_cefalico: { id: "ped-02-pc", titulo: "Perímetro Cefálico", descricao: "Perímetro cefálico aferido com fita passando pela região supraorbitária e maior proeminência occipital.", regiao: "cabeca_perimetro", acaoRealizada: "Medir perímetro cefálico" },
+      fontanela: { id: "ped-02-fon", titulo: "Fontanela", descricao: "Fontanela anterior normotensa, sem abaulamento evidente.", regiao: "cabeca_perimetro", acaoRealizada: "Palpar fontanela anterior" },
+      formato_craniano: { id: "ped-02-fcr", titulo: "Formato Craniano", descricao: "Crânio simétrico, sem deformidades grosseiras aparentes.", regiao: "cabeca_perimetro", acaoRealizada: "Inspecionar crânio" },
+      cianose_central: { id: "ped-02-cc", titulo: "Cianose Central", descricao: "Lábios e língua com coloração normal, sem cianose.", regiao: "face_olhos", acaoRealizada: "Cianose central" },
+      palidez_conjuntival: { id: "ped-02-pc2", titulo: "Palidez Conjuntival", descricao: "Conjuntivas normocoradas, sem palidez significativa.", regiao: "face_olhos", acaoRealizada: "Palidez conjuntival" },
+      sinais_desidratacao: { id: "ped-02-des", titulo: "Sinais de Desidratação", descricao: "Olhos com brilho normal, sem depressão, turgor preservado.", regiao: "face_olhos", acaoRealizada: "Sinais de desidratação" },
+      mucosa_oral: { id: "ped-02-mo", titulo: "Mucosa Oral", descricao: "Mucosa oral úmida, corada, sem lesões ulceradas aparentes.", regiao: "orofaringe", acaoRealizada: "Inspecionar cavidade oral" },
+      hiperemia_orofaringe: { id: "ped-02-hipe", titulo: "Hiperemia de Orofaringe", descricao: "Orofaringe sem placas purulentas evidentes no momento.", regiao: "orofaringe", acaoRealizada: "Avaliar orofaringe" },
+      lesoes_orais: { id: "ped-02-les", titulo: "Lesões Orais", descricao: "Sem placas esbranquiçadas aderentes sugestivas de candidíase oral.", regiao: "orofaringe", acaoRealizada: "Procurar monilíase oral" },
+      linfonodos_cervicais: { id: "ped-02-lnc", titulo: "Linfonodos Cervicais", descricao: "Linfonodos cervicais não aumentados de forma significativa à palpação.", regiao: "pescoco_linfonodos", acaoRealizada: "Palpar linfonodos cervicais" },
+      descricao_linfonodos: { id: "ped-02-dll", titulo: "Descrição de Linfonodos", descricao: "Se palpáveis: móveis, de consistência fibroelástica, indolores.", regiao: "pescoco_linfonodos", acaoRealizada: "Descrever linfonodos" },
+      rigidez_nuca: { id: "ped-02-rn", titulo: "Rigidez de Nuca", descricao: "Sem rigidez evidente, mobilidade cervical preservada.", regiao: "pescoco_linfonodos", acaoRealizada: "Avaliar mobilidade cervical" },
+      frequencia_respiratoria: { id: "ped-02-fr", titulo: "Frequência Respiratória", descricao: "Frequência respiratória aferida durante 1 minuto completo, com lactente em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Contar frequência respiratória por 1 minuto" },
+      tiragens: { id: "ped-02-tir", titulo: "Tiragens", descricao: "Sem tiragem subcostal, intercostal ou supraesternal evidente em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar tiragens" },
+      batimento_asa_nasal: { id: "ped-02-ban", titulo: "Batimento de Asa Nasal", descricao: "Sem batimento de asa nasal no momento.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar batimento de asa nasal" },
+      expansibilidade: { id: "ped-02-exp", titulo: "Expansibilidade Torácica", descricao: "Expansão simétrica bilateral, sem assimetria importante.", regiao: "torax_respiratorio", acaoRealizada: "Palpar expansibilidade torácica" },
+      ausculta_pulmonar: { id: "ped-02-ap", titulo: "Ausculta Pulmonar", descricao: "Murmúrio vesicular presente bilateralmente, sem assimetria importante.", regiao: "torax_respiratorio", acaoRealizada: "Auscultar murmúrio vesicular" },
+      ausculta_focos: { id: "ped-02-af", titulo: "Ausculta de Focos Cardíacos", descricao: "Bulhas cardíacas rítmicas e normofonéticas no momento.", regiao: "precordio", acaoRealizada: "Auscultar bulhas cardíacas" },
+      sopro: { id: "ped-02-sop", titulo: "Sopro Cardíaco", descricao: "Sem sopros evidentes à ausculta no momento.", regiao: "precordio", acaoRealizada: "Pesquisar sopros" },
+      ritmo_cardiaco: { id: "ped-02-rc", titulo: "Ritmo Cardíaco", descricao: "Frequência cardíaca aferida em repouso, compatível com avaliação clínica do lactente.", regiao: "precordio", acaoRealizada: "Avaliar frequência cardíaca" },
+      cianose_cardiaca: { id: "ped-02-ccard", titulo: "Cianose Associada", descricao: "Sem cianose central ou desconforto respiratório evidente durante o exame.", regiao: "precordio", acaoRealizada: "Avaliar sinais de insuficiência cardíaca" },
+      inspecao_abdome: { id: "ped-02-ia", titulo: "Inspeção Abdominal", descricao: "Abdome plano ou discretamente globoso, sem distensão importante.", regiao: "abdome", acaoRealizada: "Inspecionar abdome" },
+      palpacao_abdome: { id: "ped-02-pa", titulo: "Palpação Abdominal", descricao: "Abdome flácido, sem defesa ou irritação peritoneal evidente.", regiao: "abdome", acaoRealizada: "Palpar abdome superficialmente" },
+      dor_abdominal: { id: "ped-02-da", titulo: "Dor Abdominal", descricao: "Sem reação dolorosa importante à palpação abdominal.", regiao: "abdome", acaoRealizada: "Avaliar dor à palpação" },
+      distensao: { id: "ped-02-dis", titulo: "Distensão Abdominal", descricao: "Abdome não distendido, consistência normal.", regiao: "abdome", acaoRealizada: "Auscultar ruídos hidroaéreos" },
+      palpacao_figado: { id: "ped-02-pf", titulo: "Palpação Hepática", descricao: "Borda hepática palpável discretamente abaixo do rebordo costal direito, sem dor importante à palpação.", regiao: "figado", acaoRealizada: "Palpar borda hepática" },
+      hepatomegalia: { id: "ped-02-hep", titulo: "Hepatomegalia", descricao: "Sem hepatomegalia clinicamente importante evidente no momento.", regiao: "figado", acaoRealizada: "Pesquisar hepatomegalia" },
+      sensibilidade_hipocondrio_d: { id: "ped-02-shd", titulo: "Sensibilidade Hipocondrial D", descricao: "Sem reação dolorosa significativa à palpação do hipocôndrio direito.", regiao: "figado", acaoRealizada: "Avaliar dor em hipocôndrio direito" },
+      palpacao_baco: { id: "ped-02-pb", titulo: "Palpação Esplênica", descricao: "Baço não palpável no momento.", regiao: "baco", acaoRealizada: "Palpar baço" },
+      esplenomegalia: { id: "ped-02-esp", titulo: "Esplenomegalia", descricao: "Sem esplenomegalia evidente à palpação.", regiao: "baco", acaoRealizada: "Pesquisar esplenomegalia" },
+      pulsos_perifericos: { id: "ped-02-pp", titulo: "Pulsos Periféricos", descricao: "Pulsos periféricos palpáveis e simétricos.", regiao: "membros_perfusao", acaoRealizada: "Palpar pulsos periféricos" },
+      tempo_enchimento_capilar: { id: "ped-02-tec", titulo: "TEC (Tempo Enchimento Capilar)", descricao: "Tempo de enchimento capilar menor que 2 segundos.", regiao: "membros_perfusao", acaoRealizada: "Medir tempo de enchimento capilar" },
+      extremidades_frias: { id: "ped-02-ef", titulo: "Extremidades Frias", descricao: "Extremidades aquecidas, perfusão periférica preservada.", regiao: "membros_perfusao", acaoRealizada: "Avaliar perfusão periférica" },
+      edema: { id: "ped-02-edo", titulo: "Edema em Membros", descricao: "Sem edema periférico evidente.", regiao: "membros_perfusao", acaoRealizada: "Avaliar edema" },
+      petequias_equimoses_membros: { id: "ped-02-pem", titulo: "Petéquias/Equimoses", descricao: "Sem petéquias ou equimoses em membros.", regiao: "membros_perfusao", acaoRealizada: "Avaliar mobilidade espontânea" },
+      marcos_desenvolvimento: { id: "ped-02-md", titulo: "Marcos do Desenvolvimento", descricao: "Marco motor global observado de acordo com a idade informada.", regiao: "desenvolvimento", acaoRealizada: "Avaliar marco motor global" },
+      postura: { id: "ped-02-pos", titulo: "Postura", descricao: "Tônus global compatível com a idade, sem hipotonia evidente no exame.", regiao: "desenvolvimento", acaoRealizada: "Avaliar tônus" },
+      resposta_social: { id: "ped-02-rs", titulo: "Resposta Social", descricao: "Sorriso social presente ou referido conforme faixa etária.", regiao: "desenvolvimento", acaoRealizada: "Avaliar sorriso social" },
+      fala_interacao: { id: "ped-02-fi", titulo: "Fala e Interação", descricao: "Lactente interage com o examinador/cuidador de forma compatível com a idade.", regiao: "desenvolvimento", acaoRealizada: "Avaliar interação" },
+    },
+
+    // ped-04: Desenvolvimento / Lactente de 10 meses
+    // Foco em marcos neuropsicomotores e interação social
+    "ped-04": {
+      estado_geral: { id: "ped-04-eg", titulo: "Estado Geral", descricao: "Lactente em bom estado geral, ativo, explorando o ambiente e reativo ao cuidador.", regiao: "estado_geral", acaoRealizada: "Avaliar estado geral" },
+      nivel_atividade: { id: "ped-04-na", titulo: "Nível de Atividade", descricao: "Lactente ativo, exploratório, responsivo a estímulos do examinador e cuidador.", regiao: "estado_geral", acaoRealizada: "Avaliar nível de atividade" },
+      irritabilidade: { id: "ped-04-irr", titulo: "Irritabilidade", descricao: "Sem irritabilidade exagerada, responde adequadamente ao contato e manuseio.", regiao: "estado_geral", acaoRealizada: "Avaliar irritabilidade" },
+      interacao_responsavel: { id: "ped-04-int", titulo: "Interação com Responsável", descricao: "Interage ativamente com o cuidador, busca contato visual e responde a chamados.", regiao: "estado_geral", acaoRealizada: "Interação com responsável" },
+      palidez: { id: "ped-04-pal", titulo: "Palidez", descricao: "Pele corada, sem palidez evidente.", regiao: "pele_mucosas", acaoRealizada: "Avaliar palidez" },
+      cianose: { id: "ped-04-cia", titulo: "Cianose", descricao: "Sem cianose central ou periférica.", regiao: "pele_mucosas", acaoRealizada: "Avaliar cianose" },
+      hidratacao_mucosas: { id: "ped-04-hid", titulo: "Hidratação de Mucosas", descricao: "Mucosas úmidas, turgor preservado, lágrimas presentes.", regiao: "pele_mucosas", acaoRealizada: "Hidratação de mucosas" },
+      exantema: { id: "ped-04-exa", titulo: "Exantema", descricao: "Sem exantema difuso evidente no momento.", regiao: "pele_mucosas", acaoRealizada: "Avaliar exantema" },
+      petequias: { id: "ped-04-pet", titulo: "Petéquias", descricao: "Sem petéquias aparentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar petéquias" },
+      equimoses: { id: "ped-04-equ", titulo: "Equimoses", descricao: "Sem equimoses evidentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar equimoses" },
+      perimetro_cefalico: { id: "ped-04-pc", titulo: "Perímetro Cefálico", descricao: "Perímetro cefálico aferido com fita passando pela região supraorbitária e maior proeminência occipital.", regiao: "cabeca_perimetro", acaoRealizada: "Medir perímetro cefálico" },
+      fontanela: { id: "ped-04-fon", titulo: "Fontanela", descricao: "Fontanela anterior normotensa, sem abaulamento evidente.", regiao: "cabeca_perimetro", acaoRealizada: "Palpar fontanela anterior" },
+      formato_craniano: { id: "ped-04-fcr", titulo: "Formato Craniano", descricao: "Crânio simétrico, sem deformidades grosseiras aparentes.", regiao: "cabeca_perimetro", acaoRealizada: "Inspecionar crânio" },
+      cianose_central: { id: "ped-04-cc", titulo: "Cianose Central", descricao: "Lábios e língua com coloração normal, sem cianose.", regiao: "face_olhos", acaoRealizada: "Cianose central" },
+      palidez_conjuntival: { id: "ped-04-pc2", titulo: "Palidez Conjuntival", descricao: "Conjuntivas normocoradas, sem palidez significativa.", regiao: "face_olhos", acaoRealizada: "Palidez conjuntival" },
+      sinais_desidratacao: { id: "ped-04-des", titulo: "Sinais de Desidratação", descricao: "Olhos com brilho normal, sem depressão, turgor preservado.", regiao: "face_olhos", acaoRealizada: "Sinais de desidratação" },
+      mucosa_oral: { id: "ped-04-mo", titulo: "Mucosa Oral", descricao: "Mucosa oral úmida, corada, sem lesões ulceradas aparentes.", regiao: "orofaringe", acaoRealizada: "Inspecionar cavidade oral" },
+      hiperemia_orofaringe: { id: "ped-04-hipe", titulo: "Hiperemia de Orofaringe", descricao: "Orofaringe sem placas purulentas evidentes no momento.", regiao: "orofaringe", acaoRealizada: "Avaliar orofaringe" },
+      lesoes_orais: { id: "ped-04-les", titulo: "Lesões Orais", descricao: "Sem placas esbranquiçadas aderentes sugestivas de candidíase oral.", regiao: "orofaringe", acaoRealizada: "Procurar monilíase oral" },
+      linfonodos_cervicais: { id: "ped-04-lnc", titulo: "Linfonodos Cervicais", descricao: "Linfonodos cervicais não aumentados de forma significativa à palpação.", regiao: "pescoco_linfonodos", acaoRealizada: "Palpar linfonodos cervicais" },
+      descricao_linfonodos: { id: "ped-04-dll", titulo: "Descrição de Linfonodos", descricao: "Se palpáveis: móveis, de consistência fibroelástica, indolores.", regiao: "pescoco_linfonodos", acaoRealizada: "Descrever linfonodos" },
+      rigidez_nuca: { id: "ped-04-rn", titulo: "Rigidez de Nuca", descricao: "Sem rigidez evidente, mobilidade cervical preservada.", regiao: "pescoco_linfonodos", acaoRealizada: "Avaliar mobilidade cervical" },
+      frequencia_respiratoria: { id: "ped-04-fr", titulo: "Frequência Respiratória", descricao: "Frequência respiratória aferida durante 1 minuto completo, com lactente em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Contar frequência respiratória por 1 minuto" },
+      tiragens: { id: "ped-04-tir", titulo: "Tiragens", descricao: "Sem tiragem subcostal, intercostal ou supraesternal evidente em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar tiragens" },
+      batimento_asa_nasal: { id: "ped-04-ban", titulo: "Batimento de Asa Nasal", descricao: "Sem batimento de asa nasal no momento.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar batimento de asa nasal" },
+      expansibilidade: { id: "ped-04-exp", titulo: "Expansibilidade Torácica", descricao: "Expansão simétrica bilateral, sem assimetria importante.", regiao: "torax_respiratorio", acaoRealizada: "Palpar expansibilidade torácica" },
+      ausculta_pulmonar: { id: "ped-04-ap", titulo: "Ausculta Pulmonar", descricao: "Murmúrio vesicular presente bilateralmente, sem assimetria importante.", regiao: "torax_respiratorio", acaoRealizada: "Auscultar murmúrio vesicular" },
+      ausculta_focos: { id: "ped-04-af", titulo: "Ausculta de Focos Cardíacos", descricao: "Bulhas cardíacas rítmicas e normofonéticas no momento.", regiao: "precordio", acaoRealizada: "Auscultar bulhas cardíacas" },
+      sopro: { id: "ped-04-sop", titulo: "Sopro Cardíaco", descricao: "Sem sopros evidentes à ausculta no momento.", regiao: "precordio", acaoRealizada: "Pesquisar sopros" },
+      ritmo_cardiaco: { id: "ped-04-rc", titulo: "Ritmo Cardíaco", descricao: "Frequência cardíaca aferida em repouso, compatível com avaliação clínica do lactente.", regiao: "precordio", acaoRealizada: "Avaliar frequência cardíaca" },
+      cianose_cardiaca: { id: "ped-04-ccard", titulo: "Cianose Associada", descricao: "Sem cianose central ou desconforto respiratório evidente durante o exame.", regiao: "precordio", acaoRealizada: "Avaliar sinais de insuficiência cardíaca" },
+      inspecao_abdome: { id: "ped-04-ia", titulo: "Inspeção Abdominal", descricao: "Abdome plano ou discretamente globoso, sem distensão importante.", regiao: "abdome", acaoRealizada: "Inspecionar abdome" },
+      palpacao_abdome: { id: "ped-04-pa", titulo: "Palpação Abdominal", descricao: "Abdome flácido, sem defesa ou irritação peritoneal evidente.", regiao: "abdome", acaoRealizada: "Palpar abdome superficialmente" },
+      dor_abdominal: { id: "ped-04-da", titulo: "Dor Abdominal", descricao: "Sem reação dolorosa importante à palpação abdominal.", regiao: "abdome", acaoRealizada: "Avaliar dor à palpação" },
+      distensao: { id: "ped-04-dis", titulo: "Distensão Abdominal", descricao: "Abdome não distendido, consistência normal.", regiao: "abdome", acaoRealizada: "Auscultar ruídos hidroaéreos" },
+      palpacao_figado: { id: "ped-04-pf", titulo: "Palpação Hepática", descricao: "Borda hepática palpável discretamente abaixo do rebordo costal direito, sem dor importante à palpação.", regiao: "figado", acaoRealizada: "Palpar borda hepática" },
+      hepatomegalia: { id: "ped-04-hep", titulo: "Hepatomegalia", descricao: "Sem hepatomegalia clinicamente importante evidente no momento.", regiao: "figado", acaoRealizada: "Pesquisar hepatomegalia" },
+      sensibilidade_hipocondrio_d: { id: "ped-04-shd", titulo: "Sensibilidade Hipocondrial D", descricao: "Sem reação dolorosa significativa à palpação do hipocôndrio direito.", regiao: "figado", acaoRealizada: "Avaliar dor em hipocôndrio direito" },
+      palpacao_baco: { id: "ped-04-pb", titulo: "Palpação Esplênica", descricao: "Baço não palpável no momento.", regiao: "baco", acaoRealizada: "Palpar baço" },
+      esplenomegalia: { id: "ped-04-esp", titulo: "Esplenomegalia", descricao: "Sem esplenomegalia evidente à palpação.", regiao: "baco", acaoRealizada: "Pesquisar esplenomegalia" },
+      pulsos_perifericos: { id: "ped-04-pp", titulo: "Pulsos Periféricos", descricao: "Pulsos periféricos palpáveis e simétricos.", regiao: "membros_perfusao", acaoRealizada: "Palpar pulsos periféricos" },
+      tempo_enchimento_capilar: { id: "ped-04-tec", titulo: "TEC (Tempo Enchimento Capilar)", descricao: "Tempo de enchimento capilar menor que 2 segundos.", regiao: "membros_perfusao", acaoRealizada: "Medir tempo de enchimento capilar" },
+      extremidades_frias: { id: "ped-04-ef", titulo: "Extremidades Frias", descricao: "Extremidades aquecidas, perfusão periférica preservada.", regiao: "membros_perfusao", acaoRealizada: "Avaliar perfusão periférica" },
+      edema: { id: "ped-04-edo", titulo: "Edema em Membros", descricao: "Sem edema periférico evidente.", regiao: "membros_perfusao", acaoRealizada: "Avaliar edema" },
+      petequias_equimoses_membros: { id: "ped-04-pem", titulo: "Petéquias/Equimoses", descricao: "Sem petéquias ou equimoses em membros.", regiao: "membros_perfusao", acaoRealizada: "Avaliar mobilidade espontânea" },
+      marcos_desenvolvimento: { id: "ped-04-md", titulo: "Marcos do Desenvolvimento", descricao: "Marco motor global avaliado durante interação: controle cervical presente, tentativa de sentar com apoio, movimentação coordinada de membros.", regiao: "desenvolvimento", acaoRealizada: "Avaliar marco motor global" },
+      postura: { id: "ped-04-pos", titulo: "Postura", descricao: "Tônus global preservado, sem hipotonia evidente ao exame. Sustentação postural compatível com idade.", regiao: "desenvolvimento", acaoRealizada: "Avaliar tônus" },
+      resposta_social: { id: "ped-04-rs", titulo: "Resposta Social", descricao: "Contato visual mantido, sorri em resposta ao estímulo social, demonstra interesse pelos objetos ao redor.", regiao: "desenvolvimento", acaoRealizada: "Avaliar sorriso social" },
+      fala_interacao: { id: "ped-04-fi", titulo: "Fala e Interação", descricao: "Emite sons e vocaliza responsivamente. Interage ativamente durante avaliação, responde a estímulos visuais e auditivos.", regiao: "desenvolvimento", acaoRealizada: "Avaliar interação" },
+    },
+
+    // ped-05: Insuficiência Cardíaca / Lactente
+    // Achados objetivos de sobrecarga cardíaca e congestão
+    "ped-05": {
+      estado_geral: { id: "ped-05-eg", titulo: "Estado Geral", descricao: "Lactente em regular estado geral, reativo ao examinador, porém observa-se cansaço durante manuseio prolongado.", regiao: "estado_geral", acaoRealizada: "Avaliar estado geral" },
+      nivel_atividade: { id: "ped-05-na", titulo: "Nível de Atividade", descricao: "Lactente com atividade espontânea reduzida em relação ao esperado, menos exploratório que o normal para a idade.", regiao: "estado_geral", acaoRealizada: "Avaliar nível de atividade" },
+      irritabilidade: { id: "ped-05-irr", titulo: "Irritabilidade", descricao: "Demonstra irritabilidade durante manuseio mais prolongado, cansaço evidenciado.", regiao: "estado_geral", acaoRealizada: "Avaliar irritabilidade" },
+      interacao_responsavel: { id: "ped-05-int", titulo: "Interação com Responsável", descricao: "Interage com o responsável, porém apresenta menor engajamento que o esperado, cansaço evidente durante avaliação.", regiao: "estado_geral", acaoRealizada: "Interação com responsável" },
+      palidez: { id: "ped-05-pal", titulo: "Palidez", descricao: "Pele corada, sem palidez evidente.", regiao: "pele_mucosas", acaoRealizada: "Avaliar palidez" },
+      cianose: { id: "ped-05-cia", titulo: "Cianose", descricao: "Sem cianose central ou periférica.", regiao: "pele_mucosas", acaoRealizada: "Avaliar cianose" },
+      hidratacao_mucosas: { id: "ped-05-hid", titulo: "Hidratação de Mucosas", descricao: "Mucosas úmidas, turgor preservado, lágrimas presentes.", regiao: "pele_mucosas", acaoRealizada: "Hidratação de mucosas" },
+      exantema: { id: "ped-05-exa", titulo: "Exantema", descricao: "Sem exantema difuso evidente no momento.", regiao: "pele_mucosas", acaoRealizada: "Avaliar exantema" },
+      petequias: { id: "ped-05-pet", titulo: "Petéquias", descricao: "Sem petéquias aparentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar petéquias" },
+      equimoses: { id: "ped-05-equ", titulo: "Equimoses", descricao: "Sem equimoses evidentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar equimoses" },
+      perimetro_cefalico: { id: "ped-05-pc", titulo: "Perímetro Cefálico", descricao: "Perímetro cefálico aferido com fita passando pela região supraorbitária e maior proeminência occipital.", regiao: "cabeca_perimetro", acaoRealizada: "Medir perímetro cefálico" },
+      fontanela: { id: "ped-05-fon", titulo: "Fontanela", descricao: "Fontanela anterior normotensa, sem abaulamento evidente.", regiao: "cabeca_perimetro", acaoRealizada: "Palpar fontanela anterior" },
+      formato_craniano: { id: "ped-05-fcr", titulo: "Formato Craniano", descricao: "Crânio simétrico, sem deformidades grosseiras aparentes.", regiao: "cabeca_perimetro", acaoRealizada: "Inspecionar crânio" },
+      cianose_central: { id: "ped-05-cc", titulo: "Cianose Central", descricao: "Lábios e língua com coloração normal, sem cianose.", regiao: "face_olhos", acaoRealizada: "Cianose central" },
+      palidez_conjuntival: { id: "ped-05-pc2", titulo: "Palidez Conjuntival", descricao: "Conjuntivas normocoradas, sem palidez significativa.", regiao: "face_olhos", acaoRealizada: "Palidez conjuntival" },
+      sinais_desidratacao: { id: "ped-05-des", titulo: "Sinais de Desidratação", descricao: "Olhos com brilho normal, sem depressão, turgor preservado.", regiao: "face_olhos", acaoRealizada: "Sinais de desidratação" },
+      mucosa_oral: { id: "ped-05-mo", titulo: "Mucosa Oral", descricao: "Mucosa oral úmida, corada, sem lesões ulceradas aparentes.", regiao: "orofaringe", acaoRealizada: "Inspecionar cavidade oral" },
+      hiperemia_orofaringe: { id: "ped-05-hipe", titulo: "Hiperemia de Orofaringe", descricao: "Orofaringe sem placas purulentas evidentes no momento.", regiao: "orofaringe", acaoRealizada: "Avaliar orofaringe" },
+      lesoes_orais: { id: "ped-05-les", titulo: "Lesões Orais", descricao: "Sem placas esbranquiçadas aderentes sugestivas de candidíase oral.", regiao: "orofaringe", acaoRealizada: "Procurar monilíase oral" },
+      linfonodos_cervicais: { id: "ped-05-lnc", titulo: "Linfonodos Cervicais", descricao: "Linfonodos cervicais não aumentados de forma significativa à palpação.", regiao: "pescoco_linfonodos", acaoRealizada: "Palpar linfonodos cervicais" },
+      descricao_linfonodos: { id: "ped-05-dll", titulo: "Descrição de Linfonodos", descricao: "Se palpáveis: móveis, de consistência fibroelástica, indolores.", regiao: "pescoco_linfonodos", acaoRealizada: "Descrever linfonodos" },
+      rigidez_nuca: { id: "ped-05-rn", titulo: "Rigidez de Nuca", descricao: "Sem rigidez evidente, mobilidade cervical preservada.", regiao: "pescoco_linfonodos", acaoRealizada: "Avaliar mobilidade cervical" },
+      frequencia_respiratoria: { id: "ped-05-fr", titulo: "Frequência Respiratória", descricao: "Frequência respiratória elevada para a idade no contexto clínico do paciente. Aferida durante 1 minuto completo em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Contar frequência respiratória por 1 minuto" },
+      tiragens: { id: "ped-05-tir", titulo: "Tiragens", descricao: "Tiragem subcostal discreta observada durante respiração espontânea, indicando aumento do esforço respiratório.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar tiragens" },
+      batimento_asa_nasal: { id: "ped-05-ban", titulo: "Batimento de Asa Nasal", descricao: "Sem batimento de asa nasal prominente em repouso, porém observável ao aumentar esforço.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar batimento de asa nasal" },
+      expansibilidade: { id: "ped-05-exp", titulo: "Expansibilidade Torácica", descricao: "Expansão simétrica bilateral, compatível com esforço respiratório aumentado.", regiao: "torax_respiratorio", acaoRealizada: "Palpar expansibilidade torácica" },
+      ausculta_pulmonar: { id: "ped-05-ap", titulo: "Ausculta Pulmonar", descricao: "Murmúrio vesicular presente bilateralmente, porém com presença de crepitações finas em bases, sugestivas de congestão pulmonar.", regiao: "torax_respiratorio", acaoRealizada: "Auscultar murmúrio vesicular" },
+      ausculta_focos: { id: "ped-05-af", titulo: "Ausculta de Focos Cardíacos", descricao: "Bulhas cardíacas rítmicas, com frequência cardíaca elevada para a idade no contexto do caso.", regiao: "precordio", acaoRealizada: "Auscultar bulhas cardíacas" },
+      sopro: { id: "ped-05-sop", titulo: "Sopro Cardíaco", descricao: "Sopro sistólico audível à ausculta precordial, consistente com fluxo anormal.", regiao: "precordio", acaoRealizada: "Pesquisar sopros" },
+      ritmo_cardiaco: { id: "ped-05-rc", titulo: "Ritmo Cardíaco", descricao: "Frequência cardíaca elevada para a idade. Ritmo regular, porém taquicárdico no contexto da avaliação clínica.", regiao: "precordio", acaoRealizada: "Avaliar frequência cardíaca" },
+      cianose_cardiaca: { id: "ped-05-ccard", titulo: "Cianose Associada", descricao: "Sem cianose central importante. Observa-se sudorese durante o exame e manuseio.", regiao: "precordio", acaoRealizada: "Avaliar sinais de insuficiência cardíaca" },
+      inspecao_abdome: { id: "ped-05-ia", titulo: "Inspeção Abdominal", descricao: "Abdome plano ou discretamente globoso, sem distensão importante.", regiao: "abdome", acaoRealizada: "Inspecionar abdome" },
+      palpacao_abdome: { id: "ped-05-pa", titulo: "Palpação Abdominal", descricao: "Abdome flácido, sem defesa ou irritação peritoneal evidente.", regiao: "abdome", acaoRealizada: "Palpar abdome superficialmente" },
+      dor_abdominal: { id: "ped-05-da", titulo: "Dor Abdominal", descricao: "Sem reação dolorosa importante à palpação abdominal.", regiao: "abdome", acaoRealizada: "Avaliar dor à palpação" },
+      distensao: { id: "ped-05-dis", titulo: "Distensão Abdominal", descricao: "Abdome não distendido, consistência normal.", regiao: "abdome", acaoRealizada: "Auscultar ruídos hidroaéreos" },
+      palpacao_figado: { id: "ped-05-pf", titulo: "Palpação Hepática", descricao: "Borda hepática palpável nitidamente abaixo do rebordo costal direito, sugerindo aumento do volume hepático.", regiao: "figado", acaoRealizada: "Palpar borda hepática" },
+      hepatomegalia: { id: "ped-05-hep", titulo: "Hepatomegalia", descricao: "Hepatomegalia clinicamente evidente à palpação. Fígado aumentado sugestivo de congestão.", regiao: "figado", acaoRealizada: "Pesquisar hepatomegalia" },
+      sensibilidade_hipocondrio_d: { id: "ped-05-shd", titulo: "Sensibilidade Hipocondrial D", descricao: "Leve sensibilidade à palpação profunda do hipocôndrio direito, compatível com congestão hepática.", regiao: "figado", acaoRealizada: "Avaliar dor em hipocôndrio direito" },
+      palpacao_baco: { id: "ped-05-pb", titulo: "Palpação Esplênica", descricao: "Baço não palpável no momento.", regiao: "baco", acaoRealizada: "Palpar baço" },
+      esplenomegalia: { id: "ped-05-esp", titulo: "Esplenomegalia", descricao: "Sem esplenomegalia evidente à palpação.", regiao: "baco", acaoRealizada: "Pesquisar esplenomegalia" },
+      pulsos_perifericos: { id: "ped-05-pp", titulo: "Pulsos Periféricos", descricao: "Pulsos periféricos palpáveis e simétricos.", regiao: "membros_perfusao", acaoRealizada: "Palpar pulsos periféricos" },
+      tempo_enchimento_capilar: { id: "ped-05-tec", titulo: "TEC (Tempo Enchimento Capilar)", descricao: "Tempo de enchimento capilar discretamente aumentado, entre 2-3 segundos, sugestivo de perfusão periférica reduzida.", regiao: "membros_perfusao", acaoRealizada: "Medir tempo de enchimento capilar" },
+      extremidades_frias: { id: "ped-05-ef", titulo: "Extremidades Frias", descricao: "Extremidades aquecidas, porém com discreto aumento do tempo de enchimento capilar. Perfusão periférica preservada mas reduzida.", regiao: "membros_perfusao", acaoRealizada: "Avaliar perfusão periférica" },
+      edema: { id: "ped-05-edo", titulo: "Edema em Membros", descricao: "Sem edema periférico evidente.", regiao: "membros_perfusao", acaoRealizada: "Avaliar edema" },
+      petequias_equimoses_membros: { id: "ped-05-pem", titulo: "Petéquias/Equimoses", descricao: "Sem petéquias ou equimoses em membros.", regiao: "membros_perfusao", acaoRealizada: "Avaliar mobilidade espontânea" },
+      marcos_desenvolvimento: { id: "ped-05-md", titulo: "Marcos do Desenvolvimento", descricao: "Marco motor global observado de acordo com a idade informada.", regiao: "desenvolvimento", acaoRealizada: "Avaliar marco motor global" },
+      postura: { id: "ped-05-pos", titulo: "Postura", descricao: "Tônus global compatível com a idade, sem hipotonia evidente no exame.", regiao: "desenvolvimento", acaoRealizada: "Avaliar tônus" },
+      resposta_social: { id: "ped-05-rs", titulo: "Resposta Social", descricao: "Sorriso social presente ou referido conforme faixa etária.", regiao: "desenvolvimento", acaoRealizada: "Avaliar sorriso social" },
+      fala_interacao: { id: "ped-05-fi", titulo: "Fala e Interação", descricao: "Lactente interage com o examinador/cuidador de forma compatível com a idade.", regiao: "desenvolvimento", acaoRealizada: "Avaliar interação" },
+    },
+
+    // ped-07: Cardiopatia Congênita Acianótica / Sopro
+    // Achados objetivos de cardiopatia sem cianose
+    "ped-07": {
+      estado_geral: { id: "ped-07-eg", titulo: "Estado Geral", descricao: "Lactente em bom estado geral, ativo, reativo ao manuseio, sem sinais de desconforto importante.", regiao: "estado_geral", acaoRealizada: "Avaliar estado geral" },
+      nivel_atividade: { id: "ped-07-na", titulo: "Nível de Atividade", descricao: "Lactente ativo, responsivo a estímulos, com atividade motora espontânea adequada para a idade.", regiao: "estado_geral", acaoRealizada: "Avaliar nível de atividade" },
+      irritabilidade: { id: "ped-07-irr", titulo: "Irritabilidade", descricao: "Sem irritabilidade exagerada, consolável.", regiao: "estado_geral", acaoRealizada: "Avaliar irritabilidade" },
+      interacao_responsavel: { id: "ped-07-int", titulo: "Interação com Responsável", descricao: "Lactente interage com o responsável de forma compatível com a idade.", regiao: "estado_geral", acaoRealizada: "Interação com responsável" },
+      palidez: { id: "ped-07-pal", titulo: "Palidez", descricao: "Pele corada, sem palidez evidente.", regiao: "pele_mucosas", acaoRealizada: "Avaliar palidez" },
+      cianose: { id: "ped-07-cia", titulo: "Cianose", descricao: "Sem cianose central ou periférica observada durante o exame físico.", regiao: "pele_mucosas", acaoRealizada: "Avaliar cianose" },
+      hidratacao_mucosas: { id: "ped-07-hid", titulo: "Hidratação de Mucosas", descricao: "Mucosas úmidas, turgor preservado, lágrimas presentes.", regiao: "pele_mucosas", acaoRealizada: "Hidratação de mucosas" },
+      exantema: { id: "ped-07-exa", titulo: "Exantema", descricao: "Sem exantema difuso evidente no momento.", regiao: "pele_mucosas", acaoRealizada: "Avaliar exantema" },
+      petequias: { id: "ped-07-pet", titulo: "Petéquias", descricao: "Sem petéquias aparentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar petéquias" },
+      equimoses: { id: "ped-07-equ", titulo: "Equimoses", descricao: "Sem equimoses evidentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar equimoses" },
+      perimetro_cefalico: { id: "ped-07-pc", titulo: "Perímetro Cefálico", descricao: "Perímetro cefálico aferido com fita passando pela região supraorbitária e maior proeminência occipital.", regiao: "cabeca_perimetro", acaoRealizada: "Medir perímetro cefálico" },
+      fontanela: { id: "ped-07-fon", titulo: "Fontanela", descricao: "Fontanela anterior normotensa, sem abaulamento evidente.", regiao: "cabeca_perimetro", acaoRealizada: "Palpar fontanela anterior" },
+      formato_craniano: { id: "ped-07-fcr", titulo: "Formato Craniano", descricao: "Crânio simétrico, sem deformidades grosseiras aparentes.", regiao: "cabeca_perimetro", acaoRealizada: "Inspecionar crânio" },
+      cianose_central: { id: "ped-07-cc", titulo: "Cianose Central", descricao: "Lábios e língua com coloração normal, sem cianose.", regiao: "face_olhos", acaoRealizada: "Cianose central" },
+      palidez_conjuntival: { id: "ped-07-pc2", titulo: "Palidez Conjuntival", descricao: "Conjuntivas normocoradas, sem palidez significativa.", regiao: "face_olhos", acaoRealizada: "Palidez conjuntival" },
+      sinais_desidratacao: { id: "ped-07-des", titulo: "Sinais de Desidratação", descricao: "Olhos com brilho normal, sem depressão, turgor preservado.", regiao: "face_olhos", acaoRealizada: "Sinais de desidratação" },
+      mucosa_oral: { id: "ped-07-mo", titulo: "Mucosa Oral", descricao: "Mucosa oral úmida, corada, sem lesões ulceradas aparentes.", regiao: "orofaringe", acaoRealizada: "Inspecionar cavidade oral" },
+      hiperemia_orofaringe: { id: "ped-07-hipe", titulo: "Hiperemia de Orofaringe", descricao: "Orofaringe sem placas purulentas evidentes no momento.", regiao: "orofaringe", acaoRealizada: "Avaliar orofaringe" },
+      lesoes_orais: { id: "ped-07-les", titulo: "Lesões Orais", descricao: "Sem placas esbranquiçadas aderentes sugestivas de candidíase oral.", regiao: "orofaringe", acaoRealizada: "Procurar monilíase oral" },
+      linfonodos_cervicais: { id: "ped-07-lnc", titulo: "Linfonodos Cervicais", descricao: "Linfonodos cervicais não aumentados de forma significativa à palpação.", regiao: "pescoco_linfonodos", acaoRealizada: "Palpar linfonodos cervicais" },
+      descricao_linfonodos: { id: "ped-07-dll", titulo: "Descrição de Linfonodos", descricao: "Se palpáveis: móveis, de consistência fibroelástica, indolores.", regiao: "pescoco_linfonodos", acaoRealizada: "Descrever linfonodos" },
+      rigidez_nuca: { id: "ped-07-rn", titulo: "Rigidez de Nuca", descricao: "Sem rigidez evidente, mobilidade cervical preservada.", regiao: "pescoco_linfonodos", acaoRealizada: "Avaliar mobilidade cervical" },
+      frequencia_respiratoria: { id: "ped-07-fr", titulo: "Frequência Respiratória", descricao: "Frequência respiratória aferida durante 1 minuto completo, com lactente em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Contar frequência respiratória por 1 minuto" },
+      tiragens: { id: "ped-07-tir", titulo: "Tiragens", descricao: "Sem tiragem subcostal, intercostal ou supraesternal evidente em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar tiragens" },
+      batimento_asa_nasal: { id: "ped-07-ban", titulo: "Batimento de Asa Nasal", descricao: "Sem batimento de asa nasal no momento.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar batimento de asa nasal" },
+      expansibilidade: { id: "ped-07-exp", titulo: "Expansibilidade Torácica", descricao: "Expansão simétrica bilateral, sem assimetria importante.", regiao: "torax_respiratorio", acaoRealizada: "Palpar expansibilidade torácica" },
+      ausculta_pulmonar: { id: "ped-07-ap", titulo: "Ausculta Pulmonar", descricao: "Murmúrio vesicular presente bilateralmente, sem assimetria importante.", regiao: "torax_respiratorio", acaoRealizada: "Auscultar murmúrio vesicular" },
+      ausculta_focos: { id: "ped-07-af", titulo: "Ausculta de Focos Cardíacos", descricao: "Bulhas cardíacas rítmicas e normofonéticas. Frequência cardíaca compatível com avaliação clínica.", regiao: "precordio", acaoRealizada: "Auscultar bulhas cardíacas" },
+      sopro: { id: "ped-07-sop", titulo: "Sopro Cardíaco", descricao: "Sopro sistólico audível em foco precordial durante ausculta, compatível com fluxo anormal.", regiao: "precordio", acaoRealizada: "Pesquisar sopros" },
+      ritmo_cardiaco: { id: "ped-07-rc", titulo: "Ritmo Cardíaco", descricao: "Ritmo cardíaco regular. Frequência aferida em repouso, compatível com a idade e contexto clínico.", regiao: "precordio", acaoRealizada: "Avaliar frequência cardíaca" },
+      cianose_cardiaca: { id: "ped-07-ccard", titulo: "Cianose Associada", descricao: "Sem cianose central. Sem desconforto respiratório evidente. Sinais vitais estáveis durante o exame.", regiao: "precordio", acaoRealizada: "Avaliar sinais de insuficiência cardíaca" },
+      inspecao_abdome: { id: "ped-07-ia", titulo: "Inspeção Abdominal", descricao: "Abdome plano ou discretamente globoso, sem distensão importante.", regiao: "abdome", acaoRealizada: "Inspecionar abdome" },
+      palpacao_abdome: { id: "ped-07-pa", titulo: "Palpação Abdominal", descricao: "Abdome flácido, sem defesa ou irritação peritoneal evidente.", regiao: "abdome", acaoRealizada: "Palpar abdome superficialmente" },
+      dor_abdominal: { id: "ped-07-da", titulo: "Dor Abdominal", descricao: "Sem reação dolorosa importante à palpação abdominal.", regiao: "abdome", acaoRealizada: "Avaliar dor à palpação" },
+      distensao: { id: "ped-07-dis", titulo: "Distensão Abdominal", descricao: "Abdome não distendido, consistência normal.", regiao: "abdome", acaoRealizada: "Auscultar ruídos hidroaéreos" },
+      palpacao_figado: { id: "ped-07-pf", titulo: "Palpação Hepática", descricao: "Borda hepática palpável discretamente abaixo do rebordo costal direito, sem dor importante à palpação.", regiao: "figado", acaoRealizada: "Palpar borda hepática" },
+      hepatomegalia: { id: "ped-07-hep", titulo: "Hepatomegalia", descricao: "Sem hepatomegalia clinicamente importante evidente no momento.", regiao: "figado", acaoRealizada: "Pesquisar hepatomegalia" },
+      sensibilidade_hipocondrio_d: { id: "ped-07-shd", titulo: "Sensibilidade Hipocondrial D", descricao: "Sem reação dolorosa significativa à palpação do hipocôndrio direito.", regiao: "figado", acaoRealizada: "Avaliar dor em hipocôndrio direito" },
+      palpacao_baco: { id: "ped-07-pb", titulo: "Palpação Esplênica", descricao: "Baço não palpável no momento.", regiao: "baco", acaoRealizada: "Palpar baço" },
+      esplenomegalia: { id: "ped-07-esp", titulo: "Esplenomegalia", descricao: "Sem esplenomegalia evidente à palpação.", regiao: "baco", acaoRealizada: "Pesquisar esplenomegalia" },
+      pulsos_perifericos: { id: "ped-07-pp", titulo: "Pulsos Periféricos", descricao: "Pulsos periféricos palpáveis e simétricos.", regiao: "membros_perfusao", acaoRealizada: "Palpar pulsos periféricos" },
+      tempo_enchimento_capilar: { id: "ped-07-tec", titulo: "TEC (Tempo Enchimento Capilar)", descricao: "Tempo de enchimento capilar menor que 2 segundos.", regiao: "membros_perfusao", acaoRealizada: "Medir tempo de enchimento capilar" },
+      extremidades_frias: { id: "ped-07-ef", titulo: "Extremidades Frias", descricao: "Extremidades aquecidas, perfusão periférica preservada.", regiao: "membros_perfusao", acaoRealizada: "Avaliar perfusão periférica" },
+      edema: { id: "ped-07-edo", titulo: "Edema em Membros", descricao: "Sem edema periférico evidente.", regiao: "membros_perfusao", acaoRealizada: "Avaliar edema" },
+      petequias_equimoses_membros: { id: "ped-07-pem", titulo: "Petéquias/Equimoses", descricao: "Sem petéquias ou equimoses em membros.", regiao: "membros_perfusao", acaoRealizada: "Avaliar mobilidade espontânea" },
+      marcos_desenvolvimento: { id: "ped-07-md", titulo: "Marcos do Desenvolvimento", descricao: "Marco motor global observado de acordo com a idade informada.", regiao: "desenvolvimento", acaoRealizada: "Avaliar marco motor global" },
+      postura: { id: "ped-07-pos", titulo: "Postura", descricao: "Tônus global compatível com a idade, sem hipotonia evidente no exame.", regiao: "desenvolvimento", acaoRealizada: "Avaliar tônus" },
+      resposta_social: { id: "ped-07-rs", titulo: "Resposta Social", descricao: "Sorriso social presente ou referido conforme faixa etária.", regiao: "desenvolvimento", acaoRealizada: "Avaliar sorriso social" },
+      fala_interacao: { id: "ped-07-fi", titulo: "Fala e Interação", descricao: "Lactente interage com o examinador/cuidador de forma compatível com a idade.", regiao: "desenvolvimento", acaoRealizada: "Avaliar interação" },
+    },
+
+    // ped-08: Cardiopatia Cianótica / Lactente
+    // Achados objetivos de cianose central sem diagnóstico fechado
+    "ped-08": {
+      estado_geral: { id: "ped-08-eg", titulo: "Estado Geral", descricao: "Lactente em regular estado geral, reativo, com coloração cutaneomucosa alterada durante avaliação.", regiao: "estado_geral", acaoRealizada: "Avaliar estado geral" },
+      nivel_atividade: { id: "ped-08-na", titulo: "Nível de Atividade", descricao: "Lactente com atividade espontânea compatível com idade, porém observa-se desconforto leve ao manuseio prolongado.", regiao: "estado_geral", acaoRealizada: "Avaliar nível de atividade" },
+      irritabilidade: { id: "ped-08-irr", titulo: "Irritabilidade", descricao: "Sem irritabilidade exagerada, consolável.", regiao: "estado_geral", acaoRealizada: "Avaliar irritabilidade" },
+      interacao_responsavel: { id: "ped-08-int", titulo: "Interação com Responsável", descricao: "Lactente interage com o responsável de forma compatível com a idade.", regiao: "estado_geral", acaoRealizada: "Interação com responsável" },
+      palidez: { id: "ped-08-pal", titulo: "Palidez", descricao: "Pele corada, sem palidez evidente.", regiao: "pele_mucosas", acaoRealizada: "Avaliar palidez" },
+      cianose: { id: "ped-08-cia", titulo: "Cianose", descricao: "Cianose central observada em lábios e mucosa oral. Coloração arroxeada discreta em extremidades.", regiao: "pele_mucosas", acaoRealizada: "Avaliar cianose" },
+      hidratacao_mucosas: { id: "ped-08-hid", titulo: "Hidratação de Mucosas", descricao: "Mucosas úmidas, turgor preservado, lágrimas presentes.", regiao: "pele_mucosas", acaoRealizada: "Hidratação de mucosas" },
+      exantema: { id: "ped-08-exa", titulo: "Exantema", descricao: "Sem exantema difuso evidente no momento.", regiao: "pele_mucosas", acaoRealizada: "Avaliar exantema" },
+      petequias: { id: "ped-08-pet", titulo: "Petéquias", descricao: "Sem petéquias aparentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar petéquias" },
+      equimoses: { id: "ped-08-equ", titulo: "Equimoses", descricao: "Sem equimoses evidentes à inspeção.", regiao: "pele_mucosas", acaoRealizada: "Avaliar equimoses" },
+      perimetro_cefalico: { id: "ped-08-pc", titulo: "Perímetro Cefálico", descricao: "Perímetro cefálico aferido com fita passando pela região supraorbitária e maior proeminência occipital.", regiao: "cabeca_perimetro", acaoRealizada: "Medir perímetro cefálico" },
+      fontanela: { id: "ped-08-fon", titulo: "Fontanela", descricao: "Fontanela anterior normotensa, sem abaulamento evidente.", regiao: "cabeca_perimetro", acaoRealizada: "Palpar fontanela anterior" },
+      formato_craniano: { id: "ped-08-fcr", titulo: "Formato Craniano", descricao: "Crânio simétrico, sem deformidades grosseiras aparentes.", regiao: "cabeca_perimetro", acaoRealizada: "Inspecionar crânio" },
+      cianose_central: { id: "ped-08-cc", titulo: "Cianose Central", descricao: "Coloração perioral arroxeada observada durante o exame. Lábios e língua com tonalidade alterada.", regiao: "face_olhos", acaoRealizada: "Cianose central" },
+      palidez_conjuntival: { id: "ped-08-pc2", titulo: "Palidez Conjuntival", descricao: "Conjuntivas normocoradas, sem palidez significativa.", regiao: "face_olhos", acaoRealizada: "Palidez conjuntival" },
+      sinais_desidratacao: { id: "ped-08-des", titulo: "Sinais de Desidratação", descricao: "Olhos com brilho normal, sem depressão, turgor preservado.", regiao: "face_olhos", acaoRealizada: "Sinais de desidratação" },
+      mucosa_oral: { id: "ped-08-mo", titulo: "Mucosa Oral", descricao: "Mucosa oral úmida, com coloração arroxeada. Sem lesões ulceradas aparentes.", regiao: "orofaringe", acaoRealizada: "Inspecionar cavidade oral" },
+      hiperemia_orofaringe: { id: "ped-08-hipe", titulo: "Hiperemia de Orofaringe", descricao: "Orofaringe sem placas purulentas evidentes no momento.", regiao: "orofaringe", acaoRealizada: "Avaliar orofaringe" },
+      lesoes_orais: { id: "ped-08-les", titulo: "Lesões Orais", descricao: "Sem placas esbranquiçadas aderentes sugestivas de candidíase oral.", regiao: "orofaringe", acaoRealizada: "Procurar monilíase oral" },
+      linfonodos_cervicais: { id: "ped-08-lnc", titulo: "Linfonodos Cervicais", descricao: "Linfonodos cervicais não aumentados de forma significativa à palpação.", regiao: "pescoco_linfonodos", acaoRealizada: "Palpar linfonodos cervicais" },
+      descricao_linfonodos: { id: "ped-08-dll", titulo: "Descrição de Linfonodos", descricao: "Se palpáveis: móveis, de consistência fibroelástica, indolores.", regiao: "pescoco_linfonodos", acaoRealizada: "Descrever linfonodos" },
+      rigidez_nuca: { id: "ped-08-rn", titulo: "Rigidez de Nuca", descricao: "Sem rigidez evidente, mobilidade cervical preservada.", regiao: "pescoco_linfonodos", acaoRealizada: "Avaliar mobilidade cervical" },
+      frequencia_respiratoria: { id: "ped-08-fr", titulo: "Frequência Respiratória", descricao: "Frequência respiratória aferida durante 1 minuto completo, sem taquipneia importante em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Contar frequência respiratória por 1 minuto" },
+      tiragens: { id: "ped-08-tir", titulo: "Tirages", descricao: "Sem tiragem subcostal ou intercostal importante em repouso. Esforço respiratório compatível com idade.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar tiragens" },
+      batimento_asa_nasal: { id: "ped-08-ban", titulo: "Batimento de Asa Nasal", descricao: "Sem batimento de asa nasal no momento.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar batimento de asa nasal" },
+      expansibilidade: { id: "ped-08-exp", titulo: "Expansibilidade Torácica", descricao: "Expansão simétrica bilateral, sem assimetria importante.", regiao: "torax_respiratorio", acaoRealizada: "Palpar expansibilidade torácica" },
+      ausculta_pulmonar: { id: "ped-08-ap", titulo: "Ausculta Pulmonar", descricao: "Murmúrio vesicular presente bilateralmente, sem assimetria importante.", regiao: "torax_respiratorio", acaoRealizada: "Auscultar murmúrio vesicular" },
+      ausculta_focos: { id: "ped-08-af", titulo: "Ausculta de Focos Cardíacos", descricao: "Bulhas cardíacas rítmicas. Frequência cardíaca elevada para a idade no contexto do caso.", regiao: "precordio", acaoRealizada: "Auscultar bulhas cardíacas" },
+      sopro: { id: "ped-08-sop", titulo: "Sopro Cardíaco", descricao: "Sopro audível à ausculta precordial, compatível com fluxo anormal entre câmaras cardíacas.", regiao: "precordio", acaoRealizada: "Pesquisar sopros" },
+      ritmo_cardiaco: { id: "ped-08-rc", titulo: "Ritmo Cardíaco", descricao: "Ritmo regular. Frequência cardíaca elevada para a idade, compatível com demanda hipóxica.", regiao: "precordio", acaoRealizada: "Avaliar frequência cardíaca" },
+      cianose_cardiaca: { id: "ped-08-ccard", titulo: "Cianose Associada", descricao: "Cianose central presente durante avaliação. Extremidades com coloração alterada. Compatível com saturação reduzida.", regiao: "precordio", acaoRealizada: "Avaliar sinais de insuficiência cardíaca" },
+      inspecao_abdome: { id: "ped-08-ia", titulo: "Inspeção Abdominal", descricao: "Abdome plano ou discretamente globoso, sem distensão importante.", regiao: "abdome", acaoRealizada: "Inspecionar abdome" },
+      palpacao_abdome: { id: "ped-08-pa", titulo: "Palpação Abdominal", descricao: "Abdome flácido, sem defesa ou irritação peritoneal evidente.", regiao: "abdome", acaoRealizada: "Palpar abdome superficialmente" },
+      dor_abdominal: { id: "ped-08-da", titulo: "Dor Abdominal", descricao: "Sem reação dolorosa importante à palpação abdominal.", regiao: "abdome", acaoRealizada: "Avaliar dor à palpação" },
+      distensao: { id: "ped-08-dis", titulo: "Distensão Abdominal", descricao: "Abdome não distendido, consistência normal.", regiao: "abdome", acaoRealizada: "Auscultar ruídos hidroaéreos" },
+      palpacao_figado: { id: "ped-08-pf", titulo: "Palpação Hepática", descricao: "Borda hepática palpável discretamente abaixo do rebordo costal direito, sem dor importante à palpação.", regiao: "figado", acaoRealizada: "Palpar borda hepática" },
+      hepatomegalia: { id: "ped-08-hep", titulo: "Hepatomegalia", descricao: "Sem hepatomegalia clinicamente importante evidente no momento.", regiao: "figado", acaoRealizada: "Pesquisar hepatomegalia" },
+      sensibilidade_hipocondrio_d: { id: "ped-08-shd", titulo: "Sensibilidade Hipocondrial D", descricao: "Sem reação dolorosa significativa à palpação do hipocôndrio direito.", regiao: "figado", acaoRealizada: "Avaliar dor em hipocôndrio direito" },
+      palpacao_baco: { id: "ped-08-pb", titulo: "Palpação Esplênica", descricao: "Baço não palpável no momento.", regiao: "baco", acaoRealizada: "Palpar baço" },
+      esplenomegalia: { id: "ped-08-esp", titulo: "Esplenomegalia", descricao: "Sem esplenomegalia evidente à palpação.", regiao: "baco", acaoRealizada: "Pesquisar esplenomegalia" },
+      pulsos_perifericos: { id: "ped-08-pp", titulo: "Pulsos Periféricos", descricao: "Pulsos periféricos palpáveis e simétricos.", regiao: "membros_perfusao", acaoRealizada: "Palpar pulsos periféricos" },
+      tempo_enchimento_capilar: { id: "ped-08-tec", titulo: "TEC (Tempo Enchimento Capilar)", descricao: "Tempo de enchimento capilar menor que 2 segundos.", regiao: "membros_perfusao", acaoRealizada: "Medir tempo de enchimento capilar" },
+      extremidades_frias: { id: "ped-08-ef", titulo: "Extremidades Frias", descricao: "Extremidades aquecidas. Perfusão periférica preservada, porém com cianose periférica discreta observada.", regiao: "membros_perfusao", acaoRealizada: "Avaliar perfusão periférica" },
+      edema: { id: "ped-08-edo", titulo: "Edema em Membros", descricao: "Sem edema periférico evidente. Extremidades com coloração discretamente arroxeada.", regiao: "membros_perfusao", acaoRealizada: "Avaliar edema" },
+      petequias_equimoses_membros: { id: "ped-08-pem", titulo: "Petéquias/Equimoses", descricao: "Sem petéquias ou equimoses evidentes. Coloração alterada secundária à cianose observada.", regiao: "membros_perfusao", acaoRealizada: "Avaliar mobilidade espontânea" },
+      marcos_desenvolvimento: { id: "ped-08-md", titulo: "Marcos do Desenvolvimento", descricao: "Marco motor global observado de acordo com a idade informada.", regiao: "desenvolvimento", acaoRealizada: "Avaliar marco motor global" },
+      postura: { id: "ped-08-pos", titulo: "Postura", descricao: "Tônus global compatível com a idade, sem hipotonia evidente no exame.", regiao: "desenvolvimento", acaoRealizada: "Avaliar tônus" },
+      resposta_social: { id: "ped-08-rs", titulo: "Resposta Social", descricao: "Sorriso social presente ou referido conforme faixa etária.", regiao: "desenvolvimento", acaoRealizada: "Avaliar sorriso social" },
+      fala_interacao: { id: "ped-08-fi", titulo: "Fala e Interação", descricao: "Lactente inteira com o examinador/cuidador de forma compatível com a idade.", regiao: "desenvolvimento", acaoRealizada: "Avaliar interação" },
+    },
+
+    // ===== CASO PED-13: PNEUMONIA ADQUIRIDA NA COMUNIDADE - RICARDO, 5 ANOS =====
+    "ped-13": {
+      estado_geral: { id: "ped-13-eg", titulo: "Estado Geral", descricao: "Criança febril, com dificuldade respiratória moderada, prostrada, porém responsiva e em contato com o examinador.", regiao: "estado_geral", acaoRealizada: "Avaliar estado geral" },
+      nivel_atividade: { id: "ped-13-na", titulo: "Nível de Atividade", descricao: "Criança hipoativa, secundário ao quadro febril e desconforto respiratório, responsiva aos estímulos.", regiao: "estado_geral", acaoRealizada: "Avaliar nível de atividade" },
+      irritabilidade: { id: "ped-13-irr", titulo: "Irritabilidade", descricao: "Sem irritabilidade exagerada, hipoativo pelo quadro infeccioso, consola-se com a mãe.", regiao: "estado_geral", acaoRealizada: "Avaliar irritabilidade" },
+      interacao_responsavel: { id: "ped-13-interacao", titulo: "Interação com Responsável", descricao: "Criança interage com a mãe apesar da hipoatividade, mantém contato visual.", regiao: "estado_geral", acaoRealizada: "Interação com responsável" },
+      palidez: { id: "ped-13-palidez", titulo: "Palidez", descricao: "Leve palidez, compatível com quadro febril agudo.", regiao: "pele_mucosas", acaoRealizada: "Avaliar palidez" },
+      cianose: { id: "ped-13-cianose", titulo: "Cianose", descricao: "Sem cianose central evidente, SpO₂ 91% em ar ambiente indicando hipoxemia discreta.", regiao: "pele_mucosas", acaoRealizada: "Avaliar cianose" },
+      hidratacao_mucosas: { id: "ped-13-hidratacao", titulo: "Hidratação de Mucosas", descricao: "Mucosas discretamente ressecadas, compatível com febre e possível desidratação moderada.", regiao: "pele_mucosas", acaoRealizada: "Hidratação de mucosas" },
+      exantema: { id: "ped-13-exantema", titulo: "Exantema", descricao: "Sem exantema visível, apenas hiperemia secundária ao quadro febril.", regiao: "pele_mucosas", acaoRealizada: "Avaliar exantema" },
+      petequias: { id: "ped-13-petequias", titulo: "Petéquias", descricao: "Sem petéquias ou sinais de meningococcemia.", regiao: "pele_mucosas", acaoRealizada: "Avaliar petéquias" },
+      equimoses: { id: "ped-13-equimoses", titulo: "Equimoses", descricao: "Sem equimoses aparentes.", regiao: "pele_mucosas", acaoRealizada: "Avaliar equimoses" },
+      perimetro_cefalico: { id: "ped-13-perimetro", titulo: "Perímetro Cefálico", descricao: "Não aplicável para esta faixa etária (criança de 5 anos).", regiao: "cabeca_perimetro", acaoRealizada: "Medir perímetro cefálico" },
+      fontanela: { id: "ped-13-fontanela", titulo: "Fontanela", descricao: "Não aplicável em criança de 5 anos (fontanelas fechadas há anos).", regiao: "cabeca_perimetro", acaoRealizada: "Avaliar fontanela" },
+      formato_craniano: { id: "ped-13-formato", titulo: "Formato Craniano", descricao: "Simétrico, sem deformidades aparentes, compatível com o esperado para a idade.", regiao: "cabeca_perimetro", acaoRealizada: "Formato craniano" },
+      cianose_central: { id: "ped-13-cianose-central", titulo: "Cianose Central", descricao: "Lábios e língua com coloração discretamente alterada, sem cianose central franco evidente.", regiao: "face_olhos", acaoRealizada: "Cianose central" },
+      palidez_conjuntival: { id: "ped-13-palidez-conj", titulo: "Palidez Conjuntival", descricao: "Conjuntivas discretamente pálidas, compatível com quadro febril.", regiao: "face_olhos", acaoRealizada: "Palidez conjuntival" },
+      sinais_desidratacao: { id: "ped-13-desid", titulo: "Sinais de Desidratação", descricao: "Olhos com brilho preservado, sem depressão importante, turgor discretamente reduzido compatível com desidratação moderada.", regiao: "face_olhos", acaoRealizada: "Sinais de desidratação" },
+      mucosa_oral: { id: "ped-13-mucosa", titulo: "Mucosa Oral", descricao: "Mucosa oral discretamente ressecada, coloração normal, sem lesões aparentes.", regiao: "orofaringe", acaoRealizada: "Inspecionar cavidade oral" },
+      hiperemia_orofaringe: { id: "ped-13-hiperemia", titulo: "Hiperemia de Orofaringe", descricao: "Orofaringe com hiperemia discreta, sem exsudato purulentos importante.", regiao: "orofaringe", acaoRealizada: "Avaliar orofaringe" },
+      lesoes_orais: { id: "ped-13-lesoes", titulo: "Lesões Orais", descricao: "Sem placas ou lesões aparentes na cavidade oral.", regiao: "orofaringe", acaoRealizada: "Procurar lesões orais" },
+      linfonodos_cervicais: { id: "ped-13-linfono", titulo: "Linfonodos Cervicais", descricao: "Linfonodos cervicais discretamente aumentados à palpação, compatível com reação inflamatória sistêmica.", regiao: "pescoco_linfonodos", acaoRealizada: "Palpar linfonodos cervicais" },
+      descricao_linfonodos: { id: "ped-13-desc-linfono", titulo: "Descrição de Linfonodos", descricao: "Linfonodos móveis, de consistência fibroelástica, levemente dolorosos à palpação, característico de resposta infecciosa aguda.", regiao: "pescoco_linfonodos", acaoRealizada: "Descrever linfonodos" },
+      rigidez_nuca: { id: "ped-13-rigidez", titulo: "Rigidez de Nuca", descricao: "Sem rigidez de nuca evidente, mobilidade cervical preservada, sem sinais meníngeos.", regiao: "pescoco_linfonodos", acaoRealizada: "Avaliar mobilidade cervical" },
+      frequencia_respiratoria: { id: "ped-13-fr", titulo: "Frequência Respiratória", descricao: "Frequência respiratória 48 irpm, elevada para a idade (normal até 30 em repouso para criança de 5 anos), compatível com desconforto respiratório.", regiao: "torax_respiratorio", acaoRealizada: "Contar frequência respiratória por 1 minuto" },
+      tiragens: { id: "ped-13-tiragem", titulo: "Tirages", descricao: "Tiragem subcostal discreta presente durante a respiração, sugerindo desconforto respiratório moderado.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar tiragens" },
+      batimento_asa_nasal: { id: "ped-13-ban", titulo: "Batimento de Asa Nasal", descricao: "Batimento de asa nasal discreto, associado ao esforço respiratório aumentado.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar batimento de asa nasal" },
+      expansibilidade: { id: "ped-13-expansibilidade", titulo: "Expansibilidade Torácica", descricao: "Expansão torácica discretamente assimétrica, com menor expansibilidade em base direita (região acometida).", regiao: "torax_respiratorio", acaoRealizada: "Palpar expansibilidade torácica" },
+      ausculta_pulmonar: { id: "ped-13-ausculta", titulo: "Ausculta Pulmonar", descricao: "Murmúrio vesicular reduzido em base pulmonar direita, com estertores crepitantes localizados, compatível com acometimento infeccioso pulmonar.", regiao: "torax_respiratorio", acaoRealizada: "Auscultar murmúrio vesicular" },
+      ausculta_focos: { id: "ped-13-bulhas", titulo: "Ausculta de Focos Cardíacos", descricao: "Bulhas cardíacas rítmicas, frequência cardíaca 124 bpm (taquicardia), compatível com febre e compensação cardiorespiratória.", regiao: "precordio", acaoRealizada: "Auscultar bulhas cardíacas" },
+      sopro: { id: "ped-13-sopro", titulo: "Sopro Cardíaco", descricao: "Sem sopro cardíaco significativo detectado à ausculta precordial, coração estruturalmente normal.", regiao: "precordio", acaoRealizada: "Pesquisar sopros" },
+      ritmo_cardiaco: { id: "ped-13-ritmo", titulo: "Ritmo Cardíaco", descricao: "Ritmo regular, taquicardia presente (FC 124) compatível com febre e demanda metabólica aumentada.", regiao: "precordio", acaoRealizada: "Avaliar frequência cardíaca" },
+      cianose_cardiaca: { id: "ped-13-cianose-card", titulo: "Cianose Associada", descricao: "Sem cianose importante, SpO₂ 91% em ar ambiente demonstrando hipoxemia discreta por inadequação de oxigenação.", regiao: "precordio", acaoRealizada: "Avaliar sinais de insuficiência cardíaca" },
+      inspecao_abdome: { id: "ped-13-inspecao-abd", titulo: "Inspeção Abdominal", descricao: "Abdome plano, simétrico, sem distensão importante, compatível com ausência de acometimento abdominal primário.", regiao: "abdome", acaoRealizada: "Inspecionar abdome" },
+      palpacao_abdome: { id: "ped-13-palpacao-abd", titulo: "Palpação Abdominal", descricao: "Abdome flácido, sem defesa ou rigidez peritoneal, sem hepatomegalia importante.", regiao: "abdome", acaoRealizada: "Palpar abdome superficialmente" },
+      dor_abdominal: { id: "ped-13-dor-abd", titulo: "Dor Abdominal", descricao: "Sem reação dolorosa importante à palpação abdominal profunda ou superficial.", regiao: "abdome", acaoRealizada: "Avaliar dor à palpação" },
+      distensao: { id: "ped-13-distensao", titulo: "Distensão Abdominal", descricao: "Abdome não distendido, ruídos hidroaéreos presentes.", regiao: "abdome", acaoRealizada: "Auscultar ruídos hidroaéreos" },
+      palpacao_figado: { id: "ped-13-figado", titulo: "Palpação Hepática", descricao: "Borda hepática não palpável ou discretamente abaixo do rebordo costal, sem dor importante.", regiao: "figado", acaoRealizada: "Palpar borda hepática" },
+      hepatomegalia: { id: "ped-13-hepatomegalia", titulo: "Hepatomegalia", descricao: "Sem hepatomegalia clinicamente importante evidente no momento.", regiao: "figado", acaoRealizada: "Pesquisar hepatomegalia" },
+      sensibilidade_hipocondrio_d: { id: "ped-13-hipocondrio-d", titulo: "Sensibilidade Hipocondrial D", descricao: "Sem reação dolorosa significativa à palpação do hipocôndrio direito.", regiao: "figado", acaoRealizada: "Avaliar dor em hipocôndrio direito" },
+      palpacao_baco: { id: "ped-13-baco", titulo: "Palpação Esplênica", descricao: "Baço não palpável no momento.", regiao: "baco", acaoRealizada: "Palpar baço" },
+      esplenomegalia: { id: "ped-13-esplenomegalia", titulo: "Esplenomegalia", descricao: "Sem esplenomegalia evidente à palpação.", regiao: "baco", acaoRealizada: "Pesquisar esplenomegalia" },
+      pulsos_perifericos: { id: "ped-13-pulsos", titulo: "Pulsos Periféricos", descricao: "Pulsos periféricos palpáveis e simétricos bilateralmente, amplitude normal.", regiao: "membros_perfusao", acaoRealizada: "Palpar pulsos periféricos" },
+      tempo_enchimento_capilar: { id: "ped-13-tec", titulo: "TEC (Tempo Enchimento Capilar)", descricao: "Tempo de enchimento capilar menor que 2 segundos, perfusão periférica preservada.", regiao: "membros_perfusao", acaoRealizada: "Medir tempo de enchimento capilar" },
+      extremidades_frias: { id: "ped-13-extrem-frias", titulo: "Extremidades Frias", descricao: "Extremidades com temperatura normal, sem frialdade importante, apesar da febre sistêmica.", regiao: "membros_perfusao", acaoRealizada: "Avaliar perfusão periférica" },
+      edema: { id: "ped-13-edema", titulo: "Edema em Membros", descricao: "Sem edema periférico evidente. Membros com volume normal.", regiao: "membros_perfusao", acaoRealizada: "Avaliar edema" },
+      petequias_equimoses_membros: { id: "ped-13-petequias-membros", titulo: "Petéquias/Equimoses", descricao: "Sem petéquias ou equimoses evidentes, descarta vasculite/meningococcemia.", regiao: "membros_perfusao", acaoRealizada: "Avaliar mobilidade espontânea" },
+      marcos_desenvolvimento: { id: "ped-13-desenvolvimento", titulo: "Marcos do Desenvolvimento", descricao: "Criança com desenvolvimento neuropsicomotor compatível com 5 anos, porém hipoativo pelo quadro febril. Fala adequada quando estimulada.", regiao: "desenvolvimento", acaoRealizada: "Avaliar marco motor global" },
+      postura: { id: "ped-13-postura", titulo: "Postura", descricao: "Tônus muscular global compatível com a idade, sem hipotonia ou hipertonia evidente. Postura em repouso compatível com criança febril.", regiao: "desenvolvimento", acaoRealizada: "Avaliar tônus" },
+      resposta_social: { id: "ped-13-resposta-social", titulo: "Resposta Social", descricao: "Interage com o examinador e a mãe, apesar de estar hipoativo. Mantém contato visual. Responde a estímulos sociais de forma compatível com idade.", regiao: "desenvolvimento", acaoRealizada: "Avaliar resposta social" },
+      fala_interacao: { id: "ped-13-fala", titulo: "Fala e Interação", descricao: "Fala compatível com 5 anos, compreende comandos simples, responde perguntas com auxílio da mãe.", regiao: "desenvolvimento", acaoRealizada: "Avaliar interação" },
+    },
+
+    // ===== CASO PED-10: TUBERCULOSE PULMONAR - CLARA, 7 ANOS =====
+    "ped-10": {
+      estado_geral: { id: "ped-10-eg", titulo: "Estado Geral", descricao: "Criança emagrecida, com aspecto de doença crônica, porém consciente e responsiva.", regiao: "estado_geral", acaoRealizada: "Avaliar estado geral" },
+      nivel_atividade: { id: "ped-10-na", titulo: "Nível de Atividade", descricao: "Criança responsiva, com possível hipoatividade discreta pelo quadro crônico.", regiao: "estado_geral", acaoRealizada: "Avaliar nível de atividade" },
+      irritabilidade: { id: "ped-10-irr", titulo: "Irritabilidade", descricao: "Sem irritabilidade exagerada, adequada à idade e ao contexto clínico.", regiao: "estado_geral", acaoRealizada: "Avaliar irritabilidade" },
+      interacao_responsavel: { id: "ped-10-int", titulo: "Interação com Responsável", descricao: "Criança interage com acompanhante, mantém contato visual adequado.", regiao: "estado_geral", acaoRealizada: "Interação com responsável" },
+      palidez: { id: "ped-10-pal", titulo: "Palidez", descricao: "Palidez discreta compatível com doença crônica e possível desnutrição.", regiao: "pele_mucosas", acaoRealizada: "Avaliar palidez" },
+      cianose: { id: "ped-10-cia", titulo: "Cianose", descricao: "Sem cianose central ou periférica evidente.", regiao: "pele_mucosas", acaoRealizada: "Avaliar cianose" },
+      hidratacao_mucosas: { id: "ped-10-hid", titulo: "Hidratação de Mucosas", descricao: "Mucosas discretamente ressecadas, compatível com desnutrição e doença crônica.", regiao: "pele_mucosas", acaoRealizada: "Hidratação de mucosas" },
+      exantema: { id: "ped-10-exa", titulo: "Exantema", descricao: "Sem exantema visível.", regiao: "pele_mucosas", acaoRealizada: "Avaliar exantema" },
+      petequias: { id: "ped-10-pet", titulo: "Petéquias", descricao: "Sem petéquias observadas.", regiao: "pele_mucosas", acaoRealizada: "Avaliar petéquias" },
+      equimoses: { id: "ped-10-equ", titulo: "Equimoses", descricao: "Sem equimoses observadas.", regiao: "pele_mucosas", acaoRealizada: "Avaliar equimoses" },
+      frequencia_respiratoria: { id: "ped-10-fr", titulo: "Frequência Respiratória", descricao: "Frequência respiratória levemente elevada, compatível com acometimento pulmonar crônico.", regiao: "torax_respiratorio", acaoRealizada: "Contar frequência respiratória" },
+      tiragens: { id: "ped-10-tir", titulo: "Tirages", descricao: "Sem tiragem importante em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar tiragens" },
+      batimento_asa_nasal: { id: "ped-10-ban", titulo: "Batimento de Asa Nasal", descricao: "Sem batimento de asa nasal em repouso.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar batimento de asa nasal" },
+      expansibilidade: { id: "ped-10-exp", titulo: "Expansibilidade Torácica", descricao: "Expansibilidade discretamente reduzida em hemitórax acometido.", regiao: "torax_respiratorio", acaoRealizada: "Palpar expansibilidade torácica" },
+      ausculta_pulmonar: { id: "ped-10-aus", titulo: "Ausculta Pulmonar", descricao: "Murmúrio vesicular reduzido em ápice pulmonar, com estertores localizados, compatível com acometimento respiratório crônico.", regiao: "torax_respiratorio", acaoRealizada: "Auscultar campos pulmonares" },
+      linfonodos_cervicais: { id: "ped-10-lnc", titulo: "Linfonodos Cervicais", descricao: "Linfonodos cervicais pequenos e móveis, sem sinais flogísticos importantes.", regiao: "pescoco_linfonodos", acaoRealizada: "Palpar linfonodos cervicais" },
+      descricao_linfonodos: { id: "ped-10-dll", titulo: "Descrição de Linfonodos", descricao: "Se palpáveis: móveis, de consistência fibroelástica, indolores.", regiao: "pescoco_linfonodos", acaoRealizada: "Descrever linfonodos" },
+      mucosa_oral: { id: "ped-10-muc", titulo: "Mucosa Oral", descricao: "Mucosa oral sem lesões aparentes, coloração normal.", regiao: "orofaringe", acaoRealizada: "Inspecionar cavidade oral" },
+      hiperemia_orofaringe: { id: "ped-10-hip", titulo: "Hiperemia de Orofaringe", descricao: "Orofaringe sem exsudato purulento, sem sinais de obstrução de vias aéreas superiores.", regiao: "orofaringe", acaoRealizada: "Avaliar orofaringe" },
+    },
+
+    // ===== CASO PED-11: ASMA NA INFÂNCIA - PEDRO, 7 ANOS =====
+    "ped-11": {
+      estado_geral: { id: "ped-11-eg", titulo: "Estado Geral", descricao: "Criança alerta, ansiosa, com desconforto respiratório leve a moderado.", regiao: "estado_geral", acaoRealizada: "Avaliar estado geral" },
+      nivel_atividade: { id: "ped-11-na", titulo: "Nível de Atividade", descricao: "Criança hiperativa ou ansiosa pelo desconforto respiratório.", regiao: "estado_geral", acaoRealizada: "Avaliar nível de atividade" },
+      irritabilidade: { id: "ped-11-irr", titulo: "Irritabilidade", descricao: "Irritabilidade presente secundária ao desconforto respiratório.", regiao: "estado_geral", acaoRealizada: "Avaliar irritabilidade" },
+      interacao_responsavel: { id: "ped-11-int", titulo: "Interação com Responsável", descricao: "Criança interage com acompanhante, porém ansiosa pela dificuldade respiratória.", regiao: "estado_geral", acaoRealizada: "Interação com responsável" },
+      palidez: { id: "ped-11-pal", titulo: "Palidez", descricao: "Sem palidez importante.", regiao: "pele_mucosas", acaoRealizada: "Avaliar palidez" },
+      cianose: { id: "ped-11-cia", titulo: "Cianose", descricao: "Sem cianose central evidente no momento da avaliação.", regiao: "pele_mucosas", acaoRealizada: "Avaliar cianose" },
+      hidratacao_mucosas: { id: "ped-11-hid", titulo: "Hidratação de Mucosas", descricao: "Mucosas úmidas, sem sinais importantes de desidratação.", regiao: "pele_mucosas", acaoRealizada: "Hidratação de mucosas" },
+      frequencia_respiratoria: { id: "ped-11-fr", titulo: "Frequência Respiratória", descricao: "Taquipneia com aumento do trabalho respiratório.", regiao: "torax_respiratorio", acaoRealizada: "Contar frequência respiratória" },
+      tirages: { id: "ped-11-tir", titulo: "Tirages", descricao: "Tiragem subcostal e intercostal discreta a moderada durante a inspiração.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar tirages" },
+      batimento_asa_nasal: { id: "ped-11-ban", titulo: "Batimento de Asa Nasal", descricao: "Batimento de asa nasal discreto, associado ao esforço respiratório.", regiao: "torax_respiratorio", acaoRealizada: "Avaliar batimento de asa nasal" },
+      ausculta_pulmonar: { id: "ped-11-aus", titulo: "Ausculta Pulmonar", descricao: "Sibilos expiratórios difusos bilateralmente, com tempo expiratório prolongado.", regiao: "torax_respiratorio", acaoRealizada: "Auscultar campos pulmonares" },
+      expansibilidade: { id: "ped-11-exp", titulo: "Expansibilidade Torácica", descricao: "Expansibilidade preservada, com tórax discretamente hiperinsuflado.", regiao: "torax_respiratorio", acaoRealizada: "Palpar expansibilidade torácica" },
+      tempo_enchimento_capilar: { id: "ped-11-tec", titulo: "TEC (Tempo Enchimento Capilar)", descricao: "TEC menor que 2 segundos, perfusão periférica preservada.", regiao: "membros_perfusao", acaoRealizada: "Medir tempo de enchimento capilar" },
+      pulsos_perifericos: { id: "ped-11-pul", titulo: "Pulsos Periféricos", descricao: "Pulsos palpáveis e simétricos, sem alterações importantes.", regiao: "membros_perfusao", acaoRealizada: "Palpar pulsos periféricos" },
+    },
+
+    // ===== CASO PED-16: SUSPEITA DE DENGUE - DANILO, 8 ANOS =====
+    "ped-16": {
+      estado_geral: { id: "ped-16-eg", titulo: "Estado Geral", descricao: "Criança febril, hipoativa, porém consciente e orientada.", regiao: "estado_geral", acaoRealizada: "Avaliar estado geral" },
+      nivel_atividade: { id: "ped-16-na", titulo: "Nível de Atividade", descricao: "Criança hipoativa, compatível com quadro febril e mal-estar.", regiao: "estado_geral", acaoRealizada: "Avaliar nível de atividade" },
+      irritabilidade: { id: "ped-16-irr", titulo: "Irritabilidade", descricao: "Sem irritabilidade exagerada, apropriada ao contexto clínico.", regiao: "estado_geral", acaoRealizada: "Avaliar irritabilidade" },
+      interacao_responsavel: { id: "ped-16-int", titulo: "Interação com Responsável", descricao: "Criança interage com acompanhante apesar da hipoatividade.", regiao: "estado_geral", acaoRealizada: "Interação com responsável" },
+      palidez: { id: "ped-16-pal", titulo: "Palidez", descricao: "Palidez discreta compatível com doença aguda.", regiao: "pele_mucosas", acaoRealizada: "Avaliar palidez" },
+      exantema: { id: "ped-16-exa", titulo: "Exantema", descricao: "Exantema maculopapular discreto em tronco e membros.", regiao: "pele_mucosas", acaoRealizada: "Avaliar exantema" },
+      petequias: { id: "ped-16-pet", titulo: "Petéquias", descricao: "Petéquias discretas em membros, sem sangramento ativo.", regiao: "pele_mucosas", acaoRealizada: "Avaliar petéquias" },
+      hidratacao_mucosas: { id: "ped-16-hid", titulo: "Hidratação de Mucosas", descricao: "Mucosas discretamente ressecadas, sem sangramento gengival evidente.", regiao: "pele_mucosas", acaoRealizada: "Hidratação de mucosas" },
+      inspecao_abdome: { id: "ped-16-ia", titulo: "Inspeção Abdominal", descricao: "Abdome plano, simétrico, sem distensão importante.", regiao: "abdome", acaoRealizada: "Inspecionar abdome" },
+      palpacao_abdome: { id: "ped-16-pa", titulo: "Palpação Abdominal", descricao: "Dor abdominal leve à palpação, sem sinais de irritação peritoneal.", regiao: "abdome", acaoRealizada: "Palpar abdome" },
+      palpacao_figado: { id: "ped-16-pf", titulo: "Palpação Hepática", descricao: "Fígado palpável discretamente abaixo do rebordo costal direito, doloroso à palpação leve.", regiao: "figado", acaoRealizada: "Palpar borda hepática" },
+      tempo_enchimento_capilar: { id: "ped-16-tec", titulo: "TEC (Tempo Enchimento Capilar)", descricao: "TEC em torno de 2 segundos, sem sinais francos de choque no momento.", regiao: "membros_perfusao", acaoRealizada: "Medir tempo de enchimento capilar" },
+      pulsos_perifericos: { id: "ped-16-pul", titulo: "Pulsos Periféricos", descricao: "Pulsos palpáveis e simétricos.", regiao: "membros_perfusao", acaoRealizada: "Palpar pulsos periféricos" },
+    },
+
   };
 
   // Retornar achado específico do caso e ação, ou null se não encontrado
@@ -377,8 +765,53 @@ export function obterAchadoVisualPediatrico(
   return null;
 }
 
+// Função COMPLETA: obtém achado visual com fallback para achados-exame-fisico
+export function obterAchadoVisualPediatricoComFallback(
+  casoId: string,
+  acaoId: AcaoPediatricaId,
+  caso: Caso
+): AchadoVisualPediatricoComCaso | null {
+  // 1. Tentar buscar em achados-visual.ts (mapeamento direto)
+  const achadoVisual = obterAchadoVisualPediatrico(casoId, acaoId, caso);
+
+  if (achadoVisual) {
+    return {
+      ...achadoVisual,
+      casoId,
+      origem: "visual",
+    };
+  }
+
+  // 2. Se não encontrou, tentar fallback em achados-exame-fisico.ts
+  const achadoExameFisico = obterAchadoExameFisicoPed(casoId, acaoId, caso);
+
+  if (achadoExameFisico) {
+    // Converter AchadoExameFisicoPed para AchadoVisualPediatricoComCaso
+    return {
+      id: achadoExameFisico.id,
+      titulo: achadoExameFisico.titulo,
+      descricao: achadoExameFisico.descricao,
+      regiao: achadoExameFisico.categoria, // Usar categoria como regiao
+      acaoRealizada: achadoExameFisico.acaoRealizada,
+      casoId,
+      origem: "fallback_exame_fisico",
+    };
+  }
+
+  // 3. Se nenhum encontrou, retorna null
+  return null;
+}
+
 // Função para converter achado visual em formato compatível com o sistema geral
-export function converterAchadoVisualParaSistema(achado: AchadoVisualPediatrico): any {
+// AGORA COM SUPORTE A CASOID
+export function converterAchadoVisualParaSistema(
+  achado: AchadoVisualPediatrico | AchadoVisualPediatricoComCaso,
+  casoId?: string
+): any {
+  // Extrair casoId se disponível na interface estendida
+  const casoid = ("casoId" in achado) ? achado.casoId : casoId;
+  const origem = ("origem" in achado) ? achado.origem : "visual";
+
   return {
     id: achado.id,
     titulo: achado.titulo,
@@ -387,5 +820,7 @@ export function converterAchadoVisualParaSistema(achado: AchadoVisualPediatrico)
     regiao: achado.regiao,
     acaoRealizada: achado.acaoRealizada,
     sistema: "pediatria",
+    casoId: casoid, // ← NOVO: preservar casoId
+    origem: origem, // ← NOVO: rastrear origem do achado
   };
 }

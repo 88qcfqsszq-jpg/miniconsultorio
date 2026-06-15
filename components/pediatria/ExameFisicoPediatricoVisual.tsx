@@ -9,6 +9,7 @@ import {
 import { type AcaoPediatricaId } from '@/lib/pediatria/regioes-exame';
 import {
   obterAchadoVisualPediatrico,
+  obterAchadoVisualPediatricoComFallback,
   converterAchadoVisualParaSistema,
 } from '@/lib/pediatria/achados-visual';
 import { Caso } from '@/lib/types';
@@ -138,18 +139,22 @@ export default function ExameFisicoPediatricoVisual({
     (acaoId: string) => {
       setErro(null);
 
-      // Obter achado específico do caso
-      const achado = obterAchadoVisualPediatrico(caso.id, acaoId as AcaoPediatricaId, caso);
+      // Obter achado específico do caso (com fallback)
+      const achado = obterAchadoVisualPediatricoComFallback(
+        caso.id,
+        acaoId as AcaoPediatricaId,
+        caso
+      );
 
       if (!achado) {
         setErro('Achado não disponível para este caso ainda.');
         return;
       }
 
-      // Converter para formato geral
+      // Converter para formato geral (preserva casoId)
       const achadoGeral = converterAchadoVisualParaSistema(achado);
 
-      // Registrar achado
+      // Registrar achado (agora com casoId incluído)
       onAchadoEncontrado(achadoGeral);
     },
     [caso, onAchadoEncontrado]
