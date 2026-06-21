@@ -369,6 +369,20 @@ export const casosOSCE: Caso[] = [
       "Tempo é músculo - reperfusão"
     ],
     diagnosticoCorreto: "Síndrome Coronariana Aguda",
+
+    esperadosExames: {
+      ecg: {
+        indicado: true,
+        prioridade: "obrigatório",
+        achadoEsperado: "taquicardia_sinusal_pediatrica",
+        interpretacaoEsperada: [
+          "taquicardia sinusal",
+          "elevação do segmento ST",
+          "sem sinais de bloqueio"
+        ],
+        observacoes: "ECG deve ser feito imediatamente (primeiros 10 minutos)"
+      }
+    }
   },
 
   {

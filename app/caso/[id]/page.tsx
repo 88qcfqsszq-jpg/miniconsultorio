@@ -13,6 +13,7 @@ import LoadingRelatorio from "@/components/LoadingRelatorio";
 import PainelExamesComplementares from "@/components/PainelExamesComplementares";
 import ResumoAnamnese from "@/components/ResumoAnamnese";
 import SimuladorECG from "@/components/SimuladorECG";
+import PainelAnaliseImagem from "@/components/PainelAnaliseImagem";
 import { casosOSCE } from "@/data/casos-osce";
 import { event } from "@/lib/analytics";
 import type {
@@ -41,6 +42,7 @@ function CasoPageContent() {
     useState(false);
   const [manobrasSolicitadas, setManobrasSolicitadas] = useState<ManobraRealizada[]>([]);
   const [examesSolicitados, setExamesSolicitados] = useState<ExameSolicitado[]>([]);
+  const [ecgGerado, setEcgGerado] = useState<any>(null);
   const [feedback, setFeedback] = useState<FeedbackOSCEType | null>(null);
   const [mensagens, setMensagens] = useState<MensagemChat[]>([]);
   const [gerandoFeedback, setGerandoFeedback] = useState(false);
@@ -67,6 +69,21 @@ function CasoPageContent() {
 
   const handleNovoExame = useCallback((exame: ExameSolicitado) => {
     setExamesSolicitados(prev => [...prev, exame]);
+  }, []);
+
+  const handleECGGerado = useCallback((ecgGeradoData: any) => {
+    // Armazenar ECG gerado
+    setEcgGerado(ecgGeradoData);
+    // Adicionar também a examesSolicitados para aparecer na aba de exames
+    setExamesSolicitados(prev => [...prev, {
+      nome: ecgGeradoData.nome,
+      resultado: JSON.stringify({
+        interpretacao: ecgGeradoData.interpretacao,
+        presetId: ecgGeradoData.presetId,
+        selectedLeads: ecgGeradoData.selectedLeads,
+      }),
+      timestamp: new Date(),
+    }]);
   }, []);
 
   // Carregar caso
@@ -235,8 +252,8 @@ function CasoPageContent() {
     }
   };
 
-  const [abaAtiva, setAbaAtiva] = useState<"paciente" | "exame" | "exames" | "sinaisVitais" | "ecg">("paciente");
-  const [menuAtivo, setMenuAtivo] = useState<"paciente" | "exame" | "exames" | "sinaisVitais" | "ecg">("paciente");
+  const [abaAtiva, setAbaAtiva] = useState<"paciente" | "exame" | "imagemRadiologica" | "exames" | "sinaisVitais" | "ecg">("paciente");
+  const [menuAtivo, setMenuAtivo] = useState<"paciente" | "exame" | "imagemRadiologica" | "exames" | "sinaisVitais" | "ecg">("paciente");
   const [soap, setSOAP] = useState<FormularioSOAPType>({
     subjetivo: "",
     objetivo: "",
@@ -279,6 +296,7 @@ function CasoPageContent() {
   const abas = [
     { id: "paciente" as const, label: "Paciente", icon: "💬" },
     { id: "exame" as const, label: "Exame", icon: "🥼" },
+    { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "🖼️" },
     { id: "exames" as const, label: "Exames", icon: "🧪" },
     { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "📊" },
     { id: "ecg" as const, label: "ECG", icon: "📈" },
@@ -352,6 +370,7 @@ function CasoPageContent() {
                 {[
                   { id: "paciente" as const, label: "Paciente", icon: "💬" },
                   { id: "exame" as const, label: "Exame Físico", icon: "🥼" },
+                  { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "🖼️" },
                   { id: "exames" as const, label: "Exames", icon: "🧪" },
                   { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "📊" },
                   { id: "ecg" as const, label: "ECG", icon: "📈" },
@@ -457,6 +476,13 @@ function CasoPageContent() {
               </>
             )}
 
+            {menuAtivo === "imagemRadiologica" && (
+              <PainelAnaliseImagem
+                caso={caso}
+                desabilitado={phase === "feedback"}
+              />
+            )}
+
             {menuAtivo === "exames" && (
               <PainelExamesComplementares
                 casoId={casoId}
@@ -514,7 +540,7 @@ function CasoPageContent() {
               </div>
             )}
 
-            {menuAtivo === "ecg" && <SimuladorECG padrao={caso?.ecg?.padrao} onClose={() => setMenuAtivo("paciente")} />}
+            {menuAtivo === "ecg" && <SimuladorECG padrao={caso?.ecg?.padrao} caso={caso} onClose={() => setMenuAtivo("paciente")} onECGGerado={handleECGGerado} />}
           </div>
 
           {/* Coluna 3: Painel Direito Fixo (Avaliação Clínica) */}

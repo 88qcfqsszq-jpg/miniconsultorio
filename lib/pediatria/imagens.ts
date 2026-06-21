@@ -22,7 +22,7 @@ export function obterImagemPacientePediatrico(faixaEtaria?: string): string {
   switch (faixaEtaria) {
     case 'neonato':
     case 'lactente':
-      return '/images/pediatria/lactente-frente.png';
+      return '/images/pediatria/lactente-frente-crop.png';
     case 'pre_escolar':
     case 'escolar':
     case 'adolescente':

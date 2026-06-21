@@ -24,6 +24,8 @@ export interface RegiaoPediatricaAjustada {
   label: string;
   descricao: string;
   coordenadas: CoordenadaHotspot;
+  hitbox?: CoordenadaHotspot; // Área clicável separada (se diferente de coordenadas)
+  targetZone?: string; // Para drag-and-drop validation
   acoes: string[];
   zIndex: number; // Prioridade de clique (maior = maior prioridade)
 }
@@ -39,7 +41,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "cabeca_perimetro",
     label: "Cabeça / Perímetro Cefálico",
     descricao: "Avaliação craniana",
-    coordenadas: { x: 46, y: 10, width: 10, height: 8 },
+    coordenadas: { x: 49, y: 10, width: 10, height: 8 },
+    targetZone: "head",
     acoes: [
       "perimetro_cefalico",
       "fontanela",
@@ -52,6 +55,7 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     label: "Olhos / Face",
     descricao: "Avaliação facial",
     coordenadas: { x: 56, y: 19, width: 9, height: 7 },
+    targetZone: "face",
     acoes: [
       "cianose_central",
       "palidez_conjuntival",
@@ -63,7 +67,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "orofaringe",
     label: "Orofaringe",
     descricao: "Avaliação da boca e garganta",
-    coordenadas: { x: 45, y: 25, width: 9, height: 6 },
+    coordenadas: { x: 51, y: 25, width: 9, height: 6 },
+    targetZone: "mouth",
     acoes: [
       "mucosa_oral",
       "hiperemia_orofaringe",
@@ -75,7 +80,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "pescoco_linfonodos",
     label: "Pescoço / Linfonodos",
     descricao: "Avaliação cervical",
-    coordenadas: { x: 51, y: 32, width: 10, height: 8 },
+    coordenadas: { x: 51, y: 29, width: 10, height: 8 },
+    targetZone: "neck",
     acoes: [
       "linfonodos_cervicais",
       "descricao_linfonodos",
@@ -87,7 +93,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "torax_respiratorio",
     label: "Tórax Respiratório",
     descricao: "Avaliação respiratória",
-    coordenadas: { x: 35, y: 37, width: 28, height: 18 },
+    coordenadas: { x: 50, y: 37, width: 10, height: 8 },
+    targetZone: "thorax",
     acoes: [
       "frequencia_respiratoria",
       "tiragens",
@@ -101,7 +108,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "precordio",
     label: "Precórdio",
     descricao: "Avaliação cardiovascular",
-    coordenadas: { x: 54, y: 44, width: 10, height: 8 },
+    coordenadas: { x: 57, y: 40, width: 10, height: 8 },
+    targetZone: "precordium",
     acoes: [
       "ausculta_focos",
       "sopro",
@@ -114,7 +122,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "abdome",
     label: "Abdome",
     descricao: "Avaliação abdominal geral",
-    coordenadas: { x: 36, y: 53, width: 26, height: 15 },
+    coordenadas: { x: 51, y: 50, width: 10, height: 8 },
+    targetZone: "abdomen",
     acoes: [
       "inspecao_abdome",
       "palpacao_abdome",
@@ -127,7 +136,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "figado",
     label: "Fígado / Hipocôndrio D",
     descricao: "Avaliação hepática",
-    coordenadas: { x: 34, y: 57, width: 10, height: 8 },
+    coordenadas: { x: 42, y: 43, width: 10, height: 8 },
+    targetZone: "right-hypochondrium",
     acoes: [
       "palpacao_figado",
       "hepatomegalia",
@@ -139,7 +149,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "baco",
     label: "Baço / Hipocôndrio E",
     descricao: "Avaliação esplênica",
-    coordenadas: { x: 58, y: 57, width: 10, height: 8 },
+    coordenadas: { x: 61, y: 43, width: 10, height: 8 },
+    targetZone: "left-hypochondrium",
     acoes: [
       "palpacao_baco",
       "esplenomegalia",
@@ -150,7 +161,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "membros_perfusao",
     label: "Membros / Perfusão / Pulsos / TEC",
     descricao: "Avaliação de extremidades",
-    coordenadas: { x: 28, y: 77, width: 36, height: 15 },
+    coordenadas: { x: 65, y: 69, width: 11, height: 9 },
+    targetZone: "limbs",
     acoes: [
       "pulsos_perifericos",
       "tempo_enchimento_capilar",
@@ -164,7 +176,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "pele_mucosas",
     label: "Pele / Mucosas",
     descricao: "Avaliação cutânea geral",
-    coordenadas: { x: 25, y: 13, width: 55, height: 72 },
+    coordenadas: { x: 38, y: 65, width: 11, height: 9 },
+    targetZone: "skin",
     acoes: [
       "palidez",
       "cianose",
@@ -179,7 +192,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "desenvolvimento",
     label: "Desenvolvimento / Interação",
     descricao: "Avaliação neurodesenvolvimento",
-    coordenadas: { x: 20, y: 8, width: 60, height: 86 },
+    coordenadas: { x: 72, y: 30, width: 10, height: 8 },
+    targetZone: "development",
     acoes: [
       "marcos_desenvolvimento",
       "postura",
@@ -192,7 +206,8 @@ export const REGIOES_PEDIATRICAS_LACTENTE: RegiaoPediatricaAjustada[] = [
     id: "estado_geral",
     label: "Estado Geral",
     descricao: "Observação geral da criança",
-    coordenadas: { x: 20, y: 8, width: 60, height: 86 },
+    coordenadas: { x: 33, y: 30, width: 10, height: 8 },
+    targetZone: "general-state",
     acoes: [
       "estado_geral",
       "nivel_atividade",

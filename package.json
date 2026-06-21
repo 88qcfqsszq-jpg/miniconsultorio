@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google-cloud/bigquery": "^8.3.1",
     "@tailwindcss/postcss": "latest",
     "next": "latest",
     "openai": "latest",
@@ -21,6 +22,7 @@
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "playwright": "^1.61.0",
     "tailwindcss": "latest",
     "typescript": "latest"
   }

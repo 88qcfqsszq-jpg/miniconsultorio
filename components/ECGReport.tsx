@@ -8,6 +8,24 @@ interface ECGReportProps {
 }
 
 export default function ECGReport({ pattern, validacao }: ECGReportProps) {
+  // Normalizar campos antigos e novos para compatibilidade
+  const achadosPrincipais = Array.isArray(pattern?.achados)
+    ? pattern.achados
+    : []
+
+  const observacoesClinicas = Array.isArray(pattern?.observacoesClinicas)
+    ? pattern.observacoesClinicas
+    : []
+
+  // Validação segura de pattern
+  if (!pattern) {
+    return (
+      <div className="p-4 border rounded bg-amber-50 text-amber-800">
+        <p className="font-semibold">ECG gerado, mas o padrão não foi encontrado.</p>
+      </div>
+    )
+  }
+
   const percentualDisplay = validacao.percentualAcerto.toFixed(0)
 
   return (
@@ -125,11 +143,11 @@ export default function ECGReport({ pattern, validacao }: ECGReportProps) {
       </div>
 
       {/* Achados Principais */}
-      {pattern.achados.length > 0 && (
+      {achadosPrincipais.length > 0 && (
         <div className="space-y-3">
           <h3 className="text-lg font-bold text-slate-800">Achados Principais</h3>
           <div className="space-y-2">
-            {pattern.achados.map((achado, i) => (
+            {achadosPrincipais.map((achado, i) => (
               <div key={i} className="flex gap-3 p-3 bg-blue-50 rounded border border-blue-200">
                 <span className="font-semibold text-blue-900 min-w-fit text-sm">
                   {achado.derivacao}:
@@ -164,11 +182,11 @@ export default function ECGReport({ pattern, validacao }: ECGReportProps) {
       </div>
 
       {/* Observações Clínicas */}
-      {pattern.observacoesClinicas.length > 0 && (
+      {observacoesClinicas.length > 0 && (
         <div className="space-y-3">
           <h3 className="text-lg font-bold text-slate-800">Observações Clínicas</h3>
           <ul className="space-y-2">
-            {pattern.observacoesClinicas.map((obs, i) => (
+            {observacoesClinicas.map((obs, i) => (
               <li key={i} className="flex gap-3 text-slate-700">
                 <span className="text-blue-600 font-bold shrink-0">•</span>
                 <span>{obs}</span>

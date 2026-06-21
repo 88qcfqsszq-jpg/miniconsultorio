@@ -783,7 +783,9 @@ export function obterAchadoVisualPediatricoComFallback(
   }
 
   // 2. Se não encontrou, tentar fallback em achados-exame-fisico.ts
-  const achadoExameFisico = obterAchadoExameFisicoPed(casoId, acaoId, caso);
+  // Transformar acaoId para formato esperado pelo fallback (com prefixo "ped-" e underscore→hífen)
+  const acaoIdComPrefixo = `ped-${acaoId.replace(/_/g, "-")}`;
+  const achadoExameFisico = obterAchadoExameFisicoPed(casoId, acaoIdComPrefixo, caso);
 
   if (achadoExameFisico) {
     // Converter AchadoExameFisicoPed para AchadoVisualPediatricoComCaso

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { obterImagemPacientePediatrico, obterDescricaoFaixaEtaria, obterInfoImagem } from '@/lib/pediatria/imagens';
 
 interface PacientePediatricoVisualAjustadoProps {
@@ -32,6 +32,13 @@ export default function PacientePediatricoVisualAjustado({
     setErroImagem(true);
   }, [imagemPath]);
 
+  // Debug: confirmar qual imagem está sendo usada no exame físico
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[ExameFisicoPediatrico] Imagem do paciente:', imagemPath)
+    }
+  }, [imagemPath])
+
   return (
     <div className="relative w-full h-full bg-white rounded-lg border border-slate-200 overflow-hidden flex flex-col">
       {/* Imagem do bebê — centralizada e inteira */}
@@ -41,7 +48,7 @@ export default function PacientePediatricoVisualAjustado({
         onDrop={onDrop}
         style={{ minHeight: 0 }}
       >
-        <div className="relative w-full max-w-sm mx-auto">
+        <div className="relative w-full mx-auto px-0.5">
           {/* Imagem — sem corte, proporcional */}
           <img
             src={imagemPath}

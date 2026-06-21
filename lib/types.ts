@@ -386,8 +386,33 @@ export interface Caso {
     observacao?: string;
   };
 
+  // Imagem radiológica (opcional)
+  imagemRadiologica?: {
+    disponivel: boolean;
+    modalidade: "RX";
+    regiao: "torax";
+    imageId: string;
+    imageUrl: string;
+    labels: string[];
+    diagnosticoRadiologico: string;
+    achadoPrincipal: string;
+    fonte: string;
+    atribuicao: string;
+    integracaoReal: boolean;
+    validadoPorIA: boolean;
+    podeExibirAoAluno: boolean;
+    gabarito?: any;
+    metadadosOriginais?: any;
+  };
+
   // Status de ativação
   ativo?: boolean;
+
+  // Exames esperados para este caso clínico
+  esperadosExames?: EsperadosExames;
+
+  // ECG gerado durante o atendimento (runtime)
+  ecgGerado?: ECGGerado;
 }
 
 export interface ExameFisicoInterativo {
@@ -450,4 +475,58 @@ export interface ManobraRealizada {
   textDigitado: string;
   resposta: string;
   timestamp: Date;
+}
+
+// ============================================================================
+// TIPOS PARA INTEGRAÇÃO DO ECGSYN COMO EXAME COMPLEMENTAR
+// ============================================================================
+
+export interface InterpretacaoECG {
+  frequenciaCardiaca: number;
+  ritmo: string;
+  eixoMedio: number;
+  intervalosPR: number[];
+  duracoesQRS: number[];
+  duracaoQTc: number;
+}
+
+export interface MetadadosECG {
+  presetId: string;
+  dataGeracao: Date;
+  versaoECGSyn: string;
+  sintético: boolean;
+  avisoEducacional: string;
+  referências: string[];
+  fontePrincipal: string;
+}
+
+export interface ECGGerado {
+  tipo: "ECG";
+  nome: string;
+  dataHora: string;
+  presetId: string;
+  padraoSelecionado: string;
+  selectedLeads: ECGLead[];
+  resultado: any; // RespostaGeracaoECG do módulo ECGSYN
+  interpretacao: InterpretacaoECG;
+  pontosEnsino: string[];
+  aviso: string;
+  metadata?: MetadadosECG;
+}
+
+export interface EsperadoExame {
+  indicado: boolean;
+  prioridade: "obrigatório" | "recomendado" | "opcional" | "não indicado";
+  achadoEsperado?: string;
+  interpretacaoEsperada?: string[];
+  observacoes?: string;
+  // Novo para ECG
+  presetId?: string;
+  justificativa?: string;
+  pontosDeEnsino?: string[];
+}
+
+export interface EsperadosExames {
+  ecg?: EsperadoExame;
+  // Futuro: ultrassom, radiografia, ressonância, etc
 }

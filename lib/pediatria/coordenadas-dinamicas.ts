@@ -19,7 +19,7 @@ const COORDENADAS_LACTENTE: Record<RegiaoPediatricaId, CoordenadaHotspot> = {
   torax_respiratorio: { x: 32, y: 34, width: 36, height: 18 },
   precordio: { x: 50, y: 38, width: 16, height: 12 },
   abdome: { x: 34, y: 50, width: 32, height: 18 },
-  figado: { x: 34, y: 51, width: 16, height: 12 },
+  figado: { x: 26, y: 29, width: 56, height: 36 },
   baco: { x: 52, y: 51, width: 16, height: 12 },
   membros_perfusao: { x: 25, y: 68, width: 50, height: 25 },
   desenvolvimento: { x: 20, y: 8, width: 60, height: 82 },

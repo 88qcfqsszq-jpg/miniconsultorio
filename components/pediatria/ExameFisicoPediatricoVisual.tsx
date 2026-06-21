@@ -5,6 +5,7 @@ import PacientePediatricoVisualAjustado from './PacientePediatricoVisualAjustado
 import {
   obterRegioesPediatricas,
   RegiaoPediatricaId,
+  RegiaoPediatricaAjustada,
 } from '@/lib/pediatria/regioes-exame-ajustadas';
 import { type AcaoPediatricaId } from '@/lib/pediatria/regioes-exame';
 import {
@@ -96,11 +97,35 @@ export default function ExameFisicoPediatricoVisual({
   const [feedback, setFeedback] = useState<string | null>(null);
 
   const regioesAjustadas = obterRegioesPediatricas(caso.paciente.dadosPediatricos?.faixaEtaria);
-  const regiao = regioSelecionada ? regioesAjustadas.find((r) => r.id === regioSelecionada) : null;
+
+  // Verificar se uma ação tem achado válido (visual ou fallback)
+  const temAchadoValido = useCallback(
+    (acaoId: string): boolean => {
+      const achado = obterAchadoVisualPediatricoComFallback(
+        caso.id,
+        acaoId as AcaoPediatricaId,
+        caso
+      );
+      return achado !== null;
+    },
+    [caso]
+  );
+
+  // Verificar se uma região tem pelo menos uma ação válida
+  const regioTemAcoesValidas = useCallback(
+    (regiao: RegiaoPediatricaAjustada): boolean => {
+      return regiao.acoes.some((acaoId) => temAchadoValido(acaoId as string));
+    },
+    [temAchadoValido]
+  );
+
+  // Filtrar regiões que têm pelo menos uma ação válida
+  const regioesComAcoes = regioesAjustadas.filter(regioTemAcoesValidas);
+  const regiao = regioSelecionada ? regioesComAcoes.find((r) => r.id === regioSelecionada) : null;
 
   // Inicializar hotspots com as regiões ajustadas (coordenadas padrão)
   useEffect(() => {
-    const initialPlacedRegions: PlacedRegion[] = regioesAjustadas.map((r) => ({
+    const initialPlacedRegions: PlacedRegion[] = regioesComAcoes.map((r) => ({
       id: r.id,
       label: r.label,
       targetZone: r.targetZone || '',
@@ -108,7 +133,12 @@ export default function ExameFisicoPediatricoVisual({
       y: r.coordenadas.y + r.coordenadas.height / 2,
     }));
     setPlacedRegions(initialPlacedRegions);
-  }, [caso.id]);
+
+    // Se a região selecionada não tem mais ações válidas, deselecionar
+    if (regioSelecionada && !regioesComAcoes.find((r) => r.id === regioSelecionada)) {
+      setRegioSelecionada(null);
+    }
+  }, [caso.id, regioesComAcoes, regioSelecionada]);
 
   // Converter ações em acoes pediátricas
   const acoes = regiao
@@ -132,19 +162,6 @@ export default function ExameFisicoPediatricoVisual({
       );
     },
     [achadosEncontrados]
-  );
-
-  // Verificar se uma ação tem achado válido (visual ou fallback)
-  const temAchadoValido = useCallback(
-    (acaoId: string): boolean => {
-      const achado = obterAchadoVisualPediatricoComFallback(
-        caso.id,
-        acaoId as AcaoPediatricaId,
-        caso
-      );
-      return achado !== null;
-    },
-    [caso]
   );
 
   // Executar ação
@@ -318,7 +335,7 @@ export default function ExameFisicoPediatricoVisual({
                 </div>
               )}
               <div className="flex-1 overflow-y-auto space-y-2">
-                {regioesAjustadas.map((r) => {
+                {regioesComAcoes.map((r) => {
                   const isPlaced = placedRegions.some((pr) => pr.id === r.id);
                   const isLactente = caso.paciente.dadosPediatricos?.faixaEtaria === 'lactente' ||
                                      caso.paciente.dadosPediatricos?.faixaEtaria === 'neonato';

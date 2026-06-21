@@ -1,6 +1,6 @@
 // Tipos para o simulador de ECG 12 derivações
 
-export type ECGLead = 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'RA' | 'LA' | 'RL' | 'LL'
+export type ECGLead = 'I' | 'II' | 'III' | 'aVR' | 'aVL' | 'aVF' | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'RA' | 'LA' | 'RL' | 'LL'
 
 export interface ECGLeadPosition {
   lead: ECGLead

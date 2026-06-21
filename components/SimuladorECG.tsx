@@ -4,6 +4,12 @@ import { useState, useRef, useEffect } from 'react'
 import { ECGLeadPosition, ECGLead } from '@/lib/ecg/types'
 import { validarPosicionamentoECG } from '@/lib/ecg/validarEletrodos'
 import { obterPadrao, PADROES_ECG } from '@/lib/ecg/padroesECG'
+import { generateECG } from '@/src/services/ecgGenerator'
+import { getPresetOptionsFlat, getPresetById } from '@/src/services/ecgGenerator/presets'
+import { getECGExpectationForCaseTheme, getDefaultECGPresetByAgeGroup } from '@/lib/ecg/ecg-case-mapping'
+import { getPatientImage, getElectrodeProfileForCase } from '@/lib/paciente/get-patient-image'
+import type { RespostaGeracaoECG } from '@/src/services/ecgGenerator'
+import type { ECGGerado, Caso } from '@/lib/types'
 import ECGTrace from './ECGTrace'
 import ECGReport from './ECGReport'
 
@@ -11,10 +17,55 @@ const LEADS: ECGLead[] = ['V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'RA', 'LA', 'RL', 
 
 interface SimuladorECGProps {
   padrao?: string
+  caso?: Caso // Novo: caso clínico para usar preset esperado
   onClose?: () => void
+  onECGGerado?: (ecg: ECGGerado) => void
 }
 
-export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorECGProps) {
+export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, onClose, onECGGerado }: SimuladorECGProps) {
+  // Determinar preset a usar: caso esperado → fallback → padrão
+  // IMPORTANTE: Usar função pura fora do render para evitar erros de inicialização
+  const determineInitialPreset = (): string => {
+    try {
+      // 1. Se caso tem expectativa de ECG com presetId, usar esse
+      if (caso?.esperadosExames?.ecg?.presetId) {
+        return caso.esperadosExames.ecg.presetId
+      }
+
+      // 2. Se caso tem tema, buscar preset por tema
+      if (caso?.tema) {
+        try {
+          const expectativa = getECGExpectationForCaseTheme(caso.tema)
+          if (expectativa?.presetId) {
+            return expectativa.presetId
+          }
+        } catch (e) {
+          console.warn('[SimuladorECG] Erro ao buscar expectativa por tema:', e)
+        }
+      }
+
+      // 3. Fallback por idade do paciente
+      if (caso?.paciente?.dadosPediatricos?.faixaEtaria) {
+        return getDefaultECGPresetByAgeGroup(caso.paciente.dadosPediatricos.faixaEtaria)
+      }
+
+      // 4. Fallback por tipo de paciente
+      if (caso?.tipoPaciente === 'pediatrico' && caso?.paciente?.idade) {
+        if (caso.paciente.idade < 1) return 'normal_neonato'
+        if (caso.paciente.idade < 3) return 'normal_lactente'
+        if (caso.paciente.idade < 6) return 'normal_pre_escolar'
+        if (caso.paciente.idade < 12) return 'normal_escolar'
+        return 'normal_adolescente'
+      }
+
+      // 5. Fallback final
+      return padrao || 'normal_adulto'
+    } catch (e) {
+      console.error('[SimuladorECG] Erro ao determinar preset inicial:', e)
+      return padrao || 'normal_adulto'
+    }
+  }
+
   const [eletrodos, setEletrodos] = useState<ECGLeadPosition[]>(() =>
     LEADS.map((lead) => ({
       lead,
@@ -27,14 +78,37 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
   const [eletrodoDragging, setEletrodoDragging] = useState<ECGLead | null>(null)
   const [validacao, setValidacao] = useState<any>(null)
   const [ecgGerado, setEcgGerado] = useState(false)
-  const [padraoSelecionado, setPatraoSelecionado] = useState(padrao)
+  const [padraoSelecionado, setPatraoSelecionado] = useState(determineInitialPreset())
+  const [ecgDadosGerados, setEcgDadosGerados] = useState<RespostaGeracaoECG | null>(null)
+  const [erroGerador, setErroGerador] = useState<string | null>(null)
+
+  // Obter imagem exata do paciente (usa a mesma função do exame físico pediátrico)
+  const patientImage = getPatientImage(caso)
+  const electrodeProfile = getElectrodeProfileForCase(caso)
+
+  // Debug: confirmar que está usando a mesma imagem que o exame físico
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development' && caso) {
+      console.log('[SimuladorECG] Imagem do paciente:', patientImage.imageSrc, `(source: ${patientImage.source})`)
+    }
+  }, [caso, patientImage])
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const pattern = obterPadrao(padraoSelecionado)
+  // Tentar obter padrão do novo sistema primeiro, depois fallback para o antigo
+  const padraoAntigo = obterPadrao(padraoSelecionado)
+  const novoPreset = !padraoAntigo ? getPresetById(padraoSelecionado) : null
 
-  if (!pattern) {
-    return null
+  // Construir pattern final garantindo que nunca é undefined
+  const pattern: any = padraoAntigo || {
+    id: novoPreset?.id || 'fallback',
+    titulo: novoPreset?.label || 'ECG',
+    descricao: novoPreset?.description || 'Eletrocardiograma',
+    derivacoesComSupra: [],
+    derivacoesComInfra: [],
+    derivacoesComInversaoT: [],
+    derivacoesComQPatologica: [],
+    imagem: patientImage.imageSrc,
   }
 
   function handleDragStart(lead: ECGLead, e: React.DragEvent) {
@@ -74,9 +148,50 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
   function gerarECG() {
     const result = validarPosicionamentoECG(eletrodos)
     setValidacao(result)
+    setErroGerador(null)
 
     if (result.exameTecnicamenteAdequado) {
-      setEcgGerado(true)
+      try {
+        // Obter eletrodos posicionados
+        const selectedLeads = eletrodos
+          .filter((el) => el.isPlaced)
+          .map((el) => el.lead)
+
+        // Gerar ECG (normalizePresetId é feita automaticamente)
+        const ecgData = generateECG({
+          presetId: padraoSelecionado,
+          selectedLeads,
+          durationSeconds: 5,
+          samplingRate: 250,
+        })
+
+        // Armazenar dados gerados
+        setEcgDadosGerados(ecgData)
+        setEcgGerado(true)
+
+        // Chamar callback para notificar caso clínico (se fornecido)
+        if (onECGGerado) {
+          const ecgGerado: ECGGerado = {
+            tipo: 'ECG',
+            nome: 'Eletrocardiograma de 12 derivações',
+            dataHora: new Date().toISOString(),
+            presetId: padraoSelecionado,
+            padraoSelecionado,
+            selectedLeads,
+            resultado: ecgData,
+            interpretacao: ecgData.interpretation,
+            pontosEnsino: ecgData.teachingPoints,
+            aviso: ecgData.metadata?.avisoEducacional || 'Traçado sintético gerado para fins educacionais. Não utilizar para diagnóstico clínico real.',
+            metadata: ecgData.metadata,
+          }
+          onECGGerado(ecgGerado)
+        }
+      } catch (erro) {
+        const mensagem = erro instanceof Error ? erro.message : 'Erro ao gerar ECG'
+        setErroGerador(mensagem)
+        console.error('[SimuladorECG] Erro ao gerar ECG:', erro)
+        setEcgGerado(false)
+      }
     }
   }
 
@@ -84,6 +199,8 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
     setEletrodos((prev) => prev.map((el) => ({ ...el, x: 0, y: 0, isPlaced: false })))
     setValidacao(null)
     setEcgGerado(false)
+    setEcgDadosGerados(null)
+    setErroGerador(null)
   }
 
   // Determinar cores dos eletrodos baseado no tipo
@@ -210,9 +327,9 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
               }}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
-              {PADROES_ECG.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.titulo}
+              {getPresetOptionsFlat().map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
                 </option>
               ))}
             </select>
@@ -231,9 +348,9 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
                   className="relative bg-slate-50 border-2 border-slate-200 rounded-lg overflow-hidden cursor-grab active:cursor-grabbing"
                   style={{ aspectRatio: '3/4', minHeight: '480px' }}
                 >
-                  {/* Boneco real frontal */}
+                  {/* Imagem do paciente — idêntica ao exame físico */}
                   <img
-                    src="/images/boneco/paciente-ecg.png"
+                    src={patientImage.imageSrc}
                     alt="Paciente"
                     className="w-full h-full object-contain p-2"
                     draggable={false}
@@ -409,7 +526,80 @@ export default function SimuladorECG({ padrao = 'normal', onClose }: SimuladorEC
           {validacao && (
             <div className="space-y-6">
               <ECGReport pattern={pattern} validacao={validacao} />
-              {ecgGerado && <ECGTrace pattern={pattern} />}
+
+              {/* Erro ao gerar ECG */}
+              {erroGerador && (
+                <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                  <p className="text-red-800 font-semibold">Erro ao gerar ECG:</p>
+                  <p className="text-red-700 text-sm">{erroGerador}</p>
+                </div>
+              )}
+
+              {/* Aviso educacional */}
+              {ecgGerado && ecgDadosGerados && (
+                <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
+                  <p className="text-amber-800 font-semibold text-sm">⚠️ {ecgDadosGerados.metadata.avisoEducacional}</p>
+                </div>
+              )}
+
+              {/* Traçado e interpretação gerados */}
+              {ecgGerado && ecgDadosGerados && (
+                <div className="space-y-4">
+                  <ECGTrace
+                    pattern={pattern}
+                    ecgData={ecgDadosGerados}
+                  />
+
+                  {/* Interpretação */}
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-3">
+                    <h4 className="font-bold text-blue-900">📊 Interpretação Automática</h4>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <p className="text-blue-700 font-semibold">FC (bpm)</p>
+                        <p className="text-blue-900 text-lg">{ecgDadosGerados.interpretation.frequenciaCardiaca}</p>
+                      </div>
+                      <div>
+                        <p className="text-blue-700 font-semibold">Ritmo</p>
+                        <p className="text-blue-900">{ecgDadosGerados.interpretation.ritmo}</p>
+                      </div>
+                      <div>
+                        <p className="text-blue-700 font-semibold">Eixo (°)</p>
+                        <p className="text-blue-900">{ecgDadosGerados.interpretation.eixoMedio}°</p>
+                      </div>
+                      <div>
+                        <p className="text-blue-700 font-semibold">QTc (ms)</p>
+                        <p className="text-blue-900">{ecgDadosGerados.interpretation.duracaoQTc}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pontos de ensino */}
+                  {ecgDadosGerados.teachingPoints.length > 0 && (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 space-y-2">
+                      <h4 className="font-bold text-green-900">📚 Pontos de Ensino</h4>
+                      <ul className="text-sm text-green-900 space-y-1">
+                        {ecgDadosGerados.teachingPoints.map((ponto, idx) => (
+                          <li key={idx} className="flex gap-2">
+                            <span>•</span>
+                            <span>{ponto}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Referências científicas */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-2">
+                    <h4 className="font-bold text-slate-900 text-sm">🔬 Referências</h4>
+                    <p className="text-slate-700 text-xs">Fonte: {ecgDadosGerados.metadata.fontePrincipal}</p>
+                    <div className="text-xs text-slate-600 space-y-1">
+                      {ecgDadosGerados.metadata.referências.map((ref, idx) => (
+                        <p key={idx} className="italic">{ref}</p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

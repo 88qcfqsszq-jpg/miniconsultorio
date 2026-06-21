@@ -14,7 +14,9 @@ import {
 } from '@/lib/pediatria/achados-exame-fisico';
 import ProcedimentosPediatricos from './ProcedimentosPediatricos';
 import ExameFisicoPediatricoVisual from './ExameFisicoPediatricoVisual';
+import ExameFisicoPediatricoDefinitivo from './ExameFisicoPediatricoDefinitivo';
 import { Caso } from '@/lib/types';
+import { AchadoExamePediatrico } from '@/lib/pediatria/exame-fisico-pediatrico-banco';
 
 interface ExameFisicoPediatricoProps {
   caso: Caso;
@@ -52,6 +54,26 @@ export default function ExameFisicoPediatrico({
     const achadoGeral = converterAchadoParaSistema(achado);
     onAchadoEncontrado(achadoGeral);
   }, [caso, onAchadoEncontrado]);
+
+  const handleRegistrarAchadoDefinitivo = useCallback((achado: AchadoExamePediatrico) => {
+    setErro(null);
+    // Converter achado do novo formato para formato esperado pelo sistema
+    const achadoGeral = {
+      id: achado.id,
+      titulo: achado.titulo,
+      descricao: achado.descricao,
+      acaoRealizada: achado.titulo,
+      categoria: 'exame_fisico_visual',
+      casoId: achado.casoId,
+      origem: achado.origem,
+      regiao: achado.regiaoId,
+      sistema: 'pediatria',
+      normal: achado.normal,
+      campo_original: achado.campo_original,
+      sistemaClinico: achado.sistemaClinico,
+    };
+    onAchadoEncontrado(achadoGeral);
+  }, [onAchadoEncontrado]);
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
@@ -115,12 +137,11 @@ export default function ExameFisicoPediatrico({
 
         {/* Conteúdo */}
         <div className="flex-1 overflow-hidden">
-          {/* ABA VISUAL */}
+          {/* ABA VISUAL - NOVO COMPONENTE */}
           {abaAtiva === 'visual' && (
-            <ExameFisicoPediatricoVisual
+            <ExameFisicoPediatricoDefinitivo
               caso={caso}
-              onAchadoEncontrado={onAchadoEncontrado}
-              achadosEncontrados={achadosEncontrados}
+              onRegistrarAchado={handleRegistrarAchadoDefinitivo}
               onFechar={onFechar}
             />
           )}
