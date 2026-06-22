@@ -82,11 +82,10 @@ export const PainelAnaliseImagem: React.FC<PainelAnaliseImagemProps> = ({
   const [gabaritoBuscado, setGabaritoBuscado] = useState(false);
 
   // ========================================================================
-  // EFEITO: Buscar imagens do Open-i com filtro de relevância
+  // PROTEÇÃO: Bloquear apenas termos críticos não-relacionados
   // ========================================================================
 
-  // Filtro para validar se a imagem é relevante para o diagnóstico
-  const isImageRelevantForDiagnosis = (imagem: ImagemRadiologica, diagnosticoLower: string): boolean => {
+  const hasCriticalBlockTerm = (imagem: ImagemRadiologica): boolean => {
     const textosAVerificar = [
       imagem.diagnosticoRadiologico?.toLowerCase() || "",
       imagem.achadoPrincipal?.toLowerCase() || "",
@@ -97,28 +96,14 @@ export const PainelAnaliseImagem: React.FC<PainelAnaliseImagemProps> = ({
         : "",
     ].join(" ");
 
-    // Termos a evitar (diagnósticos não-relacionados)
-    const termosBloqueados = [
+    // Apenas bloquear termos CRÍTICOS não-relacionados
+    const termosCriticoBloqueados = [
       "pneumoperitoneum",
       "free intraperitoneal air",
       "bowel obstruction",
-      "fracture",
-      "bone",
     ];
 
-    // Se tem termo bloqueado, rejeitar
-    if (termosBloqueados.some(termo => textosAVerificar.includes(termo))) {
-      return false;
-    }
-
-    // Para pneumonia, buscar termos específicos
-    if (diagnosticoLower.includes("pneumonia") || diagnosticoLower.includes("pac")) {
-      const termosPositivos = ["pneumonia", "infiltrate", "consolidation", "airspace opacity", "pulmonary"];
-      return termosPositivos.some(termo => textosAVerificar.includes(termo));
-    }
-
-    // Para outros diagnósticos, aceitar se tem algum match no texto
-    return textosAVerificar.length > 0;
+    return termosCriticoBloqueados.some(termo => textosAVerificar.includes(termo));
   };
 
   useEffect(() => {
@@ -127,18 +112,13 @@ export const PainelAnaliseImagem: React.FC<PainelAnaliseImagemProps> = ({
       return;
     }
 
-    // Buscar do Open-i
+    // Buscar do Open-i (TEMPORÁRIO: busca fixa por "pneumonia" sem filtro)
     const buscarImagemOpenI = async () => {
       try {
         setEstadoVisual("carregando-imagem");
 
-        // Obter diagnóstico do caso
-        const diagnostico =
-          caso.dados_ocultos_do_sistema?.diagnostico_principal ||
-          caso.dados_visiveis_ao_estudante?.queixa_principal ||
-          "radiografia de tórax"; // Fallback genérico
-
-        const urlApiCall = `/api/exams/references?diagnosis=${encodeURIComponent(diagnostico)}&limit=3`;
+        // TEMPORÁRIO: Usar "pneumonia" fixo para testes visuais
+        const urlApiCall = `/api/exams/references?diagnosis=pneumonia&limit=3`;
 
         const response = await fetch(urlApiCall);
 
@@ -154,20 +134,22 @@ export const PainelAnaliseImagem: React.FC<PainelAnaliseImagemProps> = ({
           return;
         }
 
-        // Filtrar imagens por relevância
-        const imagensRelevantes = dados.imagens.filter((img: ImagemRadiologica) =>
-          isImageRelevantForDiagnosis(img, diagnostico.toLowerCase())
-        );
+        // TEMPORÁRIO: Usar primeira imagem, bloqueando apenas termos críticos
+        let imagemSelecionada: ImagemRadiologica | null = null;
 
-        // Usar primeira imagem relevante, ou primeira se nenhuma passou no filtro
-        const imagem = imagensRelevantes.length > 0 ? imagensRelevantes[0] : dados.imagens[0];
+        for (const img of dados.imagens) {
+          if (!hasCriticalBlockTerm(img)) {
+            imagemSelecionada = img;
+            break;
+          }
+        }
 
-        if (!imagem.imageUrl) {
+        if (!imagemSelecionada || !imagemSelecionada.imageUrl) {
           setEstadoVisual("sem-imagem");
           return;
         }
 
-        setImagemOpenI(imagem);
+        setImagemOpenI(imagemSelecionada);
         setEstadoVisual("imagem-carregada");
       } catch (erro) {
         setEstadoVisual("sem-imagem");
@@ -312,13 +294,13 @@ export const PainelAnaliseImagem: React.FC<PainelAnaliseImagemProps> = ({
 
   const imagemParaUsar = caso.imagemRadiologica || imagemOpenI;
 
-  // Se temos imagem Open-i, renderizar
+  // Se temos imagem, renderizar simples
   if (imagemOpenI && imagemOpenI.imageUrl) {
     return (
       <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
         <img
           src={imagemOpenI.imageUrl}
-          alt="Radiografia"
+          alt="Chest X-ray Open-i"
           style={{
             maxWidth: "100%",
             height: "auto",
@@ -327,24 +309,21 @@ export const PainelAnaliseImagem: React.FC<PainelAnaliseImagemProps> = ({
             marginBottom: "1rem"
           }}
         />
-
-        <div style={{ fontSize: "12px", color: "#666", marginTop: "1rem", padding: "8px", background: "#f5f5f5", borderRadius: "4px" }}>
-          <p><strong>Diagnóstico:</strong> {imagemOpenI.diagnosticoRadiologico}</p>
-          <p><strong>Fonte:</strong> {imagemOpenI.fonte}</p>
-          <p><strong>Atribuição:</strong> {imagemOpenI.atribuicao}</p>
-        </div>
+        <p style={{ fontSize: "12px", color: "#666", marginTop: "1rem" }}>
+          {imagemOpenI.diagnosticoRadiologico}
+        </p>
+        <p style={{ fontSize: "11px", color: "#999", marginTop: "0.5rem" }}>
+          Fonte: Open-i / Indiana University Chest X-ray Collection
+        </p>
       </div>
     );
   }
 
-  // Fallback quando sem imagem
+  // Fallback
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 text-center">
       <p className="text-slate-500 text-sm">
         Imagem radiológica indisponível para este caso.
-      </p>
-      <p className="text-slate-400 text-xs mt-2">
-        Fonte: Open-i / Indiana University Chest X-ray Collection. Imagens usadas para fins educacionais.
       </p>
     </div>
   );
