@@ -8,6 +8,7 @@ import "./consultorio-medix.css";
 import ExameFisicoAdultoVisual from "@/components/ExameFisicoAdultoVisual";
 import ExameFisicoPediatrico from "@/components/pediatria/ExameFisicoPediatrico";
 import IndicadorInterlocutorPediatrico from "@/components/pediatria/IndicadorInterlocutorPediatrico";
+import DadosPediatricos from "@/components/pediatria/DadosPediatricos";
 import FormularioSOAP from "@/components/FormularioSOAP";
 import PainelDiagnostico from "@/components/PainelDiagnostico";
 import FeedbackOSCE from "@/components/FeedbackOSCE";
@@ -850,6 +851,9 @@ function CasoPageContent() {
           <div className={`min-w-0 space-y-4 consultorio-medix-center${menuAtivo !== "paciente" ? " medix-center-has-panel" : ""}`}>
             {/* Indicador de Interlocutor Pediátrico */}
             <IndicadorInterlocutorPediatrico caso={caso} />
+
+            {/* Dados Pediátricos */}
+            <DadosPediatricos caso={caso} />
 
             {/* Chat */}
             <div className="h-[420px] flex flex-col medix-chat-slot">
