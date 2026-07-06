@@ -74,6 +74,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // PRIORIDADE 1: Buscar no caso V2 estruturado
+    const resultadoV2 = buscarExameNoCasoV2(caso, exameSolicitado);
+    if (resultadoV2.encontrado) {
+      return NextResponse.json(resultadoV2);
+    }
+
     // Fallback se API falhar
     if (!resposta) {
       const resultado = processoFallback(
@@ -96,6 +102,137 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// ===== NOVO MAPEADOR DE EXAMES V2 =====
+
+function normalizarTexto(texto: string): string {
+  return texto
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+const mapaExamesLaboratoriais: { [key: string]: string[] } = {
+  hemograma: ["hemograma", "hemograma completo", "serie vermelha", "serie branca", "plaquetas"],
+  funcaoRenal: ["funcao renal", "função renal", "ureia", "creatinina"],
+  eletrolitos: ["eletrolitos", "eletrólitos", "ionograma", "sodio", "sódio", "potassio", "potássio", "magnesio", "magnésio", "calcio", "cálcio"],
+  marcadoresInflamatorios: ["pcr", "vhs", "procalcitonina", "marcadores inflamatorios", "marcadores inflamatórios"],
+  gasometria: ["gasometria", "gasometria arterial", "gasometria venosa", "lactato"],
+  marcadoresCardiacos: ["troponina", "ckmb", "ck-mb", "bnp", "nt-probnp", "marcadores cardiacos", "marcadores cardíacos"],
+  funcaoHepatica: ["funcao hepatica", "função hepática", "tgo", "ast", "tgp", "alt", "bilirrubina", "bilirrubinas"],
+  coagulograma: ["coagulograma", "tp", "inr", "ttpa", "tap", "fibrinogenio", "fibrinogênio", "d-dimero", "dímero"],
+  urinaTipo1: ["urina", "urina tipo 1", "eas", "sumario de urina", "sumário de urina"],
+  urocultura: ["urocultura", "cultura de urina"],
+  perfilFerro: ["perfil ferro", "perfil do ferro", "ferritina", "ferro", "ferro serico", "ferro sérico", "transferrina"],
+  perfilHemolise: ["perfil hemolise", "perfil hemólise", "ldh", "haptoglobina", "reticulocitos", "reticulócitos"],
+  coombsDireto: ["coombs", "coombs direto", "teste de antiglobulina"],
+  esfregacoPeriferico: ["esfregaco", "esfregaço", "lamina periferica", "lâmina periférica"],
+  culturas: ["cultura", "culturas"],
+  hemoculturas: ["hemocultura", "hemoculturas"],
+  baciloscopiaEscarro: ["baar", "baciloscopia", "baciloscopia de escarro", "escarro"],
+  vitaminas: ["vitamina b12", "b12", "acido folico", "ácido fólico", "folato"],
+  mielograma: ["mielograma", "imunofenotipagem"],
+  eletroforeseHemoglobina: ["eletroforese de hemoglobina", "eletroforese hb"],
+  controleGlicemico: ["glicemia", "hemoglobina glicada", "hba1c", "cetonemia", "cetonuria"],
+  autoimunidade: ["fan", "anti-dna", "complemento", "c3", "c4"]
+};
+
+const mapaExamesComplementares: { [key: string]: { grupo: string; sinonimos: string[] } } = {
+  oximetria: { grupo: "beiraLeito", sinonimos: ["oximetria", "saturacao", "saturação", "spo2", "saturacao de oxigenio", "saturação de oxigênio"] },
+  picoFluxo: { grupo: "beiraLeito", sinonimos: ["pico de fluxo", "peak flow", "pfe", "pef"] },
+  radiografiaTorax: { grupo: "imagem", sinonimos: ["raio x de torax", "raio-x de torax", "rx torax", "rx de torax", "radiografia de torax", "radiografia torax"] },
+  ecg: { grupo: "cardiologicos", sinonimos: ["ecg", "eletrocardiograma"] },
+  ecocardiograma: { grupo: "cardiologicos", sinonimos: ["ecocardiograma", "eco", "ecocardiografia"] },
+  espirometria: { grupo: "funcaoPulmonar", sinonimos: ["espirometria", "prova de funcao pulmonar", "prova de função pulmonar"] },
+  baciloscopia: { grupo: "microbiologia", sinonimos: ["baciloscopia", "baar", "escarro"] },
+  avaliacaoDesenvolvimento: { grupo: "desenvolvimento", sinonimos: ["avaliacao do desenvolvimento", "avaliação do desenvolvimento", "marcos do desenvolvimento", "denver"] }
+};
+
+function buscarExameNoCasoV2(caso: any, exameSolicitado: string) {
+  const termo = normalizarTexto(exameSolicitado);
+
+  // 1. Buscar nos laboratoriais
+  const laboratoriais = caso?.exames?.laboratoriais;
+
+  for (const [campo, sinonimos] of Object.entries(mapaExamesLaboratoriais)) {
+    const sinonimosNormalizados = sinonimos.map(normalizarTexto);
+    const encontrou = sinonimosNormalizados.some((sinonimo) => termo.includes(sinonimo) || sinonimo.includes(termo));
+
+    if (encontrou && laboratoriais?.[campo]) {
+      const exame = laboratoriais[campo];
+      return {
+        encontrado: true,
+        tipo: "laboratorial",
+        grupo: "laboratoriais",
+        campo,
+        resultado: exame?.resultado,
+        valores: exame?.valores,
+        interpretacao: exame?.interpretacao,
+        prioridade: exame?.prioridade,
+        observacao: exame?.observacao,
+        valoresReferenciaPediatricos: exame?.valoresReferenciaPediatricos,
+        exameCompleto: exame,
+      };
+    }
+  }
+
+  // 2. Buscar nos complementares estruturados
+  for (const [campo, config] of Object.entries(mapaExamesComplementares)) {
+    const sinonimosNormalizados = config.sinonimos.map(normalizarTexto);
+    const encontrou = sinonimosNormalizados.some((sinonimo) => termo.includes(sinonimo) || sinonimo.includes(termo));
+
+    const grupo = config.grupo;
+    const exame = caso?.exames?.[grupo]?.[campo];
+
+    if (encontrou && exame) {
+      return {
+        encontrado: true,
+        tipo: "complementar",
+        grupo,
+        campo,
+        resultado: exame?.resultado,
+        valores: exame?.valores,
+        interpretacao: exame?.interpretacao,
+        prioridade: exame?.prioridade,
+        observacao: exame?.observacao,
+        valoresReferenciaPediatricos: exame?.valoresReferenciaPediatricos,
+        exameCompleto: exame,
+      };
+    }
+  }
+
+  // 3. Buscar em complementaresOriginais
+  const originais = caso?.exames?.complementaresOriginais;
+
+  if (Array.isArray(originais)) {
+    for (const item of originais) {
+      const nome = normalizarTexto(item?.nome || item?.exame || item?.titulo || item?.tipo || "");
+      if (nome && (termo.includes(nome) || nome.includes(termo))) {
+        return {
+          encontrado: true,
+          tipo: "complementarOriginal",
+          grupo: "complementaresOriginais",
+          campo: item?.nome || "exame",
+          resultado: item?.resultado,
+          valores: item?.valores,
+          interpretacao: item?.interpretacao,
+          prioridade: item?.prioridade,
+          observacao: item?.observacao,
+          valoresReferenciaPediatricos: item?.valoresReferenciaPediatricos,
+          exameCompleto: item,
+        };
+      }
+    }
+  }
+
+  return {
+    encontrado: false,
+    mensagem: "Exame não disponível neste caso.",
+  };
+}
+
+// ===== FIM MAPEADOR V2 =====
 
 function processoFallback(
   exameSolicitado: string,
