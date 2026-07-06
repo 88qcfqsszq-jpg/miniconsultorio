@@ -105,7 +105,8 @@ export default function FeedbackOSCE({
 }: FeedbackOSCEProps) {
   const minutos = Math.floor(tempoDecorrido / 60);
   const segundos = tempoDecorrido % 60;
-  const percentual = Math.round((feedback.nota / 20) * 100);
+  const notaMaxima = (caso as any)?.feedbackDetalhado?.escala?.total ?? 20;
+  const percentual = Math.round((feedback.nota / notaMaxima) * 100);
   const [trofeuFailed, setTrofeuFailed] = useState(false);
   const [exportandoPDF, setExportandoPDF] = useState(false);
   const [erroPDF, setErroPDF] = useState(false);
