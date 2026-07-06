@@ -1,7 +1,8 @@
 // Módulo ELETRÓLITOS — Sódio, Potássio, Cloro, Magnésio, Cálcio.
 import type { LabContext, LabPanelResult, ClinicalTag, Direcao } from "@/src/lab/labTypes";
 import { REF } from "@/src/lab/labReferenceRanges";
-import { gen } from "@/src/lab/labUtils";
+import { gen, analyteFrom } from "@/src/lab/labUtils";
+import { getExameLaboratorialV2, temValoresV2, obterSinonimo } from "@/src/lab/labCaseData";
 
 type Prof = { sodio?: Direcao; potassio?: Direcao; cloro?: Direcao; magnesio?: Direcao; calcio?: Direcao; obs: string[] };
 
@@ -14,6 +15,37 @@ export const ELECTRO_PROFILES: Partial<Record<ClinicalTag, Prof>> = {
 };
 
 export function generateElectrolytes(ctx: LabContext): LabPanelResult {
+  // PRIORIDADE 1: Usar dados reais do caso V2 se disponível
+  const eletrolitosV2 = getExameLaboratorialV2(ctx.caso, "eletrolitos");
+  if (temValoresV2(eletrolitosV2)) {
+    const v = eletrolitosV2.valores;
+    const itens: any[] = [];
+
+    const sodio = obterSinonimo(v, ["sodio", "sódio", "na"]);
+    const potassio = obterSinonimo(v, ["potassio", "potássio", "k"]);
+    const cloro = obterSinonimo(v, ["cloro", "cloreto", "cl"]);
+    const magnesio = obterSinonimo(v, ["magnesio", "magnésio", "mg"]);
+    const calcio = obterSinonimo(v, ["calcio", "cálcio", "ca"]);
+
+    if (sodio) itens.push(analyteFrom("Sódio (Na⁺)", parseFloat(String(sodio).replace(",", ".")), REF.sodio));
+    if (potassio) itens.push(analyteFrom("Potássio (K⁺)", parseFloat(String(potassio).replace(",", ".")), REF.potassio));
+    if (cloro) itens.push(analyteFrom("Cloro (Cl⁻)", parseFloat(String(cloro).replace(",", ".")), REF.cloro));
+    if (magnesio) itens.push(analyteFrom("Magnésio", parseFloat(String(magnesio).replace(",", ".")), REF.magnesio));
+    if (calcio) itens.push(analyteFrom("Cálcio total", parseFloat(String(calcio).replace(",", ".")), REF.calcio));
+
+    const alterado = itens.some((i: any) => i.flag);
+
+    return {
+      testId: "electrolytes",
+      titulo: "Eletrólitos",
+      nivel: alterado ? "grave" : "normal",
+      paciente: ctx.paciente,
+      sections: [{ titulo: "Eletrólitos", itens }],
+      observacoes: eletrolitosV2.interpretacao ? [eletrolitosV2.interpretacao] : [],
+    };
+  }
+
+  // FALLBACK: Usar perfis hardcoded se não houver dados V2
   const p = ELECTRO_PROFILES[ctx.tag] ?? { obs: ["Eletrólitos dentro dos parâmetros de referência."] };
   const itens = [
     gen(ctx.rnd, "Sódio (Na⁺)", REF.sodio, p.sodio ?? "normal"),

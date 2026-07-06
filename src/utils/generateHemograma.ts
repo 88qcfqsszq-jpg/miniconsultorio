@@ -8,6 +8,7 @@
 // ============================================================================
 
 import { getHemogramaProfile, type Direcao, type HemogramaProfile } from "@/src/data/hemogramaProfiles";
+import { getExameLaboratorialV2, temValoresV2, obterSinonimo } from "@/src/lab/labCaseData";
 
 export interface HemogramaAnalito {
   nome: string;
@@ -99,10 +100,59 @@ const fator: Record<Direcao, number> = { normal: 1, baixo: 0.6, muito_baixo: 0.4
 /** Gera o hemograma completo para o caso. Determinístico por caseId. */
 export function generateHemograma(input: GenerateHemogramaInput): HemogramaResultado {
   const caso = input.caso;
-  const perfil = getHemogramaProfile(caso);
   const idade = input.idade ?? caso?.paciente?.idade ?? caso?.dados_visiveis_ao_estudante?.idade;
   const sexo = normalizarSexo(input.sexo ?? caso?.paciente?.sexo ?? caso?.sexo);
   const caseId = String(input.caseId ?? caso?.id ?? caso?.paciente?.id ?? "caso");
+
+  // PRIORIDADE 1: Usar dados reais do caso V2 se disponível
+  const hemogramaV2 = getExameLaboratorialV2(caso, "hemograma");
+  if (temValoresV2(hemogramaV2)) {
+    const v = hemogramaV2.valores;
+
+    const rv = faixaVermelhaPorIdadeSexo(idade, sexo);
+    const serieVermelha: HemogramaAnalito[] = [];
+
+    // Mapear campos possíveis do V2
+    if (v.hemacias) serieVermelha.push(analito("Hemácias", parseFloat(String(v.hemacias).replace(",", ".")), 2, "milhões/mm³", rv.hemacias[0], rv.hemacias[1]));
+    if (v.hemoglobina) serieVermelha.push(analito("Hemoglobina", parseFloat(String(v.hemoglobina).replace(",", ".")), 1, "g/dL", rv.hemoglobina[0], rv.hemoglobina[1]));
+    if (v.hematocrito) serieVermelha.push(analito("Hematócrito", parseFloat(String(v.hematocrito).replace(",", ".")), 1, "%", rv.hemoglobina[0] * 3, rv.hemoglobina[1] * 3));
+    if (v.vcm) serieVermelha.push(analito("VCM", parseFloat(String(v.vcm).replace(",", ".")), 1, "fL", rv.vcm[0], rv.vcm[1]));
+    if (v.hcm) serieVermelha.push(analito("HCM", parseFloat(String(v.hcm).replace(",", ".")), 1, "pg", 27, 33));
+    if (v.chcm) serieVermelha.push(analito("CHCM", parseFloat(String(v.chcm).replace(",", ".")), 1, "g/dL", 32, 36));
+    if (v.rdw) serieVermelha.push(analito("RDW", parseFloat(String(v.rdw).replace(",", ".")), 1, "%", 11.5, 14.5));
+
+    const leucoRef: Faixa = idade != null && idade < 12 ? [5000, 14500] : [4000, 11000];
+    const serieBranca: HemogramaAnalito[] = [];
+
+    if (v.leucocitos) serieBranca.push(analito("Leucócitos", parseFloat(String(v.leucocitos).replace(/\D/g, "")), 0, "/mm³", leucoRef[0], leucoRef[1]));
+    if (v.neutrofilos) serieBranca.push({ nome: "Neutrófilos", valor: String(v.neutrofilos), unidade: "", ref: "40 – 70 %", flag: "" });
+    if (v.bastonetes) serieBranca.push({ nome: "Bastonetes", valor: String(v.bastonetes), unidade: "", ref: "0 – 5 %", flag: "" });
+    if (v.segmentados) serieBranca.push({ nome: "Segmentados", valor: String(v.segmentados), unidade: "", ref: "40 – 65 %", flag: "" });
+    if (v.linfocitos) serieBranca.push({ nome: "Linfócitos", valor: String(v.linfocitos), unidade: "", ref: "20 – 45 %", flag: "" });
+    if (v.monocitos) serieBranca.push({ nome: "Monócitos", valor: String(v.monocitos), unidade: "", ref: "2 – 10 %", flag: "" });
+    if (v.eosinofilos) serieBranca.push({ nome: "Eosinófilos", valor: String(v.eosinofilos), unidade: "", ref: "1 – 6 %", flag: "" });
+    if (v.basofilos) serieBranca.push({ nome: "Basófilos", valor: String(v.basofilos), unidade: "", ref: "0 – 2 %", flag: "" });
+
+    const plaquetasSerie: HemogramaAnalito[] = [];
+    if (v.plaquetas) plaquetasSerie.push(analito("Plaquetas", parseFloat(String(v.plaquetas).replace(/\D/g, "")), 0, "/mm³", 150000, 450000));
+    if (v.vpm) plaquetasSerie.push(analito("VPM", parseFloat(String(v.vpm).replace(",", ".")), 1, "fL", 7.5, 11.5));
+    if (v.pdw) plaquetasSerie.push(analito("PDW", parseFloat(String(v.pdw).replace(",", ".")), 1, "%", 9, 17));
+    if (v.reticulocitos) plaquetasSerie.push(analito("Reticulócitos", parseFloat(String(v.reticulocitos).replace(",", ".")), 1, "%", 0.5, 2));
+
+    return {
+      perfilKey: "hemograma-v2",
+      perfilDescricao: "Hemograma V2 — valores reais do caso",
+      nivel: hemogramaV2.interpretacao?.toLowerCase().includes("anemia") || hemogramaV2.interpretacao?.toLowerCase().includes("alteração") ? "grave" : "normal",
+      paciente: { idade, sexo },
+      serieVermelha,
+      serieBranca,
+      plaquetas: plaquetasSerie,
+      observacoes: hemogramaV2.interpretacao ? [hemogramaV2.interpretacao] : [],
+    };
+  }
+
+  // FALLBACK: Usar perfis hardcoded se não houver dados V2
+  const perfil = getHemogramaProfile(caso);
   const rnd = mulberry32(hashSeed(`${caseId}|${perfil.key}`));
 
   const sv = perfil.serieVermelha;

@@ -1,7 +1,8 @@
 // Módulo MARCADORES INFLAMATÓRIOS — PCR, VHS, Procalcitonina.
 import type { LabContext, LabPanelResult, ClinicalTag, Direcao } from "@/src/lab/labTypes";
 import { REF } from "@/src/lab/labReferenceRanges";
-import { gen } from "@/src/lab/labUtils";
+import { gen, analyteFrom } from "@/src/lab/labUtils";
+import { getExameLaboratorialV2, temValoresV2, obterSinonimo } from "@/src/lab/labCaseData";
 
 type Prof = { pcr?: Direcao; vhs?: Direcao; procalcitonina?: Direcao; obs: string[] };
 
@@ -17,6 +18,33 @@ export const INFLAM_PROFILES: Partial<Record<ClinicalTag, Prof>> = {
 };
 
 export function generateInflammation(ctx: LabContext): LabPanelResult {
+  // PRIORIDADE 1: Usar dados reais do caso V2 se disponível
+  const marcadoresV2 = getExameLaboratorialV2(ctx.caso, "marcadoresInflamatorios");
+  if (temValoresV2(marcadoresV2)) {
+    const v = marcadoresV2.valores;
+    const itens: any[] = [];
+
+    const pcr = obterSinonimo(v, ["pcr", "ProteínaCReativa"]);
+    const vhs = obterSinonimo(v, ["vhs", "VHS"]);
+    const procalcitonina = obterSinonimo(v, ["procalcitonina"]);
+
+    if (pcr) itens.push(analyteFrom("PCR", parseFloat(String(pcr).replace(",", ".")), REF.pcr));
+    if (vhs) itens.push(analyteFrom("VHS", parseFloat(String(vhs).replace(",", ".")), REF.vhs));
+    if (procalcitonina) itens.push(analyteFrom("Procalcitonina", parseFloat(String(procalcitonina).replace(",", ".")), REF.procalcitonina));
+
+    const alterado = itens.some((i: any) => i.flag);
+
+    return {
+      testId: "inflammation",
+      titulo: "Marcadores Inflamatórios",
+      nivel: alterado ? "grave" : "normal",
+      paciente: ctx.paciente,
+      sections: [{ titulo: "Marcadores Inflamatórios", itens }],
+      observacoes: marcadoresV2.interpretacao ? [marcadoresV2.interpretacao] : [],
+    };
+  }
+
+  // FALLBACK: Usar perfis hardcoded se não houver dados V2
   const p = INFLAM_PROFILES[ctx.tag] ?? { obs: ["Marcadores inflamatórios dentro dos parâmetros."] };
   const itens = [
     gen(ctx.rnd, "PCR", REF.pcr, p.pcr ?? "normal"),

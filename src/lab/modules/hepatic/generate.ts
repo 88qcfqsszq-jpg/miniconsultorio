@@ -2,6 +2,7 @@
 import type { LabContext, LabPanelResult, ClinicalTag, Direcao } from "@/src/lab/labTypes";
 import { REF } from "@/src/lab/labReferenceRanges";
 import { mkValue, analyteFrom, gen } from "@/src/lab/labUtils";
+import { getExameLaboratorialV2, temValoresV2, obterSinonimo, textoIndicaAlteracao } from "@/src/lab/labCaseData";
 
 type Prof = Partial<Record<"ast" | "alt" | "fa" | "ggt" | "bt" | "bd" | "albumina", Direcao>> & { obs: string[] };
 
@@ -15,6 +16,42 @@ export const HEPATIC_PROFILES: Partial<Record<ClinicalTag, Prof>> = {
 };
 
 export function generateHepatic(ctx: LabContext): LabPanelResult {
+  // PRIORIDADE 1: Usar dados reais do caso V2 se disponível
+  const funcaoHepaticaV2 = getExameLaboratorialV2(ctx.caso, "funcaoHepatica");
+  if (temValoresV2(funcaoHepaticaV2)) {
+    const v = funcaoHepaticaV2.valores;
+    const itens: LabContext extends any ? any[] : any[] = [];
+
+    // Mapear campos possíveis, aceitando sinônimos
+    const ast = obterSinonimo(v, ["ast", "tgo", "aspartateaminotransferase"]);
+    const alt = obterSinonimo(v, ["alt", "tgp", "alanineaminotransferase"]);
+    const fa = obterSinonimo(v, ["fa", "fosfataseAlcalina", "fosfatasealcalina"]);
+    const ggt = obterSinonimo(v, ["ggt", "gammaglutamiltransferase"]);
+    const bt = obterSinonimo(v, ["bt", "bilirrubinaTotal", "bilirrubinatotal"]);
+    const bd = obterSinonimo(v, ["bd", "bilirrubinaDireta", "bilirrubinadireta"]);
+    const albumina = obterSinonimo(v, ["albumina"]);
+
+    if (ast) itens.push(analyteFrom("AST (TGO)", parseFloat(String(ast).replace(",", ".")), REF.ast));
+    if (alt) itens.push(analyteFrom("ALT (TGP)", parseFloat(String(alt).replace(",", ".")), REF.alt));
+    if (fa) itens.push(analyteFrom("Fosfatase alcalina", parseFloat(String(fa).replace(",", ".")), REF.fa));
+    if (ggt) itens.push(analyteFrom("GGT", parseFloat(String(ggt).replace(",", ".")), REF.ggt));
+    if (bt) itens.push(analyteFrom("Bilirrubina total", parseFloat(String(bt).replace(",", ".")), REF.bt));
+    if (bd) itens.push(analyteFrom("Bilirrubina direta", parseFloat(String(bd).replace(",", ".")), REF.bd));
+    if (albumina) itens.push(analyteFrom("Albumina", parseFloat(String(albumina).replace(",", ".")), REF.albumina));
+
+    const alterado = itens.some((i: any) => i.flag) || textoIndicaAlteracao(funcaoHepaticaV2.interpretacao);
+
+    return {
+      testId: "hepatic",
+      titulo: "Função Hepática",
+      nivel: alterado ? "grave" : "normal",
+      paciente: ctx.paciente,
+      sections: [{ titulo: "Função Hepática", itens }],
+      observacoes: funcaoHepaticaV2.interpretacao ? [funcaoHepaticaV2.interpretacao] : [],
+    };
+  }
+
+  // FALLBACK: Usar perfis hardcoded se não houver dados V2
   const p = HEPATIC_PROFILES[ctx.tag] ?? { obs: ["Enzimas e função hepática dentro dos parâmetros."] };
   const bt = mkValue(ctx.rnd, REF.bt, p.bt ?? "normal");
   let bd = mkValue(ctx.rnd, REF.bd, p.bd ?? "normal");
