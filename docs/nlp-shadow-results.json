@@ -1,0 +1,544 @@
+{
+  "geradoEm": "2026-06-29T21:59:35.144Z",
+  "modo": "shadow (sem integração; não altera nota)",
+  "tuberculoseReal": {
+    "casoId": "11",
+    "paciente": "Roberto Santos",
+    "diagnostico": "Tuberculose pulmonar ativa",
+    "conceitosDetectados": [
+      "tosse",
+      "tosse_cronica",
+      "febre_vespertina_noturna",
+      "perda_peso",
+      "contato_tb",
+      "trm_tb"
+    ],
+    "conceitosNaoDetectados": [
+      "sudorese_noturna",
+      "hemoptise",
+      "risco_epidemiologico_tb",
+      "imunossupressao_hiv",
+      "rx_torax",
+      "baciloscopia_escarro",
+      "cultura_escarro",
+      "ausculta_pulmonar",
+      "linfonodos",
+      "mascara_etiqueta_respiratoria",
+      "notificacao_vigilancia",
+      "investigar_contatos",
+      "ripe",
+      "adesao_tratamento"
+    ],
+    "tabela": [
+      {
+        "conceptId": "tosse",
+        "detectadoPeloNlp": true,
+        "evidencia": "tosse",
+        "feedbackReconheceu": "n/a",
+        "issue": "nlp_detected_feedback_missed",
+        "observacao": "NLP detectou; feedback não confirmou — revisar reconhecimento no grader"
+      },
+      {
+        "conceptId": "tosse_cronica",
+        "detectadoPeloNlp": true,
+        "evidencia": "tosse ha mais de 3 semanas",
+        "feedbackReconheceu": "sim",
+        "issue": "both_detected",
+        "observacao": "ok — NLP e feedback concordam"
+      },
+      {
+        "conceptId": "febre_vespertina_noturna",
+        "detectadoPeloNlp": true,
+        "evidencia": "febre a noite",
+        "feedbackReconheceu": "nao",
+        "issue": "nlp_detected_feedback_missed",
+        "observacao": "NLP detectou no texto, mas feedback marcou como faltou — possível alias/payload gap no grader"
+      },
+      {
+        "conceptId": "sudorese_noturna",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "n/a",
+        "issue": "both_missed",
+        "observacao": "sem evidência / sem critério"
+      },
+      {
+        "conceptId": "perda_peso",
+        "detectadoPeloNlp": true,
+        "evidencia": "perdi peso",
+        "feedbackReconheceu": "sim",
+        "issue": "both_detected",
+        "observacao": "ok — NLP e feedback concordam"
+      },
+      {
+        "conceptId": "hemoptise",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "n/a",
+        "issue": "both_missed",
+        "observacao": "sem evidência / sem critério"
+      },
+      {
+        "conceptId": "contato_tb",
+        "detectadoPeloNlp": true,
+        "evidencia": "alguem com tuberculose",
+        "feedbackReconheceu": "nao",
+        "issue": "nlp_detected_feedback_missed",
+        "observacao": "NLP detectou no texto, mas feedback marcou como faltou — possível alias/payload gap no grader"
+      },
+      {
+        "conceptId": "risco_epidemiologico_tb",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "n/a",
+        "issue": "both_missed",
+        "observacao": "sem evidência / sem critério"
+      },
+      {
+        "conceptId": "imunossupressao_hiv",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "n/a",
+        "issue": "both_missed",
+        "observacao": "sem evidência / sem critério"
+      },
+      {
+        "conceptId": "rx_torax",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "nao",
+        "issue": "both_missed",
+        "observacao": "ausência real — não há evidência no texto"
+      },
+      {
+        "conceptId": "trm_tb",
+        "detectadoPeloNlp": true,
+        "evidencia": "trm tb",
+        "feedbackReconheceu": "nao",
+        "issue": "nlp_detected_feedback_missed",
+        "observacao": "NLP detectou no texto, mas feedback marcou como faltou — possível alias/payload gap no grader"
+      },
+      {
+        "conceptId": "baciloscopia_escarro",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "nao",
+        "issue": "both_missed",
+        "observacao": "ausência real — não há evidência no texto"
+      },
+      {
+        "conceptId": "cultura_escarro",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "nao",
+        "issue": "both_missed",
+        "observacao": "ausência real — não há evidência no texto"
+      },
+      {
+        "conceptId": "ausculta_pulmonar",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "n/a",
+        "issue": "both_missed",
+        "observacao": "sem evidência / sem critério"
+      },
+      {
+        "conceptId": "linfonodos",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "n/a",
+        "issue": "both_missed",
+        "observacao": "sem evidência / sem critério"
+      },
+      {
+        "conceptId": "mascara_etiqueta_respiratoria",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "nao",
+        "issue": "both_missed",
+        "observacao": "ausência real — não há evidência no texto"
+      },
+      {
+        "conceptId": "notificacao_vigilancia",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "nao",
+        "issue": "both_missed",
+        "observacao": "ausência real — não há evidência no texto"
+      },
+      {
+        "conceptId": "investigar_contatos",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "n/a",
+        "issue": "both_missed",
+        "observacao": "sem evidência / sem critério"
+      },
+      {
+        "conceptId": "ripe",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "nao",
+        "issue": "both_missed",
+        "observacao": "ausência real — não há evidência no texto"
+      },
+      {
+        "conceptId": "adesao_tratamento",
+        "detectadoPeloNlp": false,
+        "evidencia": "",
+        "feedbackReconheceu": "n/a",
+        "issue": "both_missed",
+        "observacao": "sem evidência / sem critério"
+      }
+    ],
+    "issueCount": {
+      "nlp_detected_feedback_missed": 4,
+      "both_detected": 2,
+      "both_missed": 14
+    }
+  },
+  "consultasPerfeitas": [
+    {
+      "nome": "Tuberculose pulmonar",
+      "diagnosisKey": "tuberculose_pulmonar",
+      "totalEsperados": 16,
+      "detectados": [
+        "tosse_cronica",
+        "febre_vespertina_noturna",
+        "sudorese_noturna",
+        "perda_peso",
+        "contato_tb",
+        "ausculta_pulmonar",
+        "linfonodos",
+        "trm_tb",
+        "rx_torax",
+        "baciloscopia_escarro",
+        "cultura_escarro",
+        "mascara_etiqueta_respiratoria",
+        "investigar_contatos",
+        "notificacao_vigilancia",
+        "ripe",
+        "adesao_tratamento"
+      ],
+      "naoDetectados": [],
+      "cobertura": "16/16",
+      "todosConceitosDetectados": [
+        "apresentacao_medico",
+        "tosse_cronica",
+        "febre_vespertina_noturna",
+        "sudorese_noturna",
+        "perda_peso",
+        "rx_torax",
+        "trm_tb",
+        "baciloscopia_escarro",
+        "cultura_escarro",
+        "ausculta_pulmonar",
+        "linfonodos",
+        "mascara_etiqueta_respiratoria",
+        "notificacao_vigilancia",
+        "investigar_contatos",
+        "ripe",
+        "adesao_tratamento",
+        "tosse",
+        "contato_tb"
+      ]
+    },
+    {
+      "nome": "Pneumonia / PAC",
+      "diagnosisKey": "pneumonia_pac",
+      "totalEsperados": 9,
+      "detectados": [
+        "febre",
+        "tosse",
+        "expectoracao",
+        "dor_pleuritica",
+        "ausculta_anterior_posterior",
+        "crepitacoes",
+        "rx_torax",
+        "hemograma",
+        "antibiotico_pneumonia"
+      ],
+      "naoDetectados": [],
+      "cobertura": "9/9",
+      "todosConceitosDetectados": [
+        "rx_torax",
+        "hemograma",
+        "ausculta_pulmonar",
+        "ausculta_torax_anterior",
+        "ausculta_anterior_posterior",
+        "crepitacoes",
+        "antibioticoterapia",
+        "tosse",
+        "febre",
+        "expectoracao",
+        "dor_pleuritica",
+        "antibiotico_pneumonia",
+        "sinais_alarme"
+      ]
+    },
+    {
+      "nome": "Insuficiência cardíaca",
+      "diagnosisKey": "insuficiencia_cardiaca",
+      "totalEsperados": 11,
+      "detectados": [
+        "dispneia_paroxistica_noturna",
+        "ortopneia",
+        "edema_membros_inferiores",
+        "turgencia_jugular",
+        "b3",
+        "crepitacoes",
+        "ecocardiograma",
+        "bnp_ntprobnp",
+        "rx_torax",
+        "diuretico_ic",
+        "restricao_sal"
+      ],
+      "naoDetectados": [],
+      "cobertura": "11/11",
+      "todosConceitosDetectados": [
+        "dispneia",
+        "ortopneia",
+        "dispneia_paroxistica_noturna",
+        "edema_membros_inferiores",
+        "rx_torax",
+        "ecocardiograma",
+        "bnp_ntprobnp",
+        "crepitacoes",
+        "turgencia_jugular",
+        "edema_mmii",
+        "diuretico_ic",
+        "b3",
+        "restricao_sal",
+        "controle_peso"
+      ]
+    },
+    {
+      "nome": "SCA / IAM",
+      "diagnosisKey": "sca_iam",
+      "totalEsperados": 12,
+      "detectados": [
+        "dor_toracica_isquemica",
+        "irradiacao",
+        "sudorese",
+        "nauseas",
+        "fatores_risco_cardiovascular",
+        "ecg",
+        "troponina",
+        "antiagregante_sca",
+        "anticoagulacao",
+        "nitrato",
+        "monitorizacao",
+        "angioplastia"
+      ],
+      "naoDetectados": [],
+      "cobertura": "12/12",
+      "todosConceitosDetectados": [
+        "dor_toracica",
+        "dor_toracica_isquemica",
+        "ecg",
+        "troponina",
+        "antiagregante_sca",
+        "anticoagulacao",
+        "monitorizacao",
+        "irradiacao",
+        "fatores_risco_cardiovascular",
+        "sudorese",
+        "nauseas",
+        "nitrato",
+        "reperfusao",
+        "angioplastia"
+      ]
+    },
+    {
+      "nome": "Asma",
+      "diagnosisKey": "asma",
+      "totalEsperados": 9,
+      "detectados": [
+        "sibilancia",
+        "aperto_peito",
+        "tosse",
+        "gatilhos",
+        "uso_broncodilatador",
+        "sibilos",
+        "saturacao",
+        "broncodilatador",
+        "corticoide"
+      ],
+      "naoDetectados": [],
+      "cobertura": "9/9",
+      "todosConceitosDetectados": [
+        "dor_toracica",
+        "sibilancia",
+        "sibilos",
+        "tosse",
+        "aperto_peito",
+        "gatilhos",
+        "uso_broncodilatador",
+        "broncodilatador",
+        "corticoide",
+        "saturacao"
+      ]
+    },
+    {
+      "nome": "DPOC",
+      "diagnosisKey": "dpoc",
+      "totalEsperados": 11,
+      "detectados": [
+        "tabagismo",
+        "carga_tabagica",
+        "dispneia_progressiva",
+        "tosse_cronica",
+        "expectoracao",
+        "sibilancia",
+        "roncos",
+        "oxigenio_suporte",
+        "broncodilatador",
+        "corticoide",
+        "antibiotico_dpoc"
+      ],
+      "naoDetectados": [],
+      "cobertura": "11/11",
+      "todosConceitosDetectados": [
+        "tosse_cronica",
+        "dispneia",
+        "sibilancia",
+        "sibilos",
+        "roncos",
+        "oxigenio_suporte",
+        "antibioticoterapia",
+        "tosse",
+        "tabagismo",
+        "carga_tabagica",
+        "dispneia_progressiva",
+        "expectoracao",
+        "broncodilatador",
+        "corticoide",
+        "antibiotico_dpoc"
+      ]
+    },
+    {
+      "nome": "TEP",
+      "diagnosisKey": "tep",
+      "totalEsperados": 9,
+      "detectados": [
+        "dispneia_subita",
+        "dor_pleuritica",
+        "fatores_risco_tromboembolico",
+        "tvp",
+        "hipoxemia",
+        "taquicardia",
+        "d_dimero",
+        "angio_tc_torax",
+        "anticoagulacao"
+      ],
+      "naoDetectados": [],
+      "cobertura": "9/9",
+      "todosConceitosDetectados": [
+        "dispneia",
+        "d_dimero",
+        "angio_tc_torax",
+        "anticoagulacao",
+        "risco_tvp",
+        "sinais_alarme_pediatria",
+        "dispneia_subita",
+        "dor_pleuritica",
+        "taquicardia",
+        "hipoxemia",
+        "fatores_risco_tromboembolico",
+        "tvp"
+      ]
+    },
+    {
+      "nome": "Pneumotórax",
+      "diagnosisKey": "pneumotorax",
+      "totalEsperados": 6,
+      "detectados": [
+        "dor_pleuritica",
+        "dispneia_subita",
+        "murmurio_reduzido",
+        "hipertimpanismo",
+        "rx_torax",
+        "drenagem_toracica"
+      ],
+      "naoDetectados": [],
+      "cobertura": "6/6",
+      "todosConceitosDetectados": [
+        "dispneia",
+        "rx_torax",
+        "murmurio_reduzido",
+        "dor_pleuritica",
+        "dispneia_subita",
+        "hipertimpanismo",
+        "drenagem_toracica"
+      ]
+    },
+    {
+      "nome": "Dengue",
+      "diagnosisKey": "dengue",
+      "totalEsperados": 10,
+      "detectados": [
+        "febre",
+        "mialgia",
+        "dor_retroorbitaria",
+        "exantema",
+        "sinais_alarme_dengue",
+        "hemograma",
+        "plaquetas",
+        "hematocrito",
+        "hidratacao",
+        "evitar_aine"
+      ],
+      "naoDetectados": [],
+      "cobertura": "10/10",
+      "todosConceitosDetectados": [
+        "hemograma",
+        "orientar_retorno_sinais_alarme",
+        "dor_retroorbitaria",
+        "exantema",
+        "mialgia",
+        "hidratacao",
+        "plaquetas",
+        "sinais_alarme_pediatria",
+        "evitar_aine",
+        "febre",
+        "sinais_alarme_dengue",
+        "hematocrito"
+      ]
+    },
+    {
+      "nome": "Anemia hemolítica",
+      "diagnosisKey": "anemia_hemolitica",
+      "totalEsperados": 11,
+      "detectados": [
+        "fadiga",
+        "palidez",
+        "ictericia",
+        "coluria",
+        "esplenomegalia",
+        "reticulocitos",
+        "bilirrubinas",
+        "ldh",
+        "haptoglobina",
+        "coombs",
+        "corticoide_hemolise"
+      ],
+      "naoDetectados": [],
+      "cobertura": "11/11",
+      "todosConceitosDetectados": [
+        "bilirrubinas",
+        "reticulocitos",
+        "ldh",
+        "haptoglobina",
+        "coombs",
+        "ictericia_hepatite",
+        "anemia",
+        "esplenomegalia",
+        "fadiga",
+        "palidez",
+        "ictericia",
+        "coluria",
+        "corticoide_hemolise"
+      ]
+    }
+  ]
+}

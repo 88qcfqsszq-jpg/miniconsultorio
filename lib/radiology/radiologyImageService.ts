@@ -32,6 +32,7 @@ import type {
 
 import { normalizarDiagnosticoParaNIH } from "./labelMapping";
 import { nihProvider } from "./providers/nihProvider";
+import { openiProvider } from "./providers/openiCloudProvider";
 import {
   obterFixtureAleatoria,
   AVISO_FIXTURE,
@@ -210,7 +211,7 @@ export async function buscarImagemRadiologica(
   // ⚠️ BLOQUEIO CRÍTICO: NUNCA usar fixture em produção
   if (process.env.NODE_ENV === "production") {
     logRadiology("⛔ PRODUÇÃO: Fixtures completamente bloqueadas");
-    // Pular toda lógica de fixture e ir direto para NIH real
+    // Pular toda lógica de fixture e ir direto para providers reais
   } else {
     // 1. Se modo fixture explícito em dev: usar fixture primeiro
     if (CONFIG.usarFixtureEmDesenvolvimento) {
@@ -237,7 +238,18 @@ export async function buscarImagemRadiologica(
     }
   }
 
-  // 2. Chamar provider NIH
+  // 2. Tentar Open-i PRIMEIRO (API pública, sem autenticação)
+  logRadiology("Tentando Open-i / Indiana University (API pública)");
+  const resultadoOpenI = await openiProvider.buscarImagemOpenI(parametros);
+
+  if (resultadoOpenI.sucesso && resultadoOpenI.imagem) {
+    logRadiology("✅ Imagem encontrada no Open-i");
+    return resultadoOpenI;
+  }
+
+  logRadiology("Open-i não encontrou imagem, tentando NIH");
+
+  // 3. Chamar provider NIH (requer autenticação/configuração)
   logRadiology("Chamando provider NIH");
   const resultadoNIH = await nihProvider.buscarImagemNIH(parametros);
 

@@ -1,0 +1,479 @@
+/* ==========================================================================
+   ExamesPage — "Biblioteca de Exames" (/centro-clinico/exames).
+   CSS ESCOPADO sob .exames-page (classes .ex-*). Não vaza estilos.
+   Espaçamento lateral vem do AppShell (.app-main). Estética premium azul-gelo.
+   ========================================================================== */
+
+.exames-page {
+  --ex-bg: #f3f8ff;
+  --ex-primary: #1f7bff;
+  --ex-primary-2: #4f9bff;
+  --ex-ink: #0b1f4d;
+  --ex-ink-2: #5c6d8a;
+  --ex-border: rgba(120, 170, 230, 0.24);
+
+  min-height: 100vh;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: var(--ex-ink);
+  background:
+    radial-gradient(1200px 600px at 82% -10%, rgba(192, 222, 255, 0.5), transparent 60%),
+    radial-gradient(900px 500px at -6% 112%, rgba(214, 235, 255, 0.5), transparent 60%),
+    var(--ex-bg);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.exames-page .ex-glass {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.74), rgba(232, 243, 255, 0.48));
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid var(--ex-border);
+  box-shadow: 0 18px 55px rgba(72, 116, 170, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  border-radius: 26px;
+}
+
+/* ---------- section head ---------- */
+.exames-page .ex-section-head { margin: 2px 2px 0; }
+.exames-page .ex-eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ex-primary);
+}
+.exames-page .ex-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ex-ink);
+}
+.exames-page .ex-sub {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--ex-ink-2);
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.exames-page .ex-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 30px;
+  padding: 46px 44px;
+  color: #fff;
+  background:
+    radial-gradient(720px 320px at 88% -30%, rgba(120, 190, 255, 0.55), transparent 60%),
+    linear-gradient(120deg, #1560d8 0%, #2e86ff 46%, #6aa8ff 100%);
+  box-shadow: 0 26px 70px rgba(31, 92, 190, 0.32);
+}
+.exames-page .ex-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+}
+.exames-page .ex-hero-badge i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #7dffc0;
+  box-shadow: 0 0 10px rgba(125, 255, 192, 0.9);
+}
+.exames-page .ex-hero h1 {
+  margin: 16px 0 0;
+  font-size: 42px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 850;
+  max-width: 720px;
+}
+.exames-page .ex-hero-sub {
+  margin: 14px 0 0;
+  max-width: 660px;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+}
+.exames-page .ex-hero-cards {
+  margin: 26px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.exames-page .ex-hero-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(8px);
+}
+.exames-page .ex-hero-card h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+}
+.exames-page .ex-hero-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ==========================================================================
+   SEÇÃO 1 — Regra de ouro
+   ========================================================================== */
+.exames-page .ex-gold {
+  padding: 32px;
+  border-radius: 28px;
+  margin-top: 16px;
+}
+.exames-page .ex-gold-quote {
+  margin: 0 0 18px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #12408a;
+  background: rgba(231, 243, 255, 0.7);
+  border: 1px solid var(--ex-border);
+  border-left: 4px solid var(--ex-primary);
+}
+.exames-page .ex-gold-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.exames-page .ex-gold-item {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid var(--ex-border);
+}
+.exames-page .ex-gold-item b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 850;
+  color: var(--ex-primary);
+}
+.exames-page .ex-gold-item span {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ex-ink-2);
+}
+.exames-page .ex-gold-alert {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(255, 249, 235, 0.9), rgba(255, 244, 214, 0.66));
+  border: 1px solid rgba(240, 190, 90, 0.42);
+}
+.exames-page .ex-gold-alert span {
+  flex: 0 0 auto;
+  font-size: 18px;
+}
+.exames-page .ex-gold-alert p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  font-weight: 650;
+  color: #8a6a1f;
+}
+
+/* ==========================================================================
+   SEÇÃO 2 — Cards de exames
+   ========================================================================== */
+.exames-page .ex-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 16px;
+  align-items: start;
+}
+.exames-page .ex-card {
+  padding: 22px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.exames-page .ex-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.exames-page .ex-card-ico {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  background: rgba(231, 243, 255, 0.9);
+  border: 1px solid var(--ex-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.exames-page .ex-card-head h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  color: var(--ex-ink);
+}
+.exames-page .ex-card-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.exames-page .ex-block-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #33568f;
+}
+.exames-page .ex-block-label span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--ex-primary);
+}
+.exames-page .ex-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 5px;
+}
+.exames-page .ex-list li {
+  position: relative;
+  padding-left: 15px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--ex-ink-2);
+}
+.exames-page .ex-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--ex-primary);
+  opacity: 0.5;
+}
+
+/* justificativa (fita) */
+.exames-page .ex-justify {
+  padding: 13px 16px;
+  border-radius: 16px;
+  background: rgba(231, 243, 255, 0.6);
+  border: 1px solid var(--ex-border);
+}
+.exames-page .ex-justify .ex-block-label { color: var(--ex-primary); margin-bottom: 6px; }
+.exames-page .ex-justify p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  font-style: italic;
+  font-weight: 600;
+  color: #2a4877;
+}
+
+/* pegadinhas */
+.exames-page .ex-traps {
+  padding: 13px 16px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(255, 249, 235, 0.86), rgba(255, 245, 220, 0.6));
+  border: 1px solid rgba(240, 190, 90, 0.38);
+}
+.exames-page .ex-traps .ex-block-label { color: #8a6a1f; }
+.exames-page .ex-traps .ex-block-label span { background: #e0a12a; }
+.exames-page .ex-traps .ex-list li { color: #7a5f27; }
+.exames-page .ex-traps .ex-list li::before { background: #e0a12a; opacity: 0.85; }
+
+/* ==========================================================================
+   SEÇÃO 3 — Exames por síndrome
+   ========================================================================== */
+.exames-page .ex-syn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+.exames-page .ex-syn-card {
+  padding: 18px 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.exames-page .ex-syn-card h3 {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--ex-ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.exames-page .ex-syn-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.exames-page .ex-syn-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: #23477f;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--ex-border);
+}
+
+/* ==========================================================================
+   SEÇÃO 4 — Pegadinhas gerais
+   ========================================================================== */
+.exames-page .ex-alerts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.exames-page .ex-alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255, 245, 245, 0.9), rgba(255, 236, 236, 0.66));
+  border: 1px solid rgba(244, 143, 143, 0.4);
+}
+.exames-page .ex-alert-ico {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #d9483b;
+  background: rgba(255, 220, 220, 0.85);
+  border: 1px solid rgba(220, 120, 120, 0.4);
+}
+.exames-page .ex-alert-ico svg { width: 16px; height: 16px; }
+.exames-page .ex-alert strong {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #8a2f27;
+}
+
+/* ==========================================================================
+   CTA final
+   ========================================================================== */
+.exames-page .ex-cta {
+  padding: 36px;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+.exames-page .ex-cta h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  color: var(--ex-ink);
+}
+.exames-page .ex-cta p {
+  margin: 2px 0 0;
+  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ex-ink-2);
+}
+.exames-page .ex-cta-actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.exames-page .ex-btn {
+  border: 0;
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 14.5px;
+  font-weight: 800;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.exames-page .ex-btn-primary {
+  color: #fff;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  box-shadow: 0 14px 30px rgba(31, 123, 255, 0.28);
+}
+.exames-page .ex-btn-ped {
+  color: #fff;
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  box-shadow: 0 14px 30px rgba(236, 72, 153, 0.28);
+}
+.exames-page .ex-btn-ghost {
+  color: var(--ex-primary);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--ex-border);
+}
+.exames-page .ex-btn-primary:hover,
+.exames-page .ex-btn-ped:hover,
+.exames-page .ex-btn-ghost:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media (max-width: 1180px) {
+  .exames-page .ex-grid { grid-template-columns: 1fr; }
+  .exames-page .ex-syn-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .exames-page .ex-gold-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .exames-page {
+    padding: 18px;
+    gap: 24px;
+  }
+  .exames-page .ex-hero { padding: 32px 22px; }
+  .exames-page .ex-hero h1 { font-size: 30px; }
+  .exames-page .ex-hero-cards,
+  .exames-page .ex-card-cols,
+  .exames-page .ex-syn-grid,
+  .exames-page .ex-gold-grid,
+  .exames-page .ex-alerts {
+    grid-template-columns: 1fr;
+  }
+}

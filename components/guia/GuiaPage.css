@@ -1,0 +1,377 @@
+/* ==========================================================================
+   GuiaPage — página "Guia OSCE" (estética do DashboardLanding).
+   Todo o CSS está ESCOPADO sob .guia-page para não afetar outras páginas.
+   O espaçamento lateral da sidebar vem do AppShell (.app-main). Aqui só
+   cuidamos do conteúdo.
+   ========================================================================== */
+
+.guia-page {
+  --g-bg: #f3f8ff;
+  --g-primary: #1f7bff;
+  --g-primary-2: #4f9bff;
+  --g-ink: #0b1f4d;
+  --g-ink-2: #5c6d8a;
+  --g-border: rgba(120, 170, 230, 0.24);
+
+  min-height: 100vh;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  color: var(--g-ink);
+  background:
+    radial-gradient(1200px 600px at 82% -10%, rgba(192, 222, 255, 0.5), transparent 60%),
+    radial-gradient(900px 500px at -6% 112%, rgba(214, 235, 255, 0.5), transparent 60%),
+    var(--g-bg);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------- glass primitive ---------- */
+.guia-page .g-glass {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.74), rgba(232, 243, 255, 0.48));
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid var(--g-border);
+  box-shadow: 0 18px 55px rgba(72, 116, 170, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  border-radius: 26px;
+}
+
+/* ---------- section header ---------- */
+.guia-page .g-section-head {
+  margin: 4px 2px 2px;
+}
+.guia-page .g-section-eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--g-primary);
+}
+.guia-page .g-section-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--g-ink);
+}
+.guia-page .g-section-sub {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--g-ink-2);
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.guia-page .g-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 30px;
+  padding: 54px 48px;
+  color: #fff;
+  background:
+    radial-gradient(720px 320px at 88% -30%, rgba(120, 190, 255, 0.55), transparent 60%),
+    linear-gradient(120deg, #1f7bff 0%, #2e86ff 42%, #6aa8ff 100%);
+  box-shadow: 0 26px 70px rgba(31, 92, 190, 0.34);
+}
+.guia-page .g-hero::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 62%);
+  z-index: -1;
+}
+.guia-page .g-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(8px);
+}
+.guia-page .g-hero-badge i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #7dffc0;
+  box-shadow: 0 0 10px rgba(125, 255, 192, 0.9);
+}
+.guia-page .g-hero h1 {
+  margin: 18px 0 0;
+  font-size: 46px;
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  font-weight: 850;
+}
+.guia-page .g-hero p {
+  margin: 16px 0 0;
+  max-width: 640px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ==========================================================================
+   Grade de cards genérica
+   ========================================================================== */
+.guia-page .g-grid {
+  display: grid;
+  gap: 18px;
+}
+.guia-page .g-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.guia-page .g-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.guia-page .g-card {
+  padding: 22px;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.guia-page .g-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(31, 123, 255, 0.3);
+  box-shadow: 0 24px 60px rgba(72, 116, 170, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.guia-page .g-card-ico {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--g-primary);
+  background: rgba(231, 243, 255, 0.9);
+  border: 1px solid var(--g-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.guia-page .g-card-ico svg {
+  width: 22px;
+  height: 22px;
+}
+.guia-page .g-card h3 {
+  margin: 2px 0 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--g-ink);
+}
+.guia-page .g-card p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--g-ink-2);
+}
+.guia-page .g-card .g-card-step {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--g-primary);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   Fluxo ideal do OSCE (etapas)
+   ========================================================================== */
+.guia-page .g-flow {
+  padding: 26px;
+  border-radius: 26px;
+}
+.guia-page .g-flow-track {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 12px;
+}
+.guia-page .g-flow-step {
+  position: relative;
+  padding: 16px 12px;
+  border-radius: 18px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid var(--g-border);
+  box-shadow: 0 10px 26px rgba(72, 116, 170, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.guia-page .g-flow-step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(72, 116, 170, 0.16);
+}
+.guia-page .g-flow-num {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 10px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(135deg, var(--g-primary-2), var(--g-primary));
+  box-shadow: 0 10px 22px rgba(31, 123, 255, 0.28);
+}
+.guia-page .g-flow-step span {
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--g-ink);
+  line-height: 1.25;
+}
+.guia-page .g-flow-step::after {
+  content: "→";
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  font-weight: 800;
+  color: rgba(31, 123, 255, 0.55);
+}
+.guia-page .g-flow-step:last-child::after {
+  display: none;
+}
+
+/* ==========================================================================
+   Dicas (cards curtos)
+   ========================================================================== */
+.guia-page .g-tip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 18px;
+}
+.guia-page .g-tip .g-tip-check {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #147a52;
+  background: rgba(220, 250, 235, 0.85);
+  border: 1px solid rgba(120, 210, 170, 0.4);
+}
+.guia-page .g-tip .g-tip-check svg {
+  width: 16px;
+  height: 16px;
+}
+.guia-page .g-tip strong {
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--g-ink);
+}
+
+/* ==========================================================================
+   CTA final
+   ========================================================================== */
+.guia-page .g-cta {
+  padding: 34px;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.guia-page .g-cta h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  color: var(--g-ink);
+}
+.guia-page .g-cta p {
+  margin: 2px 0 0;
+  font-size: 15px;
+  color: var(--g-ink-2);
+}
+.guia-page .g-cta-actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.guia-page .g-btn {
+  border: 0;
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 14.5px;
+  font-weight: 800;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.guia-page .g-btn-primary {
+  color: #fff;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  box-shadow: 0 14px 30px rgba(31, 123, 255, 0.28);
+}
+.guia-page .g-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px rgba(31, 123, 255, 0.34);
+}
+.guia-page .g-btn-ped {
+  color: #fff;
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  box-shadow: 0 14px 30px rgba(236, 72, 153, 0.28);
+}
+.guia-page .g-btn-ped:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px rgba(236, 72, 153, 0.34);
+}
+.guia-page .g-btn-ghost {
+  color: var(--g-primary);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--g-border);
+}
+.guia-page .g-btn-ghost:hover {
+  transform: translateY(-2px);
+  background: rgba(231, 243, 255, 0.95);
+}
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media (max-width: 1180px) {
+  .guia-page .g-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .guia-page .g-flow-track {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .guia-page .g-flow-step::after {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .guia-page {
+    padding: 18px;
+    gap: 20px;
+  }
+  .guia-page .g-hero {
+    padding: 36px 24px;
+  }
+  .guia-page .g-hero h1 {
+    font-size: 34px;
+  }
+  .guia-page .g-grid-3,
+  .guia-page .g-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .guia-page .g-flow-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

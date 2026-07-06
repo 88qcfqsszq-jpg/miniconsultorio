@@ -1,0 +1,614 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 Courier New;}}\fs20 import \{ CasoOSCEV2 \} from "@/types/caso-osce-v2";\par
+\par
+/**\par
+ * CASO 001 \u8212? S\u205?NDROME CORONARIANA AGUDA / IAM COM SUPRA DE ST\par
+ *\par
+ * Objetivo do modelo:\par
+ * - Servir como exemplo de caso cl\u237?nico completo, padronizado e autocontido.\par
+ * - Ser a fonte \u250?nica para paciente, chat, exame f\u237?sico, sinais vitais, ECG,\par
+ *   exames laboratoriais, imagem, conduta, rubrica e feedback.\par
+ * - Evitar duplicidade de campos como respostaPaciente/respostas_do_paciente,\par
+ *   sinais_vitais/sinaisVitaisCorretos, exame_fisico/exameFisicoCorreto etc.\par
+ */\par
+\par
+export const caso001SCA: CasoOSCEV2 = \{\par
+  id: "adulto-001-sca-iamcsst",\par
+  codigo: "CASO-001",\par
+  versao: "2.0.0",\par
+\par
+  metadados: \{\par
+    titulo: "Dor Tor\u225?cica \u8212? S\u237?ndrome Coronariana Aguda com Supra de ST",\par
+    sistema: "Cardiovascular",\par
+    tema: "Dor Tor\u225?cica",\par
+    subtema: "IAM com supra de ST",\par
+    nivel: "intermediario",\par
+    tipoEstacao: "integrada",\par
+    publico: "adulto",\par
+    tempoOSCEminutos: 15,\par
+    tags: [\par
+      "dor tor\u225?cica",\par
+      "SCA",\par
+      "IAMCSST",\par
+      "troponina",\par
+      "ECG",\par
+      "emerg\u234?ncia",\par
+      "cardiologia",\par
+    ],\par
+  \},\par
+\par
+  objetivoPedagogico:\par
+    "Reconhecer apresenta\u231?\u227?o t\u237?pica de s\u237?ndrome coronariana aguda, priorizar ECG em at\u233? 10 minutos, solicitar biomarcadores card\u237?acos, identificar crit\u233?rios de gravidade e indicar reperfus\u227?o urgente.",\par
+\par
+  dadosVisiveisAoEstudante: \{\par
+    nomePaciente: "Carlos Silva",\par
+    idade: 52,\par
+    sexo: "Masculino",\par
+    queixaPrincipal: "Dor no peito h\u225? 2 horas",\par
+    historiaBreve:\par
+      "Dor s\u250?bita em aperto no centro do peito, iniciada em repouso, associada a sudorese e falta de ar.",\par
+    contextoAtendimento: "Pronto atendimento / emerg\u234?ncia",\par
+  \},\par
+\par
+  paciente: \{\par
+    id: "pac-adulto-001",\par
+    nome: "Carlos Silva",\par
+    idade: 52,\par
+    sexo: "Masculino",\par
+    profissao: "Engenheiro",\par
+    estadoCivil: "Casado",\par
+    queixaPrincipal: "Dor no peito h\u225? 2 horas",\par
+    historiaDoencaAtual:\par
+      "Paciente relata dor tor\u225?cica s\u250?bita, retroesternal, em aperto, intensidade 8-9/10, iniciada em repouso h\u225? cerca de 2 horas, com irradia\u231?\u227?o para bra\u231?o esquerdo, sudorese fria, n\u225?usea leve e dispneia. N\u227?o melhora com repouso.",\par
+    antecedentes: [\par
+      "Hipertens\u227?o arterial sist\u234?mica",\par
+      "Dislipidemia n\u227?o controlada",\par
+      "Hist\u243?ria familiar de infarto precoce",\par
+    ],\par
+    medicamentosEmUso: ["Losartana 50 mg/dia"],\par
+    alergias: [],\par
+    habitos: \{\par
+      tabagismo: "Ex-tabagista, 20 ma\u231?os-ano, parou h\u225? 5 anos.",\par
+      alcool: "Uso social.",\par
+      atividadeFisica: "Sedent\u225?rio.",\par
+      dieta: "Rica em sal e gordura.",\par
+    \},\par
+    fatoresDeRisco: [\par
+      "Hipertens\u227?o",\par
+      "Dislipidemia",\par
+      "Sedentarismo",\par
+      "Hist\u243?ria familiar positiva",\par
+      "Sexo masculino",\par
+      "Idade > 45 anos",\par
+    ],\par
+  \},\par
+\par
+  respostasPaciente: \{\par
+    inicial: "Oi, doutor/doutora... estou com uma dor no peito que n\u227?o passa.",\par
+    localizacaoDor:\par
+      "\u201? bem no meio do peito, como se tivesse algo apertando forte.",\par
+    irradiacao:\par
+      "Vai para o bra\u231?o esquerdo e \u224?s vezes parece subir para o pesco\u231?o.",\par
+    intensidade: "Est\u225? muito forte, uns 8 ou 9 de 10.",\par
+    inicio: "Come\u231?ou h\u225? umas 2 horas, eu estava sentado assistindo TV.",\par
+    duracao: "N\u227?o passou desde que come\u231?ou.",\par
+    caracteristica:\par
+      "\u201? uma dor em aperto, pesada, diferente de qualquer dor que j\u225? senti.",\par
+    fatoresMelhora: "N\u227?o melhora quando eu fico quieto.",\par
+    fatoresPiora: "Parece piorar quando fico mais nervoso, mas n\u227?o muda muito com posi\u231?\u227?o.",\par
+    dispneia: "Sim, estou com falta de ar.",\par
+    sudorese: "Sim, estou suando frio.",\par
+    nauseaVomitos: "Estou enjoado, mas ainda n\u227?o vomitei.",\par
+    palpitacoes: "Sinto o cora\u231?\u227?o acelerado.",\par
+    sincope: "N\u227?o desmaiei.",\par
+    antecedentesCardiacos: "Nunca tive infarto, mas meu pai morreu de infarto.",\par
+    medicamentos:\par
+      "Tomo losartana para press\u227?o, mas \u224?s vezes esque\u231?o.",\par
+    usoNitrato: "Nunca usei rem\u233?dio debaixo da l\u237?ngua.",\par
+    alergias: "N\u227?o tenho alergia conhecida.",\par
+    fechamento:\par
+      "Doutor/doutora, isso pode ser infarto? Estou com muito medo.",\par
+  \},\par
+\par
+  dadosOcultosDoSistema: \{\par
+    diagnosticoPrincipal: "Infarto Agudo do Mioc\u225?rdio com Supra de ST \u8212? parede inferior",\par
+    diagnosticosDiferenciais: [\par
+      "Angina inst\u225?vel",\par
+      "Pericardite aguda",\par
+      "Tromboembolismo pulmonar",\par
+      "Dissec\u231?\u227?o aguda de aorta",\par
+      "Pneumot\u243?rax",\par
+      "Refluxo gastroesof\u225?gico",\par
+      "Dor musculoesquel\u233?tica",\par
+    ],\par
+    sindromesAssociadas: [\par
+      "S\u237?ndrome coronariana aguda",\par
+      "Dor tor\u225?cica de alto risco",\par
+      "Emerg\u234?ncia cardiovascular",\par
+    ],\par
+    perolasClinicas: [\par
+      "Dor tor\u225?cica t\u237?pica em repouso com sudorese e irradia\u231?\u227?o deve ser tratada como SCA at\u233? prova em contr\u225?rio.",\par
+      "ECG deve ser realizado e interpretado idealmente em at\u233? 10 minutos.",\par
+      "Troponina positiva confirma necrose, mas a conduta de reperfus\u227?o no IAMCSST n\u227?o deve aguardar troponina.",\par
+    ],\par
+  \},\par
+\par
+  sinaisVitais: \{\par
+    entrada: \{\par
+      pressaoArterial: "160/95 mmHg",\par
+      frequenciaCardiaca: 102,\par
+      frequenciaRespiratoria: 20,\par
+      temperatura: 36.8,\par
+      saturacaoOxigenio: 96,\par
+      glicemia: 110,\par
+      dorEscalaNumerica: 9,\par
+    \},\par
+    interpretacao:\par
+      "Paciente hipertenso e taquic\u225?rdico, com dor intensa e sinais auton\u244?micos; satura\u231?\u227?o preservada em ar ambiente.",\par
+    gravidade: "alto_risco",\par
+  \},\par
+\par
+  exameFisico: \{\par
+    geral: \{\par
+      estadoGeral:\par
+        "Paciente ansioso, sudoreico, p\u225?lido, em desconforto evidente pela dor.",\par
+      consciencia: "L\u250?cido e orientado em tempo, espa\u231?o e pessoa.",\par
+      fala: "Fala frases completas, mas interrompe por dor.",\par
+      perfusao: "Extremidades levemente frias, tempo de enchimento capilar < 3 segundos.",\par
+      hidratacao: "Mucosas normocoradas e hidratadas.",\par
+    \},\par
+    cardiovascular: \{\par
+      inspecaoPrecordial: "Sem abaulamentos ou cicatrizes vis\u237?veis.",\par
+      palpacaoPrecordial: "Ictus n\u227?o desviado; sem fr\u234?mitos.",\par
+      auscultaCardiaca:\par
+        "Bulhas r\u237?tmicas, normofon\u233?ticas, FC 102 bpm, sem sopros aud\u237?veis no momento.",\par
+      pulsos: "Pulsos perif\u233?ricos presentes e sim\u233?tricos.",\par
+      turgenciaJugular: "Ausente.",\par
+      edema: "Aus\u234?ncia de edema em membros inferiores.",\par
+    \},\par
+    respiratorio: \{\par
+      inspecaoTorax:\par
+        "Sem uso de musculatura acess\u243?ria; expansibilidade preservada.",\par
+      auscultaPulmonar:\par
+        "Murm\u250?rio vesicular presente bilateralmente, sem estertores, sem sibilos.",\par
+      percussao: "Som claro pulmonar bilateral.",\par
+    \},\par
+    abdomen: \{\par
+      inspecao: "Abdome plano, sem distens\u227?o.",\par
+      palpacao: "Indolor, sem massas palp\u225?veis.",\par
+      ausculta: "Ru\u237?dos hidroa\u233?reos presentes.",\par
+    \},\par
+    membros: \{\par
+      perfusao: "Extremidades frias discretamente.",\par
+      edema: "Ausente.",\par
+      panturrilhas: "Sem empastamento ou dor \u224? palpa\u231?\u227?o.",\par
+    \},\par
+    achadosChave: [\par
+      "Diaforese",\par
+      "Palidez",\par
+      "Taquicardia",\par
+      "Dor tor\u225?cica t\u237?pica",\par
+      "Aus\u234?ncia de sinais pulmonares que expliquem a dor",\par
+    ],\par
+  \},\par
+\par
+  exames: \{\par
+    laboratoriais: \{\par
+      hemograma: \{\par
+        solicitadoPor: ["hemograma", "hemograma completo"],\par
+        disponivel: true,\par
+        prioridade: "complementar",\par
+        interpretacao:\par
+          "Hemograma sem anemia ou plaquetopenia, com discreta leucocitose de estresse.",\par
+        valores: \{\par
+          hemacias: "4,82 mi/mm\u179?",\par
+          hemoglobina: "14,3 g/dL",\par
+          hematocrito: "42,1%",\par
+          vcm: "87,3 fL",\par
+          hcm: "29,7 pg",\par
+          chcm: "34,0 g/dL",\par
+          rdw: "13,1%",\par
+          leucocitos: "11.800/mm\u179?",\par
+          neutrofilos: "72%",\par
+          bastonetes: "4%",\par
+          segmentados: "68%",\par
+          linfocitos: "18%",\par
+          monocitos: "7%",\par
+          eosinofilos: "2%",\par
+          basofilos: "1%",\par
+          plaquetas: "252.000/mm\u179?",\par
+          vpm: "9,1 fL",\par
+        \},\par
+      \},\par
+\par
+      funcaoRenal: \{\par
+        solicitadoPor: ["ureia", "creatinina", "fun\u231?\u227?o renal"],\par
+        disponivel: true,\par
+        prioridade: "importante",\par
+        interpretacao:\par
+          "Fun\u231?\u227?o renal preservada, importante para planejamento terap\u234?utico e uso de contraste se cateterismo.",\par
+        valores: \{\par
+          ureia: "34 mg/dL",\par
+          creatinina: "1,0 mg/dL",\par
+          taxaFiltracaoGlomerularEstimada: "86 mL/min/1,73m\u178?",\par
+        \},\par
+      \},\par
+\par
+      eletrolitos: \{\par
+        solicitadoPor: ["s\u243?dio", "pot\u225?ssio", "eletr\u243?litos", "ionograma"],\par
+        disponivel: true,\par
+        prioridade: "importante",\par
+        interpretacao:\par
+          "Eletr\u243?litos sem altera\u231?\u245?es relevantes no momento.",\par
+        valores: \{\par
+          sodio: "139 mEq/L",\par
+          potassio: "4,1 mEq/L",\par
+          cloro: "102 mEq/L",\par
+          magnesio: "2,0 mg/dL",\par
+          calcio: "9,3 mg/dL",\par
+        \},\par
+      \},\par
+\par
+      marcadoresCardiacos: \{\par
+        solicitadoPor: ["troponina", "ckmb", "marcadores card\u237?acos"],\par
+        disponivel: true,\par
+        prioridade: "obrigatorio",\par
+        interpretacao:\par
+          "Troponina elevada, compat\u237?vel com necrose mioc\u225?rdica. Em contexto de supra de ST, confirma IAM com supra.",\par
+        valores: \{\par
+          troponinaI: "2,8 ng/mL",\par
+          ckmb: "32 ng/mL",\par
+          bnp: "96 pg/mL",\par
+        \},\par
+        valoresReferencia: \{\par
+          troponinaI: "< 0,04 ng/mL",\par
+          ckmb: "< 5 ng/mL",\par
+          bnp: "< 100 pg/mL",\par
+        \},\par
+      \},\par
+\par
+      marcadoresInflamatorios: \{\par
+        solicitadoPor: ["pcr", "vhs", "procalcitonina", "marcadores inflamat\u243?rios"],\par
+        disponivel: true,\par
+        prioridade: "opcional",\par
+        interpretacao:\par
+          "Sem padr\u227?o sugestivo de infec\u231?\u227?o bacteriana sist\u234?mica como causa principal do quadro.",\par
+        valores: \{\par
+          pcr: "0,8 mg/dL",\par
+          vhs: "14 mm/h",\par
+          procalcitonina: "0,05 ng/mL",\par
+        \},\par
+      \},\par
+\par
+      coagulograma: \{\par
+        solicitadoPor: ["tp", "inr", "ttpa", "coagulograma"],\par
+        disponivel: true,\par
+        prioridade: "importante",\par
+        interpretacao:\par
+          "Coagulograma basal sem contraindica\u231?\u227?o laboratorial evidente para estrat\u233?gia antitromb\u243?tica.",\par
+        valores: \{\par
+          tp: "12,4 s",\par
+          inr: "1,0",\par
+          ttpa: "31 s",\par
+          fibrinogenio: "320 mg/dL",\par
+          dDimero: "620 ng/mL",\par
+        \},\par
+      \},\par
+\par
+      gasometria: \{\par
+        solicitadoPor: ["gasometria", "gasometria arterial"],\par
+        disponivel: true,\par
+        prioridade: "opcional",\par
+        interpretacao:\par
+          "Sem insufici\u234?ncia respirat\u243?ria ou acidose no momento.",\par
+        valores: \{\par
+          ph: "7,40",\par
+          paco2: "39 mmHg",\par
+          pao2: "88 mmHg",\par
+          hco3: "24 mEq/L",\par
+          saturacaoO2: "96%",\par
+          lactato: "1,4 mmol/L",\par
+          be: "0",\par
+        \},\par
+      \},\par
+\par
+      funcaoHepatica: \{\par
+        solicitadoPor: ["tgo", "tgp", "fun\u231?\u227?o hep\u225?tica"],\par
+        disponivel: true,\par
+        prioridade: "opcional",\par
+        interpretacao: "Fun\u231?\u227?o hep\u225?tica sem altera\u231?\u245?es relevantes.",\par
+        valores: \{\par
+          tgo: "26 U/L",\par
+          tgp: "30 U/L",\par
+          fosfataseAlcalina: "88 U/L",\par
+          ggt: "34 U/L",\par
+          bilirrubinaTotal: "0,8 mg/dL",\par
+          bilirrubinaDireta: "0,2 mg/dL",\par
+          albumina: "4,2 g/dL",\par
+        \},\par
+      \},\par
+\par
+      urinaTipo1: \{\par
+        solicitadoPor: ["urina tipo 1", "eas", "sum\u225?rio de urina"],\par
+        disponivel: true,\par
+        prioridade: "opcional",\par
+        interpretacao: "Sem altera\u231?\u245?es urin\u225?rias relevantes.",\par
+        valores: \{\par
+          densidade: "1,020",\par
+          ph: "6,0",\par
+          proteina: "Ausente",\par
+          glicose: "Ausente",\par
+          cetonas: "Ausentes",\par
+          sangueHemoglobina: "Ausente",\par
+          nitrito: "Negativo",\par
+          esteraseLeucocitaria: "Negativa",\par
+          leucocitos: "< 5 p/campo",\par
+          hemacias: "< 3 p/campo",\par
+          bacterias: "Raras",\par
+        \},\par
+      \},\par
+    \},\par
+\par
+    ecg: \{\par
+      solicitadoPor: ["ecg", "eletrocardiograma"],\par
+      disponivel: true,\par
+      prioridade: "obrigatorio_imediato",\par
+      tempoIdeal: "At\u233? 10 minutos da chegada",\par
+      resultado:\par
+        "Ritmo sinusal, FC 102 bpm, supradesnivelamento do segmento ST em DII, DIII e aVF, com infradesnivelamento rec\u237?proco em DI e aVL.",\par
+      interpretacao:\par
+        "ECG compat\u237?vel com IAM com supra de ST de parede inferior.",\par
+      achadosEstruturados: \{\par
+        ritmo: "Sinusal",\par
+        frequencia: "102 bpm",\par
+        eixo: "Sem desvio importante",\par
+        supraST: ["DII", "DIII", "aVF"],\par
+        infraReciproco: ["DI", "aVL"],\par
+        ondaQPatologica: "Ausente no momento inicial",\par
+      \},\par
+    \},\par
+\par
+    imagem: \{\par
+      radiografiaTorax: \{\par
+        solicitadoPor: ["raio x de t\u243?rax", "rx t\u243?rax", "radiografia de t\u243?rax"],\par
+        disponivel: true,\par
+        prioridade: "opcional",\par
+        resultado:\par
+          "\u193?rea card\u237?aca sem aumento evidente. Campos pulmonares sem consolida\u231?\u245?es. Sem pneumot\u243?rax.",\par
+        interpretacao:\par
+          "Sem achados que expliquem dor tor\u225?cica; n\u227?o atrasa conduta de SCA.",\par
+      \},\par
+      ecocardiograma: \{\par
+        solicitadoPor: ["ecocardiograma", "eco"],\par
+        disponivel: true,\par
+        prioridade: "importante",\par
+        resultado:\par
+          "Hipocinesia de parede inferior, fra\u231?\u227?o de eje\u231?\u227?o estimada em 48%, sem derrame peric\u225?rdico.",\par
+        interpretacao:\par
+          "Altera\u231?\u227?o segmentar compat\u237?vel com evento isqu\u234?mico inferior.",\par
+      \},\par
+      angiografiaCoronariana: \{\par
+        solicitadoPor: ["cateterismo", "cineangiocoronariografia", "angiografia coronariana"],\par
+        disponivel: true,\par
+        prioridade: "terapeutico_urgente",\par
+        resultado:\par
+          "Oclus\u227?o aguda de art\u233?ria coron\u225?ria direita proximal.",\par
+        interpretacao:\par
+          "Les\u227?o culpada compat\u237?vel com IAM inferior; indicada reperfus\u227?o.",\par
+      \},\par
+    \},\par
+  \},\par
+\par
+  diagnostico: \{\par
+    principal: "Infarto Agudo do Mioc\u225?rdio com Supra de ST \u8212? parede inferior",\par
+    categoria: "S\u237?ndrome Coronariana Aguda",\par
+    criteriosQueSustentam: [\par
+      "Dor tor\u225?cica t\u237?pica em aperto, com dura\u231?\u227?o > 20 minutos",\par
+      "Irradia\u231?\u227?o para bra\u231?o esquerdo",\par
+      "Sudorese fria, n\u225?usea e dispneia",\par
+      "ECG com supra de ST em DII, DIII e aVF",\par
+      "Troponina elevada",\par
+    ],\par
+    diferenciais: [\par
+      \{\par
+        diagnostico: "Pericardite aguda",\par
+        contra: [\par
+          "Eleva\u231?\u227?o de ST n\u227?o \u233? difusa",\par
+          "Troponina claramente elevada",\par
+          "Dor n\u227?o melhora com inclina\u231?\u227?o anterior",\par
+        ],\par
+      \},\par
+      \{\par
+        diagnostico: "TEP",\par
+        contra: [\par
+          "Dor t\u237?pica isqu\u234?mica",\par
+          "ECG com supra inferior",\par
+          "Sem sinais de TVP ou hipoxemia importante",\par
+        ],\par
+      \},\par
+      \{\par
+        diagnostico: "Dissec\u231?\u227?o de aorta",\par
+        contra: [\par
+          "Sem dor migrat\u243?ria/lancinante para dorso",\par
+          "Pulsos sim\u233?tricos",\par
+          "Quadro e ECG favorecem IAM",\par
+        ],\par
+      \},\par
+    ],\par
+  \},\par
+\par
+  condutaEsperada: \{\par
+    imediata: [\par
+      "Reconhecer dor tor\u225?cica de alto risco.",\par
+      "Monitorizar paciente.",\par
+      "Solicitar e interpretar ECG em at\u233? 10 minutos.",\par
+      "Solicitar troponina e exames laboratoriais iniciais sem atrasar reperfus\u227?o.",\par
+      "Administrar AAS se n\u227?o houver contraindica\u231?\u227?o.",\par
+      "Considerar segundo antiagregante e anticoagula\u231?\u227?o conforme protocolo local.",\par
+      "Acionar cardiologia/hemodin\u226?mica imediatamente.",\par
+      "Indicar estrat\u233?gia de reperfus\u227?o urgente, preferencialmente angioplastia prim\u225?ria se dispon\u237?vel em tempo adequado.",\par
+      "Tratar dor e n\u225?usea conforme necessidade.",\par
+      "Oxig\u234?nio apenas se hipoxemia, desconforto respirat\u243?rio importante ou choque.",\par
+    ],\par
+    curtoPrazo: [\par
+      "Interna\u231?\u227?o em unidade coronariana.",\par
+      "Controle de fatores de risco.",\par
+      "Estatina de alta intensidade.",\par
+      "Betabloqueador se n\u227?o houver contraindica\u231?\u227?o.",\par
+      "IECA/BRA conforme estabilidade hemodin\u226?mica.",\par
+      "Ecocardiograma para avalia\u231?\u227?o de fun\u231?\u227?o ventricular.",\par
+    ],\par
+    evitar: [\par
+      "Dar alta.",\par
+      "Aguardar troponina para reperfus\u227?o diante de IAM com supra no ECG.",\par
+      "Tratar como ansiedade ou dor muscular sem ECG.",\par
+      "Atrasar transfer\u234?ncia para realizar exames n\u227?o priorit\u225?rios.",\par
+      "Usar anti-inflamat\u243?rio como se fosse pericardite sem excluir IAM.",\par
+    ],\par
+    destino: "Unidade coronariana / hemodin\u226?mica",\par
+  \},\par
+\par
+  criteriosGravidade: \{\par
+    classificacao: "emergencia",\par
+    sinais: [\par
+      "Dor tor\u225?cica t\u237?pica persistente",\par
+      "Sudorese fria",\par
+      "ECG com supra de ST",\par
+      "Troponina elevada",\par
+      "Necessidade de reperfus\u227?o urgente",\par
+    ],\par
+    recomendacao:\par
+      "Atendimento imediato, acionamento de cardiologia e reperfus\u227?o urgente.",\par
+  \},\par
+\par
+  errosCriticos: [\par
+    \{\par
+      erro: "N\u227?o solicitar ECG imediatamente",\par
+      gravidade: "critico",\par
+      impacto:\par
+        "Atrasa diagn\u243?stico de IAM com supra e reperfus\u227?o, aumentando mortalidade.",\par
+    \},\par
+    \{\par
+      erro: "N\u227?o reconhecer supra de ST",\par
+      gravidade: "critico",\par
+      impacto:\par
+        "Pode levar a tratamento inadequado e perda de janela terap\u234?utica.",\par
+    \},\par
+    \{\par
+      erro: "Aguardar troponina para decidir reperfus\u227?o",\par
+      gravidade: "grave",\par
+      impacto:\par
+        "No IAM com supra, ECG + cl\u237?nica j\u225? indicam reperfus\u227?o urgente.",\par
+    \},\par
+    \{\par
+      erro: "Dar alta ou tratar como dor inespec\u237?fica",\par
+      gravidade: "critico",\par
+      impacto: "Risco de morte e complica\u231?\u245?es arr\u237?tmicas/mec\u226?nicas.",\par
+    \},\par
+    \{\par
+      erro: "N\u227?o acionar cardiologia/hemodin\u226?mica",\par
+      gravidade: "grave",\par
+      impacto: "Atraso de cateterismo e reperfus\u227?o.",\par
+    \},\par
+  ],\par
+\par
+  rubrica: \{\par
+    totalPontos: 20,\par
+    dominios: [\par
+      \{\par
+        nome: "Comunica\u231?\u227?o e postura",\par
+        pontos: 2,\par
+        criterios: [\par
+          "Apresenta-se e confirma identifica\u231?\u227?o do paciente",\par
+          "Demonstra calma e prioridade diante de emerg\u234?ncia",\par
+          "Explica que o quadro exige investiga\u231?\u227?o imediata",\par
+        ],\par
+      \},\par
+      \{\par
+        nome: "Anamnese dirigida",\par
+        pontos: 4,\par
+        criterios: [\par
+          "Caracteriza dor: in\u237?cio, localiza\u231?\u227?o, dura\u231?\u227?o, intensidade e irradia\u231?\u227?o",\par
+          "Investiga sintomas associados: sudorese, dispneia, n\u225?usea, s\u237?ncope",\par
+          "Investiga fatores de risco cardiovascular",\par
+          "Diferencia dor isqu\u234?mica de causas pleur\u237?ticas, posicionais ou musculares",\par
+        ],\par
+      \},\par
+      \{\par
+        nome: "Exame f\u237?sico",\par
+        pontos: 3,\par
+        criterios: [\par
+          "Solicita sinais vitais completos",\par
+          "Avalia estado geral, perfus\u227?o e sinais de choque",\par
+          "Realiza ausculta card\u237?aca e pulmonar",\par
+        ],\par
+      \},\par
+      \{\par
+        nome: "Exames complementares",\par
+        pontos: 4,\par
+        criterios: [\par
+          "Solicita ECG imediatamente",\par
+          "Interpreta supra de ST em parede inferior",\par
+          "Solicita troponina e marcadores card\u237?acos",\par
+          "Solicita exames laboratoriais \u250?teis sem atrasar reperfus\u227?o",\par
+        ],\par
+      \},\par
+      \{\par
+        nome: "Racioc\u237?nio diagn\u243?stico",\par
+        pontos: 3,\par
+        criterios: [\par
+          "Formula hip\u243?tese principal de SCA/IAMCSST",\par
+          "Reconhece gravidade e necessidade de reperfus\u227?o",\par
+          "Considera diferenciais importantes sem atrasar conduta",\par
+        ],\par
+      \},\par
+      \{\par
+        nome: "Conduta",\par
+        pontos: 4,\par
+        criterios: [\par
+          "Monitoriza e aciona cardiologia/hemodin\u226?mica",\par
+          "Indica AAS e terapia antitromb\u243?tica conforme protocolo",\par
+          "Indica angioplastia/reperfus\u227?o urgente",\par
+          "Define interna\u231?\u227?o em unidade coronariana",\par
+        ],\par
+      \},\par
+    ],\par
+  \},\par
+\par
+  feedbackModelo: \{\par
+    acertosEsperados: [\par
+      "Reconheceu dor tor\u225?cica t\u237?pica de alto risco.",\par
+      "Priorizou ECG em at\u233? 10 minutos.",\par
+      "Interpretou supra de ST inferior.",\par
+      "Solicitou troponina e entendeu seu significado.",\par
+      "Acionou cardiologia/hemodin\u226?mica.",\par
+      "N\u227?o atrasou reperfus\u227?o.",\par
+    ],\par
+    errosComuns: [\par
+      "Focar em causas benignas antes de excluir SCA.",\par
+      "Pedir muitos exames antes do ECG.",\par
+      "Aguardar troponina para tomar decis\u227?o no IAM com supra.",\par
+      "N\u227?o reconhecer necessidade de transfer\u234?ncia urgente.",\par
+    ],\par
+    orientacoesPedagogicas: [\par
+      "Em dor tor\u225?cica de alto risco, ECG \u233? prioridade absoluta.",\par
+      "IAM com supra \u233? diagn\u243?stico eletrocardiogr\u225?fico em contexto cl\u237?nico compat\u237?vel.",\par
+      "Troponina ajuda, mas n\u227?o deve atrasar reperfus\u227?o.",\par
+      "Tempo \u233? m\u250?sculo: cada minuto de atraso aumenta dano mioc\u225?rdico.",\par
+    ],\par
+  \},\par
+\par
+  checklistOcultoExaminador: \{\par
+    oQueProfessorQuer:\par
+      "Atendimento \u225?gil, seguro e priorizado: reconhecer SCA, fazer ECG imediatamente, identificar IAM com supra inferior, solicitar marcadores card\u237?acos e acionar reperfus\u227?o urgente.",\par
+    itensObrigatorios: [\par
+      "ECG imediato",\par
+      "Interpreta\u231?\u227?o do supra de ST",\par
+      "Troponina",\par
+      "Monitoriza\u231?\u227?o",\par
+      "AAS/terapia antitromb\u243?tica conforme protocolo",\par
+      "Cardiologia/hemodin\u226?mica",\par
+      "Interna\u231?\u227?o em unidade coronariana",\par
+    ],\par
+  \},\par
+\};\par
+}

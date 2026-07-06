@@ -7,6 +7,7 @@ interface PainelDiagnosticoProps {
   onSubmit: (diagnostico: DiagnosticoFormulario) => void;
   onChange?: (diagnostico: DiagnosticoFormulario) => void;
   desabilitado?: boolean;
+  caso?: any;
 }
 
 export default function PainelDiagnostico({
@@ -81,31 +82,34 @@ export default function PainelDiagnostico({
     onSubmit(diagnostico);
   };
 
-  const inputClass = "w-full px-3.5 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-slate-100 text-slate-900 placeholder-slate-400 text-sm";
-  const labelClass = "block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide";
-
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 space-y-4">
-      <div className="flex items-center gap-2 pb-1">
-        <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-sm border border-slate-200">⚕️</div>
-        <h3 className="font-bold text-slate-800 text-sm">Diagnóstico e Conduta</h3>
-      </div>
+    <form onSubmit={handleSubmit} className="medix-diagnosis-card">
+      <header className="medix-diagnosis-header">
+        <div className="medix-diagnosis-icon">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M12 3v6m0 0a4 4 0 004 4h.5a3.5 3.5 0 100-7M12 9a4 4 0 01-4 4h-.5a3.5 3.5 0 110-7M12 13v3a4 4 0 004 4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+        <div>
+          <h2>Diagnóstico e Conduta</h2>
+          <p>Hipóteses, exames e plano clínico</p>
+        </div>
+      </header>
 
-      <div>
-        <label className={labelClass}>Hipótese Principal <span className="text-red-500">*</span></label>
+      <div className="medix-diagnosis-section">
+        <label>Hipótese Principal *</label>
         <input
           type="text"
           value={diagnostico.hipotesePrincipal}
           onChange={(e) => setDiagnostico((prev) => ({ ...prev, hipotesePrincipal: e.target.value }))}
           placeholder="Ex: Síndrome Coronariana Aguda"
           disabled={desabilitado}
-          className={inputClass}
         />
       </div>
 
-      <div>
-        <label className={labelClass}>Diagnósticos Diferenciais</label>
-        <div className="flex gap-2 mb-2">
+      <div className="medix-diagnosis-section">
+        <label>Diagnósticos Diferenciais</label>
+        <div className="medix-diagnosis-inline">
           <input
             type="text"
             value={novoDiferencial}
@@ -113,26 +117,24 @@ export default function PainelDiagnostico({
             onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAdicionarDiferencial(); } }}
             placeholder="Adicionar diferencial..."
             disabled={desabilitado}
-            className={inputClass}
           />
-          <button type="button" onClick={handleAdicionarDiferencial} disabled={desabilitado || !novoDiferencial.trim()}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-semibold py-2.5 px-3.5 rounded-xl text-sm shrink-0 transition-colors">
+          <button type="button" onClick={handleAdicionarDiferencial} disabled={desabilitado || !novoDiferencial.trim()} className="medix-diagnosis-add">
             +
           </button>
         </div>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="medix-diagnosis-list">
           {diagnostico.diagnosticosDisferenciais.map((diff, idx) => (
-            <span key={idx} className="inline-flex items-center gap-1 bg-blue-50 text-blue-800 border border-blue-200 px-2.5 py-1 rounded-full text-xs font-semibold">
+            <span key={idx} className="medix-diagnosis-chip">
               {diff}
-              <button type="button" onClick={() => handleRemoverDiferencial(idx)} disabled={desabilitado} className="text-blue-400 hover:text-blue-700 font-bold ml-0.5">×</button>
+              <button type="button" onClick={() => handleRemoverDiferencial(idx)} disabled={desabilitado} className="medix-diagnosis-chip-x">×</button>
             </span>
           ))}
         </div>
       </div>
 
-      <div>
-        <label className={labelClass}>Exames Indicados</label>
-        <div className="flex gap-2 mb-2">
+      <div className="medix-diagnosis-section">
+        <label>Exames Indicados</label>
+        <div className="medix-diagnosis-inline">
           <input
             type="text"
             value={novoExame}
@@ -140,40 +142,33 @@ export default function PainelDiagnostico({
             onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAdicionarExame(); } }}
             placeholder="ECG, Troponina, Raio X..."
             disabled={desabilitado}
-            className={inputClass}
           />
-          <button type="button" onClick={handleAdicionarExame} disabled={desabilitado || !novoExame.trim()}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-semibold py-2.5 px-3.5 rounded-xl text-sm shrink-0 transition-colors">
+          <button type="button" onClick={handleAdicionarExame} disabled={desabilitado || !novoExame.trim()} className="medix-diagnosis-add">
             +
           </button>
         </div>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="medix-diagnosis-list">
           {diagnostico.examesIndicados.map((exame, idx) => (
-            <span key={idx} className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded-full text-xs font-semibold">
+            <span key={idx} className="medix-diagnosis-chip medix-diagnosis-chip-green">
               {exame}
-              <button type="button" onClick={() => handleRemoverExame(idx)} disabled={desabilitado} className="text-emerald-400 hover:text-emerald-700 font-bold ml-0.5">×</button>
+              <button type="button" onClick={() => handleRemoverExame(idx)} disabled={desabilitado} className="medix-diagnosis-chip-x">×</button>
             </span>
           ))}
         </div>
       </div>
 
-      <div>
-        <label className={labelClass}>Conduta <span className="text-red-500">*</span></label>
+      <div className="medix-diagnosis-section">
+        <label>Conduta *</label>
         <textarea
           value={diagnostico.conduta}
           onChange={(e) => setDiagnostico((prev) => ({ ...prev, conduta: e.target.value }))}
           placeholder="Plano de tratamento, encaminhamentos, acompanhamento..."
           disabled={desabilitado}
-          className={inputClass}
           rows={3}
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={desabilitado}
-        className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-bold py-2.5 px-4 rounded-xl transition-all text-sm shadow-sm active:scale-[0.98]"
-      >
+      <button type="submit" disabled={desabilitado} className="medix-diagnosis-submit">
         Finalizar Atendimento e Ver Feedback
       </button>
     </form>

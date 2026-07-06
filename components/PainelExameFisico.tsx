@@ -5,6 +5,7 @@ import { ManobraRealizada } from "@/lib/types";
 import BonecoVirtual from "@/components/BonecoVirtual";
 import MenuManobrasBoneco from "@/components/MenuManobrasBoneco";
 import ModalMembrosInferiores from "@/components/ModalMembrosInferiores";
+import ExameFisicoAdultoVisual from "@/components/ExameFisicoAdultoVisual";
 import { type Regiao } from "@/data/regioesBoneco";
 import { type PadraoMembrosInferiores } from "@/lib/membros-inferiores/types";
 
@@ -82,6 +83,18 @@ export default function PainelExameFisico({
   // Modal Membros Inferiores
   const [modalMembrosAberto, setModalMembrosAberto] = useState(false);
   const padraoMembros = (caso?.membrosInferiores?.padrao || "normal") as PadraoMembrosInferiores;
+
+  // Modal Exame Físico Visual (mesmo padrão do pediátrico)
+  const [modalVisualAberto, setModalVisualAberto] = useState(false);
+
+  // Registra achado do exame visual e confirma envio ao payload/HealthBench
+  const handleAchadoVisual = (m: ManobraRealizada) => {
+    onNovaManobra(m);
+    console.log(
+      "[OSCE ADULT PHYSICAL EXAM PAYLOAD] achados adultos enviados:",
+      `${m.textDigitado}: ${m.resposta}`
+    );
+  };
 
   const handleManobraBoneco = async (textoManobra: string) => {
     if (!regiaoSelecionada || !textoManobra) return;
@@ -281,6 +294,14 @@ export default function PainelExameFisico({
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-5">
+      {/* Botão Exame Físico Visual (mesmo padrão do pediátrico) */}
+      <button
+        onClick={() => setModalVisualAberto(true)}
+        className="w-full py-3 px-4 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-2 active:scale-[0.99]"
+      >
+        🖼️ Exame Físico Visual
+      </button>
+
       {/* Boneco Virtual 2D */}
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(380px,520px)_minmax(280px,1fr)] gap-6 items-start">
         <BonecoVirtual
@@ -382,6 +403,16 @@ export default function PainelExameFisico({
         <ModalMembrosInferiores
           padrao={padraoMembros}
           onClose={() => setModalMembrosAberto(false)}
+        />
+      )}
+
+      {/* Modal Exame Físico Visual (layout idêntico ao pediátrico) */}
+      {modalVisualAberto && (
+        <ExameFisicoAdultoVisual
+          caso={caso}
+          achadosEncontrados={manobrasSolicitadas}
+          onAchadoEncontrado={handleAchadoVisual}
+          onFechar={() => setModalVisualAberto(false)}
         />
       )}
     </div>

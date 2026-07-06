@@ -8,6 +8,9 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuAberto, setMenuAberto] = useState(false);
 
+  // Oculta o navbar global apenas na pré-visualização do dashboard (para teste).
+  if (pathname === "/dashboard-landing") return null;
+
   const isActive = (href: string) => pathname === href;
 
   const links = [

@@ -1,0 +1,1501 @@
+/* ==========================================================================
+   Consultório MEDIX — tema visual da página de atendimento (ISOLADO)
+   Escopado sob .consultorio-medix. NÃO altera lógica; apenas visual.
+   ========================================================================== */
+
+.consultorio-medix {
+  --medix-bg: #eef7ff;
+  --medix-card: rgba(246, 251, 255, 0.78);
+  --medix-card-strong: rgba(255, 255, 255, 0.88);
+  --medix-border: rgba(139, 190, 245, 0.32);
+  --medix-primary: #2e86ff;
+  --medix-primary-2: #4aa3ff;
+  --medix-ink: #0b1f4d;
+  --medix-muted: #5c6d8a;
+  --medix-soft: #e7f3ff;
+
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(173, 218, 255, 0.3), transparent 34%),
+    linear-gradient(180deg, #eef7ff 0%, #f7fbff 100%);
+  color: var(--medix-ink);
+}
+
+/* O espaçamento à esquerda para a sidebar agora vem do AppShell (.app-main).
+   Não reservamos padding aqui para evitar deslocamento duplo. */
+
+/* Compat.: se a Navbar global existir nesta rota, mantém oculta (hoje já não
+   é renderizada — a navegação é a AppSidebar global). */
+body.is-consultorio-medix-page > nav {
+  display: none !important;
+}
+
+/* ---------- Topbar MEDIX própria ---------- */
+.consultorio-medix-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 35;
+  height: 64px;
+  padding: 12px 24px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  background: rgba(238, 247, 255, 0.74);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border-bottom: 1px solid rgba(139, 190, 245, 0.22);
+}
+.consultorio-medix-topbar-spacer {
+  flex: 1;
+}
+.consultorio-medix-user {
+  height: 38px;
+  padding: 0 14px 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border-radius: 999px;
+  background: rgba(246, 251, 255, 0.86);
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  box-shadow: 0 10px 28px rgba(72, 116, 170, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  color: var(--medix-ink);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.consultorio-medix-google {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #1f7bff;
+  font-weight: 900;
+  font-size: 14px;
+  box-shadow: inset 0 0 0 1px rgba(139, 190, 245, 0.3);
+}
+.consultorio-medix-email {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.consultorio-medix-chevron {
+  color: #2e86ff;
+  font-size: 14px;
+  line-height: 1;
+}
+.consultorio-medix-top-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  background: rgba(246, 251, 255, 0.86);
+  color: #315f9f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(72, 116, 170, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease,
+    color 180ms ease;
+}
+.consultorio-medix-top-icon:hover {
+  transform: translateY(-1px);
+  color: #1f7bff;
+  border-color: rgba(31, 123, 255, 0.38);
+  box-shadow: 0 14px 34px rgba(72, 116, 170, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+.consultorio-medix-top-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Sidebar global MEDIX (recolhida, fixa) ---------- */
+.medix-gsb {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  bottom: 16px;
+  width: 82px;
+  z-index: 60;
+  display: none; /* aparece só no desktop */
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 8px 14px;
+  gap: 6px;
+  background: linear-gradient(180deg, rgba(241, 248, 255, 0.94), rgba(226, 241, 255, 0.78));
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid var(--medix-border);
+  border-radius: 30px;
+  box-shadow: 0 22px 60px rgba(72, 116, 170, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+@media (min-width: 1024px) {
+  .medix-gsb {
+    display: flex;
+  }
+}
+.medix-gsb-logo {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.medix-gsb-logo img {
+  width: 44px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(31, 123, 255, 0.18));
+}
+.medix-gsb-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+  align-items: center;
+}
+.medix-gsb-item {
+  width: 48px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+.medix-gsb-item:hover {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: var(--medix-border);
+  transform: translateY(-1px);
+}
+.medix-gsb-item.active {
+  background: rgba(46, 134, 255, 0.14);
+  border-color: rgba(46, 134, 255, 0.28);
+}
+.medix-gsb-item img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  pointer-events: none;
+}
+.medix-gsb-journey {
+  width: 60px;
+  min-height: 60px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid var(--medix-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 6px;
+}
+.medix-gsb-journey .lvl {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--medix-primary);
+}
+.medix-gsb-journey .bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(120, 170, 230, 0.22);
+  overflow: hidden;
+}
+.medix-gsb-journey .bar > i {
+  display: block;
+  height: 100%;
+  width: 72%;
+  background: linear-gradient(90deg, var(--medix-primary-2), var(--medix-primary));
+}
+
+/* ---------- Card glass genérico ---------- */
+.consultorio-medix .medix-card {
+  background: var(--medix-card);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid var(--medix-border);
+  box-shadow: 0 18px 50px rgba(72, 116, 170, 0.1);
+  border-radius: 22px;
+}
+
+/* ---------- Menu de atendimento ---------- */
+.consultorio-medix .attendance-panel {
+  background: var(--medix-card);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid var(--medix-border);
+  box-shadow: 0 18px 50px rgba(72, 116, 170, 0.1);
+  border-radius: 22px;
+  padding: 16px;
+}
+.consultorio-medix .attendance-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--medix-muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.consultorio-medix .attendance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.consultorio-medix .attendance-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--medix-ink);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--medix-border);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease,
+    box-shadow 0.18s ease, color 0.18s ease;
+}
+.consultorio-medix .attendance-item:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(46, 134, 255, 0.28);
+  transform: translateX(2px);
+}
+.consultorio-medix .attendance-item.active {
+  background: linear-gradient(135deg, var(--medix-primary-2), var(--medix-primary));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 12px 26px rgba(31, 123, 255, 0.28);
+}
+.consultorio-medix .attendance-item-ico {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+}
+.consultorio-medix .attendance-item-ico img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+/* Item ativo com ícone um pouco maior, para reforçar o destaque. */
+.consultorio-medix .attendance-item.active .attendance-item-ico {
+  flex-basis: 44px;
+}
+.consultorio-medix .attendance-item.active .attendance-item-ico,
+.consultorio-medix .attendance-item.active .attendance-item-ico img {
+  width: 44px;
+  height: 44px;
+}
+
+/* ==========================================================================
+   PASSO 2 — Card de chat (ChatPaciente) no visual MEDIX
+   ========================================================================== */
+.consultorio-medix .medix-chat-card {
+  min-height: calc(100vh - 150px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 26px;
+  overflow: hidden;
+  background: rgba(246, 251, 255, 0.78);
+  border: 1px solid rgba(139, 190, 245, 0.32);
+  box-shadow: 0 18px 50px rgba(72, 116, 170, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+.consultorio-medix .medix-chat-header {
+  min-height: 92px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  color: #ffffff;
+}
+.consultorio-medix .medix-patient-avatar-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 22px rgba(20, 80, 180, 0.18);
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+}
+.consultorio-medix .medix-patient-info {
+  min-width: 0;
+  flex: 1;
+}
+.consultorio-medix .medix-patient-info h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+.consultorio-medix .medix-patient-info p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.86);
+}
+.consultorio-medix .medix-online-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+}
+.consultorio-medix .medix-online-status span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #33e58d;
+  box-shadow: 0 0 10px rgba(51, 229, 141, 0.75);
+}
+.consultorio-medix .medix-chat-messages {
+  flex: 1;
+  min-height: 360px;
+  padding: 28px 28px 22px;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 30% 10%, rgba(173, 218, 255, 0.22), transparent 34%),
+    rgba(246, 251, 255, 0.42);
+}
+.consultorio-medix .medix-message {
+  max-width: 58%;
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  font-weight: 600;
+}
+.consultorio-medix .medix-message p {
+  margin: 0;
+}
+.consultorio-medix .medix-message-time {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+.consultorio-medix .medix-message.patient {
+  margin-right: auto;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(139, 190, 245, 0.28);
+  color: #0b1f4d;
+  box-shadow: 0 10px 28px rgba(72, 116, 170, 0.08);
+}
+.consultorio-medix .medix-message.student {
+  margin-left: auto;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(31, 123, 255, 0.22);
+}
+.consultorio-medix .medix-message.medix-typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  max-width: max-content;
+}
+.consultorio-medix .medix-chat-input-row {
+  display: grid;
+  grid-template-columns: 1fr 52px 92px;
+  gap: 12px;
+  padding: 18px 22px 14px;
+  background: rgba(246, 251, 255, 0.72);
+  border-top: 1px solid rgba(139, 190, 245, 0.24);
+}
+.consultorio-medix .medix-chat-input-row input,
+.consultorio-medix .medix-chat-input-row textarea {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  background: rgba(255, 255, 255, 0.82);
+  color: #0b1f4d;
+  padding: 0 16px;
+  outline: none;
+  font-size: 14px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.consultorio-medix .medix-chat-input-row input:focus,
+.consultorio-medix .medix-chat-input-row textarea:focus {
+  border-color: rgba(31, 123, 255, 0.55);
+  box-shadow: 0 0 0 4px rgba(31, 123, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.consultorio-medix .medix-mic-button {
+  width: 52px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  background: rgba(255, 255, 255, 0.82);
+  color: #1f7bff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.consultorio-medix .medix-mic-button.medix-mic-active {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.consultorio-medix .medix-send-button {
+  height: 48px;
+  border-radius: 14px;
+  border: 0;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(31, 123, 255, 0.24);
+}
+.consultorio-medix .medix-send-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.consultorio-medix .medix-chat-note {
+  margin: 0 22px 22px;
+  padding: 16px 20px;
+  border-radius: 18px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(139, 190, 245, 0.28);
+  color: #5c6d8a;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 10px 28px rgba(72, 116, 170, 0.07);
+}
+.consultorio-medix .medix-chat-note p {
+  margin: 0 0 8px;
+}
+.consultorio-medix .medix-chat-note strong {
+  color: #466aa2;
+  font-size: 15px;
+}
+@media (max-width: 900px) {
+  .consultorio-medix .medix-chat-card {
+    min-height: auto;
+  }
+  .consultorio-medix .medix-chat-header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .consultorio-medix .medix-online-status {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .consultorio-medix .medix-message {
+    max-width: 86%;
+  }
+  .consultorio-medix .medix-chat-input-row {
+    grid-template-columns: 1fr 48px;
+  }
+  .consultorio-medix .medix-send-button {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================================
+   PASSO 3 — Painel SOAP (FormularioSOAP) no visual MEDIX
+   ========================================================================== */
+.consultorio-medix .medix-soap-card {
+  height: 100%;
+  min-height: calc(100vh - 150px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 26px;
+  padding: 22px;
+  background: rgba(246, 251, 255, 0.78);
+  border: 1px solid rgba(139, 190, 245, 0.32);
+  box-shadow: 0 18px 50px rgba(72, 116, 170, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+.consultorio-medix .medix-soap-header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 22px;
+}
+.consultorio-medix .medix-soap-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: rgba(231, 243, 255, 0.86);
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  color: #1f7bff;
+  box-shadow: 0 10px 26px rgba(72, 116, 170, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.consultorio-medix .medix-soap-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.consultorio-medix .medix-soap-header h2 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0b1f4d;
+}
+.consultorio-medix .medix-soap-header p {
+  margin: 7px 0 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5c6d8a;
+}
+.consultorio-medix .medix-soap-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+.consultorio-medix .medix-soap-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.consultorio-medix .medix-soap-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: #0b1f4d;
+}
+.consultorio-medix .medix-soap-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  box-shadow: 0 8px 16px rgba(31, 123, 255, 0.2);
+}
+.consultorio-medix .medix-soap-label strong {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0b1f4d;
+  white-space: nowrap;
+}
+.consultorio-medix .medix-soap-label small {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7b95;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.consultorio-medix .medix-soap-field textarea {
+  width: 100%;
+  min-height: 112px;
+  resize: vertical;
+  border-radius: 16px;
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  background: rgba(255, 255, 255, 0.72);
+  color: #0b1f4d;
+  padding: 14px 15px;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.55;
+  font-weight: 500;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 20px rgba(72, 116, 170, 0.045);
+}
+.consultorio-medix .medix-soap-field textarea::placeholder {
+  color: rgba(92, 109, 138, 0.68);
+}
+.consultorio-medix .medix-soap-field textarea:focus {
+  border-color: rgba(31, 123, 255, 0.55);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 0 0 4px rgba(31, 123, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+.consultorio-medix .medix-soap-field textarea:disabled {
+  opacity: 0.7;
+}
+@media (max-width: 1100px) {
+  .consultorio-medix .medix-soap-card {
+    min-height: auto;
+  }
+  .consultorio-medix .medix-soap-field textarea {
+    min-height: 96px;
+  }
+}
+
+/* ==========================================================================
+   PASSO 4 — Painel Diagnóstico e Conduta no visual MEDIX
+   ========================================================================== */
+.consultorio-medix .medix-diagnosis-card {
+  border-radius: 24px;
+  padding: 20px;
+  background: rgba(246, 251, 255, 0.78);
+  border: 1px solid rgba(139, 190, 245, 0.32);
+  box-shadow: 0 18px 50px rgba(72, 116, 170, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+.consultorio-medix .medix-diagnosis-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.consultorio-medix .medix-diagnosis-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: rgba(231, 243, 255, 0.86);
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  color: #1f7bff;
+  box-shadow: 0 10px 26px rgba(72, 116, 170, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.consultorio-medix .medix-diagnosis-icon svg {
+  width: 19px;
+  height: 19px;
+}
+.consultorio-medix .medix-diagnosis-header h2 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0b1f4d;
+}
+.consultorio-medix .medix-diagnosis-header p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5c6d8a;
+}
+.consultorio-medix .medix-diagnosis-section {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 14px;
+}
+.consultorio-medix .medix-diagnosis-section label {
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #425c88;
+}
+.consultorio-medix .medix-diagnosis-section input,
+.consultorio-medix .medix-diagnosis-section textarea {
+  width: 100%;
+  min-height: 42px;
+  border-radius: 13px;
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  background: rgba(255, 255, 255, 0.74);
+  color: #0b1f4d;
+  padding: 0 13px;
+  outline: none;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 20px rgba(72, 116, 170, 0.04);
+}
+.consultorio-medix .medix-diagnosis-section textarea {
+  min-height: 86px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  resize: vertical;
+}
+.consultorio-medix .medix-diagnosis-section input::placeholder,
+.consultorio-medix .medix-diagnosis-section textarea::placeholder {
+  color: rgba(92, 109, 138, 0.62);
+}
+.consultorio-medix .medix-diagnosis-section input:focus,
+.consultorio-medix .medix-diagnosis-section textarea:focus {
+  border-color: rgba(31, 123, 255, 0.55);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 0 0 4px rgba(31, 123, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+.consultorio-medix .medix-diagnosis-inline {
+  display: grid;
+  grid-template-columns: 1fr 42px;
+  gap: 8px;
+  align-items: center;
+}
+.consultorio-medix .medix-diagnosis-add {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  border: 0;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(31, 123, 255, 0.2);
+}
+.consultorio-medix .medix-diagnosis-add:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.consultorio-medix .medix-diagnosis-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+}
+.consultorio-medix .medix-diagnosis-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(231, 243, 255, 0.78);
+  border: 1px solid rgba(139, 190, 245, 0.3);
+  color: #254c86;
+  font-size: 12px;
+  font-weight: 750;
+}
+.consultorio-medix .medix-diagnosis-chip-green {
+  background: rgba(220, 250, 235, 0.8);
+  border-color: rgba(120, 210, 170, 0.4);
+  color: #147a52;
+}
+.consultorio-medix .medix-diagnosis-chip-x {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  opacity: 0.55;
+  font-weight: 900;
+  cursor: pointer;
+  line-height: 1;
+}
+.consultorio-medix .medix-diagnosis-chip-x:hover {
+  opacity: 1;
+}
+.consultorio-medix .medix-diagnosis-submit {
+  margin-top: 18px;
+  width: 100%;
+  height: 46px;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(31, 123, 255, 0.24);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.consultorio-medix .medix-diagnosis-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 34px rgba(31, 123, 255, 0.3);
+}
+.consultorio-medix .medix-diagnosis-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ==========================================================================
+   PASSO 5 — Refinamento de layout + card Sinais Vitais no visual MEDIX
+   ========================================================================== */
+.consultorio-medix,
+.consultorio-medix * {
+  box-sizing: border-box;
+}
+.consultorio-medix {
+  overflow-x: hidden;
+}
+
+/* card Sinais Vitais */
+.consultorio-medix .medix-vitals-card {
+  margin-top: 18px;
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(246, 251, 255, 0.72);
+  border: 1px solid rgba(139, 190, 245, 0.3);
+  box-shadow: 0 14px 34px rgba(72, 116, 170, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+.consultorio-medix .medix-vitals-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 14px;
+}
+.consultorio-medix .medix-vitals-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: rgba(231, 243, 255, 0.86);
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  color: #1f7bff;
+  box-shadow: 0 10px 24px rgba(72, 116, 170, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.consultorio-medix .medix-vitals-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.consultorio-medix .medix-vitals-header h3 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #0b1f4d;
+}
+.consultorio-medix .medix-vitals-header p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5c6d8a;
+}
+.consultorio-medix .medix-vitals-request {
+  width: 100%;
+  min-height: 42px;
+  border-radius: 13px;
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  background: rgba(255, 255, 255, 0.72);
+  color: #1f7bff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+.consultorio-medix .medix-vitals-request:hover:not(:disabled) {
+  background: rgba(231, 243, 255, 0.9);
+  border-color: rgba(31, 123, 255, 0.4);
+  transform: translateY(-1px);
+}
+.consultorio-medix .medix-vitals-request.coletado {
+  background: rgba(220, 250, 235, 0.85);
+  border-color: rgba(120, 210, 170, 0.45);
+  color: #147a52;
+  cursor: default;
+}
+.consultorio-medix .medix-vitals-request:disabled {
+  cursor: not-allowed;
+}
+.consultorio-medix .medix-vitals-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.consultorio-medix .medix-vital-item {
+  min-height: 62px;
+  border-radius: 16px;
+  padding: 11px 12px;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(139, 190, 245, 0.26);
+  box-shadow: 0 8px 20px rgba(72, 116, 170, 0.055), inset 0 1px 0 rgba(255, 255, 255, 0.88);
+}
+.consultorio-medix .medix-vital-item span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 10px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5c6d8a;
+}
+.consultorio-medix .medix-vital-item strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #0b1f4d;
+  word-break: break-word;
+}
+
+/* harmonizar altura das colunas (aplica ao grid Tailwind existente) */
+@media (min-width: 1024px) {
+  .consultorio-medix .attendance-panel {
+    min-height: 0;
+  }
+}
+
+/* ==========================================================================
+   PASSO 6 — Ajuste fino visual (overrides p/ aproximar do mockup)
+   ========================================================================== */
+
+/* T2 — painel Atendimento mais leve */
+.consultorio-medix .attendance-panel {
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(246, 251, 255, 0.68);
+  border: 1px solid rgba(139, 190, 245, 0.24);
+  box-shadow: 0 14px 34px rgba(72, 116, 170, 0.075);
+}
+/* Card compacto (altura fixa) com ícone junto à borda esquerda e texto logo
+   após — padrão do menu escuro de referência. */
+.consultorio-medix .attendance-item {
+  min-height: 72px;
+  height: 72px;
+  border-radius: 12px;
+  /* Ícone junto à borda esquerda; texto logo após — alinhado à esquerda,
+     conjunto compacto como no menu escuro de referência. */
+  padding: 10px 16px 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 12px;
+  /* "Exames Laboratoriais" quebra em duas linhas sem estourar o card. */
+  line-height: 1.25;
+}
+.consultorio-medix .attendance-item-ico,
+.consultorio-medix .attendance-item-ico img {
+  width: 44px;
+  height: 44px;
+}
+.consultorio-medix .attendance-item-ico {
+  flex: 0 0 44px;
+  margin: 0;
+}
+/* Ícone mais "marcante" — a escala preenche a margem interna vazia dos PNGs,
+   aproximando o glifo da borda e do texto, SEM aumentar o botão nem deslocar o
+   texto (transform não afeta o layout/box do ícone). */
+.consultorio-medix .attendance-item-ico img {
+  transform: scale(1.28);
+  transform-origin: center;
+}
+.consultorio-medix .attendance-item.active {
+  justify-content: flex-start;
+}
+.consultorio-medix .attendance-item.active .attendance-item-ico {
+  flex-basis: 48px;
+}
+.consultorio-medix .attendance-item.active .attendance-item-ico,
+.consultorio-medix .attendance-item.active .attendance-item-ico img {
+  width: 48px;
+  height: 48px;
+}
+/* Responsivo: ícones menores no mobile; botão continua compacto. */
+@media (max-width: 768px) {
+  .consultorio-medix .attendance-item {
+    min-height: 64px;
+    height: 64px;
+    padding: 8px 14px 8px 12px;
+    gap: 10px;
+  }
+  .consultorio-medix .attendance-item-ico,
+  .consultorio-medix .attendance-item-ico img {
+    width: 38px;
+    height: 38px;
+  }
+  .consultorio-medix .attendance-item-ico {
+    flex-basis: 38px;
+  }
+  .consultorio-medix .attendance-item.active .attendance-item-ico {
+    flex-basis: 40px;
+  }
+  .consultorio-medix .attendance-item.active .attendance-item-ico,
+  .consultorio-medix .attendance-item.active .attendance-item-ico img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* T3 — chat central amplo */
+.consultorio-medix .medix-chat-card {
+  min-height: calc(100vh - 112px);
+  border-radius: 22px;
+  box-shadow: 0 14px 38px rgba(72, 116, 170, 0.08);
+}
+.consultorio-medix .medix-chat-header {
+  min-height: 84px;
+  padding: 16px 22px;
+}
+.consultorio-medix .medix-chat-messages {
+  min-height: 430px;
+  padding: 26px 26px 20px;
+}
+.consultorio-medix .medix-chat-input-row {
+  padding: 16px 20px 12px;
+  grid-template-columns: 1fr 50px 88px;
+}
+.consultorio-medix .medix-chat-note {
+  margin: 0 20px 20px;
+}
+
+/* T4 — SOAP proporcional */
+.consultorio-medix .medix-soap-card {
+  min-height: calc(100vh - 112px);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 14px 38px rgba(72, 116, 170, 0.08);
+}
+.consultorio-medix .medix-soap-fields {
+  gap: 14px;
+}
+.consultorio-medix .medix-soap-field textarea {
+  min-height: 104px;
+  border-radius: 14px;
+}
+
+/* T5 — Diagnóstico e Conduta compacto */
+.consultorio-medix .medix-diagnosis-card {
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 14px 34px rgba(72, 116, 170, 0.075);
+}
+.consultorio-medix .medix-diagnosis-header {
+  margin-bottom: 14px;
+}
+.consultorio-medix .medix-diagnosis-section {
+  margin-top: 11px;
+}
+.consultorio-medix .medix-diagnosis-section input {
+  min-height: 38px;
+  font-size: 12px;
+}
+.consultorio-medix .medix-diagnosis-inline {
+  grid-template-columns: 1fr 38px;
+}
+.consultorio-medix .medix-diagnosis-add {
+  width: 38px;
+  height: 38px;
+}
+
+/* T6 — Sinais Vitais: mini-cards um pouco mais leves */
+.consultorio-medix .medix-vitals-card {
+  border-radius: 22px;
+  box-shadow: 0 14px 34px rgba(72, 116, 170, 0.075);
+}
+
+/* T7 — topbar mais discreta */
+.consultorio-medix-topbar {
+  height: 56px;
+  padding-top: 10px;
+  padding-bottom: 8px;
+  background: rgba(238, 247, 255, 0.52);
+  border-bottom: 0;
+}
+.consultorio-medix-user {
+  height: 34px;
+  font-size: 12px;
+}
+.consultorio-medix-top-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+}
+
+/* ==========================================================================
+   PASSO 8 — Sidebar global MEDIX expansível no hover
+   ========================================================================== */
+.consultorio-medix .medix-gsb {
+  width: 82px;
+  overflow: hidden;
+  transition: width 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+.consultorio-medix .medix-gsb:hover {
+  width: 250px;
+  box-shadow: 0 22px 60px rgba(72, 116, 170, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+/* itens: ícone centralizado recolhido; ícone + label alinhados à esquerda no hover */
+.consultorio-medix .medix-gsb-item {
+  width: 100%;
+  height: auto;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 8px 10px;
+  border-radius: 12px;
+  transition: gap 0.22s ease, justify-content 0.22s ease, background 0.18s ease,
+    border-color 0.18s ease;
+}
+.consultorio-medix .medix-gsb:hover .medix-gsb-item {
+  justify-content: flex-start;
+  gap: 12px;
+}
+.consultorio-medix .medix-gsb-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.consultorio-medix .medix-gsb-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  pointer-events: none;
+}
+.consultorio-medix .medix-gsb-label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateX(-8px);
+  transition: max-width 220ms ease, opacity 180ms ease, transform 180ms ease;
+  font-size: 13px;
+  font-weight: 750;
+  color: #315f9f;
+}
+.consultorio-medix .medix-gsb:hover .medix-gsb-label {
+  max-width: 160px;
+  opacity: 1;
+  transform: translateX(0);
+}
+.consultorio-medix .medix-gsb-item.active .medix-gsb-label {
+  color: #1f7bff;
+}
+/* logo: leve realce no hover */
+.consultorio-medix .medix-gsb-logo {
+  transition: transform 220ms ease;
+}
+.consultorio-medix .medix-gsb:hover .medix-gsb-logo {
+  transform: scale(1.02);
+}
+
+/* ==========================================================================
+   CORREÇÃO — painéis internos abaixo do chat (chat card altíssimo os cobria)
+   ========================================================================== */
+.consultorio-medix .consultorio-medix-center {
+  min-width: 0;
+  overflow: visible;
+}
+.consultorio-medix .medix-internal-panel-slot {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+.consultorio-medix .medix-internal-panel-slot > * {
+  width: 100%;
+}
+
+/* Quando há painel interno ativo (aba ≠ Paciente): chat compacto, libera espaço */
+.consultorio-medix .medix-center-has-panel .medix-chat-slot {
+  height: auto;
+}
+.consultorio-medix .medix-center-has-panel .medix-chat-card {
+  min-height: 420px;
+  height: auto;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.consultorio-medix .medix-center-has-panel .medix-chat-messages {
+  min-height: 230px;
+  max-height: 340px;
+}
+.consultorio-medix .medix-center-has-panel .medix-chat-note {
+  margin-bottom: 18px;
+}
+@media (max-width: 900px) {
+  .consultorio-medix .medix-center-has-panel .medix-chat-card {
+    min-height: auto;
+  }
+  .consultorio-medix .medix-center-has-panel .medix-chat-messages {
+    min-height: 220px;
+    max-height: none;
+  }
+}
+
+/* ==========================================================================
+   PASSO 10 — Topbar estilo DashboardLanding
+   ========================================================================== */
+.consultorio-medix .consultorio-medix-topbar-dashboard {
+  height: 74px;
+  margin: 10px 16px 0;
+  padding: 10px 18px;
+  display: grid;
+  grid-template-columns: minmax(300px, auto) minmax(360px, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  border-radius: 26px;
+  background: rgba(238, 247, 255, 0.76);
+  border: 1px solid rgba(139, 190, 245, 0.28);
+  box-shadow: 0 18px 46px rgba(72, 116, 170, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+.consultorio-medix .consultorio-medix-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.consultorio-medix .consultorio-medix-profile-initials {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: rgba(231, 243, 255, 0.92);
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  color: #1f7bff;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  box-shadow: 0 12px 26px rgba(72, 116, 170, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+.consultorio-medix .consultorio-medix-welcome {
+  min-width: 0;
+}
+.consultorio-medix .consultorio-medix-welcome-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: #0b1f4d;
+  font-size: 16px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.consultorio-medix .consultorio-medix-pro-badge {
+  min-height: 22px;
+  padding: 4px 8px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  color: white;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+.consultorio-medix .consultorio-medix-welcome p {
+  margin: 5px 0 0;
+  color: #5c6d8a;
+  font-size: 13px;
+  font-weight: 600;
+}
+.consultorio-medix .consultorio-medix-search {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 0 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(139, 190, 245, 0.32);
+  box-shadow: 0 10px 24px rgba(72, 116, 170, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+.consultorio-medix .consultorio-medix-search svg {
+  width: 19px;
+  height: 19px;
+  color: #315f9f;
+  flex: 0 0 auto;
+}
+.consultorio-medix .consultorio-medix-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #0b1f4d;
+  font-size: 14px;
+  font-weight: 600;
+}
+.consultorio-medix .consultorio-medix-search input::placeholder {
+  color: rgba(92, 109, 138, 0.82);
+}
+.consultorio-medix .consultorio-medix-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.consultorio-medix .consultorio-medix-topbar-dashboard .consultorio-medix-top-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  border: 1px solid rgba(139, 190, 245, 0.32);
+  background: rgba(255, 255, 255, 0.74);
+  color: #315f9f;
+  box-shadow: 0 10px 24px rgba(72, 116, 170, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+.consultorio-medix .consultorio-medix-topbar-dashboard .consultorio-medix-top-icon:hover {
+  color: #1f7bff;
+  border-color: rgba(31, 123, 255, 0.4);
+  transform: translateY(-1px);
+}
+.consultorio-medix .consultorio-medix-topbar-dashboard .consultorio-medix-top-icon svg {
+  width: 20px;
+  height: 20px;
+}
+@media (max-width: 1200px) {
+  .consultorio-medix .consultorio-medix-topbar-dashboard {
+    grid-template-columns: minmax(260px, auto) 1fr auto;
+  }
+  .consultorio-medix .consultorio-medix-search {
+    max-width: 520px;
+  }
+}
+@media (max-width: 900px) {
+  .consultorio-medix .consultorio-medix-topbar-dashboard {
+    height: auto;
+    grid-template-columns: 1fr auto;
+    margin: 8px 12px 0;
+  }
+  .consultorio-medix .consultorio-medix-search {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+  .consultorio-medix .consultorio-medix-welcome-title {
+    font-size: 14px;
+  }
+}
+
+/* ==========================================================================
+   PASSO 10 SEGURO — alinhar valores da topbar aos do DashboardLanding
+   (apenas seletores da topbar; nada de chat/soap/diagnóstico/sidebar/vitals)
+   ========================================================================== */
+.consultorio-medix .consultorio-medix-topbar-dashboard {
+  height: auto;
+  padding: 14px 18px;
+  border-radius: 22px;
+  gap: 18px;
+}
+.consultorio-medix .consultorio-medix-profile-initials {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #cfe4ff, #eaf3ff);
+  border: 1px solid rgba(139, 190, 245, 0.32);
+  color: #1f7bff;
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow: none;
+}
+.consultorio-medix .consultorio-medix-welcome-title {
+  font-size: 15px;
+  font-weight: 800;
+}
+.consultorio-medix .consultorio-medix-welcome p {
+  margin: 1px 0 0;
+  font-size: 12px;
+}
+.consultorio-medix .consultorio-medix-pro-badge {
+  min-height: 0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #4f9bff, #1f7bff);
+}
+.consultorio-medix .consultorio-medix-search {
+  height: auto;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.7);
+}
+.consultorio-medix .consultorio-medix-search svg {
+  width: 18px;
+  height: 18px;
+}
+.consultorio-medix .consultorio-medix-search input {
+  font-size: 13px;
+  font-weight: 600;
+}
+.consultorio-medix .consultorio-medix-topbar-actions {
+  gap: 8px;
+}
+.consultorio-medix .consultorio-medix-topbar-dashboard .consultorio-medix-top-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #2a4d86;
+  box-shadow: none;
+}
+.consultorio-medix .consultorio-medix-topbar-dashboard .consultorio-medix-top-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+/* ==========================================================================
+   AJUSTE — Chat sempre compacto no Atendimento MEDIX (inclusive aba Paciente)
+   ========================================================================== */
+.consultorio-medix .medix-chat-slot {
+  height: auto !important;
+}
+.consultorio-medix .medix-chat-card {
+  min-height: 420px !important;
+  height: auto !important;
+  flex: 0 0 auto;
+}
+.consultorio-medix .medix-chat-messages {
+  min-height: 230px !important;
+  max-height: 340px;
+}
+.consultorio-medix .medix-chat-note {
+  display: none !important;
+}
+@media (max-width: 900px) {
+  .consultorio-medix .medix-chat-card {
+    min-height: auto !important;
+  }
+  .consultorio-medix .medix-chat-messages {
+    min-height: 220px !important;
+    max-height: none;
+  }
+}
+
+.consultorio-medix .medix-gsb-item { text-decoration: none; }
+.consultorio-medix .medix-gsb-label { white-space: nowrap; max-width: 180px; }
+
+/* dobrar apenas o ícone de Simular Pediatria */
+.consultorio-medix .medix-gsb-icon img[src*="icon-simulacao-pediatria"] { width: 48px; height: 48px; }

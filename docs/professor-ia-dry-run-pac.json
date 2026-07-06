@@ -1,0 +1,1078 @@
+{
+  "geradoEm": "2026-07-04T01:20:54.980Z",
+  "observacao": "Dry run estrutural (sem IA/endpoint/chat). HealthBench é MOCK. dry-run.ts é a prova type-checked da arquitetura real.",
+  "contextoSuficienteParaIA": true,
+  "result": {
+    "caso": {
+      "canonicalId": "pac",
+      "legacyId": 2,
+      "titulo": "Pneumonia Adquirida na Comunidade"
+    },
+    "diagnostico": "Pneumonia Adquirida na Comunidade (PAC)",
+    "nota": 11.8,
+    "passou": false,
+    "principaisFalhas": [
+      "Apresentar-se e explicar a hipótese em linguagem acessível",
+      "Investigar antecedentes, medicamentos e alergias",
+      "Pesquisar sinais de gravidade",
+      "Prescreveu antibiótico apropriado COM dose",
+      "Orientou sinais de alarme e retorno em 48–72h",
+      "Prescreveu antibiótico apropriado COM dose"
+    ],
+    "pontosFortes": [
+      "Mediu sinais vitais completos, incluindo SpO₂",
+      "Auscultou o tórax e identificou crepitações",
+      "Solicitou radiografia de tórax",
+      "Solicitou hemograma",
+      "Formulou hipótese de PAC coerente com os achados",
+      "Considerou diagnósticos diferenciais"
+    ],
+    "recursosCentroClinico": [
+      {
+        "dominio": "semiologia",
+        "titulo": "Semiologia — Pneumologia",
+        "href": "/centro-clinico/semiologia"
+      },
+      {
+        "dominio": "fluxo",
+        "titulo": "Fluxo da Dispneia / Febre",
+        "href": "/centro-clinico/fluxos"
+      },
+      {
+        "dominio": "exame",
+        "titulo": "RX de tórax · Hemograma",
+        "href": "/centro-clinico/exames"
+      },
+      {
+        "dominio": "imagem",
+        "titulo": "Pneumonia (RX)",
+        "href": "/centro-clinico/imagens"
+      },
+      {
+        "dominio": "som",
+        "titulo": "Crepitações",
+        "href": "/centro-clinico/sons"
+      },
+      {
+        "dominio": "escore",
+        "titulo": "CURB-65"
+      }
+    ],
+    "sonsRelacionados": [
+      {
+        "id": "ls-crepitacoes",
+        "nome": "Crepitações",
+        "categoria": "lung_sound"
+      }
+    ],
+    "imagensRelacionadas": [
+      {
+        "id": "img-rx-torax",
+        "nome": "Radiografia de tórax",
+        "categoria": "imaging"
+      }
+    ],
+    "examesRelacionados": [
+      {
+        "id": "lab-hemograma",
+        "nome": "Hemograma completo",
+        "categoria": "laboratory"
+      }
+    ],
+    "fluxosRelacionados": [
+      {
+        "id": "flow-dispneia",
+        "nome": "Fluxo da Dispneia",
+        "categoria": "flow"
+      },
+      {
+        "id": "flow-febre",
+        "nome": "Fluxo da Febre",
+        "categoria": "flow"
+      }
+    ],
+    "objetivosProfessor": [
+      "Sempre medir SpO₂ e FR (gravidade da PAC).",
+      "Justificar o antibiótico e a dose.",
+      "Relacionar ausculta + RX + leucograma ao diagnóstico."
+    ],
+    "perguntasSocraticas": [
+      "Quais achados no exame físico apontam para consolidação, e não broncoespasmo?",
+      "Como a SpO₂ e a FR mudam a sua conduta?",
+      "Por que este quadro é PAC e não asma, IC ou TEP?",
+      "Qual antibiótico e por quê? Qual a dose?"
+    ],
+    "planoDeEstudo": {
+      "casoId": 2,
+      "prioridade1": [
+        {
+          "prioridade": 1,
+          "titulo": "Corrigir erro crítico: Prescreveu antibiótico apropriado COM dose",
+          "severidade": "critica"
+        },
+        {
+          "prioridade": 1,
+          "competencia": "anamnese",
+          "titulo": "Reforçar: Anamnese dirigida",
+          "severidade": "importante",
+          "recursos": [
+            "/centro-clinico/semiologia"
+          ]
+        },
+        {
+          "prioridade": 1,
+          "competencia": "condutaSeguranca",
+          "titulo": "Reforçar: Conduta e Segurança",
+          "severidade": "importante",
+          "recursos": [
+            "/centro-clinico/fluxos"
+          ]
+        }
+      ],
+      "prioridade2": [
+        {
+          "prioridade": 2,
+          "competencia": "comunicacao",
+          "titulo": "Reforçar: Comunicação e postura médica",
+          "severidade": "leve",
+          "recursos": []
+        }
+      ],
+      "prioridade3": [],
+      "itens": [
+        {
+          "prioridade": 1,
+          "titulo": "Corrigir erro crítico: Prescreveu antibiótico apropriado COM dose",
+          "severidade": "critica"
+        },
+        {
+          "prioridade": 1,
+          "competencia": "anamnese",
+          "titulo": "Reforçar: Anamnese dirigida",
+          "severidade": "importante",
+          "recursos": [
+            "/centro-clinico/semiologia"
+          ]
+        },
+        {
+          "prioridade": 1,
+          "competencia": "condutaSeguranca",
+          "titulo": "Reforçar: Conduta e Segurança",
+          "severidade": "importante",
+          "recursos": [
+            "/centro-clinico/fluxos"
+          ]
+        },
+        {
+          "prioridade": 2,
+          "competencia": "comunicacao",
+          "titulo": "Reforçar: Comunicação e postura médica",
+          "severidade": "leve",
+          "recursos": []
+        }
+      ],
+      "resumo": "Plano com 4 itens."
+    },
+    "teachingStrategy": {
+      "prioridadePrincipal": {
+        "eixo": "erro_critico",
+        "titulo": "Corrigir erro crítico",
+        "modo": "reforco_de_erro_critico",
+        "motivo": "Prescreveu antibiótico apropriado COM dose",
+        "severidade": "critica"
+      },
+      "prioridadesSecundarias": [
+        {
+          "eixo": "condutaSeguranca",
+          "titulo": "Conduta segura",
+          "modo": "diretivo",
+          "motivo": "Prescreveu antibiótico apropriado COM dose; Orientou sinais de alarme e retorno em 48–72h",
+          "severidade": "alta"
+        },
+        {
+          "eixo": "anamnese",
+          "titulo": "Investigação dirigida",
+          "modo": "socratico",
+          "motivo": "Investigar antecedentes, medicamentos e alergias; Pesquisar sinais de gravidade",
+          "severidade": "alta"
+        }
+      ],
+      "modoPedagogico": "reforco_de_erro_critico",
+      "objetivos": [
+        "Corrigir erro crítico",
+        "Conduta segura",
+        "Investigação dirigida",
+        "Sempre medir SpO₂ e FR (gravidade da PAC).",
+        "Justificar o antibiótico e a dose."
+      ],
+      "errosParaExplorar": [
+        "Prescreveu antibiótico apropriado COM dose",
+        "Prescreveu antibiótico apropriado COM dose; Orientou sinais de alarme e retorno em 48–72h",
+        "Investigar antecedentes, medicamentos e alergias; Pesquisar sinais de gravidade"
+      ],
+      "errosParaIgnorarAgora": [
+        "Fala médica clara: Apresentar-se e explicar a hipótese em linguagem acessível"
+      ],
+      "planoTresPassos": [
+        "1) Reconhecer acertos: Exame físico, Exames complementares, Raciocínio diagnóstico",
+        "2) Prioridade 1 (modo reforco_de_erro_critico): Corrigir erro crítico — Prescreveu antibiótico apropriado COM dose",
+        "3) Avançar: Conduta segura (modo diretivo) e consolidar"
+      ],
+      "alertaSeguranca": "⚠️ ERRO CRÍTICO — prioridade máxima: Prescreveu antibiótico apropriado COM dose",
+      "erroAtualEhRepeticao": true,
+      "errosRecorrentesDetectados": [
+        "Antibiótico sem dose (3x)"
+      ],
+      "ajustePorHistorico": "Erro recorrente de segurança → modo mais DIRETIVO (não é a primeira vez).",
+      "ajustePorSessao": "Pós-reprovação → começar com reforço positivo antes de corrigir.",
+      "maxPrioridadesSessao": 2,
+      "reforcoPositivo": true
+    },
+    "personaDecision": {
+      "persona": {
+        "key": "mentor_clinico",
+        "nome": "Mentor clínico",
+        "tom": "acolhedor"
+      },
+      "tom": "acolhedor",
+      "justificativa": "Sessão pós-reprovação → mentor acolhedor (não reforçar o fracasso).",
+      "sessionConfig": {
+        "estimatedDurationMinutes": 8,
+        "maxQuestions": 4,
+        "maxConcepts": 2,
+        "reviewAtEnd": true,
+        "generateMiniQuiz": true,
+        "allowFreeQuestions": false,
+        "requireStudentAnswerBeforeExplanation": true,
+        "stopAfterCriticalCorrection": true
+      }
+    },
+    "lessonPlan": {
+      "lessonPlan": {
+        "titulo": "Plano de aula — Pneumonia Adquirida na Comunidade",
+        "objetivoFinal": "Corrigir com segurança: Prescreveu antibiótico apropriado COM dose e consolidar a conduta correta.",
+        "steps": [
+          {
+            "ordem": 1,
+            "fase": "abertura",
+            "action": {
+              "tipo": "acknowledge_strength",
+              "descricao": "Reconhecer o acerto: Mediu sinais vitais completos, incluindo SpO₂"
+            }
+          },
+          {
+            "ordem": 2,
+            "fase": "correcao_critica",
+            "action": {
+              "tipo": "correct_critical_error",
+              "descricao": "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose",
+              "checkpoint": true
+            }
+          },
+          {
+            "ordem": 3,
+            "fase": "correcao_critica",
+            "action": {
+              "tipo": "ask_socratic_question",
+              "descricao": "Pergunta socrática: Qual antibiótico e por quê? Qual a dose?",
+              "pergunta": "Qual antibiótico e por quê? Qual a dose?"
+            }
+          },
+          {
+            "ordem": 4,
+            "fase": "correcao_critica",
+            "action": {
+              "tipo": "wait_for_student_answer",
+              "descricao": "Aguardar a resposta do aluno antes de explicar.",
+              "checkpoint": true
+            }
+          },
+          {
+            "ordem": 5,
+            "fase": "correcao_critica",
+            "action": {
+              "tipo": "explain_concept",
+              "descricao": "Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente"
+            }
+          },
+          {
+            "ordem": 6,
+            "fase": "correcao_critica",
+            "action": {
+              "tipo": "show_exam_reference",
+              "descricao": "Exame de referência: RX de tórax · Hemograma",
+              "recursoRef": "/centro-clinico/exames",
+              "recursoTitulo": "RX de tórax · Hemograma"
+            }
+          },
+          {
+            "ordem": 7,
+            "fase": "correcao_critica",
+            "action": {
+              "tipo": "show_sound_reference",
+              "descricao": "Som de referência: Crepitações",
+              "recursoRef": "/centro-clinico/sons",
+              "recursoTitulo": "Crepitações"
+            }
+          },
+          {
+            "ordem": 8,
+            "fase": "pratica",
+            "action": {
+              "tipo": "mini_quiz",
+              "descricao": "Mini-quiz de verificação (1 item objetivo).",
+              "checkpoint": true
+            }
+          },
+          {
+            "ordem": 9,
+            "fase": "fechamento",
+            "action": {
+              "tipo": "summarize_session",
+              "descricao": "Resumir os pontos-chave da sessão."
+            }
+          },
+          {
+            "ordem": 10,
+            "fase": "fechamento",
+            "action": {
+              "tipo": "assign_next_step",
+              "descricao": "Definir o próximo passo de treino: Conduta segura"
+            }
+          }
+        ],
+        "duracaoEstimadaMin": 8,
+        "conceitosIncluidos": [
+          "Segurança / erro crítico"
+        ],
+        "perguntasIncluidas": [
+          "Qual antibiótico e por quê? Qual a dose?"
+        ],
+        "recursosUsados": [
+          {
+            "titulo": "RX de tórax · Hemograma",
+            "href": "/centro-clinico/exames"
+          },
+          {
+            "titulo": "Crepitações",
+            "href": "/centro-clinico/sons"
+          }
+        ],
+        "checkpoints": [
+          "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose",
+          "Aguardar a resposta do aluno antes de explicar.",
+          "Mini-quiz de verificação (1 item objetivo)."
+        ]
+      },
+      "actions": [
+        {
+          "tipo": "calibrate_session_goal",
+          "descricao": "Calibrar o objetivo da sessão: Corrigir o erro recorrente de dose do antibiótico com segurança. (modo pos_reprovacao, 8 min)."
+        },
+        {
+          "tipo": "acknowledge_strength",
+          "descricao": "Reconhecer o acerto: Mediu sinais vitais completos, incluindo SpO₂"
+        },
+        {
+          "tipo": "reinforce_confidence",
+          "descricao": "Reforçar a confiança: retomar 1 acerto e enquadrar o erro como aprendizado (não reforçar o fracasso)."
+        },
+        {
+          "tipo": "reduce_cognitive_load",
+          "descricao": "Reduzir a carga cognitiva: 1 ponto por vez, linguagem simples."
+        },
+        {
+          "tipo": "reinforce_progress",
+          "descricao": "Reforçar a evolução: melhorando (nota média 11/20)."
+        },
+        {
+          "tipo": "review_recurring_error",
+          "descricao": "Revisar erro RECORRENTE (3x): Antibiótico sem dose — não é a primeira vez.",
+          "checkpoint": true
+        },
+        {
+          "tipo": "correct_critical_error",
+          "descricao": "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose",
+          "checkpoint": true
+        },
+        {
+          "tipo": "ask_socratic_question",
+          "descricao": "Pergunta socrática: Qual antibiótico e por quê? Qual a dose?",
+          "pergunta": "Qual antibiótico e por quê? Qual a dose?"
+        },
+        {
+          "tipo": "wait_for_student_answer",
+          "descricao": "Aguardar a resposta do aluno antes de explicar.",
+          "checkpoint": true
+        },
+        {
+          "tipo": "explain_concept",
+          "descricao": "Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente"
+        },
+        {
+          "tipo": "show_exam_reference",
+          "descricao": "Exame de referência: RX de tórax · Hemograma",
+          "recursoRef": "/centro-clinico/exames",
+          "recursoTitulo": "RX de tórax · Hemograma"
+        },
+        {
+          "tipo": "show_sound_reference",
+          "descricao": "Som de referência: Crepitações",
+          "recursoRef": "/centro-clinico/sons",
+          "recursoTitulo": "Crepitações"
+        },
+        {
+          "tipo": "mini_quiz",
+          "descricao": "Mini-quiz de verificação (1 item objetivo).",
+          "checkpoint": true
+        },
+        {
+          "tipo": "summarize_session",
+          "descricao": "Resumir os pontos-chave da sessão."
+        },
+        {
+          "tipo": "compare_with_previous_attempts",
+          "descricao": "Comparar com o histórico (3 casos; evolução melhorando)."
+        },
+        {
+          "tipo": "assign_next_step",
+          "descricao": "Definir o próximo passo de treino: Conduta segura"
+        }
+      ],
+      "duracaoEstimadaMin": 8,
+      "conceitosIncluidos": [
+        "Segurança / erro crítico"
+      ],
+      "perguntasIncluidas": [
+        "Qual antibiótico e por quê? Qual a dose?"
+      ],
+      "recursosUsados": [
+        {
+          "titulo": "RX de tórax · Hemograma",
+          "href": "/centro-clinico/exames"
+        },
+        {
+          "titulo": "Crepitações",
+          "href": "/centro-clinico/sons"
+        }
+      ],
+      "checkpoints": [
+        "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose",
+        "Aguardar a resposta do aluno antes de explicar.",
+        "Mini-quiz de verificação (1 item objetivo)."
+      ],
+      "objetivoFinal": "Corrigir com segurança: Prescreveu antibiótico apropriado COM dose e consolidar a conduta correta."
+    },
+    "goldStandardTruthLayers": {
+      "presente": true,
+      "camadas": [
+        "clinical",
+        "educational",
+        "evaluation",
+        "teaching",
+        "resource"
+      ],
+      "clinical": {
+        "diagnostico": "Pneumonia Adquirida na Comunidade (PAC)",
+        "diferenciais": [
+          "asma",
+          "DPOC",
+          "TEP",
+          "IC",
+          "tuberculose",
+          "bronquite"
+        ],
+        "sinaisDeGravidade": [
+          "SpO₂ < 92%",
+          "FR > 24",
+          "confusão",
+          "hipotensão",
+          "comorbidades"
+        ]
+      },
+      "educational": {
+        "conceitosEssenciais": [
+          "Diferenciar consolidação de broncoespasmo",
+          "Correlacionar ausculta + RX + clínica",
+          "SpO₂/FR",
+          "Antibiótico com dose",
+          "CURB-65"
+        ]
+      },
+      "evaluation": {
+        "criteriosObrigatorios": [
+          "Pedir RX",
+          "Medir SpO₂",
+          "Auscultar pulmão",
+          "Diagnosticar PAC",
+          "Antibiótico com dose",
+          "Sinais de alarme",
+          "Reavaliação"
+        ],
+        "criteriosCriticos": [
+          "RX",
+          "SpO₂/sinais vitais",
+          "Antibiótico com dose"
+        ]
+      },
+      "teaching": {
+        "miniQuiz": [
+          "Por que antibiótico sem dose é inseguro?",
+          "Por que o RX muda a conduta?",
+          "Por que asma não explica consolidação?",
+          "Por que o TEP pode ter RX normal?",
+          "Qual escore avalia gravidade (CURB-65)?"
+        ],
+        "modoSeErroCritico": "reforco_de_erro_critico",
+        "modoSeNotaAlta": "revisao_rapida"
+      },
+      "resource": {
+        "sons": [
+          "ls-crepitacoes"
+        ],
+        "imagens": [
+          "img-rx-torax"
+        ],
+        "exames": [
+          "lab-hemograma"
+        ],
+        "fluxos": [
+          "flow-febre",
+          "flow-dispneia"
+        ],
+        "guidelines": [
+          "guide-pneumonia"
+        ],
+        "scores": [
+          "score-curb65"
+        ],
+        "farmacos": [
+          "drug-amoxicilina"
+        ],
+        "referencias": [
+          "ref-open-i",
+          "ref-hls-cmds"
+        ]
+      }
+    },
+    "studentModel": {
+      "profile": {
+        "nome": "Aluno(a) demo",
+        "nivel": "intermediario",
+        "semestre": 3
+      },
+      "confiancaEstimada": 0.63,
+      "evolucao": "melhorando",
+      "notaMedia": 11,
+      "casosRealizados": 3,
+      "topForcas": [
+        "Raciocínio diagnóstico (89%)"
+      ],
+      "topFraquezas": [
+        "Conduta e segurança (37%)",
+        "Anamnese (55%)"
+      ],
+      "errosRecorrentes": [
+        {
+          "descricao": "Antibiótico sem dose",
+          "ocorrencias": 3,
+          "persistente": true,
+          "eixo": "condutaSeguranca"
+        }
+      ],
+      "riscoPedagogico": {
+        "tipo": "erro_critico_recorrente",
+        "descricao": "Erro crítico de segurança recorrente: Antibiótico sem dose (3x)."
+      },
+      "recomendacaoDeFoco": "Priorizar a correção do erro crítico recorrente de segurança com abordagem diretiva."
+    },
+    "learningSession": {
+      "modo": "pos_reprovacao",
+      "objetivo": "Corrigir o erro recorrente de dose do antibiótico com segurança.",
+      "tempoDisponivelMin": 8,
+      "curto": false,
+      "energia": "media",
+      "emocao": "ansioso",
+      "confianca": 0.45,
+      "frustracao": 0.5,
+      "cargaCognitivaRecomendada": "baixa",
+      "maxPrioridades": 2,
+      "abordagem": "Acolher, reforçar 1 acerto e corrigir 1 ponto por vez (sem reforçar o fracasso).",
+      "alerta": "Pós-reprovação: acolher e reconstruir confiança; não reforçar o fracasso."
+    },
+    "professorLesson": {
+      "status": "ok",
+      "header": {
+        "titulo": "Professor IA",
+        "subtitulo": "Sessão de tutoria personalizada baseada no seu desempenho",
+        "aviso": "Prévia estrutural — o chat generativo será ativado em fase futura."
+      },
+      "diagnostico": {
+        "caso": "Pneumonia Adquirida na Comunidade",
+        "diagnostico": "Pneumonia Adquirida na Comunidade (PAC)",
+        "nota": 11.8,
+        "prioridadePrincipal": "Corrigir erro crítico",
+        "persona": "Mentor clínico",
+        "modoPedagogico": "reforco_de_erro_critico",
+        "duracaoEstimadaMin": 8,
+        "modoSessao": "pos_reprovacao"
+      },
+      "objetivo": {
+        "objetivoFinal": "Corrigir com segurança: Prescreveu antibiótico apropriado COM dose e consolidar a conduta correta.",
+        "objetivos": [
+          "Corrigir erro crítico",
+          "Conduta segura",
+          "Investigação dirigida",
+          "Sempre medir SpO₂ e FR (gravidade da PAC).",
+          "Justificar o antibiótico e a dose."
+        ]
+      },
+      "openingLine": {
+        "texto": "Você foi bem em Mediu sinais vitais completos, incluindo SpO₂. Agora vamos corrigir um ponto crítico: prescreveu antibiótico apropriado com dose.",
+        "origem": "estatico_do_plano"
+      },
+      "actions": [
+        {
+          "ordem": 1,
+          "tipo": "calibrate_session_goal",
+          "rotulo": "Calibrar objetivo da sessão",
+          "descricao": "Calibrar o objetivo da sessão: Corrigir o erro recorrente de dose do antibiótico com segurança. (modo pos_reprovacao, 8 min)."
+        },
+        {
+          "ordem": 2,
+          "tipo": "acknowledge_strength",
+          "rotulo": "Reconhecer acerto",
+          "descricao": "Reconhecer o acerto: Mediu sinais vitais completos, incluindo SpO₂"
+        },
+        {
+          "ordem": 3,
+          "tipo": "reinforce_confidence",
+          "rotulo": "Reforçar confiança",
+          "descricao": "Reforçar a confiança: retomar 1 acerto e enquadrar o erro como aprendizado (não reforçar o fracasso)."
+        },
+        {
+          "ordem": 4,
+          "tipo": "reduce_cognitive_load",
+          "rotulo": "Reduzir carga cognitiva",
+          "descricao": "Reduzir a carga cognitiva: 1 ponto por vez, linguagem simples."
+        },
+        {
+          "ordem": 5,
+          "tipo": "reinforce_progress",
+          "rotulo": "Reforçar evolução",
+          "descricao": "Reforçar a evolução: melhorando (nota média 11/20)."
+        },
+        {
+          "ordem": 6,
+          "tipo": "review_recurring_error",
+          "rotulo": "Revisar erro recorrente",
+          "descricao": "Revisar erro RECORRENTE (3x): Antibiótico sem dose — não é a primeira vez."
+        },
+        {
+          "ordem": 7,
+          "tipo": "correct_critical_error",
+          "rotulo": "Corrigir erro crítico",
+          "descricao": "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose"
+        },
+        {
+          "ordem": 8,
+          "tipo": "ask_socratic_question",
+          "rotulo": "Pergunta socrática",
+          "descricao": "Pergunta socrática: Qual antibiótico e por quê? Qual a dose?"
+        },
+        {
+          "ordem": 9,
+          "tipo": "wait_for_student_answer",
+          "rotulo": "Esperar resposta",
+          "descricao": "Aguardar a resposta do aluno antes de explicar."
+        },
+        {
+          "ordem": 10,
+          "tipo": "explain_concept",
+          "rotulo": "Explicar conceito",
+          "descricao": "Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente"
+        },
+        {
+          "ordem": 11,
+          "tipo": "show_exam_reference",
+          "rotulo": "Mostrar exame",
+          "descricao": "Exame de referência: RX de tórax · Hemograma"
+        },
+        {
+          "ordem": 12,
+          "tipo": "show_sound_reference",
+          "rotulo": "Mostrar som",
+          "descricao": "Som de referência: Crepitações"
+        },
+        {
+          "ordem": 13,
+          "tipo": "mini_quiz",
+          "rotulo": "Mini-quiz",
+          "descricao": "Mini-quiz de verificação (1 item objetivo)."
+        },
+        {
+          "ordem": 14,
+          "tipo": "summarize_session",
+          "rotulo": "Revisão final",
+          "descricao": "Resumir os pontos-chave da sessão."
+        },
+        {
+          "ordem": 15,
+          "tipo": "compare_with_previous_attempts",
+          "rotulo": "Comparar com histórico",
+          "descricao": "Comparar com o histórico (3 casos; evolução melhorando)."
+        },
+        {
+          "ordem": 16,
+          "tipo": "assign_next_step",
+          "rotulo": "Próximo passo",
+          "descricao": "Definir o próximo passo de treino: Conduta segura"
+        }
+      ],
+      "recursos": [
+        {
+          "dominio": "som",
+          "titulo": "ls-crepitacoes"
+        },
+        {
+          "dominio": "exame",
+          "titulo": "lab-hemograma"
+        },
+        {
+          "dominio": "fluxo",
+          "titulo": "flow-febre"
+        },
+        {
+          "dominio": "fluxo",
+          "titulo": "flow-dispneia"
+        }
+      ],
+      "proximoPasso": {
+        "descricao": "Conduta segura"
+      },
+      "lessonFlow": {
+        "flowId": "flow-pac",
+        "lessonId": "lesson-pac",
+        "steps": [
+          {
+            "id": "step-1",
+            "order": 1,
+            "type": "opening",
+            "title": "opening",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-2",
+            "resources": []
+          },
+          {
+            "id": "step-2",
+            "order": 2,
+            "type": "calibrate_goal",
+            "title": "calibrate_goal",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-3",
+            "resources": []
+          },
+          {
+            "id": "step-3",
+            "order": 3,
+            "type": "acknowledge_strength",
+            "title": "acknowledge_strength",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-4",
+            "resources": []
+          },
+          {
+            "id": "step-4",
+            "order": 4,
+            "type": "explain_concept",
+            "title": "explain_concept",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-5",
+            "resources": []
+          },
+          {
+            "id": "step-5",
+            "order": 5,
+            "type": "reinforce_confidence",
+            "title": "reinforce_confidence",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-6",
+            "resources": []
+          },
+          {
+            "id": "step-6",
+            "order": 6,
+            "type": "reinforce_confidence",
+            "title": "reinforce_confidence",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-7",
+            "resources": []
+          },
+          {
+            "id": "step-7",
+            "order": 7,
+            "type": "identify_error",
+            "title": "identify_error",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-8",
+            "resources": []
+          },
+          {
+            "id": "step-8",
+            "order": 8,
+            "type": "correct_critical_error",
+            "title": "correct_critical_error",
+            "requiresInput": false,
+            "isCheckpoint": true,
+            "nextStepId": "step-9",
+            "resources": []
+          },
+          {
+            "id": "step-9",
+            "order": 9,
+            "type": "ask_question",
+            "title": "ask_question",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-10",
+            "resources": []
+          },
+          {
+            "id": "step-10",
+            "order": 10,
+            "type": "wait_student_answer",
+            "title": "wait_student_answer",
+            "requiresInput": true,
+            "isCheckpoint": true,
+            "nextStepId": "step-11",
+            "resources": [],
+            "fallbackIfNoAnswer": "Dar dica e reformular; não entregar a resposta."
+          },
+          {
+            "id": "step-11",
+            "order": 11,
+            "type": "explain_concept",
+            "title": "explain_concept",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-12",
+            "resources": []
+          },
+          {
+            "id": "step-12",
+            "order": 12,
+            "type": "show_exam",
+            "title": "show_exam",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-13",
+            "resources": []
+          },
+          {
+            "id": "step-13",
+            "order": 13,
+            "type": "show_sound",
+            "title": "show_sound",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-14",
+            "resources": []
+          },
+          {
+            "id": "step-14",
+            "order": 14,
+            "type": "mini_quiz",
+            "title": "mini_quiz",
+            "requiresInput": true,
+            "isCheckpoint": true,
+            "nextStepId": "step-15",
+            "resources": [],
+            "fallbackIfNoAnswer": "Dar dica e reformular; não entregar a resposta."
+          },
+          {
+            "id": "step-15",
+            "order": 15,
+            "type": "summarize",
+            "title": "summarize",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-16",
+            "resources": []
+          },
+          {
+            "id": "step-16",
+            "order": 16,
+            "type": "compare_model_answer",
+            "title": "compare_model_answer",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-17",
+            "resources": []
+          },
+          {
+            "id": "step-17",
+            "order": 17,
+            "type": "assign_next_step",
+            "title": "assign_next_step",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "nextStepId": "step-18",
+            "resources": []
+          },
+          {
+            "id": "step-18",
+            "order": 18,
+            "type": "closing",
+            "title": "closing",
+            "requiresInput": false,
+            "isCheckpoint": false,
+            "resources": []
+          }
+        ],
+        "firstStepId": "step-1",
+        "finalStepId": "step-18",
+        "currentStepId": "step-1",
+        "totalSteps": 18,
+        "interactiveSteps": 2,
+        "resourceSteps": 0,
+        "checkpoints": [
+          {
+            "id": "step-8",
+            "order": 8,
+            "type": "correct_critical_error",
+            "title": "correct_critical_error",
+            "requiresInput": false,
+            "isCheckpoint": true,
+            "nextStepId": "step-9",
+            "resources": []
+          },
+          {
+            "id": "step-10",
+            "order": 10,
+            "type": "wait_student_answer",
+            "title": "wait_student_answer",
+            "requiresInput": true,
+            "isCheckpoint": true,
+            "nextStepId": "step-11",
+            "resources": [],
+            "fallbackIfNoAnswer": "Dar dica e reformular; não entregar a resposta."
+          },
+          {
+            "id": "step-14",
+            "order": 14,
+            "type": "mini_quiz",
+            "title": "mini_quiz",
+            "requiresInput": true,
+            "isCheckpoint": true,
+            "nextStepId": "step-15",
+            "resources": [],
+            "fallbackIfNoAnswer": "Dar dica e reformular; não entregar a resposta."
+          }
+        ],
+        "navigationRules": [
+          "Execução sequencial",
+          "Parar em wait_student_answer",
+          "Não pular checkpoints",
+          "Sem resposta → fallback",
+          "Só recursos anexados"
+        ],
+        "branches": [
+          {
+            "from": "step-10",
+            "cond": "on_correct",
+            "to": "step-11"
+          },
+          {
+            "from": "step-10",
+            "cond": "on_incorrect",
+            "to": "step-11"
+          },
+          {
+            "from": "step-10",
+            "cond": "on_no_answer",
+            "to": "step-10"
+          },
+          {
+            "from": "step-10",
+            "cond": "on_request_explanation",
+            "to": "step-4"
+          },
+          {
+            "from": "step-14",
+            "cond": "on_correct",
+            "to": "step-15"
+          },
+          {
+            "from": "step-14",
+            "cond": "on_incorrect",
+            "to": "step-15"
+          },
+          {
+            "from": "step-14",
+            "cond": "on_no_answer",
+            "to": "step-14"
+          },
+          {
+            "from": "step-14",
+            "cond": "on_request_explanation",
+            "to": "step-4"
+          }
+        ],
+        "canResume": true,
+        "canPause": true,
+        "canSkipOptionalSteps": true,
+        "requiresSequentialExecution": true
+      }
+    },
+    "prompts": {
+      "system": "Você é o \"Professor IA\" do Mini Consultório OSCE — preceptor clínico socrático, baseado EXCLUSIVAMENTE no caso, na avaliação e na base do sistema.",
+      "contexto": "Hipótese do aluno: Pneumonia adquirida na comunidade\nNota: 11.8/20 (abaixo do esperado)\nA melhorar: dose do antibiótico; anamnese; orientações\nRecursos: Semiologia — Pneumologia; Fluxo da Dispneia / Febre; RX de tórax · Hemograma; Pneumonia (RX); Crepitações; CURB-65",
+      "caso": "Caso: Pneumonia Adquirida na Comunidade\nDiagnóstico correto: Pneumonia Adquirida na Comunidade (PAC)\nPaciente: 38 anos, F. Queixa: tosse com catarro e febre há 5 dias.",
+      "professor": "Estilo: reconhecer o que foi bem; apontar 2–3 lacunas por prioridade; perguntas socráticas; ligar a recursos da base.",
+      "seguranca": "Ambiente educacional/simulado; sem prescrição real; priorizar segurança e red flags.",
+      "naoInventarMedicina": "Não inventar achados/exames/condutas fora do caso ou da base; dizer quando não há dado.",
+      "apenasBaseDoSistema": "Responder só com base no caso, avaliação HealthBench, material do caso e Centro Clínico.",
+      "verdade": "# Verdade do caso (Gold Standard — Truth Layers)\n## Clinical Truth\nDiagnóstico: Pneumonia Adquirida na Comunidade (PAC)\nDiferenciais: asma, DPOC, TEP, IC, tuberculose, bronquite\nSinais de gravidade: SpO₂ < 92%; FR > 24; confusão; hipotensão; comorbidades\n## Evaluation Truth\nCritérios obrigatórios: Pedir RX; Medir SpO₂; Auscultar pulmão; Diagnosticar PAC; Antibiótico com dose; Sinais de alarme; Reavaliação\nCritérios CRÍTICOS: RX; SpO₂/sinais vitais; Antibiótico com dose\n## Teaching Truth\nMini-quiz: Por que antibiótico sem dose é inseguro? · Por que o RX muda a conduta? · Por que asma não explica consolidação? · Por que o TEP pode ter RX normal? · Qual escore avalia gravidade (CURB-65)?\n## Resource Truth (use APENAS estes recursos)\nsons[ls-crepitacoes] imagens[img-rx-torax] exames[lab-hemograma] fluxos[flow-febre,flow-dispneia] scores[score-curb65] fármacos[drug-amoxicilina]\n\nRegras da verdade: priorize as Truth Layers; não contradiga o Gold Standard; em conflito, o Gold Standard VENCE; não extrapole além das Truth Layers.",
+      "sessao": "# Estado atual da sessão\nModo: pos_reprovacao. Objetivo: Corrigir o erro recorrente de dose do antibiótico com segurança..\nTempo disponível: 8 min. Carga cognitiva recomendada: baixa.\nEstado emocional: ansioso (frustração 50%, energia media). Confiança: 45%.\nAbordagem: Acolher, reforçar 1 acerto e corrigir 1 ponto por vez (sem reforçar o fracasso).\n⚠️ Pós-reprovação: acolher e reconstruir confiança; não reforçar o fracasso.\n\nRegras da sessão: adapte a linguagem ao momento; se frustração alta, seja acolhedor e objetivo; se tempo curto, não abra aula longa; se pós-reprovação, não reforce o fracasso; se treino pré-prova, seja direto e avaliativo.",
+      "aluno": "# Perfil do aluno (histórico longitudinal)\nNível: intermediario, 3º semestre. Confiança: 63%. Evolução: melhorando.\nForças: Raciocínio diagnóstico (89%)\nFraquezas: Conduta e segurança (37%); Anamnese (55%)\nErros recorrentes: Antibiótico sem dose (3x)\nRisco: Erro crítico de segurança recorrente: Antibiótico sem dose (3x).\nFoco: Priorizar a correção do erro crítico recorrente de segurança com abordagem diretiva.\n\nRegras: use o histórico só para personalizar; não exponha dados sensíveis desnecessários; NÃO humilhe o aluno por erro recorrente; se o erro já apareceu antes, reconheça o padrão com respeito e seja mais direto.",
+      "conducao": "# Condução da sessão\nPersona: Mentor clínico — tom acolhedor.\nModo: reforco_de_erro_critico. Prioridade: Corrigir erro crítico.\nSessão: até 2 conceito(s) e 4 pergunta(s); ~8 min.\n- Não ensine mais do que o permitido; respeite o modo e o tom.\n- Não saia da base do sistema; não vire aula infinita.\n- Após corrigir o erro crítico, pare e verifique compreensão.\n- Termine com revisão curta.\n\n# Plano de aula (Teaching Actions) — siga NESTA ordem:\n  1. [calibrate_session_goal] Calibrar o objetivo da sessão: Corrigir o erro recorrente de dose do antibiótico com segurança. (modo pos_reprovacao, 8 min).\n  2. [acknowledge_strength] Reconhecer o acerto: Mediu sinais vitais completos, incluindo SpO₂\n  3. [reinforce_confidence] Reforçar a confiança: retomar 1 acerto e enquadrar o erro como aprendizado (não reforçar o fracasso).\n  4. [reduce_cognitive_load] Reduzir a carga cognitiva: 1 ponto por vez, linguagem simples.\n  5. [reinforce_progress] Reforçar a evolução: melhorando (nota média 11/20).\n  6. [review_recurring_error] Revisar erro RECORRENTE (3x): Antibiótico sem dose — não é a primeira vez.\n  7. [correct_critical_error] Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose\n  8. [ask_socratic_question] Pergunta socrática: Qual antibiótico e por quê? Qual a dose? — \"Qual antibiótico e por quê? Qual a dose?\"\n  9. [wait_for_student_answer] Aguardar a resposta do aluno antes de explicar.\n  10. [explain_concept] Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente\n  11. [show_exam_reference] Exame de referência: RX de tórax · Hemograma\n  12. [show_sound_reference] Som de referência: Crepitações\n  13. [mini_quiz] Mini-quiz de verificação (1 item objetivo).\n  14. [summarize_session] Resumir os pontos-chave da sessão.\n  15. [compare_with_previous_attempts] Comparar com o histórico (3 casos; evolução melhorando).\n  16. [assign_next_step] Definir o próximo passo de treino: Conduta segura\nRegras do plano: siga a sequência; não pule etapas; se houver 'wait_for_student_answer' espere a resposta; use APENAS os recursos listados; encerre ao final.\nObjetivo final: Corrigir com segurança: Prescreveu antibiótico apropriado COM dose e consolidar a conduta correta."
+    },
+    "ordemComposicaoPrompts": [
+      "system",
+      "seguranca",
+      "naoInventarMedicina",
+      "apenasBaseDoSistema",
+      "verdade",
+      "aluno",
+      "sessao",
+      "professor",
+      "conducao",
+      "caso",
+      "contexto"
+    ],
+    "riscosAlucinacaoEvitados": [
+      "Prompt 'não inventar medicina': proíbe achados/condutas fora do caso e da base.",
+      "Prompt 'apenas base do sistema': ancoragem em caso + HealthBench + material + Centro Clínico.",
+      "Prompt de segurança: contexto educacional/simulado; sem prescrição real."
+    ],
+    "camposAusentes": [
+      "ecg (não indicado no caso)",
+      "sinaisVitais.detalhados (mock parcial)"
+    ],
+    "contextoResumo": {
+      "conversaMsgs": 4,
+      "exameFisicoEventos": 2,
+      "exames": 3,
+      "recursosConhecimento": 6,
+      "temAvaliacao": true,
+      "temMaterial": true
+    }
+  }
+}

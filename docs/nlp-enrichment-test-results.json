@@ -1,0 +1,41 @@
+{
+  "geradoEm": "2026-06-29T21:59:33.623Z",
+  "tbReal": {
+    "detectados": [
+      "confirmacao_identidade",
+      "tosse_cronica",
+      "febre_vespertina_noturna",
+      "perda_peso",
+      "dispneia",
+      "trm_tb",
+      "hemograma",
+      "analgesia",
+      "antibioticoterapia",
+      "tosse",
+      "contato_tb"
+    ],
+    "deveConterFaltando": [],
+    "naoDeveConterIntrusos": [],
+    "enrichmentText": "[ENRIQUECIMENTO NLP — CONCEITOS CLÍNICOS DETECTADOS]\nEste bloco é auxiliar e NÃO substitui a avaliação clínica nem atribui pontos.\nUse apenas como apoio para interpretar abreviações, sinônimos e termos informais do aluno.\nNão infira itens não realizados a partir deste bloco.\n- confirmacao_identidade: o texto contém \"o senhor e\", interpretado como conceito clínico detectado no texto do aluno.\n- tosse_cronica: o texto contém \"tosse ha mais de 3 semanas\", interpretado como tosse persistente/prolongada, compatível com tosse crônica.\n- febre_vespertina_noturna: o texto contém \"febre a noite\", interpretado como relato ou investigação de febre à noite, equivalente a febre vespertina/noturna.\n- perda_peso: o texto contém \"perdi peso\", interpretado como perda ponderal ou emagrecimento.\n- dispneia: o texto contém \"falta de ar\", interpretado como conceito clínico detectado no texto do aluno.\n- trm_tb: o texto contém \"trm tb\", interpretado como solicitação de TRM-TB, equivalente a teste rápido molecular para tuberculose.\n- hemograma: o texto contém \"hemograma\", interpretado como conceito clínico detectado no texto do aluno.\n- analgesia: o texto contém \"dipirona\", interpretado como conceito clínico detectado no texto do aluno.\n- antibioticoterapia: o texto contém \"antibioticoterapia\", interpretado como conceito clínico detectado no texto do aluno.\n- tosse: o texto contém \"tosse\", interpretado como relato de tosse.\n- contato_tb: o texto contém \"alguem com tuberculose\", interpretado como investigação de contato epidemiológico com tuberculose."
+  },
+  "negacao": {
+    "dispneiaNegada": true,
+    "dorNegada": true
+  },
+  "passou": true,
+  "e2eTbReal": {
+    "nota": 0.9,
+    "passed": false,
+    "totalGrades": 26,
+    "trmTbReconhecido": true,
+    "ausenciasReaisMantidas": [
+      "Investigação Diagnóstica — Baciloscopia apropriada",
+      "Solicitou RX de tórax",
+      "Solicitou baciloscopia (2 amostras)",
+      "Prescreveu esquema RIPE",
+      "Solicitou baciloscopia ou cultura de escarro conforme protocolo.",
+      "Notificou ou encaminhou para vigilância quando indicado."
+    ],
+    "observacao": "amostra única, grader real é não-determinístico"
+  }
+}

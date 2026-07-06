@@ -10,13 +10,7 @@ export default function ResumoAnamnese({ mensagens }: ResumoAnamneseProps) {
   const estudanteMsgs = mensagens.filter((m) => m.tipo === "estudante").length;
 
   if (estudanteMsgs < 2) {
-    return (
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 text-center">
-        <p className="text-slate-400 text-sm">
-          Os dados da anamnese aparecerão aqui conforme você conversar com o paciente.
-        </p>
-      </div>
-    );
+    return null;
   }
 
   return (

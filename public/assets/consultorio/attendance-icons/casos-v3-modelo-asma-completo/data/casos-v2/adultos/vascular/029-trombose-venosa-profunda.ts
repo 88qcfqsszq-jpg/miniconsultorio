@@ -1,0 +1,602 @@
+import { CasoOSCEV2 } from "@/types/caso-osce-v2";
+
+export const caso029TromboseVenosaProfunda: CasoOSCEV2 = {
+// ====== CASO 29: TROMBOSE VENOSA PROFUNDA ======
+id: "29",
+titulo: "Trombose Venosa Profunda",
+sistema: "Vascular",
+tema: "Vasculopatia Periférica",
+nivel: "intermediario",
+tipo_estacao: "integrada",
+tempo_osce_minutos: 11,
+objetivo_pedagogico: "Diagnosticar TVP e iniciar anticoagulação apropriada",
+dados_visiveis_ao_estudante: {
+nome_paciente: "Lucas Martins",
+idade: 42,
+sexo: "Masculino",
+queixa_principal: "Inchaço e dor na perna",
+historia_breve: "Inchaço súbito após cirurgia há 5 dias, dor localizada"
+},
+dados_ocultos_do_sistema: {
+diagnostico_principal: "Trombose Venosa Profunda de membro inferior esquerdo",
+diagnosticos_diferenciais: ["Celulite", "Bursite", "Ruptura de Baker"],
+sindromes_associadas: ["Risco de Embolia Pulmonar"],
+},
+descricaoBreve: "Paciente com edema assimétrico, dor, ultrassom com trombo venoso",
+categoria: "Vascular",
+paciente: {
+id: "pac-029",
+nome: "Lucas Martins",
+idade: 42,
+sexo: "M",
+queixaPrincipal: "Inchaço e dor",
+historicoDoenca: "Cirurgia há 5 dias",
+antecedentes: ["Cirurgia ortopédica recente"],
+profissao: "Executivo",
+estado_civil: "Casado",
+alergias: [],
+medicamentos_em_uso: [],
+},
+respostas_do_paciente: {
+inicial: "Minha perna inchou muito depois da cirurgia",
+edema: "Sim, comparando está muito maior",
+dor: "Sim, dor na panturrilha",
+duracao: "Começou ontem",
+febre: "Não",
+vermelha: "Não está vermelha, só inchada",
+},
+respostaPaciente: {
+inicial: "Inchaço na perna",
+edema: "Sim",
+dor: "Sim",
+duracao: "Ontem",
+febre: "Não",
+vermelha: "Não",
+},
+sinais_vitais: {
+corretos: {
+pressaoArterial: "130/80 mmHg",
+frequenciaCardiaca: 85,
+frequenciaRespiratoria: 18,
+temperatura: 36.8,
+saturacaoOxigenio: 98,
+},
+},
+sinaisVitaisCorretos: {
+pressaoArterial: "130/80 mmHg",
+frequenciaCardiaca: 85,
+frequenciaRespiratoria: 18,
+temperatura: 36.8,
+saturacaoOxigenio: 98,
+},
+exame_fisico: {
+correto: {
+inspecao: "Edema assimétrico em MIE, calor local",
+palpacao: "Dor à palpação, empastamento muscular",
+ausculta: "Normal",
+percussao: "Normal",
+observacoes: "Diferença de circunferência >2cm entre membros",
+regiao: "Membros inferiores",
+achados_positivos: ["Edema assimétrico"],
+achados_negativos: ["Eritema"],
+},
+},
+exameFisicoCorreto: {
+inspecao: "Edema assimétrico",
+palpacao: "Dor, empastamento",
+ausculta: "Normal",
+percussao: "Normal",
+observacoes: "Sugestivo de TVP",
+},
+exame_fisico_interativo: {
+membros: {
+edema: "Assimétrico grau III",
+pulsos: "Presentes bilateralmente",
+temperatura: "Normal",
+mobilidade: "Normal",
+},
+},
+exames_complementares_disponiveis: [
+{
+nome: "Ultrassom Venoso Duplex",
+descricao: "Avaliação de trombose",
+resultado: "Trombo em veia femoral profunda",
+valor_referencia: "Sem trombo",
+interpretacao: "TVP confirmada",
+},
+],
+hipoteses_diagnosticas_esperadas: [
+{
+diagnostico: "Trombose Venosa Profunda",
+probabilidade: 90,
+criterios_minimos: [
+"Edema assimétrico",
+"Dor",
+"Trombo no ultrassom",
+],
+},
+],
+diagnosticos_diferenciais: [
+{
+diagnostico: "Celulite",
+criterios_exclusao: ["Trombo no ultrassom"],
+achados_que_descartam: ["Ultrassom normal"],
+},
+],
+examesIndicados: [
+"Ultrassom venoso duplex urgente",
+"D-dímero",
+],
+conduta_esperada: {
+imediata: [
+"Anticoagulação imediata",
+"Elevação de membro",
+],
+curto_prazo: [
+"Iniciar DOAC ou warfarina",
+"Possível trombólise",
+],
+longo_prazo: [
+"Anticoagulação por 3 meses",
+],
+encaminhamentos: ["Angiologia"],
+},
+condutaCorreta: "Ultrassom urgente, anticoagulação imediata com HBPM, DOAC ou warfarina",
+criterios_de_gravidade: [
+{
+severidade: "grave",
+sinais: ["TVP extensa", "Risco de TEP"],
+descricao: "Emergência vascular",
+recomendacao: "Anticoagulação urgente",
+},
+],
+erros_criticos: [
+{
+erro: "Não anticoagular",
+descricao: "Risco de TEP",
+penalidade: 3,
+evitavel: true,
+},
+{
+erro: "Não fazer ultrassom",
+descricao: "Diagnóstico definitivo necessário",
+penalidade: 2,
+evitavel: true,
+},
+],
+checklist_osce: [
+{
+item: "Mediu circunferência de membros",
+realizado: false,
+critico: true,
+},
+{
+item: "Solicitou ultrassom duplex",
+realizado: false,
+critico: true,
+},
+{
+item: "Iniciou anticoagulação",
+realizado: false,
+critico: true,
+},
+],
+rubrica_correcao: [
+{
+criterio: "Reconhecimento de TVP",
+peso: 30,
+descricao: "Achados clínicos e ultrassom",
+pontuacao_maxima: 30,
+},
+{
+criterio: "Anticoagulação",
+peso: 25,
+descricao: "Prevenção de TEP",
+pontuacao_maxima: 25,
+},
+],
+modelo_soap: {
+subjetivo: {
+secao: "S",
+componentes_obrigatorios: [
+"Edema súbito",
+"Cirurgia recente",
+],
+},
+objetivo: {
+secao: "O",
+componentes_obrigatorios: [
+"Edema assimétrico",
+"Trombo no ultrassom",
+],
+},
+avaliacao: {
+secao: "A",
+componentes_obrigatorios: ["TVP"],
+},
+plano: {
+secao: "P",
+componentes_obrigatorios: [
+"Anticoagulação",
+"Seguimento",
+],
+},
+},
+feedback_modelo: {
+acertos_esperados: [
+"Reconheceu TVP",
+"Solicitou ultrassom",
+"Iniciou anticoagulação",
+],
+erros_comuns: ["Confundir com celulite"],
+orientacoes_pedagogicas: [
+"TVP pós-cirurgia é complicação comum",
+"Sempre fazer ultrassom para confirmar",
+],
+},
+checklist_oculto_examinador: {
+oQueProfessorQuer: "Diagnosticar TVP e iniciar anticoagulação",
+comunicacao: ["explicou risco de TEP"],
+anamnese: ["investigou fator de risco"],
+exame_fisico: ["mediu edema"],
+exames_complementares: ["pediu ultrassom"],
+raciocinio: ["diagnosticou TVP"],
+conduta: ["anticoagulou"],
+soap: ["documentou TVP"],
+},
+temaOSCE: "Vasculopatia Periférica",
+subtopicosOSCE: [
+"TVP",
+"Edema assimétrico",
+"Ultrassom com trombo",
+"Anticoagulação",
+],
+diagnosticoCorreto: "Trombose Venosa Profunda",
+
+  exames_laboratoriais_detalhados: {
+    hemograma: {
+      solicitadoPor: ["hemograma"],
+      disponivel: true,
+      prioridade: "importante",
+      interpretacao: "Hemograma sem anemia ou plaquetopenia.",
+      valores: {
+        hemoglobina: "13,6 g/dL",
+        leucocitos: "9.200/mm³",
+        plaquetas: "280.000/mm³",
+      },
+    },
+    funcaoRenal: {
+      solicitadoPor: ["ureia", "creatinina", "função renal"],
+      disponivel: true,
+      prioridade: "rotina",
+      interpretacao: "Função renal preservada.",
+      valores: {
+        ureia: "32 mg/dL",
+        creatinina: "0,9 mg/dL",
+        etfg: "> 90 mL/min/1,73m²",
+      },
+    },
+    eletrolitos: {
+      solicitadoPor: ["sódio", "potássio", "eletrólitos", "ionograma"],
+      disponivel: true,
+      prioridade: "rotina",
+      interpretacao: "Eletrólitos sem alterações relevantes.",
+      valores: {
+        sodio: "139 mEq/L",
+        potassio: "4,2 mEq/L",
+        cloro: "102 mEq/L",
+        magnesio: "2,0 mg/dL",
+        calcio: "9,2 mg/dL",
+      },
+    },
+    marcadoresInflamatorios: {
+      solicitadoPor: ["pcr", "vhs", "procalcitonina", "marcadores inflamatórios"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Marcadores inflamatórios sem elevação relevante.",
+      valores: {
+        pcr: "0,4 mg/dL",
+        vhs: "12 mm/h",
+        procalcitonina: "0,05 ng/mL",
+      },
+    },
+    gasometria: {
+      solicitadoPor: ["gasometria", "gasometria arterial"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Gasometria sem distúrbios ácido-base relevantes.",
+      valores: {
+        ph: "7,40",
+        paco2: "40 mmHg",
+        pao2: "92 mmHg",
+        hco3: "24 mEq/L",
+        satO2: "97%",
+        lactato: "1,2 mmol/L",
+        be: "0",
+      },
+    },
+    marcadoresCardiacos: {
+      solicitadoPor: ["troponina", "ckmb", "bnp", "marcadores cardíacos"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Marcadores cardíacos sem evidência de necrose miocárdica.",
+      valores: {
+        troponina: "<0,04 ng/mL",
+        ckmb: "2,0 ng/mL",
+        bnp: "48 pg/mL",
+      },
+    },
+    funcaoHepatica: {
+      solicitadoPor: ["tgo", "tgp", "bilirrubinas", "função hepática"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Função hepática sem alterações relevantes.",
+      valores: {
+        tgo: "24 U/L",
+        tgp: "28 U/L",
+        fa: "88 U/L",
+        ggt: "34 U/L",
+        bilirrubinaTotal: "0,8 mg/dL",
+        bilirrubinaDireta: "0,2 mg/dL",
+        bilirrubinaIndireta: "0,6 mg/dL",
+        albumina: "4,1 g/dL",
+      },
+    },
+    coagulograma: {
+      solicitadoPor: ["d-dímero", "coagulograma"],
+      disponivel: true,
+      prioridade: "importante",
+      interpretacao: "D-dímero elevado, compatível com trombose venosa no contexto clínico.",
+      valores: {
+        tp: "12,8 s",
+        inr: "1,0",
+        ttpa: "30 s",
+        fibrinogenio: "410 mg/dL",
+        dDimero: "> 3.500 ng/mL",
+      },
+    },
+    urinaTipo1: {
+      solicitadoPor: ["urina tipo 1", "eas", "sumário de urina"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Urina tipo 1 sem alterações relevantes.",
+      valores: {
+        densidade: "1,020",
+        ph: "6,0",
+        proteina: "Ausente",
+        glicose: "Ausente",
+        cetonas: "Ausentes",
+        sangueHemoglobina: "Ausente",
+        nitrito: "Negativo",
+        esteraseLeucocitaria: "Negativa",
+        leucocitos: "< 5 p/campo",
+        hemacias: "< 3 p/campo",
+        bacterias: "Raras",
+        cilindros: "Ausentes",
+      },
+    },
+  },
+
+
+  // ===== CAMPOS V3 — MODELO PADRÃO BASEADO NO CASO DE ASMA GRAVE =====
+  sinaisVitais: {
+    entrada: {
+      momento: "Chegada ao atendimento",
+      pressaoArterial: "130/80 mmHg",
+      frequenciaCardiaca: 85,
+      frequenciaRespiratoria: 18,
+      temperatura: 36.8,
+      saturacaoOxigenio: 98,
+      glicemia: 100,
+      interpretacao: "Caso clínico com necessidade de avaliação dirigida, conduta proporcional à gravidade e reavaliação objetiva.",
+    },
+    evolucao: {
+      aposCondutaCorreta_60min: {
+        condicoesParaAtivar: ["Diagnóstico reconhecido", "Conduta inicial correta", "Monitorização", "Reavaliação"],
+        pressaoArterial: "120/78 mmHg",
+        frequenciaCardiaca: 88,
+        frequenciaRespiratoria: 18,
+        saturacaoOxigenio: 97,
+        interpretacao: "Melhora ou estabilização após conduta adequada.",
+      },
+      seCondutaInadequadaOuAtrasada: {
+        pressaoArterial: "100/66 mmHg",
+        frequenciaCardiaca: 112,
+        frequenciaRespiratoria: 24,
+        saturacaoOxigenio: 93,
+        interpretacao: "Risco de deterioração por atraso diagnóstico ou conduta incompleta.",
+      },
+    },
+    criteriosParaAltaOuObservacao: {
+      altaSeguraSe: ["sinais vitais estáveis", "diagnóstico seguro", "conduta realizada", "reavaliação documentada", "seguimento orientado"],
+      manterObservacaoOuInternarSe: ["instabilidade", "dúvida diagnóstica grave", "risco de deterioração", "exames críticos"],
+    },
+  },
+
+  exames: {
+    complementaresDisponiveisOriginais: [
+{
+nome: "Ultrassom Venoso Duplex",
+descricao: "Avaliação de trombose",
+resultado: "Trombo em veia femoral profunda",
+valor_referencia: "Sem trombo",
+interpretacao: "TVP confirmada",
+},
+],
+    laboratoriais: {
+    hemograma: {
+      solicitadoPor: ["hemograma"],
+      disponivel: true,
+      prioridade: "importante",
+      interpretacao: "Hemograma sem anemia ou plaquetopenia.",
+      valores: {
+        hemoglobina: "13,6 g/dL",
+        leucocitos: "9.200/mm³",
+        plaquetas: "280.000/mm³",
+      },
+    },
+    funcaoRenal: {
+      solicitadoPor: ["ureia", "creatinina", "função renal"],
+      disponivel: true,
+      prioridade: "rotina",
+      interpretacao: "Função renal preservada.",
+      valores: {
+        ureia: "32 mg/dL",
+        creatinina: "0,9 mg/dL",
+        etfg: "> 90 mL/min/1,73m²",
+      },
+    },
+    eletrolitos: {
+      solicitadoPor: ["sódio", "potássio", "eletrólitos", "ionograma"],
+      disponivel: true,
+      prioridade: "rotina",
+      interpretacao: "Eletrólitos sem alterações relevantes.",
+      valores: {
+        sodio: "139 mEq/L",
+        potassio: "4,2 mEq/L",
+        cloro: "102 mEq/L",
+        magnesio: "2,0 mg/dL",
+        calcio: "9,2 mg/dL",
+      },
+    },
+    marcadoresInflamatorios: {
+      solicitadoPor: ["pcr", "vhs", "procalcitonina", "marcadores inflamatórios"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Marcadores inflamatórios sem elevação relevante.",
+      valores: {
+        pcr: "0,4 mg/dL",
+        vhs: "12 mm/h",
+        procalcitonina: "0,05 ng/mL",
+      },
+    },
+    gasometria: {
+      solicitadoPor: ["gasometria", "gasometria arterial"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Gasometria sem distúrbios ácido-base relevantes.",
+      valores: {
+        ph: "7,40",
+        paco2: "40 mmHg",
+        pao2: "92 mmHg",
+        hco3: "24 mEq/L",
+        satO2: "97%",
+        lactato: "1,2 mmol/L",
+        be: "0",
+      },
+    },
+    marcadoresCardiacos: {
+      solicitadoPor: ["troponina", "ckmb", "bnp", "marcadores cardíacos"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Marcadores cardíacos sem evidência de necrose miocárdica.",
+      valores: {
+        troponina: "<0,04 ng/mL",
+        ckmb: "2,0 ng/mL",
+        bnp: "48 pg/mL",
+      },
+    },
+    funcaoHepatica: {
+      solicitadoPor: ["tgo", "tgp", "bilirrubinas", "função hepática"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Função hepática sem alterações relevantes.",
+      valores: {
+        tgo: "24 U/L",
+        tgp: "28 U/L",
+        fa: "88 U/L",
+        ggt: "34 U/L",
+        bilirrubinaTotal: "0,8 mg/dL",
+        bilirrubinaDireta: "0,2 mg/dL",
+        bilirrubinaIndireta: "0,6 mg/dL",
+        albumina: "4,1 g/dL",
+      },
+    },
+    coagulograma: {
+      solicitadoPor: ["d-dímero", "coagulograma"],
+      disponivel: true,
+      prioridade: "importante",
+      interpretacao: "D-dímero elevado, compatível com trombose venosa no contexto clínico.",
+      valores: {
+        tp: "12,8 s",
+        inr: "1,0",
+        ttpa: "30 s",
+        fibrinogenio: "410 mg/dL",
+        dDimero: "> 3.500 ng/mL",
+      },
+    },
+    urinaTipo1: {
+      solicitadoPor: ["urina tipo 1", "eas", "sumário de urina"],
+      disponivel: true,
+      prioridade: "opcional",
+      interpretacao: "Urina tipo 1 sem alterações relevantes.",
+      valores: {
+        densidade: "1,020",
+        ph: "6,0",
+        proteina: "Ausente",
+        glicose: "Ausente",
+        cetonas: "Ausentes",
+        sangueHemoglobina: "Ausente",
+        nitrito: "Negativo",
+        esteraseLeucocitaria: "Negativa",
+        leucocitos: "< 5 p/campo",
+        hemacias: "< 3 p/campo",
+        bacterias: "Raras",
+        cilindros: "Ausentes",
+      },
+    },
+  },
+    observacaoUsoExames: "Exames devem apoiar o raciocínio, mas não atrasar condutas urgentes quando houver instabilidade ou sinal de gravidade.",
+  },
+
+  feedbackDetalhado: {
+    escala: { total: 20, minimoAprovacao: 17 },
+    dominios: [
+      { nome: "Comunicação e postura", pontos: 2, criterios: [
+        { item: "Apresentou-se, confirmou paciente e manteve postura segura", pontos: 0.5 },
+        { item: "Explicou avaliação e conduta em linguagem acessível", pontos: 0.5 },
+        { item: "Priorizou segurança sem atrasar medidas urgentes", pontos: 0.5 },
+        { item: "Reavaliou e comunicou evolução/próximos passos", pontos: 0.5 },
+      ]},
+      { nome: "Anamnese dirigida", pontos: 3, criterios: [
+        { item: "Caracterizou queixa principal, início, duração e progressão", pontos: 0.7 },
+        { item: "Investigou sintomas associados relevantes", pontos: 0.7 },
+        { item: "Investigou antecedentes, medicações, alergias e fatores de risco", pontos: 0.7 },
+        { item: "Investigou sinais de gravidade e diferenciais perigosos", pontos: 0.9 },
+      ]},
+      { nome: "Exame físico e gravidade", pontos: 4, criterios: [
+        { item: "Solicitou sinais vitais completos e valorizou alterações", pontos: 0.9, critico: true },
+        { item: "Realizou exame físico direcionado ao sistema acometido", pontos: 1.0 },
+        { item: "Identificou achados positivos e negativos relevantes", pontos: 0.8 },
+        { item: "Classificou gravidade e risco de deterioração", pontos: 1.0, critico: true },
+        { item: "Reavaliou após intervenção quando aplicável", pontos: 0.3 },
+      ]},
+      { nome: "Exames complementares", pontos: 2, criterios: [
+        { item: "Solicitou exames essenciais sem atrasar tratamento urgente", pontos: 0.7 },
+        { item: "Interpretou labs/imagem de forma coerente", pontos: 0.7 },
+        { item: "Usou exames para confirmar hipótese e excluir diferenciais graves", pontos: 0.4 },
+        { item: "Evitou priorizar exames desnecessários em instabilidade", pontos: 0.2 },
+      ]},
+      { nome: "Raciocínio diagnóstico", pontos: 3, criterios: [
+        { item: "Formulou diagnóstico principal correto", pontos: 1.0, critico: true },
+        { item: "Justificou com história, exame físico e exames", pontos: 0.8 },
+        { item: "Considerou diferenciais perigosos", pontos: 0.7 },
+        { item: "Reconheceu gravidade e necessidade de escalonamento", pontos: 0.5 },
+      ]},
+      { nome: "Conduta, reavaliação e destino", pontos: 6, criterios: [
+        { item: "Iniciou conduta imediata apropriada", pontos: 1.4, critico: true },
+        { item: "Indicou tratamento específico correto", pontos: 1.2, critico: true },
+        { item: "Monitorizou resposta clínica e sinais vitais", pontos: 0.9 },
+        { item: "Escalonou cuidado se resposta inadequada", pontos: 0.9 },
+        { item: "Definiu destino seguro", pontos: 0.8 },
+        { item: "Orientou retorno/seguimento/prevenção", pontos: 0.8 },
+      ]},
+    ],
+    penalidadesAutomaticas: [
+      { condicao: "Não reconhecer sinal de gravidade", penalidade: 2, justificativa: "Sinais de gravidade mudam prioridade e destino." },
+      { condicao: "Atrasar conduta urgente para aguardar exame não essencial", penalidade: 2, justificativa: "Estabilização não deve ser atrasada." },
+      { condicao: "Dar alta sem reavaliação objetiva", penalidade: 3, justificativa: "Alta insegura expõe a risco de deterioração." },
+    ],
+  },
+
+} as CasoOSCEV2;

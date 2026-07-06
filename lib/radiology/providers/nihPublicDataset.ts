@@ -208,12 +208,12 @@ export async function buscarImagemNIHPublico(
       // Identificação
       imageId: resultado.imageId,
       imageUrl: imageUrl,
-      labels: resultado.labels || [primeiroLabel],
+      labels: (resultado.labels as any) || [primeiroLabel],
       diagnosticoRadiologico: primeiroLabel,
       achadoPrincipal: primeiroLabel,
 
       // Fonte: NIH PÚBLICO
-      fonte: "NIH Chest X-ray Dataset (Google Cloud Public Data)",
+      fonte: "NIH Chest X-ray",
       atribuicao: "NIH Clinical Center | Domínio Público | Sem restrições de uso",
 
       // Integração PÚBLICA (não requer credenciais)
@@ -222,7 +222,7 @@ export async function buscarImagemNIHPublico(
       podeExibirAoAluno: true, // Público = pode exibir diretamente
 
       // Metadados
-      metadadosOriginais: resultado,
+      metadadosOriginais: resultado as any,
       dataAssociacao: new Date().toISOString(),
     };
 

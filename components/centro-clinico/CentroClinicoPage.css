@@ -1,0 +1,523 @@
+/* ==========================================================================
+   CentroClinicoPage — "Centro de Conhecimento Clínico".
+   CSS ESCOPADO sob .centro-clinico-page (classes .cc-*). Não vaza estilos.
+   Espaçamento lateral da sidebar vem do AppShell (.app-main). Aqui só conteúdo.
+   Estética premium alinhada ao Dashboard / Guia (vidro azul-gelo).
+   ========================================================================== */
+
+.centro-clinico-page {
+  --cc-bg: #f3f8ff;
+  --cc-primary: #1f7bff;
+  --cc-primary-2: #4f9bff;
+  --cc-ink: #0b1f4d;
+  --cc-ink-2: #5c6d8a;
+  --cc-border: rgba(120, 170, 230, 0.24);
+
+  min-height: 100vh;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: var(--cc-ink);
+  background:
+    radial-gradient(1200px 600px at 82% -10%, rgba(192, 222, 255, 0.5), transparent 60%),
+    radial-gradient(900px 500px at -6% 112%, rgba(214, 235, 255, 0.5), transparent 60%),
+    var(--cc-bg);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------- glass primitive ---------- */
+.centro-clinico-page .cc-glass {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.74), rgba(232, 243, 255, 0.48));
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid var(--cc-border);
+  box-shadow: 0 18px 55px rgba(72, 116, 170, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  border-radius: 26px;
+}
+
+/* ---------- section head ---------- */
+.centro-clinico-page .cc-section-head {
+  margin: 2px 2px 0;
+}
+.centro-clinico-page .cc-eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cc-primary);
+}
+.centro-clinico-page .cc-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--cc-ink);
+}
+.centro-clinico-page .cc-sub {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--cc-ink-2);
+}
+.centro-clinico-page .cc-link {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--cc-primary);
+  transition: opacity 0.16s ease;
+}
+.centro-clinico-page .cc-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+/* ---------- "Em breve" badge ---------- */
+.centro-clinico-page .cc-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a5cc0;
+  background: rgba(233, 226, 255, 0.72);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.centro-clinico-page .cc-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 30px;
+  padding: 50px 48px;
+  color: #fff;
+  background:
+    radial-gradient(760px 340px at 90% -34%, rgba(120, 190, 255, 0.6), transparent 60%),
+    linear-gradient(120deg, #1560d8 0%, #2e86ff 46%, #6aa8ff 100%);
+  box-shadow: 0 26px 70px rgba(31, 92, 190, 0.34);
+}
+.centro-clinico-page .cc-hero::after {
+  content: "";
+  position: absolute;
+  right: -70px;
+  top: -70px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 62%);
+  z-index: -1;
+}
+.centro-clinico-page .cc-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+}
+.centro-clinico-page .cc-hero-badge i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #7dffc0;
+  box-shadow: 0 0 10px rgba(125, 255, 192, 0.9);
+}
+.centro-clinico-page .cc-hero h1 {
+  margin: 18px 0 0;
+  font-size: 44px;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  font-weight: 850;
+  max-width: 720px;
+}
+.centro-clinico-page .cc-hero-sub {
+  margin: 16px 0 0;
+  max-width: 660px;
+  font-size: 17px;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.92);
+}
+.centro-clinico-page .cc-hero-chips {
+  margin: 24px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.centro-clinico-page .cc-hero-chip {
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 750;
+  color: #eaf3ff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(6px);
+}
+.centro-clinico-page .cc-hero-actions {
+  margin: 26px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   Botões
+   ========================================================================== */
+.centro-clinico-page .cc-btn {
+  border: 0;
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 13px 22px;
+  font-size: 14px;
+  font-weight: 800;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.centro-clinico-page .cc-btn-light {
+  color: var(--cc-primary);
+  background: #fff;
+  box-shadow: 0 14px 30px rgba(10, 40, 90, 0.24);
+}
+.centro-clinico-page .cc-btn-light:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px rgba(10, 40, 90, 0.3);
+}
+.centro-clinico-page .cc-btn-primary {
+  color: #fff;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  box-shadow: 0 14px 30px rgba(31, 123, 255, 0.28);
+}
+.centro-clinico-page .cc-btn-ped {
+  color: #fff;
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  box-shadow: 0 14px 30px rgba(236, 72, 153, 0.28);
+}
+.centro-clinico-page .cc-btn-ghost {
+  color: var(--cc-primary);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--cc-border);
+}
+.centro-clinico-page .cc-btn-primary:hover,
+.centro-clinico-page .cc-btn-ped:hover,
+.centro-clinico-page .cc-btn-ghost:hover {
+  transform: translateY(-2px);
+}
+/* variantes translúcidas dentro do hero */
+.centro-clinico-page .cc-hero .cc-btn-ghost {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+/* ==========================================================================
+   Grades e cards genéricos
+   ========================================================================== */
+.centro-clinico-page .cc-grid {
+  display: grid;
+  gap: 18px;
+  margin-top: 16px;
+}
+.centro-clinico-page .cc-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.centro-clinico-page .cc-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.centro-clinico-page .cc-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.centro-clinico-page .cc-card {
+  padding: 20px;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.centro-clinico-page .cc-card.is-clickable {
+  cursor: pointer;
+}
+.centro-clinico-page .cc-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(31, 123, 255, 0.3);
+  box-shadow: 0 24px 60px rgba(72, 116, 170, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.centro-clinico-page .cc-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.centro-clinico-page .cc-card-ico {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  font-size: 20px;
+  color: var(--cc-primary);
+  background: rgba(231, 243, 255, 0.9);
+  border: 1px solid var(--cc-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.centro-clinico-page .cc-card-ico svg {
+  width: 22px;
+  height: 22px;
+}
+.centro-clinico-page .cc-card h3 {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--cc-ink);
+}
+.centro-clinico-page .cc-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--cc-ink-2);
+}
+.centro-clinico-page .cc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+.centro-clinico-page .cc-tag {
+  font-size: 11.5px;
+  font-weight: 650;
+  color: #33568f;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(231, 243, 255, 0.72);
+  border: 1px solid var(--cc-border);
+}
+
+/* ==========================================================================
+   Fluxos clínicos (etapas encadeadas)
+   ========================================================================== */
+.centro-clinico-page .cc-flow-card {
+  padding: 18px 20px;
+  border-radius: 20px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.centro-clinico-page .cc-flow-card.is-clickable {
+  cursor: pointer;
+}
+.centro-clinico-page .cc-flow-card.is-clickable:hover {
+  transform: translateY(-3px);
+  border-color: rgba(31, 123, 255, 0.3);
+  box-shadow: 0 24px 60px rgba(72, 116, 170, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.centro-clinico-page .cc-flow-card h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--cc-ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.centro-clinico-page .cc-flow-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.centro-clinico-page .cc-flow-pill {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #23477f;
+  padding: 7px 12px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--cc-border);
+  box-shadow: 0 6px 16px rgba(72, 116, 170, 0.06);
+}
+.centro-clinico-page .cc-flow-arrow {
+  color: rgba(31, 123, 255, 0.6);
+  font-weight: 800;
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Checklist OSCE
+   ========================================================================== */
+.centro-clinico-page .cc-checklist {
+  padding: 22px;
+  border-radius: 24px;
+}
+.centro-clinico-page .cc-checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.centro-clinico-page .cc-check {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid var(--cc-border);
+  font-size: 13.5px;
+  font-weight: 650;
+  color: var(--cc-ink);
+}
+.centro-clinico-page .cc-check-box {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  color: #147a52;
+  background: rgba(220, 250, 235, 0.85);
+  border: 1px solid rgba(120, 210, 170, 0.42);
+}
+.centro-clinico-page .cc-check-box svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ==========================================================================
+   Sons (botões "Ouvir em breve")
+   ========================================================================== */
+.centro-clinico-page .cc-sound-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 11px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #6a7c99;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(120, 170, 230, 0.5);
+  cursor: not-allowed;
+}
+.centro-clinico-page .cc-sound-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ==========================================================================
+   Erros comuns (alerta)
+   ========================================================================== */
+.centro-clinico-page .cc-alert {
+  padding: 16px 18px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(145deg, rgba(255, 245, 245, 0.9), rgba(255, 236, 236, 0.7));
+  border: 1px solid rgba(244, 143, 143, 0.4);
+  box-shadow: 0 12px 30px rgba(200, 80, 80, 0.08);
+}
+.centro-clinico-page .cc-alert-ico {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #d9483b;
+  background: rgba(255, 220, 220, 0.85);
+  border: 1px solid rgba(220, 120, 120, 0.4);
+}
+.centro-clinico-page .cc-alert-ico svg {
+  width: 16px;
+  height: 16px;
+}
+.centro-clinico-page .cc-alert strong {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #8a2f27;
+}
+
+/* ==========================================================================
+   Modo Professor IA
+   ========================================================================== */
+.centro-clinico-page .cc-professor {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 40px;
+  border-radius: 30px;
+  color: #fff;
+  background:
+    radial-gradient(620px 300px at 12% -20%, rgba(178, 148, 255, 0.6), transparent 60%),
+    linear-gradient(120deg, #6d3fd6 0%, #7b5cff 48%, #9d7bff 100%);
+  box-shadow: 0 26px 70px rgba(90, 60, 200, 0.34);
+}
+.centro-clinico-page .cc-professor h2 {
+  margin: 14px 0 0;
+  font-size: 30px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+.centro-clinico-page .cc-professor p {
+  margin: 12px 0 0;
+  max-width: 640px;
+  font-size: 15.5px;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.92);
+}
+.centro-clinico-page .cc-professor .cc-hero-badge {
+  background: rgba(255, 255, 255, 0.18);
+}
+.centro-clinico-page .cc-professor-actions {
+  margin: 24px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.centro-clinico-page .cc-professor .cc-btn-ghost {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+}
+.centro-clinico-page .cc-btn-soon {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media (max-width: 1180px) {
+  .centro-clinico-page .cc-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .centro-clinico-page .cc-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .centro-clinico-page .cc-checklist-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .centro-clinico-page {
+    padding: 18px;
+    gap: 24px;
+  }
+  .centro-clinico-page .cc-hero {
+    padding: 34px 22px;
+  }
+  .centro-clinico-page .cc-hero h1 {
+    font-size: 32px;
+  }
+  .centro-clinico-page .cc-professor {
+    padding: 28px 22px;
+  }
+  .centro-clinico-page .cc-grid-4,
+  .centro-clinico-page .cc-grid-3,
+  .centro-clinico-page .cc-grid-2,
+  .centro-clinico-page .cc-checklist-grid {
+    grid-template-columns: 1fr;
+  }
+}

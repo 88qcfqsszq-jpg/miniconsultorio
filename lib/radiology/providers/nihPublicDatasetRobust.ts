@@ -202,7 +202,7 @@ function construirUrlImagem(
   resultado: Record<string, any>
 ): string {
   // Se tem caminho completo, usar template com path
-  if (resultado[config.campos.caminho]) {
+  if (config.campos.caminho && resultado[config.campos.caminho]) {
     return config.urlTemplate
       .replace("{bucket}", config.bucket)
       .replace("{file_path}", resultado[config.campos.caminho])
@@ -210,7 +210,7 @@ function construirUrlImagem(
   }
 
   // Caso contrário, construir com image_id e study_id
-  if (resultado[config.campos.id] && resultado[config.campos.estudoId]) {
+  if (config.campos.id && config.campos.estudoId && resultado[config.campos.id] && resultado[config.campos.estudoId]) {
     return config.urlTemplate
       .replace("{bucket}", config.bucket)
       .replace("{image_id}", resultado[config.campos.id])
@@ -218,7 +218,8 @@ function construirUrlImagem(
   }
 
   // Fallback: URL simples
-  return `https://storage.googleapis.com/${config.bucket}/images/${resultado[config.campos.id]}/${resultado[config.campos.id]}.png`;
+  const imageId = config.campos.id ? resultado[config.campos.id] : "unknown";
+  return `https://storage.googleapis.com/${config.bucket}/images/${imageId}/${imageId}.png`;
 }
 
 // ============================================================================
@@ -292,20 +293,20 @@ export async function buscarImagemNIHPublicoRobust(
           modalidade: "RX",
           regiao: "torax",
 
-          imageId: resultado[config.campos.id],
+          imageId: String(resultado[config.campos.id]),
           imageUrl: imageUrl,
-          labels: [labelsNIH[0]],
+          labels: [labelsNIH[0]] as any,
           diagnosticoRadiologico: labelsNIH[0],
           achadoPrincipal: labelsNIH[0],
 
-          fonte: "NIH Chest X-ray Dataset (Google Cloud Public Data)",
+          fonte: "NIH Chest X-ray",
           atribuicao: "NIH Clinical Center | Domínio Público",
 
           integracaoReal: true,
           validadoPorIA: false,
           podeExibirAoAluno: true,
 
-          metadadosOriginais: resultado,
+          metadadosOriginais: resultado as any,
           dataAssociacao: new Date().toISOString(),
         };
 

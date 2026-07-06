@@ -1,0 +1,41 @@
+{
+  "geradoEm": "2026-07-04T02:52:17.686Z",
+  "passados": 12,
+  "totalChecks": 12,
+  "resultados": [
+    {
+      "cenario": "A — sem ausculta (fez dx+conduta)",
+      "opening": "Você foi bem em: Formulou a hipótese diagnóstica (Pneumonia). Agora vamos corrigir um ponto crítico: prescreveu antibiótico apropriado com dose.",
+      "forcas": [
+        "Formulou a hipótese diagnóstica (Pneumonia)",
+        "Registrou uma conduta",
+        "Prescreveu medicação"
+      ],
+      "falhas": []
+    },
+    {
+      "cenario": "B — RX apenas (sem ausculta)",
+      "opening": "Você foi bem em: Solicitou Radiografia de tórax. Agora vamos corrigir um ponto crítico: prescreveu antibiótico apropriado com dose.",
+      "forcas": [
+        "Solicitou Radiografia de tórax",
+        "Formulou a hipótese diagnóstica (Pneumonia)"
+      ],
+      "falhas": []
+    },
+    {
+      "cenario": "C — ausculta comprovada",
+      "opening": "Você foi bem em: Auscultou o tórax. Agora vamos corrigir um ponto crítico: prescreveu antibiótico apropriado com dose.",
+      "forcas": [
+        "Auscultou o tórax",
+        "Solicitou Radiografia de tórax"
+      ],
+      "falhas": []
+    },
+    {
+      "cenario": "D — sem StudentTrace",
+      "opening": "Vamos revisar seu atendimento e corrigir o ponto mais importante com segurança.",
+      "forcas": [],
+      "falhas": []
+    }
+  ]
+}

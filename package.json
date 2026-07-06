@@ -11,8 +11,10 @@
   "dependencies": {
     "@google-cloud/bigquery": "^8.3.1",
     "@tailwindcss/postcss": "latest",
+    "jspdf": "^4.2.1",
     "next": "latest",
     "openai": "latest",
+    "puppeteer": "^25.2.0",
     "react": "latest",
     "react-dom": "latest"
   },

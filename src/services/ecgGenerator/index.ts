@@ -21,6 +21,23 @@ import { getPresetById, normalizePresetId } from './presets'
 import { transformarEm12Derivacoes } from './leadTransform'
 
 // ============================================================================
+// FUNÇÕES AUXILIARES
+// ============================================================================
+
+function mapearGrupoIdade(ageGroup: string): "neonato" | "lactente" | "adolescente" | "adulto" | "crianca" | undefined {
+  const mapas: Record<string, "neonato" | "lactente" | "adolescente" | "adulto" | "crianca" | undefined> = {
+    neonato: "neonato",
+    lactente: "lactente",
+    pre_escolar: "crianca",
+    escolar: "crianca",
+    adolescente: "adolescente",
+    crianca: "crianca",
+    adulto: "adulto",
+  };
+  return mapas[ageGroup] || "adulto";
+}
+
+// ============================================================================
 // FUNÇÃO PRINCIPAL
 // ============================================================================
 
@@ -64,7 +81,7 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
     },
     duracao: params.durationSeconds ?? 5,
     ruido: 0,
-    agrupoIdade: ecgPreset.ageGroup,
+    agrupoIdade: mapearGrupoIdade(ecgPreset.ageGroup),
   }
 
   // Validar eletrodos solicitados
@@ -190,5 +207,5 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
 // ============================================================================
 
 export { ParametrosGeracaoECG, RespostaGeracaoECG }
-export { obterPresetECG, listarPresetsDisponiveis, listarPresetsPorIdade } from './presets'
+export { getPresetById, normalizePresetId } from './presets'
 export type { PresetECG, ParametrosECGSyn } from './types'

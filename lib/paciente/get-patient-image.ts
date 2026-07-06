@@ -49,7 +49,24 @@ export function getPatientImage(caso?: Caso | null): PatientImageProfile {
     }
   }
 
-  // Adulto: fallback genérico
+  // Adulto: imagem específica por sexo (feminino usa a paciente realista)
+  const sexo = (
+    (caso as any)?.sexo ||
+    (caso as any)?.dados_visiveis_ao_estudante?.sexo ||
+    caso.paciente?.sexo ||
+    ''
+  )
+    .toString()
+    .toLowerCase()
+
+  if (sexo.startsWith('f')) {
+    return {
+      imageSrc: '/images/boneco/feminino-frontal-realista.png',
+      ageGroup: 'adulto',
+      source: 'fallback',
+    }
+  }
+
   return {
     imageSrc: '/images/boneco/boneco-frente.png',
     ageGroup: 'adulto',

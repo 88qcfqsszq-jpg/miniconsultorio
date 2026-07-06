@@ -842,6 +842,7 @@ function CasoPageContent() {
               onSubmit={handleFinalizarAtendimento}
               onChange={setDiagnostico}
               desabilitado={phase === "feedback"}
+              caso={caso}
             />
           </div>
 
@@ -914,7 +915,7 @@ function CasoPageContent() {
           {/* Coluna 3: Painel Direito Fixo (Avaliação Clínica) */}
           <div className="min-w-0">
             <div className="sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
-              <FormularioSOAP onSubmit={handleFinalizarAtendimento} onChange={setSOAP} desabilitado={phase === "feedback"} />
+              <FormularioSOAP onSubmit={handleFinalizarAtendimento} onChange={setSOAP} desabilitado={phase === "feedback"} caso={caso} />
             </div>
           </div>
         </div>
@@ -988,11 +989,12 @@ function CasoPageContent() {
           </div>
 
           {/* Blocos fixos no mobile (abaixo das abas dinâmicas) */}
-          <FormularioSOAP onSubmit={handleFinalizarAtendimento} onChange={setSOAP} desabilitado={phase === "feedback"} />
+          <FormularioSOAP onSubmit={handleFinalizarAtendimento} onChange={setSOAP} desabilitado={phase === "feedback"} caso={caso} />
           <PainelDiagnostico
             onSubmit={handleFinalizarAtendimento}
             onChange={setDiagnostico}
             desabilitado={phase === "feedback"}
+            caso={caso}
           />
         </div>
       </div>

@@ -1,0 +1,1130 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "ok",
+  "header": {
+    "titulo": "Professor IA",
+    "subtitulo": "Sessão de tutoria personalizada baseada no seu desempenho",
+    "aviso": "Prévia estrutural — o chat generativo será ativado em fase futura."
+  },
+  "diagnostico": {
+    "caso": "Pneumonia Adquirida na Comunidade",
+    "diagnostico": "Pneumonia Adquirida na Comunidade (PAC)",
+    "nota": 11.8,
+    "prioridadePrincipal": "Corrigir erro crítico",
+    "erroCritico": "Prescreveu antibiótico apropriado COM dose",
+    "persona": "Examinador rigoroso",
+    "modoPedagogico": "reforco_de_erro_critico",
+    "duracaoEstimadaMin": 8
+  },
+  "objetivo": {
+    "objetivoFinal": "Corrigir com segurança: Prescreveu antibiótico apropriado COM dose e consolidar a conduta correta.",
+    "objetivos": [
+      "Corrigir erro crítico",
+      "Fala médica clara (Comunicação e postura médica)",
+      "Investigação dirigida (Anamnese dirigida)",
+      "Sempre medir SpO₂ e FR (gravidade da PAC).",
+      "Justificar o antibiótico e a dose."
+    ]
+  },
+  "openingLine": {
+    "texto": "Você foi bem em: Auscultou o tórax. Agora vamos corrigir um ponto crítico: prescreveu antibiótico apropriado com dose.",
+    "origem": "estatico_do_plano"
+  },
+  "actions": [
+    {
+      "ordem": 1,
+      "tipo": "acknowledge_strength",
+      "rotulo": "Reconhecer acerto",
+      "descricao": "Reconhecer o acerto comprovado: Auscultou o tórax"
+    },
+    {
+      "ordem": 2,
+      "tipo": "identify_error",
+      "rotulo": "Apontar lacuna",
+      "descricao": "Apontar omissão comprovada: Hemograma não realizado(a) neste atendimento."
+    },
+    {
+      "ordem": 3,
+      "tipo": "identify_error",
+      "rotulo": "Apontar lacuna",
+      "descricao": "Apontar omissão comprovada: Sinais vitais / SpO₂ não realizado(a) neste atendimento."
+    },
+    {
+      "ordem": 4,
+      "tipo": "correct_critical_error",
+      "rotulo": "Corrigir erro crítico",
+      "descricao": "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose",
+      "checkpoint": true
+    },
+    {
+      "ordem": 5,
+      "tipo": "ask_socratic_question",
+      "rotulo": "Pergunta socrática",
+      "descricao": "Pergunta socrática: Qual antibiótico e por quê? Qual a dose?",
+      "pergunta": "Qual antibiótico e por quê? Qual a dose?"
+    },
+    {
+      "ordem": 6,
+      "tipo": "wait_for_student_answer",
+      "rotulo": "Esperar resposta",
+      "descricao": "Aguardar a resposta do aluno antes de explicar.",
+      "checkpoint": true
+    },
+    {
+      "ordem": 7,
+      "tipo": "explain_concept",
+      "rotulo": "Explicar conceito",
+      "descricao": "Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente"
+    },
+    {
+      "ordem": 8,
+      "tipo": "show_exam_reference",
+      "rotulo": "Mostrar exame",
+      "descricao": "Exame de referência: RX de tórax · Hemograma",
+      "recursoTitulo": "RX de tórax · Hemograma",
+      "recursoRef": "/centro-clinico/exames"
+    },
+    {
+      "ordem": 9,
+      "tipo": "show_sound_reference",
+      "rotulo": "Mostrar som",
+      "descricao": "Som de referência: Crepitações (finas/grossas)",
+      "recursoTitulo": "Crepitações (finas/grossas)",
+      "recursoRef": "/centro-clinico/sons"
+    },
+    {
+      "ordem": 10,
+      "tipo": "mini_quiz",
+      "rotulo": "Mini-quiz",
+      "descricao": "Mini-quiz (Teaching Truth): Por que prescrever antibiótico sem dose é inseguro?",
+      "pergunta": "Por que prescrever antibiótico sem dose é inseguro?",
+      "checkpoint": true
+    },
+    {
+      "ordem": 11,
+      "tipo": "summarize_session",
+      "rotulo": "Revisão final",
+      "descricao": "Resumir os pontos-chave da sessão."
+    },
+    {
+      "ordem": 12,
+      "tipo": "assign_next_step",
+      "rotulo": "Próximo passo",
+      "descricao": "Definir o próximo passo de treino: Fala médica clara"
+    }
+  ],
+  "recursos": [
+    {
+      "dominio": "som",
+      "titulo": "ls-crepitacoes",
+      "ref": "ls-crepitacoes"
+    },
+    {
+      "dominio": "imagem",
+      "titulo": "img-rx-torax",
+      "ref": "img-rx-torax"
+    },
+    {
+      "dominio": "exame",
+      "titulo": "lab-hemograma",
+      "ref": "lab-hemograma"
+    },
+    {
+      "dominio": "fluxo",
+      "titulo": "flow-febre",
+      "ref": "flow-febre"
+    },
+    {
+      "dominio": "fluxo",
+      "titulo": "flow-dispneia",
+      "ref": "flow-dispneia"
+    },
+    {
+      "dominio": "centro_clinico",
+      "titulo": "Semiologia — Pneumologia",
+      "href": "/centro-clinico/semiologia"
+    },
+    {
+      "dominio": "centro_clinico",
+      "titulo": "Fluxo da Dispneia / Febre",
+      "href": "/centro-clinico/fluxos"
+    },
+    {
+      "dominio": "centro_clinico",
+      "titulo": "RX de tórax · Hemograma",
+      "href": "/centro-clinico/exames"
+    },
+    {
+      "dominio": "centro_clinico",
+      "titulo": "Pneumonia (RX)",
+      "href": "/centro-clinico/imagens"
+    },
+    {
+      "dominio": "centro_clinico",
+      "titulo": "Crepitações (finas/grossas)",
+      "href": "/centro-clinico/sons"
+    },
+    {
+      "dominio": "centro_clinico",
+      "titulo": "CURB-65 (gravidade da PAC)"
+    }
+  ],
+  "perguntasSocraticas": [
+    "Quais achados no exame físico apontam para consolidação, e não broncoespasmo?",
+    "Como a SpO₂ e a FR mudam a sua conduta e o local de tratamento?",
+    "Por que este quadro é PAC e não asma, IC ou TEP?",
+    "Qual antibiótico e por quê? Qual a dose?"
+  ],
+  "miniQuiz": [
+    {
+      "pergunta": "Por que prescrever antibiótico sem dose é inseguro?",
+      "resposta": "Sem dose/via/duração não há como garantir eficácia nem segurança (sub ou superdosagem); a prescrição fica incompleta e não executável."
+    },
+    {
+      "pergunta": "Por que o RX de tórax muda a conduta na suspeita de PAC?",
+      "resposta": "Confirma a consolidação, avalia extensão e complicações (derrame) e sustenta a indicação de antibiótico."
+    },
+    {
+      "pergunta": "Por que asma não explica uma consolidação focal?",
+      "resposta": "Asma cursa com broncoespasmo difuso (sibilos), não com consolidação focal com frêmito aumentado/submacicez."
+    },
+    {
+      "pergunta": "Por que o TEP pode ter RX de tórax normal?",
+      "resposta": "No TEP o RX é frequentemente normal ou inespecífico; o diagnóstico depende de probabilidade clínica e angio-TC, não da consolidação."
+    },
+    {
+      "pergunta": "Qual escore avalia a gravidade e o local de tratamento da PAC?",
+      "resposta": "CURB-65 (confusão, ureia, FR, PA, idade ≥ 65)."
+    }
+  ],
+  "respostasEsperadas": {
+    "respostaModelo": "Diante de tosse produtiva, febre há 5 dias, dor pleurítica e dispneia, com crepitações e submacicez em base esquerda, a hipótese é PAC. Solicito RX de tórax (consolidação) e hemograma (leucocitose com neutrofilia), avalio gravidade (SpO₂ 92%, FR 24 → risco moderado) e inicio antibioticoterapia empírica (betalactâmico + macrolídeo) com hidratação e O₂ se SpO₂ < 92%. Oriento sinais de alarme e reavaliação em 48–72h.",
+    "checklistNotaMaxima": [
+      "Apresentou-se e acolheu a paciente",
+      "Caracterizou a tosse e a febre",
+      "Investigou dispneia, dor pleurítica e contatos",
+      "Mediu sinais vitais completos com SpO₂",
+      "Auscultou tórax e identificou crepitações",
+      "Solicitou RX de tórax e hemograma",
+      "Formulou PAC com diferenciais",
+      "Prescreveu antibiótico apropriado com dose",
+      "Avaliou gravidade e orientou sinais de alarme + retorno"
+    ]
+  },
+  "pegadinhas": [
+    "RX inicial pode ser pouco evidente",
+    "Leucograma normal não exclui infecção",
+    "Crepitações basais também ocorrem em congestão — correlacionar com febre/consolidação"
+  ],
+  "regrasSeguranca": [
+    {
+      "regra": "⚠️ ERRO CRÍTICO DE SEGURANÇA — prioridade máxima: Prescreveu antibiótico apropriado COM dose"
+    },
+    {
+      "regra": "Ambiente educacional e simulado — sem prescrição para uso real."
+    },
+    {
+      "regra": "Priorizar segurança do paciente, sinais de gravidade e red flags."
+    }
+  ],
+  "promptPlan": {
+    "ordem": [
+      "system",
+      "seguranca",
+      "naoInventarMedicina",
+      "apenasBaseDoSistema",
+      "verdade",
+      "professor",
+      "conducao",
+      "caso",
+      "contexto"
+    ],
+    "prompts": [
+      "system",
+      "contexto",
+      "caso",
+      "professor",
+      "seguranca",
+      "naoInventarMedicina",
+      "apenasBaseDoSistema",
+      "verdade",
+      "conducao"
+    ],
+    "totalChars": 10187
+  },
+  "proximoPasso": {
+    "descricao": "Fala médica clara"
+  },
+  "studentBase": {
+    "temEvidencia": true,
+    "confidence": "media",
+    "confirmedStrengths": [
+      "Auscultou o tórax",
+      "Solicitou Radiografia de tórax"
+    ],
+    "forbiddenPraise": [
+      "solicitou hemograma",
+      "pediu hemograma",
+      "mediu os sinais vitais",
+      "aferiu a saturação",
+      "mediu a spo",
+      "verificou os sinais vitais",
+      "diagnosticou",
+      "formulou a hipótese",
+      "fechou o diagnóstico",
+      "prescreveu",
+      "definiu a conduta",
+      "indicou o antibiótico"
+    ],
+    "missingRequiredItems": [
+      "Hemograma",
+      "Sinais vitais / SpO₂",
+      "Antibiótico com dose",
+      "Hipótese diagnóstica"
+    ],
+    "omissions": [
+      "Hemograma não solicitado.",
+      "Sinais vitais / SpO₂ não solicitados.",
+      "Conduta não registrada."
+    ]
+  },
+  "lessonSteps": {
+    "schemaVersion": "1.0.0",
+    "lessonId": "lesson-pneumonia-adquirida-na-c",
+    "titulo": "Professor IA",
+    "steps": [
+      {
+        "id": "step-1",
+        "order": 1,
+        "type": "opening",
+        "title": "Abertura",
+        "goal": "Situar o aluno e criar rapport",
+        "instructionForLLM": "Abra a sessão de forma acolhedora e breve; situe o objetivo. Base: Você foi bem em: Auscultou o tórax. Agora vamos corrigir um ponto crítico: prescreveu antibiótico apropriado com dose.",
+        "staticPreviewText": "Você foi bem em: Auscultou o tórax. Agora vamos corrigir um ponto crítico: prescreveu antibiótico apropriado com dose.",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-2",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-2",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-2",
+        "order": 2,
+        "type": "acknowledge_strength",
+        "title": "Reconhecer acerto",
+        "goal": "Reconhecer o acerto comprovado: Auscultou o tórax",
+        "instructionForLLM": "Reconheça, em 1 frase, o acerto do aluno: Reconhecer o acerto comprovado: Auscultou o tórax. Não liste vários; escolha o mais relevante.",
+        "staticPreviewText": "Reconhecer o acerto comprovado: Auscultou o tórax",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-3",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-3",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-3",
+        "order": 3,
+        "type": "identify_error",
+        "title": "Apontar lacuna",
+        "goal": "Apontar omissão comprovada: Hemograma não realizado(a) neste atendimento.",
+        "instructionForLLM": "Aponte a lacuna com respeito (sem humilhar): Apontar omissão comprovada: Hemograma não realizado(a) neste atendimento.",
+        "staticPreviewText": "Apontar omissão comprovada: Hemograma não realizado(a) neste atendimento.",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-4",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-4",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-4",
+        "order": 4,
+        "type": "identify_error",
+        "title": "Apontar lacuna",
+        "goal": "Apontar omissão comprovada: Sinais vitais / SpO₂ não realizado(a) neste atendimento.",
+        "instructionForLLM": "Aponte a lacuna com respeito (sem humilhar): Apontar omissão comprovada: Sinais vitais / SpO₂ não realizado(a) neste atendimento.",
+        "staticPreviewText": "Apontar omissão comprovada: Sinais vitais / SpO₂ não realizado(a) neste atendimento.",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-5",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-5",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-5",
+        "order": 5,
+        "type": "correct_critical_error",
+        "title": "Corrigir erro crítico",
+        "goal": "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose",
+        "instructionForLLM": "Corrija o erro crítico e explique o risco, com prioridade: Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose. Só avance após o aluno reconhecer.",
+        "staticPreviewText": "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [
+          {
+            "regra": "⚠️ ERRO CRÍTICO DE SEGURANÇA — prioridade máxima: Prescreveu antibiótico apropriado COM dose"
+          },
+          {
+            "regra": "Ambiente educacional e simulado — sem prescrição para uso real."
+          },
+          {
+            "regra": "Priorizar segurança do paciente, sinais de gravidade e red flags."
+          }
+        ],
+        "transition": {
+          "nextStepId": "step-6",
+          "autoAdvance": true,
+          "stopCondition": "Só avançar após o aluno reconhecer a correção."
+        },
+        "nextStepId": "step-6",
+        "stopCondition": "Só avançar após o aluno reconhecer a correção.",
+        "isOptional": false,
+        "isCheckpoint": true,
+        "status": "pending"
+      },
+      {
+        "id": "step-6",
+        "order": 6,
+        "type": "ask_question",
+        "title": "Pergunta socrática",
+        "goal": "Pergunta socrática: Qual antibiótico e por quê? Qual a dose?",
+        "instructionForLLM": "Faça a pergunta socrática e PARE para o aluno responder: \"Qual antibiótico e por quê? Qual a dose?\"",
+        "staticPreviewText": "Pergunta socrática: Qual antibiótico e por quê? Qual a dose?",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-7",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-7",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-7",
+        "order": 7,
+        "type": "wait_student_answer",
+        "title": "Esperar resposta",
+        "goal": "Aguardar a resposta do aluno antes de explicar.",
+        "instructionForLLM": "Aguarde a resposta do aluno. NÃO explique nem avance sozinho até haver resposta.",
+        "staticPreviewText": "Aguardar a resposta do aluno antes de explicar.",
+        "expectedStudentAction": {
+          "requiresInput": true,
+          "descricao": "O aluno deve responder antes de avançar."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-8",
+          "autoAdvance": false,
+          "stopCondition": "Aguardar a resposta do aluno antes de explicar."
+        },
+        "nextStepId": "step-8",
+        "fallbackIfNoAnswer": "Se o aluno não responder, ofereça uma dica curta e reformule a pergunta; NÃO entregue a resposta pronta.",
+        "stopCondition": "Aguardar a resposta do aluno antes de explicar.",
+        "isOptional": false,
+        "isCheckpoint": true,
+        "status": "pending"
+      },
+      {
+        "id": "step-8",
+        "order": 8,
+        "type": "explain_concept",
+        "title": "Explicar conceito",
+        "goal": "Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente",
+        "instructionForLLM": "Explique o conceito de forma curta e ancorada na base: Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente",
+        "staticPreviewText": "Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-9",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-9",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-9",
+        "order": 9,
+        "type": "show_exam",
+        "title": "Mostrar exame",
+        "goal": "Exame de referência: RX de tórax · Hemograma",
+        "instructionForLLM": "Aponte o recurso da base (não invente): Exame de referência: RX de tórax · Hemograma",
+        "staticPreviewText": "Exame de referência: RX de tórax · Hemograma",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [
+          {
+            "dominio": "exam",
+            "titulo": "RX de tórax · Hemograma",
+            "ref": "/centro-clinico/exames"
+          }
+        ],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-10",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-10",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-10",
+        "order": 10,
+        "type": "show_sound",
+        "title": "Mostrar som",
+        "goal": "Som de referência: Crepitações (finas/grossas)",
+        "instructionForLLM": "Aponte o recurso da base (não invente): Som de referência: Crepitações (finas/grossas)",
+        "staticPreviewText": "Som de referência: Crepitações (finas/grossas)",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [
+          {
+            "dominio": "sound",
+            "titulo": "Crepitações (finas/grossas)",
+            "ref": "/centro-clinico/sons"
+          }
+        ],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-11",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-11",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-11",
+        "order": 11,
+        "type": "mini_quiz",
+        "title": "Mini-quiz",
+        "goal": "Mini-quiz (Teaching Truth): Por que prescrever antibiótico sem dose é inseguro?",
+        "instructionForLLM": "Aplique 1 item objetivo e PARE para a resposta: \"Por que prescrever antibiótico sem dose é inseguro?\"",
+        "staticPreviewText": "Mini-quiz (Teaching Truth): Por que prescrever antibiótico sem dose é inseguro?",
+        "expectedStudentAction": {
+          "requiresInput": true,
+          "descricao": "O aluno deve responder antes de avançar."
+        },
+        "expectedAnswer": "Sem dose/via/duração não há como garantir eficácia nem segurança (sub ou superdosagem); a prescrição fica incompleta e não executável.",
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-12",
+          "autoAdvance": false
+        },
+        "nextStepId": "step-12",
+        "fallbackIfNoAnswer": "Se o aluno não responder, ofereça uma dica curta e reformule a pergunta; NÃO entregue a resposta pronta.",
+        "isOptional": false,
+        "isCheckpoint": true,
+        "status": "pending"
+      },
+      {
+        "id": "step-12",
+        "order": 12,
+        "type": "summarize",
+        "title": "Revisão final",
+        "goal": "Resumir os pontos-chave da sessão.",
+        "instructionForLLM": "Resuma os pontos-chave da sessão em poucas linhas: Resumir os pontos-chave da sessão.",
+        "staticPreviewText": "Resumir os pontos-chave da sessão.",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-13",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-13",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-13",
+        "order": 13,
+        "type": "assign_next_step",
+        "title": "Próximo passo",
+        "goal": "Definir o próximo passo de treino: Fala médica clara",
+        "instructionForLLM": "Defina o próximo passo de treino: Definir o próximo passo de treino: Fala médica clara",
+        "staticPreviewText": "Definir o próximo passo de treino: Fala médica clara",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-14",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-14",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-14",
+        "order": 14,
+        "type": "closing",
+        "title": "Encerramento",
+        "goal": "Encerrar e fixar o próximo passo",
+        "instructionForLLM": "Encerre de forma breve, reforçando 1 aprendizado e o próximo passo: Próximo passo: Fala médica clara",
+        "staticPreviewText": "Próximo passo: Fala médica clara",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "autoAdvance": true
+        },
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      }
+    ],
+    "totalSteps": 14,
+    "estimatedDurationMinutes": 8,
+    "requiresStudentInput": true,
+    "interactiveSteps": 2,
+    "resourceSteps": 2,
+    "checkpoints": 3,
+    "canResume": true,
+    "canSkipOptionalSteps": true,
+    "safetyRules": [
+      {
+        "regra": "⚠️ ERRO CRÍTICO DE SEGURANÇA — prioridade máxima: Prescreveu antibiótico apropriado COM dose"
+      },
+      {
+        "regra": "Ambiente educacional e simulado — sem prescrição para uso real."
+      },
+      {
+        "regra": "Priorizar segurança do paciente, sinais de gravidade e red flags."
+      }
+    ]
+  },
+  "lessonFlow": {
+    "schemaVersion": "1.0.0",
+    "flowId": "flow-pneumonia-adquirida-na-c",
+    "lessonId": "lesson-pneumonia-adquirida-na-c",
+    "titulo": "Professor IA",
+    "steps": [
+      {
+        "id": "step-1",
+        "order": 1,
+        "type": "opening",
+        "title": "Abertura",
+        "goal": "Situar o aluno e criar rapport",
+        "instructionForLLM": "Abra a sessão de forma acolhedora e breve; situe o objetivo. Base: Você foi bem em: Auscultou o tórax. Agora vamos corrigir um ponto crítico: prescreveu antibiótico apropriado com dose.",
+        "staticPreviewText": "Você foi bem em: Auscultou o tórax. Agora vamos corrigir um ponto crítico: prescreveu antibiótico apropriado com dose.",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-2",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-2",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-2",
+        "order": 2,
+        "type": "acknowledge_strength",
+        "title": "Reconhecer acerto",
+        "goal": "Reconhecer o acerto comprovado: Auscultou o tórax",
+        "instructionForLLM": "Reconheça, em 1 frase, o acerto do aluno: Reconhecer o acerto comprovado: Auscultou o tórax. Não liste vários; escolha o mais relevante.",
+        "staticPreviewText": "Reconhecer o acerto comprovado: Auscultou o tórax",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-3",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-3",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-3",
+        "order": 3,
+        "type": "identify_error",
+        "title": "Apontar lacuna",
+        "goal": "Apontar omissão comprovada: Hemograma não realizado(a) neste atendimento.",
+        "instructionForLLM": "Aponte a lacuna com respeito (sem humilhar): Apontar omissão comprovada: Hemograma não realizado(a) neste atendimento.",
+        "staticPreviewText": "Apontar omissão comprovada: Hemograma não realizado(a) neste atendimento.",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-4",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-4",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-4",
+        "order": 4,
+        "type": "identify_error",
+        "title": "Apontar lacuna",
+        "goal": "Apontar omissão comprovada: Sinais vitais / SpO₂ não realizado(a) neste atendimento.",
+        "instructionForLLM": "Aponte a lacuna com respeito (sem humilhar): Apontar omissão comprovada: Sinais vitais / SpO₂ não realizado(a) neste atendimento.",
+        "staticPreviewText": "Apontar omissão comprovada: Sinais vitais / SpO₂ não realizado(a) neste atendimento.",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-5",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-5",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-5",
+        "order": 5,
+        "type": "correct_critical_error",
+        "title": "Corrigir erro crítico",
+        "goal": "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose",
+        "instructionForLLM": "Corrija o erro crítico e explique o risco, com prioridade: Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose. Só avance após o aluno reconhecer.",
+        "staticPreviewText": "Corrigir o erro crítico e explicar o risco: Prescreveu antibiótico apropriado COM dose",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [
+          {
+            "regra": "⚠️ ERRO CRÍTICO DE SEGURANÇA — prioridade máxima: Prescreveu antibiótico apropriado COM dose"
+          },
+          {
+            "regra": "Ambiente educacional e simulado — sem prescrição para uso real."
+          },
+          {
+            "regra": "Priorizar segurança do paciente, sinais de gravidade e red flags."
+          }
+        ],
+        "transition": {
+          "nextStepId": "step-6",
+          "autoAdvance": true,
+          "stopCondition": "Só avançar após o aluno reconhecer a correção."
+        },
+        "nextStepId": "step-6",
+        "stopCondition": "Só avançar após o aluno reconhecer a correção.",
+        "isOptional": false,
+        "isCheckpoint": true,
+        "status": "pending"
+      },
+      {
+        "id": "step-6",
+        "order": 6,
+        "type": "ask_question",
+        "title": "Pergunta socrática",
+        "goal": "Pergunta socrática: Qual antibiótico e por quê? Qual a dose?",
+        "instructionForLLM": "Faça a pergunta socrática e PARE para o aluno responder: \"Qual antibiótico e por quê? Qual a dose?\"",
+        "staticPreviewText": "Pergunta socrática: Qual antibiótico e por quê? Qual a dose?",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-7",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-7",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-7",
+        "order": 7,
+        "type": "wait_student_answer",
+        "title": "Esperar resposta",
+        "goal": "Aguardar a resposta do aluno antes de explicar.",
+        "instructionForLLM": "Aguarde a resposta do aluno. NÃO explique nem avance sozinho até haver resposta.",
+        "staticPreviewText": "Aguardar a resposta do aluno antes de explicar.",
+        "expectedStudentAction": {
+          "requiresInput": true,
+          "descricao": "O aluno deve responder antes de avançar."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-8",
+          "autoAdvance": false,
+          "stopCondition": "Aguardar a resposta do aluno antes de explicar."
+        },
+        "nextStepId": "step-8",
+        "fallbackIfNoAnswer": "Se o aluno não responder, ofereça uma dica curta e reformule a pergunta; NÃO entregue a resposta pronta.",
+        "stopCondition": "Aguardar a resposta do aluno antes de explicar.",
+        "isOptional": false,
+        "isCheckpoint": true,
+        "status": "pending"
+      },
+      {
+        "id": "step-8",
+        "order": 8,
+        "type": "explain_concept",
+        "title": "Explicar conceito",
+        "goal": "Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente",
+        "instructionForLLM": "Explique o conceito de forma curta e ancorada na base: Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente",
+        "staticPreviewText": "Explicar: a importância de prescreveu antibiótico apropriado com dose e o risco à segurança do paciente",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-9",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-9",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-9",
+        "order": 9,
+        "type": "show_exam",
+        "title": "Mostrar exame",
+        "goal": "Exame de referência: RX de tórax · Hemograma",
+        "instructionForLLM": "Aponte o recurso da base (não invente): Exame de referência: RX de tórax · Hemograma",
+        "staticPreviewText": "Exame de referência: RX de tórax · Hemograma",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [
+          {
+            "dominio": "exam",
+            "titulo": "RX de tórax · Hemograma",
+            "ref": "/centro-clinico/exames"
+          }
+        ],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-10",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-10",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-10",
+        "order": 10,
+        "type": "show_sound",
+        "title": "Mostrar som",
+        "goal": "Som de referência: Crepitações (finas/grossas)",
+        "instructionForLLM": "Aponte o recurso da base (não invente): Som de referência: Crepitações (finas/grossas)",
+        "staticPreviewText": "Som de referência: Crepitações (finas/grossas)",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [
+          {
+            "dominio": "sound",
+            "titulo": "Crepitações (finas/grossas)",
+            "ref": "/centro-clinico/sons"
+          }
+        ],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-11",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-11",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-11",
+        "order": 11,
+        "type": "mini_quiz",
+        "title": "Mini-quiz",
+        "goal": "Mini-quiz (Teaching Truth): Por que prescrever antibiótico sem dose é inseguro?",
+        "instructionForLLM": "Aplique 1 item objetivo e PARE para a resposta: \"Por que prescrever antibiótico sem dose é inseguro?\"",
+        "staticPreviewText": "Mini-quiz (Teaching Truth): Por que prescrever antibiótico sem dose é inseguro?",
+        "expectedStudentAction": {
+          "requiresInput": true,
+          "descricao": "O aluno deve responder antes de avançar."
+        },
+        "expectedAnswer": "Sem dose/via/duração não há como garantir eficácia nem segurança (sub ou superdosagem); a prescrição fica incompleta e não executável.",
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-12",
+          "autoAdvance": false
+        },
+        "nextStepId": "step-12",
+        "fallbackIfNoAnswer": "Se o aluno não responder, ofereça uma dica curta e reformule a pergunta; NÃO entregue a resposta pronta.",
+        "isOptional": false,
+        "isCheckpoint": true,
+        "status": "pending"
+      },
+      {
+        "id": "step-12",
+        "order": 12,
+        "type": "summarize",
+        "title": "Revisão final",
+        "goal": "Resumir os pontos-chave da sessão.",
+        "instructionForLLM": "Resuma os pontos-chave da sessão em poucas linhas: Resumir os pontos-chave da sessão.",
+        "staticPreviewText": "Resumir os pontos-chave da sessão.",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-13",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-13",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-13",
+        "order": 13,
+        "type": "assign_next_step",
+        "title": "Próximo passo",
+        "goal": "Definir o próximo passo de treino: Fala médica clara",
+        "instructionForLLM": "Defina o próximo passo de treino: Definir o próximo passo de treino: Fala médica clara",
+        "staticPreviewText": "Definir o próximo passo de treino: Fala médica clara",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "nextStepId": "step-14",
+          "autoAdvance": true
+        },
+        "nextStepId": "step-14",
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      },
+      {
+        "id": "step-14",
+        "order": 14,
+        "type": "closing",
+        "title": "Encerramento",
+        "goal": "Encerrar e fixar o próximo passo",
+        "instructionForLLM": "Encerre de forma breve, reforçando 1 aprendizado e o próximo passo: Próximo passo: Fala médica clara",
+        "staticPreviewText": "Próximo passo: Fala médica clara",
+        "expectedStudentAction": {
+          "requiresInput": false,
+          "descricao": "Nenhuma ação obrigatória do aluno."
+        },
+        "resources": [],
+        "safetyRules": [],
+        "transition": {
+          "autoAdvance": true
+        },
+        "isOptional": false,
+        "isCheckpoint": false,
+        "status": "pending"
+      }
+    ],
+    "currentStepId": "step-1",
+    "firstStepId": "step-1",
+    "finalStepId": "step-14",
+    "totalSteps": 14,
+    "estimatedDurationMinutes": 8,
+    "requiresStudentInput": true,
+    "interactiveSteps": 2,
+    "resourceSteps": 2,
+    "checkpoints": [
+      {
+        "stepId": "step-5",
+        "tipo": "correct_critical_error",
+        "descricao": "Corrigir erro crítico"
+      },
+      {
+        "stepId": "step-7",
+        "tipo": "wait_student_answer",
+        "descricao": "Esperar resposta"
+      },
+      {
+        "stepId": "step-11",
+        "tipo": "mini_quiz",
+        "descricao": "Mini-quiz"
+      }
+    ],
+    "navigationRules": [
+      {
+        "regra": "Execução sequencial por padrão (requiresSequentialExecution)."
+      },
+      {
+        "regra": "Parar em steps que exigem resposta; não avançar sozinho após wait_student_answer."
+      },
+      {
+        "regra": "Não pular checkpoints; passos opcionais (isOptional) podem ser pulados."
+      },
+      {
+        "regra": "Sem resposta do aluno → usar fallbackIfNoAnswer do step; não entregar a resposta pronta."
+      },
+      {
+        "regra": "Usar apenas os recursos anexados ao step; não inventar recurso nem conteúdo clínico."
+      }
+    ],
+    "branches": [
+      {
+        "fromStepId": "step-7",
+        "condition": "on_correct",
+        "targetStepId": "step-8",
+        "descricao": "Se o aluno acertar → próximo step."
+      },
+      {
+        "fromStepId": "step-7",
+        "condition": "on_incorrect",
+        "targetStepId": "step-8",
+        "descricao": "Se o aluno errar → step de reforço/explicação."
+      },
+      {
+        "fromStepId": "step-7",
+        "condition": "on_no_answer",
+        "targetStepId": "step-7",
+        "descricao": "Se não responder → usar fallbackIfNoAnswer e repetir o step."
+      },
+      {
+        "fromStepId": "step-7",
+        "condition": "on_request_explanation",
+        "targetStepId": "step-8",
+        "descricao": "Se pedir explicação → aprofundamento."
+      },
+      {
+        "fromStepId": "step-11",
+        "condition": "on_correct",
+        "targetStepId": "step-12",
+        "descricao": "Se o aluno acertar → próximo step."
+      },
+      {
+        "fromStepId": "step-11",
+        "condition": "on_incorrect",
+        "targetStepId": "step-12",
+        "descricao": "Se o aluno errar → step de reforço/explicação."
+      },
+      {
+        "fromStepId": "step-11",
+        "condition": "on_no_answer",
+        "targetStepId": "step-11",
+        "descricao": "Se não responder → usar fallbackIfNoAnswer e repetir o step."
+      },
+      {
+        "fromStepId": "step-11",
+        "condition": "on_request_explanation",
+        "targetStepId": "step-8",
+        "descricao": "Se pedir explicação → aprofundamento."
+      }
+    ],
+    "canResume": true,
+    "canPause": true,
+    "canSkipOptionalSteps": true,
+    "requiresSequentialExecution": true,
+    "safetyRules": [
+      {
+        "regra": "⚠️ ERRO CRÍTICO DE SEGURANÇA — prioridade máxima: Prescreveu antibiótico apropriado COM dose"
+      },
+      {
+        "regra": "Ambiente educacional e simulado — sem prescrição para uso real."
+      },
+      {
+        "regra": "Priorizar segurança do paciente, sinais de gravidade e red flags."
+      }
+    ]
+  }
+}

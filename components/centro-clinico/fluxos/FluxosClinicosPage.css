@@ -1,0 +1,458 @@
+/* ==========================================================================
+   FluxosClinicosPage — "Fluxos Clínicos" (/centro-clinico/fluxos).
+   CSS ESCOPADO sob .fluxos-page (classes .flx-*). Não vaza estilos.
+   Espaçamento lateral vem do AppShell (.app-main). Estética premium azul-gelo.
+   ========================================================================== */
+
+.fluxos-page {
+  --flx-bg: #f3f8ff;
+  --flx-primary: #1f7bff;
+  --flx-primary-2: #4f9bff;
+  --flx-ink: #0b1f4d;
+  --flx-ink-2: #5c6d8a;
+  --flx-border: rgba(120, 170, 230, 0.24);
+
+  min-height: 100vh;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: var(--flx-ink);
+  background:
+    radial-gradient(1200px 600px at 82% -10%, rgba(192, 222, 255, 0.5), transparent 60%),
+    radial-gradient(900px 500px at -6% 112%, rgba(214, 235, 255, 0.5), transparent 60%),
+    var(--flx-bg);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.fluxos-page .flx-glass {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.74), rgba(232, 243, 255, 0.48));
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid var(--flx-border);
+  box-shadow: 0 18px 55px rgba(72, 116, 170, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  border-radius: 26px;
+}
+
+/* ---------- section head ---------- */
+.fluxos-page .flx-section-head { margin: 2px 2px 0; }
+.fluxos-page .flx-eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--flx-primary);
+}
+.fluxos-page .flx-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--flx-ink);
+}
+.fluxos-page .flx-sub {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--flx-ink-2);
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.fluxos-page .flx-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 30px;
+  padding: 46px 44px;
+  color: #fff;
+  background:
+    radial-gradient(720px 320px at 88% -30%, rgba(120, 190, 255, 0.55), transparent 60%),
+    linear-gradient(120deg, #1560d8 0%, #2e86ff 46%, #6aa8ff 100%);
+  box-shadow: 0 26px 70px rgba(31, 92, 190, 0.32);
+}
+.fluxos-page .flx-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+}
+.fluxos-page .flx-hero-badge i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #7dffc0;
+  box-shadow: 0 0 10px rgba(125, 255, 192, 0.9);
+}
+.fluxos-page .flx-hero h1 {
+  margin: 16px 0 0;
+  font-size: 42px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 850;
+  max-width: 720px;
+}
+.fluxos-page .flx-hero-sub {
+  margin: 14px 0 0;
+  max-width: 660px;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+}
+.fluxos-page .flx-hero-cards {
+  margin: 26px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.fluxos-page .flx-hero-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  font-size: 14.5px;
+  font-weight: 750;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(8px);
+}
+.fluxos-page .flx-hero-card span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: rgba(125, 255, 192, 0.28);
+  color: #eafff5;
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Grade de fluxos
+   ========================================================================== */
+.fluxos-page .flx-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 16px;
+  align-items: start;
+}
+.fluxos-page .flx-card {
+  padding: 22px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.fluxos-page .flx-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.fluxos-page .flx-card-ico {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  background: rgba(231, 243, 255, 0.9);
+  border: 1px solid var(--flx-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.fluxos-page .flx-card-head h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  color: var(--flx-ink);
+}
+
+/* ---------- fluxograma (nós + setas) ---------- */
+.fluxos-page .flx-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.fluxos-page .flx-node {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #23477f;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--flx-border);
+  box-shadow: 0 8px 20px rgba(72, 116, 170, 0.06);
+}
+.fluxos-page .flx-node.is-start {
+  color: #fff;
+  background: linear-gradient(135deg, var(--flx-primary-2), var(--flx-primary));
+  border-color: transparent;
+  box-shadow: 0 12px 26px rgba(31, 123, 255, 0.26);
+}
+.fluxos-page .flx-node.is-hyp {
+  background: rgba(233, 243, 255, 0.7);
+  padding: 12px;
+}
+.fluxos-page .flx-node-hyp-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #33568f;
+}
+.fluxos-page .flx-hyp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+.fluxos-page .flx-hyp-chip {
+  font-size: 12px;
+  font-weight: 700;
+  color: #8a3550;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 231, 240, 0.82);
+  border: 1px solid rgba(244, 143, 177, 0.4);
+}
+.fluxos-page .flx-arrow {
+  width: 26px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  color: rgba(31, 123, 255, 0.55);
+}
+.fluxos-page .flx-arrow svg { width: 16px; height: 16px; }
+
+/* ---------- blocos (gravidade / pegadinhas) ---------- */
+.fluxos-page .flx-block {
+  padding: 13px 15px;
+  border-radius: 16px;
+}
+.fluxos-page .flx-block-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.fluxos-page .flx-block-label span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+.fluxos-page .flx-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+.fluxos-page .flx-list li {
+  font-size: 12.5px;
+  line-height: 1.3;
+  font-weight: 650;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+/* gravidade (vermelho) */
+.fluxos-page .flx-block-grav {
+  background: linear-gradient(145deg, rgba(255, 245, 245, 0.9), rgba(255, 236, 236, 0.66));
+  border: 1px solid rgba(244, 143, 143, 0.4);
+}
+.fluxos-page .flx-block-grav .flx-block-label { color: #b23b30; }
+.fluxos-page .flx-block-grav .flx-block-label span { background: #e0574a; }
+.fluxos-page .flx-block-grav .flx-list li {
+  color: #8a2f27;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(230, 150, 150, 0.35);
+}
+
+/* pegadinhas (âmbar) */
+.fluxos-page .flx-block-trap {
+  background: linear-gradient(145deg, rgba(255, 249, 235, 0.9), rgba(255, 245, 220, 0.64));
+  border: 1px solid rgba(240, 190, 90, 0.4);
+}
+.fluxos-page .flx-block-trap .flx-block-label { color: #8a6a1f; }
+.fluxos-page .flx-block-trap .flx-block-label span { background: #e0a12a; }
+.fluxos-page .flx-block-trap .flx-list {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.fluxos-page .flx-block-trap .flx-list li {
+  position: relative;
+  padding: 2px 0 2px 16px;
+  color: #7a5f27;
+  background: transparent;
+}
+.fluxos-page .flx-block-trap .flx-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #e0a12a;
+}
+
+/* ==========================================================================
+   Como pensar no OSCE
+   ========================================================================== */
+.fluxos-page .flx-think {
+  padding: 34px;
+  border-radius: 28px;
+  margin-top: 16px;
+}
+.fluxos-page .flx-think h2 {
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  color: var(--flx-ink);
+}
+.fluxos-page .flx-think p.flx-think-sub {
+  margin: 0 0 18px;
+  font-size: 14px;
+  color: var(--flx-ink-2);
+}
+.fluxos-page .flx-think-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+.fluxos-page .flx-think-q {
+  padding: 18px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid var(--flx-border);
+  box-shadow: 0 10px 26px rgba(72, 116, 170, 0.06);
+}
+.fluxos-page .flx-think-q b {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(135deg, var(--flx-primary-2), var(--flx-primary));
+}
+.fluxos-page .flx-think-q p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--flx-ink);
+}
+
+/* ==========================================================================
+   CTA final
+   ========================================================================== */
+.fluxos-page .flx-cta {
+  padding: 36px;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+.fluxos-page .flx-cta h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  color: var(--flx-ink);
+}
+.fluxos-page .flx-cta p {
+  margin: 2px 0 0;
+  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--flx-ink-2);
+}
+.fluxos-page .flx-cta-actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.fluxos-page .flx-btn {
+  border: 0;
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 14.5px;
+  font-weight: 800;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.fluxos-page .flx-btn-primary {
+  color: #fff;
+  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
+  box-shadow: 0 14px 30px rgba(31, 123, 255, 0.28);
+}
+.fluxos-page .flx-btn-ped {
+  color: #fff;
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  box-shadow: 0 14px 30px rgba(236, 72, 153, 0.28);
+}
+.fluxos-page .flx-btn-ghost {
+  color: var(--flx-primary);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--flx-border);
+}
+.fluxos-page .flx-btn-primary:hover,
+.fluxos-page .flx-btn-ped:hover,
+.fluxos-page .flx-btn-ghost:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media (max-width: 1180px) {
+  .fluxos-page .flx-grid { grid-template-columns: 1fr; }
+  .fluxos-page .flx-think-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .fluxos-page {
+    padding: 18px;
+    gap: 24px;
+  }
+  .fluxos-page .flx-hero {
+    padding: 32px 22px;
+  }
+  .fluxos-page .flx-hero h1 {
+    font-size: 30px;
+  }
+  .fluxos-page .flx-hero-cards,
+  .fluxos-page .flx-think-grid {
+    grid-template-columns: 1fr;
+  }
+}

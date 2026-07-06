@@ -1,0 +1,713 @@
+{
+  "geradoEm": "2026-06-29T21:59:34.362Z",
+  "totaisConceitosGlobais": 144,
+  "totalSinonimosGlobais": 992,
+  "totalPacotesDiagnostico": 37,
+  "diagnosisKeys": [
+    "tuberculose_pulmonar",
+    "pneumonia_pac",
+    "asma",
+    "dpoc",
+    "insuficiencia_cardiaca",
+    "sca_iam",
+    "tep",
+    "pneumotorax",
+    "derrame_pleural",
+    "anemia_hemolitica",
+    "anemia_ferropriva",
+    "dengue",
+    "hipertensao_arterial",
+    "avc_isquemico",
+    "ait",
+    "avc_hemorragico",
+    "crise_convulsiva",
+    "cefaleia_hsa",
+    "vertigem",
+    "rebaixamento_consciencia",
+    "endocardite_infecciosa",
+    "estenose_mitral",
+    "estenose_mitral_fa",
+    "emergencia_hipertensiva_loa",
+    "tvp",
+    "febre_amarela",
+    "zika_guillain_barre",
+    "chikungunya",
+    "mieloma_multiplo",
+    "cid",
+    "hemofilia_a",
+    "talassemia_maior",
+    "atelectasia_pos_operatoria",
+    "bronquiolite_viral_aguda",
+    "pa_elevada_pediatrica",
+    "desenvolvimento_normal_pediatrico",
+    "rinossinusite_bacteriana"
+  ],
+  "casosNoBanco": 77,
+  "casosComPack": 77,
+  "casosSemPack": 0,
+  "testes": {
+    "total": 53,
+    "ok": 53,
+    "falhas": 0,
+    "detalhe": [
+      {
+        "frase": "vou pedir o trm tb",
+        "esperados": [
+          "trm_tb"
+        ],
+        "diagnosisKey": "tuberculose_pulmonar",
+        "detectados": [
+          "trm_tb"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "tem febre a noite?",
+        "esperados": [
+          "febre_vespertina_noturna"
+        ],
+        "detectados": [
+          "febre_vespertina_noturna"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "meu irmao teve tuberculose",
+        "esperados": [
+          "contato_tb"
+        ],
+        "diagnosisKey": "tuberculose_pulmonar",
+        "detectados": [
+          "contato_tb"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "tosse ha mais de 3 semanas",
+        "esperados": [
+          "tosse_cronica"
+        ],
+        "detectados": [
+          "tosse_cronica",
+          "tosse"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "oriento a usar mascara",
+        "esperados": [
+          "mascara_etiqueta_respiratoria"
+        ],
+        "detectados": [
+          "mascara_etiqueta_respiratoria"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "acordo sufocando de madrugada",
+        "esperados": [
+          "dispneia_paroxistica_noturna"
+        ],
+        "detectados": [
+          "dispneia",
+          "dispneia_paroxistica_noturna"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "durmo com tres travesseiros",
+        "esperados": [
+          "ortopneia"
+        ],
+        "detectados": [
+          "ortopneia"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "estou com as pernas inchadas",
+        "esperados": [
+          "edema_membros_inferiores"
+        ],
+        "detectados": [
+          "edema_membros_inferiores",
+          "edema_mmii"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "vou prescrever furosemida",
+        "esperados": [
+          "diuretico_ic"
+        ],
+        "detectados": [
+          "diuretico_ic"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "aperto no peito irradiando para braco esquerdo",
+        "esperados": [
+          "dor_toracica_isquemica",
+          "irradiacao"
+        ],
+        "diagnosisKey": "sca_iam",
+        "detectados": [
+          "dor_toracica",
+          "dor_toracica_isquemica",
+          "irradiacao"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "pedir um eletro",
+        "esperados": [
+          "ecg"
+        ],
+        "detectados": [
+          "ecg"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "solicito enzimas cardiacas",
+        "esperados": [
+          "troponina"
+        ],
+        "detectados": [
+          "troponina"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "dar aas agora",
+        "esperados": [
+          "antiagregante_sca"
+        ],
+        "detectados": [
+          "antiagregante_sca"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "tosse com catarro amarelado",
+        "esperados": [
+          "expectoracao"
+        ],
+        "diagnosisKey": "pneumonia_pac",
+        "detectados": [
+          "tosse",
+          "expectoracao"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "auscultei anterior e posterior",
+        "esperados": [
+          "ausculta_anterior_posterior"
+        ],
+        "detectados": [
+          "ausculta_anterior_posterior"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "vou pedir um raio x do peito",
+        "esperados": [
+          "rx_torax"
+        ],
+        "detectados": [
+          "rx_torax"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "fez viagem longa e esta com a perna inchada",
+        "esperados": [
+          "fatores_risco_tromboembolico",
+          "tvp"
+        ],
+        "diagnosisKey": "tep",
+        "detectados": [
+          "risco_tvp",
+          "fatores_risco_tromboembolico",
+          "tvp"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "solicito angio tc",
+        "esperados": [
+          "angio_tc_torax"
+        ],
+        "detectados": [
+          "angio_tc_torax"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "olhos amarelos e urina escura",
+        "esperados": [
+          "ictericia",
+          "coluria"
+        ],
+        "diagnosisKey": "anemia_hemolitica",
+        "detectados": [
+          "ictericia_hepatite",
+          "ictericia",
+          "coluria"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "pedir coombs direto",
+        "esperados": [
+          "coombs"
+        ],
+        "detectados": [
+          "coombs"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "dor atras dos olhos",
+        "esperados": [
+          "dor_retroorbitaria"
+        ],
+        "diagnosisKey": "dengue",
+        "detectados": [
+          "dor_retroorbitaria"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "oriento nao tomar ibuprofeno",
+        "esperados": [
+          "evitar_aine"
+        ],
+        "diagnosisKey": "dengue",
+        "detectados": [
+          "evitar_aine"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "febre prolongada e sopro no coracao",
+        "esperados": [
+          "febre_prolongada",
+          "sopro_cardiaco"
+        ],
+        "detectados": [
+          "febre_prolongada",
+          "sopro_cardiaco"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "vou coletar hemoculturas e pedir eco transesofagico",
+        "esperados": [
+          "hemoculturas",
+          "ecocardiograma_transesofagico"
+        ],
+        "detectados": [
+          "ecocardiograma",
+          "hemoculturas",
+          "ecocardiograma_transesofagico"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "ritmo irregular e ruflar diastolico",
+        "esperados": [
+          "fibrilacao_atrial",
+          "estenose_mitral"
+        ],
+        "detectados": [
+          "estenose_mitral",
+          "fibrilacao_atrial"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "pa 180/120 com lesao de orgao alvo",
+        "esperados": [
+          "pa_muito_elevada",
+          "lesao_orgao_alvo"
+        ],
+        "detectados": [
+          "lesao_orgao_alvo",
+          "pa_muito_elevada"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "panturrilha dolorosa e edema unilateral",
+        "esperados": [
+          "dor_panturrilha",
+          "edema_unilateral"
+        ],
+        "detectados": [
+          "dor_panturrilha",
+          "edema_unilateral"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "vou pedir doppler venoso",
+        "esperados": [
+          "usg_doppler_venoso"
+        ],
+        "detectados": [
+          "usg_doppler_venoso"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "febre, ictericia e sangramento gengival",
+        "esperados": [
+          "ictericia_hepatite",
+          "sangramento_mucoso"
+        ],
+        "diagnosisKey": "febre_amarela",
+        "detectados": [
+          "ictericia_hepatite",
+          "sangramento_mucoso",
+          "sangramento_coagulopatia",
+          "febre"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "nao tomou vacina de febre amarela",
+        "esperados": [
+          "vacina_febre_amarela"
+        ],
+        "detectados": [
+          "vacina_febre_amarela"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "zika com fraqueza ascendente nas pernas",
+        "esperados": [
+          "sinais_neurologicos_gbs"
+        ],
+        "detectados": [
+          "sinais_neurologicos_gbs"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "febre e dor intensa nas juntas",
+        "esperados": [
+          "artralgia_intensa"
+        ],
+        "diagnosisKey": "chikungunya",
+        "detectados": [
+          "artralgia_intensa",
+          "febre"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "dor ossea, anemia e lesoes liticas",
+        "esperados": [
+          "dor_ossea",
+          "anemia",
+          "lesoes_liticas"
+        ],
+        "detectados": [
+          "dor_ossea",
+          "lesoes_liticas",
+          "anemia"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "eletroforese de proteinas e mielograma",
+        "esperados": [
+          "eletroforese_proteinas",
+          "mielograma"
+        ],
+        "detectados": [
+          "proteinuria_bence_jones",
+          "mielograma",
+          "eletroforese_proteinas"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "sangramento, plaquetas baixas e fibrinogenio baixo",
+        "esperados": [
+          "sangramento_coagulopatia",
+          "plaquetas",
+          "tp_ttp_fibrinogenio"
+        ],
+        "detectados": [
+          "sangramento_mucoso",
+          "sangramento_coagulopatia",
+          "tp_ttp_fibrinogenio",
+          "plaquetas"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "hemartrose e fator viii baixo",
+        "esperados": [
+          "hemartrose",
+          "fator_viii"
+        ],
+        "detectados": [
+          "fator_viii",
+          "hemartrose"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "talassemia maior com transfusoes regulares e quelacao de ferro",
+        "esperados": [
+          "talassemia",
+          "transfusao_regular",
+          "quelacao_ferro"
+        ],
+        "detectados": [
+          "talassemia",
+          "transfusao_regular",
+          "quelacao_ferro"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "pos operatorio com hipoventilacao e fisioterapia respiratoria",
+        "esperados": [
+          "pos_operatorio",
+          "hipoventilacao",
+          "fisioterapia_respiratoria"
+        ],
+        "detectados": [
+          "pos_operatorio",
+          "hipoventilacao",
+          "fisioterapia_respiratoria"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "lactente chiando com tiragem e mamando menos",
+        "esperados": [
+          "bronquiolite",
+          "tiragem",
+          "alimentacao_reduzida"
+        ],
+        "detectados": [
+          "bronquiolite",
+          "tiragem",
+          "alimentacao_reduzida"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "pa acima do percentil 95 para idade",
+        "esperados": [
+          "pa_pediatrica_elevada"
+        ],
+        "detectados": [
+          "pa_pediatrica_elevada"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "marcos do desenvolvimento e vacinacao em dia",
+        "esperados": [
+          "desenvolvimento_normal",
+          "vacinacao"
+        ],
+        "detectados": [
+          "desenvolvimento_normal",
+          "marcos_desenvolvimento",
+          "vacinacao"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "secrecao nasal purulenta e piora apos melhora",
+        "esperados": [
+          "secrecao_nasal_purulenta",
+          "piora_apos_melhora"
+        ],
+        "diagnosisKey": "rinossinusite_bacteriana",
+        "detectados": [
+          "roncos",
+          "rinossinusite",
+          "secrecao_nasal_purulenta",
+          "piora_apos_melhora"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "sudorese noturna",
+        "esperados": [
+          "sudorese_noturna"
+        ],
+        "detectados": [
+          "sudorese_noturna"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "perdi peso",
+        "esperados": [
+          "perda_peso"
+        ],
+        "detectados": [
+          "perda_peso"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "perda de peso",
+        "esperados": [
+          "perda_peso"
+        ],
+        "detectados": [
+          "perda_peso"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "vou auscultar os pulmoes",
+        "esperados": [
+          "ausculta_pulmonar"
+        ],
+        "detectados": [
+          "ausculta_pulmonar"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "peco um rx de torax",
+        "esperados": [
+          "rx_torax"
+        ],
+        "detectados": [
+          "rx_torax"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "fazer a investigacao dos contatos",
+        "esperados": [
+          "investigar_contatos"
+        ],
+        "detectados": [
+          "investigar_contatos"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "preciso fazer a notificacao",
+        "esperados": [
+          "notificacao_vigilancia"
+        ],
+        "detectados": [
+          "notificacao_vigilancia"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "reforco a adesao ao ripe",
+        "esperados": [
+          "adesao_tratamento"
+        ],
+        "detectados": [
+          "ripe",
+          "adesao_tratamento"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "monitorizo o paciente",
+        "esperados": [
+          "monitorizacao"
+        ],
+        "detectados": [
+          "monitorizacao"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "paciente com tosse seca",
+        "esperados": [
+          "tosse"
+        ],
+        "detectados": [
+          "tosse"
+        ],
+        "faltando": [],
+        "passou": true
+      },
+      {
+        "frase": "nao usar ibuprofeno",
+        "esperados": [
+          "evitar_aine"
+        ],
+        "detectados": [
+          "evitar_aine"
+        ],
+        "faltando": [],
+        "passou": true
+      }
+    ]
+  },
+  "casosSemPackLista": []
+}

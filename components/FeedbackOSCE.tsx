@@ -2,13 +2,26 @@
 
 import type { FeedbackOSCE } from "@/lib/types";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { exportarAtendimentoPDF } from "@/lib/pdf/exportar-feedback-atendimento";
+import { montarTextoAtendimento } from "@/lib/pdf/texto-atendimento";
+// ProfessorIAPreview (diagnóstico/plano/recursos/base/preview) permanece no código,
+// mas NÃO é mais renderizado na UI (Fase 25 — apenas chat limpo).
+import ProfessorIAOpenChat from "@/components/professor-ia/ProfessorIAOpenChat";
+import { buildProfessorIAPreview } from "@/lib/professor-ia/preview-builder";
 
 interface FeedbackOSCEProps {
   feedback: FeedbackOSCE;
   nomePaciente: string;
   tempoDecorrido: number;
   caso?: any;
+  // Dados brutos do atendimento (auditoria/PDF) — opcionais, não quebram chamadas existentes
+  chatMessages?: any[];
+  manobrasSolicitadas?: any[];
+  examesSolicitados?: any[];
+  sinaisVitais?: { solicitado?: boolean; dados?: any };
+  diagnostico?: any;
+  soap?: any;
 }
 
 const limitar = (items: any[], max: number = 2) => {
@@ -40,7 +53,7 @@ function sugestaoRecuperarPontos(competencia: string): string {
   }
 
   if (nome.includes("conduta")) {
-    return "Registre tratamento, orientações ao paciente, sinais de alarme, necessidade de retorno, encaminhamento ou internação quando indicado.";
+    return "Antes de finalizar, confirme estabilidade clínica, reavalie resposta à conduta, revise riscos, oriente sinais de alarme e indique encaminhamento ou retorno quando necessário.";
   }
 
   return "Revise os objetivos da estação e compare sua resposta com a sequência ideal do caso.";
@@ -83,11 +96,43 @@ export default function FeedbackOSCE({
   nomePaciente,
   tempoDecorrido,
   caso,
+  chatMessages,
+  manobrasSolicitadas,
+  examesSolicitados,
+  sinaisVitais,
+  diagnostico,
+  soap,
 }: FeedbackOSCEProps) {
   const minutos = Math.floor(tempoDecorrido / 60);
   const segundos = tempoDecorrido % 60;
   const percentual = Math.round((feedback.nota / 20) * 100);
   const [trofeuFailed, setTrofeuFailed] = useState(false);
+  const [exportandoPDF, setExportandoPDF] = useState(false);
+  const [erroPDF, setErroPDF] = useState(false);
+
+  const handleExportarPDF = () => {
+    setErroPDF(false);
+    setExportandoPDF(true);
+    try {
+      exportarAtendimentoPDF({
+        caso,
+        nomePaciente,
+        tempoAtendimento: tempoDecorrido,
+        feedback,
+        chatMessages,
+        manobrasSolicitadas,
+        examesSolicitados,
+        sinaisVitais,
+        diagnostico,
+        soap,
+      });
+    } catch (e) {
+      console.error("Erro ao exportar PDF do atendimento:", e);
+      setErroPDF(true);
+    } finally {
+      setExportandoPDF(false);
+    }
+  };
   const [rubricaAberta, setRubricaAberta] = useState<string | null>(null);
   const [estudoExpandido, setEstudoExpandido] = useState(false);
   const [estudoFinal, setEstudoFinal] = useState<any | null>(null);
@@ -95,6 +140,79 @@ export default function FeedbackOSCE({
   const [erroEstudoFinal, setErroEstudoFinal] = useState<string | null>(null);
 
   const isAprovado = feedback.nota >= 17;
+
+  // Professor IA — preview estrutural (Fase 17). Puro, sem IA/endpoint/banco.
+  // Fase 22: mapeia os dados REAIS do atendimento → StudentTrace (fonte única de elogio).
+  // Mapeamento defensivo: o que não existir vira ausência de evidência (comportamento conservador).
+  const professorPreview = useMemo(() => {
+    try {
+      const examRequests = (Array.isArray(examesSolicitados) ? examesSolicitados : []).map((x: any) =>
+        typeof x === "string" ? { nome: x } : { nome: x?.nome ?? x?.exame ?? x?.titulo ?? String(x?.label ?? ""), resultado: x?.resultado }
+      );
+      const physicalExamEvents = (Array.isArray(manobrasSolicitadas) ? manobrasSolicitadas : []).map((x: any) =>
+        typeof x === "string"
+          ? { textDigitado: x }
+          : { textDigitado: x?.texto ?? x?.textDigitado ?? x?.nome ?? x?.acao ?? String(x?.label ?? ""), resposta: x?.resposta ?? x?.resultado, local: x?.local }
+      );
+      const dx: any = diagnostico ?? {};
+      const diagnosisAndPlan = {
+        hipotesePrincipal: dx.hipotesePrincipal ?? dx.diagnosticoPrincipal ?? dx.principal ?? dx.hipotese,
+        diagnosticosDiferenciais: dx.diagnosticosDiferenciais ?? dx.diferenciais ?? [],
+        examesIndicados: dx.examesIndicados ?? [],
+        conduta: dx.conduta ?? (soap as any)?.plano,
+      };
+      const sv: any = sinaisVitais ?? {};
+      return buildProfessorIAPreview({
+        caso,
+        notaReal: feedback?.nota,
+        estudoFinal: estudoFinal ?? undefined,
+        chatMessages: Array.isArray(chatMessages) ? chatMessages : undefined,
+        physicalExamEvents,
+        examRequests,
+        sinaisVitais: { solicitado: !!(sv.solicitado ?? sv.dados), dados: sv.dados },
+        diagnosisAndPlan,
+        soap: soap ?? undefined,
+        tempoAtendimentoSegundos: tempoDecorrido,
+      });
+    } catch (e) {
+      console.error("Falha ao montar o preview do Professor IA:", e);
+      return null;
+    }
+  }, [caso, feedback?.nota, estudoFinal, chatMessages, manobrasSolicitadas, examesSolicitados, sinaisVitais, diagnostico, soap, tempoDecorrido]);
+
+  // Fase 24: dados do atendimento para o Chat Aberto (mapeamento defensivo) + texto do PDF.
+  const professorAtendimento = useMemo(() => {
+    const examRequests = (Array.isArray(examesSolicitados) ? examesSolicitados : []).map((x: any) =>
+      typeof x === "string" ? { nome: x } : { nome: x?.nome ?? x?.exame ?? x?.titulo ?? String(x?.label ?? "") }
+    );
+    const physicalExamEvents = (Array.isArray(manobrasSolicitadas) ? manobrasSolicitadas : []).map((x: any) =>
+      typeof x === "string" ? { textDigitado: x } : { textDigitado: x?.texto ?? x?.textDigitado ?? x?.nome ?? x?.acao ?? String(x?.label ?? ""), resposta: x?.resposta ?? x?.resultado, local: x?.local }
+    );
+    const dx: any = diagnostico ?? {};
+    const sv: any = sinaisVitais ?? {};
+    return {
+      chatMessages: Array.isArray(chatMessages) ? chatMessages : [],
+      physicalExamEvents,
+      examRequests,
+      sinaisVitais: { solicitado: !!(sv.solicitado ?? sv.dados), dados: sv.dados },
+      diagnosisAndPlan: {
+        hipotesePrincipal: dx.hipotesePrincipal ?? dx.diagnosticoPrincipal ?? dx.principal ?? dx.hipotese,
+        diagnosticosDiferenciais: dx.diagnosticosDiferenciais ?? dx.diferenciais ?? [],
+        examesIndicados: dx.examesIndicados ?? [],
+        conduta: dx.conduta ?? (soap as any)?.plano,
+      },
+      soap: soap ?? undefined,
+      tempoAtendimentoSegundos: tempoDecorrido,
+    };
+  }, [chatMessages, manobrasSolicitadas, examesSolicitados, sinaisVitais, diagnostico, soap, tempoDecorrido]);
+
+  const professorPdfText = useMemo(() => {
+    try {
+      return montarTextoAtendimento({ caso, nomePaciente, tempoAtendimento: tempoDecorrido, feedback, chatMessages, manobrasSolicitadas, examesSolicitados, sinaisVitais, diagnostico, soap });
+    } catch {
+      return undefined;
+    }
+  }, [caso, nomePaciente, tempoDecorrido, feedback, chatMessages, manobrasSolicitadas, examesSolicitados, sinaisVitais, diagnostico, soap]);
 
   useEffect(() => {
     async function carregarEstudoFinal() {
@@ -184,8 +302,37 @@ export default function FeedbackOSCE({
       <div className="w-full max-w-none space-y-6">
         {/* CARD PRINCIPAL AZUL */}
         <section className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 px-8 py-10 text-white shadow-xl border border-blue-900/40">
+          {/* BOTÃO EXPORTAR PDF (secundário, canto superior direito) */}
+          <div className="absolute right-6 top-6 z-10 flex flex-col items-end gap-1">
+            <button
+              type="button"
+              onClick={handleExportarPDF}
+              disabled={exportandoPDF}
+              className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold text-blue-50 backdrop-blur-sm transition-colors hover:bg-white/20 disabled:opacity-60"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              {exportandoPDF ? "Gerando PDF…" : "Exportar PDF do Atendimento"}
+            </button>
+            {erroPDF && (
+              <span className="text-xs text-rose-300">
+                Não foi possível gerar o PDF. Tente novamente.
+              </span>
+            )}
+          </div>
+
           {/* TÍTULO */}
-          <div className="mb-10">
+          <div className="mb-10 pr-0 sm:pr-64">
             <h1 className="text-4xl md:text-5xl font-black text-white">
               Feedback do Atendimento
             </h1>
@@ -267,7 +414,7 @@ export default function FeedbackOSCE({
               </p>
 
               <p className="mt-2 text-lg font-semibold leading-relaxed text-blue-100 break-words whitespace-normal">
-                {feedback.resumoCaso?.diagnosticoEsperado || "Não informado"}
+                {feedback.resumoCaso?.diagnosticoInformado || feedback.resumoCaso?.diagnosticoEsperado || "Não informado"}
               </p>
 
               {feedback.justificativaNota && (
@@ -319,7 +466,7 @@ export default function FeedbackOSCE({
             <p className="mt-2 text-base text-slate-600">Veja onde você foi bem e quais pontos priorizar no próximo atendimento.</p>
             {feedback.rubricaAvaliacao && feedback.rubricaAvaliacao.length > 0 && (
               <p className="mt-1 text-sm text-slate-500">
-                Somatório da rubrica: {feedback.rubricaAvaliacao.reduce((total, item) => total + Number(item.pontosObtidos || 0), 0)}/{feedback.rubricaAvaliacao.reduce((total, item) => total + Number(item.pontosMaximos || 0), 0)}
+                Distribuição por competência: {Math.round(feedback.rubricaAvaliacao.reduce((total, item) => total + Number(item.pontosObtidos || 0), 0) * 10) / 10}/{feedback.rubricaAvaliacao.reduce((total, item) => total + Number(item.pontosMaximos || 0), 0)}
               </p>
             )}
           </div>
@@ -392,7 +539,11 @@ export default function FeedbackOSCE({
                           <ListaDetalheRubrica
                             titulo="O que faltou para fechar a pontuação"
                             itens={competencia.melhorias}
-                            fallback="Nenhuma melhoria crítica identificada."
+                            fallback={
+                              competencia.pontosObtidos >= competencia.pontosMaximos
+                                ? "Nenhuma pendência identificada."
+                                : "Revise os critérios não pontuados desta competência."
+                            }
                           />
 
                           <ListaDetalheRubrica
@@ -407,7 +558,11 @@ export default function FeedbackOSCE({
                               Como recuperar esses pontos
                             </p>
                             <p className="text-sm font-medium text-slate-700 leading-relaxed">
-                              {sugestaoRecuperarPontos(competencia.nome)}
+                              {competencia.pontosObtidos >= competencia.pontosMaximos
+                                ? "Competência completa neste atendimento — mantenha o padrão."
+                                : competencia.melhorias && competencia.melhorias.length > 0
+                                  ? competencia.melhorias.join(" ")
+                                  : sugestaoRecuperarPontos(competencia.nome)}
                             </p>
                           </div>
                         </div>
@@ -646,6 +801,21 @@ export default function FeedbackOSCE({
             )}
           </div>
         </section>
+
+        {/* PROFESSOR IA (Fase 25): UI simplificada — apenas o chat aberto.
+            Toda a infraestrutura (ProfessorLesson/StudentTrace/GoldStandard/Truth
+            Layers/guardrails) continua sendo montada em segundo plano; só não é
+            mais renderizada. */}
+        {professorPreview && (
+          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+            <ProfessorIAOpenChat
+              caso={caso}
+              feedback={feedback}
+              atendimento={professorAtendimento}
+              pdfText={professorPdfText}
+            />
+          </section>
+        )}
 
         {/* BOTÕES FINAIS */}
         <div className="flex gap-4 pt-6">

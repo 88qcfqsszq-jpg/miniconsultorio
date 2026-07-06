@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "@/components/Navbar";
+import AppShell from "@/components/layout/AppShell";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { AnalyticsPageView } from "@/components/AnalyticsPageView";
 import "./globals.css";
@@ -36,8 +36,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <AnalyticsPageView />
         </Suspense>
-        <Navbar />
-        {children}
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

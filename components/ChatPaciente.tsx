@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { MensagemChat, Caso } from "@/lib/types";
-import { gerarMensagemInicial } from "@/lib/pediatria/chat-regras";
 
 interface ChatPacienteProps {
   nomePaciente: string;
@@ -19,17 +18,9 @@ export default function ChatPaciente({
   caso,
   onMensagensChange,
 }: ChatPacienteProps) {
-  // Gerar mensagem inicial correta (pediátrica ou adulta)
-  const mensagemInicial = caso ? gerarMensagemInicial(caso) : `Oi doutor/doutora, tudo bem? Meu nome é ${nomePaciente}, tô aqui porque não tô me sentindo bem.`;
-
-  const [mensagens, setMensagens] = useState<MensagemChat[]>([
-    {
-      id: "1",
-      tipo: "paciente",
-      conteudo: mensagemInicial,
-      timestamp: new Date(),
-    },
-  ]);
+  // Chat começa vazio - médico deve iniciar a conversa
+  // Não há mensagem inicial do paciente para evitar spoiler de sintomas
+  const [mensagens, setMensagens] = useState<MensagemChat[]>([]);
 
   const [input, setInput] = useState("");
   const [carregando, setCarregando] = useState(false);
@@ -39,6 +30,16 @@ export default function ChatPaciente({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
+  // Refs sempre atualizados p/ evitar closures obsoletas (ex.: reconhecimento de voz)
+  const mensagensRef = useRef<MensagemChat[]>([]);
+  const carregandoRef = useRef(false);
+  const enviarTextoRef = useRef<(texto: string) => void>(() => {});
+  useEffect(() => {
+    mensagensRef.current = mensagens;
+  }, [mensagens]);
+  useEffect(() => {
+    carregandoRef.current = carregando;
+  }, [carregando]);
 
   // Validar suporte a Web Speech API e registrar cleanup
   useEffect(() => {
@@ -108,11 +109,16 @@ export default function ChatPaciente({
         }
       }
 
-      const textoReconhecido = (transcriptFinal || transcriptParcial).trim();
-      console.log("Resultado de voz:", textoReconhecido);
+      const finalLimpo = transcriptFinal.trim();
+      const parcialLimpo = transcriptParcial.trim();
+      console.log("Resultado de voz:", finalLimpo || parcialLimpo);
 
-      if (textoReconhecido) {
-        setInput(textoReconhecido);
+      if (finalLimpo) {
+        // resultado final → envia direto e limpa o campo (sem deixar texto sobrando)
+        enviarTextoRef.current(finalLimpo);
+      } else if (parcialLimpo) {
+        // preview ao vivo enquanto ainda está reconhecendo
+        setInput(parcialLimpo);
       }
     };
 
@@ -149,11 +155,14 @@ export default function ChatPaciente({
     }
   };
 
-  const enviarMensagem = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+  // Núcleo de envio: aceita o texto (digitado ou transcrito por voz).
+  // Limpa o campo ANTES do await para evitar reenvio acidental da mesma mensagem.
+  const enviarTexto = async (textoBruto: string) => {
+    const mensagemEstudante = (textoBruto || "").trim();
+    if (!mensagemEstudante || carregandoRef.current) return;
 
-    const mensagemEstudante = input.trim();
+    // limpar imediatamente o campo (texto já salvo em mensagemEstudante)
+    setInput("");
 
     // Adicionar mensagem do estudante
     const novaMensagemEstudante: MensagemChat = {
@@ -163,10 +172,10 @@ export default function ChatPaciente({
       timestamp: new Date(),
     };
 
-    // Atualizar estado localmente
-    const mensagensAtualizadas = [...mensagens, novaMensagemEstudante];
+    // Atualizar estado localmente (usa ref p/ histórico sempre atualizado)
+    const mensagensAtualizadas = [...mensagensRef.current, novaMensagemEstudante];
     setMensagens(mensagensAtualizadas);
-    setInput("");
+    carregandoRef.current = true;
     setCarregando(true);
 
     try {
@@ -208,81 +217,84 @@ export default function ChatPaciente({
       };
       setMensagens((prev) => [...prev, mensagemErro]);
     } finally {
+      carregandoRef.current = false;
       setCarregando(false);
     }
   };
 
+  // Mantém o ref apontando para a versão mais recente (usado pela voz)
+  enviarTextoRef.current = enviarTexto;
+
+  // Handler do formulário (envio por digitação)
+  const enviarMensagem = (e: React.FormEvent) => {
+    e.preventDefault();
+    enviarTexto(input);
+  };
+
+  const sexoLabel =
+    caso?.paciente?.sexo === "M" ? "masculino" : caso?.paciente?.sexo === "F" ? "feminino" : "";
+  const subtituloPaciente = caso?.paciente
+    ? `Paciente Virtual · ${caso.paciente.idade} anos · Sexo ${sexoLabel}`.trim()
+    : "Paciente Virtual";
+
   return (
-    <div className="flex flex-col h-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold shrink-0">
-          {nomePaciente.charAt(0)}
+    <section className="medix-chat-card">
+      {/* Barra superior do paciente */}
+      <header className="medix-chat-header">
+        <div className="medix-patient-avatar-placeholder">{nomePaciente.charAt(0)}</div>
+        <div className="medix-patient-info">
+          <h2>{nomePaciente}</h2>
+          <p>{subtituloPaciente}</p>
         </div>
-        <div>
-          <p className="font-semibold text-sm leading-tight">{nomePaciente}</p>
-          <p className="text-blue-200 text-xs">Paciente Virtual</p>
+        <div className="medix-online-status">
+          <span></span>
+          Online
         </div>
-        <div className="ml-auto flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span className="text-xs text-blue-200">Online</span>
-        </div>
-      </div>
+      </header>
 
       {/* Mensagens */}
-      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50">
+      <div ref={messagesContainerRef} className="medix-chat-messages">
         {mensagens.map((msg) => (
           <div
             key={msg.id}
-            className={`flex ${msg.tipo === "estudante" ? "justify-end" : "justify-start"}`}
+            className={`medix-message ${msg.tipo === "estudante" ? "student" : "patient"}`}
           >
-            <div
-              className={`max-w-[80%] sm:max-w-[72%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
-                msg.tipo === "estudante"
-                  ? "bg-blue-600 text-white rounded-br-sm"
-                  : "bg-white text-slate-800 rounded-bl-sm shadow-sm border border-slate-200"
-              }`}
-            >
-              <p>{msg.conteudo}</p>
-              <span className={`text-xs mt-1 block ${msg.tipo === "estudante" ? "text-blue-200" : "text-slate-400"}`}>
-                {msg.timestamp.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
-              </span>
-            </div>
+            <p>{msg.conteudo}</p>
+            <span className="medix-message-time">
+              {msg.timestamp.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
+            </span>
           </div>
         ))}
         {carregando && (
-          <div className="flex justify-start">
-            <div className="bg-white border border-slate-200 px-4 py-3 rounded-2xl rounded-bl-sm shadow-sm flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
-              <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
-              <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
-            </div>
+          <div className="medix-message patient medix-typing">
+            <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+            <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+            <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
       {/* Input */}
-      <form onSubmit={enviarMensagem} className="border-t border-slate-200 p-3 bg-white">
+      <form onSubmit={enviarMensagem}>
         {ouvindo && (
-          <div className="mb-2 px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 flex items-center gap-2">
+          <div className="mx-[22px] mt-3 px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 flex items-center gap-2">
             <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
             Ouvindo... fale agora
           </div>
         )}
         {erroVoz && (
-          <div className="mb-2 px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700">
+          <div className="mx-[22px] mt-3 px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700">
             {erroVoz}
           </div>
         )}
-        <div className="flex gap-2">
+        <div className="medix-chat-input-row">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Digite sua pergunta..."
             disabled={carregando}
-            className="flex-1 px-3.5 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-slate-100 text-slate-900 placeholder-slate-400 text-sm"
           />
           {suportaVoz && (
             <button
@@ -290,11 +302,7 @@ export default function ChatPaciente({
               onClick={iniciarTranscricao}
               disabled={carregando}
               title={ouvindo ? "Parar" : "Falar"}
-              className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all shrink-0 ${
-                ouvindo
-                  ? "bg-red-500 hover:bg-red-600 text-white animate-pulse"
-                  : "bg-slate-100 hover:bg-slate-200 text-slate-600"
-              } disabled:opacity-50`}
+              className={`medix-mic-button ${ouvindo ? "medix-mic-active" : ""}`}
             >
               🎙️
             </button>
@@ -302,12 +310,12 @@ export default function ChatPaciente({
           <button
             type="submit"
             disabled={carregando || !input.trim()}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm shrink-0 active:scale-[0.97]"
+            className="medix-send-button"
           >
             Enviar
           </button>
         </div>
       </form>
-    </div>
+    </section>
   );
 }
