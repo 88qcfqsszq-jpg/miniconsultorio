@@ -14,6 +14,7 @@ export default function PainelDiagnostico({
   onSubmit,
   onChange,
   desabilitado = false,
+  caso,
 }: PainelDiagnosticoProps) {
   const [diagnostico, setDiagnostico] = useState<DiagnosticoFormulario>({
     hipotesePrincipal: "",
@@ -24,6 +25,7 @@ export default function PainelDiagnostico({
 
   const [novoDiferencial, setNovoDiferencial] = useState("");
   const [novoExame, setNovoExame] = useState("");
+  const [referenciaAberta, setReferenciaAberta] = useState(false);
 
   useEffect(() => {
     if (onChange) {
@@ -167,6 +169,63 @@ export default function PainelDiagnostico({
           rows={3}
         />
       </div>
+
+      {caso?.diagnostico || caso?.condutaEsperada || caso?.criteriosGravidade || caso?.errosCriticos ? (
+        <div className="medix-diagnosis-reference" style={{ marginTop: "1.5rem", borderTop: "1px solid #e0e0e0", paddingTop: "1rem" }}>
+          <button
+            type="button"
+            onClick={() => setReferenciaAberta(!referenciaAberta)}
+            style={{
+              background: "none",
+              border: "none",
+              padding: "0.5rem 0",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              color: "#666",
+              fontSize: "0.9rem",
+              fontWeight: "500",
+            }}
+          >
+            <span style={{ transition: "transform 0.2s", transform: referenciaAberta ? "rotate(90deg)" : "rotate(0)" }}>▶</span>
+            Referência esperada
+          </button>
+
+          {referenciaAberta && (
+            <div style={{ marginTop: "1rem", padding: "1rem", backgroundColor: "#f9f9f9", borderRadius: "6px", fontSize: "0.95rem", lineHeight: "1.6", color: "#333" }}>
+              {caso?.diagnostico && (
+                <div style={{ marginBottom: "1rem" }}>
+                  <p style={{ fontWeight: "bold", color: "#666", marginBottom: "0.5rem" }}>Diagnóstico esperado:</p>
+                  <p>{typeof caso.diagnostico === "object" ? JSON.stringify(caso.diagnostico, null, 2) : caso.diagnostico}</p>
+                </div>
+              )}
+              {caso?.condutaEsperada && (
+                <div style={{ marginBottom: "1rem" }}>
+                  <p style={{ fontWeight: "bold", color: "#666", marginBottom: "0.5rem" }}>Conduta esperada:</p>
+                  <p>{typeof caso.condutaEsperada === "object" ? JSON.stringify(caso.condutaEsperada, null, 2) : caso.condutaEsperada}</p>
+                </div>
+              )}
+              {caso?.criteriosGravidade && (
+                <div style={{ marginBottom: "1rem" }}>
+                  <p style={{ fontWeight: "bold", color: "#666", marginBottom: "0.5rem" }}>Critérios de gravidade:</p>
+                  <p>{typeof caso.criteriosGravidade === "object" ? JSON.stringify(caso.criteriosGravidade, null, 2) : caso.criteriosGravidade}</p>
+                </div>
+              )}
+              {caso?.errosCriticos && Array.isArray(caso.errosCriticos) && caso.errosCriticos.length > 0 && (
+                <div>
+                  <p style={{ fontWeight: "bold", color: "#666", marginBottom: "0.5rem" }}>Erros críticos a evitar:</p>
+                  <ul style={{ marginLeft: "1.5rem" }}>
+                    {caso.errosCriticos.map((erro: string, idx: number) => (
+                      <li key={idx}>{erro}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ) : null}
 
       <button type="submit" disabled={desabilitado} className="medix-diagnosis-submit">
         Finalizar Atendimento e Ver Feedback
