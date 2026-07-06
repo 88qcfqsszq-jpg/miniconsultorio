@@ -8,13 +8,13 @@
  */
 
 import type { ECGLead } from '@/lib/ecg/types'
-import type { Dados12Derivacoes, ConfiguracaoDerivaçao, TransformacaoDerivacoesConfig } from './types'
+import type { Dados12Derivacoes, ConfiguracaoDerivaçao, DerivacaoClinica } from './types'
 
 // ============================================================================
 // CONFIGURAÇÕES DE TRANSFORMAÇÃO POR DERIVAÇÃO
 // ============================================================================
 
-export const CONFIG_DERIVACOES: TransformacaoDerivacoesConfig = {
+export const CONFIG_DERIVACOES: Record<DerivacaoClinica, ConfiguracaoDerivaçao> = {
   I: {
     nome: 'I',
     tipo: 'bipolar',

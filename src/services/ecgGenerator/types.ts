@@ -137,6 +137,9 @@ export interface ECGPreset {
   // Eixo e padrão
   axisProfile: AxisProfile
 
+  // Padrão de QRS (pode estar no nível raiz ou em morphology)
+  qrsPattern?: string // Ex: "normal", "rsR_prime_V1", "broad_R_lateral"
+
   // Morfologia P-QRS-T (parâmetros relativos 0-1)
   morphology: {
     pAmplitude: number
@@ -197,8 +200,10 @@ export interface PresetECG {
 // CONFIGURAÇÃO DE DERIVAÇÕES
 // ============================================================================
 
+export type DerivacaoClinica = 'I' | 'II' | 'III' | 'aVR' | 'aVL' | 'aVF' | 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6'
+
 export interface ConfiguracaoDerivaçao {
-  nome: ECGLead
+  nome: DerivacaoClinica
   tipo: 'bipolar' | 'unipolar' | 'precordial'
   descricao: string
   ganho: number
@@ -206,9 +211,7 @@ export interface ConfiguracaoDerivaçao {
   inversao: boolean
 }
 
-export interface TransformacaoDerivacoesConfig {
-  [lead in ECGLead]?: ConfiguracaoDerivaçao
-}
+export type TransformacaoDerivacoesConfig = Partial<Record<DerivacaoClinica, ConfiguracaoDerivaçao>>
 
 // ============================================================================
 // PARÂMETROS DE GERAÇÃO

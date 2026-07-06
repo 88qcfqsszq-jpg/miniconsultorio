@@ -148,7 +148,7 @@ export const arrhythmiaPresets: Record<string, ECGPreset> = {
     rrVariability: 0.30,
     prIntervalMs: 0,  // Sem P organizada
     qrsDurationMs: 90,
-    pAmplitude: 0,  // Sem P
+    
 
     axisProfile: 'normal',
 
@@ -266,7 +266,7 @@ export const arrhythmiaPresets: Record<string, ECGPreset> = {
     rrVariability: 0.005,
     prIntervalMs: 0,  // P retrógrada/incorporada
     qrsDurationMs: 80,
-    pAmplitude: 0.02,
+
 
     axisProfile: 'normal',
 
