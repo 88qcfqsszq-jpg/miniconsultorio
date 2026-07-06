@@ -21,6 +21,75 @@ export const URINE_PROFILES: Partial<Record<ClinicalTag, UProf>> = {
 };
 
 export function generateUrinalysis(ctx: LabContext): LabPanelResult {
+  // PRIORIDADE 1: Usar dados reais do caso V2 se disponível
+  const urinaCasoV2 = ctx.caso?.exames?.laboratoriais?.urinaTipo1;
+
+  if (urinaCasoV2 && urinaCasoV2.valores) {
+    // Mapear valores do caso para LabAnalyte
+    const valores = urinaCasoV2.valores;
+    const fisicoQuimico: LabAnalyte[] = [];
+    const sedimento: LabAnalyte[] = [];
+
+    // Físico-químico
+    if (valores.densidade) {
+      fisicoQuimico.push(qualitativo("Densidade", valores.densidade, "1,005-1,030", valores.densidade !== "1,005-1,030"));
+    }
+    if (valores.ph) {
+      fisicoQuimico.push(qualitativo("pH urinário", valores.ph, "4,5-8,0", valores.ph < "4,5" || valores.ph > "8,0"));
+    }
+    if (valores.proteina) {
+      fisicoQuimico.push(qualitativo("Proteína", valores.proteina, "Ausente", valores.proteina !== "Ausente" && !valores.proteina?.includes("aços")));
+    }
+    if (valores.glicose) {
+      fisicoQuimico.push(qualitativo("Glicose", valores.glicose, "Ausente", valores.glicose !== "Ausente"));
+    }
+    if (valores.cetonicos) {
+      fisicoQuimico.push(qualitativo("Corpos cetônicos", valores.cetonicos, "Ausentes", valores.cetonicos !== "Ausentes"));
+    }
+    if (valores.sangueHemoglobina) {
+      fisicoQuimico.push(qualitativo("Sangue/Hemoglobina", valores.sangueHemoglobina, "Ausente", valores.sangueHemoglobina !== "Ausente"));
+    }
+    if (valores.nitrito) {
+      fisicoQuimico.push(qualitativo("Nitrito", valores.nitrito, "Negativo", valores.nitrito !== "Negativo"));
+    }
+    if (valores.esterase) {
+      fisicoQuimico.push(qualitativo("Esterase leucocitária", valores.esterase, "Negativa", valores.esterase !== "Negativa"));
+    }
+
+    // Sedimento
+    if (valores.leucocitos) {
+      sedimento.push(qualitativo("Leucócitos", valores.leucocitos, "< 5 p/campo", !valores.leucocitos?.includes("<")));
+    }
+    if (valores.hemacias) {
+      sedimento.push(qualitativo("Hemácias", valores.hemacias, "< 3 p/campo", !valores.hemacias?.includes("<")));
+    }
+    if (valores.bacterias) {
+      sedimento.push(qualitativo("Bactérias", valores.bacterias, "Raras", valores.bacterias !== "Raras" && valores.bacterias !== "Ausentes"));
+    }
+    if (valores.cilindros) {
+      sedimento.push(qualitativo("Cilindros", valores.cilindros, "Ausentes", valores.cilindros !== "Ausentes"));
+    }
+    if (valores.urobilinogenio) {
+      sedimento.push(qualitativo("Urobilinogênio", valores.urobilinogenio, "Normal", valores.urobilinogenio !== "Normal" && !valores.urobilinogenio?.toLowerCase()?.includes("normal")));
+    }
+
+    const alterado = [...fisicoQuimico, ...sedimento].some((i) => i.flag);
+    const observacoes = urinaCasoV2.interpretacao ? [urinaCasoV2.interpretacao] : [];
+
+    return {
+      testId: "urinalysis",
+      titulo: "Urina Tipo 1 (EAS)",
+      nivel: alterado ? "grave" : "normal",
+      paciente: ctx.paciente,
+      sections: [
+        { titulo: "Físico-químico", itens: fisicoQuimico },
+        { titulo: "Sedimentoscopia", itens: sedimento },
+      ],
+      observacoes,
+    };
+  }
+
+  // FALLBACK: Usar perfis hardcoded se não houver dados V2
   const p = URINE_PROFILES[ctx.tag] ?? { obs: ["Urina tipo 1 sem alterações relevantes."] };
   const alt = (campo: string) => (p.altera ?? []).includes(campo);
   const fisicoQuimico: LabAnalyte[] = [

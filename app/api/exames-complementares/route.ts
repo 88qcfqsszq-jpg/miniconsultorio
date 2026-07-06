@@ -113,6 +113,32 @@ function normalizarTexto(texto: string): string {
     .trim();
 }
 
+function gerarResultadoFormatado(campo: string, exame: any): string {
+  // Se já tem interpretação, usa ela como base
+  if (exame?.interpretacao) {
+    return exame.interpretacao;
+  }
+
+  // Se tem valores, formata uma string descritiva
+  if (exame?.valores && typeof exame.valores === "object") {
+    const linhas: string[] = [];
+
+    // Adicionar valores principais de forma legível
+    Object.entries(exame.valores).forEach(([chave, valor]: any) => {
+      if (valor) {
+        linhas.push(`${chave}: ${valor}`);
+      }
+    });
+
+    if (linhas.length > 0) {
+      return linhas.join("; ");
+    }
+  }
+
+  // Fallback simples
+  return `Exame ${campo} realizado. Verificar detalhes no laudo completo.`;
+}
+
 const mapaExamesLaboratoriais: { [key: string]: string[] } = {
   hemograma: ["hemograma", "hemograma completo", "serie vermelha", "serie branca", "plaquetas"],
   funcaoRenal: ["funcao renal", "função renal", "ureia", "creatinina"],
@@ -161,12 +187,16 @@ function buscarExameNoCasoV2(caso: any, exameSolicitado: string) {
 
     if (encontrou && laboratoriais?.[campo]) {
       const exame = laboratoriais[campo];
+
+      // Gerar string de resultado formatada
+      const resultadoFormatado = gerarResultadoFormatado(campo, exame);
+
       return {
         encontrado: true,
         tipo: "laboratorial",
         grupo: "laboratoriais",
         campo,
-        resultado: exame?.resultado,
+        resultado: resultadoFormatado,
         valores: exame?.valores,
         interpretacao: exame?.interpretacao,
         prioridade: exame?.prioridade,
@@ -186,12 +216,14 @@ function buscarExameNoCasoV2(caso: any, exameSolicitado: string) {
     const exame = caso?.exames?.[grupo]?.[campo];
 
     if (encontrou && exame) {
+      const resultadoFormatado = gerarResultadoFormatado(campo, exame);
+
       return {
         encontrado: true,
         tipo: "complementar",
         grupo,
         campo,
-        resultado: exame?.resultado,
+        resultado: resultadoFormatado,
         valores: exame?.valores,
         interpretacao: exame?.interpretacao,
         prioridade: exame?.prioridade,
@@ -209,12 +241,14 @@ function buscarExameNoCasoV2(caso: any, exameSolicitado: string) {
     for (const item of originais) {
       const nome = normalizarTexto(item?.nome || item?.exame || item?.titulo || item?.tipo || "");
       if (nome && (termo.includes(nome) || nome.includes(termo))) {
+        const resultadoFormatado = gerarResultadoFormatado(item?.nome || "exame", item);
+
         return {
           encontrado: true,
           tipo: "complementarOriginal",
           grupo: "complementaresOriginais",
           campo: item?.nome || "exame",
-          resultado: item?.resultado,
+          resultado: resultadoFormatado,
           valores: item?.valores,
           interpretacao: item?.interpretacao,
           prioridade: item?.prioridade,
