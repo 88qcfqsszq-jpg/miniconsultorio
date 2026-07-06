@@ -31,12 +31,27 @@ export function generateUrinalysis(ctx: LabContext): LabPanelResult {
     const sedimento: LabAnalyte[] = [];
 
     // Físico-químico
+    if (valores.cor) {
+  const corTexto = String(valores.cor).toLowerCase();
+  const corAlterada =
+    !corTexto.includes("amarela") &&
+    !corTexto.includes("clara") &&
+    !corTexto.includes("normal");
+
+  fisicoQuimico.push(qualitativo("Cor", valores.cor, "Amarela clara", corAlterada));
+}
     if (valores.densidade) {
-      fisicoQuimico.push(qualitativo("Densidade", valores.densidade, "1,005-1,030", valores.densidade !== "1,005-1,030"));
-    }
+  const densidadeNum = Number(String(valores.densidade).replace(",", "."));
+  const densidadeAlterada = !Number.isNaN(densidadeNum) && (densidadeNum < 1.005 || densidadeNum > 1.030);
+
+  fisicoQuimico.push(qualitativo("Densidade", valores.densidade, "1,005-1,030", densidadeAlterada));
+}
     if (valores.ph) {
-      fisicoQuimico.push(qualitativo("pH urinário", valores.ph, "4,5-8,0", valores.ph < "4,5" || valores.ph > "8,0"));
-    }
+  const phNum = Number(String(valores.ph).replace(",", "."));
+  const phAlterado = !Number.isNaN(phNum) && (phNum < 4.5 || phNum > 8.0);
+
+  fisicoQuimico.push(qualitativo("pH urinário", valores.ph, "4,5-8,0", phAlterado));
+}
     if (valores.proteina) {
       fisicoQuimico.push(qualitativo("Proteína", valores.proteina, "Ausente", valores.proteina !== "Ausente" && !valores.proteina?.includes("aços")));
     }
@@ -61,8 +76,17 @@ export function generateUrinalysis(ctx: LabContext): LabPanelResult {
       sedimento.push(qualitativo("Leucócitos", valores.leucocitos, "< 5 p/campo", !valores.leucocitos?.includes("<")));
     }
     if (valores.hemacias) {
-      sedimento.push(qualitativo("Hemácias", valores.hemacias, "< 3 p/campo", !valores.hemacias?.includes("<")));
-    }
+  const hemaciasTexto = String(valores.hemacias).toLowerCase();
+  const hemaciasAlteradas =
+    !hemaciasTexto.includes("0-2") &&
+    !hemaciasTexto.includes("0 a 2") &&
+    !hemaciasTexto.includes("< 3") &&
+    !hemaciasTexto.includes("<3") &&
+    !hemaciasTexto.includes("ausente") &&
+    !hemaciasTexto.includes("ausentes");
+
+  sedimento.push(qualitativo("Hemácias", valores.hemacias, "< 3 p/campo", hemaciasAlteradas));
+}
     if (valores.bacterias) {
       sedimento.push(qualitativo("Bactérias", valores.bacterias, "Raras", valores.bacterias !== "Raras" && valores.bacterias !== "Ausentes"));
     }

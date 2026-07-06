@@ -54,6 +54,7 @@ export const REF: Record<string, Ref> = {
   ggt: { lo: 10, hi: 60, un: "U/L", dec: 0, kind: "m" },
   bt: { lo: 0.2, hi: 1.2, un: "mg/dL", dec: 1, kind: "m", clampMin: 0.1 },
   bd: { lo: 0.0, hi: 0.3, un: "mg/dL", dec: 1, kind: "m" },
+  bi: { lo: 0.2, hi: 0.9, un: "mg/dL", dec: 1, kind: "m" },
   albumina: { lo: 3.5, hi: 5.0, un: "g/dL", dec: 1, kind: "h", clampMin: 1.5, clampMax: 5.5 },
 
   // Coagulograma
