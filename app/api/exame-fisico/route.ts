@@ -1,4 +1,4 @@
-import { casosOSCE } from "@/data/casos-osce";
+import { casosV2 } from "@/data/casos-v2";
 import { criarPromptExameFisico } from "@/lib/prompts";
 import { openai } from "@/lib/openai";
 import { interpretarManobraExameFisico } from "@/lib/interpretarManobraExameFisico";
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const caso = casosOSCE.find((c) => c.id === casoId);
+    const caso = casosV2.find((c) => c.id === casoId) as any;
     if (!caso) {
       return Response.json({ erro: "Caso não encontrado" }, { status: 404 });
     }

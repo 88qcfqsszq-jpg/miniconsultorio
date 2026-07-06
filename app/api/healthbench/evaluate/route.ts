@@ -15,7 +15,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { casosOSCE } from "@/data/casos-osce";
+import { casosV2 } from "@/data/casos-v2";
 import { evaluateHealthBenchAttempt } from "@/lib/healthbench/evaluator";
 import type { HealthBenchAtendimentoInput } from "@/lib/healthbench/types";
 
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const caso = casosOSCE.find((c) => String(c.id) === String(body.casoId));
+    const caso = casosV2.find((c: any) => String(c.id) === String(body.casoId)) as any;
     if (!caso) {
       return NextResponse.json(
         { error: `Caso ${body.casoId} não encontrado.` },

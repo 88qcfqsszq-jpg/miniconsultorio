@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { casosOSCE } from "@/data/casos-osce";
+import { casosV2 } from "@/data/casos-v2";
 import { criarPromptPaciente } from "@/lib/prompts";
 import { openai } from "@/lib/openai";
 import { obterRespostaPaciente } from "@/lib/mockPaciente";
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Buscar o caso
-    const caso = casosOSCE.find((c) => c.id === casoId);
+    const caso = casosV2.find((c: any) => c.id === casoId) as any;
     if (!caso) {
       return NextResponse.json({
         resposta: "Desculpe, não encontrei o caso solicitado.",
