@@ -3,7 +3,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import ChatPaciente from "@/components/ChatPaciente";
-import PainelExameFisico from "@/components/PainelExameFisico";
+import { ConsultorioMedixBodyClass } from "@/components/consultorio/ConsultorioMedixBodyClass";
+import "./consultorio-medix.css";
+import ExameFisicoAdultoVisual from "@/components/ExameFisicoAdultoVisual";
 import ExameFisicoPediatrico from "@/components/pediatria/ExameFisicoPediatrico";
 import IndicadorInterlocutorPediatrico from "@/components/pediatria/IndicadorInterlocutorPediatrico";
 import FormularioSOAP from "@/components/FormularioSOAP";
@@ -11,11 +13,15 @@ import PainelDiagnostico from "@/components/PainelDiagnostico";
 import FeedbackOSCE from "@/components/FeedbackOSCE";
 import LoadingRelatorio from "@/components/LoadingRelatorio";
 import PainelExamesComplementares from "@/components/PainelExamesComplementares";
-import ResumoAnamnese from "@/components/ResumoAnamnese";
 import SimuladorECG from "@/components/SimuladorECG";
-import PainelAnaliseImagem from "@/components/PainelAnaliseImagem";
-import { casosOSCE } from "@/data/casos-osce";
+import OpenIRawImagePanel from "@/components/OpenIRawImagePanel";
+import LaboratoryPanel from "@/src/components/LaboratoryPanel";
+import VitalsReassessment from "@/src/components/VitalsReassessment";
+import { mapEvidences, expandExamName } from "@/lib/osce/evidence-mapper";
+import { construirFeedbackViewDeHealthBench } from "@/lib/healthbench/feedback-view-builder";
+import { casosV2 } from "@/data/casos-v2";
 import { event } from "@/lib/analytics";
+import { getDiagnosticoOcultoDoCaso } from "@/lib/utils/diagnostico-oculto";
 import type {
   Caso,
   MensagemChat,
@@ -42,6 +48,13 @@ function CasoPageContent() {
     useState(false);
   const [manobrasSolicitadas, setManobrasSolicitadas] = useState<ManobraRealizada[]>([]);
   const [examesSolicitados, setExamesSolicitados] = useState<ExameSolicitado[]>([]);
+  // Fase 27: laudos laboratoriais REALMENTE visualizados (aba Exames Laboratoriais).
+  const [labsVisualizados, setLabsVisualizados] = useState<string[]>([]);
+  const registrarLabVisualizado = (_id: string, label: string) => {
+    setLabsVisualizados((prev) => (prev.includes(label) ? prev : [...prev, label]));
+  };
+  // Reavaliação de sinais vitais: tempo de observação escolhido (persiste entre abas).
+  const [vitalsReavaliadoMin, setVitalsReavaliadoMin] = useState<number | null>(null);
   const [ecgGerado, setEcgGerado] = useState<any>(null);
   const [feedback, setFeedback] = useState<FeedbackOSCEType | null>(null);
   const [mensagens, setMensagens] = useState<MensagemChat[]>([]);
@@ -49,8 +62,22 @@ function CasoPageContent() {
   const [progressoFeedback, setProgressoFeedback] = useState(0);
   const [mensagemLoading, setMensagemLoading] = useState("");
   const [erroFeedback, setErroFeedback] = useState<string | null>(null);
+  const [imagensCandidatasPrecarregadas, setImagensCandidatasPrecarregadas] = useState<any[]>([]);
+  const [carregandoImagemRadiologica, setCarregandoImagemRadiologica] = useState(false);
+  const [erroImagemRadiologica, setErroImagemRadiologica] = useState(false);
+  const [imageUrlRadiologica, setImageUrlRadiologica] = useState<string | null>(null);
+
+  // 🟢 NOVO FLUXO LIMPO — Open-i Raw (/api/openi/raw + OpenIRawImagePanel)
+  const [openIImageUrl, setOpenIImageUrl] = useState<string | null>(null);
+  const [openIQuery, setOpenIQuery] = useState<string | null>(null);
+  const [openILoading, setOpenILoading] = useState(false);
+  const [openIError, setOpenIError] = useState<string | null>(null);
   const apiConcluídaRef = useRef(false);
   const feedbackRecebidoRef = useRef<FeedbackOSCEType | null>(null);
+  const abortControllerImagemRef = useRef<AbortController | null>(null);
+  const diagnosticoPrecarregadoRef = useRef<string>("");
+  const imagensPrecarregadasCacheRef = useRef<Map<string, any[]>>(new Map());
+  const timeoutImagemRef = useRef<NodeJS.Timeout | null>(null);
 
   const getMensagemLoading = (percentual: number): string => {
     if (percentual < 16) return "Iniciando análise do atendimento...";
@@ -110,9 +137,9 @@ function CasoPageContent() {
     }
 
     // 2. Se não achou em sessionStorage, procurar em casos estáticos
-    const casoEncontrado = casosOSCE.find((c) => c.id === casoId);
+    const casoEncontrado = casosV2.find((c) => c.id === casoId);
     if (casoEncontrado) {
-      setCaso(casoEncontrado);
+      setCaso(casoEncontrado as any);
       setTempoInicio(Date.now());
       event("iniciou_caso", {
         caso_id: casoEncontrado.id,
@@ -131,6 +158,183 @@ function CasoPageContent() {
       return () => clearInterval(interval);
     }
   }, [phase, tempoInicio]);
+
+  // Pré-carregamento de imagens radiológicas em background
+  useEffect(() => {
+    if (!caso) return;
+
+    // Usar diagnóstico OCULTO real do caso (nunca exibido ao aluno)
+    const diagnostico = getDiagnosticoOcultoDoCaso(caso);
+
+    if (!diagnostico) return;
+
+    // Verificar se já está em cache
+    const cacheKey = `${caso.id}_${diagnostico}`;
+    if (imagensPrecarregadasCacheRef.current.has(cacheKey)) {
+      const imagensCached = imagensPrecarregadasCacheRef.current.get(cacheKey);
+      setImagensCandidatasPrecarregadas(imagensCached || []);
+      setCarregandoImagemRadiologica(false);
+      setErroImagemRadiologica(false);
+      return;
+    }
+
+    // Se já está carregando para este diagnóstico, não fazer de novo
+    if (diagnosticoPrecarregadoRef.current === cacheKey) {
+      return;
+    }
+
+    diagnosticoPrecarregadoRef.current = cacheKey;
+
+    // Cancelar busca anterior se existir
+    if (abortControllerImagemRef.current) {
+      abortControllerImagemRef.current.abort();
+    }
+    if (timeoutImagemRef.current) {
+      clearTimeout(timeoutImagemRef.current);
+    }
+
+    // Criar novo controller para esta busca
+    const controller = new AbortController();
+    abortControllerImagemRef.current = controller;
+
+    // TIMEOUT DE SEGURANÇA: 8 segundos máximo
+    const timeout = setTimeout(() => {
+      controller.abort();
+      setCarregandoImagemRadiologica(false);
+      setErroImagemRadiologica(true);
+      // Armazenar em cache como vazio temporariamente (5 min) para não repetir busca travada
+      imagensPrecarregadasCacheRef.current.set(cacheKey, []);
+    }, 8000);
+    timeoutImagemRef.current = timeout;
+
+    // Buscar imagens em background
+    setCarregandoImagemRadiologica(true);
+    setErroImagemRadiologica(false);
+
+    const buscarImagensBackground = async () => {
+      try {
+        // 🔴 SIMPLES: Buscar com mode=openi_raw e pegar apenas imageUrl
+        const url = `/api/exams/references?diagnosis=${encodeURIComponent(diagnostico)}&mode=openi_raw`;
+
+        const response = await fetch(url, {
+          signal: controller.signal,
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          setImagensCandidatasPrecarregadas([]);
+          imagensPrecarregadasCacheRef.current.set(cacheKey, []);
+          return;
+        }
+
+        const dados = await response.json();
+
+        // 1️⃣ API retorna imageUrl?
+        console.log("[1️⃣ API]", {
+          "sucesso": dados?.sucesso,
+          "imageUrl": dados?.imageUrl?.substring(0, 60),
+          "imagens[0].imageUrl": dados?.imagens?.[0]?.imageUrl?.substring(0, 60)
+        });
+
+        // 2️⃣ Extrair imageUrl diretamente
+        const imageUrl = dados?.imageUrl || dados?.imagens?.[0]?.imageUrl || null;
+        console.log("[2️⃣ EXTRAÇÃO]", { imageUrl: imageUrl?.substring(0, 60) });
+
+        // 3️⃣ Setar o estado simples
+        console.log("[3️⃣ ANTES DE setState]", { imageUrl: imageUrl?.substring(0, 60) });
+        setImageUrlRadiologica(imageUrl);
+        console.log("[3️⃣ APÓS setState]", { imageUrlRadiologica: imageUrl?.substring(0, 60) });
+
+        setErroImagemRadiologica(false);
+      } catch (erro) {
+        if (erro instanceof Error && erro.name === "AbortError") {
+          // Busca foi cancelada (timeout ou cleanup), não fazer nada
+          return;
+        }
+        setImagensCandidatasPrecarregadas([]);
+        imagensPrecarregadasCacheRef.current.set(cacheKey, []);
+        setErroImagemRadiologica(true);
+      } finally {
+        setCarregandoImagemRadiologica(false);
+        if (timeoutImagemRef.current) {
+          clearTimeout(timeoutImagemRef.current);
+          timeoutImagemRef.current = null;
+        }
+      }
+    };
+
+    buscarImagensBackground();
+
+    // Cleanup: cancelar busca ao desmontar ou se caso mudar
+    return () => {
+      if (abortControllerImagemRef.current === controller) {
+        controller.abort();
+      }
+      if (timeoutImagemRef.current) {
+        clearTimeout(timeoutImagemRef.current);
+      }
+    };
+  }, [caso]);
+
+  // 🟢 NOVO FLUXO LIMPO — Buscar imagem via /api/openi/raw ao trocar de caso
+  useEffect(() => {
+    if (!caso) return;
+
+    // 1. Limpar SEMPRE a imagem anterior (nunca persiste entre casos)
+    setOpenIImageUrl(null);
+    setOpenIQuery(null);
+    setOpenIError(null);
+    setOpenILoading(true);
+
+    // 2. Diagnóstico oculto do caso (campo: dados_ocultos_do_sistema.diagnostico_principal)
+    const diagnostico = getDiagnosticoOcultoDoCaso(caso);
+
+    if (!diagnostico) {
+      setOpenILoading(false);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    (async () => {
+      try {
+        const resp = await fetch(
+          `/api/openi/raw?diagnosis=${encodeURIComponent(diagnostico)}`,
+          { cache: "no-store", signal: controller.signal }
+        );
+        const data = await resp.json();
+
+        const url = data?.imageUrl ?? null;
+        setOpenIQuery(data?.query ?? null);
+
+        if (url) {
+          // Sucesso com imagem: imagem válida + erro SEMPRE limpo
+          setOpenIImageUrl(url);
+          setOpenIError(null);
+        } else {
+          // Resposta sem imagem
+          setOpenIImageUrl(null);
+          setOpenIError("Imagem indisponível");
+        }
+        setOpenILoading(false);
+
+        console.log("[OPENI FRONT STATE]", {
+          casoId: caso.id,
+          query: data?.query ?? null,
+          imageUrl: url,
+          loading: false,
+          error: url ? null : "Imagem indisponível",
+        });
+      } catch (erro) {
+        if (erro instanceof Error && erro.name === "AbortError") return;
+        setOpenIImageUrl(null);
+        setOpenIError("Falha ao consultar o Open-i.");
+        setOpenILoading(false);
+      }
+    })();
+
+    return () => controller.abort();
+  }, [caso]);
 
   // Atualizar mensagem de loading baseado no progresso
   useEffect(() => {
@@ -166,6 +370,144 @@ function CasoPageContent() {
         }
       });
     }, 300);
+
+    // 🟢 FASE 2: caminho central /api/osce/finalizar (HealthBench = source of truth,
+    // legado embutido). Se falhar, cai no fluxo antigo /api/corrigir abaixo (fallback).
+    try {
+      const respOsce = await fetch("/api/osce/finalizar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          casoId: caso?.id,
+          chatMessages: mensagens,
+          physicalExamEvents: [
+            ...manobrasSolicitadas.map((m) => ({
+              categoria: m.categoria,
+              textDigitado: m.textDigitado,
+              resposta: m.resposta,
+            })),
+            // Fase 27: evidências reconhecidas do exame físico (log real → tokens avaliáveis).
+            ...(() => {
+              const ev = mapEvidences({ physicalExamEvents: manobrasSolicitadas.map((m) => ({ categoria: m.categoria, textDigitado: m.textDigitado, resposta: m.resposta })) }).physicalEvidences;
+              return ev.length ? [{ categoria: "exame_fisico", textDigitado: ev.join("; "), resposta: "" }] : [];
+            })(),
+          ],
+          vitalSignsEvents: {
+            solicitado: sinaisVitaisSolicitados,
+            dados: sinaisVitaisSolicitados ? caso?.sinaisVitaisCorretos : undefined,
+          },
+          // Fase 27: examRequests com expansão de exames agrupados + labs realmente visualizados.
+          examRequests: [
+            ...examesSolicitados.map((e) => ({ nome: e.nome, resultado: `${e.resultado ?? ""} ${expandExamName(e.nome, e.resultado).join(" ")}`.trim() })),
+            ...labsVisualizados.map((l) => ({ nome: l, resultado: `laudo laboratorial visualizado ${expandExamName(l).join(" ")}` })),
+          ],
+          diagnosisAndPlan: {
+            hipotesePrincipal: diagnostico.hipotesePrincipal,
+            diagnosticosDiferenciais: diagnostico.diagnosticosDisferenciais,
+            examesIndicados: diagnostico.examesIndicados,
+            conduta: diagnostico.conduta,
+          },
+          soap: soap,
+          tempoAtendimento: tempoDecorrido,
+          mode: modoOSCE ? "exam" : "training",
+        }),
+      });
+
+      if (respOsce.ok) {
+        const data = await respOsce.json();
+        const hb = data?.healthBenchResult ?? null;
+
+        // 🟢 HealthBench é a ÚNICA fonte visual do feedback principal quando existir.
+        if (hb && caso) {
+          console.log("[FEEDBACK HB DATA] healthBenchResult recebido");
+          const falasAluno = mensagens
+            .filter((m) => m.tipo === "estudante")
+            .map((m) => m.conteudo)
+            .join(" . ");
+          const condutaTexto = [
+            diagnostico.conduta,
+            soap.plano,
+            soap.avaliacao,
+            falasAluno,
+          ]
+            .filter(Boolean)
+            .join(" . ");
+          // Radiografia visualizada pela aba "Exames de Imagem" (Open-i) conta como RX
+          const imagemVisualizada = openIImageUrl
+            ? `exame de imagem visualizado radiografia de torax ${openIQuery ?? ""} ${openIImageUrl}`
+            : "";
+          // Fase 27: Evidence Mapper — reconhece exames clicados/agrupados + exame físico do log.
+          const evidencias = mapEvidences({
+            examRequests: examesSolicitados.map((e) => ({ nome: e.nome, resultado: e.resultado })),
+            labsVisualizados,
+            physicalExamEvents: manobrasSolicitadas.map((m) => ({ categoria: m.categoria, textDigitado: m.textDigitado, resposta: m.resposta })),
+            examesIndicadosTexto: diagnostico.examesIndicados ?? [],
+            sinaisVitaisSolicitados,
+          });
+          const examesTexto = [
+            ...examesSolicitados.map((e) => `${e.nome} ${e.resultado ?? ""}`),
+            ...(diagnostico.examesIndicados ?? []),
+            imagemVisualizada,
+            evidencias.examesTextoExpandido, // exames agrupados + labs visualizados
+          ]
+            .filter(Boolean)
+            .join(" ");
+
+          // Transcrição completa (anamnese) e correlações verbalizadas pelo aluno
+          const transcricaoTexto = mensagens
+            .map((m) => m.conteudo)
+            .filter(Boolean)
+            .join(" . ");
+          const correlacaoTexto = [
+            falasAluno,
+            diagnostico.hipotesePrincipal,
+            (diagnostico.diagnosticosDisferenciais ?? []).join(" "),
+            soap.avaliacao,
+            soap.objetivo,
+          ]
+            .filter(Boolean)
+            .join(" . ");
+          const achadosTexto = [
+            ...manobrasSolicitadas.map((m) => `${m.textDigitado ?? ""} ${m.resposta ?? ""}`),
+            ...examesSolicitados.map((e) => `${e.nome} ${e.resultado ?? ""}`),
+            evidencias.achadosTextoExpandido, // exame físico do log + exames reconhecidos
+          ]
+            .filter(Boolean)
+            .join(" ");
+
+          const feedbackView = construirFeedbackViewDeHealthBench(hb, caso, {
+            diagnosticoInformado: diagnostico.hipotesePrincipal,
+            tempoAtendimento: tempoDecorrido,
+            sinaisVitais: {
+              solicitado: sinaisVitaisSolicitados,
+              dados: sinaisVitaisSolicitados ? caso?.sinaisVitaisCorretos : undefined,
+            },
+            condutaTexto,
+            examesTexto,
+            anamneseTexto: transcricaoTexto,
+            correlacaoTexto,
+            achadosTexto,
+            diferenciaisInformados: diagnostico.diagnosticosDisferenciais ?? [],
+          });
+          console.log("[FEEDBACK HB DATA] cards montados por competência:", feedbackView.rubricaAvaliacao?.length);
+          console.log("[FEEDBACK HB DATA] feedback principal usando HealthBench");
+          console.log("[FEEDBACK HB CLEANUP] sem painel paralelo e sem duas notas");
+
+          apiConcluídaRef.current = true;
+          await new Promise((r) => setTimeout(r, 400));
+          event("finalizou_caso", { caso_id: caso?.id, caso_titulo: caso?.titulo, modo: modoOSCE ? "prova" : "treinamento" });
+          event("abriu_feedback", { caso_id: caso?.id, caso_titulo: caso?.titulo, nota: feedbackView.nota });
+          // legacyCorrectionResult é IGNORADO visualmente (fallback técnico silencioso)
+          setFeedback(feedbackView);
+          setPhase("feedback");
+          clearInterval(intervaloProgresso);
+          setProgressoFeedback(100);
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn("[FEEDBACK HB FALLBACK] HealthBench indisponível, usando correção legada:", e);
+    }
 
     try {
       const response = await fetch("/api/corrigir", {
@@ -229,7 +571,9 @@ function CasoPageContent() {
           nota: feedbackDetalhado?.nota,
         });
 
-        // Mostrar feedback
+        // Fallback legado: feedback do /api/corrigir alimenta a tela
+        // (só chega aqui se /api/osce/finalizar / HealthBench falhar).
+        console.log("[FEEDBACK HB FALLBACK] fallback legado acionado");
         setFeedback(feedbackDetalhado);
         setPhase("feedback");
       } else {
@@ -252,8 +596,37 @@ function CasoPageContent() {
     }
   };
 
-  const [abaAtiva, setAbaAtiva] = useState<"paciente" | "exame" | "imagemRadiologica" | "exames" | "sinaisVitais" | "ecg">("paciente");
-  const [menuAtivo, setMenuAtivo] = useState<"paciente" | "exame" | "imagemRadiologica" | "exames" | "sinaisVitais" | "ecg">("paciente");
+  const [abaAtiva, setAbaAtiva] = useState<"paciente" | "exame" | "imagemRadiologica" | "exames" | "laboratorio" | "sinaisVitais" | "ecg">("paciente");
+
+  // 🔍 LOG: Monitorar mudanças de aba
+  useEffect(() => {
+    console.log("[ABA]", abaAtiva);
+  }, [abaAtiva]);
+  const [menuAtivo, setMenuAtivo] = useState<"paciente" | "exame" | "imagemRadiologica" | "exames" | "laboratorio" | "sinaisVitais" | "ecg">("paciente");
+
+  // Exame Físico Visual do adulto (modal, padrão pediátrico)
+  const [modalExameAdultoAberto, setModalExameAdultoAberto] = useState(false);
+  const isAdulto = caso?.tipoPaciente !== "pediatrico";
+
+  // Abrir Exame Físico: adulto → modal visual direto; pediátrico → fluxo inline atual
+  const abrirExameFisico = (origem: "menu" | "aba") => {
+    if (isAdulto) {
+      setModalExameAdultoAberto(true);
+    } else if (origem === "menu") {
+      setMenuAtivo("exame");
+    } else {
+      setAbaAtiva("exame");
+    }
+  };
+
+  // Registra achado do exame visual adulto e confirma envio ao payload/HealthBench
+  const handleAchadoExameAdulto = (m: ManobraRealizada) => {
+    handleNovaManobra(m);
+    console.log(
+      "[OSCE ADULT PHYSICAL EXAM PAYLOAD] achados adultos enviados:",
+      `${m.textDigitado}: ${m.resposta}`
+    );
+  };
   const [soap, setSOAP] = useState<FormularioSOAPType>({
     subjetivo: "",
     objetivo: "",
@@ -282,60 +655,118 @@ function CasoPageContent() {
     return (
       <div className="min-h-screen bg-slate-50 py-6 sm:py-10">
         <div className="w-full px-4">
+          {/* Feedback do Atendimento — alimentado diretamente pelo HealthBench
+              (quando /api/osce/finalizar retorna healthBenchResult). Sem painel paralelo. */}
           <FeedbackOSCE
             feedback={feedback}
             nomePaciente={caso.paciente.nome}
             tempoDecorrido={tempoDecorrido}
             caso={caso}
+            chatMessages={mensagens}
+            manobrasSolicitadas={manobrasSolicitadas}
+            examesSolicitados={[
+              ...examesSolicitados,
+              // Fase 27: laudos laboratoriais visualizados entram como evidência real
+              // (StudentTrace, PDF e Professor IA passam a reconhecê-los).
+              ...labsVisualizados.map((l) => ({ nome: l, resultado: "laudo laboratorial visualizado" })),
+            ]}
+            sinaisVitais={{
+              solicitado: sinaisVitaisSolicitados,
+              dados: sinaisVitaisSolicitados ? caso?.sinaisVitaisCorretos : undefined,
+            }}
+            diagnostico={diagnostico}
+            soap={soap}
           />
         </div>
       </div>
     );
   }
 
+  // Conduta CONSOLIDADA lida pelo TreatmentResponseEngine na aba Sinais Vitais.
+  // Fontes somadas (nenhuma substitui a outra): conduta do diagnóstico, plano e
+  // avaliação do SOAP e o HISTÓRICO COMPLETO do chat (mensagens do médico e do
+  // paciente). Assim, intervenções ditas no chat ("vou administrar dipirona 1g",
+  // "faço nebulização com salbutamol") também são reconhecidas.
+  // Somente leitura: não altera scoring, feedback, SOAP, diagnóstico nem o chat.
+  const chatCondutaTexto = mensagens.map((m) => m.conteudo).filter(Boolean).join(". ");
+  const condutaTexto = [diagnostico.conduta, soap.plano, soap.avaliacao, chatCondutaTexto]
+    .filter(Boolean)
+    .join(". ");
+  const condutaFontes = {
+    conduta: diagnostico.conduta || "",
+    plano: soap.plano || "",
+    avaliacao: soap.avaliacao || "",
+    chatMensagens: mensagens.length,
+  };
+
   const abas = [
     { id: "paciente" as const, label: "Paciente", icon: "💬" },
     { id: "exame" as const, label: "Exame", icon: "🥼" },
     { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "🖼️" },
     { id: "exames" as const, label: "Exames", icon: "🧪" },
+    { id: "laboratorio" as const, label: "Exames Laboratoriais", icon: "🧬" },
     { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "📊" },
     { id: "ecg" as const, label: "ECG", icon: "📈" },
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Aviso OSCE */}
-      {modoOSCE && (
-        <div className="bg-blue-700 text-white py-2 px-4 text-center text-xs font-semibold">
-          🎯 Modo OSCE — Diagnóstico revelado ao finalizar
-        </div>
-      )}
+    <div className="min-h-screen consultorio-medix">
+      {/* Mantém a classe no body para os overrides visuais desta rota */}
+      <ConsultorioMedixBodyClass />
 
-      {/* Header compacto */}
-      <div className="bg-white border-b border-slate-200 px-4 py-3">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="min-w-0">
-            <p className="font-bold text-slate-800 text-sm truncate">
-              {modoOSCE ? "Simulado OSCE" : caso.titulo}
-            </p>
-            <p className="text-slate-500 text-xs">
-              {caso.paciente.nome} • {caso.paciente.idade} anos • {caso.paciente.sexo === "M" ? "M" : "F"}
-              {caso.tipoPaciente === "pediatrico" && caso.paciente.dadosPediatricos && (
-                <>
-                  {" • "}
-                  Responsável: {caso.paciente.dadosPediatricos.responsavel.nome}
-                </>
-              )}
-            </p>
-          </div>
-          <div className="text-right shrink-0">
-            <p className="text-xs text-slate-400">Tempo</p>
-            <p className="font-bold text-slate-700 tabular-nums text-sm">
-              {Math.floor(tempoDecorrido / 60).toString().padStart(2, "0")}:{(tempoDecorrido % 60).toString().padStart(2, "0")}
-            </p>
+      {/* A sidebar é global (AppShell/AppSidebar) — não renderiza sidebar local aqui. */}
+
+      {/* Topbar MEDIX própria — estilo DashboardLanding */}
+      <header className="consultorio-medix-topbar consultorio-medix-topbar-dashboard">
+        <div className="consultorio-medix-topbar-left">
+          <div className="consultorio-medix-profile-initials">JS</div>
+          <div className="consultorio-medix-welcome">
+            <div className="consultorio-medix-welcome-title">
+              <span>Olá, Dr. João Silva</span>
+              <span className="consultorio-medix-pro-badge">PRO</span>
+            </div>
+            <p>Seja bem-vindo à sua plataforma acadêmica</p>
           </div>
         </div>
-      </div>
+
+        <div className="consultorio-medix-search">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M21 21l-4.3-4.3M11 19a8 8 0 100-16 8 8 0 000 16z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Buscar conteúdos, casos, disciplinas..."
+            aria-label="Buscar conteúdos, casos, disciplinas"
+          />
+        </div>
+
+        <div className="consultorio-medix-topbar-actions">
+          <button className="consultorio-medix-top-icon" type="button" aria-label="Notificações">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button className="consultorio-medix-top-icon" type="button" aria-label="Calendário">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M3 9h18M7 3v3m10-3v3M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button className="consultorio-medix-top-icon" type="button" aria-label="Mensagens">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button className="consultorio-medix-top-icon" type="button" aria-label="Perfil">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M20 21a8 8 0 10-16 0M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      {/* Faixas antigas (banner "Modo OSCE" e header "Simulado OSCE / Tempo")
+          removidas do layout MEDIX — o cronômetro (tempoDecorrido) e a lógica
+          do modo OSCE seguem ativos internamente para payload/finalização. */}
 
       {/* Abas — visível apenas em mobile */}
       <div className="lg:hidden bg-white border-b border-slate-200 px-4">
@@ -343,7 +774,11 @@ function CasoPageContent() {
           {abas.map((aba) => (
             <button
               key={aba.id}
-              onClick={() => setAbaAtiva(aba.id)}
+              onClick={() =>
+                aba.id === "exame"
+                  ? abrirExameFisico("aba")
+                  : setAbaAtiva(aba.id)
+              }
               className={`flex items-center gap-1.5 px-3 py-3 text-xs font-semibold whitespace-nowrap border-b-2 transition-colors shrink-0 ${
                 abaAtiva === aba.id
                   ? "border-blue-600 text-blue-700"
@@ -360,80 +795,47 @@ function CasoPageContent() {
       {/* Conteúdo Principal */}
       <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
         {/* Layout Desktop: 3 colunas proporcionais (Sidebar + Centro + Painel Direito) */}
-        <div className="hidden lg:grid lg:grid-cols-[280px_minmax(0,1fr)_360px] gap-6">
+        <div className="hidden lg:grid lg:grid-cols-[240px_minmax(0,1fr)_350px] gap-5">
           {/* Coluna 1: Sidebar Esquerda */}
           <div className="space-y-4">
             {/* Menu Atendimento */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Atendimento</p>
-              <div className="space-y-2">
+            <div className="attendance-panel">
+              <p className="attendance-title">Atendimento</p>
+              <div className="attendance-list">
                 {[
-                  { id: "paciente" as const, label: "Paciente", icon: "💬" },
-                  { id: "exame" as const, label: "Exame Físico", icon: "🥼" },
-                  { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "🖼️" },
-                  { id: "exames" as const, label: "Exames", icon: "🧪" },
-                  { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "📊" },
-                  { id: "ecg" as const, label: "ECG", icon: "📈" },
+                  { id: "paciente" as const, label: "Paciente", icon: "icon-paciente.png" },
+                  { id: "exame" as const, label: "Exame Físico", icon: "icon-exame-fisico.png" },
+                  { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "icon-exames-imagem.png" },
+                  { id: "exames" as const, label: "Exames", icon: "icon-exames.png" },
+                  { id: "laboratorio" as const, label: "Exames Laboratoriais", icon: "icon-exames.png" },
+                  { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "icon-sinais-vitais.png" },
+                  { id: "ecg" as const, label: "ECG", icon: "icon-ecg.png" },
                 ].map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => setMenuAtivo(item.id)}
-                    className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                      menuAtivo === item.id
-                        ? "bg-blue-600 text-white shadow-sm"
-                        : "bg-slate-50 text-slate-700 hover:bg-slate-100"
-                    }`}
+                    onClick={() =>
+                      item.id === "exame"
+                        ? abrirExameFisico("menu")
+                        : setMenuAtivo(item.id)
+                    }
+                    className={`attendance-item${menuAtivo === item.id ? " active" : ""}`}
                   >
-                    <span className="mr-2">{item.icon}</span>
+                    <span className="attendance-item-ico">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={`/assets/consultorio/attendance-icons/${item.icon}`}
+                        alt=""
+                        draggable={false}
+                      />
+                    </span>
                     {item.label}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Sinais Vitais */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Sinais Vitais</p>
-              <button
-                onClick={() => setSinaisVitaisSolicitados(true)}
-                disabled={sinaisVitaisSolicitados || phase === "feedback"}
-                className={`w-full px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  sinaisVitaisSolicitados
-                    ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                    : "bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
-                }`}
-              >
-                {sinaisVitaisSolicitados ? "✓ Coletado" : "Solicitar"}
-              </button>
-              {sinaisVitaisSolicitados && caso.sinaisVitaisCorretos && (
-                <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
-                  <div className="bg-emerald-50 p-2 rounded text-center">
-                    <p className="text-slate-500">PA</p>
-                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.pressaoArterial}</p>
-                  </div>
-                  <div className="bg-emerald-50 p-2 rounded text-center">
-                    <p className="text-slate-500">FC</p>
-                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.frequenciaCardiaca}</p>
-                  </div>
-                  <div className="bg-emerald-50 p-2 rounded text-center">
-                    <p className="text-slate-500">FR</p>
-                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.frequenciaRespiratoria}</p>
-                  </div>
-                  <div className="bg-emerald-50 p-2 rounded text-center">
-                    <p className="text-slate-500">Temp</p>
-                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.temperatura}°C</p>
-                  </div>
-                  <div className="bg-emerald-50 p-2 rounded text-center">
-                    <p className="text-slate-500">SpO₂</p>
-                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.saturacaoOxigenio}%</p>
-                  </div>
-                  <div className="bg-emerald-50 p-2 rounded text-center">
-                    <p className="text-slate-500">Glicose</p>
-                    <p className="font-bold text-emerald-700">{caso.sinaisVitaisCorretos.glicemia ? `${caso.sinaisVitaisCorretos.glicemia} mg/dL` : "—"}</p>
-                  </div>
-                </div>
-              )}
-            </div>
+            {/* Card lateral "Sinais Vitais — Dados iniciais" removido (redundante):
+                a coleta e a reavaliação vivem na aba/menu "Sinais Vitais" central. */}
 
             {/* Diagnóstico e Conduta */}
             <PainelDiagnostico
@@ -444,42 +846,34 @@ function CasoPageContent() {
           </div>
 
           {/* Coluna 2: Conteúdo Central */}
-          <div className="min-w-0 space-y-4">
+          <div className={`min-w-0 space-y-4 consultorio-medix-center${menuAtivo !== "paciente" ? " medix-center-has-panel" : ""}`}>
             {/* Indicador de Interlocutor Pediátrico */}
             <IndicadorInterlocutorPediatrico caso={caso} />
 
             {/* Chat */}
-            <div className="h-[420px] flex flex-col">
+            <div className="h-[420px] flex flex-col medix-chat-slot">
               <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} />
             </div>
 
             {/* Conteúdo Dinâmico baseado no Menu */}
-            {menuAtivo === "paciente" && <ResumoAnamnese mensagens={mensagens} />}
+            <div className="medix-internal-panel-slot">
+            {/* Aba Paciente: apenas o chat (Resumo da Anamnese removido da UI) */}
 
-            {menuAtivo === "exame" && (
-              <>
-                {caso.tipoPaciente === "pediatrico" ? (
-                  <ExameFisicoPediatrico
-                    caso={caso}
-                    onAchadoEncontrado={handleNovaManobra}
-                    achadosEncontrados={manobrasSolicitadas}
-                    onFechar={() => setMenuAtivo("paciente")}
-                  />
-                ) : (
-                  <PainelExameFisico
-                    caso={caso}
-                    manobrasSolicitadas={manobrasSolicitadas}
-                    onNovaManobra={handleNovaManobra}
-                    modoOSCE={modoOSCE}
-                  />
-                )}
-              </>
+            {menuAtivo === "exame" && caso.tipoPaciente === "pediatrico" && (
+              <ExameFisicoPediatrico
+                caso={caso}
+                onAchadoEncontrado={handleNovaManobra}
+                achadosEncontrados={manobrasSolicitadas}
+                onFechar={() => setMenuAtivo("paciente")}
+              />
             )}
 
             {menuAtivo === "imagemRadiologica" && (
-              <PainelAnaliseImagem
-                caso={caso}
-                desabilitado={phase === "feedback"}
+              <OpenIRawImagePanel
+                imageUrl={openIImageUrl}
+                loading={openILoading}
+                error={openIError}
+                query={openIQuery}
               />
             )}
 
@@ -492,55 +886,29 @@ function CasoPageContent() {
               />
             )}
 
+            {menuAtivo === "laboratorio" && <LaboratoryPanel caso={caso} onExamViewed={registrarLabVisualizado} />}
+
             {menuAtivo === "sinaisVitais" && (
               <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">📊</span>
                   <h3 className="font-bold text-slate-800">Sinais Vitais</h3>
                 </div>
-                <button
-                  onClick={() => setSinaisVitaisSolicitados(true)}
-                  disabled={sinaisVitaisSolicitados || phase === "feedback"}
-                  className={`w-full px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                    sinaisVitaisSolicitados
-                      ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                      : "bg-blue-600 hover:bg-blue-700 text-white border border-blue-600"
-                  }`}
-                >
-                  {sinaisVitaisSolicitados ? "✓ Coletado" : "Solicitar Sinais Vitais"}
-                </button>
-                {sinaisVitaisSolicitados && caso.sinaisVitaisCorretos && (
-                  <div className="grid grid-cols-3 gap-3 text-sm">
-                    <div className="bg-emerald-50 p-3 rounded text-center">
-                      <p className="text-slate-600 font-semibold">PA</p>
-                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.pressaoArterial}</p>
-                    </div>
-                    <div className="bg-emerald-50 p-3 rounded text-center">
-                      <p className="text-slate-600 font-semibold">FC</p>
-                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.frequenciaCardiaca}</p>
-                    </div>
-                    <div className="bg-emerald-50 p-3 rounded text-center">
-                      <p className="text-slate-600 font-semibold">FR</p>
-                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.frequenciaRespiratoria}</p>
-                    </div>
-                    <div className="bg-emerald-50 p-3 rounded text-center">
-                      <p className="text-slate-600 font-semibold">Temp</p>
-                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.temperatura}°C</p>
-                    </div>
-                    <div className="bg-emerald-50 p-3 rounded text-center">
-                      <p className="text-slate-600 font-semibold">SpO₂</p>
-                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.saturacaoOxigenio}%</p>
-                    </div>
-                    <div className="bg-emerald-50 p-3 rounded text-center">
-                      <p className="text-slate-600 font-semibold">Glicose</p>
-                      <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.glicemia ? `${caso.sinaisVitaisCorretos.glicemia} mg/dL` : "—"}</p>
-                    </div>
-                  </div>
-                )}
+                <VitalsReassessment
+                  caso={caso}
+                  condutaTexto={condutaTexto}
+                  debugSources={condutaFontes}
+                  sinaisSolicitados={sinaisVitaisSolicitados}
+                  onSolicitarEntrada={() => setSinaisVitaisSolicitados(true)}
+                  reavaliadoMin={vitalsReavaliadoMin}
+                  onReavaliar={setVitalsReavaliadoMin}
+                  desabilitado={phase === "feedback"}
+                />
               </div>
             )}
 
             {menuAtivo === "ecg" && <SimuladorECG padrao={caso?.ecg?.padrao} caso={caso} onClose={() => setMenuAtivo("paciente")} onECGGerado={handleECGGerado} />}
+            </div>
           </div>
 
           {/* Coluna 3: Painel Direito Fixo (Avaliação Clínica) */}
@@ -562,11 +930,31 @@ function CasoPageContent() {
             </div>
           </div>
           <div className={abaAtiva === "exame" ? "block" : "hidden"}>
-            <PainelExameFisico
-              caso={caso}
-              manobrasSolicitadas={manobrasSolicitadas}
-              onNovaManobra={handleNovaManobra}
-              modoOSCE={modoOSCE}
+            {caso.tipoPaciente === "pediatrico" ? (
+              <ExameFisicoPediatrico
+                caso={caso}
+                onAchadoEncontrado={handleNovaManobra}
+                achadosEncontrados={manobrasSolicitadas}
+                onFechar={() => setAbaAtiva("paciente")}
+              />
+            ) : (
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 text-center text-sm text-slate-600">
+                <p className="mb-3">Exame físico visual do paciente adulto.</p>
+                <button
+                  onClick={() => setModalExameAdultoAberto(true)}
+                  className="w-full py-3 px-4 bg-gradient-to-r from-blue-700 via-blue-600 to-sky-500 text-white rounded-xl font-semibold text-sm"
+                >
+                  🩺 Abrir Exame Físico Visual
+                </button>
+              </div>
+            )}
+          </div>
+          <div className={abaAtiva === "imagemRadiologica" ? "block" : "hidden"}>
+            <OpenIRawImagePanel
+              imageUrl={openIImageUrl}
+              loading={openILoading}
+              error={openIError}
+              query={openIQuery}
             />
           </div>
           <div className={abaAtiva === "exames" ? "block" : "hidden"}>
@@ -577,51 +965,25 @@ function CasoPageContent() {
               desabilitado={phase === "feedback"}
             />
           </div>
+          <div className={abaAtiva === "laboratorio" ? "block" : "hidden"}>
+            <LaboratoryPanel caso={caso} onExamViewed={registrarLabVisualizado} />
+          </div>
           <div className={abaAtiva === "sinaisVitais" ? "block" : "hidden"}>
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4">
               <div className="flex items-center gap-2">
                 <span className="text-2xl">📊</span>
                 <h3 className="font-bold text-slate-800">Sinais Vitais</h3>
               </div>
-              <button
-                onClick={() => setSinaisVitaisSolicitados(true)}
-                disabled={sinaisVitaisSolicitados || phase === "feedback"}
-                className={`w-full px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  sinaisVitaisSolicitados
-                    ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                    : "bg-blue-600 hover:bg-blue-700 text-white border border-blue-600"
-                }`}
-              >
-                {sinaisVitaisSolicitados ? "✓ Coletado" : "Solicitar Sinais Vitais"}
-              </button>
-              {sinaisVitaisSolicitados && caso.sinaisVitaisCorretos && (
-                <div className="grid grid-cols-3 gap-3 text-sm">
-                  <div className="bg-emerald-50 p-3 rounded text-center">
-                    <p className="text-slate-600 font-semibold">PA</p>
-                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.pressaoArterial}</p>
-                  </div>
-                  <div className="bg-emerald-50 p-3 rounded text-center">
-                    <p className="text-slate-600 font-semibold">FC</p>
-                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.frequenciaCardiaca}</p>
-                  </div>
-                  <div className="bg-emerald-50 p-3 rounded text-center">
-                    <p className="text-slate-600 font-semibold">FR</p>
-                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.frequenciaRespiratoria}</p>
-                  </div>
-                  <div className="bg-emerald-50 p-3 rounded text-center">
-                    <p className="text-slate-600 font-semibold">Temp</p>
-                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.temperatura}°C</p>
-                  </div>
-                  <div className="bg-emerald-50 p-3 rounded text-center">
-                    <p className="text-slate-600 font-semibold">SpO₂</p>
-                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.saturacaoOxigenio}%</p>
-                  </div>
-                  <div className="bg-emerald-50 p-3 rounded text-center">
-                    <p className="text-slate-600 font-semibold">Glicose</p>
-                    <p className="font-bold text-emerald-700 mt-1">{caso.sinaisVitaisCorretos.glicemia ? `${caso.sinaisVitaisCorretos.glicemia} mg/dL` : "—"}</p>
-                  </div>
-                </div>
-              )}
+              <VitalsReassessment
+                caso={caso}
+                condutaTexto={condutaTexto}
+                debugSources={condutaFontes}
+                sinaisSolicitados={sinaisVitaisSolicitados}
+                onSolicitarEntrada={() => setSinaisVitaisSolicitados(true)}
+                reavaliadoMin={vitalsReavaliadoMin}
+                onReavaliar={setVitalsReavaliadoMin}
+                desabilitado={phase === "feedback"}
+              />
             </div>
           </div>
 
@@ -666,6 +1028,16 @@ function CasoPageContent() {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Modal Exame Físico Visual do adulto (padrão pediátrico) */}
+      {modalExameAdultoAberto && isAdulto && (
+        <ExameFisicoAdultoVisual
+          caso={caso}
+          achadosEncontrados={manobrasSolicitadas}
+          onAchadoEncontrado={handleAchadoExameAdulto}
+          onFechar={() => setModalExameAdultoAberto(false)}
+        />
       )}
     </div>
   );

@@ -1,0 +1,65 @@
+# Inventário de casos v2 inline perfeitos
+
+Total de casos: 61
+
+- 1. Dor Torácica - Síndrome Coronariana Aguda — `adultos/cardiovascular/001-dor-toracica-sindrome-coronariana-aguda.ts`
+- 2. Pneumonia Adquirida na Comunidade — `adultos/respiratorio/002-pneumonia-adquirida-na-comunidade.ts`
+- 3. Asma Aguda — `adultos/respiratorio/003-asma-aguda.ts`
+- 4. Dor Torácica - Angina Típica — `adultos/cardiovascular/004-dor-toracica-angina-tipica.ts`
+- 5. Hipertensão Arterial Sistêmica — `adultos/cardiovascular/005-hipertensao-arterial-sistemica.ts`
+- 6. Pneumonia Atípica — `adultos/respiratorio/006-pneumonia-atipica.ts`
+- 7. Pericardite Aguda — `adultos/cardiovascular/007-pericardite-aguda.ts`
+- 8. Insuficiência Cardíaca Esquerda — `adultos/cardiovascular/008-insuficiencia-cardiaca-esquerda.ts`
+- 9. DPOC - Exacerbação Aguda — `adultos/respiratorio/009-dpoc-exacerbacao-aguda.ts`
+- 10. Tromboembolismo Pulmonar — `adultos/respiratorio/010-tromboembolismo-pulmonar.ts`
+- 11. Tuberculose Pulmonar — `adultos/respiratorio/011-tuberculose-pulmonar.ts`
+- 12. Dengue - Grupo A — `adultos/infectologia/012-dengue-grupo-a.ts`
+- 13. Endocardite Infecciosa — `adultos/cardiovascular/013-endocardite-infecciosa.ts`
+- 14. Estenose Mitral — `adultos/cardiovascular/014-estenose-mitral.ts`
+- 15. Doença Arterial Obstrutiva Periférica — `adultos/cardiovascular/015-doenca-arterial-obstrutiva-periferica.ts`
+- 16. Derrame Pleural — `adultos/respiratorio/016-derrame-pleural.ts`
+- 17. Anemia Ferropriva — `adultos/hematologia/017-anemia-ferropriva.ts`
+- 18. Infarto Agudo do Miocárdio sem Supra de ST — `adultos/cardiovascular/018-infarto-agudo-do-miocardio-sem-supra-de-st.ts`
+- 19. Angina Instável — `adultos/cardiovascular/019-angina-instavel.ts`
+- 20. Infarto Agudo do Miocárdio com Supra de ST - Necessidade de Trombólise — `adultos/cardiovascular/020-infarto-agudo-do-miocardio-com-supra-de-st-necessidade-de-trombolise.ts`
+- 21. Fibrilação Atrial Paroxística — `adultos/cardiovascular/021-fibrilacao-atrial-paroxistica.ts`
+- 22. Emergência Hipertensiva Suspeita — `adultos/cardiovascular/022-emergencia-hipertensiva-suspeita.ts`
+- 23. Insuficiência Mitral Crônica — `adultos/cardiovascular/023-insuficiencia-mitral-cronica.ts`
+- 24. Estenose Aórtica Grave — `adultos/cardiovascular/024-estenose-aortica-grave.ts`
+- 25. Insuficiência Aórtica Aguda — `adultos/cardiovascular/025-insuficiencia-aortica-aguda.ts`
+- 26. Estenose Mitral com Fibrilação Atrial — `adultos/cardiovascular/026-estenose-mitral-com-fibrilacao-atrial.ts`
+- 27. Febre Reumática Aguda — `adultos/cardiovascular/027-febre-reumatica-aguda.ts`
+- 28. Insuficiência Venosa Crônica — `adultos/vascular/028-insuficiencia-venosa-cronica.ts`
+- 29. Trombose Venosa Profunda — `adultos/vascular/029-trombose-venosa-profunda.ts`
+- 30. Doença Arterial Oclusiva Periférica com Claudicação — `adultos/vascular/030-doenca-arterial-oclusiva-periferica-com-claudicacao.ts`
+- 31. Asma Aguda Leve-Moderada — `adultos/respiratorio/031-asma-aguda-leve-moderada.ts`
+- 32. Crise Asmática Grave — `adultos/respiratorio/032-crise-asmatica-grave.ts`
+- 33. DPOC Estável — `adultos/respiratorio/033-dpoc-estavel.ts`
+- 34. DPOC Exacerbado — `adultos/respiratorio/034-dpoc-exacerbado.ts`
+- 38. Dengue Clássica — `adultos/infectologia/038-dengue-classica.ts`
+- 39. Dengue com Sinais de Alarme — `adultos/infectologia/039-dengue-com-sinais-de-alarme.ts`
+- 40. Febre Amarela — `adultos/infectologia/040-febre-amarela.ts`
+- 41. Zika com Síndrome de Guillain-Barré — `adultos/infectologia/041-zika-com-sindrome-de-guillain-barre.ts`
+- 42. Chikungunya — `adultos/infectologia/042-chikungunya.ts`
+- 43. Anemia Ferropriva — `adultos/hematologia/043-anemia-ferropriva.ts`
+- 44. Anemia Hemolítica — `adultos/hematologia/044-anemia-hemolitica.ts`
+- 45. Trombocitopenia Imune — `adultos/hematologia/045-trombocitopenia-imune.ts`
+- 46. Deficiência de Vitamina B12 — `adultos/hematologia/046-deficiencia-de-vitamina-b12.ts`
+- 47. Policitemia Vera — `adultos/hematologia/047-policitemia-vera.ts`
+- 48. Mieloma Múltiplo — `adultos/hematologia/048-mieloma-multiplo.ts`
+- 49. Leucemia Linfoblástica Aguda — `adultos/hematologia/049-leucemia-linfoblastica-aguda.ts`
+- 50. Coagulação Intravascular Disseminada — `adultos/hematologia/050-coagulacao-intravascular-disseminada.ts`
+- 51. Hemofilia A — `adultos/hematologia/051-hemofilia-a.ts`
+- 52. Deficiência de Vitamina K — `adultos/hematologia/052-deficiencia-de-vitamina-k.ts`
+- 53. Talassemia Maior — `adultos/hematologia/053-talassemia-maior.ts`
+- 54. Diabetes Mellitus Tipo 2 com Complicações Vasculares — `adultos/endocrinologia/054-diabetes-mellitus-tipo-2-com-complicacoes-vasculares.ts`
+- 55. Insuficiência Renal Crônica Estágio 4 — `adultos/nefrologia/055-insuficiencia-renal-cronica-estagio-4.ts`
+- 56. Lúpus Eritematoso Sistêmico com Nefrite — `adultos/imunologia/056-lupus-eritematoso-sistemico-com-nefrite.ts`
+- 57. HIV/AIDS com Pneumocistose — `adultos/infectologia/057-hiv-aids-com-pneumocistose.ts`
+- 58. Síndrome Metabólica com Infarto Agudo do Miocárdio — `adultos/cardiovascular/058-sindrome-metabolica-com-infarto-agudo-do-miocardio.ts`
+- 59. Sepse com Choque Séptico por Infecção do Trato Urinário — `adultos/infectologia/059-sepse-com-choque-septico-por-infeccao-do-trato-urinario.ts`
+- 60. Cetoacidose Diabética — `adultos/endocrinologia/060-cetoacidose-diabetica.ts`
+- 61. Cardiomegalia em investigação — `adultos/cardiovascular/061-cardiomegalia-em-investigacao.ts`
+- 62. Pneumotórax espontâneo — `adultos/respiratorio/062-pneumotorax-espontaneo.ts`
+- 63. Atelectasia pós-operatória — `adultos/respiratorio/063-atelectasia-pos-operatoria.ts`
+- 64. Bronquiolite viral aguda — `pediatricos/respiratorio/064-bronquiolite-viral-aguda.ts`

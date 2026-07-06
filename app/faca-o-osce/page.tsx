@@ -1,26 +1,19 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { casosOSCE } from "@/data/casos-osce";
+import { casosAdultos, casosPediatricos } from "@/data/casos-v2";
 
 export default function FacaOOSCE() {
   const router = useRouter();
 
-  const casosAtivos = casosOSCE.filter((caso) => caso.ativo !== false);
-
   const iniciarOSCE = (tipoOSCE: "adulto" | "pediatrico") => {
     // Filtrar casos pelo tipo de paciente
-    let casosFiltrados = casosAtivos;
+    let casosFiltrados: any[];
 
     if (tipoOSCE === "pediatrico") {
-      casosFiltrados = casosAtivos.filter(
-        (caso) => caso.tipoPaciente === "pediatrico" || caso.paciente?.tipoPaciente === "pediatrico"
-      );
+      casosFiltrados = casosPediatricos.filter((caso) => caso.ativo !== false);
     } else {
-      // Adulto: casos sem tipoPaciente (padrão adulto) ou explicitamente marcados como adulto
-      casosFiltrados = casosAtivos.filter(
-        (caso) => !caso.tipoPaciente || caso.tipoPaciente === "adulto" || !caso.paciente?.tipoPaciente || caso.paciente?.tipoPaciente === "adulto"
-      );
+      casosFiltrados = casosAdultos.filter((caso) => caso.ativo !== false);
     }
 
     if (casosFiltrados.length === 0) {

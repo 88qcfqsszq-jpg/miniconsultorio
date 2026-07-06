@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { casosOSCE } from "@/data/casos-osce";
+import { casosV2 } from "@/data/casos-v2";
 import { criarPromptAgentExames } from "@/lib/prompts";
 import { openai } from "@/lib/openai";
 
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const caso = casosOSCE.find((c) => c.id === casoId);
+    const caso = casosV2.find((c) => c.id === casoId);
     if (!caso) {
       return NextResponse.json(
         { erro: `Caso com ID ${casoId} não encontrado` },
@@ -29,12 +29,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const examesDisponiveisTexto = caso.exames_complementares_disponiveis
-      .map((e) => `- ${e.nome}: ${e.descricao || "N/A"}`)
-      .join("\n");
+    // Tentar nova estrutura primeiro, depois fallback para a antiga
+    const examesComplementares = (caso as any).exames_complementares_disponiveis ||
+      (caso as any).exames?.complementaresOriginais || [];
+
+    const examesDisponiveisTexto = Array.isArray(examesComplementares)
+      ? examesComplementares
+          .map((e: any) => `- ${e.nome}: ${e.descricao || "N/A"}`)
+          .join("\n")
+      : "";
 
     const prompt = criarPromptAgentExames(
-      caso,
+      caso as any,
       exameSolicitado,
       historico,
       examesDisponiveisTexto

@@ -1,3 +1,22 @@
+import type { ECGLead } from "./ecg/types";
+
+export interface FonteExamePainel {
+  interpretacao: string;
+  dados: Record<string, string>;
+}
+
+export interface FonteExamesLaboratoriais {
+  hemograma?: FonteExamePainel;
+  funcao_renal?: FonteExamePainel;
+  eletrolitos?: FonteExamePainel;
+  marcadores_inflamatorios?: FonteExamePainel;
+  gasometria?: FonteExamePainel;
+  marcadores_cardiacos?: FonteExamePainel;
+  funcao_hepatica?: FonteExamePainel;
+  coagulograma?: FonteExamePainel;
+  urina_tipo_1?: FonteExamePainel;
+}
+
 export interface DadosPediatricos {
   idadeMeses?: number;
   idadeAnos?: number;
@@ -182,6 +201,7 @@ export interface FeedbackOSCE {
 
   resumoCaso: {
     diagnosticoEsperado: string;
+    diagnosticoInformado?: string;
     sindromePrincipal: string;
     achadosChave: string[];
     raciocinioEsperado: string;
@@ -413,6 +433,9 @@ export interface Caso {
 
   // ECG gerado durante o atendimento (runtime)
   ecgGerado?: ECGGerado;
+
+  // Fonte de exames laboratoriais (legado)
+  fonte_exames_laboratoriais?: FonteExamesLaboratoriais;
 }
 
 export interface ExameFisicoInterativo {

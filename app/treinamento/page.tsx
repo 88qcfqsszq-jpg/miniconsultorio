@@ -4,14 +4,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import CasoCard from "@/components/CasoCard";
 import PainelGerarCaso from "@/components/PainelGerarCaso";
-import { casosOSCE } from "@/data/casos-osce";
+import { casosAdultos } from "@/data/casos-v2";
 import { Caso } from "@/lib/types";
 
 export default function Treinamento() {
   const [mostrarGerador, setMostrarGerador] = useState(false);
   const router = useRouter();
 
-  const casosAtivos = casosOSCE.filter((caso) => caso.ativo !== false);
+  const casosAtivos = casosAdultos.filter((caso) => caso.ativo !== false);
 
   const handleCasoGerado = (caso: Caso) => {
     // Salvar na sessionStorage para acessar na página de caso
@@ -62,7 +62,7 @@ export default function Treinamento() {
         {/* Cards de Casos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10">
           {casosAtivos.map((caso) => (
-            <CasoCard key={caso.id} caso={caso} />
+            <CasoCard key={caso.id} caso={caso as any} />
           ))}
         </div>
 
