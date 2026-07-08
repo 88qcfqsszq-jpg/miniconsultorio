@@ -255,11 +255,11 @@ body.is-consultorio-medix-page > nav {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
+  gap: 10px;
+  padding: 8px 9px;
   border-radius: 14px;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--medix-ink);
   background: rgba(255, 255, 255, 0.55);
   border: 1px solid var(--medix-border);
@@ -567,7 +567,7 @@ body.is-consultorio-medix-page > nav {
 }
 .consultorio-medix .medix-soap-header h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 17px;
   line-height: 1.1;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -575,7 +575,7 @@ body.is-consultorio-medix-page > nav {
 }
 .consultorio-medix .medix-soap-header p {
   margin: 7px 0 0;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -601,8 +601,8 @@ body.is-consultorio-medix-page > nav {
   color: #0b1f4d;
 }
 .consultorio-medix .medix-soap-badge {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 7px;
   display: inline-flex;
   align-items: center;
@@ -654,7 +654,8 @@ body.is-consultorio-medix-page > nav {
 .consultorio-medix .medix-soap-field textarea:disabled {
   opacity: 0.7;
 }
-@media (max-width: 1100px) {
+/* Limitado a < 1024px (mobile). Em telas >= 1024px vale o padrão desktop/Mac. */
+@media (max-width: 1023.98px) {
   .consultorio-medix .medix-soap-card {
     min-height: auto;
   }
@@ -973,7 +974,7 @@ body.is-consultorio-medix-page > nav {
 /* T2 — painel Atendimento mais leve */
 .consultorio-medix .attendance-panel {
   border-radius: 22px;
-  padding: 18px;
+  padding: 14px;
   background: rgba(246, 251, 255, 0.68);
   border: 1px solid rgba(139, 190, 245, 0.24);
   box-shadow: 0 14px 34px rgba(72, 116, 170, 0.075);
@@ -981,27 +982,27 @@ body.is-consultorio-medix-page > nav {
 /* Card compacto (altura fixa) com ícone junto à borda esquerda e texto logo
    após — padrão do menu escuro de referência. */
 .consultorio-medix .attendance-item {
-  min-height: 72px;
-  height: 72px;
+  min-height: 56px;
+  height: 56px;
   border-radius: 12px;
-  /* Ícone junto à borda esquerda; texto logo após — alinhado à esquerda,
-     conjunto compacto como no menu escuro de referência. */
-  padding: 10px 16px 10px 14px;
+  padding: 8px 10px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   text-align: left;
-  gap: 12px;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 600;
   /* "Exames Laboratoriais" quebra em duas linhas sem estourar o card. */
   line-height: 1.25;
 }
 .consultorio-medix .attendance-item-ico,
 .consultorio-medix .attendance-item-ico img {
-  width: 44px;
-  height: 44px;
+  width: 34px;
+  height: 34px;
 }
 .consultorio-medix .attendance-item-ico {
-  flex: 0 0 44px;
+  flex: 0 0 34px;
   margin: 0;
 }
 /* Ícone mais "marcante" — a escala preenche a margem interna vazia dos PNGs,
@@ -1015,12 +1016,12 @@ body.is-consultorio-medix-page > nav {
   justify-content: flex-start;
 }
 .consultorio-medix .attendance-item.active .attendance-item-ico {
-  flex-basis: 48px;
+  flex-basis: 36px;
 }
 .consultorio-medix .attendance-item.active .attendance-item-ico,
 .consultorio-medix .attendance-item.active .attendance-item-ico img {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
 }
 /* Responsivo: ícones menores no mobile; botão continua compacto. */
 @media (max-width: 768px) {
@@ -1074,21 +1075,22 @@ body.is-consultorio-medix-page > nav {
 .consultorio-medix .medix-soap-card {
   min-height: calc(100vh - 112px);
   border-radius: 22px;
-  padding: 20px;
+  padding: 16px;
   box-shadow: 0 14px 38px rgba(72, 116, 170, 0.08);
 }
 .consultorio-medix .medix-soap-fields {
   gap: 14px;
 }
 .consultorio-medix .medix-soap-field textarea {
-  min-height: 104px;
+  min-height: 90px;
+  font-size: 12.5px;
   border-radius: 14px;
 }
 
 /* T5 — Diagnóstico e Conduta compacto */
 .consultorio-medix .medix-diagnosis-card {
   border-radius: 22px;
-  padding: 18px;
+  padding: 14px;
   box-shadow: 0 14px 34px rgba(72, 116, 170, 0.075);
 }
 .consultorio-medix .medix-diagnosis-header {
@@ -1374,7 +1376,8 @@ body.is-consultorio-medix-page > nav {
   width: 20px;
   height: 20px;
 }
-@media (max-width: 1200px) {
+/* Limitado a < 1024px (mobile). Em telas >= 1024px vale o padrão desktop/Mac. */
+@media (max-width: 1023.98px) {
   .consultorio-medix .consultorio-medix-topbar-dashboard {
     grid-template-columns: minmax(260px, auto) 1fr auto;
   }
@@ -1499,3 +1502,113 @@ body.is-consultorio-medix-page > nav {
 
 /* dobrar apenas o ícone de Simular Pediatria */
 .consultorio-medix .medix-gsb-icon img[src*="icon-simulacao-pediatria"] { width: 48px; height: 48px; }
+
+/* iPad landscape unificado com o Mac/desktop: o bloco específico
+   @media (min-width: 1024px) and (max-width: 1366px) foi removido para que todas
+   as telas >= 1024px usem o MESMO padrão visual (grid, Atendimento, ícones, SOAP,
+   chat). O mobile (< 1024px) continua com seus próprios breakpoints. */
+
+/* ==========================================================================
+   Barra "Atendimento" HORIZONTAL (topo da coluna central) — mesma identidade
+   visual do menu antigo: mesmas imagens, mesmas cores, item ativo azul.
+   Apenas reorganização estrutural (vertical -> horizontal) + ícones um pouco
+   menores. Fica dentro da coluna central do grid, então não invade a direita.
+   ========================================================================== */
+.consultorio-medix .attendance-bar {
+  background: var(--medix-card);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid var(--medix-border);
+  border-radius: 18px;
+  box-shadow: 0 14px 34px rgba(72, 116, 170, 0.075);
+  padding: 8px;
+}
+.consultorio-medix .attendance-bar-list {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+}
+/* Botões da barra: ícone em cima, rótulo embaixo; dividem a largura igualmente. */
+.consultorio-medix .attendance-bar .attendance-item {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 8px 6px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.15;
+}
+.consultorio-medix .attendance-bar .attendance-item-ico,
+.consultorio-medix .attendance-bar .attendance-item-ico img {
+  width: 26px;
+  height: 26px;
+  flex-basis: 26px;
+}
+/* sem a ampliação usada no menu vertical (ícones um pouco menores na barra) */
+.consultorio-medix .attendance-bar .attendance-item-ico img {
+  transform: none;
+}
+.consultorio-medix .attendance-bar .attendance-item.active .attendance-item-ico,
+.consultorio-medix .attendance-bar .attendance-item.active .attendance-item-ico img {
+  width: 26px;
+  height: 26px;
+}
+
+/* Coluna direita "Diagnóstico e Conduta" — ocupa a altura útil da lateral. */
+.consultorio-medix .medix-diagnosis-col .medix-diagnosis-card {
+  min-height: calc(100vh - 90px);
+}
+
+/* ==========================================================================
+   SOAP OPCIONAL dentro de "Diagnóstico e Conduta" (ação secundária discreta).
+   Reaproveita o FormularioSOAP (as="div"); apenas encaixe/padding, sem mudar
+   cores, textos nem lógica.
+   ========================================================================== */
+.consultorio-medix .medix-soap-optional {
+  margin-top: 14px;
+}
+/* Ação secundária destacada: azul SUAVE, harmônico com o botão finalizar
+   (mesma largura/raio), altura levemente menor. */
+.consultorio-medix .medix-soap-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  height: 42px;
+  background: rgba(31, 123, 255, 0.1);
+  border: 1px solid rgba(31, 123, 255, 0.28);
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1f7bff;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.consultorio-medix .medix-soap-toggle:hover {
+  background: rgba(31, 123, 255, 0.16);
+  border-color: rgba(31, 123, 255, 0.42);
+  color: #1f7bff;
+}
+.consultorio-medix .medix-soap-toggle-caret {
+  font-size: 10px;
+}
+/* Encaixe: dentro do painel o SOAP aparece só como cabeçalho + campos. */
+.consultorio-medix .medix-soap-embed {
+  margin-top: 12px;
+}
+.consultorio-medix .medix-soap-embed .medix-soap-card {
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}

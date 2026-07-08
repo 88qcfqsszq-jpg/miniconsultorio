@@ -7,8 +7,6 @@ import { ConsultorioMedixBodyClass } from "@/components/consultorio/ConsultorioM
 import "./consultorio-medix.css";
 import ExameFisicoAdultoVisual from "@/components/ExameFisicoAdultoVisual";
 import ExameFisicoPediatrico from "@/components/pediatria/ExameFisicoPediatrico";
-import IndicadorInterlocutorPediatrico from "@/components/pediatria/IndicadorInterlocutorPediatrico";
-import DadosPediatricos from "@/components/pediatria/DadosPediatricos";
 import FormularioSOAP from "@/components/FormularioSOAP";
 import PainelDiagnostico from "@/components/PainelDiagnostico";
 import FeedbackOSCE from "@/components/FeedbackOSCE";
@@ -717,53 +715,8 @@ function CasoPageContent() {
 
       {/* A sidebar é global (AppShell/AppSidebar) — não renderiza sidebar local aqui. */}
 
-      {/* Topbar MEDIX própria — estilo DashboardLanding */}
-      <header className="consultorio-medix-topbar consultorio-medix-topbar-dashboard">
-        <div className="consultorio-medix-topbar-left">
-          <div className="consultorio-medix-profile-initials">JS</div>
-          <div className="consultorio-medix-welcome">
-            <div className="consultorio-medix-welcome-title">
-              <span>Olá, Dr. João Silva</span>
-              <span className="consultorio-medix-pro-badge">PRO</span>
-            </div>
-            <p>Seja bem-vindo à sua plataforma acadêmica</p>
-          </div>
-        </div>
-
-        <div className="consultorio-medix-search">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden>
-            <path d="M21 21l-4.3-4.3M11 19a8 8 0 100-16 8 8 0 000 16z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Buscar conteúdos, casos, disciplinas..."
-            aria-label="Buscar conteúdos, casos, disciplinas"
-          />
-        </div>
-
-        <div className="consultorio-medix-topbar-actions">
-          <button className="consultorio-medix-top-icon" type="button" aria-label="Notificações">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <button className="consultorio-medix-top-icon" type="button" aria-label="Calendário">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M3 9h18M7 3v3m10-3v3M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <button className="consultorio-medix-top-icon" type="button" aria-label="Mensagens">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <button className="consultorio-medix-top-icon" type="button" aria-label="Perfil">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M20 21a8 8 0 10-16 0M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
-      </header>
+      {/* Topbar MEDIX antiga (saudação + busca + ícones) removida desta tela.
+          A navegação global permanece na sidebar esquerda (AppShell). */}
 
       {/* Faixas antigas (banner "Modo OSCE" e header "Simulado OSCE / Tempo")
           removidas do layout MEDIX — o cronômetro (tempoDecorrido) e a lógica
@@ -795,20 +748,21 @@ function CasoPageContent() {
 
       {/* Conteúdo Principal */}
       <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-        {/* Layout Desktop: 3 colunas proporcionais (Sidebar + Centro + Painel Direito) */}
-        <div className="hidden lg:grid lg:grid-cols-[240px_minmax(0,1fr)_350px] gap-5">
-          {/* Coluna 1: Sidebar Esquerda */}
-          <div className="space-y-4">
-            {/* Menu Atendimento */}
-            <div className="attendance-panel">
-              <p className="attendance-title">Atendimento</p>
-              <div className="attendance-list">
+        {/* Layout Desktop/iPad: 2 colunas (Central larga + Diagnóstico à direita).
+            Menu Atendimento virou barra horizontal no topo da coluna central;
+            SOAP não é renderizado nesta organização (componente preservado). */}
+        <div className="consultorio-medix-grid hidden lg:grid lg:grid-cols-[minmax(0,1fr)_320px] gap-4 items-start">
+          {/* Coluna esquerda/central: barra Atendimento + chat + painéis */}
+          <div className={`min-w-0 space-y-4 consultorio-medix-center${menuAtivo !== "paciente" ? " medix-center-has-panel" : ""}`}>
+            {/* Barra Atendimento horizontal (mesmos botões/ícones/labels) */}
+            <nav className="attendance-bar" aria-label="Atendimento">
+              <div className="attendance-bar-list">
                 {[
                   { id: "paciente" as const, label: "Paciente", icon: "icon-paciente.png" },
                   { id: "exame" as const, label: "Exame Físico", icon: "icon-exame-fisico.png" },
                   { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "icon-exames-imagem.png" },
                   { id: "exames" as const, label: "Exames", icon: "icon-exames.png" },
-                  { id: "laboratorio" as const, label: "Exames Laboratoriais", icon: "icon-exames.png" },
+                  { id: "laboratorio" as const, label: "Exames Laboratoriais", icon: "exames-laboratoriais.png" },
                   { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "icon-sinais-vitais.png" },
                   { id: "ecg" as const, label: "ECG", icon: "icon-ecg.png" },
                 ].map((item) => (
@@ -833,34 +787,14 @@ function CasoPageContent() {
                   </button>
                 ))}
               </div>
-            </div>
-
-            {/* Card lateral "Sinais Vitais — Dados iniciais" removido (redundante):
-                a coleta e a reavaliação vivem na aba/menu "Sinais Vitais" central. */}
-
-            {/* Diagnóstico e Conduta */}
-            <PainelDiagnostico
-              onSubmit={handleFinalizarAtendimento}
-              onChange={setDiagnostico}
-              desabilitado={phase === "feedback"}
-              caso={caso}
-            />
-          </div>
-
-          {/* Coluna 2: Conteúdo Central */}
-          <div className={`min-w-0 space-y-4 consultorio-medix-center${menuAtivo !== "paciente" ? " medix-center-has-panel" : ""}`}>
-            {/* Indicador de Interlocutor Pediátrico */}
-            <IndicadorInterlocutorPediatrico caso={caso} />
-
-            {/* Dados Pediátricos */}
-            <DadosPediatricos caso={caso} />
+            </nav>
 
             {/* Chat */}
             <div className="h-[420px] flex flex-col medix-chat-slot">
               <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} />
             </div>
 
-            {/* Conteúdo Dinâmico baseado no Menu */}
+            {/* Conteúdo Dinâmico (Exames Solicitados / painéis) — abaixo do chat */}
             <div className="medix-internal-panel-slot">
             {/* Aba Paciente: apenas o chat (Resumo da Anamnese removido da UI) */}
 
@@ -916,10 +850,23 @@ function CasoPageContent() {
             </div>
           </div>
 
-          {/* Coluna 3: Painel Direito Fixo (Avaliação Clínica) */}
+          {/* Coluna direita: Diagnóstico e Conduta (lateral inteira, do topo) */}
           <div className="min-w-0">
-            <div className="sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
-              <FormularioSOAP onSubmit={handleFinalizarAtendimento} onChange={setSOAP} desabilitado={phase === "feedback"} caso={caso} />
+            <div className="sticky top-6 max-h-[calc(100vh-90px)] overflow-y-auto medix-diagnosis-col">
+              <PainelDiagnostico
+                onSubmit={handleFinalizarAtendimento}
+                onChange={setDiagnostico}
+                desabilitado={phase === "feedback"}
+                caso={caso}
+                soapSlot={
+                  <FormularioSOAP
+                    onChange={setSOAP}
+                    desabilitado={phase === "feedback"}
+                    caso={caso}
+                    as="div"
+                  />
+                }
+              />
             </div>
           </div>
         </div>
@@ -927,9 +874,7 @@ function CasoPageContent() {
         {/* Layout Mobile: abas dinâmicas */}
         <div className="lg:hidden space-y-4">
           <div className={abaAtiva === "paciente" ? "block" : "hidden"}>
-            {/* Indicador de Interlocutor Pediátrico Mobile */}
-            <IndicadorInterlocutorPediatrico caso={caso} />
-
+            {/* Bloco informativo pediátrico removido da tela do aluno (ver desktop). */}
             <div className="h-[calc(100dvh-200px)] min-h-80 flex flex-col">
               <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} />
             </div>

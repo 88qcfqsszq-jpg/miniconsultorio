@@ -191,6 +191,9 @@ export default function ChatPaciente({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           casoId,
+          // Envia o caso ativo (o componente já o recebe como prop). Necessário
+          // para casos GERADOS, cujo id não existe em casosV2 no servidor.
+          caso,
           mensagem: mensagemEstudante,
           historico,
         }),

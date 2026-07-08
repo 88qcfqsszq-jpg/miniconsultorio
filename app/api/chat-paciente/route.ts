@@ -6,6 +6,9 @@ import { obterRespostaPaciente } from "@/lib/mockPaciente";
 
 interface RequestBody {
   casoId: string;
+  // Caso ativo enviado pelo cliente. Fonte primária — cobre casos GERADOS
+  // (que não existem em casosV2 no servidor).
+  caso?: any;
   mensagem: string;
   historico?: Array<{
     tipo: "estudante" | "paciente";
@@ -43,18 +46,21 @@ async function obterRespostaOpenAI(
 export async function POST(request: NextRequest) {
   try {
     const body: RequestBody = await request.json();
-    const { casoId, mensagem, historico = [] } = body;
+    const { casoId, caso: casoDoPayload, mensagem, historico = [] } = body;
 
-    if (!casoId || !mensagem) {
+    if (!mensagem) {
       return NextResponse.json(
         { resposta: "Desculpe, não consegui processar sua mensagem." },
         { status: 400 }
       );
     }
 
-    // Buscar o caso
-    const caso = casosV2.find((c: any) => c.id === casoId) as any;
-    if (!caso) {
+    // Fonte do caso: usa o caso ativo enviado pelo cliente (cobre casos
+    // gerados). Fallback: busca por id em casosV2 (casos estáticos).
+    const caso =
+      (casoDoPayload && casoDoPayload.paciente ? casoDoPayload : null) ??
+      (casosV2.find((c: any) => c.id === casoId) as any);
+    if (!caso || !caso.paciente) {
       return NextResponse.json({
         resposta: "Desculpe, não encontrei o caso solicitado.",
       });

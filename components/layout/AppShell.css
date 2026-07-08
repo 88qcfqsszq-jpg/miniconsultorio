@@ -382,3 +382,111 @@
     max-height: 44px;
   }
 }
+
+/* ==========================================================================
+   Adições: nome da plataforma (junto da logo), avatar/nome do usuário e
+   botão "Sair". Mantêm o estilo atual da sidebar (mesma paleta/gradiente),
+   com o padrão "texto só quando expandida" (max-width/max-height 0 -> hover).
+   ========================================================================== */
+
+/* Nome da plataforma ao lado da logo — só na sidebar expandida */
+.app-sidebar-logo {
+  gap: 0;
+}
+.app-brand-name {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #0b1f4d;
+  transition: opacity 220ms ease, max-width 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    margin 220ms ease;
+}
+
+/* Avatar/foto do usuário (abaixo da logo) + nome abaixo (só expandida) */
+.app-sidebar-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  margin-bottom: 10px;
+}
+.app-user-avatar {
+  /* Mesmo tamanho visual da logo (.app-sidebar-logo img ~62px). */
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background: rgba(31, 123, 255, 0.12);
+  border: 1px solid rgba(120, 170, 230, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+.app-user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.app-user-initials {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1f7bff;
+}
+.app-user-name {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #315f9f;
+  transition: opacity 220ms ease, max-height 220ms ease;
+}
+
+/* Botão Sair no rodapé — reaproveita o visual de .app-nav-item */
+.app-logout {
+  flex: 0 0 auto;
+  width: 100%;
+  margin-top: 8px;
+}
+/* Ícone do "Sair" segue o mesmo padrão dos demais ícones da sidebar:
+   mesmo tamanho (28px), mesmo tom azul (#1f7bff) e o mesmo drop-shadow. */
+.app-logout-icon svg {
+  width: 28px;
+  height: 28px;
+  color: #1f7bff;
+  filter: drop-shadow(0 4px 8px rgba(31, 123, 255, 0.12));
+}
+
+/* Expandida (desktop hover) */
+@media (min-width: 1024px) {
+  .app-sidebar:hover .app-brand-name {
+    opacity: 1;
+    max-width: 150px;
+    margin-left: 10px;
+  }
+  .app-sidebar:hover .app-user-name {
+    opacity: 1;
+    max-height: 22px;
+  }
+}
+
+/* Expandida (mobile drawer) */
+@media (max-width: 1023px) {
+  .app-sidebar .app-brand-name {
+    opacity: 1;
+    max-width: 150px;
+    margin-left: 10px;
+  }
+  .app-sidebar .app-user-name {
+    opacity: 1;
+    max-height: 22px;
+  }
+}

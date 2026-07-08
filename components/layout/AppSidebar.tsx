@@ -23,7 +23,7 @@ const NAV_ITEMS: Array<{ key: string; label: string; icon: string; href: string 
   { key: "guia", label: "Guia Clínico", icon: "icon-conteudos.png", href: "/guia" },
   { key: "desempenho", label: "Desempenho", icon: "icon-desempenho.png", href: "#" },
   { key: "centro-clinico", label: "Centro Clínico", icon: "icon-biblioteca.png", href: "/centro-clinico" },
-  { key: "config", label: "Configurações", icon: "icon-configuracoes.png", href: "#" },
+  { key: "config", label: "Meu Perfil", icon: "icon-configuracoes.png", href: "#" },
 ];
 
 function isNavActive(href: string, pathname: string): boolean {
@@ -41,6 +41,53 @@ function PlayIcon() {
       <path d="M8 5v14l11-7z" />
     </svg>
   );
+}
+
+function LogoutIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M15 12H3m0 0l4-4m-4 4l4 4M13 4h5a2 2 0 012 2v12a2 2 0 01-2 2h-5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+// Nome da plataforma já definido no projeto (logo alt / package "MEDIX").
+const PLATFORM_NAME = "MEDIX";
+
+/**
+ * Dados do usuário logado. Estrutura preparada para receber futuramente:
+ * name, profileImageUrl, title, gender, titlePrefix. Enquanto não há auth,
+ * usa os fallbacks solicitados (iniciais e "Dr(a).").
+ */
+interface SidebarUser {
+  fullName?: string;
+  name?: string;
+  displayName?: string;
+  firstName?: string;
+  lastName?: string;
+  profileImageUrl?: string;
+  title?: string;
+  gender?: string;
+  titlePrefix?: string;
+}
+
+function resolverUsuario(user: SidebarUser) {
+  const titlePrefix = user.titlePrefix || "Dr(a).";
+  // Prioriza nome completo; se houver campos separados, monta nome + sobrenome.
+  const nomeCompleto = (
+    user.fullName ||
+    user.name ||
+    user.displayName ||
+    [user.firstName, user.lastName].filter(Boolean).join(" ")
+  )?.trim() || "";
+  const partes = nomeCompleto.split(/\s+/).filter(Boolean);
+  const temNomeESobrenome = partes.length >= 2;
+  // Só exibe o nome quando houver nome E sobrenome; senão, usa o fallback.
+  const displayName = temNomeESobrenome ? `${titlePrefix} ${nomeCompleto}` : "Dr(a). Usuário";
+  const iniciais = temNomeESobrenome
+    ? partes.slice(0, 2).map((p) => p[0]?.toUpperCase() || "").join("")
+    : "U";
+  return { displayName, iniciais, foto: user.profileImageUrl };
 }
 
 export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
@@ -62,6 +109,15 @@ export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) 
     router.push(href);
   };
 
+  // Logout: usa navegação existente (sem sistema de auth próprio, redireciona à home).
+  const sair = () => {
+    onNavigate?.();
+    router.push("/");
+  };
+
+  // TODO: substituir por dados reais do usuário logado quando houver auth.
+  const { displayName, iniciais, foto } = resolverUsuario({});
+
   return (
     <aside className="app-sidebar" aria-label="Navegação principal">
       <div className="app-sidebar-logo">
@@ -74,6 +130,21 @@ export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) 
             (e.currentTarget as HTMLImageElement).style.display = "none";
           }}
         />
+        {/* Nome da plataforma — visível só na sidebar expandida */}
+        <span className="app-brand-name">{PLATFORM_NAME}</span>
+      </div>
+
+      {/* Avatar/foto do usuário (abaixo da logo) + nome (só expandida) */}
+      <div className="app-sidebar-user">
+        <div className="app-user-avatar" aria-hidden={foto ? undefined : true}>
+          {foto ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={foto} alt={displayName} draggable={false} />
+          ) : (
+            <span className="app-user-initials">{iniciais}</span>
+          )}
+        </div>
+        <span className="app-user-name">{displayName}</span>
       </div>
 
       {/* Grupo de 3 botões play (balões) — fundo transparente */}
@@ -148,6 +219,14 @@ export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) 
           <i />
         </div>
       </div>
+
+      {/* Rodapé: botão Sair (mesmo estilo dos itens de navegação) */}
+      <button type="button" className="app-nav-item app-logout" onClick={sair} aria-label="Sair">
+        <span className="app-nav-icon app-logout-icon">
+          <LogoutIcon />
+        </span>
+        <span className="app-nav-label">Sair</span>
+      </button>
     </aside>
   );
 }

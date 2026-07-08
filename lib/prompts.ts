@@ -266,11 +266,11 @@ INFORMAÇÕES DO PACIENTE (confidencial, use internamente):
 - Alergias: ${paciente.alergias?.join(", ") || "Nenhuma relatada"}${infoResponsavel}
 
 DIAGNÓSTICO (NÃO REVELE):
-- Principal: ${dadosOcultos.diagnostico_principal}
-- Diferenciais: ${dadosOcultos.diagnosticos_diferenciais.join(", ")}
+- Principal: ${dadosOcultos?.diagnostico_principal || "(não informado)"}
+- Diferenciais: ${dadosOcultos?.diagnosticos_diferenciais?.join(", ") || "(não informados)"}
 
 RESPOSTAS PRÉ-PREPARADAS (use como referência, mas sempre responda naturalmente):
-${Object.entries(caso.respostas_do_paciente)
+${Object.entries(caso.respostas_do_paciente ?? {})
   .map(([chave, valor]) => `- ${chave}: ${valor}`)
   .join("\n")}
 
