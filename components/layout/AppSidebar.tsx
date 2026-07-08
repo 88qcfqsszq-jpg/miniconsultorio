@@ -13,6 +13,8 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { urlOSCEAleatorio, type TipoOSCE } from "@/lib/osce/iniciar-osce";
+import { useUserProfile } from "@/hooks/useUserProfile";
+import { displayName, initials } from "@/lib/userProfile";
 
 const ICON_BASE = "/assets/dashboard/sidebar-icons";
 
@@ -23,7 +25,7 @@ const NAV_ITEMS: Array<{ key: string; label: string; icon: string; href: string 
   { key: "guia", label: "Guia Clínico", icon: "icon-conteudos.png", href: "/guia" },
   { key: "desempenho", label: "Desempenho", icon: "icon-desempenho.png", href: "#" },
   { key: "centro-clinico", label: "Centro Clínico", icon: "icon-biblioteca.png", href: "/centro-clinico" },
-  { key: "config", label: "Meu Perfil", icon: "icon-configuracoes.png", href: "#" },
+  { key: "config", label: "Meu Perfil", icon: "icon-configuracoes.png", href: "/meu-perfil" },
 ];
 
 function isNavActive(href: string, pathname: string): boolean {
@@ -32,6 +34,7 @@ function isNavActive(href: string, pathname: string): boolean {
   if (href === "/treinamento") return pathname.startsWith("/treinamento");
   if (href === "/guia") return pathname.startsWith("/guia");
   if (href === "/centro-clinico") return pathname.startsWith("/centro-clinico");
+  if (href === "/meu-perfil") return pathname.startsWith("/meu-perfil");
   return false;
 }
 
@@ -53,42 +56,6 @@ function LogoutIcon() {
 
 // Nome da plataforma já definido no projeto (logo alt / package "MEDIX").
 const PLATFORM_NAME = "MEDIX";
-
-/**
- * Dados do usuário logado. Estrutura preparada para receber futuramente:
- * name, profileImageUrl, title, gender, titlePrefix. Enquanto não há auth,
- * usa os fallbacks solicitados (iniciais e "Dr(a).").
- */
-interface SidebarUser {
-  fullName?: string;
-  name?: string;
-  displayName?: string;
-  firstName?: string;
-  lastName?: string;
-  profileImageUrl?: string;
-  title?: string;
-  gender?: string;
-  titlePrefix?: string;
-}
-
-function resolverUsuario(user: SidebarUser) {
-  const titlePrefix = user.titlePrefix || "Dr(a).";
-  // Prioriza nome completo; se houver campos separados, monta nome + sobrenome.
-  const nomeCompleto = (
-    user.fullName ||
-    user.name ||
-    user.displayName ||
-    [user.firstName, user.lastName].filter(Boolean).join(" ")
-  )?.trim() || "";
-  const partes = nomeCompleto.split(/\s+/).filter(Boolean);
-  const temNomeESobrenome = partes.length >= 2;
-  // Só exibe o nome quando houver nome E sobrenome; senão, usa o fallback.
-  const displayName = temNomeESobrenome ? `${titlePrefix} ${nomeCompleto}` : "Dr(a). Usuário";
-  const iniciais = temNomeESobrenome
-    ? partes.slice(0, 2).map((p) => p[0]?.toUpperCase() || "").join("")
-    : "U";
-  return { displayName, iniciais, foto: user.profileImageUrl };
-}
 
 export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname() || "";
@@ -115,8 +82,11 @@ export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) 
     router.push("/");
   };
 
-  // TODO: substituir por dados reais do usuário logado quando houver auth.
-  const { displayName, iniciais, foto } = resolverUsuario({});
+  // Fonte única de perfil (mesma da top bar e de /meu-perfil).
+  const { profile } = useUserProfile();
+  const nomeExibido = displayName(profile);
+  const iniciais = initials(profile);
+  const foto = profile.avatarDataUrl;
 
   return (
     <aside className="app-sidebar" aria-label="Navegação principal">
@@ -139,12 +109,12 @@ export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) 
         <div className="app-user-avatar" aria-hidden={foto ? undefined : true}>
           {foto ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={foto} alt={displayName} draggable={false} />
+            <img src={foto} alt={nomeExibido} draggable={false} />
           ) : (
             <span className="app-user-initials">{iniciais}</span>
           )}
         </div>
-        <span className="app-user-name">{displayName}</span>
+        <span className="app-user-name">{nomeExibido}</span>
       </div>
 
       {/* Grupo de 3 botões play (balões) — fundo transparente */}

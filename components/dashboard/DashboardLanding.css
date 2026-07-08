@@ -311,6 +311,13 @@
   font-weight: 800;
   color: var(--dl-primary);
   flex: none;
+  overflow: hidden;
+}
+.dashboard-landing .dl-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .dashboard-landing .dl-greet h3 {
   margin: 0;

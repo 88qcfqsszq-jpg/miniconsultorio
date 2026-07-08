@@ -10,7 +10,10 @@
 // ============================================================================
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import "./DashboardLanding.css";
+import { useUserProfile } from "@/hooks/useUserProfile";
+import { displayName, initials } from "@/lib/userProfile";
 
 const ASSET_BASE = "/assets/dashboard";
 
@@ -195,6 +198,14 @@ function FreshHeroCarousel() {
 }
 
 export default function DashboardLanding() {
+  const router = useRouter();
+  const { profile } = useUserProfile();
+
+  // Primeira entrada: se ainda não completou o perfil, coleta os dados básicos.
+  useEffect(() => {
+    if (!profile.onboarded) router.replace("/onboarding");
+  }, [profile.onboarded, router]);
+
   return (
     <div className="dashboard-landing">
       {/* Sidebar removida: agora é global (AppShell/AppSidebar). */}
@@ -204,10 +215,17 @@ export default function DashboardLanding() {
         {/* header */}
         <header className="dl-header glass-panel">
           <div className="dl-greet">
-            <div className="dl-avatar">JS</div>
+            <div className="dl-avatar">
+              {profile.avatarDataUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={profile.avatarDataUrl} alt={displayName(profile)} />
+              ) : (
+                initials(profile)
+              )}
+            </div>
             <div>
               <h3>
-                Olá, Dr. João Silva <span className="dl-badge">PRO</span>
+                Olá, {displayName(profile)} <span className="dl-badge">PRO</span>
               </h3>
               <p>Seja bem-vindo à sua plataforma acadêmica</p>
             </div>
