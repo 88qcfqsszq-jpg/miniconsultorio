@@ -8,6 +8,7 @@
 // ============================================================================
 
 import { jsPDF } from "jspdf";
+import { classificarExameFisico, ESTADO_EXAME_LABEL } from "@/lib/osce/physical-exam-mapper";
 
 export interface DadosExportacaoAtendimento {
   caso: any;
@@ -18,6 +19,14 @@ export interface DadosExportacaoAtendimento {
   manobrasSolicitadas?: any[];
   examesSolicitados?: any[];
   sinaisVitais?: { solicitado?: boolean; dados?: any };
+  vitalSignsReassessment?: {
+    realizado?: boolean;
+    minutos?: number;
+    exitVitals?: Record<string, unknown>;
+    therapeuticResponseLabel?: string;
+    disposition?: string;
+    stabilityLabel?: string;
+  } | null;
   diagnostico?: any;
   soap?: any;
 }
@@ -52,6 +61,7 @@ export function exportarAtendimentoPDF(dados: DadosExportacaoAtendimento): void 
     manobrasSolicitadas = [],
     examesSolicitados = [],
     sinaisVitais,
+    vitalSignsReassessment,
     diagnostico,
     soap,
   } = dados;
@@ -260,6 +270,7 @@ export function exportarAtendimentoPDF(dados: DadosExportacaoAtendimento): void 
 
   // --------------------------------------------- EXAME FÍSICO REALIZADO
   secao("4. Exame físico realizado");
+  paragrafo(ESTADO_EXAME_LABEL[classificarExameFisico(manobrasSolicitadas)], { indent: 2 });
   if (!Array.isArray(manobrasSolicitadas) || manobrasSolicitadas.length === 0) {
     paragrafo(NAO_REGISTRADO, { indent: 2 });
   } else {
@@ -268,11 +279,17 @@ export function exportarAtendimentoPDF(dados: DadosExportacaoAtendimento): void 
     for (const m of manobrasSolicitadas) {
       const txt = (m?.textDigitado || "").toString();
       let regiao = m?.categoria || "Geral";
+      let nome = txt;
       if (txt.startsWith("[Exame Visual]")) {
         const semPref = txt.replace("[Exame Visual] ", "");
         regiao = semPref.split(" — ")[0] || regiao;
+        nome = ""; // a região já identifica a manobra visual
       }
-      const linha = `${m?.resposta || txt || ""}`.trim();
+      const resp = (m?.resposta || "").toString().trim();
+      // Marca se foi exame sem achado relevante ou com achado.
+      const marca = m?.normal === true ? " (sem achado relevante)" : "";
+      const base = nome && nome !== resp ? `${nome} — ${resp}` : resp || nome || "";
+      const linha = `${base}${marca}`.trim();
       if (!grupos.has(regiao)) grupos.set(regiao, []);
       grupos.get(regiao)!.push(linha);
     }
@@ -315,12 +332,45 @@ export function exportarAtendimentoPDF(dados: DadosExportacaoAtendimento): void 
       .forEach(([k, v]) => item(`${k}: ${v}`, "•"));
   }
 
+  // -------------------------------------------- REAVALIAÇÃO CLÍNICA
+  if (vitalSignsReassessment?.realizado) {
+    const r = vitalSignsReassessment;
+    const ev = r.exitVitals ?? {};
+    sub(`Reavaliação clínica (após ${r.minutos ?? "?"} min)`);
+    const paSys = ev.paSys as number | undefined;
+    const paDia = ev.paDia as number | undefined;
+    const camposReav: [string, string | null][] = [
+      ["PA", paSys != null ? `${paSys}${paDia != null ? `/${paDia}` : ""} mmHg` : null],
+      ["FC", ev.fc != null ? `${ev.fc} bpm` : null],
+      ["FR", ev.fr != null ? `${ev.fr} irpm` : null],
+      ["Temperatura", ev.temp != null ? `${Number(ev.temp).toFixed(1)}°C` : null],
+      ["SpO₂", ev.spo2 != null ? `${ev.spo2}%` : null],
+    ];
+    camposReav
+      .filter(([, v]) => v != null)
+      .forEach(([k, v]) => item(`${k}: ${v}`, "•"));
+    if (r.therapeuticResponseLabel) {
+      item(`Resposta terapêutica: ${r.therapeuticResponseLabel}`, "•");
+    }
+    if (r.disposition) {
+      const labelDisp: Record<string, string> = {
+        alta_segura: "Alta com segurança indicada",
+        observacao: "Observação/monitorização contínua",
+        encaminhamento_hospitalar: "Encaminhamento hospitalar indicado",
+      };
+      item(`Decisão clínica: ${labelDisp[r.disposition] ?? r.disposition.replace(/_/g, " ")}`, "•");
+    }
+    espaco(2);
+  }
+
   // ------------------------------------------ DIAGNÓSTICO E RACIOCÍNIO
   secao("7. Diagnóstico e raciocínio");
   sub("Hipótese principal informada");
   paragrafo(diagnostico?.hipotesePrincipal || NAO_REGISTRADO, { indent: 2 });
   sub("Diagnósticos diferenciais informados");
-  listaOuFallback(diagnostico?.diagnosticosDisferenciais, "•");
+  // Fallback defensivo: aceita ambas nomenclaturas (com e sem "s") para compatibilidade
+  const diferencialsPDF = diagnostico?.diagnosticosDiferenciais ?? (diagnostico as any)?.diagnosticosDisferenciais;
+  listaOuFallback(diferencialsPDF, "•");
   sub("Exames indicados (formulário)");
   listaOuFallback(diagnostico?.examesIndicados, "•");
   sub("Avaliação / raciocínio (feedback)");

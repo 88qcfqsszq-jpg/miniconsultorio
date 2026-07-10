@@ -10,7 +10,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { urlOSCEAleatorio, type TipoOSCE } from "@/lib/osce/iniciar-osce";
+import { useIniciarOsce } from "@/hooks/useIniciarOsce";
 import { CLINICAL_SOUNDS, type ClinicalSound } from "@/lib/clinical-sounds/soundsCatalog";
 import "./SonsClinicosPage.css";
 
@@ -80,11 +80,7 @@ export default function SonsClinicosPage() {
   };
   const trocarModo = (m: "estudo" | "treino") => { setModo(m); setRevelados({}); };
 
-  const iniciarOSCE = (t: TipoOSCE) => {
-    const u = urlOSCEAleatorio(t);
-    if (!u) { alert(`Nenhum caso ${t} disponível no momento.`); return; }
-    router.push(u);
-  };
+  const { iniciarOSCE, accessModal } = useIniciarOsce();
 
   const icone = cat === "lung" ? "🫁" : "🫀";
 
@@ -249,6 +245,7 @@ export default function SonsClinicosPage() {
           <button type="button" className="snd-btn snd-btn-ghost" onClick={() => router.push("/centro-clinico")}>Voltar ao Centro Clínico</button>
         </div>
       </section>
+      {accessModal}
     </div>
   );
 }

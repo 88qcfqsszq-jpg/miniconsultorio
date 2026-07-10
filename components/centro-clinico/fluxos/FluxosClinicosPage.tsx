@@ -9,7 +9,7 @@
 // ============================================================================
 
 import { useRouter } from "next/navigation";
-import { urlOSCEAleatorio, type TipoOSCE } from "@/lib/osce/iniciar-osce";
+import { useIniciarOsce } from "@/hooks/useIniciarOsce";
 import "./FluxosClinicosPage.css";
 
 function ArrowDown() {
@@ -131,14 +131,7 @@ function FlowChart({ flow }: { flow: Flow }) {
 export default function FluxosClinicosPage() {
   const router = useRouter();
 
-  const iniciarOSCE = (tipo: TipoOSCE) => {
-    const url = urlOSCEAleatorio(tipo);
-    if (!url) {
-      alert(`Nenhum caso ${tipo} disponível no momento.`);
-      return;
-    }
-    router.push(url);
-  };
+  const { iniciarOSCE, accessModal } = useIniciarOsce();
 
   return (
     <div className="fluxos-page">
@@ -226,6 +219,7 @@ export default function FluxosClinicosPage() {
           </button>
         </div>
       </section>
+      {accessModal}
     </div>
   );
 }

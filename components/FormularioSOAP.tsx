@@ -11,6 +11,8 @@ interface FormularioSOAPProps {
   /** Tag do wrapper. Use "div" para embutir dentro de outro <form> (ex.: SOAP
    *  opcional dentro de "Diagnóstico e Conduta") sem aninhar formulários. */
   as?: "form" | "div";
+  /** Valor para retomar um atendimento em andamento (progresso salvo). */
+  valorInicial?: FormularioSOAP;
 }
 
 export default function FormularioSOAP({
@@ -19,13 +21,17 @@ export default function FormularioSOAP({
   desabilitado = false,
   caso,
   as = "form",
+  valorInicial,
 }: FormularioSOAPProps) {
-  const [soap, setSOAP] = useState<FormularioSOAP>({
-    subjetivo: "",
-    objetivo: "",
-    avaliacao: "",
-    plano: "",
-  });
+  const [soap, setSOAP] = useState<FormularioSOAP>(
+    () =>
+      valorInicial ?? {
+        subjetivo: "",
+        objetivo: "",
+        avaliacao: "",
+        plano: "",
+      }
+  );
 
   useEffect(() => {
     if (onChange) {

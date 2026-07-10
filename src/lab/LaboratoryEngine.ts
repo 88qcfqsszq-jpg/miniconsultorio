@@ -48,6 +48,22 @@ export interface GenerateLabsInput {
 }
 
 /** Gera os laudos solicitados (ou todos). Determinístico e coerente por caso. */
+/**
+ * Resumo OBJETIVO e curto de um laudo laboratorial (para relatório/feedback):
+ * lista os analitos alterados com valor/unidade; se nada alterado, informa que
+ * está dentro dos parâmetros. Evita o genérico "laudo laboratorial visualizado".
+ */
+export function resumoLabPanel(result?: LabPanelResult): string {
+  if (!result) return "";
+  const analitos = result.sections.flatMap((s) => s.itens);
+  const alterados = analitos.filter((a) => a.flag === "↑" || a.flag === "↓");
+  const escolhidos = (alterados.length > 0 ? alterados : analitos).slice(0, 6);
+  const partes = escolhidos.map((a) => `${a.nome} ${a.valor}${a.unidade ? " " + a.unidade : ""}${a.flag ? " " + a.flag : ""}`);
+  const corpo = partes.join("; ");
+  if (alterados.length === 0) return `${result.titulo}: dentro dos parâmetros (${corpo})`;
+  return `${result.titulo} (${result.nivel}): ${corpo}`;
+}
+
 export function generateLabs({ caso, requestedTests }: GenerateLabsInput): Record<string, LabPanelResult> {
   const tag = resolveClinicalTag(caso);
   const gravidade = gravidadeDaTag(tag);

@@ -7,7 +7,12 @@
 // ============================================================================
 
 import type { CompetenciaAvaliacao } from "@/lib/types";
-import { normalizar } from "../feedback-consistency";
+import {
+  normalizar,
+  aplicarConsistenciaReavaliacao,
+  aplicarConsistenciaCondutas,
+  RX_PENDENCIA_GENERICA,
+} from "../feedback-consistency";
 import type { ContextoAvaliacaoOSCE } from "./tipos";
 import { detectarRXTorax, detectarSinaisVitaisCompletos } from "./utils-deteccao";
 
@@ -42,9 +47,10 @@ export function removerEvidenciasContraditorias(
 /**
  * Normaliza a camada explicativa de um card já calculado.
  * - remove evidências contraditórias;
- * - cards recalibrados pela rubrica usam os próprios acertos como evidências
- *   (curtas, positivas, coerentes com a pontuação);
- * - card abaixo do máximo nunca fica sem "o que faltou".
+ * - cards recalibrados pela rubrica usam os próprios acertos como evidências;
+ * - filtra pendências genéricas não-acionáveis;
+ * - recalcula pontosObtidos quando melhorias vazia e há acertos reconhecidos;
+ * - nunca adiciona fallback genérico ("Revisar critérios...").
  */
 export function normalizarExplicacaoCard(
   card: CompetenciaAvaliacao,
@@ -57,29 +63,37 @@ export function normalizarExplicacaoCard(
     card.acertos ?? [],
     ctx
   );
-  // Cards recalibrados: evidências = acertos (fonte coerente com a pontuação)
   if (recalibrado) {
     evidencias = (card.acertos ?? []).slice();
   }
 
-  // 2. "O que faltou":
-  //    - completo (pontos >= máximo) → marca explicitamente sem pendência;
-  //    - incompleto sem melhoria específica → frase NÃO-genérica de revisão (3.1),
-  //      nunca o texto proibido "Completar os critérios restantes...".
-  let melhorias = card.melhorias ?? [];
-  if (card.pontosObtidos >= card.pontosMaximos) {
-    melhorias = ["Nenhuma pendência identificada."];
-  } else if (melhorias.length === 0) {
-    console.warn(
-      "[FEEDBACK CONSISTENCY] card abaixo do máximo sem critério faltante:",
-      card.nome
-    );
-    melhorias = [
-      "Revisar os critérios objetivos ainda não cumpridos desta competência.",
-    ];
+  // 2. Filtrar pendências genéricas/não-específicas (podem vir de qualquer fonte)
+  let melhorias = (card.melhorias ?? []).filter(
+    (m) => !RX_PENDENCIA_GENERICA.test(normalizar(m))
+  );
+
+  // 3. Recalcular pontuação quando melhorias fica vazia mas card tem acertos reconhecidos.
+  //    Regra: sem pendência específica identificada → aluno demonstrou todos os critérios
+  //    avaliados → pontuação sobe para o máximo do card.
+  //    Não é aumento artificial: é coerência entre o texto (sem gaps) e a nota.
+  let pontosObtidos = card.pontosObtidos;
+  const acertosCount = (card.acertos ?? []).length;
+  if (melhorias.length === 0 && acertosCount > 0 && pontosObtidos < card.pontosMaximos) {
+    pontosObtidos = card.pontosMaximos;
   }
 
-  return { ...card, evidencias, melhorias };
+  // 4. Determinar melhorias finais
+  if (pontosObtidos >= card.pontosMaximos) {
+    melhorias = ["Nenhuma pendência identificada."];
+  }
+  // Se ainda há melhorias específicas: exibi-las sem fallback (o texto IS the feedback)
+
+  return {
+    ...card,
+    pontosObtidos: Math.round(pontosObtidos * 10) / 10,
+    evidencias,
+    melhorias,
+  };
 }
 
 /**
@@ -100,8 +114,11 @@ export function aplicarConsistenciaGlobalCards(
   normalizarFn: (c: CompetenciaAvaliacao) => CompetenciaAvaliacao
 ): CompetenciaAvaliacao[] {
   return cards.map((card) => {
-    const logico = normalizarFn(card);
+    let c = normalizarFn(card);
+    // Camada global: reavaliação e conduta, aplicada a todos os casos independente de rubrica.
+    c = aplicarConsistenciaReavaliacao(c, ctx);
+    c = aplicarConsistenciaCondutas(c, ctx);
     const foiRecalibrado = recalibrados.has(normalizar(card.nome));
-    return normalizarExplicacaoCard(logico, ctx, foiRecalibrado);
+    return normalizarExplicacaoCard(c, ctx, foiRecalibrado);
   });
 }

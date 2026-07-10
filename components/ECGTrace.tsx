@@ -252,13 +252,34 @@ export default function ECGTrace({ pattern, ecgData }: ECGTraceProps) {
 
         {/* Renderizar traçados gerados em layout clássico 12 derivações */}
         <div className="bg-rose-50 rounded-lg border-2 border-slate-300 p-4">
-          {/* Validação de derivações */}
+                    {/* Validação de derivações */}
           {(() => {
-            const derivacoesEsperadas = ['I', 'II', 'III', 'aVR', 'aVL', 'aVF', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6'] as const
-            const ausentes = derivacoesEsperadas.filter((lead) => !ecgData.leads[lead])
+            const derivacoesEsperadas = [
+              'I',
+              'II',
+              'III',
+              'aVR',
+              'aVL',
+              'aVF',
+              'V1',
+              'V2',
+              'V3',
+              'V4',
+              'V5',
+              'V6',
+            ] as const
+
+            const ausentes = derivacoesEsperadas.filter(
+              (lead) => !ecgData.leads[lead]
+            )
+
             if (ausentes.length > 0) {
-              console.warn(`[ECGTrace] Derivações ausentes em ecgData.leads: ${ausentes.join(', ')}`)
+              console.warn(
+                `[ECGTrace] Derivações ausentes em ecgData.leads: ${ausentes.join(', ')}`
+              )
             }
+
+            return null
           })()}
 
           {/* Grid 4x3 para 12 derivações */}

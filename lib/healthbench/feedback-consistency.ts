@@ -28,6 +28,16 @@ export interface ContextoConsistencia {
   diferenciaisInformados?: string[];
   diagnosticoEsperado?: string;
   tituloCaso?: string;
+  // Reavaliação de sinais vitais realizada pelo aluno (sinais de saída pós-intervenção)
+  vitalSignsReassessment?: {
+    realizado?: boolean;
+    minutos?: number;
+    exitVitals?: { spo2?: number; fr?: number; fc?: number; [key: string]: unknown };
+    therapeuticResponse?: string;
+    therapeuticResponseLabel?: string;
+    disposition?: string;
+    stabilityLabel?: string;
+  } | null;
 }
 
 export function normalizar(s: unknown): string {
@@ -39,6 +49,17 @@ export function normalizar(s: unknown): string {
     .replace(/\s+/g, " ")
     .trim();
 }
+
+/**
+ * Pendências genéricas que não informam ao aluno o que especificamente faltou.
+ * São descartadas de qualquer card — não há valor pedagógico nem auditabilidade.
+ * Cobre: revisar/completar/aprimorar/melhorar critérios, avaliação mais completa,
+ * raciocínio clínico, comunicação, condução do caso, itens faltantes, etc.
+ * Exceção: "Considerar [diagnóstico]" ou "Realizar [ação clínica específica]"
+ * são acionáveis e não são removidas.
+ */
+export const RX_PENDENCIA_GENERICA =
+  /revisar\s+(?:os\s+)?crit[eé]rios|crit[eé]rios\s+(?:objetivos\s+ainda\s+n[ãa]o\s+)?cumpridos|completar\s+(?:os\s+)?crit[eé]rios|completar\s+avalia[çc][ãa]o\s+da\s+compet|melhorar\s+avalia[çc][ãa]o\s+(?:objetiva|cl[ií]nica|da\s+compet)|melhorar\s+(?:abordagem|condu[çc][ãa]o|plano|comunica[çc][ãa]o)|aprimorar\s+(?:avalia[çc][ãa]o|plano|abordagem)|aprofundar\s+investiga[çc][ãa]o|realizar\s+avalia[çc][ãa]o\s+mais\s+completa|realizar\s+exame\s+f[ií]sico\s+mais\s+completo|correlacionar\s+melhor|refor[çc]ar\s+racioc[ií]nio|considerar\s+avalia[çc][ãa]o\s+complementar\s+quando|conduzir\s+de\s+forma\s+(?:mais\s+)?sistem[aá]tica|revisar\s+pontos\s+n[ãa]o\s+contemplados|executar\s+(?:os\s+)?itens\s+faltantes|(?:revisar|melhorar|aprimorar|aprofundar|completar)\s+\w+\s+(?:de|do|da|dos)\s+compet|(?:melhorar|aprimorar)\s+este\s+card|fazer\s+avalia[çc][ãa]o\s+mais\s+completa/i;
 
 /** Sinais vitais completos: PA, FC, FR, Temperatura e SpO₂ (glicemia é bônus). */
 export function temSinaisVitaisCompletos(
@@ -504,9 +525,35 @@ export function normalizarCard(card: CompetenciaAvaliacao): CompetenciaAvaliacao
   const nucleosAcertos = new Set(acertos.map(nucleo));
   melhorias = melhorias.filter((m) => !nucleosAcertos.has(nucleo(m)));
 
+  // Remover contradições semânticas: "Não <ação> X" invalidado por acerto que confirma "X".
+  // Padrão: se um item de melhorias começa com "Não [verbo]" e os acertos contêm a palavra-chave
+  // principal do que vem depois, o item é contraditório e deve ser removido.
+  const melhoriasPreContradicao = melhorias.length;
+  const RX_NAO_VERBO = /^nao\s+(?:avaliar|avaliou|verificar|verificou|realizar|realizou|medir|mediu|solicitar|solicitou|indicar|indicou|reconhecer|reconheceu|identificar|identificou|considerar|considerou|prescrever|prescreveu|tratar|tratou|administrar|administrou)\s*/;
+  melhorias = melhorias.filter((m) => {
+    const mNorm = normalizar(m);
+    if (!mNorm.startsWith("nao ")) return true;
+    const aposNao = mNorm.replace(RX_NAO_VERBO, "").split(/[—\-:.,]/)[0].trim();
+    const palavraChave = aposNao.split(/\s+/).find((w) => w.length >= 4);
+    if (!palavraChave) return true;
+    return !acertos.some((a) => normalizar(a).includes(palavraChave));
+  });
+  const contradicoesRemovidas = melhoriasPreContradicao - melhorias.length;
+
+  // Remover pendências genéricas que possam vir do grader ou de passes anteriores
+  melhorias = melhorias.filter((m) => !RX_PENDENCIA_GENERICA.test(normalizar(m)));
+
   // Clamp de pontuação
   let pontos = Number(card.pontosObtidos) || 0;
   pontos = Math.max(0, Math.min(card.pontosMaximos, pontos));
+
+  // Restauração proporcional por contradições removidas: cada pendência contraditória
+  // removida representa um critério que o aluno de fato cumpriu mas foi marcado errado.
+  if (contradicoesRemovidas > 0 && pontos < card.pontosMaximos) {
+    const totalCriteria = Math.max(1, acertos.length + melhoriasPreContradicao);
+    const creditPerItem = card.pontosMaximos / totalCriteria;
+    pontos = Math.min(card.pontosMaximos, Math.round((pontos + contradicoesRemovidas * creditPerItem) * 10) / 10);
+  }
 
   // Card com acertos não pode ficar 0 sem penalidade crítica visível
   const temPenalidadeCritica = melhorias.some((m) =>
@@ -522,6 +569,144 @@ export function normalizarCard(card: CompetenciaAvaliacao): CompetenciaAvaliacao
     acertos,
     melhorias,
   };
+}
+
+// ---------------------------------------------------------------------------
+// 5. Consistência de reavaliação de sinais vitais (todos os cards)
+// ---------------------------------------------------------------------------
+const RX_REAV_PENDING = /reavaliar|reavaliou|monitoriz|observ.*resposta|resposta.*tratamento|acompanhar|acompanhou/;
+const RX_SPO2_PENDING = /oximetria|satura[çc][ãa]o|avaliar.*spo2|medir.*spo2|\bspo2\b/;
+const RX_HOSPITAL_PENDING = /hospitaliz|intern(ac|aç)|encaminh.*hospital|uti\b|emergencia|observa[çc][ãa]o hospitalar/;
+
+export function aplicarConsistenciaReavaliacao(
+  card: CompetenciaAvaliacao,
+  ctx: ContextoConsistencia
+): CompetenciaAvaliacao {
+  const reav = ctx.vitalSignsReassessment;
+  if (!reav?.realizado) return card;
+
+  // Classificação do card por nome (genérica — não hardcoda caso nem diagnóstico)
+  const nomeCard = normalizar(card.nome);
+  const ehConduta = /conduta/.test(nomeCard);
+  const ehExameFisico = /exame.*fis|fis.*exame/.test(nomeCard);
+  const ehRaciocinio = /raciocinio/.test(nomeCard);
+
+  // Contagem pré-consistência (critérios que o grader avaliou neste card)
+  const melhoriasBefore = card.melhorias?.length ?? 0;
+  const acertosBefore = card.acertos?.length ?? 0;
+
+  let acertos = [...(card.acertos || [])];
+  let melhorias = [...(card.melhorias || [])];
+
+  // ── REMOÇÃO GLOBAL (todos os cards): elimina falsos negativos ──────────────
+  // Rastreia especificamente se um pending de reavaliação foi removido deste card
+  // (usado para injeção condicional do acerto em Exame Físico).
+  const melhoriasPreReav = melhorias.length;
+  melhorias = removerSe(melhorias, (n) => RX_REAV_PENDING.test(n));
+  const temReavRemovido = melhorias.length < melhoriasPreReav;
+
+  const temSpO2Entrada = temSinaisVitaisCompletos(ctx.sinaisVitais);
+  const temSpO2Saida = reav.exitVitals?.spo2 != null;
+  if (temSpO2Entrada || temSpO2Saida) {
+    melhorias = removerSe(melhorias, (n) => RX_SPO2_PENDING.test(n));
+  }
+
+  if (reav.disposition === "observacao" || reav.disposition === "encaminhamento_hospitalar") {
+    melhorias = removerSe(melhorias, (n) => RX_HOSPITAL_PENDING.test(n));
+  }
+
+  // ── ACERTOS ESCOPADOS: cada tipo de acerto só entra no card relevante ──────
+
+  // "Reavaliou sinais vitais":
+  // - Conduta e Segurança: SEMPRE (reavaliação é critério universal de conduta)
+  // - Exame Físico: APENAS se o grader tinha esse critério (evidenciado por pending removido)
+  //   Sem um pending removido, o grader não avaliou reavaliação como critério do Exame Físico
+  //   e adicionar o acerto sem ajuste de score geraria inconsistência texto vs nota.
+  if (ehConduta || (ehExameFisico && temReavRemovido)) {
+    if (!acertos.some((a) => /reavaliar|reavaliou/.test(normalizar(a)))) {
+      acertos.push("Reavaliou sinais vitais após intervenção/observação.");
+    }
+  }
+
+  // Acertos clínicos de melhora e decisão → exclusivamente Conduta e Segurança
+  if (ehConduta) {
+    const dados = ctx.sinaisVitais?.dados as Record<string, any> | undefined;
+
+    const entradaSpo2 = dados?.saturacaoOxigenio ?? dados?.saturacao ?? dados?.spo2;
+    const saidaSpo2 = reav.exitVitals?.spo2;
+    if (entradaSpo2 != null && saidaSpo2 != null && Number(saidaSpo2) > Number(entradaSpo2) + 2) {
+      if (!acertos.some((a) => /melhora.*oxigenac|melhora.*spo2|spo2.*melhorou/.test(normalizar(a)))) {
+        acertos.push("Houve melhora objetiva da oxigenação (SpO₂) após a conduta.");
+      }
+    }
+
+    const entradaFR = dados?.frequenciaRespiratoria ?? dados?.fr;
+    const saidaFR = reav.exitVitals?.fr;
+    if (entradaFR != null && saidaFR != null && Number(saidaFR) < Number(entradaFR) - 2) {
+      if (!acertos.some((a) => /melhora.*freq.*resp|melhora.*\bfr\b|fr.*melhorou/.test(normalizar(a)))) {
+        acertos.push("Houve melhora objetiva da frequência respiratória após observação/tratamento.");
+      }
+    }
+
+    if (reav.disposition === "observacao" || reav.disposition === "encaminhamento_hospitalar") {
+      const label = reav.disposition === "encaminhamento_hospitalar"
+        ? "Reconheceu necessidade de hospitalização/encaminhamento conforme reavaliação clínica."
+        : "Reconheceu necessidade de observação/monitorização conforme reavaliação clínica.";
+      if (!acertos.some((a) => /hospitaliz|encaminh|observa[çc][ãa]o/.test(normalizar(a)))) {
+        acertos.push(label);
+      }
+    }
+  }
+
+  // Decisão de hospitalização/observação → Raciocínio Diagnóstico (decisão clínica, não achados)
+  if (ehRaciocinio && (reav.disposition === "observacao" || reav.disposition === "encaminhamento_hospitalar")) {
+    if (!acertos.some((a) => /hospitaliz|encaminh|observa[çc][ãa]o/.test(normalizar(a)))) {
+      acertos.push("Indicou conduta de hospitalização/observação com base na evolução clínica.");
+    }
+  }
+
+  // ── RESTAURAÇÃO PROPORCIONAL DE PONTUAÇÃO ──────────────────────────────────
+  // Cada pendência removida por evidência objetiva restaura crédito proporcional.
+  const gradedItemsFixed = Math.max(0, melhoriasBefore - melhorias.length);
+  let pontosObtidos = card.pontosObtidos;
+  if (gradedItemsFixed > 0 && pontosObtidos < card.pontosMaximos) {
+    const totalGraderCriteria = Math.max(1, acertosBefore + melhoriasBefore);
+    const creditPerItem = card.pontosMaximos / totalGraderCriteria;
+    pontosObtidos = Math.min(
+      card.pontosMaximos,
+      Math.round((pontosObtidos + gradedItemsFixed * creditPerItem) * 10) / 10
+    );
+  }
+
+  return { ...card, acertos: dedup(acertos), melhorias: dedup(melhorias), pontosObtidos };
+}
+
+// ---------------------------------------------------------------------------
+// 6. Consistência de conduta — consolida evidências de múltiplas fontes
+// ---------------------------------------------------------------------------
+export function aplicarConsistenciaCondutas(
+  card: CompetenciaAvaliacao,
+  ctx: ContextoConsistencia
+): CompetenciaAvaliacao {
+  const conduta = normalizar(ctx.condutaTexto);
+  if (!conduta) return card;
+
+  let acertos = [...(card.acertos || [])];
+  let melhorias = [...(card.melhorias || [])];
+
+  // Se alguma fonte de conduta menciona hospitalização/observação, remove pendências incompatíveis
+  const mencionaHospital = RX_HOSPITAL_PENDING.test(conduta) ||
+    /hospitaliz|internar|encaminhar ao hospital|observa[çc][ãa]o/.test(conduta);
+
+  if (mencionaHospital) {
+    const hadPending = melhorias.some((m) => RX_HOSPITAL_PENDING.test(normalizar(m)));
+    melhorias = removerSe(melhorias, (n) => RX_HOSPITAL_PENDING.test(n));
+    if (hadPending && !acertos.some((a) => /hospitaliz|encaminh|observa[çc][ãa]o/.test(normalizar(a)))) {
+      acertos.push("Indicou hospitalização, observação ou encaminhamento quando necessário.");
+    }
+  }
+
+  return { ...card, acertos: dedup(acertos), melhorias: dedup(melhorias) };
 }
 
 // ---------------------------------------------------------------------------

@@ -73,6 +73,15 @@ export interface HealthBenchAtendimentoInput {
   chatMessages?: Array<{ tipo?: string; role?: string; conteudo?: string; content?: string }>;
   physicalExamEvents?: Array<{ categoria?: string; textDigitado?: string; resposta?: string }>;
   vitalSignsEvents?: { solicitado?: boolean; dados?: Record<string, unknown> } | null;
+  vitalSignsReassessment?: {
+    realizado?: boolean;
+    minutos?: number;
+    exitVitals?: Record<string, unknown>;
+    therapeuticResponse?: string;
+    therapeuticResponseLabel?: string;
+    disposition?: string;
+    stabilityLabel?: string;
+  } | null;
   examRequests?: Array<{ nome?: string; resultado?: string }>;
   diagnosisAndPlan?: {
     hipotesePrincipal?: string;

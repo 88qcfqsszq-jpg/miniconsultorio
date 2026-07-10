@@ -10,11 +10,18 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { LAB_TESTS, generateLabs } from "@/src/lab/LaboratoryEngine";
+import { LAB_TESTS, generateLabs, resumoLabPanel } from "@/src/lab/LaboratoryEngine";
 import LabReport from "@/src/lab/LabReport";
 import HemogramaReport from "@/src/components/HemogramaReport";
 
-export default function LaboratoryPanel({ caso, onExamViewed }: { caso: any; onExamViewed?: (id: string, label: string) => void }) {
+export default function LaboratoryPanel({
+  caso,
+  onExamViewed,
+}: {
+  caso: any;
+  // resumo = resultado OBJETIVO do laudo (valores), para o relatório/feedback.
+  onExamViewed?: (id: string, label: string, resumo?: string) => void;
+}) {
   const [sel, setSel] = useState<string>("hemograma");
 
   // Determinístico por caso — recomputar não muda os valores.
@@ -23,8 +30,9 @@ export default function LaboratoryPanel({ caso, onExamViewed }: { caso: any; onE
 
   const selecionar = (id: string, label: string) => {
     setSel(id);
-    // Fase 27: visualizar o laudo é uma AÇÃO REAL → registra como evidência.
-    onExamViewed?.(id, label);
+    // Fase 27: visualizar o laudo é uma AÇÃO REAL → registra como evidência,
+    // agora com o RESULTADO objetivo do exame (não apenas "visualizado").
+    onExamViewed?.(id, label, resumoLabPanel(resultados[id]));
   };
 
   return (

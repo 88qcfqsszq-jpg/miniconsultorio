@@ -10,6 +10,8 @@ interface PainelDiagnosticoProps {
   caso?: any;
   /** SOAP opcional expansível (renderizado dentro deste painel). Opcional. */
   soapSlot?: ReactNode;
+  /** Valor para retomar um atendimento em andamento (progresso salvo). */
+  valorInicial?: DiagnosticoFormulario;
 }
 
 export default function PainelDiagnostico({
@@ -18,15 +20,19 @@ export default function PainelDiagnostico({
   desabilitado = false,
   caso,
   soapSlot,
+  valorInicial,
 }: PainelDiagnosticoProps) {
   // SOAP começa FECHADO; preenchimento é opcional e não bloqueia a finalização.
   const [soapAberto, setSoapAberto] = useState(false);
-  const [diagnostico, setDiagnostico] = useState<DiagnosticoFormulario>({
-    hipotesePrincipal: "",
-    diagnosticosDisferenciais: [],
-    examesIndicados: [],
-    conduta: "",
-  });
+  const [diagnostico, setDiagnostico] = useState<DiagnosticoFormulario>(
+    () =>
+      valorInicial ?? {
+        hipotesePrincipal: "",
+        diagnosticosDiferenciais: [],
+        examesIndicados: [],
+        conduta: "",
+      }
+  );
 
   const [novoDiferencial, setNovoDiferencial] = useState("");
   const [novoExame, setNovoExame] = useState("");
@@ -41,8 +47,8 @@ export default function PainelDiagnostico({
     if (novoDiferencial.trim()) {
       setDiagnostico((prev) => ({
         ...prev,
-        diagnosticosDisferenciais: [
-          ...prev.diagnosticosDisferenciais,
+        diagnosticosDiferenciais: [
+          ...prev.diagnosticosDiferenciais,
           novoDiferencial,
         ],
       }));
@@ -53,7 +59,7 @@ export default function PainelDiagnostico({
   const handleRemoverDiferencial = (index: number) => {
     setDiagnostico((prev) => ({
       ...prev,
-      diagnosticosDisferenciais: prev.diagnosticosDisferenciais.filter(
+      diagnosticosDiferenciais: prev.diagnosticosDiferenciais.filter(
         (_, i) => i !== index
       ),
     }));
@@ -129,7 +135,7 @@ export default function PainelDiagnostico({
           </button>
         </div>
         <div className="medix-diagnosis-list">
-          {diagnostico.diagnosticosDisferenciais.map((diff, idx) => (
+          {diagnostico.diagnosticosDiferenciais.map((diff, idx) => (
             <span key={idx} className="medix-diagnosis-chip">
               {diff}
               <button type="button" onClick={() => handleRemoverDiferencial(idx)} disabled={desabilitado} className="medix-diagnosis-chip-x">×</button>

@@ -5,6 +5,12 @@ import { Caso } from "@/lib/types";
 
 interface CasoCardProps {
   caso: Caso;
+  /** Caso bloqueado (free tier): mostra cadeado e não navega. */
+  locked?: boolean;
+  /** Ação ao clicar num caso bloqueado (abrir login/planos). */
+  onLockedClick?: () => void;
+  /** Tipo do paciente para a rota (adulto/pediátrico). Se omitido, deriva do caso. */
+  tipo?: "adulto" | "pediatrico";
 }
 
 const CONFIG_SISTEMA: Record<string, { icon: string; cor: string; badge: string }> = {
@@ -20,13 +26,29 @@ const NIVEL_BADGE: Record<string, string> = {
   avancado:     "bg-purple-50 text-purple-700",
 };
 
-export default function CasoCard({ caso }: CasoCardProps) {
+export default function CasoCard({ caso, locked = false, onLockedClick, tipo }: CasoCardProps) {
   const cfg = CONFIG_SISTEMA[caso.sistema] ?? { icon: "📋", cor: "border-slate-300", badge: "bg-slate-50 text-slate-600" };
   const nivelClass = NIVEL_BADGE[caso.nivel] ?? "bg-slate-50 text-slate-600";
   const nivelLabel = caso.nivel === "iniciante" ? "Iniciante" : caso.nivel === "intermediario" ? "Intermediário" : "Avançado";
 
+  // Tipo do paciente (deriva do caso se não for informado).
+  const tipoPaciente: "adulto" | "pediatrico" =
+    tipo ?? ((caso as any)?.tipoPaciente === "pediatrico" || (caso as any)?.paciente?.tipoPaciente === "pediatrico" ? "pediatrico" : "adulto");
+  const href = `/caso/${caso.id}?modo=treinamento&tipo=${tipoPaciente}`;
+
   return (
-    <div className={`bg-white rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-slate-300 transition-all flex flex-col overflow-hidden border-t-4 ${cfg.cor}`}>
+    <div className={`relative bg-white rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-slate-300 transition-all flex flex-col overflow-hidden border-t-4 ${cfg.cor}`}>
+      {locked && (
+        <span
+          className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-500 shadow-sm"
+          aria-label="Conteúdo bloqueado"
+          title="Conteúdo bloqueado"
+        >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11v3m-6 5h12a1 1 0 001-1v-7a1 1 0 00-1-1H6a1 1 0 00-1 1v7a1 1 0 001 1zm9-9V7a4 4 0 10-8 0v3" />
+          </svg>
+        </span>
+      )}
       <div className="p-5 flex-1">
         <div className="flex items-start gap-3 mb-3">
           <span className="text-2xl shrink-0 mt-0.5">{cfg.icon}</span>
@@ -38,6 +60,9 @@ export default function CasoCard({ caso }: CasoCardProps) {
         <div className="flex flex-wrap gap-1.5 mb-3">
           <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${cfg.badge}`}>{caso.sistema}</span>
           <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${nivelClass}`}>{nivelLabel}</span>
+          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${tipoPaciente === "pediatrico" ? "bg-teal-50 text-teal-700" : "bg-slate-100 text-slate-600"}`}>
+            {tipoPaciente === "pediatrico" ? "Pediátrico" : "Adulto"}
+          </span>
         </div>
 
         <div className="bg-slate-50 rounded-xl p-3 space-y-1 border border-slate-100">
@@ -51,11 +76,24 @@ export default function CasoCard({ caso }: CasoCardProps) {
       </div>
 
       <div className="px-5 pb-5">
-        <Link href={`/caso/${caso.id}`}>
-          <button className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-2.5 px-4 rounded-xl transition-all text-sm">
-            Iniciar Atendimento
+        {locked ? (
+          <button
+            type="button"
+            onClick={onLockedClick}
+            className="w-full bg-slate-100 hover:bg-slate-200 active:scale-[0.98] text-slate-600 font-semibold py-2.5 px-4 rounded-xl transition-all text-sm flex items-center justify-center gap-2"
+          >
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11v3m-6 5h12a1 1 0 001-1v-7a1 1 0 00-1-1H6a1 1 0 00-1 1v7a1 1 0 001 1zm9-9V7a4 4 0 10-8 0v3" />
+            </svg>
+            Desbloquear
           </button>
-        </Link>
+        ) : (
+          <Link href={href}>
+            <button className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-2.5 px-4 rounded-xl transition-all text-sm">
+              Iniciar Atendimento
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

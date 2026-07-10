@@ -1,29 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { casosAdultos, casosPediatricos } from "@/data/casos-v2";
+import { useIniciarOsce } from "@/hooks/useIniciarOsce";
 
 export default function FacaOOSCE() {
-  const router = useRouter();
-
-  const iniciarOSCE = (tipoOSCE: "adulto" | "pediatrico") => {
-    // Filtrar casos pelo tipo de paciente
-    let casosFiltrados: any[];
-
-    if (tipoOSCE === "pediatrico") {
-      casosFiltrados = casosPediatricos.filter((caso) => caso.ativo !== false);
-    } else {
-      casosFiltrados = casosAdultos.filter((caso) => caso.ativo !== false);
-    }
-
-    if (casosFiltrados.length === 0) {
-      alert(`Nenhum caso ${tipoOSCE} disponível no momento.`);
-      return;
-    }
-
-    const casoAleatorio = casosFiltrados[Math.floor(Math.random() * casosFiltrados.length)];
-    router.push(`/caso/${casoAleatorio.id}?modo=osce&tipo=${tipoOSCE}`);
-  };
+  // Porta única de início de OSCE (mesmas regras de free tier de todo o app).
+  const { iniciarOSCE, accessModal } = useIniciarOsce();
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -129,6 +110,7 @@ export default function FacaOOSCE() {
           </div>
         </div>
       </div>
+      {accessModal}
     </div>
   );
 }

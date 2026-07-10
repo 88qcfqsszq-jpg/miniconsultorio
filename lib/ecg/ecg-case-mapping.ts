@@ -229,3 +229,91 @@ export function getDefaultECGPresetByAgeGroup(ageGroup?: string): string {
 
   return 'normal_adulto'
 }
+
+// ============================================================================
+// RESOLVEDOR CENTRAL de ECG por CASO (diagnóstico-aware).
+// Prioridade: esperadosExames.ecg → tema mapeado → DIAGNÓSTICO → idade (normal).
+// Quando o diagnóstico é cardíaco/relevante mas só há preset normal disponível,
+// devolve um laudo CONTEXTUALIZADO (ECG normal não exclui o diagnóstico).
+// Evita o antigo comportamento de "normal_lactente" genérico sem contexto.
+// ============================================================================
+
+function normalizar(s: unknown): string {
+  return String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+}
+
+function presetNormalPorIdade(caso: any): string {
+  const faixa = caso?.paciente?.dadosPediatricos?.faixaEtaria
+  if (faixa) return getDefaultECGPresetByAgeGroup(faixa)
+  if (caso?.tipoPaciente === 'pediatrico' && typeof caso?.paciente?.idade === 'number') {
+    const idade = caso.paciente.idade
+    if (idade < 1) return 'normal_neonato'
+    if (idade < 3) return 'normal_lactente'
+    if (idade < 6) return 'normal_pre_escolar'
+    if (idade < 12) return 'normal_escolar'
+    return 'normal_adolescente'
+  }
+  return 'normal_adulto'
+}
+
+export interface ECGResolucaoCaso {
+  presetId: string
+  /** Nota educacional quando o ECG é normal mas não exclui o diagnóstico. */
+  laudoContextual?: string
+  origem: 'esperado' | 'tema' | 'diagnostico' | 'idade'
+}
+
+/** Presets patológicos disponíveis mapeados por palavra-chave de diagnóstico. */
+const DIAGNOSTICO_PRESET: Array<[RegExp, string]> = [
+  [/fibrilacao atrial|flutter atrial|\bfa\b paroxist/, 'fibrilacao_atrial'],
+  [/taquicardia supraventricular|\btsv\b|palpitac/, 'taquicardia_supraventricular'],
+  [/bradicardia|bloqueio atrioventricular|\bbav\b|bloqueio av/, 'bradicardia_sinusal'],
+  [/infarto|\biam\b|sindrome coronarian|\bsca\b|angina|isquemia miocard/, 'taquicardia_sinusal_adulto'],
+]
+
+/** Diagnósticos cardíacos em que um ECG normal NÃO exclui a doença. */
+const DIAGNOSTICO_CARDIACO_CONTEXTO = /cardiopatia|cianotic|tetralogia|fallot|transposi|\btga\b|congenit.*cardi|cardi.*congenit|sopro|comunicac.*(interventricular|interatrial)|\bciv\b|\bcia\b|persistencia.*ducto|\bpca\b|coarctac|estenose (aortic|mitral|pulmonar)|insuficiencia (mitral|aortic|cardiac)|\bicc\b|pericardite|miocardite|endocardite|valvopatia|hipertrofia|arritmia|prolapso/
+
+export function resolveECGPresetForCase(caso: any): ECGResolucaoCaso {
+  // 1. Expectativa explícita do caso.
+  if (caso?.esperadosExames?.ecg?.presetId) {
+    return { presetId: caso.esperadosExames.ecg.presetId, origem: 'esperado' }
+  }
+
+  // 2. Tema mapeado (comportamento existente).
+  if (caso?.tema) {
+    try {
+      const exp = getECGExpectationForCaseTheme(caso.tema)
+      if (exp?.presetId) return { presetId: exp.presetId, origem: 'tema' }
+    } catch {
+      /* ignora e segue para diagnóstico */
+    }
+  }
+
+  // 3. Diagnóstico do caso.
+  const diag = normalizar(
+    caso?.diagnosticoCorreto ??
+      caso?.dados_ocultos_do_sistema?.diagnostico_principal ??
+      caso?.diagnostico ??
+      caso?.titulo ??
+      caso?.categoria
+  )
+  if (diag) {
+    for (const [re, preset] of DIAGNOSTICO_PRESET) {
+      if (re.test(diag)) return { presetId: preset, origem: 'diagnostico' }
+    }
+    // Cardíaco sem preset específico → normal por idade, mas CONTEXTUALIZADO.
+    if (DIAGNOSTICO_CARDIACO_CONTEXTO.test(diag)) {
+      return {
+        presetId: presetNormalPorIdade(caso),
+        origem: 'diagnostico',
+        laudoContextual:
+          'ECG sem alterações específicas neste simulador. Um ECG normal NÃO exclui o diagnóstico — ' +
+          'correlacionar com ecocardiograma, radiografia e o quadro clínico.',
+      }
+    }
+  }
+
+  // 4. Idade (normal padrão).
+  return { presetId: presetNormalPorIdade(caso), origem: 'idade' }
+}

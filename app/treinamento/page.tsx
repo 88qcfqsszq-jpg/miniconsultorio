@@ -4,14 +4,34 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import CasoCard from "@/components/CasoCard";
 import PainelGerarCaso from "@/components/PainelGerarCaso";
-import { casosAdultos } from "@/data/casos-v2";
+import AccessModal from "@/components/access/AccessModal";
+import { todosCasosAdultos, todosCasosPediatricos } from "@/data/casos-v2";
 import { Caso } from "@/lib/types";
+import { useAccess } from "@/hooks/useAccess";
+import { isClinicalCaseFree } from "@/lib/accessControl";
 
 export default function Treinamento() {
   const [mostrarGerador, setMostrarGerador] = useState(false);
+  const [modalAberto, setModalAberto] = useState(false);
   const router = useRouter();
+  const { loggedIn } = useAccess();
 
-  const casosAtivos = casosAdultos.filter((caso) => caso.ativo !== false);
+  // Lista COMPLETA da plataforma: adultos + pediátricos (sem duplicar).
+  const adultosAtivos = todosCasosAdultos.filter((caso: any) => caso.ativo !== false);
+  const pediatricosAtivos = todosCasosPediatricos.filter((caso: any) => caso.ativo !== false);
+  const casosAtivos: Array<{ caso: any; tipo: "adulto" | "pediatrico" }> = [
+    ...adultosAtivos.map((caso: any) => ({ caso, tipo: "adulto" as const })),
+    ...pediatricosAtivos.map((caso: any) => ({ caso, tipo: "pediatrico" as const })),
+  ];
+  const isLocked = (id: string) => !loggedIn && !isClinicalCaseFree(id);
+
+  const onGerarIA = () => {
+    if (!loggedIn) {
+      setModalAberto(true);
+      return;
+    }
+    setMostrarGerador(true);
+  };
 
   const handleCasoGerado = (caso: Caso) => {
     // Salvar na sessionStorage para acessar na página de caso
@@ -51,20 +71,39 @@ export default function Treinamento() {
         ) : (
           <div className="mb-8">
             <button
-              onClick={() => setMostrarGerador(true)}
-              className="w-full py-3.5 px-6 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-semibold text-sm sm:text-base hover:from-violet-700 hover:to-purple-700 shadow-sm hover:shadow-md transition-all active:scale-[0.99]"
+              onClick={onGerarIA}
+              className="relative w-full py-3.5 px-6 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-semibold text-sm sm:text-base hover:from-violet-700 hover:to-purple-700 shadow-sm hover:shadow-md transition-all active:scale-[0.99]"
             >
               🤖 Gerar Novo Caso com IA
+              {!loggedIn && (
+                <svg className="absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11v3m-6 5h12a1 1 0 001-1v-7a1 1 0 00-1-1H6a1 1 0 00-1 1v7a1 1 0 001 1zm9-9V7a4 4 0 10-8 0v3" />
+                </svg>
+              )}
             </button>
           </div>
         )}
 
         {/* Cards de Casos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10">
-          {casosAtivos.map((caso) => (
-            <CasoCard key={caso.id} caso={caso as any} />
+          {casosAtivos.map(({ caso, tipo }) => (
+            <CasoCard
+              key={caso.id}
+              caso={caso as any}
+              tipo={tipo}
+              locked={isLocked(caso.id)}
+              onLockedClick={() => setModalAberto(true)}
+            />
           ))}
         </div>
+
+        <AccessModal
+          open={modalAberto}
+          onClose={() => setModalAberto(false)}
+          onLoggedIn={() => setModalAberto(false)}
+          titulo="Conteúdo exclusivo"
+          descricao="Este caso faz parte do plano completo. Faça login ou assine para desbloquear."
+        />
 
         {/* Como usar */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">

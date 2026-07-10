@@ -12,7 +12,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { urlOSCEAleatorio, type TipoOSCE } from "@/lib/osce/iniciar-osce";
+import { useIniciarOsce } from "@/hooks/useIniciarOsce";
 import "./ImagensClinicasPage.css";
 
 function Alert() {
@@ -208,11 +208,7 @@ export default function ImagensClinicasPage() {
       });
   }, [pato.id, pato.query, pato.diagnosis]);
 
-  const iniciarOSCE = (tipo: TipoOSCE) => {
-    const u = urlOSCEAleatorio(tipo);
-    if (!u) { alert(`Nenhum caso ${tipo} disponível no momento.`); return; }
-    router.push(u);
-  };
+  const { iniciarOSCE, accessModal } = useIniciarOsce();
 
   const img = imgs[pato.id];
 
@@ -393,6 +389,7 @@ export default function ImagensClinicasPage() {
           </button>
         </div>
       </section>
+      {accessModal}
     </div>
   );
 }

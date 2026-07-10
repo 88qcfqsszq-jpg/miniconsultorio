@@ -248,7 +248,7 @@ export default function ExameFisicoAdultoVisual({
   }, [registrosVisuais]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 lg:pl-[120px]">
       {/* Fundo com gradiente radial */}
       <div
         className="absolute inset-0 -z-10 rounded-3xl"
@@ -263,7 +263,7 @@ export default function ExameFisicoAdultoVisual({
 
       {/* Modal principal */}
       <div
-        className="relative w-[90vw] h-[85vh] flex flex-col bg-white/45 backdrop-blur-xl rounded-3xl border border-white/60 overflow-hidden"
+        className="relative w-full max-w-[90vw] lg:max-w-[calc(100vw-120px-2rem)] h-[85vh] flex flex-col bg-white/45 backdrop-blur-xl rounded-3xl border border-white/60 overflow-hidden"
         style={{ boxShadow: "0 20px 60px rgba(15,23,42,0.12)" }}
       >
         {/* CABEÇALHO AZUL */}

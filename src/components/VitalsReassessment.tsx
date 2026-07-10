@@ -21,6 +21,14 @@ import { runTreatmentResponse } from "@/src/treatment/TreatmentResponseEngine";
 
 const TEMPOS = [15, 30, 60, 120];
 
+export interface ReavaliacaoSaida {
+  exitVitals: VitalSet;
+  therapeuticResponse: string;
+  therapeuticResponseLabel: string;
+  disposition?: string;
+  stabilityLabel?: string;
+}
+
 const STATUS_STYLE: Record<string, { cls: string; icon: string }> = {
   alta_segura: { cls: "border-emerald-300 bg-emerald-50 text-emerald-800", icon: "✅" },
   observacao: { cls: "border-amber-300 bg-amber-50 text-amber-800", icon: "🕒" },
@@ -100,7 +108,7 @@ export default function VitalsReassessment({
   sinaisSolicitados?: boolean;
   onSolicitarEntrada?: () => void;
   reavaliadoMin: number | null;
-  onReavaliar: (min: number) => void;
+  onReavaliar: (min: number, saida?: ReavaliacaoSaida) => void;
   desabilitado?: boolean;
 }) {
   const [tempo, setTempo] = useState<number>(reavaliadoMin ?? 30);
@@ -131,7 +139,13 @@ export default function VitalsReassessment({
     console.log("Resposta terapêutica:", r.therapeuticResponse, "→", r.therapeuticResponseLabel);
     console.groupEnd();
     /* eslint-enable no-console */
-    onReavaliar(tempo);
+    onReavaliar(tempo, {
+      exitVitals: r.exitVitals,
+      therapeuticResponse: r.therapeuticResponse,
+      therapeuticResponseLabel: r.therapeuticResponseLabel,
+      disposition: r.disposition?.disposition,
+      stabilityLabel: r.disposition?.stabilityLabel,
+    });
   }
 
   return (

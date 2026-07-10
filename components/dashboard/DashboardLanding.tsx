@@ -10,42 +10,13 @@
 // ============================================================================
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import "./DashboardLanding.css";
+import { todosCasosAdultos, todosCasosPediatricos } from "@/data/casos-v2";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { displayName, initials } from "@/lib/userProfile";
 
 const ASSET_BASE = "/assets/dashboard";
-
-/**
- * <img> que, em caso de erro/asset ausente, renderiza um fallback no lugar
- * (sem quebrar o layout). Pronto para receber o arquivo real depois.
- */
-function SmartImg({
-  src,
-  alt,
-  className,
-  fallback = null,
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-  fallback?: React.ReactNode;
-}) {
-  const [ok, setOk] = useState(true);
-  if (!ok) return <>{fallback}</>;
-  // eslint-disable-next-line @next/next/no-img-element
-  return (
-    <img src={src} alt={alt} className={className} onError={() => setOk(false)} draggable={false} />
-  );
-}
-
-const CASES = [
-  { titulo: "IAM com supra", area: "Cardiologia", tag: "MÉDIA", tagClass: "media", icon: "case-heart.png", dot: "#e74c3c" },
-  { titulo: "Asma grave", area: "Pneumologia", tag: "DIFÍCIL", tagClass: "dificil", icon: "case-lung-purple.png", dot: "#8e6bd6" },
-  { titulo: "Pneumonia adquirida na comunidade", area: "Pneumologia", tag: "MÉDIA", tagClass: "media", icon: "case-lung-blue.png", dot: "#3b8bff" },
-  { titulo: "Dengue com sinais de alarme", area: "Infectologia", tag: "MÉDIA", tagClass: "media", icon: "case-virus.png", dot: "#1aa06d" },
-];
 
 const METRICS = [
   { label: "Disciplinas ativas", value: "8", delta: "+2 este mês" },
@@ -60,6 +31,40 @@ function HeaderIcon({ d }: { d: string }) {
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden>
       <path d={d} stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  );
+}
+
+// Ícone por especialidade/sistema, usando apenas assets existentes.
+function iconePorSistema(sistema: string): { src?: string; dot: string; virus?: boolean } {
+  const s = (sistema || "").toLowerCase();
+  if (s.includes("cardio") || s.includes("vascular")) return { src: "case-heart.png", dot: "#e74c3c" };
+  if (s.includes("respirat") || s.includes("orl") || s.includes("pneumo")) return { src: "case-lung-blue.png", dot: "#3b8bff" };
+  if (s.includes("infec")) return { src: "case-virus.png", dot: "#1aa06d", virus: true };
+  if (s.includes("hemat")) return { dot: "#c0392b" };
+  if (s.includes("endocrin")) return { dot: "#d97706" };
+  if (s.includes("nefro") || s.includes("renal")) return { dot: "#0ea5a5" };
+  if (s.includes("neuro")) return { dot: "#6366f1" };
+  if (s.includes("imuno")) return { dot: "#8e6bd6" };
+  return { dot: "#1f7bff" };
+}
+
+function CaseIcon({ titulo, sistema }: { titulo: string; sistema: string }) {
+  const { src, dot, virus } = iconePorSistema(sistema);
+  const [ok, setOk] = useState(true);
+  return (
+    <div className={`dl-case-ico${virus ? " is-virus" : ""}`}>
+      {src && ok ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={`${ASSET_BASE}/${src}`}
+          alt={titulo}
+          onError={() => setOk(false)}
+          draggable={false}
+        />
+      ) : (
+        <span className="dl-ico-dot" style={{ background: dot }} />
+      )}
+    </div>
   );
 }
 
@@ -198,13 +203,22 @@ function FreshHeroCarousel() {
 }
 
 export default function DashboardLanding() {
-  const router = useRouter();
   const { profile } = useUserProfile();
 
-  // Primeira entrada: se ainda não completou o perfil, coleta os dados básicos.
-  useEffect(() => {
-    if (!profile.onboarded) router.replace("/onboarding");
-  }, [profile.onboarded, router]);
+  // Lista completa da plataforma: adultos + pediátricos ativos, sem hardcode.
+  const casosRecomendados = [
+    ...todosCasosAdultos
+      .filter((c: any) => c.ativo !== false)
+      .map((c: any) => ({ id: c.id, titulo: c.titulo, sistema: c.sistema, area: c.sistema })),
+    ...todosCasosPediatricos
+      .filter((c: any) => c.ativo !== false)
+      .map((c: any) => ({
+        id: c.id,
+        titulo: c.titulo,
+        sistema: c.sistema,
+        area: `Pediatria · ${c.sistema}`,
+      })),
+  ];
 
   return (
     <div className="dashboard-landing">
@@ -246,9 +260,9 @@ export default function DashboardLanding() {
             <button className="dl-iconbtn" type="button" aria-label="Mensagens">
               <HeaderIcon d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
             </button>
-            <button className="dl-iconbtn" type="button" aria-label="Perfil">
+            <a className="dl-iconbtn" href="/meu-perfil" aria-label="Meu Perfil">
               <HeaderIcon d="M20 21a8 8 0 10-16 0M12 11a4 4 0 100-8 4 4 0 000 8z" />
-            </button>
+            </a>
           </div>
         </header>
 
@@ -270,24 +284,20 @@ export default function DashboardLanding() {
             </section>
           </main>
 
-          {/* RIGHT PANEL */}
+          {/* RIGHT PANEL — casos verticalizados com scroll interno */}
           <aside className="dl-right glass-panel">
             <h3>Casos recomendados pela IA</h3>
-            {CASES.map((c) => (
-              <div key={c.titulo} className="dl-case">
-                <div className={`dl-case-ico${c.icon === "case-virus.png" ? " is-virus" : ""}`}>
-                  <SmartImg
-                    src={`${ASSET_BASE}/${c.icon}`}
-                    alt={c.titulo}
-                    fallback={<span className="dl-ico-dot" style={{ background: c.dot }} />}
-                  />
-                </div>
-                <div className="dl-case-body">
-                  <h5>{c.titulo}</h5>
-                  <span>{c.area}</span>
-                </div>
-              </div>
-            ))}
+            <div className="dl-right-cases">
+              {casosRecomendados.map((c) => (
+                <Link key={c.id} href={`/caso/${c.id}`} className="dl-case">
+                  <CaseIcon titulo={c.titulo} sistema={c.sistema} />
+                  <div className="dl-case-body">
+                    <h5>{c.titulo}</h5>
+                    <span>{c.area}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </aside>
         </div>
       </div>

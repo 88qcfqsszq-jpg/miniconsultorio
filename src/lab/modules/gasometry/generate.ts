@@ -24,12 +24,12 @@ export function generateGasometry(ctx: LabContext): LabPanelResult {
     const itens: any[] = [];
 
     const ph = obterSinonimo(v, ["ph", "pH"]);
-    const paco2 = obterSinonimo(v, ["paco2", "paCO2"]);
-    const pao2 = obterSinonimo(v, ["pao2", "paO2"]);
-    const hco3 = obterSinonimo(v, ["hco3", "bicarbonato", "HCO3"]);
-    const sato2 = obterSinonimo(v, ["sato2", "satO2", "saturacao"]);
+    const paco2 = obterSinonimo(v, ["paco2", "paCO2", "pco2", "pCO2"]);
+    const pao2 = obterSinonimo(v, ["pao2", "paO2", "po2", "pO2"]);
+    const hco3 = obterSinonimo(v, ["hco3", "bicarbonato", "HCO3", "hco3-"]);
+    const sato2 = obterSinonimo(v, ["sato2", "satO2", "saturacao", "saturacaoO2", "saturacaoOxigenio", "spo2", "SpO2"]);
     const lactato = obterSinonimo(v, ["lactato"]);
-    const be = obterSinonimo(v, ["be", "baseExcess"]);
+    const be = obterSinonimo(v, ["be", "baseExcess", "excessodebase"]);
 
     if (ph) itens.push(analyteFrom("pH", parseFloat(String(ph).replace(",", ".")), REF.ph));
     if (paco2) itens.push(analyteFrom("PaCO₂", parseFloat(String(paco2).replace(",", ".")), REF.paco2));

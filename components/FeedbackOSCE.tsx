@@ -20,6 +20,14 @@ interface FeedbackOSCEProps {
   manobrasSolicitadas?: any[];
   examesSolicitados?: any[];
   sinaisVitais?: { solicitado?: boolean; dados?: any };
+  vitalSignsReassessment?: {
+    realizado?: boolean;
+    minutos?: number;
+    exitVitals?: Record<string, unknown>;
+    therapeuticResponseLabel?: string;
+    disposition?: string;
+    stabilityLabel?: string;
+  } | null;
   diagnostico?: any;
   soap?: any;
 }
@@ -98,6 +106,7 @@ export default function FeedbackOSCE({
   caso,
   chatMessages,
   manobrasSolicitadas,
+  vitalSignsReassessment,
   examesSolicitados,
   sinaisVitais,
   diagnostico,
@@ -124,6 +133,7 @@ export default function FeedbackOSCE({
         manobrasSolicitadas,
         examesSolicitados,
         sinaisVitais,
+        vitalSignsReassessment,
         diagnostico,
         soap,
       });

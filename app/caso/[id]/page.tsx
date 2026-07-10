@@ -12,7 +12,7 @@ import PainelDiagnostico from "@/components/PainelDiagnostico";
 import FeedbackOSCE from "@/components/FeedbackOSCE";
 import LoadingRelatorio from "@/components/LoadingRelatorio";
 import PainelExamesComplementares from "@/components/PainelExamesComplementares";
-import SimuladorECG from "@/components/SimuladorECG";
+import SimuladorECG, { type ECGSimuladorState } from "@/components/SimuladorECG";
 import OpenIRawImagePanel from "@/components/OpenIRawImagePanel";
 import LaboratoryPanel from "@/src/components/LaboratoryPanel";
 import VitalsReassessment from "@/src/components/VitalsReassessment";
@@ -21,6 +21,13 @@ import { construirFeedbackViewDeHealthBench } from "@/lib/healthbench/feedback-v
 import { casosV2 } from "@/data/casos-v2";
 import { event } from "@/lib/analytics";
 import { getDiagnosticoOcultoDoCaso } from "@/lib/utils/diagnostico-oculto";
+import { markFreeOsceUsedOnFinish } from "@/lib/accessControl";
+import {
+  getAttendanceProgress,
+  saveAttendanceProgress,
+  clearAttendanceProgress,
+  type AttendanceSnapshot,
+} from "@/lib/attendanceProgress";
 import type {
   Caso,
   MensagemChat,
@@ -49,12 +56,37 @@ function CasoPageContent() {
   const [examesSolicitados, setExamesSolicitados] = useState<ExameSolicitado[]>([]);
   // Fase 27: laudos laboratoriais REALMENTE visualizados (aba Exames Laboratoriais).
   const [labsVisualizados, setLabsVisualizados] = useState<string[]>([]);
-  const registrarLabVisualizado = (_id: string, label: string) => {
+  // Auditoria: resultado OBJETIVO por exame visualizado (para relatório/feedback).
+  const [labsResultados, setLabsResultados] = useState<Record<string, string>>({});
+  const registrarLabVisualizado = (_id: string, label: string, resumo?: string) => {
     setLabsVisualizados((prev) => (prev.includes(label) ? prev : [...prev, label]));
+    if (resumo) setLabsResultados((prev) => ({ ...prev, [label]: resumo }));
   };
   // Reavaliação de sinais vitais: tempo de observação escolhido (persiste entre abas).
   const [vitalsReavaliadoMin, setVitalsReavaliadoMin] = useState<number | null>(null);
+  const [vitalsReavaliacao, setVitalsReavaliacao] = useState<{
+    minutos: number;
+    exitVitals: Record<string, unknown>;
+    therapeuticResponse: string;
+    therapeuticResponseLabel: string;
+    disposition?: string;
+    stabilityLabel?: string;
+  } | null>(null);
+  const handleReavaliar = (min: number, saida?: { exitVitals: any; therapeuticResponse: string; therapeuticResponseLabel: string; disposition?: string; stabilityLabel?: string }) => {
+    setVitalsReavaliadoMin(min);
+    if (saida) {
+      setVitalsReavaliacao({
+        minutos: min,
+        exitVitals: saida.exitVitals as Record<string, unknown>,
+        therapeuticResponse: saida.therapeuticResponse,
+        therapeuticResponseLabel: saida.therapeuticResponseLabel,
+        disposition: saida.disposition,
+        stabilityLabel: saida.stabilityLabel,
+      });
+    }
+  };
   const [ecgGerado, setEcgGerado] = useState<any>(null);
+  const [ecgSimuladorState, setEcgSimuladorState] = useState<ECGSimuladorState | null>(null);
   const [feedback, setFeedback] = useState<FeedbackOSCEType | null>(null);
   const [mensagens, setMensagens] = useState<MensagemChat[]>([]);
   const [gerandoFeedback, setGerandoFeedback] = useState(false);
@@ -112,6 +144,28 @@ function CasoPageContent() {
     }]);
   }, []);
 
+  // Snapshot de progresso restaurado — usado para semear os componentes
+  // controlados (chat, diagnóstico, SOAP) na primeira montagem.
+  const progressoRestauradoRef = useRef<AttendanceSnapshot | null>(null);
+  const progressoHidratadoRef = useRef(false);
+
+  // Restaura o progresso salvo do atendimento (se houver) para retomar de onde parou.
+  const restaurarProgresso = () => {
+    const snap = getAttendanceProgress(casoId);
+    if (!snap) return;
+    progressoRestauradoRef.current = snap;
+    if (snap.mensagens) setMensagens(snap.mensagens);
+    if (snap.manobras) setManobrasSolicitadas(snap.manobras);
+    if (snap.exames) setExamesSolicitados(snap.exames);
+    if (snap.labs) setLabsVisualizados(snap.labs);
+    if (typeof snap.sinaisVitaisSolicitados === "boolean") setSinaisVitaisSolicitados(snap.sinaisVitaisSolicitados);
+    if (snap.vitalsReavaliadoMin !== undefined) setVitalsReavaliadoMin(snap.vitalsReavaliadoMin);
+    if (snap.vitalsReavaliacao) setVitalsReavaliacao(snap.vitalsReavaliacao);
+    if (snap.ecgGerado) setEcgGerado(snap.ecgGerado);
+    if (snap.ecgSimuladorState) setEcgSimuladorState(snap.ecgSimuladorState);
+    if (snap.tempoInicio) setTempoInicio(snap.tempoInicio);
+  };
+
   // Carregar caso
   useEffect(() => {
     // 1. Verificar sessionStorage primeiro (para casos gerados)
@@ -122,6 +176,7 @@ function CasoPageContent() {
         if (caso.id === casoId) {
           setCaso(caso);
           setTempoInicio(Date.now());
+          restaurarProgresso();
           event("iniciou_caso", {
             caso_id: caso.id,
             caso_titulo: caso.titulo,
@@ -140,6 +195,7 @@ function CasoPageContent() {
     if (casoEncontrado) {
       setCaso(casoEncontrado as any);
       setTempoInicio(Date.now());
+      restaurarProgresso();
       event("iniciou_caso", {
         caso_id: casoEncontrado.id,
         caso_titulo: casoEncontrado.titulo,
@@ -147,6 +203,15 @@ function CasoPageContent() {
       });
     }
   }, [casoId]);
+
+  // Free tier: o caso gratuito só é CONSUMIDO ao finalizar (feedback gerado).
+  // Ao finalizar, também limpamos o progresso salvo (atendimento concluído).
+  useEffect(() => {
+    if (phase === "feedback") {
+      markFreeOsceUsedOnFinish(casoId);
+      clearAttendanceProgress(casoId);
+    }
+  }, [phase, casoId]);
 
   // Timer do atendimento
   useEffect(() => {
@@ -398,15 +463,18 @@ function CasoPageContent() {
           // Fase 27: examRequests com expansão de exames agrupados + labs realmente visualizados.
           examRequests: [
             ...examesSolicitados.map((e) => ({ nome: e.nome, resultado: `${e.resultado ?? ""} ${expandExamName(e.nome, e.resultado).join(" ")}`.trim() })),
-            ...labsVisualizados.map((l) => ({ nome: l, resultado: `laudo laboratorial visualizado ${expandExamName(l).join(" ")}` })),
+            ...labsVisualizados.map((l) => ({ nome: l, resultado: labsResultados[l] || `laudo laboratorial visualizado ${expandExamName(l).join(" ")}` })),
           ],
           diagnosisAndPlan: {
             hipotesePrincipal: diagnostico.hipotesePrincipal,
-            diagnosticosDiferenciais: diagnostico.diagnosticosDisferenciais,
+            diagnosticosDiferenciais: diagnostico.diagnosticosDiferenciais,
             examesIndicados: diagnostico.examesIndicados,
             conduta: diagnostico.conduta,
           },
           soap: soap,
+          vitalSignsReassessment: vitalsReavaliacao
+            ? { realizado: true, ...vitalsReavaliacao }
+            : undefined,
           tempoAtendimento: tempoDecorrido,
           mode: modoOSCE ? "exam" : "training",
         }),
@@ -460,7 +528,7 @@ function CasoPageContent() {
           const correlacaoTexto = [
             falasAluno,
             diagnostico.hipotesePrincipal,
-            (diagnostico.diagnosticosDisferenciais ?? []).join(" "),
+            (diagnostico.diagnosticosDiferenciais ?? []).join(" "),
             soap.avaliacao,
             soap.objetivo,
           ]
@@ -486,7 +554,10 @@ function CasoPageContent() {
             anamneseTexto: transcricaoTexto,
             correlacaoTexto,
             achadosTexto,
-            diferenciaisInformados: diagnostico.diagnosticosDisferenciais ?? [],
+            diferenciaisInformados: diagnostico.diagnosticosDiferenciais ?? [],
+            vitalSignsReassessment: vitalsReavaliacao
+              ? { realizado: true, ...vitalsReavaliacao }
+              : undefined,
           });
           console.log("[FEEDBACK HB DATA] cards montados por competência:", feedbackView.rubricaAvaliacao?.length);
           console.log("[FEEDBACK HB DATA] feedback principal usando HealthBench");
@@ -523,7 +594,7 @@ function CasoPageContent() {
           sinaisVitaisSolicitados,
           sinaisVitaisDoEstudante: sinaisVitaisSolicitados ? caso?.sinaisVitaisCorretos : undefined,
           hipoteseDiagnostica: diagnostico.hipotesePrincipal,
-          diagnosticosDiferenciais: diagnostico.diagnosticosDisferenciais,
+          diagnosticosDiferenciais: diagnostico.diagnosticosDiferenciais,
           examesRealizados: examesSolicitados.map(e => ({
             nome: e.nome,
             resultado: e.resultado
@@ -634,10 +705,51 @@ function CasoPageContent() {
   });
   const [diagnostico, setDiagnostico] = useState<DiagnosticoFormulario>({
     hipotesePrincipal: "",
-    diagnosticosDisferenciais: [],
+    diagnosticosDiferenciais: [],
     examesIndicados: [],
     conduta: "",
   });
+
+  // Persistência do progresso do atendimento (durante a anamnese), para retomar
+  // de onde parou ao voltar. Pula a 1ª execução (antes de a restauração refletir
+  // no estado) para não sobrescrever o progresso salvo com valores vazios.
+  useEffect(() => {
+    if (!caso || phase !== "anamnese") return;
+    if (!progressoHidratadoRef.current) {
+      progressoHidratadoRef.current = true;
+      return;
+    }
+    saveAttendanceProgress(casoId, {
+      mensagens,
+      manobras: manobrasSolicitadas,
+      exames: examesSolicitados,
+      labs: labsVisualizados,
+      sinaisVitaisSolicitados,
+      vitalsReavaliadoMin,
+      vitalsReavaliacao,
+      ecgGerado,
+      ecgSimuladorState,
+      soap,
+      diagnostico,
+      tempoInicio,
+    });
+  }, [
+    caso,
+    phase,
+    casoId,
+    mensagens,
+    manobrasSolicitadas,
+    examesSolicitados,
+    labsVisualizados,
+    sinaisVitaisSolicitados,
+    vitalsReavaliadoMin,
+    vitalsReavaliacao,
+    ecgGerado,
+    ecgSimuladorState,
+    soap,
+    diagnostico,
+    tempoInicio,
+  ]);
 
   if (!caso) {
     return (
@@ -667,12 +779,13 @@ function CasoPageContent() {
               ...examesSolicitados,
               // Fase 27: laudos laboratoriais visualizados entram como evidência real
               // (StudentTrace, PDF e Professor IA passam a reconhecê-los).
-              ...labsVisualizados.map((l) => ({ nome: l, resultado: "laudo laboratorial visualizado" })),
+              ...labsVisualizados.map((l) => ({ nome: l, resultado: labsResultados[l] || "laudo laboratorial visualizado" })),
             ]}
             sinaisVitais={{
               solicitado: sinaisVitaisSolicitados,
               dados: sinaisVitaisSolicitados ? caso?.sinaisVitaisCorretos : undefined,
             }}
+            vitalSignsReassessment={vitalsReavaliacao ? { realizado: true, ...vitalsReavaliacao } : null}
             diagnostico={diagnostico}
             soap={soap}
           />
@@ -700,11 +813,11 @@ function CasoPageContent() {
 
   const abas = [
     { id: "paciente" as const, label: "Paciente", icon: "💬" },
+    { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "📊" },
     { id: "exame" as const, label: "Exame", icon: "🥼" },
     { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "🖼️" },
     { id: "exames" as const, label: "Exames", icon: "🧪" },
     { id: "laboratorio" as const, label: "Exames Laboratoriais", icon: "🧬" },
-    { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "📊" },
     { id: "ecg" as const, label: "ECG", icon: "📈" },
   ];
 
@@ -759,11 +872,11 @@ function CasoPageContent() {
               <div className="attendance-bar-list">
                 {[
                   { id: "paciente" as const, label: "Paciente", icon: "icon-paciente.png" },
+                  { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "icon-sinais-vitais.png" },
                   { id: "exame" as const, label: "Exame Físico", icon: "icon-exame-fisico.png" },
                   { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "icon-exames-imagem.png" },
                   { id: "exames" as const, label: "Exames", icon: "icon-exames.png" },
                   { id: "laboratorio" as const, label: "Exames Laboratoriais", icon: "exames-laboratoriais.png" },
-                  { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "icon-sinais-vitais.png" },
                   { id: "ecg" as const, label: "ECG", icon: "icon-ecg.png" },
                 ].map((item) => (
                   <button
@@ -791,7 +904,7 @@ function CasoPageContent() {
 
             {/* Chat */}
             <div className="h-[420px] flex flex-col medix-chat-slot">
-              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} />
+              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} mensagensIniciais={progressoRestauradoRef.current?.mensagens} />
             </div>
 
             {/* Conteúdo Dinâmico (Exames Solicitados / painéis) — abaixo do chat */}
@@ -840,13 +953,13 @@ function CasoPageContent() {
                   sinaisSolicitados={sinaisVitaisSolicitados}
                   onSolicitarEntrada={() => setSinaisVitaisSolicitados(true)}
                   reavaliadoMin={vitalsReavaliadoMin}
-                  onReavaliar={setVitalsReavaliadoMin}
+                  onReavaliar={handleReavaliar}
                   desabilitado={phase === "feedback"}
                 />
               </div>
             )}
 
-            {menuAtivo === "ecg" && <SimuladorECG padrao={caso?.ecg?.padrao} caso={caso} onClose={() => setMenuAtivo("paciente")} onECGGerado={handleECGGerado} />}
+            {menuAtivo === "ecg" && <SimuladorECG padrao={caso?.ecg?.padrao} caso={caso} onClose={() => setMenuAtivo("paciente")} onECGGerado={handleECGGerado} initialState={ecgSimuladorState} onStateChange={setEcgSimuladorState} />}
             </div>
           </div>
 
@@ -858,12 +971,14 @@ function CasoPageContent() {
                 onChange={setDiagnostico}
                 desabilitado={phase === "feedback"}
                 caso={caso}
+                valorInicial={progressoRestauradoRef.current?.diagnostico}
                 soapSlot={
                   <FormularioSOAP
                     onChange={setSOAP}
                     desabilitado={phase === "feedback"}
                     caso={caso}
                     as="div"
+                    valorInicial={progressoRestauradoRef.current?.soap}
                   />
                 }
               />
@@ -876,7 +991,7 @@ function CasoPageContent() {
           <div className={abaAtiva === "paciente" ? "block" : "hidden"}>
             {/* Bloco informativo pediátrico removido da tela do aluno (ver desktop). */}
             <div className="h-[calc(100dvh-200px)] min-h-80 flex flex-col">
-              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} />
+              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} mensagensIniciais={progressoRestauradoRef.current?.mensagens} />
             </div>
           </div>
           <div className={abaAtiva === "exame" ? "block" : "hidden"}>
@@ -938,12 +1053,13 @@ function CasoPageContent() {
           </div>
 
           {/* Blocos fixos no mobile (abaixo das abas dinâmicas) */}
-          <FormularioSOAP onSubmit={handleFinalizarAtendimento} onChange={setSOAP} desabilitado={phase === "feedback"} caso={caso} />
+          <FormularioSOAP onSubmit={handleFinalizarAtendimento} onChange={setSOAP} desabilitado={phase === "feedback"} caso={caso} valorInicial={progressoRestauradoRef.current?.soap} />
           <PainelDiagnostico
             onSubmit={handleFinalizarAtendimento}
             onChange={setDiagnostico}
             desabilitado={phase === "feedback"}
             caso={caso}
+            valorInicial={progressoRestauradoRef.current?.diagnostico}
           />
         </div>
       </div>

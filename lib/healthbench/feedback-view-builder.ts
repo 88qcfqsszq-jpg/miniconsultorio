@@ -164,6 +164,15 @@ export function construirFeedbackViewDeHealthBench(
     correlacaoTexto?: string;
     achadosTexto?: string;
     diferenciaisInformados?: string[];
+    vitalSignsReassessment?: {
+      realizado?: boolean;
+      minutos?: number;
+      exitVitals?: Record<string, unknown>;
+      therapeuticResponse?: string;
+      therapeuticResponseLabel?: string;
+      disposition?: string;
+      stabilityLabel?: string;
+    } | null;
   } = {}
 ): FeedbackOSCE {
   const diagnosticoEsperadoCalc =
@@ -177,6 +186,7 @@ export function construirFeedbackViewDeHealthBench(
     examesTexto: ctx.examesTexto,
     anamneseTexto: ctx.anamneseTexto,
     correlacaoTexto: ctx.correlacaoTexto,
+    vitalSignsReassessment: ctx.vitalSignsReassessment,
     achadosTexto: ctx.achadosTexto,
     diferenciaisInformados: ctx.diferenciaisInformados,
     diagnosticoEsperado: diagnosticoEsperadoCalc,

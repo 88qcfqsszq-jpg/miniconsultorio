@@ -602,11 +602,35 @@
   gap: 14px;
   position: sticky;
   top: 28px;
+  max-height: calc(100vh - 80px);
 }
 .dashboard-landing .dl-right h3 {
   margin: 0 2px 4px;
   font-size: 15px;
   color: var(--dl-ink);
+  flex: none;
+}
+.dashboard-landing .dl-right-cases {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 170, 230, 0.35) transparent;
+  padding-right: 2px;
+}
+.dashboard-landing .dl-right-cases::-webkit-scrollbar {
+  width: 4px;
+}
+.dashboard-landing .dl-right-cases::-webkit-scrollbar-thumb {
+  background: rgba(120, 170, 230, 0.35);
+  border-radius: 999px;
+}
+.dashboard-landing .dl-right-cases .dl-case {
+  text-decoration: none;
+  color: inherit;
 }
 .dashboard-landing .dl-case {
   display: flex;
@@ -686,6 +710,7 @@
   }
   .dashboard-landing .dl-right {
     position: static;
+    max-height: 600px;
   }
   .dashboard-landing .dl-metrics {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -715,6 +740,9 @@
   }
   .dashboard-landing .fresh-hero {
     height: 440px;
+  }
+  .dashboard-landing .dl-right {
+    max-height: none;
   }
 }
 

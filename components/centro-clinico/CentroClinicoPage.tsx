@@ -10,7 +10,7 @@
 // ============================================================================
 
 import { useRouter } from "next/navigation";
-import { urlOSCEAleatorio, type TipoOSCE } from "@/lib/osce/iniciar-osce";
+import { useIniciarOsce } from "@/hooks/useIniciarOsce";
 import "./CentroClinicoPage.css";
 
 function Check() {
@@ -125,14 +125,7 @@ const ERROS = [
 export default function CentroClinicoPage() {
   const router = useRouter();
 
-  const iniciarOSCE = (tipo: TipoOSCE) => {
-    const url = urlOSCEAleatorio(tipo);
-    if (!url) {
-      alert(`Nenhum caso ${tipo} disponível no momento.`);
-      return;
-    }
-    router.push(url);
-  };
+  const { iniciarOSCE, accessModal } = useIniciarOsce();
 
   return (
     <div className="centro-clinico-page">
@@ -479,6 +472,7 @@ export default function CentroClinicoPage() {
           </button>
         </div>
       </section>
+      {accessModal}
     </div>
   );
 }

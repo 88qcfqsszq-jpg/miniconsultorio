@@ -175,7 +175,7 @@ export interface FormularioSOAP {
 
 export interface DiagnosticoFormulario {
   hipotesePrincipal: string;
-  diagnosticosDisferenciais: string[];
+  diagnosticosDiferenciais: string[];
   examesIndicados: string[];
   conduta: string;
 }

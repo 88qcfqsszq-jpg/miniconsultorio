@@ -9,7 +9,7 @@
 // ============================================================================
 
 import { useRouter } from "next/navigation";
-import { urlOSCEAleatorio, type TipoOSCE } from "@/lib/osce/iniciar-osce";
+import { useIniciarOsce } from "@/hooks/useIniciarOsce";
 import "./ExamesPage.css";
 
 function Alert() {
@@ -152,14 +152,7 @@ function Bloco({ label, itens, warn }: { label: string; itens: string[]; warn?: 
 export default function ExamesPage() {
   const router = useRouter();
 
-  const iniciarOSCE = (tipo: TipoOSCE) => {
-    const url = urlOSCEAleatorio(tipo);
-    if (!url) {
-      alert(`Nenhum caso ${tipo} disponível no momento.`);
-      return;
-    }
-    router.push(url);
-  };
+  const { iniciarOSCE, accessModal } = useIniciarOsce();
 
   return (
     <div className="exames-page">
@@ -292,6 +285,7 @@ export default function ExamesPage() {
           </button>
         </div>
       </section>
+      {accessModal}
     </div>
   );
 }

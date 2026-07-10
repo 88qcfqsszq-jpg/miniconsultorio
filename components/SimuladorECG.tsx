@@ -6,7 +6,7 @@ import { validarPosicionamentoECG } from '@/lib/ecg/validarEletrodos'
 import { obterPadrao, PADROES_ECG } from '@/lib/ecg/padroesECG'
 import { generateECG } from '@/src/services/ecgGenerator'
 import { getPresetOptionsFlat, getPresetById } from '@/src/services/ecgGenerator/presets'
-import { getECGExpectationForCaseTheme, getDefaultECGPresetByAgeGroup } from '@/lib/ecg/ecg-case-mapping'
+import { resolveECGPresetForCase } from '@/lib/ecg/ecg-case-mapping'
 import { getPatientImage, getElectrodeProfileForCase } from '@/lib/paciente/get-patient-image'
 import type { RespostaGeracaoECG } from '@/src/services/ecgGenerator'
 import type { ECGGerado, Caso } from '@/lib/types'
@@ -15,71 +15,48 @@ import ECGReport from './ECGReport'
 
 const LEADS: ECGLead[] = ['V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'RA', 'LA', 'RL', 'LL']
 
+export interface ECGSimuladorState {
+  eletrodos: ECGLeadPosition[];
+  padraoSelecionado: string;
+  ecgGerado: boolean;
+  ecgDadosGerados: RespostaGeracaoECG | null;
+  validacao: any;
+}
+
 interface SimuladorECGProps {
   padrao?: string
   caso?: Caso // Novo: caso clínico para usar preset esperado
   onClose?: () => void
   onECGGerado?: (ecg: ECGGerado) => void
+  initialState?: ECGSimuladorState | null
+  onStateChange?: (state: ECGSimuladorState) => void
 }
 
-export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, onClose, onECGGerado }: SimuladorECGProps) {
-  // Determinar preset a usar: caso esperado → fallback → padrão
-  // IMPORTANTE: Usar função pura fora do render para evitar erros de inicialização
-  const determineInitialPreset = (): string => {
+export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, onClose, onECGGerado, initialState, onStateChange }: SimuladorECGProps) {
+  // Resolvedor CENTRAL: escolhe o preset por diagnóstico/idade e traz um laudo
+  // contextual quando o ECG é normal mas não exclui o diagnóstico cardíaco.
+  const ecgResolucao = (() => {
     try {
-      // 1. Se caso tem expectativa de ECG com presetId, usar esse
-      if (caso?.esperadosExames?.ecg?.presetId) {
-        return caso.esperadosExames.ecg.presetId
-      }
-
-      // 2. Se caso tem tema, buscar preset por tema
-      if (caso?.tema) {
-        try {
-          const expectativa = getECGExpectationForCaseTheme(caso.tema)
-          if (expectativa?.presetId) {
-            return expectativa.presetId
-          }
-        } catch (e) {
-          console.warn('[SimuladorECG] Erro ao buscar expectativa por tema:', e)
-        }
-      }
-
-      // 3. Fallback por idade do paciente
-      if (caso?.paciente?.dadosPediatricos?.faixaEtaria) {
-        return getDefaultECGPresetByAgeGroup(caso.paciente.dadosPediatricos.faixaEtaria)
-      }
-
-      // 4. Fallback por tipo de paciente
-      if (caso?.tipoPaciente === 'pediatrico' && caso?.paciente?.idade) {
-        if (caso.paciente.idade < 1) return 'normal_neonato'
-        if (caso.paciente.idade < 3) return 'normal_lactente'
-        if (caso.paciente.idade < 6) return 'normal_pre_escolar'
-        if (caso.paciente.idade < 12) return 'normal_escolar'
-        return 'normal_adolescente'
-      }
-
-      // 5. Fallback final
-      return padrao || 'normal_adulto'
+      return resolveECGPresetForCase(caso)
     } catch (e) {
-      console.error('[SimuladorECG] Erro ao determinar preset inicial:', e)
-      return padrao || 'normal_adulto'
+      console.error('[SimuladorECG] Erro ao resolver ECG do caso:', e)
+      return { presetId: padrao || 'normal_adulto', origem: 'idade' as const }
     }
-  }
+  })()
 
-  const [eletrodos, setEletrodos] = useState<ECGLeadPosition[]>(() =>
-    LEADS.map((lead) => ({
-      lead,
-      x: 0,
-      y: 0,
-      isPlaced: false,
-    }))
+  const determineInitialPreset = (): string => ecgResolucao.presetId || padrao || 'normal_adulto'
+
+  const [eletrodos, setEletrodos] = useState<ECGLeadPosition[]>(
+    () => initialState?.eletrodos ?? LEADS.map((lead) => ({ lead, x: 0, y: 0, isPlaced: false }))
   )
 
   const [eletrodoDragging, setEletrodoDragging] = useState<ECGLead | null>(null)
-  const [validacao, setValidacao] = useState<any>(null)
-  const [ecgGerado, setEcgGerado] = useState(false)
-  const [padraoSelecionado, setPatraoSelecionado] = useState(determineInitialPreset())
-  const [ecgDadosGerados, setEcgDadosGerados] = useState<RespostaGeracaoECG | null>(null)
+  const eletrodoDraggingRef = useRef<ECGLead | null>(null)
+  const [ghostPos, setGhostPos] = useState<{ x: number; y: number } | null>(null)
+  const [validacao, setValidacao] = useState<any>(() => initialState?.validacao ?? null)
+  const [ecgGerado, setEcgGerado] = useState<boolean>(() => initialState?.ecgGerado ?? false)
+  const [padraoSelecionado, setPatraoSelecionado] = useState<string>(() => initialState?.padraoSelecionado ?? determineInitialPreset())
+  const [ecgDadosGerados, setEcgDadosGerados] = useState<RespostaGeracaoECG | null>(() => initialState?.ecgDadosGerados ?? null)
   const [erroGerador, setErroGerador] = useState<string | null>(null)
 
   // Obter imagem exata do paciente (usa a mesma função do exame físico pediátrico)
@@ -94,6 +71,8 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
   }, [caso, patientImage])
 
   const containerRef = useRef<HTMLDivElement>(null)
+  const imgRef = useRef<HTMLImageElement>(null)
+  const [imageRect, setImageRect] = useState<{ left: number; top: number; width: number; height: number } | null>(null)
 
   // Tentar obter padrão do novo sistema primeiro, depois fallback para o antigo
   const padraoAntigo = obterPadrao(padraoSelecionado)
@@ -111,38 +90,24 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
     imagem: patientImage.imageSrc,
   }
 
-  function handleDragStart(lead: ECGLead, e: React.DragEvent) {
-    e.dataTransfer.effectAllowed = 'move'
+  function computeImageRect() {
+    if (!containerRef.current || !imgRef.current) return
+    const cW = containerRef.current.clientWidth
+    const cH = containerRef.current.clientHeight
+    const nW = imgRef.current.naturalWidth
+    const nH = imgRef.current.naturalHeight
+    if (!nW || !nH) return
+    const scale = Math.min(cW / nW, cH / nH)
+    const rW = nW * scale
+    const rH = nH * scale
+    setImageRect({ left: (cW - rW) / 2, top: (cH - rH) / 2, width: rW, height: rH })
+  }
+
+  function handlePointerDown(lead: ECGLead, e: React.PointerEvent) {
+    e.preventDefault()
+    eletrodoDraggingRef.current = lead
     setEletrodoDragging(lead)
-  }
-
-  function handleDragOver(e: React.DragEvent) {
-    e.preventDefault()
-    e.dataTransfer.dropEffect = 'move'
-  }
-
-  function handleDrop(e: React.DragEvent) {
-    e.preventDefault()
-
-    if (!containerRef.current || !eletrodoDragging) return
-
-    const rect = containerRef.current.getBoundingClientRect()
-    const x = ((e.clientX - rect.left) / rect.width) * 100
-    const y = ((e.clientY - rect.top) / rect.height) * 100
-
-    // Garantir que está dentro dos limites
-    const xFinal = Math.max(0, Math.min(100, x))
-    const yFinal = Math.max(0, Math.min(100, y))
-
-    setEletrodos((prev) =>
-      prev.map((el) =>
-        el.lead === eletrodoDragging
-          ? { ...el, x: xFinal, y: yFinal, isPlaced: true }
-          : el
-      )
-    )
-
-    setEletrodoDragging(null)
+    setGhostPos({ x: e.clientX, y: e.clientY })
   }
 
   function gerarECG() {
@@ -181,7 +146,12 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
             resultado: ecgData,
             interpretacao: ecgData.interpretation,
             pontosEnsino: ecgData.teachingPoints,
-            aviso: ecgData.metadata?.avisoEducacional || 'Traçado sintético gerado para fins educacionais. Não utilizar para diagnóstico clínico real.',
+            aviso: [
+              ecgResolucao.laudoContextual,
+              ecgData.metadata?.avisoEducacional || 'Traçado sintético gerado para fins educacionais. Não utilizar para diagnóstico clínico real.',
+            ]
+              .filter(Boolean)
+              .join(' '),
             metadata: ecgData.metadata,
           }
           onECGGerado(ecgGerado)
@@ -287,9 +257,62 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [onClose])
 
+  // Sincroniza estado relevante com o pai para sobreviver a troca de abas.
+  // Lazy inits acima garantem que o pai NÃO reinicia o estado ao re-renderizar.
+  useEffect(() => {
+    onStateChange?.({ eletrodos, padraoSelecionado, ecgGerado, ecgDadosGerados, validacao })
+  }, [eletrodos, padraoSelecionado, ecgGerado, ecgDadosGerados, validacao, onStateChange])
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    const ro = new ResizeObserver(() => computeImageRect())
+    ro.observe(containerRef.current)
+    return () => ro.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!eletrodoDragging) return
+
+    function onPointerMove(e: PointerEvent) {
+      setGhostPos({ x: e.clientX, y: e.clientY })
+    }
+
+    function onPointerUp(e: PointerEvent) {
+      const lead = eletrodoDraggingRef.current
+      setEletrodoDragging(null)
+      setGhostPos(null)
+      eletrodoDraggingRef.current = null
+
+      if (!lead || !containerRef.current || !imageRect) return
+
+      const rect = containerRef.current.getBoundingClientRect()
+      // Cancela se o ponteiro saiu do container por completo
+      if (e.clientX < rect.left || e.clientX > rect.right ||
+          e.clientY < rect.top || e.clientY > rect.bottom) return
+
+      const xPx = e.clientX - rect.left - imageRect.left
+      const yPx = e.clientY - rect.top - imageRect.top
+      const xFinal = Math.max(0, Math.min(100, (xPx / imageRect.width) * 100))
+      const yFinal = Math.max(0, Math.min(100, (yPx / imageRect.height) * 100))
+
+      setEletrodos((prev) =>
+        prev.map((el) =>
+          el.lead === lead ? { ...el, x: xFinal, y: yFinal, isPlaced: true } : el
+        )
+      )
+    }
+
+    window.addEventListener('pointermove', onPointerMove)
+    window.addEventListener('pointerup', onPointerUp)
+    return () => {
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointerup', onPointerUp)
+    }
+  }, [eletrodoDragging, imageRect])
+
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 lg:pl-[120px]">
+      <div className="bg-white rounded-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl max-w-[calc(100vw-2rem)] lg:max-w-[min(72rem,calc(100vw-120px-2rem))]">
         {/* Header */}
         <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 flex justify-between items-center z-10">
           <div>
@@ -343,71 +366,87 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
                 <h3 className="text-lg font-bold text-slate-800">Paciente Virtual</h3>
                 <div
                   ref={containerRef}
-                  onDragOver={handleDragOver}
-                  onDrop={handleDrop}
-                  className="relative bg-slate-50 border-2 border-slate-200 rounded-lg overflow-hidden cursor-grab active:cursor-grabbing"
-                  style={{ aspectRatio: '3/4', minHeight: '480px' }}
+                  className="relative bg-slate-50 border-2 border-slate-200 rounded-lg overflow-hidden"
+                  style={{ aspectRatio: '3/4', maxHeight: 'calc(90vh - 260px)', minHeight: '300px' }}
                 >
                   {/* Imagem do paciente — idêntica ao exame físico */}
                   <img
+                    ref={imgRef}
                     src={patientImage.imageSrc}
                     alt="Paciente"
-                    className="w-full h-full object-contain p-2"
+                    className="w-full h-full object-contain"
                     draggable={false}
+                    onLoad={computeImageRect}
                   />
 
-                  {/* SVG de cabos saindo dos eletrodos até a máquina (efeito visual) */}
-                  <svg
-                    className="absolute inset-0 w-full h-full pointer-events-none"
-                    style={{ zIndex: 5 }}
-                  >
-                    {eletrodos
-                      .filter((el) => el.isPlaced)
-                      .map((el) => (
-                        <line
-                          key={`cable-${el.lead}`}
-                          x1={`${el.x}%`}
-                          y1={`${el.y}%`}
-                          x2="95%"
-                          y2="95%"
-                          stroke="#999"
-                          strokeWidth="1"
-                          opacity="0.6"
-                          strokeDasharray="3,3"
-                        />
-                      ))}
-                  </svg>
+                  {/* Overlay posicionado exatamente sobre a área real da imagem (após object-contain) */}
+                  {imageRect && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        left: imageRect.left,
+                        top: imageRect.top,
+                        width: imageRect.width,
+                        height: imageRect.height,
+                        pointerEvents: 'none',
+                      }}
+                    >
+                      {/* SVG de cabos saindo dos eletrodos até a máquina (efeito visual) */}
+                      <svg
+                        className="absolute inset-0 w-full h-full pointer-events-none"
+                        style={{ zIndex: 5 }}
+                      >
+                        {eletrodos
+                          .filter((el) => el.isPlaced)
+                          .map((el) => (
+                            <line
+                              key={`cable-${el.lead}`}
+                              x1={`${el.x}%`}
+                              y1={`${el.y}%`}
+                              x2="95%"
+                              y2="95%"
+                              stroke="#999"
+                              strokeWidth="1"
+                              opacity="0.6"
+                              strokeDasharray="3,3"
+                            />
+                          ))}
+                      </svg>
 
-                  {/* Eletrodos posicionados */}
-                  {eletrodos
-                    .filter((el) => el.isPlaced)
-                    .map((el) => {
-                      const bgColor = getCorEletrodoPosicionado(el.lead)
-                      let textColor = 'text-white'
-                      if (el.lead === 'LA') {
-                        textColor = 'text-yellow-900'
-                      } else if (el.lead === 'LL') {
-                        textColor = 'text-green-900'
-                      }
+                      {/* Eletrodos posicionados: left/top em % do overlay = % da imagem real */}
+                      {eletrodos
+                        .filter((el) => el.isPlaced)
+                        .map((el) => {
+                          const bgColor = getCorEletrodoPosicionado(el.lead)
+                          let textColor = 'text-white'
+                          if (el.lead === 'LA') {
+                            textColor = 'text-yellow-900'
+                          } else if (el.lead === 'LL') {
+                            textColor = 'text-green-900'
+                          }
 
-                      return (
-                        <div
-                          key={el.lead}
-                          style={{
-                            position: 'absolute',
-                            left: `${el.x}%`,
-                            top: `${el.y}%`,
-                            transform: 'translate(-50%, -50%)',
-                          }}
-                          className={`w-7 h-7 ${bgColor} rounded-full border-2 flex items-center justify-center ${textColor} text-[10px] font-bold cursor-move hover:scale-110 transition-transform shadow-lg z-10`}
-                          draggable
-                          onDragStart={(e) => handleDragStart(el.lead, e)}
-                          title={`${el.lead}`}
-                        >
-                          {el.lead}
-                        </div>
-                      )
-                    })}
+                          return (
+                            <div
+                              key={el.lead}
+                              style={{
+                                position: 'absolute',
+                                left: `${el.x}%`,
+                                top: `${el.y}%`,
+                                transform: 'translate(-50%, -50%)',
+                                pointerEvents: 'auto',
+                                touchAction: 'none',
+                                userSelect: 'none',
+                              }}
+                              className={`w-5 h-5 ${bgColor} rounded-full border-2 flex items-center justify-center ${textColor} text-[8px] font-bold cursor-move hover:scale-110 transition-transform shadow-md z-10`}
+                              onPointerDown={(e) => handlePointerDown(el.lead, e)}
+                              title={`${el.lead}`}
+                            >
+                              {el.lead}
+                            </div>
+                          )
+                        })}
+                    </div>
+                  )}
                 </div>
 
                 <div className="text-xs text-slate-600 bg-blue-50 border border-blue-200 rounded p-2">
@@ -433,8 +472,8 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
                     return (
                       <div
                         key={lead}
-                        draggable
-                        onDragStart={(e) => handleDragStart(lead as ECGLead, e)}
+                        onPointerDown={(e) => handlePointerDown(lead as ECGLead, e)}
+                        style={{ touchAction: 'none', userSelect: 'none' }}
                         className={`p-2 rounded text-xs font-bold text-center cursor-move transition-all ${
                           isPlaced
                             ? 'bg-green-100 border border-green-400 text-green-800'
@@ -461,8 +500,8 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
                     return (
                       <div
                         key={lead}
-                        draggable
-                        onDragStart={(e) => handleDragStart(lead as ECGLead, e)}
+                        onPointerDown={(e) => handlePointerDown(lead as ECGLead, e)}
+                        style={{ touchAction: 'none', userSelect: 'none' }}
                         className={`p-2 rounded text-xs font-bold text-center cursor-move transition-all ${getCorEletrodo(lead, isPlaced || false)}`}
                       >
                         {lead}
@@ -604,6 +643,23 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
           )}
         </div>
       </div>
+      {/* Ghost visual que segue o ponteiro durante o arraste */}
+      {eletrodoDragging && ghostPos && (
+        <div
+          style={{
+            position: 'fixed',
+            left: ghostPos.x,
+            top: ghostPos.y,
+            transform: 'translate(-50%, -50%)',
+            pointerEvents: 'none',
+            zIndex: 9999,
+            color: eletrodoDragging === 'LA' ? '#713f12' : eletrodoDragging === 'LL' ? '#14532d' : 'white',
+          }}
+          className={`w-5 h-5 ${getCorEletrodoPosicionado(eletrodoDragging)} rounded-full border-2 flex items-center justify-center text-[8px] font-bold shadow-lg opacity-90`}
+        >
+          {eletrodoDragging}
+        </div>
+      )}
     </div>
   )
 }

@@ -8,6 +8,8 @@ interface ChatPacienteProps {
   casoId: string;
   caso?: Caso; // Opcional: caso completo para contexto pediátrico
   onMensagensChange?: (mensagens: MensagemChat[]) => void;
+  /** Mensagens para retomar um atendimento em andamento (progresso salvo). */
+  mensagensIniciais?: MensagemChat[];
 }
 
 type SpeechRecognitionType = any;
@@ -17,10 +19,14 @@ export default function ChatPaciente({
   casoId,
   caso,
   onMensagensChange,
+  mensagensIniciais,
 }: ChatPacienteProps) {
   // Chat começa vazio - médico deve iniciar a conversa
   // Não há mensagem inicial do paciente para evitar spoiler de sintomas
-  const [mensagens, setMensagens] = useState<MensagemChat[]>([]);
+  // (ou retoma o progresso salvo, se houver).
+  const [mensagens, setMensagens] = useState<MensagemChat[]>(
+    () => mensagensIniciais ?? []
+  );
 
   const [input, setInput] = useState("");
   const [carregando, setCarregando] = useState(false);

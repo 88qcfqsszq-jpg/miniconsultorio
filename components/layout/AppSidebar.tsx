@@ -12,9 +12,11 @@
 // ============================================================================
 
 import { usePathname, useRouter } from "next/navigation";
-import { urlOSCEAleatorio, type TipoOSCE } from "@/lib/osce/iniciar-osce";
+import { type TipoOSCE } from "@/lib/osce/iniciar-osce";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { displayName, initials } from "@/lib/userProfile";
+import { useIniciarOsce } from "@/hooks/useIniciarOsce";
+import { setLoggedIn } from "@/lib/accessControl";
 
 const ICON_BASE = "/assets/dashboard/sidebar-icons";
 
@@ -61,29 +63,23 @@ export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) 
   const pathname = usePathname() || "";
   const router = useRouter();
 
-  const iniciarOSCE = (tipo: TipoOSCE) => {
-    const url = urlOSCEAleatorio(tipo);
-    if (!url) {
-      alert(`Nenhum caso ${tipo} disponível no momento.`);
-      return;
-    }
-    onNavigate?.();
-    router.push(url);
-  };
 
   const irPara = (href: string) => {
     onNavigate?.();
     router.push(href);
   };
 
-  // Logout: usa navegação existente (sem sistema de auth próprio, redireciona à home).
+  // Logout: encerra a sessão simulada e volta à home.
   const sair = () => {
+    setLoggedIn(false);
     onNavigate?.();
     router.push("/");
   };
 
   // Fonte única de perfil (mesma da top bar e de /meu-perfil).
   const { profile } = useUserProfile();
+  // Porta única de início de OSCE (regras de free tier centralizadas).
+  const { iniciarOSCE, accessModal } = useIniciarOsce(onNavigate);
   const nomeExibido = displayName(profile);
   const iniciais = initials(profile);
   const foto = profile.avatarDataUrl;
@@ -104,8 +100,16 @@ export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) 
         <span className="app-brand-name">{PLATFORM_NAME}</span>
       </div>
 
-      {/* Avatar/foto do usuário (abaixo da logo) + nome (só expandida) */}
-      <div className="app-sidebar-user">
+      {/* Avatar/foto do usuário (abaixo da logo) + nome (só expandida).
+          Clicável → Meu Perfil (login/primeiro acesso se não logado). */}
+      <div
+        className="app-sidebar-user"
+        role="button"
+        tabIndex={0}
+        onClick={() => irPara("/meu-perfil")}
+        onKeyDown={(e) => { if (e.key === "Enter") irPara("/meu-perfil"); }}
+        style={{ cursor: "pointer" }}
+      >
         <div className="app-user-avatar" aria-hidden={foto ? undefined : true}>
           {foto ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -197,6 +201,8 @@ export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) 
         </span>
         <span className="app-nav-label">Sair</span>
       </button>
+
+      {accessModal}
     </aside>
   );
 }

@@ -17,6 +17,26 @@ function texto(v: unknown): string {
   return String(v).trim();
 }
 
+/** Converte vitais de saída (VitalSet serializado) numa frase legível para o grader. */
+function descreverVitaisReavaliacao(ev: Record<string, unknown> | undefined): string {
+  if (!ev) return "";
+  const partes: string[] = [];
+  const paSys = ev.paSys ?? ev.pressaoArterial;
+  const paDia = ev.paDia;
+  if (paSys != null) partes.push(`PA ${paSys}${paDia != null ? `/${paDia}` : ""} mmHg`);
+  const fc = ev.fc ?? ev.frequenciaCardiaca;
+  if (fc != null) partes.push(`FC ${fc} bpm`);
+  const fr = ev.fr ?? ev.frequenciaRespiratoria;
+  if (fr != null) partes.push(`FR ${fr} irpm`);
+  const temp = ev.temp ?? ev.temperatura;
+  if (temp != null) partes.push(`Temp ${Number(temp).toFixed(1)}°C`);
+  const spo2 = ev.spo2 ?? ev.saturacaoO2 ?? ev.saturacao;
+  if (spo2 != null) partes.push(`SpO₂ ${spo2}%`);
+  const glicemia = ev.glicemia;
+  if (glicemia != null) partes.push(`Glicemia ${glicemia}`);
+  return partes.join(", ");
+}
+
 /** Converte os sinais vitais (objeto) numa frase legível para o grader. */
 function descreverSinaisVitais(dados: Record<string, unknown> | undefined): string {
   if (!dados) return "";
@@ -89,6 +109,45 @@ export function normalizarTranscript(
       role: "system_event",
       content: desc ? `Sinais vitais: ${desc}.` : "Sinais vitais coletados.",
     });
+  }
+
+  // 3b. Reavaliação de sinais vitais (sinais de saída pós-intervenção)
+  if (input.vitalSignsReassessment?.realizado) {
+    const r = input.vitalSignsReassessment;
+    timeline.push({
+      role: "student_action",
+      content: `Aluno reavaliou sinais vitais após ${r.minutos ?? "?"} minutos de observação/tratamento.`,
+    });
+    const exitDesc = descreverVitaisReavaliacao(r.exitVitals);
+    if (exitDesc) {
+      timeline.push({
+        role: "system_event",
+        content: `Sinais vitais de saída (reavaliação após ${r.minutos ?? "?"} min): ${exitDesc}.`,
+      });
+    }
+    if (r.therapeuticResponseLabel) {
+      timeline.push({
+        role: "system_event",
+        content: `Resposta terapêutica observada: ${r.therapeuticResponseLabel}.`,
+      });
+    }
+    if (r.disposition) {
+      const disposicaoLabel: Record<string, string> = {
+        alta_segura: "Alta com segurança indicada",
+        observacao: "Observação/monitorização contínua necessária",
+        encaminhamento_hospitalar: "Encaminhamento hospitalar indicado",
+      };
+      timeline.push({
+        role: "system_event",
+        content: `Decisão clínica indicada pela reavaliação: ${disposicaoLabel[r.disposition] ?? r.disposition.replace(/_/g, " ")}.`,
+      });
+    }
+    if (r.stabilityLabel) {
+      timeline.push({
+        role: "system_event",
+        content: `Estabilidade clínica após tratamento: ${r.stabilityLabel}.`,
+      });
+    }
   }
 
   // 4. Exames complementares

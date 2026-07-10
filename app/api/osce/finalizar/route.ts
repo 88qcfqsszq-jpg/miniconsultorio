@@ -34,6 +34,9 @@ async function rodarLegado(
 ): Promise<any | null> {
   try {
     const dp = input.diagnosisAndPlan ?? {};
+    // Fallback defensivo: aceita ambas as nomenclaturas (com e sem "s")
+    // para compatibilidade com dados antigos durante a transição.
+    const diferenciais = dp.diagnosticosDiferenciais ?? (dp as any).diagnosticosDisferenciais ?? [];
     const payloadLegado = {
       casoId: input.casoId,
       historico: input.chatMessages ?? [],
@@ -47,7 +50,7 @@ async function rodarLegado(
         ? input.vitalSignsEvents?.dados
         : undefined,
       hipoteseDiagnostica: dp.hipotesePrincipal,
-      diagnosticosDiferenciais: dp.diagnosticosDiferenciais ?? [],
+      diagnosticosDiferenciais: diferenciais,
       examesRealizados: (input.examRequests ?? []).map((e) => ({
         nome: e.nome,
         resultado: e.resultado,

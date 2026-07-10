@@ -170,6 +170,11 @@ export const casosV2 = [
 export const casosAdultos = casosAdultosV2;
 export const casosPediatricos = casosPediatricosV3;
 
+// Aliases centrais (nomes explícitos) — lista completa da plataforma.
+export const todosCasosAdultos = casosAdultosV2;
+export const todosCasosPediatricos = casosPediatricosV3;
+export const todosCasosV2 = casosV2;
+
 // Compatibilidade com imports default antigos.
 export default casosV2;
 

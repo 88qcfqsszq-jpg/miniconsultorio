@@ -12,6 +12,7 @@ import {
   obterAchadoExameFisicoPed,
   converterAchadoParaSistema,
 } from '@/lib/pediatria/achados-exame-fisico';
+import { montarManobraExameFisico, sistemaParaCategoria } from '@/lib/osce/physical-exam-mapper';
 import ProcedimentosPediatricos from './ProcedimentosPediatricos';
 import ExameFisicoPediatricoVisual from './ExameFisicoPediatricoVisual';
 import ExameFisicoPediatricoDefinitivo from './ExameFisicoPediatricoDefinitivo';
@@ -46,13 +47,22 @@ export default function ExameFisicoPediatrico({
 
   const handleRealizarAcao = useCallback((acaoId: string) => {
     setErro(null);
-    const achado = obterAchadoExameFisicoPed(caso.id, acaoId, caso);
-    if (!achado) {
-      setErro('Achado não disponível para este caso ainda.');
-      return;
-    }
-    const achadoGeral = converterAchadoParaSistema(achado);
-    onAchadoEncontrado(achadoGeral);
+    const acao = ACOES_EXAME_FISICO_PEDIATRICO.find((a) => a.id === acaoId);
+    const titulo = acao?.titulo || acaoId;
+    const sistema = acao?.sistema;
+    // Toda manobra realizada É registrada: com achado quando existir, ou como
+    // "exame realizado sem achado relevante" quando o caso não configurar um.
+    const achadoBruto = obterAchadoExameFisicoPed(caso.id, acaoId, caso);
+    const achadoConvertido = achadoBruto ? converterAchadoParaSistema(achadoBruto) : null;
+    const manobra = montarManobraExameFisico({
+      acaoId,
+      titulo,
+      sistema,
+      achado: achadoConvertido
+        ? { ...achadoConvertido, normal: (achadoBruto as any)?.normal === true }
+        : null,
+    });
+    onAchadoEncontrado(manobra);
   }, [caso, onAchadoEncontrado]);
 
   const handleRegistrarAchadoDefinitivo = useCallback((achado: AchadoExamePediatrico) => {
@@ -63,7 +73,9 @@ export default function ExameFisicoPediatrico({
       titulo: achado.titulo,
       descricao: achado.descricao,
       acaoRealizada: achado.titulo,
-      categoria: 'exame_fisico_visual',
+      // Categoria padrão (lida pelo relatório/evidence-mapper). Mantemos a
+      // origem visual em `origem`/`regiao`.
+      categoria: sistemaParaCategoria(achado.sistemaClinico || achado.regiaoId),
       casoId: achado.casoId,
       origem: achado.origem,
       regiao: achado.regiaoId,
@@ -71,6 +83,9 @@ export default function ExameFisicoPediatrico({
       normal: achado.normal,
       campo_original: achado.campo_original,
       sistemaClinico: achado.sistemaClinico,
+      // Campos padrão para relatório/feedback:
+      textDigitado: achado.titulo,
+      resposta: achado.descricao,
     };
     onAchadoEncontrado(achadoGeral);
   }, [onAchadoEncontrado]);
