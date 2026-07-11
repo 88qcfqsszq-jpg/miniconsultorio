@@ -55,12 +55,22 @@ export function recomputarClinica(s: PatientState): ClinicalStatus {
         : spo2 < 92
           ? "dispneico, em estabilização"
           : "estável, respondendo ao tratamento";
+    // Perfusão: lentificada quando há tensão alta, hipoxemia grave ou PA limítrofe/baixa.
+    // Melhora gradual após descompressão + estabilização.
+    const perfusaoPn: string =
+      tensao >= 70 || spo2 < 90 || paSys <= 90
+        ? "lentificada"
+        : s.descomprimido && spo2 >= 92 && paSys >= 100
+          ? s.drenado
+            ? "preservada"
+            : "melhorando"
+          : "reduzida";
     return {
       estadoGeral: estadoPn,
       trabalhoRespiratorio: trabalho,
       ausculta: auscultaPn,
       fala: fr > 30 || spo2 < 90 ? "frases entrecortadas" : "frases completas",
-      perfusao: paSys < 90 ? "lentificada" : "preservada",
+      perfusao: perfusaoPn,
     };
   }
 
