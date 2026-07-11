@@ -125,6 +125,28 @@ for (const caso of DYNAMIC_CASES) {
       ok(Math.abs(soma - fb.nota) < 0.001, `Soma dos domínios = nota (${soma} = ${fb.nota})`);
     }
 
+    // 5b. Exames não prioritários antes da descompressão (só casos que a exigem)
+    if (caso.intervencoes.intervencoesEssenciais.includes("descompressao_toracica") && rubrica) {
+      secao("Exames não prioritários antes da descompressão");
+      const fbExameAntes = gerarFeedbackDinamico(rubrica, {
+        comunicacaoItens: caso.comunicacao.itensEsperados,
+        anamneseItens: checklistAnamnese(caso),
+        exameItens: caso.exameFisico.manobrasObrigatorias,
+        examesSolicitados: ["Gasometria", ...caso.exames.examesEssenciais],
+        intervencoesAplicadas: cfg.correta,
+        estadoInicial: inicial,
+        estadoFinal: st,
+        eventos: [],
+        erroCriticoRegistrado: false,
+        examesNaoPrioritariosAntesDescompressao: true,
+      });
+      const naoAtrasouComExame = fbExameAntes.dominios
+        .find((d) => d.nome === "Exames e monitorização")
+        ?.itens.find((i) => /não atrasou/i.test(i.descricao))?.cumprido;
+      ok(naoAtrasouComExame === false, "Exame não essencial antes da descompressão: 'não atrasou' NÃO pontua");
+      ok(fbExameAntes.nota < 20, `Nota < 20 com exame antecipado (${fbExameAntes.nota}/${fbExameAntes.total})`);
+    }
+
     // 6. Sequência sem tratamento / errada
     secao("Sequência sem tratamento / errada (piora esperada)");
     let stSem: PatientState = inicial;

@@ -102,6 +102,11 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
   const [feedback, setFeedback] = useState<DynamicFeedbackResult | null>(null);
   const finalizado = feedback !== null;
 
+  // Rastreia se o caso exige descompressão como intervenção essencial.
+  const casoExigeDescompressao = caso.intervencoes.intervencoesEssenciais.includes("descompressao_toracica");
+  const [descompressaoAplicada, setDescompressaoAplicada] = useState(false);
+  const [examesNaoPrioritariosAntesDescompressao, setExamesNaoPrioritariosAntesDescompressao] = useState(false);
+
   // Responsividade sem CSS global: empilha as colunas em telas estreitas.
   const [narrow, setNarrow] = useState(false);
   useEffect(() => {
@@ -128,11 +133,17 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
     setUltimaTendencia(r.tendencia);
     setIntervencoesAplicadas((prev) => [...prev, id]);
     if (r.erroCritico) setErroCritico(true);
+    if (id === "descompressao_toracica") setDescompressaoAplicada(true);
   }
 
   function solicitarExame(nome: string) {
     if (finalizado) return;
     if (!examesSolicitados.includes(nome)) {
+      // Exame essencial (oximetria, monitorização, PA seriada) não atrasa a descompressão.
+      const ehEssencial = caso.exames.examesEssenciais.includes(nome);
+      const alertaPrioridade = casoExigeDescompressao && !descompressaoAplicada && !ehEssencial;
+      if (alertaPrioridade) setExamesNaoPrioritariosAntesDescompressao(true);
+
       setExamesSolicitados((prev) => [...prev, nome]);
       const t = tempo + 2;
       setTempo(t);
@@ -142,8 +153,10 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
           id: `exame-${t}-${nome}`,
           tMin: t,
           titulo: `Exame solicitado: ${nome}`,
-          detalhe: "Resultado incorporado à monitorização.",
-          tendencia: "estabilidade",
+          detalhe: alertaPrioridade
+            ? "⚠️ Exame solicitado antes da descompressão — não deve atrasar a intervenção salvadora."
+            : "Resultado incorporado à monitorização.",
+          tendencia: alertaPrioridade ? "piora" : "estabilidade",
           tipo: "exame",
         },
       ]);
@@ -162,6 +175,7 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
       estadoFinal: estado,
       eventos,
       erroCriticoRegistrado: erroCritico,
+      examesNaoPrioritariosAntesDescompressao,
     });
     setEventos((prev) => [
       ...prev,

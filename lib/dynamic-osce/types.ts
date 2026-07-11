@@ -346,6 +346,8 @@ export interface RubricEvalContext {
   estadoFinal: PatientState;
   eventos: TimelineEvent[];
   erroCriticoRegistrado: boolean;
+  /** Exames não essenciais solicitados ANTES da intervenção salvadora (descompressão). */
+  examesNaoPrioritariosAntesDescompressao?: boolean;
 }
 
 export interface DynamicFeedbackCriterion {

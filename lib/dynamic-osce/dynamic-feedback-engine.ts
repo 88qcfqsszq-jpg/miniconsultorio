@@ -81,7 +81,10 @@ const PREDICADOS: Record<string, (ctx: RubricEvalContext) => boolean> = {
 
   "pn-exm-oximetria": (c) => inclui(c.examesSolicitados, "oximetria") || tem(c.intervencoesAplicadas, "oxigenio_alto_fluxo") || tem(c.intervencoesAplicadas, "monitorizacao"),
   "pn-exm-monitor": (c) => inclui(c.examesSolicitados, "monitor") || tem(c.intervencoesAplicadas, "monitorizacao") || tem(c.intervencoesAplicadas, "reavaliar"),
-  "pn-exm-nao-atrasou": (c) => !c.erroCriticoRegistrado && tem(c.intervencoesAplicadas, "descompressao_toracica"),
+  "pn-exm-nao-atrasou": (c) =>
+    !c.erroCriticoRegistrado &&
+    tem(c.intervencoesAplicadas, "descompressao_toracica") &&
+    !c.examesNaoPrioritariosAntesDescompressao,
 
   "pn-rac-reconhece": (c) => tem(c.intervencoesAplicadas, "descompressao_toracica"),
   "pn-rac-gravidade": (c) =>
