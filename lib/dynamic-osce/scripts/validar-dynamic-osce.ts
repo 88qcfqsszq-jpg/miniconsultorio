@@ -16,12 +16,13 @@ import { linkRubrica } from "../dynamic-rubric-link";
 import { applyIntervention } from "../dynamic-state-engine";
 import { gerarFeedbackDinamico } from "../dynamic-feedback-engine";
 import { checklistAnamnese } from "../dynamic-case-contract";
+import { avaliarAtrasoTerapiaSalvadora } from "../dynamic-therapeutic-delay-evaluator";
 import { getPulseCapability } from "../pulse/pulse-capability-map";
 import { getPulseAction } from "../pulse/pulse-action-map";
 import { VITAIS_CENTRAIS_MEDIX, medixFieldsCobertos } from "../pulse/pulse-output-map";
 import { getPulseScenarioTemplate } from "../pulse/pulse-scenario-templates";
 import { PULSE_EXECUTION_ENABLED } from "../pulse/pulse-adapter.contract";
-import type { InterventionId, PatientState } from "../types";
+import type { InterventionId, ItemSequencia, PatientState } from "../types";
 
 // Sequências de teste por caso (correta / sem tratamento ou errada / alta).
 interface SeqTeste {
@@ -125,26 +126,106 @@ for (const caso of DYNAMIC_CASES) {
       ok(Math.abs(soma - fb.nota) < 0.001, `Soma dos domínios = nota (${soma} = ${fb.nota})`);
     }
 
-    // 5b. Exames não prioritários antes da descompressão (só casos que a exigem)
+    // 5b. Avaliador contextual de atraso terapêutico (só casos com descompressão essencial)
     if (caso.intervencoes.intervencoesEssenciais.includes("descompressao_toracica") && rubrica) {
-      secao("Exames não prioritários antes da descompressão");
-      const fbExameAntes = gerarFeedbackDinamico(rubrica, {
+      secao("Avaliador contextual de atraso terapêutico");
+
+      const exEss = caso.exames.examesEssenciais;
+      const inputBaseAtraso = {
+        intervencaoSalvadora: "descompressao_toracica" as const,
+        examesEssenciais: exEss,
+        examesCriticosAntesDoSalvador: ["radiografia"],
+        intervencoesDeAtraso: ["aguardar_exames", "solicitar_rx_torax"],
+        limiteToleravel: 2,
+      };
+
+      // ---- Cenário A: apenas essenciais + suporte antes da descompressão -----
+      const seqA: ItemSequencia[] = [
+        { tipo: "exame", nome: exEss[0] },
+        { tipo: "exame", nome: exEss[1] },
+        { tipo: "exame", nome: exEss[2] },
+        { tipo: "intervencao", id: "oxigenio_alto_fluxo" },
+        { tipo: "intervencao", id: "descompressao_toracica" },
+        { tipo: "intervencao", id: "drenagem_toracica" },
+        { tipo: "intervencao", id: "reavaliar" },
+      ];
+      const avA = avaliarAtrasoTerapiaSalvadora({ sequencia: seqA, ...inputBaseAtraso });
+      ok(avA.classificacao === "sem-atraso", `Cenário A: apenas essenciais → sem-atraso (${avA.classificacao})`);
+      ok(avA.devePontuarNaoAtrasou, "Cenário A: pontua pn-exm-nao-atrasou");
+      const fbA = gerarFeedbackDinamico(rubrica, {
         comunicacaoItens: caso.comunicacao.itensEsperados,
         anamneseItens: checklistAnamnese(caso),
         exameItens: caso.exameFisico.manobrasObrigatorias,
-        examesSolicitados: ["Gasometria", ...caso.exames.examesEssenciais],
+        examesSolicitados: exEss,
         intervencoesAplicadas: cfg.correta,
-        estadoInicial: inicial,
-        estadoFinal: st,
-        eventos: [],
+        estadoInicial: inicial, estadoFinal: st, eventos: [],
         erroCriticoRegistrado: false,
-        examesNaoPrioritariosAntesDescompressao: true,
+        atrasoTerapiaSalvadora: avA,
       });
-      const naoAtrasouComExame = fbExameAntes.dominios
+      ok(fbA.nota === 20, `Cenário A: sequência perfeita mantém 20/20 (obtido ${fbA.nota})`);
+
+      // ---- Cenário B: 1 exame tolerável antes da descompressão ---------------
+      const seqB: ItemSequencia[] = [
+        { tipo: "exame", nome: exEss[0] },
+        { tipo: "exame", nome: "Gasometria" },
+        { tipo: "intervencao", id: "oxigenio_alto_fluxo" },
+        { tipo: "intervencao", id: "descompressao_toracica" },
+        { tipo: "intervencao", id: "drenagem_toracica" },
+        { tipo: "intervencao", id: "reavaliar" },
+      ];
+      const avB = avaliarAtrasoTerapiaSalvadora({ sequencia: seqB, ...inputBaseAtraso });
+      ok(avB.classificacao === "alerta-leve", `Cenário B: 1 tolerável → alerta-leve (${avB.classificacao})`);
+      ok(avB.devePontuarNaoAtrasou, "Cenário B: alerta-leve ainda pontua pn-exm-nao-atrasou");
+      const fbB = gerarFeedbackDinamico(rubrica, {
+        comunicacaoItens: caso.comunicacao.itensEsperados,
+        anamneseItens: checklistAnamnese(caso),
+        exameItens: caso.exameFisico.manobrasObrigatorias,
+        examesSolicitados: [...exEss, "Gasometria"],
+        intervencoesAplicadas: cfg.correta,
+        estadoInicial: inicial, estadoFinal: st, eventos: [],
+        erroCriticoRegistrado: false,
+        atrasoTerapiaSalvadora: avB,
+      });
+      ok(fbB.nota === 20, `Cenário B: alerta-leve não perde ponto → 20/20 (obtido ${fbB.nota})`);
+
+      // ---- Cenário C: atraso relevante (RX + múltiplos exames) ---------------
+      const seqC: ItemSequencia[] = [
+        { tipo: "exame", nome: "Gasometria" },
+        { tipo: "exame", nome: "ECG para diferencial de dor torácica" },
+        { tipo: "exame", nome: "Ultrassom torácico à beira-leito" },
+        { tipo: "exame", nome: "Radiografia de tórax após estabilização" },
+        { tipo: "intervencao", id: "oxigenio_alto_fluxo" },
+        { tipo: "intervencao", id: "descompressao_toracica" },
+        { tipo: "intervencao", id: "drenagem_toracica" },
+      ];
+      const avC = avaliarAtrasoTerapiaSalvadora({ sequencia: seqC, ...inputBaseAtraso });
+      ok(avC.classificacao === "atraso-relevante", `Cenário C: RX + múltiplos → atraso-relevante (${avC.classificacao})`);
+      ok(!avC.devePontuarNaoAtrasou, "Cenário C: atraso-relevante não pontua pn-exm-nao-atrasou");
+      const fbC = gerarFeedbackDinamico(rubrica, {
+        comunicacaoItens: caso.comunicacao.itensEsperados,
+        anamneseItens: checklistAnamnese(caso),
+        exameItens: caso.exameFisico.manobrasObrigatorias,
+        examesSolicitados: ["Gasometria", "ECG para diferencial de dor torácica", "Ultrassom torácico à beira-leito", "Radiografia de tórax após estabilização", ...exEss],
+        intervencoesAplicadas: cfg.correta,
+        estadoInicial: inicial, estadoFinal: st, eventos: [],
+        erroCriticoRegistrado: false,
+        atrasoTerapiaSalvadora: avC,
+      });
+      ok(fbC.nota < 20, `Cenário C: nota < 20 com atraso-relevante (obtido ${fbC.nota})`);
+      const naoAtrasouC = fbC.dominios
         .find((d) => d.nome === "Exames e monitorização")
         ?.itens.find((i) => /não atrasou/i.test(i.descricao))?.cumprido;
-      ok(naoAtrasouComExame === false, "Exame não essencial antes da descompressão: 'não atrasou' NÃO pontua");
-      ok(fbExameAntes.nota < 20, `Nota < 20 com exame antecipado (${fbExameAntes.nota}/${fbExameAntes.total})`);
+      ok(naoAtrasouC === false, "Cenário C: pn-exm-nao-atrasou NÃO cumprido");
+
+      // ---- Cenário D: erro crítico (intervenção de atraso antes da descompressão) ----
+      const seqD: ItemSequencia[] = [
+        { tipo: "intervencao", id: "aguardar_exames" },
+        { tipo: "intervencao", id: "solicitar_rx_torax" },
+      ];
+      const avD = avaliarAtrasoTerapiaSalvadora({ sequencia: seqD, ...inputBaseAtraso });
+      ok(avD.classificacao === "erro-critico", `Cenário D: aguardar+RX → erro-critico (${avD.classificacao})`);
+      ok(!avD.devePontuarNaoAtrasou, "Cenário D: não pontua pn-exm-nao-atrasou");
+      ok(avD.deveGerarErroCritico, "Cenário D: deveGerarErroCritico=true");
     }
 
     // 6. Sequência sem tratamento / errada

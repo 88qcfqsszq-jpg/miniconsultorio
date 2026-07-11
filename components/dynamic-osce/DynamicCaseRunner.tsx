@@ -5,10 +5,12 @@ import type {
   DynamicCase,
   DynamicFeedbackResult,
   InterventionId,
+  ItemSequencia,
   PatientState,
   TimelineEvent,
   TrendDirection,
 } from "@/lib/dynamic-osce/types";
+import { avaliarAtrasoTerapiaSalvadora } from "@/lib/dynamic-osce/dynamic-therapeutic-delay-evaluator";
 import { applyIntervention, eventoInicial } from "@/lib/dynamic-osce/dynamic-state-engine";
 import { gerarFeedbackDinamico } from "@/lib/dynamic-osce/dynamic-feedback-engine";
 import { linkRubrica } from "@/lib/dynamic-osce/dynamic-rubric-link";
@@ -102,10 +104,9 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
   const [feedback, setFeedback] = useState<DynamicFeedbackResult | null>(null);
   const finalizado = feedback !== null;
 
-  // Rastreia se o caso exige descompressão como intervenção essencial.
   const casoExigeDescompressao = caso.intervencoes.intervencoesEssenciais.includes("descompressao_toracica");
-  const [descompressaoAplicada, setDescompressaoAplicada] = useState(false);
-  const [examesNaoPrioritariosAntesDescompressao, setExamesNaoPrioritariosAntesDescompressao] = useState(false);
+  // Sequência unificada (intervenções + exames) mantida em ordem de clique.
+  const [sequenciaUnificada, setSequenciaUnificada] = useState<ItemSequencia[]>([]);
 
   // Responsividade sem CSS global: empilha as colunas em telas estreitas.
   const [narrow, setNarrow] = useState(false);
@@ -132,18 +133,21 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
     setTempo(t);
     setUltimaTendencia(r.tendencia);
     setIntervencoesAplicadas((prev) => [...prev, id]);
+    setSequenciaUnificada((prev) => [...prev, { tipo: "intervencao" as const, id }]);
     if (r.erroCritico) setErroCritico(true);
-    if (id === "descompressao_toracica") setDescompressaoAplicada(true);
   }
 
   function solicitarExame(nome: string) {
     if (finalizado) return;
     if (!examesSolicitados.includes(nome)) {
-      // Exame essencial (oximetria, monitorização, PA seriada) não atrasa a descompressão.
       const ehEssencial = caso.exames.examesEssenciais.includes(nome);
-      const alertaPrioridade = casoExigeDescompressao && !descompressaoAplicada && !ehEssencial;
-      if (alertaPrioridade) setExamesNaoPrioritariosAntesDescompressao(true);
+      // Alerta imediato quando exame não essencial é pedido antes da descompressão.
+      const descompressaoJaFeita = sequenciaUnificada.some(
+        (item) => item.tipo === "intervencao" && item.id === "descompressao_toracica"
+      );
+      const alertaPrioridade = casoExigeDescompressao && !descompressaoJaFeita && !ehEssencial;
 
+      setSequenciaUnificada((prev) => [...prev, { tipo: "exame" as const, nome }]);
       setExamesSolicitados((prev) => [...prev, nome]);
       const t = tempo + 2;
       setTempo(t);
@@ -154,7 +158,7 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
           tMin: t,
           titulo: `Exame solicitado: ${nome}`,
           detalhe: alertaPrioridade
-            ? "⚠️ Exame solicitado antes da descompressão — não deve atrasar a intervenção salvadora."
+            ? "⚠️ Exame solicitado antes da intervenção salvadora — aceitável apenas se não atrasar a descompressão."
             : "Resultado incorporado à monitorização.",
           tendencia: alertaPrioridade ? "piora" : "estabilidade",
           tipo: "exame",
@@ -165,6 +169,16 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
 
   function finalizar() {
     if (!rubrica) return;
+    const atraso = casoExigeDescompressao
+      ? avaliarAtrasoTerapiaSalvadora({
+          sequencia: sequenciaUnificada,
+          intervencaoSalvadora: "descompressao_toracica",
+          examesEssenciais: caso.exames.examesEssenciais,
+          examesCriticosAntesDoSalvador: ["radiografia"],
+          intervencoesDeAtraso: ["aguardar_exames", "solicitar_rx_torax"],
+          limiteToleravel: 2,
+        })
+      : undefined;
     const resultado = gerarFeedbackDinamico(rubrica, {
       comunicacaoItens,
       anamneseItens,
@@ -174,8 +188,8 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
       estadoInicial,
       estadoFinal: estado,
       eventos,
-      erroCriticoRegistrado: erroCritico,
-      examesNaoPrioritariosAntesDescompressao,
+      erroCriticoRegistrado: erroCritico || (atraso?.deveGerarErroCritico ?? false),
+      atrasoTerapiaSalvadora: atraso,
     });
     setEventos((prev) => [
       ...prev,

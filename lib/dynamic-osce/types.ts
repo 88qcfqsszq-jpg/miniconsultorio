@@ -334,6 +334,29 @@ export const DOMINIOS_OBRIGATORIOS = [
   "Conduta e reavaliação",
 ] as const;
 
+// ---- Sequência unificada e avaliação de atraso terapêutico -----------------
+
+/** Item da sequência unificada de ações do aluno (intervenção OU exame). */
+export type ItemSequencia =
+  | { tipo: "intervencao"; id: InterventionId }
+  | { tipo: "exame"; nome: string };
+
+/** Classificação da sequência em relação ao atraso antes da intervenção salvadora. */
+export type ClassificacaoAtraso =
+  | "sem-atraso"
+  | "alerta-leve"
+  | "atraso-relevante"
+  | "erro-critico";
+
+/** Resultado da avaliação contextual de atraso terapêutico. */
+export interface AvaliacaoAtrasoTerapeutico {
+  classificacao: ClassificacaoAtraso;
+  motivo: string;
+  devePontuarNaoAtrasou: boolean;
+  deveGerarErroCritico: boolean;
+  alertas: string[];
+}
+
 // ---- Contexto e resultado do feedback --------------------------------------
 
 export interface RubricEvalContext {
@@ -346,8 +369,8 @@ export interface RubricEvalContext {
   estadoFinal: PatientState;
   eventos: TimelineEvent[];
   erroCriticoRegistrado: boolean;
-  /** Exames não essenciais solicitados ANTES da intervenção salvadora (descompressão). */
-  examesNaoPrioritariosAntesDescompressao?: boolean;
+  /** Avaliação contextual do atraso antes da intervenção salvadora (ex.: descompressão). */
+  atrasoTerapiaSalvadora?: AvaliacaoAtrasoTerapeutico;
 }
 
 export interface DynamicFeedbackCriterion {

@@ -81,10 +81,17 @@ const PREDICADOS: Record<string, (ctx: RubricEvalContext) => boolean> = {
 
   "pn-exm-oximetria": (c) => inclui(c.examesSolicitados, "oximetria") || tem(c.intervencoesAplicadas, "oxigenio_alto_fluxo") || tem(c.intervencoesAplicadas, "monitorizacao"),
   "pn-exm-monitor": (c) => inclui(c.examesSolicitados, "monitor") || tem(c.intervencoesAplicadas, "monitorizacao") || tem(c.intervencoesAplicadas, "reavaliar"),
-  "pn-exm-nao-atrasou": (c) =>
-    !c.erroCriticoRegistrado &&
-    tem(c.intervencoesAplicadas, "descompressao_toracica") &&
-    !c.examesNaoPrioritariosAntesDescompressao,
+  "pn-exm-nao-atrasou": (c) => {
+    if (c.atrasoTerapiaSalvadora) {
+      return (
+        !c.erroCriticoRegistrado &&
+        tem(c.intervencoesAplicadas, "descompressao_toracica") &&
+        c.atrasoTerapiaSalvadora.devePontuarNaoAtrasou
+      );
+    }
+    // Fallback: sem avaliador contextual (asma e futuros casos sem descompressão).
+    return !c.erroCriticoRegistrado && tem(c.intervencoesAplicadas, "descompressao_toracica");
+  },
 
   "pn-rac-reconhece": (c) => tem(c.intervencoesAplicadas, "descompressao_toracica"),
   "pn-rac-gravidade": (c) =>
@@ -144,6 +151,18 @@ export function gerarFeedbackDinamico(
     errosCriticos.push(
       "Alta insegura: paciente com hipoxemia e/ou esforço respiratório mantidos."
     );
+  }
+  // Alertas e erros do avaliador contextual de atraso terapêutico.
+  if (ctx.atrasoTerapiaSalvadora) {
+    const a = ctx.atrasoTerapiaSalvadora;
+    for (const msg of a.alertas) {
+      if (a.deveGerarErroCritico) {
+        if (!errosCriticos.includes(msg)) errosCriticos.push(msg);
+      } else if (a.classificacao !== "sem-atraso") {
+        // alerta-leve ou atraso-relevante: aparece em melhorias (educativo).
+        if (!melhorias.includes(msg)) melhorias.push(msg);
+      }
+    }
   }
 
   return {
