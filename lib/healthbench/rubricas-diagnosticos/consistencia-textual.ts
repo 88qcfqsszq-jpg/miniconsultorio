@@ -115,9 +115,15 @@ export function aplicarConsistenciaGlobalCards(
 ): CompetenciaAvaliacao[] {
   return cards.map((card) => {
     let c = normalizarFn(card);
-    // Camada global: reavaliação e conduta, aplicada a todos os casos independente de rubrica.
+    // Camada global: reavaliação em todos os cards (possui guardas internas por eixo
+    // — reconhece corretamente melhora de SpO₂/FR e destino clínico no card certo).
     c = aplicarConsistenciaReavaliacao(c, ctx);
-    c = aplicarConsistenciaCondutas(c, ctx);
+    // Conduta: só pode atuar no card "Conduta e Segurança". Sem esta guarda, o acerto
+    // "Indicou hospitalização, observação ou encaminhamento…" vazava para Anamnese e
+    // outros cards. A função não tem guarda interna de card, então filtramos aqui.
+    if (/conduta/.test(normalizar(card.nome))) {
+      c = aplicarConsistenciaCondutas(c, ctx);
+    }
     const foiRecalibrado = recalibrados.has(normalizar(card.nome));
     return normalizarExplicacaoCard(c, ctx, foiRecalibrado);
   });

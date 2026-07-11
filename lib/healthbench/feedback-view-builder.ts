@@ -46,7 +46,26 @@ function resumoCurto(hb: HealthBenchEvaluationResult): string {
     .filter((l) => !/^nota:/i.test(l))
     .filter((l) => !/avaliação educacional gerada/i.test(l));
   const texto = linhas.join(" ");
-  return texto.length > 320 ? texto.slice(0, 317) + "…" : texto;
+
+  // Limite confortável; o professorFeedback completo é preservado em hb.professorFeedback.
+  const LIMITE = 700;
+  if (texto.length <= LIMITE) return texto;
+
+  // Trunca preferencialmente no fim de uma frase antes do limite; se não houver,
+  // no último espaço — nunca no meio de uma palavra (evita "Pres…").
+  const janela = texto.slice(0, LIMITE);
+  const fimFrase = Math.max(
+    janela.lastIndexOf(". "),
+    janela.lastIndexOf("! "),
+    janela.lastIndexOf("? ")
+  );
+  if (fimFrase >= LIMITE * 0.6) {
+    // +1 para incluir o ponto final da frase.
+    return janela.slice(0, fimFrase + 1) + " …";
+  }
+  const ultimoEspaco = janela.lastIndexOf(" ");
+  const corte = ultimoEspaco > 0 ? janela.slice(0, ultimoEspaco) : janela;
+  return corte.trimEnd() + "…";
 }
 
 /**
