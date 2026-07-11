@@ -27,6 +27,8 @@ const NAV_ITEMS: Array<{ key: string; label: string; icon: string; href: string 
   { key: "guia", label: "Guia Clínico", icon: "icon-conteudos.png", href: "/guia" },
   { key: "desempenho", label: "Desempenho", icon: "icon-desempenho.png", href: "#" },
   { key: "centro-clinico", label: "Centro Clínico", icon: "icon-biblioteca.png", href: "/centro-clinico" },
+  // Entrada paralela discreta para o módulo beta (não substitui nenhum fluxo atual).
+  { key: "casos-dinamicos", label: "Casos Dinâmicos Beta", icon: "icon-simulacao.png", href: "/casos-dinamicos" },
   { key: "config", label: "Meu Perfil", icon: "icon-configuracoes.png", href: "/meu-perfil" },
 ];
 
@@ -36,6 +38,7 @@ function isNavActive(href: string, pathname: string): boolean {
   if (href === "/treinamento") return pathname.startsWith("/treinamento");
   if (href === "/guia") return pathname.startsWith("/guia");
   if (href === "/centro-clinico") return pathname.startsWith("/centro-clinico");
+  if (href === "/casos-dinamicos") return pathname.startsWith("/casos-dinamicos");
   if (href === "/meu-perfil") return pathname.startsWith("/meu-perfil");
   return false;
 }
