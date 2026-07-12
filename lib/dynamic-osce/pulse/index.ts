@@ -17,3 +17,6 @@ export * from "./pulse-output-normalizer";
 export * from "./pulse-medix-bridge";
 export * from "./pulse-experimental-adapter";
 // pulse-fixtures-asthma não é exportado pelo barrel — é apenas para teste/script
+// Fase 7 — descoberta local e reader de output real
+export * from "./pulse-local-discovery";
+export * from "./pulse-real-output-reader";

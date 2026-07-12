@@ -176,6 +176,75 @@ candidatos, overlay, segurança pediátrica). Os validadores conferem essa decla
 checa o mapeamento — **sem executar o Pulse**. Quando o adaptador existir, o caso já estará
 pronto: só trocar o provider em execução.
 
+## Fase 7 — Preparação para execução real local do Pulse
+
+A Fase 6 validou o contrato do bridge via fixtures estáticas. A Fase 7 **descobre a instalação
+local** e prepara o **reader de output real**, sem executar o Pulse automaticamente.
+
+### Descoberta local
+
+```bash
+npx tsx lib/dynamic-osce/scripts/descobrir-pulse-local.ts
+```
+
+Resultado esperado (root encontrado + 7 cenários de asma):
+```
+RESUMO: ✅ Pulse encontrado. 7 cenário(s) de asma disponíveis.
+```
+
+Cenários de asma encontrados em `.reference-local/engine-stable`:
+
+| Arquivo | Severidade | Uso |
+|---------|-----------|-----|
+| `AsthmaAttackSevereAcute.json` | 0.75 | **Recomendado** (mais próximo do caso OSCE) |
+| `AsthmaAttack.json` (showcase) | 0.70 | Inclui albuterol — bom para validar resposta |
+| `AsthmaAttackLifeThreateningAcute.json` | - | Risco de vida |
+| `AsthmaAttackModerateAcute.json` | - | Crise moderada |
+| `AsthmaAttackDeath.json` | - | Crise fatal |
+| `BronchoconstrictionDeath.json` | - | Broncospasmo fatal |
+| `BronchoConstrictionVaried.json` | - | Broncospasmo variado |
+
+### Por que Pulse ainda não executa
+
+O engine requer compilação C++ (cmake + `PyPulse.so`). O binding `PyPulse` não está compilado.
+
+Comando provável **após compilação**:
+```bash
+cd .reference-local/engine-stable/bin
+PYTHONPATH=../src/python python3 ../src/python/pulse/howto/HowTo_AsthmaAttack.py
+```
+
+Ou diretamente com cenário:
+```bash
+PYTHONPATH=../src/python python3 - <<'EOF'
+from pulse.engine.PulseEngine import PulseEngine
+pulse = PulseEngine(data_root_dir="./")
+pulse.serialize_from_file("./states/StandardMale@0s.json", None)
+# ... aplicar AsthmaAttack action + advance_time_s(30) + pull_data()
+EOF
+```
+
+### Reader de output real
+
+```bash
+npx tsx lib/dynamic-osce/scripts/testar-pulse-real-output-reader.ts
+# RESUMO: ✅ TODOS os 18 critérios passaram.
+```
+
+O reader aceita:
+- **CSV** (formato nativo Pulse) — usa última linha temporal
+- **JSON** (formato Python API) — aceita array de timesteps
+- Converte `OxygenSaturation` de fração Pulse (0–1) para % (0–100)
+- Mapeia `InspiratoryRespiratoryResistance` → `AirwayResistance`
+- Mapeia `Aorta-CarbonDioxide-PartialPressure` → `ArterialCarbonDioxidePressure`
+
+### Próximo passo: Fase 8
+
+Compilar PyPulse → executar `HowTo_AsthmaAttack.py` → capturar output CSV →
+passar para `readPulseOutputFileAsRawOutput` → pipeline completa Fase 6 → PatientState real.
+
+---
+
 ## Fase 6 — Pulse Adapter Experimental (fixture-based)
 
 A Fase 6 introduz o **bridge Pulse→MEDIX**, validado com fixtures estáticas do caso de asma grave.
