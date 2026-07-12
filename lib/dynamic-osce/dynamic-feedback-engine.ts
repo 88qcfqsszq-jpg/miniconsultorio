@@ -106,6 +106,48 @@ const PREDICADOS: Record<string, (ctx: RubricEvalContext) => boolean> = {
   "pn-cond-reavaliou": (c) =>
     tem(c.intervencoesAplicadas, "reavaliar") &&
     c.estadoFinal.vitals.spo2 > c.estadoInicial.vitals.spo2,
+
+  // ---- DPOC exacerbado (dpoc-*) -------------------------------------------
+  "dpoc-com-apresentacao": (c) => inclui(c.comunicacaoItens, "apresent") || inclui(c.comunicacaoItens, "acolh") || inclui(c.comunicacaoItens, "tranquiliz"),
+  "dpoc-com-explicou": (c) => inclui(c.comunicacaoItens, "explic"),
+
+  "dpoc-anm-dispneia": (c) => inclui(c.anamneseItens, "dispneia") || inclui(c.anamneseItens, "falta de ar") || inclui(c.anamneseItens, "piora"),
+  "dpoc-anm-dpoc": (c) => inclui(c.anamneseItens, "dpoc") || inclui(c.anamneseItens, "tabag") || inclui(c.anamneseItens, "pulmonar obstrutivo"),
+  "dpoc-anm-escarro": (c) => inclui(c.anamneseItens, "escarro") || inclui(c.anamneseItens, "expectoraç") || inclui(c.anamneseItens, "secreç"),
+  "dpoc-anm-broncodilatador": (c) => inclui(c.anamneseItens, "broncodilatador") || inclui(c.anamneseItens, "bombinha") || inclui(c.anamneseItens, "formoterol") || inclui(c.anamneseItens, "tiotr"),
+
+  "dpoc-exf-vitais": (c) => inclui(c.exameItens, "sinais vitais") || inclui(c.exameItens, "satura") || inclui(c.exameItens, "spo2"),
+  "dpoc-exf-ausculta": (c) => inclui(c.exameItens, "ausculta") || inclui(c.exameItens, "roncos") || inclui(c.exameItens, "sibilos") || inclui(c.exameItens, "padrão respiratório") || inclui(c.exameItens, "padrao respiratorio"),
+  "dpoc-exf-musculatura": (c) => inclui(c.exameItens, "musculatura") || inclui(c.exameItens, "tiragem") || inclui(c.exameItens, "esforço") || inclui(c.exameItens, "esforco"),
+
+  "dpoc-exm-gasometria": (c) => inclui(c.examesSolicitados, "gasometria"),
+  "dpoc-exm-monitor": (c) => inclui(c.examesSolicitados, "oximetria") || tem(c.intervencoesAplicadas, "monitorizacao"),
+  "dpoc-exm-alvo-spo2": (c) =>
+    tem(c.intervencoesAplicadas, "oxigenio_controlado") &&
+    !tem(c.intervencoesAplicadas, "oxigenio_alto_fluxo_sem_controle"),
+
+  "dpoc-rac-reconhece": (c) =>
+    tem(c.intervencoesAplicadas, "oxigenio_controlado") ||
+    tem(c.intervencoesAplicadas, "ventilacao_nao_invasiva"),
+  "dpoc-rac-alvo-o2": (c) =>
+    tem(c.intervencoesAplicadas, "oxigenio_controlado") &&
+    !tem(c.intervencoesAplicadas, "oxigenio_alto_fluxo_sem_controle"),
+  "dpoc-rac-sem-alta": (c) =>
+    !tem(c.intervencoesAplicadas, "alta_precoce") &&
+    !tem(c.intervencoesAplicadas, "alta"),
+  "dpoc-rac-vni": (c) =>
+    tem(c.intervencoesAplicadas, "ventilacao_nao_invasiva") ||
+    tem(c.intervencoesAplicadas, "internacao") ||
+    tem(c.intervencoesAplicadas, "intubacao-uti"),
+
+  "dpoc-cond-o2-controlado": (c) => tem(c.intervencoesAplicadas, "oxigenio_controlado"),
+  "dpoc-cond-broncodilatadores": (c) =>
+    tem(c.intervencoesAplicadas, "salbutamol") &&
+    tem(c.intervencoesAplicadas, "ipratropio"),
+  "dpoc-cond-corticoide": (c) => tem(c.intervencoesAplicadas, "corticoide"),
+  "dpoc-cond-reavaliou": (c) =>
+    tem(c.intervencoesAplicadas, "reavaliar") &&
+    c.estadoFinal.vitals.spo2 > c.estadoInicial.vitals.spo2,
 };
 
 function classificar(nota: number, total: number): DynamicFeedbackResult["classificacao"] {

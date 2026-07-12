@@ -131,6 +131,38 @@ export const CATALOGO_INTERVENCOES: Record<InterventionId, Intervention> = {
     descricao: "Liberar antes da estabilização. Erro crítico nesta condição.",
     categoria: "decisao",
   },
+
+  // ---- Fase 4 — DPOC exacerbado ------------------------------------------
+  oxigenio_controlado: {
+    id: "oxigenio_controlado",
+    label: "O₂ controlado (alvo 88–92%)",
+    descricao: "Oxigenioterapia titulada. Alvo SpO₂ 88–92% no DPOC; evita narcose por CO₂.",
+    categoria: "suporte",
+  },
+  oxigenio_alto_fluxo_sem_controle: {
+    id: "oxigenio_alto_fluxo_sem_controle",
+    label: "O₂ alto fluxo s/ controle",
+    descricao: "Alto fluxo sem titulação. Perigoso no DPOC: agrava retenção de CO₂ (narcose).",
+    categoria: "suporte",
+  },
+  ventilacao_nao_invasiva: {
+    id: "ventilacao_nao_invasiva",
+    label: "Ventilação não invasiva (VNI)",
+    descricao: "CPAP/BiPAP: reduz trabalho respiratório e melhora eliminação de CO₂.",
+    categoria: "procedimento",
+  },
+  antibiotico_se_indicado: {
+    id: "antibiotico_se_indicado",
+    label: "Antibiótico (se indicado)",
+    descricao: "Indicado na exacerbação infecciosa (escarro purulento/febre). Sem efeito imediato nos sinais vitais.",
+    categoria: "medicacao",
+  },
+  sedativo_sem_indicacao: {
+    id: "sedativo_sem_indicacao",
+    label: "Sedativo sem indicação",
+    descricao: "Contraindicado no DPOC com retenção de CO₂. Suprime o drive respiratório.",
+    categoria: "medicacao",
+  },
 };
 
 /** Resolve o metadado de uma intervenção pelo id. */

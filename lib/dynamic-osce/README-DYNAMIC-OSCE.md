@@ -37,6 +37,8 @@ lib/dynamic-osce/
 - **Crise Asmática Grave — Adulto** (`dynamic-asthma-severe-adult-001`) — piloto de referência.
 - **Pneumotórax Hipertensivo — Adulto** (`dynamic-tension-pneumothorax-adult-001`) — emergência
   torácica; a descompressão é intervenção salvadora e **atrasar por exames é erro crítico**.
+- **DPOC Exacerbado — Adulto** (`dynamic-copd-exacerbation-adult-001`) — exacerbação grave com
+  retenção de CO₂; **alvo de SpO₂ 88–92%**; hiperóxia é erro crítico; VNI é escalonamento chave.
 
 Cada caso é **1 arquivo TS** em `cases/` contendo o caso **e** a sua rubrica completa (ex.:
 `cases/pneumotorax-hipertensivo-adulto.ts` exporta `pneumotoraxHipertensivoAdulto` e

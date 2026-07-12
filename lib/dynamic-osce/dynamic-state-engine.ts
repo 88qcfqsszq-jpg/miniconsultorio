@@ -74,6 +74,37 @@ export function recomputarClinica(s: PatientState): ClinicalStatus {
     };
   }
 
+  // Ramo DPOC EXACERBADO (retenção de CO₂ presente).
+  if (s.retencaoCO2 !== undefined) {
+    const co2 = s.retencaoCO2;
+    const bronco = s.broncodilatacaoDpoc ?? 0;
+    const trabalho = bronco > 60 ? "muito aumentado" : bronco > 30 ? "aumentado" : "próximo do normal";
+    const ausculta =
+      bronco > 60
+        ? "roncos e sibilos difusos, murmúrio reduzido (tórax em barril)"
+        : bronco > 30
+          ? "sibilos esparsos e roncos, murmúrio diminuído"
+          : "roncos dispersos, murmúrio diminuído cronicamente";
+    const estadoGeral =
+      s.hiperoxia
+        ? "sonolento, confuso — possível agravamento por CO₂ elevado (hiperóxia)"
+        : spo2 < 88
+          ? "dispneico, ansioso, cansado — hipoxemia importante sem melhora"
+          : spo2 <= 92
+            ? "dispneico, cansado, alerta — SpO₂ em alvo (88–92%)"
+            : "mais confortável; SpO₂ acima do alvo — monitorar nível de consciência";
+    const fala = fr > 26 || spo2 < 88 ? "frases entrecortadas" : "frases curtas";
+    const perfusao =
+      spo2 < 84 || paSys > 160
+        ? "comprometida"
+        : s.vniAplicada
+          ? "melhorando"
+          : co2 > 60
+            ? "reduzida"
+            : "preservada";
+    return { estadoGeral, trabalhoRespiratorio: trabalho, ausculta, fala, perfusao };
+  }
+
   // Ramo ASMA (broncoespasmo) — comportamento original.
   const bronco = s.broncoespasmo;
 
@@ -106,8 +137,10 @@ export function recomputarClinica(s: PatientState): ClinicalStatus {
   };
 }
 
-/** Alvo de SpO₂ atingível conforme o broncoespasmo residual e uso de O₂. */
+/** Alvo de SpO₂ atingível conforme o contexto clínico. */
 function alvoSpo2(s: PatientState): number {
+  // DPOC: teto em 92% para evitar narcose por CO₂.
+  if (s.retencaoCO2 !== undefined) return 92;
   const base = s.oxigenioSuplementar ? 97 : 94;
   // Broncoespasmo alto limita o teto de saturação alcançável.
   const teto = 100 - Math.round(s.broncoespasmo / 12);
@@ -146,6 +179,9 @@ export function applyIntervention(
     }
     case "salbutamol": {
       s.broncoespasmo = clamp(s.broncoespasmo - 25, 0, 100);
+      if (s.broncodilatacaoDpoc !== undefined) {
+        s.broncodilatacaoDpoc = clamp(s.broncodilatacaoDpoc - 20, 0, 100);
+      }
       s.vitals.fr = clamp(s.vitals.fr - 4, 12, 70);
       s.vitals.fc = clamp(s.vitals.fc + 6, 60, 160); // efeito adrenérgico
       s.vitals.spo2 = clamp(s.vitals.spo2 + 2, 40, alvoSpo2(s));
@@ -156,6 +192,9 @@ export function applyIntervention(
     case "ipratropio": {
       const ganho = s.broncoespasmo > 30 ? 15 : 6;
       s.broncoespasmo = clamp(s.broncoespasmo - ganho, 0, 100);
+      if (s.broncodilatacaoDpoc !== undefined) {
+        s.broncodilatacaoDpoc = clamp(s.broncodilatacaoDpoc - 15, 0, 100);
+      }
       s.vitals.fr = clamp(s.vitals.fr - 2, 12, 70);
       s.vitals.spo2 = clamp(s.vitals.spo2 + 1, 40, alvoSpo2(s));
       tendencia = "melhora";
@@ -179,21 +218,38 @@ export function applyIntervention(
     }
     case "reavaliar": {
       const pneumo = typeof s.tensaoPneumotorax === "number";
-      const semTratamentoAsma = s.broncoespasmo > 60 && !s.oxigenioSuplementar;
+      const dpoc = s.retencaoCO2 !== undefined;
+      const semTratamentoAsma = !dpoc && s.broncoespasmo > 60 && !s.oxigenioSuplementar;
       const semTratamentoPneumo = pneumo && (s.tensaoPneumotorax ?? 0) > 40 && !s.descomprimido;
+      const hiperóxiaDpoc = dpoc && !!s.hiperoxia;
+      const semTratamentoDpoc = dpoc && s.vitals.spo2 < 88 && !s.oxigenioSuplementar;
       if (semTratamentoAsma || semTratamentoPneumo) {
-        // Sem conduta adequada, o quadro piora ao longo do tempo.
         s.vitals.spo2 = clamp(s.vitals.spo2 - 3, 40, 100);
         s.vitals.fr = clamp(s.vitals.fr + 2, 12, 70);
         if (semTratamentoPneumo) s.vitals.paSys = clamp(s.vitals.paSys - 5, 40, 260);
         tendencia = "piora";
         mensagem = "Reavaliação sem conduta adequada: piora progressiva.";
+      } else if (hiperóxiaDpoc) {
+        // Narcose hipercápnica progressiva após hiperóxia
+        s.vitals.fr = clamp(s.vitals.fr - 3, 4, 70);
+        s.vitals.spo2 = clamp(s.vitals.spo2 - 10, 40, 100);
+        s.retencaoCO2 = clamp((s.retencaoCO2 ?? 0) + 5, 0, 100);
+        tendencia = "piora";
+        mensagem = `Reavaliação com hiperóxia: narcose hipercápnica progressiva, SpO₂ caindo (${s.vitals.spo2}%).`;
+      } else if (semTratamentoDpoc) {
+        s.vitals.spo2 = clamp(s.vitals.spo2 - 3, 40, 100);
+        s.vitals.fr = clamp(s.vitals.fr + 2, 12, 70);
+        tendencia = "piora";
+        mensagem = "Reavaliação DPOC sem oxigênio: piora progressiva.";
       } else if (pneumo) {
         tendencia = s.vitals.spo2 >= 92 && s.vitals.paSys >= 100 ? "melhora" : "estabilidade";
         mensagem = `Reavaliação: SpO₂ ${s.vitals.spo2}%, PA sistólica ${s.vitals.paSys}, FR ${s.vitals.fr}.`;
+      } else if (dpoc) {
+        const emAlvo = s.vitals.spo2 >= 88 && s.vitals.spo2 <= 92;
+        tendencia = emAlvo && (s.broncodilatacaoDpoc ?? 100) <= 50 ? "melhora" : "estabilidade";
+        mensagem = `Reavaliação DPOC: SpO₂ ${s.vitals.spo2}% (alvo 88–92%), FR ${s.vitals.fr}.`;
       } else {
-        tendencia =
-          s.vitals.spo2 >= 92 && s.broncoespasmo <= 30 ? "melhora" : "estabilidade";
+        tendencia = s.vitals.spo2 >= 92 && s.broncoespasmo <= 30 ? "melhora" : "estabilidade";
         mensagem = `Reavaliação: SpO₂ ${s.vitals.spo2}%, FR ${s.vitals.fr}, broncoespasmo ${s.broncoespasmo}/100.`;
       }
       break;
@@ -334,18 +390,85 @@ export function applyIntervention(
       break;
     }
     case "alta_precoce": {
-      const inseguro =
-        s.vitals.spo2 < 92 ||
-        s.vitals.paSys < 100 ||
-        s.vitals.fr > 26 ||
-        (typeof s.tensaoPneumotorax === "number" && !s.drenado);
+      const dpocAtivo = s.retencaoCO2 !== undefined;
+      const inseguro = dpocAtivo
+        ? s.vitals.spo2 < 88 || s.vitals.fr > 26
+        : s.vitals.spo2 < 92 || s.vitals.paSys < 100 || s.vitals.fr > 26 || (typeof s.tensaoPneumotorax === "number" && !s.drenado);
       if (inseguro) {
         tendencia = "piora";
-        erroCritico = "Alta insegura: paciente ainda instável / sem tratamento definitivo.";
+        erroCritico = dpocAtivo
+          ? "Alta insegura em DPOC: paciente hipoxêmico (SpO₂ < 88%) sem tratamento adequado."
+          : "Alta insegura: paciente ainda instável / sem tratamento definitivo.";
         mensagem = erroCritico;
       } else {
         tendencia = "estabilidade";
         mensagem = "Alta com paciente estável e orientado.";
+      }
+      break;
+    }
+
+    // ---- Fase 4 — DPOC exacerbado ----------------------------------------
+    case "oxigenio_controlado": {
+      s.oxigenioSuplementar = true;
+      s.oxigenioControlado = true;
+      const antes = s.vitals.spo2;
+      // Teto 92%: titulado para evitar narcose por CO₂.
+      s.vitals.spo2 = clamp(s.vitals.spo2 + 5, 40, 92);
+      tendencia = s.vitals.spo2 > antes ? "melhora" : "estabilidade";
+      mensagem = `O₂ controlado (alvo 88–92%): SpO₂ ${antes}% → ${s.vitals.spo2}%. CO₂ monitorado.`;
+      break;
+    }
+    case "oxigenio_alto_fluxo_sem_controle": {
+      s.oxigenioSuplementar = true;
+      const antes = s.vitals.spo2;
+      if (s.retencaoCO2 !== undefined) {
+        // Em DPOC: O₂ alto fluxo pode piorar hipercapnia por mecanismos multifatoriais (efeito Haldane, V/Q, drive)
+        s.vitals.spo2 = clamp(s.vitals.spo2 + 4, 40, 99);
+        s.hiperoxia = true;
+        s.retencaoCO2 = clamp(s.retencaoCO2 + 25, 0, 100);
+        s.vitals.fr = clamp(s.vitals.fr - 4, 4, 70); // narcose: drive respiratório cai
+        tendencia = "piora";
+        erroCritico =
+          "Hiperóxia em DPOC: O₂ de alto fluxo sem controle agrava retenção de CO₂ (narcose hipercápnica).";
+        mensagem = erroCritico;
+      } else {
+        s.vitals.spo2 = clamp(s.vitals.spo2 + 8, 40, 99);
+        tendencia = s.vitals.spo2 > antes ? "melhora" : "estabilidade";
+        mensagem = `O₂ alto fluxo: SpO₂ ${antes}% → ${s.vitals.spo2}%.`;
+      }
+      break;
+    }
+    case "ventilacao_nao_invasiva": {
+      const antesFr = s.vitals.fr;
+      s.vitals.fr = clamp(s.vitals.fr - 6, 12, 70);
+      // Em DPOC: SpO₂ controlada (teto 92%); melhora CO₂.
+      const tetoDpoc = s.retencaoCO2 !== undefined ? 92 : 99;
+      s.vitals.spo2 = clamp(s.vitals.spo2 + 3, 40, tetoDpoc);
+      if (s.retencaoCO2 !== undefined) {
+        s.retencaoCO2 = clamp(s.retencaoCO2 - 15, 0, 100);
+        s.vniAplicada = true;
+      }
+      tendencia = "melhora";
+      mensagem = `VNI aplicada: FR ${antesFr} → ${s.vitals.fr} irpm, SpO₂ melhora, CO₂ reduzindo.`;
+      break;
+    }
+    case "antibiotico_se_indicado": {
+      s.antibioticoAplicado = true;
+      tendencia = "estabilidade";
+      mensagem = "Antibiótico administrado: conduta correta na exacerbação infecciosa (efeito não imediato).";
+      break;
+    }
+    case "sedativo_sem_indicacao": {
+      if (s.retencaoCO2 !== undefined) {
+        s.vitals.fr = clamp(s.vitals.fr - 6, 4, 70);
+        s.vitals.spo2 = clamp(s.vitals.spo2 - 6, 40, 100);
+        tendencia = "piora";
+        erroCritico =
+          "Sedação em DPOC com retenção de CO₂: supressão do drive respiratório — risco de parada.";
+        mensagem = erroCritico;
+      } else {
+        tendencia = "estabilidade";
+        mensagem = "Sedação administrada.";
       }
       break;
     }

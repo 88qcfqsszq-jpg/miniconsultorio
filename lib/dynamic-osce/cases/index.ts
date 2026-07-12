@@ -8,10 +8,12 @@
 import type { DynamicCase } from "../types";
 import { pilotoAsmaGraveAdulto } from "./piloto-asma-grave-adulto";
 import { pneumotoraxHipertensivoAdulto } from "./pneumotorax-hipertensivo-adulto";
+import { dpocExacerbadoAdulto } from "./dpoc-exacerbado-adulto";
 
 export const DYNAMIC_CASES: DynamicCase[] = [
   pilotoAsmaGraveAdulto,
   pneumotoraxHipertensivoAdulto,
+  dpocExacerbadoAdulto,
 ];
 
 export function getDynamicCase(caseId: string): DynamicCase | undefined {

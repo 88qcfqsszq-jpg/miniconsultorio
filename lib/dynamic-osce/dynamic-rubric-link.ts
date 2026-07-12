@@ -8,6 +8,7 @@
 
 import type { DynamicRubric } from "./types";
 import { rubricaDynamicTensionPneumothoraxAdult001 } from "./cases/pneumotorax-hipertensivo-adulto";
+import { rubricaDynamicCopdExacerbationAdult001 } from "./cases/dpoc-exacerbado-adulto";
 
 /** Rubrica dinâmica do piloto de crise asmática grave (total = 20). */
 export const RUBRICA_ASMA_GRAVE_PILOTO: DynamicRubric = {
@@ -239,6 +240,7 @@ export const RUBRICA_ASMA_GRAVE_PILOTO: DynamicRubric = {
 const REGISTRO_RUBRICAS: Record<string, DynamicRubric> = {
   "rubrica-asma-grave-piloto": RUBRICA_ASMA_GRAVE_PILOTO,
   "rubrica-dynamic-tension-pneumothorax-adult-001": rubricaDynamicTensionPneumothoraxAdult001,
+  "rubrica-dynamic-copd-exacerbation-adult-001": rubricaDynamicCopdExacerbationAdult001,
 };
 
 /** Liga um caso (via rubricaId) à sua rubrica dinâmica. Null se não existir. */

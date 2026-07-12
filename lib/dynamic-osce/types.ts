@@ -47,6 +47,19 @@ export interface PatientState {
   drenado?: boolean;
   acessoVenoso?: boolean;
   dorControlada?: boolean;
+  // ---- Marcadores opcionais (DPOC exacerbado — Fase 4) -------------------
+  /** Grau de retenção de CO₂ (0 = sem retenção, 100 = máxima). Só em DPOC. */
+  retencaoCO2?: number;
+  /** O₂ está sendo ofertado em modo controlado (alvo 88–92%). */
+  oxigenioControlado?: boolean;
+  /** Hiperóxia instalada (O₂ alto fluxo sem controle em paciente DPOC). */
+  hiperoxia?: boolean;
+  /** Ventilação não invasiva aplicada. */
+  vniAplicada?: boolean;
+  /** Antibiótico administrado. */
+  antibioticoAplicado?: boolean;
+  /** Grau de obstrução brônquica DPOC (0 = sem obstrução, 100 = máxima). */
+  broncodilatacaoDpoc?: number;
 }
 
 // ---- Intervenções ----------------------------------------------------------
@@ -72,7 +85,13 @@ export type InterventionId =
   | "solicitar_rx_torax"
   | "solicitar_usg_torax"
   | "aguardar_exames"
-  | "alta_precoce";
+  | "alta_precoce"
+  // Fase 4 — DPOC exacerbado
+  | "oxigenio_controlado"
+  | "oxigenio_alto_fluxo_sem_controle"
+  | "ventilacao_nao_invasiva"
+  | "antibiotico_se_indicado"
+  | "sedativo_sem_indicacao";
 
 export type InterventionCategory =
   | "suporte"

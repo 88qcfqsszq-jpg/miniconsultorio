@@ -290,9 +290,67 @@ export const PULSE_ACTION_MAP: Record<string, PulseActionEntry> = {
     expectedPhysiologyTargets: [],
     notes: "Erro crítico se critérios de alta não atingidos.",
   },
+
+  // ---- Fase 4 — DPOC exacerbado ------------------------------------------
+  oxigenio_controlado: {
+    medixActionId: "oxigenio_controlado",
+    label: "O₂ controlado (alvo 88–92%)",
+    clinicalCategory: "suporte",
+    pulseActionCandidate: "PatientAction.SupplementalOxygen (titulado) / EquipmentAction.VentilatorMask",
+    directPulseSupport: true,
+    requiresTranslator: true,
+    expectedPhysiologyTargets: ["OxygenSaturation", "EndTidalCarbonDioxidePressure"],
+    notes: "Teto de FiO₂ para manter SpO₂ 88–92%; evitar narcose por CO₂.",
+  },
+  oxigenio_alto_fluxo_sem_controle: {
+    medixActionId: "oxigenio_alto_fluxo_sem_controle",
+    label: "O₂ alto fluxo sem controle",
+    clinicalCategory: "suporte",
+    pulseActionCandidate: "PatientAction.SupplementalOxygen (NonRebreather, FiO₂ > 0,6)",
+    directPulseSupport: true,
+    requiresTranslator: true,
+    expectedPhysiologyTargets: ["OxygenSaturation", "EndTidalCarbonDioxidePressure", "RespirationRate"],
+    notes: "Erro clínico no DPOC: eleva SpO₂ acima do alvo, suprime drive hipóxico, agrava hipercápnia.",
+  },
+  ventilacao_nao_invasiva: {
+    medixActionId: "ventilacao_nao_invasiva",
+    label: "Ventilação não invasiva (VNI)",
+    clinicalCategory: "ventilacao",
+    pulseActionCandidate: "EquipmentAction.NonInvasiveVentilation / BiPAP",
+    directPulseSupport: true,
+    requiresTranslator: true,
+    expectedPhysiologyTargets: [
+      "TidalVolume",
+      "RespirationRate",
+      "EndTidalCarbonDioxidePressure",
+      "OxygenSaturation",
+    ],
+    notes: "CPAP/BiPAP: reduz trabalho respiratório e melhora eliminação de CO₂.",
+  },
+  antibiotico_se_indicado: {
+    medixActionId: "antibiotico_se_indicado",
+    label: "Antibiótico (se indicado)",
+    clinicalCategory: "medicacao",
+    pulseActionCandidate: "SubstanceBolus (aproximação) — sem modelo de infecção no Pulse",
+    directPulseSupport: false,
+    requiresTranslator: true,
+    expectedPhysiologyTargets: [],
+    notes: "Indicado na exacerbação infecciosa; sem efeito fisiológico imediato no Pulse.",
+  },
+  sedativo_sem_indicacao: {
+    medixActionId: "sedativo_sem_indicacao",
+    label: "Sedativo sem indicação",
+    clinicalCategory: "medicacao",
+    pulseActionCandidate: "SubstanceBolus (Midazolam/Propofol)",
+    directPulseSupport: true,
+    requiresTranslator: true,
+    expectedPhysiologyTargets: ["RespirationRate", "RespiratoryMusclePressure"],
+    notes: "Erro crítico em DPOC com hipercápnia: suprime drive respiratório.",
+  },
 };
 
 /** Busca o mapeamento de uma intervenção MEDIX. */
+
 export function getPulseAction(medixActionId: string): PulseActionEntry | undefined {
   return PULSE_ACTION_MAP[medixActionId];
 }

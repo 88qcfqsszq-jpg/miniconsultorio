@@ -44,6 +44,12 @@ const SEQ_TESTE: Record<string, SeqTeste> = {
     semTratamentoEsperaErro: true,
     altaId: "alta_precoce",
   },
+  "dynamic-copd-exacerbation-adult-001": {
+    correta: ["monitorizacao", "oxigenio_controlado", "salbutamol", "ipratropio", "corticoide", "antibiotico_se_indicado", "ventilacao_nao_invasiva", "reavaliar"],
+    semTratamento: ["oxigenio_alto_fluxo_sem_controle", "reavaliar"],
+    semTratamentoEsperaErro: true,
+    altaId: "alta_precoce",
+  },
 };
 
 let falhas = 0;
@@ -247,10 +253,18 @@ for (const caso of DYNAMIC_CASES) {
           estadoInicial: inicial, estadoFinal: stSem,
           eventos: [], erroCriticoRegistrado: true,
         });
-        const condDefinitiva = fbErr.dominios
-          .find((d) => d.nome === "Conduta e reavaliação")
-          ?.itens.find((i) => /descompress/i.test(i.descricao))?.cumprido;
-        ok(condDefinitiva === false, "Conduta definitiva (descompressão) NÃO pontua na sequência errada");
+        if (id === "dynamic-tension-pneumothorax-adult-001") {
+          const condDefinitiva = fbErr.dominios
+            .find((d) => d.nome === "Conduta e reavaliação")
+            ?.itens.find((i) => /descompress/i.test(i.descricao))?.cumprido;
+          ok(condDefinitiva === false, "Conduta definitiva (descompressão) NÃO pontua na sequência errada");
+        }
+        if (id === "dynamic-copd-exacerbation-adult-001") {
+          const condO2 = fbErr.dominios
+            .find((d) => d.nome === "Conduta e reavaliação")
+            ?.itens.find((i) => /controlado/i.test(i.descricao))?.cumprido;
+          ok(condO2 === false, "O₂ controlado NÃO pontua na sequência com alto fluxo (DPOC)");
+        }
       }
     }
 
