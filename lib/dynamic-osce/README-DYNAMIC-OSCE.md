@@ -176,9 +176,52 @@ candidatos, overlay, segurança pediátrica). Os validadores conferem essa decla
 checa o mapeamento — **sem executar o Pulse**. Quando o adaptador existir, o caso já estará
 pronto: só trocar o provider em execução.
 
+## Fase 6 — Pulse Adapter Experimental (fixture-based)
+
+A Fase 6 introduz o **bridge Pulse→MEDIX**, validado com fixtures estáticas do caso de asma grave.
+O Pulse real **ainda não executa** — a pipeline existe para validar o contrato antes da integração real.
+
+### Novos arquivos (Fase 6)
+
+```
+lib/dynamic-osce/pulse/
+├── pulse-output-normalizer.ts     # PulseRawOutput → PulseNormalizedVitals + fallbacks
+├── pulse-medix-bridge.ts          # PulseNormalizedVitals → PatientState (usa recomputarClinica)
+├── pulse-fixtures-asthma.ts       # 3 snapshots estáticos: baseline, após O₂, após BD
+└── pulse-experimental-adapter.ts  # Ponto de entrada único; só aceita casos validados
+lib/dynamic-osce/scripts/
+└── testar-pulse-adapter-asthma.ts # 15 critérios — exit 0 se todos passarem
+```
+
+### Pipeline de conversão
+
+```
+PulseRawOutput (dict bruto)
+  → normalizePulseOutputs()   → PulseNormalizedVitals (campos canônicos + fallbacks)
+  → pulseVitalsToPatientState() → PatientState (vitals + broncoespasmo + clinical)
+                                  └── recomputarClinica() recalcula o texto clínico
+```
+
+### Executar o teste Fase 6
+
+```bash
+npx tsx lib/dynamic-osce/scripts/testar-pulse-adapter-asthma.ts
+```
+
+Espera: `RESUMO: ✅ TODOS os 15 critérios passaram.`
+
+### Invariantes mantidos
+
+- `PULSE_EXECUTION_ENABLED === false` verificado em runtime no adapter
+- `simulationProvider` dos casos permanece `medix-rule-based`
+- `recomputarClinica` é o único motor de texto clínico em uso
+- Nenhum processo externo, nenhuma dependência nova
+
+---
+
 ## O que ainda NÃO está integrado (beta)
 
-- Sem Pulse real (apenas o motor de regras).
+- Sem Pulse real (apenas o motor de regras + fixtures estáticas na Fase 6).
 - Não usa o feedback OSCE principal nem HealthBench.
 - Anamnese/exame/comunicação são auto-registro (checkboxes), não capturados por chat/exame reais.
 - Não persiste tentativas nem alimenta desempenho/dashboard.
