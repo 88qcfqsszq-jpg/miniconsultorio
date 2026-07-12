@@ -148,6 +148,86 @@ const PREDICADOS: Record<string, (ctx: RubricEvalContext) => boolean> = {
   "dpoc-cond-reavaliou": (c) =>
     tem(c.intervencoesAplicadas, "reavaliar") &&
     c.estadoFinal.vitals.spo2 > c.estadoInicial.vitals.spo2,
+
+  // ---- Pneumonia grave (pnm-*) --------------------------------------------
+  "pnm-com-apresentacao": (c) =>
+    inclui(c.comunicacaoItens, "apresent") ||
+    inclui(c.comunicacaoItens, "acolh") ||
+    inclui(c.comunicacaoItens, "tranquiliz"),
+  "pnm-com-explicou": (c) =>
+    inclui(c.comunicacaoItens, "explic") ||
+    inclui(c.comunicacaoItens, "orient"),
+
+  "pnm-anm-febre-tosse": (c) =>
+    inclui(c.anamneseItens, "febre") ||
+    inclui(c.anamneseItens, "tosse") ||
+    inclui(c.anamneseItens, "escarro"),
+  "pnm-anm-dispneia-dor": (c) =>
+    (inclui(c.anamneseItens, "dispneia") || inclui(c.anamneseItens, "falta de ar")) &&
+    (inclui(c.anamneseItens, "dor") || inclui(c.anamneseItens, "torácica") || inclui(c.anamneseItens, "toracica")),
+  "pnm-anm-comorbidades": (c) =>
+    inclui(c.anamneseItens, "comorbidade") ||
+    inclui(c.anamneseItens, "imunossupress") ||
+    inclui(c.anamneseItens, "diabetes") ||
+    inclui(c.anamneseItens, "cardiopatia"),
+  "pnm-anm-alergias-vacinacao": (c) =>
+    inclui(c.anamneseItens, "alergi") ||
+    inclui(c.anamneseItens, "vacin") ||
+    inclui(c.anamneseItens, "antibiótico") ||
+    inclui(c.anamneseItens, "antibiotico"),
+
+  "pnm-exf-vitais-spo2": (c) =>
+    inclui(c.exameItens, "sinais vitais") ||
+    inclui(c.exameItens, "satura") ||
+    inclui(c.exameItens, "spo2") ||
+    inclui(c.exameItens, "temperatura"),
+  "pnm-exf-ausculta-bilateral": (c) =>
+    inclui(c.exameItens, "ausculta") ||
+    inclui(c.exameItens, "crepitação") ||
+    inclui(c.exameItens, "crepita") ||
+    inclui(c.exameItens, "murmúrio"),
+  "pnm-exf-perfusao-consciencia": (c) =>
+    (inclui(c.exameItens, "perfus") || inclui(c.exameItens, "perfusão")) &&
+    (inclui(c.exameItens, "consciência") || inclui(c.exameItens, "consciencia") || inclui(c.exameItens, "nível")),
+
+  "pnm-exm-rx-torax": (c) =>
+    inclui(c.examesSolicitados, "radiografia") ||
+    inclui(c.examesSolicitados, "rx") ||
+    inclui(c.examesSolicitados, "tórax") ||
+    inclui(c.examesSolicitados, "torax"),
+  "pnm-exm-laboratorio": (c) =>
+    inclui(c.examesSolicitados, "hemograma") ||
+    inclui(c.examesSolicitados, "pcr") ||
+    inclui(c.examesSolicitados, "função renal") ||
+    inclui(c.examesSolicitados, "funcao renal") ||
+    inclui(c.examesSolicitados, "creatinina"),
+  "pnm-exm-gaso-lactato-culturas": (c) =>
+    inclui(c.examesSolicitados, "gasometria") ||
+    inclui(c.examesSolicitados, "lactato") ||
+    inclui(c.examesSolicitados, "hemocultura"),
+
+  "pnm-rac-reconhece-pac-grave": (c) =>
+    tem(c.intervencoesAplicadas, "oxigenio_suplementar") &&
+    tem(c.intervencoesAplicadas, "antibiotico_precoce"),
+  "pnm-rac-considera-sepse": (c) =>
+    inclui(c.examesSolicitados, "lactato") ||
+    inclui(c.examesSolicitados, "hemocultura") ||
+    inclui(c.anamneseItens, "sepse"),
+  "pnm-rac-nao-atrasa-antibiotico": (c) =>
+    tem(c.intervencoesAplicadas, "antibiotico_precoce") &&
+    !tem(c.intervencoesAplicadas, "atrasar_antibiotico_por_exames"),
+  "pnm-rac-sem-alta": (c) =>
+    !tem(c.intervencoesAplicadas, "alta_precoce") &&
+    !tem(c.intervencoesAplicadas, "alta"),
+
+  "pnm-cond-oxigenio": (c) => tem(c.intervencoesAplicadas, "oxigenio_suplementar"),
+  "pnm-cond-antibiotico-precoce": (c) => tem(c.intervencoesAplicadas, "antibiotico_precoce"),
+  "pnm-cond-suporte": (c) =>
+    tem(c.intervencoesAplicadas, "antitermico") ||
+    tem(c.intervencoesAplicadas, "hidratacao_cautelosa"),
+  "pnm-cond-reavaliou-internou": (c) =>
+    tem(c.intervencoesAplicadas, "reavaliar") &&
+    (tem(c.intervencoesAplicadas, "internacao") || tem(c.intervencoesAplicadas, "intubacao-uti")),
 };
 
 function classificar(nota: number, total: number): DynamicFeedbackResult["classificacao"] {

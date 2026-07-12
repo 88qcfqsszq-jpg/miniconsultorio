@@ -163,6 +163,44 @@ export const CATALOGO_INTERVENCOES: Record<InterventionId, Intervention> = {
     descricao: "Contraindicado no DPOC com retenção de CO₂. Suprime o drive respiratório.",
     categoria: "medicacao",
   },
+
+  // ---- Fase 5 — Pneumonia grave -------------------------------------------
+  oxigenio_suplementar: {
+    id: "oxigenio_suplementar",
+    label: "Oxigênio suplementar",
+    descricao: "Oxigenioterapia para corrigir hipoxemia (cânula/máscara). Alvo SpO₂ ≥ 92% na pneumonia.",
+    categoria: "suporte",
+  },
+  antibiotico_precoce: {
+    id: "antibiotico_precoce",
+    label: "Antibiótico precoce",
+    descricao: "Antibioticoterapia iniciada em até 1 hora — conduta essencial na pneumonia grave.",
+    categoria: "medicacao",
+  },
+  coleta_culturas_sem_atrasar_antibiotico: {
+    id: "coleta_culturas_sem_atrasar_antibiotico",
+    label: "Culturas (sem atrasar ATB)",
+    descricao: "Hemoculturas coletadas antes ou junto ao antibiótico, sem atrasar o tratamento.",
+    categoria: "monitorizacao",
+  },
+  antitermico: {
+    id: "antitermico",
+    label: "Antitérmico",
+    descricao: "Reduz febre e melhora conforto; melhora FC discretamente.",
+    categoria: "medicacao",
+  },
+  hidratacao_cautelosa: {
+    id: "hidratacao_cautelosa",
+    label: "Hidratação cautelosa",
+    descricao: "Reposição volêmica criteriosa: melhora perfusão sem risco de congestão.",
+    categoria: "suporte",
+  },
+  atrasar_antibiotico_por_exames: {
+    id: "atrasar_antibiotico_por_exames",
+    label: "Atrasar ATB por exames",
+    descricao: "Aguardar resultado de exames antes de iniciar antibiótico. Erro grave em pneumonia severa.",
+    categoria: "decisao",
+  },
 };
 
 /** Resolve o metadado de uma intervenção pelo id. */

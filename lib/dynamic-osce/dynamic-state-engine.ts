@@ -105,6 +105,39 @@ export function recomputarClinica(s: PatientState): ClinicalStatus {
     return { estadoGeral, trabalhoRespiratorio: trabalho, ausculta, fala, perfusao };
   }
 
+  // Ramo PNEUMONIA GRAVE (infecção pulmonar presente).
+  if (s.infeccaoPulmonar !== undefined) {
+    const infec = s.infeccaoPulmonar;
+    const trabalho = spo2 < 90 ? "muito aumentado" : spo2 < 94 ? "aumentado" : "próximo do normal";
+    const ausculta =
+      infec > 60
+        ? "crepitações finas em base direita, murmúrio reduzido ipsilateralmente"
+        : infec > 30
+          ? "crepitações esparsas em base direita, murmúrio discretamente reduzido"
+          : "murmúrio vesicular presente com ruídos adventícios residuais";
+    const estadoGeral =
+      spo2 < 88 || paSys < 90
+        ? "febril, prostrado, dispneico — deteriorando, risco de sepse"
+        : s.antibioticoAplicado && spo2 >= 92
+          ? "febril, dispneico com leve melhora após antibiótico e suporte"
+          : "febril, prostrado, dispneico";
+    const perfusao =
+      paSys < 90
+        ? "lentificada — possível hipoperfusão sistêmica"
+        : s.fluidosAplicados
+          ? "preservada"
+          : paSys < 100
+            ? "discretamente lentificada"
+            : "preservada";
+    return {
+      estadoGeral,
+      trabalhoRespiratorio: trabalho,
+      ausculta,
+      fala: fr > 28 || spo2 < 90 ? "frases curtas" : "frases curtas, com dificuldade",
+      perfusao,
+    };
+  }
+
   // Ramo ASMA (broncoespasmo) — comportamento original.
   const bronco = s.broncoespasmo;
 
@@ -219,10 +252,12 @@ export function applyIntervention(
     case "reavaliar": {
       const pneumo = typeof s.tensaoPneumotorax === "number";
       const dpoc = s.retencaoCO2 !== undefined;
-      const semTratamentoAsma = !dpoc && s.broncoespasmo > 60 && !s.oxigenioSuplementar;
+      const pneumonia = s.infeccaoPulmonar !== undefined;
+      const semTratamentoAsma = !dpoc && !pneumonia && s.broncoespasmo > 60 && !s.oxigenioSuplementar;
       const semTratamentoPneumo = pneumo && (s.tensaoPneumotorax ?? 0) > 40 && !s.descomprimido;
       const hiperóxiaDpoc = dpoc && !!s.hiperoxia;
       const semTratamentoDpoc = dpoc && s.vitals.spo2 < 88 && !s.oxigenioSuplementar;
+      const semAntibioticoPneumonia = pneumonia && !s.antibioticoAplicado && s.vitals.spo2 < 90;
       if (semTratamentoAsma || semTratamentoPneumo) {
         s.vitals.spo2 = clamp(s.vitals.spo2 - 3, 40, 100);
         s.vitals.fr = clamp(s.vitals.fr + 2, 12, 70);
@@ -241,6 +276,17 @@ export function applyIntervention(
         s.vitals.fr = clamp(s.vitals.fr + 2, 12, 70);
         tendencia = "piora";
         mensagem = "Reavaliação DPOC sem oxigênio: piora progressiva.";
+      } else if (semAntibioticoPneumonia) {
+        s.vitals.spo2 = clamp(s.vitals.spo2 - 3, 40, 100);
+        s.vitals.fr = clamp(s.vitals.fr + 2, 12, 70);
+        s.vitals.paSys = clamp(s.vitals.paSys - 4, 40, 260);
+        if (s.infeccaoPulmonar !== undefined) s.infeccaoPulmonar = clamp(s.infeccaoPulmonar + 5, 0, 100);
+        tendencia = "piora";
+        mensagem = "Reavaliação sem antibiótico: piora progressiva — risco de sepse crescente.";
+      } else if (pneumonia) {
+        const melhora = !!s.antibioticoAplicado && s.vitals.spo2 >= 92;
+        tendencia = melhora ? "melhora" : "estabilidade";
+        mensagem = `Reavaliação: SpO₂ ${s.vitals.spo2}%, FR ${s.vitals.fr}, PA ${s.vitals.paSys}/${s.vitals.paDia}, temp ${s.vitals.temp.toFixed(1)}°C.`;
       } else if (pneumo) {
         tendencia = s.vitals.spo2 >= 92 && s.vitals.paSys >= 100 ? "melhora" : "estabilidade";
         mensagem = `Reavaliação: SpO₂ ${s.vitals.spo2}%, PA sistólica ${s.vitals.paSys}, FR ${s.vitals.fr}.`;
@@ -391,14 +437,19 @@ export function applyIntervention(
     }
     case "alta_precoce": {
       const dpocAtivo = s.retencaoCO2 !== undefined;
-      const inseguro = dpocAtivo
-        ? s.vitals.spo2 < 88 || s.vitals.fr > 26
-        : s.vitals.spo2 < 92 || s.vitals.paSys < 100 || s.vitals.fr > 26 || (typeof s.tensaoPneumotorax === "number" && !s.drenado);
+      const pneumoniaAtiva = s.infeccaoPulmonar !== undefined;
+      const inseguro = pneumoniaAtiva
+        ? s.vitals.spo2 < 92 || s.vitals.fr > 26 || !s.antibioticoAplicado
+        : dpocAtivo
+          ? s.vitals.spo2 < 88 || s.vitals.fr > 26
+          : s.vitals.spo2 < 92 || s.vitals.paSys < 100 || s.vitals.fr > 26 || (typeof s.tensaoPneumotorax === "number" && !s.drenado);
       if (inseguro) {
         tendencia = "piora";
-        erroCritico = dpocAtivo
-          ? "Alta insegura em DPOC: paciente hipoxêmico (SpO₂ < 88%) sem tratamento adequado."
-          : "Alta insegura: paciente ainda instável / sem tratamento definitivo.";
+        erroCritico = pneumoniaAtiva
+          ? "Alta insegura em pneumonia grave: hipoxemia e/ou antibiótico ainda não iniciado."
+          : dpocAtivo
+            ? "Alta insegura em DPOC: paciente hipoxêmico (SpO₂ < 88%) sem tratamento adequado."
+            : "Alta insegura: paciente ainda instável / sem tratamento definitivo.";
         mensagem = erroCritico;
       } else {
         tendencia = "estabilidade";
@@ -469,6 +520,69 @@ export function applyIntervention(
       } else {
         tendencia = "estabilidade";
         mensagem = "Sedação administrada.";
+      }
+      break;
+    }
+
+    // ---- Fase 5 — Pneumonia grave ----------------------------------------
+    case "oxigenio_suplementar": {
+      s.oxigenioSuplementar = true;
+      const antes = s.vitals.spo2;
+      s.vitals.spo2 = clamp(s.vitals.spo2 + 5, 40, 97);
+      s.vitals.fr = clamp(s.vitals.fr - 2, 12, 70);
+      tendencia = s.vitals.spo2 > antes ? "melhora" : "estabilidade";
+      mensagem = `Oxigênio suplementar: SpO₂ ${antes}% → ${s.vitals.spo2}%. FR discretamente reduzida.`;
+      break;
+    }
+    case "antibiotico_precoce": {
+      s.antibioticoAplicado = true;
+      if (s.cargaInflamatoria !== undefined) {
+        s.cargaInflamatoria = clamp(s.cargaInflamatoria - 5, 0, 100);
+      }
+      tendencia = "estabilidade";
+      mensagem = "Antibiótico iniciado precocemente: conduta essencial. Efeito clínico progressivo nas próximas horas.";
+      break;
+    }
+    case "antitermico": {
+      s.vitals.temp = clamp(s.vitals.temp - 0.8, 36.0, 43.0);
+      s.vitals.fc = clamp(s.vitals.fc - 8, 60, 200);
+      if (s.cargaInflamatoria !== undefined) {
+        s.cargaInflamatoria = clamp(s.cargaInflamatoria - 5, 0, 100);
+      }
+      tendencia = "melhora";
+      mensagem = `Antitérmico: temperatura ${s.vitals.temp.toFixed(1)}°C, FC melhora para ${s.vitals.fc} bpm.`;
+      break;
+    }
+    case "hidratacao_cautelosa": {
+      s.fluidosAplicados = true;
+      if (s.vitals.paSys < 100) {
+        s.vitals.paSys = clamp(s.vitals.paSys + 10, 40, 260);
+        s.vitals.paDia = clamp(s.vitals.paDia + 5, 30, 160);
+      }
+      s.vitals.fc = clamp(s.vitals.fc - 5, 60, 200);
+      tendencia = s.vitals.paSys < 105 ? "melhora" : "estabilidade";
+      mensagem = "Hidratação cautelosa: perfusão melhora discretamente. Monitorar sinais de congestão.";
+      break;
+    }
+    case "coleta_culturas_sem_atrasar_antibiotico": {
+      tendencia = "estabilidade";
+      mensagem = "Hemoculturas coletadas antes do antibiótico: conduta ideal — ATB não foi atrasado.";
+      break;
+    }
+    case "atrasar_antibiotico_por_exames": {
+      if (s.infeccaoPulmonar !== undefined) {
+        s.infeccaoPulmonar = clamp(s.infeccaoPulmonar + 10, 0, 100);
+        if (s.cargaInflamatoria !== undefined) {
+          s.cargaInflamatoria = clamp(s.cargaInflamatoria + 10, 0, 100);
+        }
+        s.vitals.spo2 = clamp(s.vitals.spo2 - 2, 40, 100);
+        tendencia = "piora";
+        erroCritico =
+          "Atraso no antibiótico: em pneumonia grave o ATB deve ser iniciado em até 1 hora — atrasar aumenta mortalidade e risco de sepse.";
+        mensagem = erroCritico;
+      } else {
+        tendencia = "estabilidade";
+        mensagem = "Aguardando exames antes de iniciar antibiótico.";
       }
       break;
     }

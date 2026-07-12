@@ -50,6 +50,12 @@ const SEQ_TESTE: Record<string, SeqTeste> = {
     semTratamentoEsperaErro: true,
     altaId: "alta_precoce",
   },
+  "dynamic-severe-pneumonia-adult-001": {
+    correta: ["monitorizacao", "acesso_venoso", "oxigenio_suplementar", "coleta_culturas_sem_atrasar_antibiotico", "antibiotico_precoce", "antitermico", "hidratacao_cautelosa", "reavaliar", "internacao"],
+    semTratamento: ["atrasar_antibiotico_por_exames", "reavaliar"],
+    semTratamentoEsperaErro: true,
+    altaId: "alta_precoce",
+  },
 };
 
 let falhas = 0;
@@ -264,6 +270,12 @@ for (const caso of DYNAMIC_CASES) {
             .find((d) => d.nome === "Conduta e reavaliação")
             ?.itens.find((i) => /controlado/i.test(i.descricao))?.cumprido;
           ok(condO2 === false, "O₂ controlado NÃO pontua na sequência com alto fluxo (DPOC)");
+        }
+        if (id === "dynamic-severe-pneumonia-adult-001") {
+          const condAtb = fbErr.dominios
+            .find((d) => d.nome === "Conduta e reavaliação")
+            ?.itens.find((i) => /antibiótico/i.test(i.descricao))?.cumprido;
+          ok(condAtb === false, "Antibiótico precoce NÃO pontua na sequência de atraso (pneumonia)");
         }
       }
     }

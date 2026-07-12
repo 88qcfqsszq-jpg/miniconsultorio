@@ -60,6 +60,13 @@ export interface PatientState {
   antibioticoAplicado?: boolean;
   /** Grau de obstrução brônquica DPOC (0 = sem obstrução, 100 = máxima). */
   broncodilatacaoDpoc?: number;
+  // ---- Marcadores opcionais (Pneumonia grave — Fase 5) -------------------
+  /** Grau de infecção/consolidação pulmonar (0 = sem infecção, 100 = máxima). Discriminador pneumonia. */
+  infeccaoPulmonar?: number;
+  /** Carga inflamatória sistêmica (0 = sem inflamação, 100 = máxima). Correlaciona com febre e resposta inflamatória. */
+  cargaInflamatoria?: number;
+  /** Fluidos administrados de forma cautelosa. */
+  fluidosAplicados?: boolean;
 }
 
 // ---- Intervenções ----------------------------------------------------------
@@ -91,7 +98,14 @@ export type InterventionId =
   | "oxigenio_alto_fluxo_sem_controle"
   | "ventilacao_nao_invasiva"
   | "antibiotico_se_indicado"
-  | "sedativo_sem_indicacao";
+  | "sedativo_sem_indicacao"
+  // Fase 5 — Pneumonia grave
+  | "oxigenio_suplementar"
+  | "antibiotico_precoce"
+  | "coleta_culturas_sem_atrasar_antibiotico"
+  | "antitermico"
+  | "hidratacao_cautelosa"
+  | "atrasar_antibiotico_por_exames";
 
 export type InterventionCategory =
   | "suporte"

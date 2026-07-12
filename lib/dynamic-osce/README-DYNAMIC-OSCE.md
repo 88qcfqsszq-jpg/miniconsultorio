@@ -39,6 +39,9 @@ lib/dynamic-osce/
   torácica; a descompressão é intervenção salvadora e **atrasar por exames é erro crítico**.
 - **DPOC Exacerbado — Adulto** (`dynamic-copd-exacerbation-adult-001`) — exacerbação grave com
   retenção de CO₂; **alvo de SpO₂ 88–92%**; hiperóxia é erro crítico; VNI é escalonamento chave.
+- **Pneumonia Grave — Adulto** (`dynamic-severe-pneumonia-adult-001`) — PAC grave com hipoxemia,
+  febre e risco de sepse; **antibiótico precoce (≤ 1 h) é conduta essencial**; atrasar por exames
+  é erro crítico; avaliar lactato e hemoculturas; SpO₂ alvo ≥ 92%.
 
 Cada caso é **1 arquivo TS** em `cases/` contendo o caso **e** a sua rubrica completa (ex.:
 `cases/pneumotorax-hipertensivo-adulto.ts` exporta `pneumotoraxHipertensivoAdulto` e
@@ -54,6 +57,8 @@ Pulse) e retorna exit 1 em qualquer falha:
 ```bash
 npx tsx lib/dynamic-osce/scripts/validar-dynamic-osce.ts
 ```
+
+Atualmente cobre **4 casos**: asma, pneumotórax, DPOC e pneumonia grave.
 
 > Pulse real **ainda não está integrado** — o provider em execução de todos os casos é
 > `medix-rule-based`; a compatibilidade Pulse é apenas declarada e validada.
