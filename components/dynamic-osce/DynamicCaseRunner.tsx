@@ -24,6 +24,9 @@ import {
 import DynamicPatientStatePanel from "./DynamicPatientStatePanel";
 import DynamicInterventionsPanel from "./DynamicInterventionsPanel";
 import DynamicTimelinePanel from "./DynamicTimelinePanel";
+import PulseLocalExperimentPanel from "./PulseLocalExperimentPanel";
+
+const ASTHMA_CASE_ID = "dynamic-asthma-severe-adult-001";
 
 interface Props {
   caso: DynamicCase;
@@ -257,6 +260,10 @@ export default function DynamicCaseRunner({ caso, onSair }: Props) {
       <div style={{ display: "grid", gridTemplateColumns: narrow ? "1fr" : "minmax(0, 1fr) minmax(0, 320px)", gap: 16, alignItems: "start" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <DynamicPatientStatePanel estado={estado} tendencia={ultimaTendencia} />
+
+          {caso.identificacao.caseId === ASTHMA_CASE_ID && (
+            <PulseLocalExperimentPanel conditionId="asthma-severe-adult" severity={0.75} duration_s={580} />
+          )}
 
           {!finalizado && (
             <>
