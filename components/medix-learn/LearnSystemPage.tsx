@@ -1,10 +1,13 @@
+import { redirect } from "next/navigation";
 import { LEARN_SYSTEMS } from "@/lib/medix-learn";
+import type { LearnSystem } from "@/lib/medix-learn/types";
 import LearnShell from "./LearnShell";
 import LearnHero from "./LearnHero";
 import LearnTrailCard from "./LearnTrailCard";
 
 interface Props {
   systemId: string;
+  sistema?: LearnSystem;
 }
 
 const SYSTEM_INTROS: Record<string, string> = {
@@ -17,9 +20,9 @@ const SYSTEM_INTROS: Record<string, string> = {
   "raciocinio-clinico": "a trilha de Síndromes antes de diagnósticos apresenta o princípio fundamental do raciocínio clínico.",
 };
 
-export default function LearnSystemPage({ systemId }: Props) {
-  const sistema = LEARN_SYSTEMS.find((s) => s.id === systemId);
-  if (!sistema) return null;
+export default function LearnSystemPage({ systemId, sistema: sistemaProp }: Props) {
+  const sistema = sistemaProp ?? LEARN_SYSTEMS.find((s) => s.id === systemId);
+  if (!sistema) redirect("/learn");
 
   const intro = SYSTEM_INTROS[systemId] ?? "comece pela primeira trilha do sistema.";
 
