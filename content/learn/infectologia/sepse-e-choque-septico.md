@@ -162,7 +162,10 @@ Depois pergunte:
 ### Cenário
 Homem de 71 anos com febre, tosse purulenta e dispneia há 3 dias. PA 92/58, FC 124, FR 32, SpO₂ 88%, confuso, crepitações em base direita, extremidades frias.
 
-### Dados-chave
+### Mecanismo principal
+Infecção pulmonar com disfunção orgânica sistêmica: hipoxemia, hipotensão, confusão e hipoperfusão.
+
+### Achados-chave
 - foco respiratório provável;
 - hipoxemia;
 - hipotensão;
@@ -189,7 +192,10 @@ Treine pneumonia grave: ABCDE, oxigênio, acesso, exames úteis, antibiótico co
 ### Cenário
 Mulher de 58 anos, diabética, febre, calafrios, disúria e dor lombar direita. PA 100/64, FC 116, FR 24, dor à punho-percussão lombar, náuseas, prostração.
 
-### Dados-chave
+### Mecanismo principal
+Pielonefrite com resposta inflamatória sistêmica e risco de progressão para sepse.
+
+### Achados-chave
 - foco urinário alto;
 - diabetes;
 - febre com calafrios;
@@ -216,7 +222,10 @@ Treine ITU/pielonefrite: diferenciar infecção baixa, alta e urosepse.
 ### Cenário
 Paciente com infecção abdominal suspeita. PA 78/46, FC 138, FR 34, pele fria/marmórea, confuso, oligúria, lactato elevado. Dor abdominal difusa com defesa.
 
-### Dados-chave
+### Mecanismo principal
+Falência circulatória por resposta inflamatória desregulada com hipoperfusão grave e foco abdominal provável.
+
+### Achados-chave
 - hipotensão importante;
 - hipoperfusão;
 - alteração mental;
@@ -243,7 +252,10 @@ Treine priorização: estabilizar, tratar, reavaliar e acionar suporte.
 ### Cenário
 Mulher de 84 anos trazida por “sonolência e queda”. Afebril no momento. PA 94/60, FC 108, FR 26. Família relata redução de ingesta e diurese. Urina com odor forte. Está desorientada.
 
-### Dados-chave
+### Mecanismo principal
+Resposta inflamatória sistêmica atenuada em idosa frágil com foco urinário provável e delirium como sinal de gravidade.
+
+### Achados-chave
 - idosa frágil;
 - ausência de febre não tranquiliza;
 - delirium;

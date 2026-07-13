@@ -6,8 +6,6 @@ Ensinar você a abordar sonolência, confusão, delirium, estupor e coma sem per
 
 Rebaixamento de consciência não é diagnóstico. É uma síndrome de risco. Você precisa proteger vida, medir glicemia, avaliar respiração, procurar foco infeccioso, intoxicação, trauma, AVC e distúrbio metabólico.
 
-> **PONTO-CHAVE:** paciente rebaixado não espera anamnese perfeita. Primeiro segurança e ABCDE; depois hipótese.
-
 ---
 
 ## Competências ao final
@@ -37,6 +35,9 @@ O paciente pode rebaixar por lesão estrutural, hipóxia, hipoglicemia, sepse, i
 rebaixamento → ABCDE → glicemia → pupilas/focalidade → infecção/tox/metabólico/estrutural
 ```
 
+**PONTO-CHAVE:**  
+Paciente rebaixado não espera anamnese perfeita. Primeiro segurança e ABCDE; depois hipótese.
+
 ## Não erre
 
 Nunca diga “está dormindo” antes de avaliar resposta verbal, resposta motora, pupilas, glicemia, respiração e perfusão.
@@ -61,7 +62,8 @@ Padrão comum: déficit focal, anisocoria, assimetria motora, cefaleia/vômitos,
 
 Estado confusional agudo, flutuante, com desatenção. Em idosos, pode ser a apresentação de sepse, ITU, pneumonia, desidratação, medicação ou dor.
 
-> **RACIOCÍNIO:** no idoso, confusão aguda é infecção/metabólico/medicação até prova em contrário.
+**RACIOCÍNIO:**  
+No idoso, confusão aguda é infecção/metabólico/medicação até prova em contrário.
 
 ---
 
@@ -92,7 +94,8 @@ Não use Glasgow como número decorado. Use para comunicar gravidade:
 - resposta verbal;
 - resposta motora.
 
-> **PONTO-CHAVE:** queda de Glasgow, assimetria pupilar, déficit focal, rigidez de nuca ou hipoglicemia mudam a prioridade.
+**PONTO-CHAVE:**  
+Queda de Glasgow, assimetria pupilar, déficit focal, rigidez de nuca ou hipoglicemia mudam a prioridade.
 
 ---
 

@@ -6,8 +6,6 @@ Ensinar você a avaliar cefaleia sem cair em dois extremos: banalizar uma emerg�
 
 A meta é reconhecer padrões, procurar sinais de alarme e decidir quando a cefaleia pode ser manejada como primária e quando precisa investigação urgente.
 
-> **PONTO-CHAVE:** cefaleia é sintoma. O primeiro passo não é nomear “enxaqueca”; é decidir se existe risco de causa secundária grave.
-
 ---
 
 ## Competências ao final
@@ -34,6 +32,9 @@ Você não deve estudar cefaleia como uma lista de tipos. Estude como uma triage
 dor de cabeça → padrão temporal → sinais de alarme → exame neurológico → decisão
 ```
 
+**PONTO-CHAVE:**  
+Cefaleia é sintoma. O primeiro passo não é nomear "enxaqueca"; é decidir se existe risco de causa secundária grave.
+
 ## Não erre
 
 Dor intensa não é sinônimo de gravidade. Dor leve também pode ser grave se vier com febre, rigidez de nuca, déficit focal, alteração de consciência, papiledema, gravidez/puerpério ou início súbito.
@@ -58,7 +59,8 @@ Aqui a dor é consequência de outro problema:
 - crise hipertensiva com lesão de órgão-alvo;
 - trauma.
 
-> **RACIOCÍNIO:** se a cefaleia mudou o comportamento do paciente, veio com sinal neurológico ou rompeu o padrão habitual, trate como secundária até provar o contrário.
+**RACIOCÍNIO:**  
+Se a cefaleia mudou o comportamento do paciente, veio com sinal neurológico ou rompeu o padrão habitual, trate como secundária até provar o contrário.
 
 ---
 
@@ -90,7 +92,8 @@ Você deve procurar:
 - sinais vitais;
 - sinais de infecção ou trauma.
 
-> **NÃO CONFUNDA:** fotofobia pode ocorrer na enxaqueca, mas febre + rigidez de nuca + confusão muda o problema para meningite/encefalite até prova em contrário.
+**NÃO CONFUNDA:**  
+Fotofobia pode ocorrer na enxaqueca, mas febre + rigidez de nuca + confusão muda o problema para meningite/encefalite até prova em contrário.
 
 ---
 

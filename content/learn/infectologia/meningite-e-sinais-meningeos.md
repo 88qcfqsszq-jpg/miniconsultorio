@@ -145,7 +145,10 @@ Se o paciente está instável, antibiótico e suporte não devem esperar a punç
 ### Cenário
 Jovem de 20 anos com febre alta, cefaleia intensa, vômitos, fotofobia e rigidez de nuca. FC 120, PA 110/70, irritado e sonolento.
 
-### Dados-chave
+### Mecanismo principal
+Inflamação bacteriana das meninges com risco de deterioração neurológica rápida e sepse.
+
+### Achados-chave
 - febre;
 - cefaleia intensa;
 - rigidez de nuca;
@@ -172,7 +175,10 @@ Treine reconhecimento, isolamento conforme protocolo, antibiótico precoce e inv
 ### Cenário
 Adolescente com febre, mal-estar intenso, dor em pernas, vômitos, manchas arroxeadas na pele, FC 140, PA 86/48, extremidades frias.
 
-### Dados-chave
+### Mecanismo principal
+Bacteremia meningocócica com endotoxemia, sepse e vasculite cutânea.
+
+### Achados-chave
 - febre;
 - púrpura/petéquias;
 - hipotensão;
@@ -198,7 +204,10 @@ Treine choque infeccioso com suspeita meningocócica.
 ### Cenário
 Homem de 78 anos com febre baixa, confusão e sonolência. Sem queixa clara de cefaleia. PA 100/64, FC 112. Rigidez de nuca discreta. Família relata piora rápida em 24h.
 
-### Dados-chave
+### Mecanismo principal
+Infecção do SNC com apresentação atípica em idoso: delirium febril e piora rápida sem tríade clássica.
+
+### Achados-chave
 - idoso;
 - delirium;
 - febre baixa;
@@ -224,7 +233,10 @@ Treine idoso febril confuso: não perder meningite, sepse e causas metabólicas.
 ### Cenário
 Paciente com febre, cefaleia, sonolência e fraqueza em braço direito. Teve convulsão na sala de espera. PA 130/80, FC 116.
 
-### Dados-chave
+### Mecanismo principal
+Infecção do SNC ou lesão intracraniana associada com irritação meníngea e déficit neurológico focal.
+
+### Achados-chave
 - febre;
 - cefaleia;
 - déficit focal;

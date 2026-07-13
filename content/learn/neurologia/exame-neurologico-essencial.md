@@ -6,8 +6,6 @@ Ensinar você a fazer um exame neurológico útil, rápido e direcionado para o 
 
 O objetivo não é decorar manobras. É localizar o problema e reconhecer gravidade.
 
-> **PONTO-CHAVE:** exame neurológico bom responde: há déficit focal? onde localiza? é urgente?
-
 ---
 
 ## Competências ao final
@@ -34,6 +32,9 @@ consciência → linguagem → pares cranianos → força → sensibilidade → 
 
 Você não precisa fazer tudo em todos os pacientes. Você precisa fazer o essencial para a queixa e para gravidade.
 
+**PONTO-CHAVE:**  
+Exame neurológico bom responde: há déficit focal? Onde localiza? É urgente?
+
 ---
 
 # 2. Neuroanatomia aplicada
@@ -58,7 +59,8 @@ Coordenação, equilíbrio, marcha, precisão do movimento.
 
 Força segmentar, sensibilidade em dermátomos, reflexos, esfíncteres.
 
-> **RACIOCÍNIO:** face + braço + fala sugere cérebro; pares cranianos cruzados ou diplopia sugerem tronco; ataxia sugere cerebelo.
+**RACIOCÍNIO:**  
+Face + braço + fala sugere cérebro; pares cranianos cruzados ou diplopia sugerem tronco; ataxia sugere cerebelo.
 
 ---
 

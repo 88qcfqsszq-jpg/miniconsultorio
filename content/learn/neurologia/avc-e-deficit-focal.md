@@ -6,8 +6,6 @@ Ensinar você a reconhecer déficit neurológico focal como urgência tempo-depe
 
 AVC não é “fraqueza de um lado” apenas. É uma síndrome vascular aguda que pode comprometer fala, visão, coordenação, sensibilidade, consciência e função cortical.
 
-> **PONTO-CHAVE:** no AVC, tempo é cérebro. Você não precisa fechar subtipo na primeira abordagem; precisa reconhecer déficit focal, horário de início e estabilidade clínica.
-
 ---
 
 ## Competências ao final
@@ -40,6 +38,9 @@ Você deve começar pela síndrome:
 déficit focal súbito → horário de início → glicemia → exame neurológico → encaminhamento
 ```
 
+**PONTO-CHAVE:**  
+No AVC, tempo é cérebro. Você não precisa fechar subtipo na primeira abordagem; precisa reconhecer déficit focal, horário de início e estabilidade clínica.
+
 ## Não erre
 
 Hipoglicemia pode imitar AVC. Medir glicemia capilar é parte da abordagem inicial.
@@ -61,7 +62,8 @@ O sangue no parênquima ou espaço subaracnoideo causa lesão direta, edema, aum
 - anterior: afasia, hemiparesia, hemianopsia, desvio do olhar;
 - posterior: vertigem intensa, diplopia, disfagia, ataxia, alteração de consciência.
 
-> **CUIDADO:** AVC posterior pode parecer “labirintite”. Ataxia, diplopia, disartria, disfagia ou déficit focal tornam o caso neurológico até prova em contrário.
+**CUIDADO:**  
+AVC posterior pode parecer “labirintite”. Ataxia, diplopia, disartria, disfagia ou déficit focal tornam o caso neurológico até prova em contrário.
 
 ---
 

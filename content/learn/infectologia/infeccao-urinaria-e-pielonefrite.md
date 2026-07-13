@@ -165,7 +165,10 @@ Use esta sequência:
 ### Cenário
 Mulher de 26 anos, não gestante, com disúria, urgência e polaciúria há 2 dias. Sem febre, sem dor lombar, PA 116/72, FC 84, bom estado geral.
 
-### Dados-chave
+### Mecanismo principal
+Inflamação restrita à mucosa vesical por ascensão bacteriana, sem acometimento renal.
+
+### Achados-chave
 - sintomas urinários baixos;
 - sem febre;
 - sem dor lombar;
@@ -191,7 +194,10 @@ Treine orientação, sinais de retorno e uso racional de antibiótico.
 ### Cenário
 Mulher de 34 anos com febre 39 °C, calafrios, náuseas, dor lombar direita e disúria há 3 dias. FC 112, PA 108/70, punho-percussão lombar direita dolorosa.
 
-### Dados-chave
+### Mecanismo principal
+Infecção urinária alta com acometimento renal e resposta inflamatória sistêmica.
+
+### Achados-chave
 - febre;
 - calafrios;
 - dor lombar;
@@ -218,7 +224,10 @@ Treine pielonefrite: gravidade, cultura, antibiótico adequado e reavaliação.
 ### Cenário
 Homem de 79 anos com hiperplasia prostática, febre baixa, confusão, fraqueza, PA 88/54, FC 120, FR 26, oligúria. Dor suprapúbica e globo vesical palpável.
 
-### Dados-chave
+### Mecanismo principal
+Infecção urinária com disfunção orgânica sistêmica em idoso com obstrução prostática.
+
+### Achados-chave
 - idoso;
 - obstrução provável;
 - confusão;
@@ -245,7 +254,10 @@ Treine urosepse: foco, perfusão, obstrução e prioridade.
 ### Cenário
 Mulher de 68 anos faz exame de rotina. EAS com nitrito positivo e bacteriúria, mas sem disúria, febre, dor lombar, urgência, polaciúria ou alteração clínica.
 
-### Dados-chave
+### Mecanismo principal
+Colonização bacteriana sem resposta inflamatória sintomática, sem indicação de tratamento fora de contextos específicos.
+
+### Achados-chave
 - exame alterado;
 - sem sintomas;
 - bom estado geral;

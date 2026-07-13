@@ -6,8 +6,6 @@ Ensinar você a reconhecer uma crise epiléptica, proteger o paciente, identific
 
 Crise convulsiva não é apenas “tremer”. Pode haver alteração de consciência, olhar fixo, automatismos, confusão pós-ictal, queda, mordedura de língua ou perda urinária.
 
-> **PONTO-CHAVE:** primeiro proteja vida e via aérea. Depois classifique a crise.
-
 ---
 
 ## Competências ao final
@@ -34,6 +32,9 @@ Você deve pensar em três perguntas:
 está em crise agora? → recuperou? → há causa provocada ou lesão estrutural?
 ```
 
+**PONTO-CHAVE:**  
+Primeiro proteja vida e via aérea. Depois classifique a crise.
+
 ## Não erre
 
 Não coloque objetos na boca. Não tente segurar a língua. Não restrinja movimentos com força. Proteja de trauma, posicione quando possível e avalie respiração.
@@ -54,7 +55,8 @@ Envolve redes bilaterais desde o início ou rapidamente. Pode causar perda de co
 
 Após a crise, pode haver sonolência, confusão, cefaleia, dor muscular e déficit focal transitório (paralisia de Todd).
 
-> **RACIOCÍNIO:** crise + febre/rigidez de nuca = pense em infecção do SNC. Crise + déficit focal persistente = pense em AVC/lesão estrutural.
+**RACIOCÍNIO:**  
+Crise + febre/rigidez de nuca = pense em infecção do SNC. Crise + déficit focal persistente = pense em AVC/lesão estrutural.
 
 ---
 
@@ -116,7 +118,8 @@ ABCDE → glicemia → tempo de crise → causa reversível → sinais de lesão
 
 Crise prolongada ou crises repetidas sem recuperação adequada entre elas são emergência neurológica.
 
-> **CUIDADO:** quanto mais tempo a crise dura, mais difícil fica controlar e maior o risco de dano.
+**CUIDADO:**  
+Quanto mais tempo a crise dura, mais difícil fica controlar e maior o risco de dano.
 
 ## Erros comuns
 

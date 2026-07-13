@@ -6,8 +6,6 @@ Ensinar você a avaliar dor lombar separando quadro mecânico comum de sinais de
 
 A maioria das lombalgias é benigna. O perigo está em perder síndrome da cauda equina, infecção, fratura, tumor ou déficit neurológico progressivo.
 
-> **PONTO-CHAVE:** dor lombar com perda de força, anestesia em sela ou alteração urinária não é “lombalgia simples”.
-
 ---
 
 ## Competências ao final
@@ -33,6 +31,9 @@ A pergunta inicial é:
 ```text
 é dor mecânica isolada ou há sinal neurológico/sistêmico?
 ```
+
+**PONTO-CHAVE:**  
+Dor lombar com perda de força, anestesia em sela ou alteração urinária não é "lombalgia simples".
 
 ## Não erre
 
@@ -61,7 +62,8 @@ Compressão de raízes sacrais e lombares. Pode causar:
 - alteração sexual;
 - dor ciática bilateral.
 
-> **CUIDADO:** cauda equina é tempo-dependente. Atraso pode deixar sequela esfincteriana e motora.
+**CUIDADO:**  
+Cauda equina é tempo-dependente. Atraso pode deixar sequela esfincteriana e motora.
 
 ---
 

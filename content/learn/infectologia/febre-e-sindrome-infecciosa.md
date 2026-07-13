@@ -164,7 +164,10 @@ A prioridade não é “descobrir o germe” no primeiro minuto. A prioridade é
 ### Cenário
 Você atende uma paciente de 24 anos com febre há 24 horas, mialgia leve, coriza, dor de garganta discreta. PA 118/76, FC 92, FR 16, SpO₂ 98%, lúcida, hidratada, sem dispneia, sem dor abdominal, sem rigidez de nuca, sem sangramento.
 
-### Dados-chave
+### Mecanismo principal
+Resposta inflamatória viral sem sinais de gravidade sistêmica ou foco bacteriano identificável.
+
+### Achados-chave
 - febre recente;
 - bom estado geral;
 - sinais vitais estáveis;
@@ -190,7 +193,10 @@ Treine comunicação: explicar sinais de alarme e quando retornar.
 ### Cenário
 Homem de 67 anos, diabético, febre há 3 dias, tosse produtiva, dispneia e dor torácica ventilatório-dependente. PA 100/64, FC 118, FR 30, SpO₂ 89%, crepitações em base direita, prostrado.
 
-### Dados-chave
+### Mecanismo principal
+Síndrome infecciosa respiratória com comprometimento sistêmico sugestivo de pneumonia grave.
+
+### Achados-chave
 - febre + tosse produtiva;
 - hipoxemia;
 - taquipneia;
@@ -217,7 +223,10 @@ Treine pneumonia: reconhecimento de gravidade, oxigênio, exames que mudam condu
 ### Cenário
 Mulher de 72 anos chega “mais quieta e confusa” há 1 dia. Temperatura 37,9 °C, FC 112, PA 92/58, FR 24. Sem queixa clara. Família relata redução da diurese. Extremidades frias. Dor à palpação suprapúbica.
 
-### Dados-chave
+### Mecanismo principal
+Sepse provável com apresentação atípica: idosa com febre baixa, confusão e sinais de hipoperfusão.
+
+### Achados-chave
 - idosa;
 - febre baixa;
 - confusão;
@@ -244,7 +253,10 @@ Treine idoso com apresentação atípica: sinais vitais, perfusão, foco infecci
 ### Cenário
 Paciente de 19 anos com febre alta, cefaleia intensa, vômitos e fotofobia. Está sonolento, irritado ao exame, com rigidez de nuca. PA 110/70, FC 122.
 
-### Dados-chave
+### Mecanismo principal
+Infecção do sistema nervoso central provável com resposta inflamatória meníngea e risco de deterioração.
+
+### Achados-chave
 - febre;
 - cefaleia intensa;
 - vômitos;

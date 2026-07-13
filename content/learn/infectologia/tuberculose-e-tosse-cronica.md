@@ -155,7 +155,10 @@ tosse ≥ semanas
 ### Cenário
 Homem de 38 anos com tosse há 5 semanas, perda de 6 kg, febre vespertina, sudorese noturna e escarro com raias de sangue. Mora com várias pessoas. Ausculta pouco alterada.
 
-### Dados-chave
+### Mecanismo principal
+Doença granulomatosa pulmonar por Mycobacterium tuberculosis com síndrome constitucional e risco de transmissão.
+
+### Achados-chave
 - tosse crônica;
 - perda de peso;
 - febre vespertina;
@@ -182,7 +185,10 @@ Treine tosse crônica: duração, sintomas B, contato e investigação.
 ### Cenário
 Paciente com HIV sem acompanhamento, tosse há 3 semanas, febre baixa, emagrecimento e dispneia. RX sem cavitação evidente.
 
-### Dados-chave
+### Mecanismo principal
+TB pulmonar com apresentação atípica por imunossupressão, menor probabilidade de cavitação clássica.
+
+### Achados-chave
 - imunossupressão;
 - sintomas sistêmicos;
 - tosse subaguda;
@@ -207,7 +213,10 @@ Treine TB em paciente vulnerável: risco, exames e proteção.
 ### Cenário
 Homem de 52 anos, tabagista, tosse há 2 meses, emagrecimento e episódios de hemoptise. Nega febre importante. Tem sudorese noturna ocasional.
 
-### Dados-chave
+### Mecanismo principal
+Doença pulmonar crônica com sangramento de vias aéreas inferiores: diagnóstico diferencial entre TB e neoplasia.
+
+### Achados-chave
 - tosse crônica;
 - hemoptise;
 - emagrecimento;
@@ -233,7 +242,10 @@ Treine raciocínio diferencial de tosse crônica com sangue.
 ### Cenário
 Criança mora com avô recém-diagnosticado com TB pulmonar bacilífera. Está assintomática. Família pergunta se precisa fazer algo.
 
-### Dados-chave
+### Mecanismo principal
+Exposição de alto risco a caso bacilífero com necessidade de investigação de infecção latente conforme protocolo.
+
+### Achados-chave
 - contato próximo;
 - caso bacilífero;
 - criança;

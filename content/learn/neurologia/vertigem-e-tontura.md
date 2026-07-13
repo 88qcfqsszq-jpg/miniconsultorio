@@ -6,8 +6,6 @@ Ensinar você a diferenciar tontura vaga, pré-síncope, desequilíbrio e vertig
 
 Nem toda vertigem é labirintite. O erro perigoso é chamar de periférico um quadro central.
 
-> **PONTO-CHAVE:** vertigem com sinal neurológico é AVC posterior até prova em contrário.
-
 ---
 
 ## Competências ao final
@@ -33,6 +31,9 @@ gira? → quase desmaia? → desequilibra? → está fraco/confuso?
 
 Vertigem é sensação de rotação ou movimento. Pode ser periférica ou central.
 
+**PONTO-CHAVE:**  
+Vertigem com sinal neurológico é AVC posterior até prova em contrário.
+
 ## Não erre
 
 “Labirintite” não é diagnóstico para toda tontura. É um rótulo que pode esconder AVC posterior.
@@ -55,7 +56,8 @@ Padrões:
 
 Vem do tronco/cerebelo. Pode ter ataxia, disartria, diplopia, disfagia, fraqueza, alteração de sensibilidade ou nistagmo atípico.
 
-> **CUIDADO:** paciente que não consegue ficar em pé sem apoio preocupa.
+**CUIDADO:**  
+Paciente que não consegue ficar em pé sem apoio preocupa.
 
 ---
 

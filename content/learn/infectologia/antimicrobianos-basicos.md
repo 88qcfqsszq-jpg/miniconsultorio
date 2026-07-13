@@ -141,7 +141,10 @@ Começar amplo pode ser necessário em gravidade. Manter amplo sem motivo é err
 ### Cenário
 Paciente de 22 anos com coriza, dor de garganta leve, tosse seca, febre baixa há 24h. Bom estado geral, ausculta normal, SpO₂ 98%, sem exsudato, sem sinais de gravidade.
 
-### Dados-chave
+### Mecanismo principal
+Infecção viral de vias aéreas superiores sem evidência de infecção bacteriana.
+
+### Achados-chave
 - sintomas de vias aéreas superiores;
 - bom estado geral;
 - sem foco bacteriano claro;
@@ -166,7 +169,10 @@ Treine comunicação: explicar por que não usar antibiótico também é conduta
 ### Cenário
 Homem de 70 anos com febre, tosse purulenta, dispneia, FR 32, SpO₂ 88%, crepitações, confusão leve. PA 100/60.
 
-### Dados-chave
+### Mecanismo principal
+Pneumonia bacteriana provável com comprometimento sistêmico e risco de sepse.
+
+### Achados-chave
 - foco pulmonar;
 - hipoxemia;
 - taquipneia;
@@ -192,7 +198,10 @@ Treine pneumonia: gravidade, suporte, antibiótico e reavaliação.
 ### Cenário
 Mulher de 35 anos com febre, calafrios, dor lombar e disúria. Recebeu nitrofurantoína e piorou após 48h.
 
-### Dados-chave
+### Mecanismo principal
+Pielonefrite inadequadamente tratada com antibiótico sem penetração adequada no parênquima renal.
+
+### Achados-chave
 - febre;
 - dor lombar;
 - calafrios;
@@ -218,7 +227,10 @@ Treine ITU: local da infecção muda antibiótico.
 ### Cenário
 Paciente com lesão dolorosa, flutuante, eritematosa em coxa. Febre baixa. Recebeu antibiótico oral e não melhorou. Exame mostra coleção purulenta.
 
-### Dados-chave
+### Mecanismo principal
+Abscesso com coleção purulenta que exige controle de foco além do antibiótico.
+
+### Achados-chave
 - abscesso;
 - flutuação;
 - pus;
