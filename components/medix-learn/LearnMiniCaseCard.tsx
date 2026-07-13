@@ -49,9 +49,9 @@ export default function LearnMiniCaseCard({ miniCase }: Props) {
 
         {/* Dados chave */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-          {miniCase.dadosChave.map((d) => (
+          {miniCase.dadosChave.map((d, i) => (
             <span
-              key={d.label}
+              key={`${miniCase.id}-dado-${i}`}
               style={{
                 padding: "4px 9px",
                 borderRadius: 8,

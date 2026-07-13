@@ -76,8 +76,8 @@ export default function LearnHipoxemiaPage() {
       >
         <SectionTitle>Objetivos da trilha</SectionTitle>
         <ul style={{ margin: 0, paddingLeft: 18, display: "grid", gap: 5 }}>
-          {trilha.objetivos.map((obj) => (
-            <li key={obj} style={{ fontSize: 13, color: "#374151", lineHeight: 1.5 }}>
+          {trilha.objetivos.map((obj, i) => (
+            <li key={`obj-${i}`} style={{ fontSize: 13, color: "#374151", lineHeight: 1.5 }}>
               {obj}
             </li>
           ))}

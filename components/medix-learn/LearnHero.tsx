@@ -22,7 +22,7 @@ export default function LearnHero({ titulo, subtitulo, badges = [], breadcrumb =
       {breadcrumb.length > 0 && (
         <nav style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "#5c6d8a" }}>
           {breadcrumb.map((crumb, i) => (
-            <span key={crumb.href} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span key={`crumb-${i}`} style={{ display: "flex", alignItems: "center", gap: 6 }}>
               {i > 0 && <span style={{ opacity: 0.5 }}>›</span>}
               <a
                 href={crumb.href}
@@ -49,11 +49,11 @@ export default function LearnHero({ titulo, subtitulo, badges = [], breadcrumb =
       </p>
       {badges.length > 0 && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 4 }}>
-          {badges.map((b) => {
+          {badges.map((b, i) => {
             const palette = BADGE_PALETTE[b] ?? { bg: "rgba(120,130,180,0.12)", color: "#334155" };
             return (
               <span
-                key={b}
+                key={`badge-${i}`}
                 style={{
                   padding: "3px 10px",
                   borderRadius: 999,

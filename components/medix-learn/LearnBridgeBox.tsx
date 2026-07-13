@@ -33,9 +33,9 @@ export default function LearnBridgeBox({ bridge }: Props) {
           Casos recomendados
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-          {bridge.casosRecomendados.map((c) => (
+          {bridge.casosRecomendados.map((c, i) => (
             <span
-              key={c}
+              key={`caso-${i}`}
               style={{
                 padding: "3px 9px",
                 borderRadius: 999,
@@ -57,8 +57,8 @@ export default function LearnBridgeBox({ bridge }: Props) {
           Competências treinadas
         </div>
         <ul style={{ margin: 0, paddingLeft: 16, display: "flex", flexDirection: "column", gap: 3 }}>
-          {bridge.competencias.map((comp) => (
-            <li key={comp} style={{ fontSize: 12, color: "#374151", lineHeight: 1.45 }}>
+          {bridge.competencias.map((comp, i) => (
+            <li key={`${bridge.modulo}-comp-${i}`} style={{ fontSize: 12, color: "#374151", lineHeight: 1.45 }}>
               {comp}
             </li>
           ))}

@@ -60,8 +60,8 @@ export default function LearnTrailPage({ trail, systemId }: Props) {
         <div style={{ padding: "18px 20px", borderRadius: 14, background: "#fff", border: "1px solid rgba(120,130,180,0.16)", display: "flex", flexDirection: "column", gap: 10 }}>
           <SectionTitle>Objetivos da trilha</SectionTitle>
           <ul style={{ margin: 0, paddingLeft: 18, display: "grid", gap: 5 }}>
-            {trail.objetivos.map((obj) => (
-              <li key={obj} style={{ fontSize: 13, color: "#374151", lineHeight: 1.5 }}>{obj}</li>
+            {trail.objetivos.map((obj, i) => (
+              <li key={`obj-${i}`} style={{ fontSize: 13, color: "#374151", lineHeight: 1.5 }}>{obj}</li>
             ))}
           </ul>
         </div>
