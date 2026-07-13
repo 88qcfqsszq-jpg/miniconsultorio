@@ -2,123 +2,105 @@
 
 ## Objetivo da trilha
 
-Ensinar diferenciar vertigem periférica, central, pré-síncope e desequilíbrio com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a diferenciar tontura vaga, pré-síncope, desequilíbrio e vertigem verdadeira, reconhecendo sinais de AVC posterior.
 
-A trilha deve sempre conectar três camadas:
+Nem toda vertigem é labirintite. O erro perigoso é chamar de periférico um quadro central.
 
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+> **PONTO-CHAVE:** vertigem com sinal neurológico é AVC posterior até prova em contrário.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de vertigem e tontura.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Definir vertigem como ilusão de movimento.
+2. Diferenciar vertigem de pré-síncope e desequilíbrio.
+3. Reconhecer VPPB, neurite vestibular e Ménière como padrões periféricos.
+4. Identificar red flags de AVC posterior.
+5. Fazer exame dirigido: nistagmo, marcha, coordenação, pares cranianos.
+6. Evitar alta em vertigem com ataxia, disartria, diplopia ou déficit focal.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Vertigem e tontura é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Vertigem e tontura**: Vertigem e tontura é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+A palavra “tontura” é imprecisa. Você precisa transformar a queixa em síndrome:
 
 ```text
-Vertigem e tontura: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+gira? → quase desmaia? → desequilibra? → está fraco/confuso?
 ```
+
+Vertigem é sensação de rotação ou movimento. Pode ser periférica ou central.
+
+## Não erre
+
+“Labirintite” não é diagnóstico para toda tontura. É um rótulo que pode esconder AVC posterior.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Vertigem periférica
 
-Em vertigem e tontura, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Vem do labirinto/nervo vestibular. Geralmente causa vertigem intensa, náuseas, nistagmo, mas sem déficit neurológico focal.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+Padrões:
 
-## 2. Semiologia aplicada
+- VPPB: crises breves, desencadeadas por posição;
+- neurite vestibular: vertigem contínua por dias, sem perda auditiva;
+- Ménière: vertigem + perda auditiva/tinnitus/plenitude.
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+## Vertigem central
 
-```text
-observação → interpretação → conduta
-```
+Vem do tronco/cerebelo. Pode ter ataxia, disartria, diplopia, disfagia, fraqueza, alteração de sensibilidade ou nistagmo atípico.
 
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+> **CUIDADO:** paciente que não consegue ficar em pé sem apoio preocupa.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+Pergunte:
 
-## Achados que precisam ser procurados
+- é rotação?
+- dura segundos, horas ou dias?
+- é desencadeada por posição?
+- há perda auditiva/tinnitus?
+- há cefaleia súbita?
+- há diplopia, disartria, disfagia?
+- há fraqueza, dormência, ataxia?
+- há fatores vasculares?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+Examine:
 
-## Sinais de alarme
-
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+- nistagmo;
+- marcha;
+- coordenação;
+- fala;
+- pares cranianos;
+- força/sensibilidade;
+- pressão e pulso;
+- sinais de desidratação.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
-
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
-```
-
-O raciocínio deve seguir:
-
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+vertigem isolada com padrão periférico → provável vestibular
+vertigem + sinal neurológico → central até prova em contrário
+pré-síncope → cardiovascular/hipotensão
+desequilíbrio crônico → neurológico, sensorial, medicação
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Chamar toda tontura de labirintite.
+- Não examinar marcha.
+- Ignorar diplopia/disartria.
+- Não perguntar perda auditiva.
+- Não considerar AVC posterior em idoso hipertenso.
 
 ---
 
@@ -127,119 +109,108 @@ O raciocínio deve seguir:
 ## Mini-caso 1 — VPPB
 
 ### Cenário
-Paciente com apresentação típica relacionada a vppb, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher de 45 anos relata crises de vertigem de segundos ao virar na cama. Sem déficit neurológico. Entre as crises fica bem.
 
 ### Mecanismo principal
-Mecanismo dominante de vppb dentro da trilha vertigem e tontura.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Deslocamento de otólitos no canal semicircular, provocando vertigem posicional breve.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- crise breve
+- gatilho posicional
+- ausência de déficit focal
+- melhora entre episódios
 
 ### Pergunta central
-Qual mecanismo explica vppb?
+Por que é periférico provável?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque é vertigem breve, posicional, sem sinais neurológicos.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir TC por quadro típico sem alarme.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treinar caracterização temporal da tontura.
+
 ## Mini-caso 2 — Neurite vestibular
 
 ### Cenário
-Paciente com apresentação típica relacionada a neurite vestibular, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 32 anos, vertigem contínua há 24 horas, náuseas intensas, sem perda auditiva, sem déficit focal, marcha difícil pela vertigem mas sem ataxia franca central.
 
 ### Mecanismo principal
-Mecanismo dominante de neurite vestibular dentro da trilha vertigem e tontura.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Inflamação vestibular periférica, geralmente pós-viral.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- vertigem contínua
+- náuseas
+- sem perda auditiva
+- sem déficit focal
+- início agudo
 
 ### Pergunta central
-Qual mecanismo explica neurite vestibular?
+O que você precisa excluir antes de chamar de periférico?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Sinais centrais: ataxia grave, disartria, diplopia, déficit focal, nistagmo atípico ou fatores fortes para AVC.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Não examinar coordenação e marcha.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — AVC cerebelar
+Treinar exame neurológico breve em vertigem.
+
+## Mini-caso 3 — AVC posterior
 
 ### Cenário
-Paciente com apresentação típica relacionada a avc cerebelar, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Idoso hipertenso com vertigem súbita, vômitos, fala arrastada e incapacidade de andar sem apoio. Exame mostra ataxia e dismetria.
 
 ### Mecanismo principal
-Mecanismo dominante de avc cerebelar dentro da trilha vertigem e tontura.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Isquemia cerebelar/vertebrobasilar.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- idade/fator vascular
+- início súbito
+- ataxia
+- disartria
+- incapacidade de marcha
 
 ### Pergunta central
-Qual mecanismo explica avc cerebelar?
+Qual achado muda tudo?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Ataxia importante/disartria. Vertigem com sinal neurológico é central até prova em contrário.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dar medicação para tontura e alta.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Pré-síncope
+Treinar red flags de AVC posterior.
+
+## Mini-caso 4 — Pré-síncope confundida com vertigem
 
 ### Cenário
-Paciente com apresentação típica relacionada a pré-síncope, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente relata “tontura” ao levantar, escurecimento visual e sensação de desmaio. Sem rotação. PA em pé cai, FC aumenta.
 
 ### Mecanismo principal
-Mecanismo dominante de pré-síncope dentro da trilha vertigem e tontura.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Hipotensão ortostática/hipoperfusão cerebral transitória.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- sem rotação
+- escurecimento visual
+- gatilho ortostático
+- queda pressórica
 
 ### Pergunta central
-Qual mecanismo explica pré-síncope?
+Por que isso não é vertigem?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque não há ilusão de movimento. O quadro sugere pré-síncope por alteração hemodinâmica.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como labirintite sem medir PA ortostática.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treinar tradução da queixa “tontura” em síndrome clínica.
 
 ---
 
@@ -247,37 +218,55 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de vertigem e tontura?
+**Pergunta:** Qual pergunta separa vertigem de pré-síncope?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** “Você sente que tudo gira ou sente que vai desmaiar?”
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Direciona para vestibular versus cardiovascular/hemodinâmico.
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Qual achado em vertigem sugere AVC posterior?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Ataxia, disartria, diplopia, disfagia, déficit focal, nistagmo central ou incapacidade de marcha.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Evita alta perigosa.
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Vertigem de segundos ao virar na cama sugere o quê?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** VPPB, se não houver sinais neurológicos.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Padrão temporal e gatilho são mais úteis que a palavra “tontura”.
+
+## Questão ativa 4
+
+**Pergunta:** Perda auditiva com vertigem aponta para qual grupo?
+
+**Resposta esperada:** Mais frequentemente periférico, como Ménière ou labirintite, mas sempre avalie sinais neurológicos.
+
+**Por que importa:** Audição ajuda a localizar, mas não substitui exame neurológico.
 
 ---
 
 # 7. Mapa final
 
 ```text
-VERTIGEM E TONTURA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+TONTURA
+├── vertigem
+│   ├── segundos + posição → VPPB
+│   ├── contínua + sem déficit → neurite provável
+│   └── déficit neurológico → AVC posterior
+├── pré-síncope
+│   └── escurecimento/ortostase → hemodinâmico
+├── desequilíbrio
+│   └── marcha/sensibilidade/cerebelo
+└── red flags
+    ├── ataxia
+    ├── disartria/diplopia/disfagia
+    ├── déficit focal
+    └── cefaleia súbita
 ```
 
 ---
@@ -286,31 +275,33 @@ VERTIGEM E TONTURA
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- perguntas dirigidas;
+- exame neurológico focal;
+- reconhecimento de gravidade;
+- diagnóstico sindrômico;
+- comunicação com paciente/família;
+- decisão segura de encaminhamento.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+No módulo clínico, esta trilha pode ser aprofundada com:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
+- evolução temporal do nível de consciência;
+- alteração dinâmica de sinais vitais;
 - piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- resposta a medidas iniciais;
+- comparação entre raciocínio MEDIX e evolução fisiológica.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
+- [ ] A trilha ensina mecanismo, não só lista de sinais?
+- [ ] Você consegue ligar semiologia à decisão?
 - [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
+- [ ] Há erros comuns destacados?
+- [ ] O conteúdo prepara para OSCE?
+- [ ] A linguagem é direta, médica e adequada ao iniciante?
 - [ ] Há alerta para situações em que atraso terapêutico é perigoso?

@@ -1,245 +1,267 @@
 # Trilha Gastro/Abdome — Abdome agudo
 
+
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
+
 ## Objetivo da trilha
 
-Ensinar peritonite, obstrução, isquemia e urgências cirúrgicas com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a reconhecer abdome agudo como situação de risco, organizar prioridades e diferenciar quadros inflamatórios, obstrutivos, perfurativos, hemorrágicos e vasculares.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** abdome agudo não é “dor forte”. É dor abdominal com potencial de deterioração rápida, cirurgia, sepse, choque ou morte se houver atraso.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de abdome agudo.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Definir abdome agudo de forma clínica.
+2. Separar abdome agudo cirúrgico e não cirúrgico.
+3. Reconhecer peritonite.
+4. Identificar obstrução, perfuração e isquemia.
+5. Entender por que sinais vitais valem mais que exames isolados.
+6. Comunicar gravidade com clareza no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Abdome agudo é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Abdome agudo**: Abdome agudo é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Você não aborda abdome agudo perguntando “qual doença é?”. Primeiro pergunte:
 
 ```text
-Abdome agudo: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+esse abdome pode matar nas próximas horas?
 ```
+
+Se houver choque, peritonite, sangramento, obstrução completa, perfuração ou isquemia, a prioridade é **tempo**.
+
+**PONTO-CHAVE:**  
+A palavra “agudo” fala de tempo e gravidade. A dor pode ter poucas horas, mas já exigir cirurgia.
+
+**NÃO ERRE:**  
+Um abdome agudo pode ter hemograma pouco alterado no início. Clínica vem antes da falsa segurança laboratorial.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Inflamatório
 
-Em abdome agudo, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Inflamação progressiva de órgão abdominal.
 
 ```text
-observação → interpretação → conduta
+apêndice/vesícula/divertículo inflamado → dor local → febre → peritonite se evoluir
 ```
 
-## 3. Risco e priorização
+## Obstrutivo
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Bloqueio de fluxo intestinal, biliar ou urinário.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+obstrução → distensão → cólica/vômitos → isquemia/perfuração se grave
 ```
+
+## Perfurativo
+
+Conteúdo de víscera oca cai no peritônio.
+
+```text
+perfuração → irritação química/bacteriana → abdome rígido → sepse
+```
+
+## Vascular
+
+Fluxo sanguíneo inadequado para intestino ou vasos abdominais.
+
+```text
+isquemia → dor desproporcional → acidose/lactato → necrose
+```
+
+**RACIOCÍNIO:**  
+Quando a dor é desproporcional ao exame, pense em abdome vascular até provar o contrário.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Sinais de peritonite
 
-## Achados que precisam ser procurados
+- Defesa involuntária.
+- Rigidez.
+- Dor à descompressão.
+- Dor à tosse ou ao movimento.
+- Paciente imóvel, evitando mexer o abdome.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Sinais de obstrução
 
-## Sinais de alarme
+- Dor em cólica.
+- Distensão.
+- Vômitos.
+- Parada de eliminação de gases/fezes.
+- Ruídos metálicos ou reduzidos em fases tardias.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+## Sinais de choque/sepse
+
+- Taquicardia.
+- Hipotensão ou pressão de pulso estreita.
+- Extremidades frias.
+- Confusão.
+- Oligúria.
+- Febre ou hipotermia.
+
+**CUIDADO:**  
+Idosos, diabéticos, imunossuprimidos e gestantes podem ter poucos sinais, mesmo com doença grave.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use este eixo:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+estável ou instável?
+peritonítico ou não?
+obstrutivo, inflamatório, perfurativo, vascular ou hemorrágico?
 ```
 
-O raciocínio deve seguir:
+## Exames que ajudam
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Hemograma, eletrólitos, função renal, PCR conforme contexto.
+- Lactato quando suspeita de hipoperfusão/isquemia/sepse.
+- Beta-hCG em pessoa com possibilidade de gestação.
+- Urina quando cólica renal/ITU entram no diferencial.
+- USG para biliar/ginecológico quando adequado.
+- TC quando estável e dúvida diagnóstica relevante.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Esperar todos os exames antes de chamar cirurgia.
+- Não repetir exame abdominal.
+- Ignorar dor desproporcional.
+- Não considerar gravidez.
+- Confundir analgesia com “mascaramento”.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Apendicite perfurada
+## Mini-caso 1 — Apendicite com irritação peritoneal
 
 ### Cenário
-Paciente com apresentação típica relacionada a apendicite perfurada, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente jovem com dor que migrou para FID, anorexia, náuseas, febre baixa e dor ao caminhar. Defesa localizada.
 
 ### Mecanismo principal
-Mecanismo dominante de apendicite perfurada dentro da trilha abdome agudo.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Inflamação apendicular com irritação progressiva do peritônio.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Migração da dor.
+- Anorexia.
+- Defesa em FID.
+- Febre/taquicardia.
 
 ### Pergunta central
-Qual mecanismo explica apendicite perfurada?
+Por que este quadro pode ser cirúrgico?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque a dor localizada com defesa sugere irritação peritoneal por processo inflamatório progressivo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar leucocitose exuberante para valorizar o quadro.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine hipótese sindrômica, analgesia, jejum, exames direcionados e avaliação cirúrgica.
+
+---
+
 ## Mini-caso 2 — Obstrução intestinal
 
 ### Cenário
-Paciente com apresentação típica relacionada a obstrução intestinal, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor em cólica, distensão abdominal, vômitos biliosos e parada de gases. Cirurgia abdominal prévia. FC 110, abdome distendido e timpânico.
 
 ### Mecanismo principal
-Mecanismo dominante de obstrução intestinal dentro da trilha abdome agudo.
+Obstrução mecânica com acúmulo proximal de gás e secreções.
 
 ```text
-queixa → achados → mecanismo → decisão
+aderência/hérnia/tumor → bloqueio → distensão → vômitos → risco de isquemia
 ```
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Distensão.
+- Vômitos.
+- Parada de gases.
+- Cirurgia prévia.
 
 ### Pergunta central
-Qual mecanismo explica obstrução intestinal?
+O que diferencia obstrução simples de quadro complicado?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Dor contínua intensa, febre, taquicardia persistente, peritonite, acidose/lactato ou sinais de isquemia sugerem complicação.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como constipação sem avaliar vômitos, distensão e eliminação de gases.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Isquemia mesentérica
+Treine história cirúrgica prévia, hérnias, hidratação, sonda quando indicada e cirurgia.
+
+---
+
+## Mini-caso 3 — Úlcera perfurada
 
 ### Cenário
-Paciente com apresentação típica relacionada a isquemia mesentérica, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor epigástrica súbita, intensa, rigidez abdominal difusa, hipotensão e uso crônico de AINE.
 
 ### Mecanismo principal
-Mecanismo dominante de isquemia mesentérica dentro da trilha abdome agudo.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Perfuração de víscera oca com peritonite química/bacteriana.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Início súbito.
+- Abdome em tábua.
+- Instabilidade.
+- Uso de AINE.
 
 ### Pergunta central
-Qual mecanismo explica isquemia mesentérica?
+Qual é a prioridade?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Reconhecer peritonite perfurativa, estabilizar, analgesiar, antibiótico conforme protocolo e acionar cirurgia.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Perder tempo tentando “confirmar gastrite”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Peritonite
+Treine comunicação de urgência e priorização.
+
+---
+
+## Mini-caso 4 — Isquemia mesentérica
 
 ### Cenário
-Paciente com apresentação típica relacionada a peritonite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente idoso com fibrilação atrial, dor abdominal súbita intensa, exame abdominal inicialmente discreto, náuseas e lactato elevado.
 
 ### Mecanismo principal
-Mecanismo dominante de peritonite dentro da trilha abdome agudo.
+Oclusão vascular com hipoperfusão intestinal.
 
 ```text
-queixa → achados → mecanismo → decisão
+êmbolo/trombose → isquemia intestinal → dor desproporcional → necrose se atraso
 ```
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor desproporcional.
+- Fator de risco embólico.
+- Lactato elevado.
+- Exame inicial pobre.
 
 ### Pergunta central
-Qual mecanismo explica peritonite?
+Por que o exame pouco exuberante não tranquiliza?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque na isquemia precoce a dor pode ser intensa antes de aparecer peritonite. A peritonite pode indicar necrose avançada.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Aguardar rigidez abdominal para pensar em isquemia.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine reconhecimento de diagnóstico tempo-dependente.
 
 ---
 
@@ -247,25 +269,27 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de abdome agudo?
+**Pergunta:** O que transforma dor abdominal em abdome agudo?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Risco de deterioração: instabilidade, peritonite, obstrução, perfuração, isquemia, sangramento ou sepse.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Qual achado físico mais sugere abdome cirúrgico?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Defesa involuntária/rigidez com dor localizada ou difusa, especialmente associada a sinais sistêmicos.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Dor desproporcional ao exame aponta para quê?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Isquemia mesentérica ou causa vascular deve entrar forte no diferencial.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Quando chamar cirurgia?
+
+**Resposta esperada:** Instabilidade, peritonite, obstrução complicada, perfuração, suspeita vascular grave ou piora progressiva apesar de medidas iniciais.
 
 ---
 
@@ -273,44 +297,44 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ```text
 ABDOME AGUDO
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+├── inflamatório
+│   ├── apendicite
+│   ├── colecistite
+│   └── diverticulite
+├── obstrutivo
+│   ├── obstrução intestinal
+│   ├── hérnia encarcerada
+│   └── cálculo
+├── perfurativo
+│   └── úlcera perfurada/víscera oca
+├── vascular
+│   ├── isquemia mesentérica
+│   └── aneurisma/dissecção
+└── prioridade
+    ├── estabilizar
+    ├── analgesiar
+    ├── investigar sem atrasar
+    └── acionar cirurgia quando indicado
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- apresentação objetiva de gravidade;
+- exame abdominal com peritonite;
+- reavaliação;
+- comunicação com cirurgia;
+- conduta inicial segura.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você separou abdome agudo de dor abdominal simples?
+- [ ] Procurou peritonite?
+- [ ] Pensou em obstrução e isquemia?
+- [ ] Considerou gestação quando aplicável?
+- [ ] Priorizou cirurgia quando necessário?

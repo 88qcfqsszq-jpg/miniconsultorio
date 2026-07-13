@@ -1,217 +1,247 @@
 # Trilha Respiratório — Tosse e febre
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar raciocínio para queixas respiratórias infecciosas, diferenciando IVAS, bronquite, pneumonia, tuberculose e quadros graves, sem reduzir tudo a antibiótico.
+Ensinar você a abordar tosse e febre como síndrome respiratória, diferenciando infecção viral, pneumonia, tuberculose, exacerbação de doença respiratória e sinais de gravidade.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** tosse com febre pode ser simples, mas fica perigosa quando há taquipneia, hipoxemia, toxemia, dor pleurítica, confusão ou vulnerabilidade.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Caracterizar tosse por duração e produção.
-2. Reconhecer sinais de pneumonia e gravidade.
-3. Diferenciar tosse alta/baixa, seca/produtiva, aguda/crônica.
-4. Relacionar febre a resposta inflamatória e foco.
-5. Aplicar em pneumonia, TB, influenza/COVID e DPOC infectado.
+1. Diferenciar IVAS, bronquite, pneumonia e TB provável.
+2. Reconhecer sinais de gravidade respiratória.
+3. Interpretar crepitações, sibilos e consolidação.
+4. Avaliar duração da tosse.
+5. Usar radiografia e exames com propósito.
+6. Orientar retorno seguro.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Reflexo de proteção das vias aéreas, podendo indicar irritação, secreção, inflamação ou congestão.
-
-## Conceitos obrigatórios
-
-- **Tosse**: Reflexo de proteção das vias aéreas, podendo indicar irritação, secreção, inflamação ou congestão.
-- **Febre**: Resposta sistêmica a pirógenos, comum em infecção, mas não exclusiva.
-- **Consolidação**: Preenchimento alveolar que altera ausculta e troca gasosa.
-
-## Frase didática
+Tosse e febre devem ser organizadas por tempo, gravidade e localização provável.
 
 ```text
-Tosse e febre: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+vias aéreas altas → coriza/dor de garganta/tosse leve
+vias aéreas baixas → tosse + sibilos/crepitações/dispneia
+alvéolo → febre + crepitações + taquipneia + hipoxemia
 ```
+
+**PONTO-CHAVE:**  
+Taquipneia é sinal de gravidade. Não deixe de contar FR.
+
+**NÃO ERRE:**  
+Não trate toda tosse febril como “gripe” sem avaliar SpO₂, FR e ausculta.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Tosse produtiva
+## Infecção viral de vias aéreas
 
-Sugere secreção em vias aéreas, mas cor do escarro isolada não define etiologia com segurança.
+Inflamação de mucosa nasal/faríngea/brônquica.
 
-```text
-inflamação/secreção → receptores ativados → tosse
-```
+Pistas: coriza, odinofagia, tosse, febre baixa/moderada, estado geral preservado.
 
-## 2. Pneumonia
+## Pneumonia
 
-Infecção do parênquima pulmonar, com alvéolos inflamados/preenchidos e possível hipoxemia.
+Infecção do parênquima pulmonar.
 
 ```text
-infecção → exsudato alveolar → crepitação/consolidação → hipoxemia
+alvéolo inflamado/preenchido → troca gasosa piora → crepitações/hipoxemia
 ```
 
-## 3. Tuberculose
+## Tuberculose
 
-Tosse prolongada, sintomas constitucionais e risco epidemiológico devem levantar suspeita.
+Infecção crônica com tosse persistente e sintomas sistêmicos.
 
-```text
-infecção crônica → tosse persistente + perda ponderal/sudorese
-```
+Pistas: tosse por semanas, perda de peso, sudorese noturna, febre vespertina, contato.
+
+## Exacerbação de asma/DPOC
+
+Infecção viral pode precipitar broncoespasmo.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Há quantos dias/semanas?
+- Tosse seca ou produtiva?
+- Escarro purulento? sangue?
+- Falta de ar?
+- Dor torácica pleurítica?
+- Febre alta ou persistente?
+- Contato com TB?
+- Perda de peso/sudorese noturna?
+- Comorbidades: asma, DPOC, IC, imunossupressão?
+- Vacinação, surtos, exposição.
 
-- Duração da tosse.
-- Tipo de escarro.
-- Febre, calafrios e queda do estado geral.
-- Dor pleurítica.
-- Crepitações, sopro tubário, macicez.
-- SpO₂ e FR.
-- Perda de peso, sudorese noturna, hemoptise.
+## Exame físico
 
-## Sinais de alarme
+- FR.
+- SpO₂.
+- Temperatura.
+- Estado geral.
+- Ausculta: crepitações, sibilos, roncos.
+- Sinais de esforço.
+- Perfusão.
+- Hidratação.
 
-- SpO₂ baixa.
-- FR alta.
-- Confusão.
-- Hipotensão.
-- Hemoptise relevante.
+**CUIDADO:**  
+Idoso pode ter pneumonia sem febre alta, mas com confusão, queda ou taquipneia.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+tempo da tosse + sinais vitais + ausculta + risco = decisão
 ```
 
-O raciocínio deve seguir:
+## Sinais de gravidade
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- SpO₂ baixa.
+- FR elevada.
+- Confusão.
+- Hipotensão.
+- Cianose.
+- Dor torácica importante.
+- Incapacidade de ingerir líquidos.
+- Imunossupressão.
+- Idade extrema.
+- Piora rápida.
 
 ## Erros comuns
 
-- Tratar temperatura sem avaliar FR/SpO₂.
-- Antibiótico automático.
-- Não perguntar duração da tosse.
+- Não contar FR.
+- Não considerar pneumonia com ausculta discreta.
+- Não perguntar tempo de tosse.
+- Esquecer TB em tosse persistente.
+- Usar antibiótico sem critério.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Pneumonia comunitária
+## Mini-caso 1 — IVAS provável
 
 ### Cenário
-Febre, tosse produtiva, dor pleurítica e crepitações.
+Paciente jovem com coriza, dor de garganta, tosse seca, febre baixa há 2 dias, sinais vitais normais, pulmões sem crepitações.
 
 ### Mecanismo principal
-Infecção alveolar com V/Q baixo.
-
-```text
-alvéolo preenchido → troca ↓ → hipoxemia
-```
+Infecção viral de vias aéreas superiores.
 
 ### Achados-chave
-- febre
-- crepitações
-- taquipneia
-- SpO₂ baixa
+- Coriza/odinofagia.
+- Febre baixa.
+- Estado geral bom.
+- Ausculta sem sinais focais.
 
 ### Pergunta central
-O que sugere gravidade?
+Por que não parece pneumonia?
 
 ### Resposta esperada
-FR alta, SpO₂ baixa, hipotensão, confusão, comorbidades e extensão clínica.
+Não há taquipneia, hipoxemia, crepitações focais, dor pleurítica ou toxemia.
 
 ### Erro comum
-Tratar só febre e esquecer saturação/FR.
+Prescrever antibiótico automaticamente.
 
 ### Ponte para OSCE
-Treinar conduta inicial e sinais de alarme.
-## Mini-caso 2 — Tuberculose pulmonar
+Treine orientação e sinais de retorno.
+
+---
+
+## Mini-caso 2 — Pneumonia
 
 ### Cenário
-Tosse há 4 semanas, perda de peso e sudorese noturna.
+Paciente com febre 39 °C, tosse produtiva, dor pleurítica, FR 30, SpO₂ 92% e crepitações em base direita.
 
 ### Mecanismo principal
-Infecção crônica com acometimento pulmonar.
-
-```text
-infecção crônica → lesão pulmonar → tosse persistente
-```
+Infecção alveolar com troca gasosa prejudicada.
 
 ### Achados-chave
-- tosse prolongada
-- perda ponderal
-- sudorese noturna
-- hemoptise possível
+- Febre alta.
+- Crepitações focais.
+- Taquipneia.
+- Hipoxemia.
 
 ### Pergunta central
-Quando suspeitar?
+O que define gravidade inicial?
 
 ### Resposta esperada
-Tosse persistente com sintomas constitucionais e contexto epidemiológico.
+FR, SpO₂, estado geral, PA, idade, comorbidades e capacidade de hidratação ajudam a definir gravidade.
 
 ### Erro comum
-Ignorar duração da tosse.
+Focar só no antibiótico e esquecer oxigenação.
 
 ### Ponte para OSCE
-Treinar perguntas de triagem e isolamento quando indicado.
-## Mini-caso 3 — IVAS/influenza
+Treine pneumonia com avaliação de gravidade.
+
+---
+
+## Mini-caso 3 — Tuberculose provável
 
 ### Cenário
-Febre, mialgia, coriza, tosse seca e ausculta sem foco.
+Paciente com tosse há 4 semanas, perda de peso, sudorese noturna, febre vespertina e contato domiciliar com TB.
 
 ### Mecanismo principal
-Infecção de vias aéreas superiores/sistêmica viral.
-
-```text
-vírus → inflamação mucosa → tosse/febre
-```
+Infecção crônica por Mycobacterium tuberculosis com sintomas respiratórios e sistêmicos.
 
 ### Achados-chave
-- coriza
-- odinofagia
-- mialgia
-- ausculta normal
+- Tosse persistente.
+- Perda de peso.
+- Sudorese noturna.
+- Contato.
 
 ### Pergunta central
-Por que nem todo quadro febril respiratório é pneumonia?
+Qual dado muda investigação?
 
 ### Resposta esperada
-Porque sinais de foco pulmonar e gravidade precisam ser avaliados.
+Duração da tosse associada a sintomas sistêmicos e contato exige investigação de TB e orientação de controle de transmissão conforme protocolo.
 
 ### Erro comum
-Antibiótico automático.
+Tratar repetidamente como bronquite.
 
 ### Ponte para OSCE
-Treinar reconhecimento de gravidade e orientação.
+Treine tosse crônica.
+
+---
+
+## Mini-caso 4 — Exacerbação de DPOC
+
+### Cenário
+Paciente tabagista com DPOC, piora da tosse, aumento de escarro e dispneia. Sibilos, roncos, SpO₂ 89%.
+
+### Mecanismo principal
+Inflamação/infeção precipitando piora da limitação ao fluxo aéreo.
+
+### Achados-chave
+- DPOC prévia.
+- Mais dispneia.
+- Mais escarro.
+- SpO₂ baixa.
+
+### Pergunta central
+Por que não é só pneumonia?
+
+### Resposta esperada
+O padrão de exacerbação inclui piora de dispneia, tosse e escarro em paciente com DPOC. Pneumonia pode coexistir e deve ser avaliada.
+
+### Erro comum
+Não ajustar oxigênio com alvo adequado para DPOC quando aplicável.
+
+### Ponte para OSCE
+Treine obstrução crônica.
 
 ---
 
@@ -219,25 +249,27 @@ Treinar reconhecimento de gravidade e orientação.
 
 ## Questão ativa 1
 
-**Pergunta:** Tosse produtiva purulenta sempre exige antibiótico?
+**Pergunta:** O que diferencia IVAS de pneumonia?
 
-**Resposta esperada:** Não isoladamente. Decisão depende do quadro clínico, foco, gravidade, comorbidades e suspeita diagnóstica.
+**Resposta esperada:** Taquipneia, hipoxemia, crepitações focais, dor pleurítica, toxemia e pior estado geral sugerem pneumonia.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 2
 
-**Pergunta:** Quais dados são mais importantes que a temperatura isolada?
+**Pergunta:** Quando pensar em TB?
 
-**Resposta esperada:** FR, SpO₂, PA, nível de consciência, sinais de esforço e queda do estado geral.
+**Resposta esperada:** Tosse persistente por semanas, perda de peso, sudorese noturna, febre vespertina, hemoptise ou contato.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 3
 
-**Pergunta:** Tosse há mais de 3 semanas com perda de peso sugere o quê?
+**Pergunta:** Qual sinal vital não pode faltar?
 
-**Resposta esperada:** Deve levantar suspeita de tuberculose, entre outras causas crônicas.
+**Resposta esperada:** Frequência respiratória.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
+## Questão ativa 4
+
+**Pergunta:** Tosse produtiva sempre precisa antibiótico?
+
+**Resposta esperada:** Não. A decisão depende de síndrome, gravidade, duração, ausculta, risco e hipótese bacteriana.
 
 ---
 
@@ -245,42 +277,45 @@ Treinar reconhecimento de gravidade e orientação.
 
 ```text
 TOSSE + FEBRE
-├── alta/viral: coriza, odinofagia, mialgia
-├── pneumonia: febre + crepitação + taquipneia/SpO₂ baixa
-├── TB: tosse prolongada + sintomas constitucionais
-└── DPOC infectado: piora de dispneia/escarro em paciente crônico
+├── vias aéreas altas
+│   ├── coriza
+│   ├── odinofagia
+│   └── estado geral bom
+├── pneumonia
+│   ├── febre alta
+│   ├── crepitações
+│   ├── FR alta
+│   └── SpO₂ baixa
+├── TB
+│   ├── tosse prolongada
+│   ├── perda de peso
+│   └── sudorese noturna
+└── gravidade
+    ├── hipóxia
+    ├── confusão
+    ├── hipotensão
+    └── vulnerabilidade
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- anamnese respiratória
-- exame pulmonar
-- sinais de gravidade
-- conduta inicial
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- duração da tosse;
+- sinais vitais;
+- ausculta;
+- gravidade da pneumonia;
+- sinais de TB;
+- orientação de retorno.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você contou FR?
+- [ ] Mediu SpO₂?
+- [ ] Auscultou procurando foco?
+- [ ] Perguntou duração da tosse?
+- [ ] Procurou sinais de gravidade?

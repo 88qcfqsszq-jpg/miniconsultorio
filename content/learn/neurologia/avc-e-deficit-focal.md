@@ -2,244 +2,239 @@
 
 ## Objetivo da trilha
 
-Ensinar reconhecimento de déficit neurológico focal e tempo de início com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a reconhecer déficit neurológico focal como urgência tempo-dependente.
 
-A trilha deve sempre conectar três camadas:
+AVC não é “fraqueza de um lado” apenas. É uma síndrome vascular aguda que pode comprometer fala, visão, coordenação, sensibilidade, consciência e função cortical.
 
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+> **PONTO-CHAVE:** no AVC, tempo é cérebro. Você não precisa fechar subtipo na primeira abordagem; precisa reconhecer déficit focal, horário de início e estabilidade clínica.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de avc e déficit focal.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Reconhecer sinais de déficit focal.
+2. Diferenciar AVC provável de mimetizadores comuns.
+3. Perguntar “última vez visto bem”.
+4. Avaliar glicemia capilar imediatamente.
+5. Identificar sinais de AVC de circulação anterior e posterior.
+6. Entender por que tomografia e encaminhamento não devem atrasar.
+7. Comunicar urgência neurológica de forma clara.
 
 ---
 
 # 1. Microaula — Ideia central
 
-AVC e déficit focal é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
+AVC é perda súbita de função neurológica por alteração vascular.
 
-## Conceitos obrigatórios
+Pode ser:
 
-- **AVC e déficit focal**: AVC e déficit focal é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
+- isquêmico: vaso ocluído, tecido em sofrimento;
+- hemorrágico: ruptura vascular, sangue e efeito de massa;
+- AIT: sintomas transitórios, risco futuro elevado.
 
-## Frase didática
+Você deve começar pela síndrome:
 
 ```text
-AVC e déficit focal: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+déficit focal súbito → horário de início → glicemia → exame neurológico → encaminhamento
 ```
+
+## Não erre
+
+Hipoglicemia pode imitar AVC. Medir glicemia capilar é parte da abordagem inicial.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Isquemia
 
-Em avc e déficit focal, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+A oclusão reduz perfusão. Parte do tecido pode estar irreversivelmente lesada; outra parte pode estar em penumbra, ainda recuperável se houver reperfusão no tempo adequado.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+## Hemorragia
 
-## 2. Semiologia aplicada
+O sangue no parênquima ou espaço subaracnoideo causa lesão direta, edema, aumento de pressão e piora neurológica.
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+## Circulação anterior x posterior
 
-```text
-observação → interpretação → conduta
-```
+- anterior: afasia, hemiparesia, hemianopsia, desvio do olhar;
+- posterior: vertigem intensa, diplopia, disfagia, ataxia, alteração de consciência.
 
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+> **CUIDADO:** AVC posterior pode parecer “labirintite”. Ataxia, diplopia, disartria, disfagia ou déficit focal tornam o caso neurológico até prova em contrário.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Quando começou?
+- Qual foi a última vez em que estava bem?
+- O déficit foi súbito?
+- Melhorou, piorou ou flutuou?
+- Usa anticoagulante?
+- Teve trauma?
+- Há cefaleia explosiva?
+- Há convulsão no início?
+- Tem diabetes ou possibilidade de hipoglicemia?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame dirigido
 
-## Sinais de alarme
+Você deve observar:
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+- face;
+- fala;
+- força em braços e pernas;
+- sensibilidade;
+- campo visual;
+- coordenação;
+- marcha se seguro;
+- nível de consciência;
+- pupilas;
+- sinais vitais;
+- glicemia capilar.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+A pergunta-guia é:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+Esse déficit é focal, súbito e vascular até prova em contrário?
 ```
 
-O raciocínio deve seguir:
+## Mimetizadores comuns
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- hipoglicemia;
+- crise convulsiva com paralisia de Todd;
+- enxaqueca com aura;
+- síncope;
+- intoxicação;
+- distúrbios metabólicos;
+- paralisia facial periférica;
+- vertigem periférica.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Não perguntar horário de início.
+- Não medir glicemia.
+- Chamar AVC posterior de labirintite.
+- Esperar “melhorar” antes de encaminhar.
+- Valorizar só hemiparesia e esquecer afasia, campo visual e ataxia.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — AVC isquêmico
+## Mini-caso 1 — AVC isquêmico de circulação anterior
 
 ### Cenário
-Paciente com apresentação típica relacionada a avc isquêmico, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 67 anos, hipertenso, início súbito há 50 minutos de boca torta, fala enrolada e fraqueza em braço direito. Glicemia 112 mg/dL. PA 178/96. Sem trauma.
 
 ### Mecanismo principal
-Mecanismo dominante de avc isquêmico dentro da trilha avc e déficit focal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Oclusão arterial aguda em território de circulação anterior, com déficit focal motor e linguagem.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- início súbito
+- déficit focal
+- fala alterada
+- glicemia normal
+- tempo de início conhecido
 
 ### Pergunta central
-Qual mecanismo explica avc isquêmico?
+Qual informação não pode faltar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+A última vez em que o paciente foi visto bem. Essa informação define janela terapêutica e urgência de encaminhamento.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Documentar “começou hoje” sem horário preciso.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — AIT
+Treinar reconhecimento rápido, glicemia, horário de início e encaminhamento.
+
+## Mini-caso 2 — AVC posterior
 
 ### Cenário
-Paciente com apresentação típica relacionada a ait, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher de 72 anos com vertigem intensa súbita, vômitos, dificuldade para andar e fala arrastada. Sem perda auditiva. Exame mostra ataxia importante e disartria.
 
 ### Mecanismo principal
-Mecanismo dominante de ait dentro da trilha avc e déficit focal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Isquemia em território vertebrobasilar/cerebelar, com risco de deterioração.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- vertigem súbita intensa
+- ataxia
+- disartria
+- vômitos
+- idosa com fator de risco vascular
 
 ### Pergunta central
-Qual mecanismo explica ait?
+Por que não chamar isso de labirintite simples?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque há sinais neurológicos centrais: ataxia e disartria. Vertigem com déficit neurológico deve ser tratada como AVC posterior até prova em contrário.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Prescrever sintomático e mandar para casa.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — AVC hemorrágico
+Treinar diferenciação entre vertigem periférica e central.
+
+## Mini-caso 3 — Hipoglicemia mimetizando AVC
 
 ### Cenário
-Paciente com apresentação típica relacionada a avc hemorrágico, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente diabético em uso de insulina, encontrado confuso, sudoreico, com fala arrastada e fraqueza aparente. Glicemia capilar 42 mg/dL.
 
 ### Mecanismo principal
-Mecanismo dominante de avc hemorrágico dentro da trilha avc e déficit focal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Neuroglicopenia reduz função cerebral e pode simular déficit focal.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- diabetes/insulina
+- sudorese
+- confusão
+- glicemia baixa
+- déficit reversível após correção
 
 ### Pergunta central
-Qual mecanismo explica avc hemorrágico?
+Qual medida vem antes de discutir imagem?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Glicemia capilar imediata e correção da hipoglicemia conforme protocolo local.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Encaminhar como AVC sem checar glicemia.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Hipoglicemia simulando AVC
+Treinar ABCDE neurológico e glicemia como “vital neurológico”.
+
+## Mini-caso 4 — Hemorragia intracraniana provável
 
 ### Cenário
-Paciente com apresentação típica relacionada a hipoglicemia simulando avc, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 60 anos, hipertenso, cefaleia intensa, vômitos e hemiparesia esquerda. Sonolento. PA 220/120. Início súbito.
 
 ### Mecanismo principal
-Mecanismo dominante de hipoglicemia simulando avc dentro da trilha avc e déficit focal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Sangramento intracraniano com efeito de massa e hipertensão intracraniana.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- cefaleia intensa
+- vômitos
+- déficit focal
+- rebaixamento
+- PA muito elevada
 
 ### Pergunta central
-Qual mecanismo explica hipoglicemia simulando avc?
+Qual elemento sugere gravidade além do déficit focal?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Rebaixamento de consciência e sinais de hipertensão intracraniana. Isso exige atendimento emergencial.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como crise hipertensiva isolada.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treinar reconhecimento de AVC hemorrágico provável e comunicação de emergência.
 
 ---
 
@@ -247,37 +242,57 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de avc e déficit focal?
+**Pergunta:** Qual pergunta define a linha do tempo no AVC?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** “Qual foi a última vez em que estava normal/foi visto bem?”
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Janela terapêutica depende desse dado.
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que você deve medir imediatamente em todo déficit focal?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Glicemia capilar.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Hipoglicemia pode simular AVC e é reversível.
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Vertigem súbita com ataxia e disartria é labirintite?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Não assuma. Esses sinais sugerem AVC posterior até prova em contrário.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** AVC posterior é frequentemente subdiagnosticado.
+
+## Questão ativa 4
+
+**Pergunta:** Por que exame neurológico “quase normal” não exclui AIT?
+
+**Resposta esperada:** Porque déficits transitórios podem desaparecer, mas indicam risco vascular relevante.
+
+**Por que importa:** O risco futuro ainda precisa ser investigado.
 
 ---
 
 # 7. Mapa final
 
 ```text
-AVC E DÉFICIT FOCAL
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+DÉFICIT FOCAL SÚBITO
+├── medir glicemia
+├── perguntar última vez visto bem
+├── circulação anterior
+│   ├── face/braço/perna
+│   ├── afasia
+│   └── campo visual
+├── circulação posterior
+│   ├── vertigem + ataxia
+│   ├── diplopia
+│   ├── disartria/disfagia
+│   └── rebaixamento
+├── cefaleia/vômitos/rebaixamento
+│   └── pensar em hemorragia
+└── déficit transitório
+    └── pensar em AIT, não banalizar
 ```
 
 ---
@@ -286,31 +301,33 @@ AVC E DÉFICIT FOCAL
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- perguntas dirigidas;
+- exame neurológico focal;
+- reconhecimento de gravidade;
+- diagnóstico sindrômico;
+- comunicação com paciente/família;
+- decisão segura de encaminhamento.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+No módulo clínico, esta trilha pode ser aprofundada com:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
+- evolução temporal do nível de consciência;
+- alteração dinâmica de sinais vitais;
 - piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- resposta a medidas iniciais;
+- comparação entre raciocínio MEDIX e evolução fisiológica.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
+- [ ] A trilha ensina mecanismo, não só lista de sinais?
+- [ ] Você consegue ligar semiologia à decisão?
 - [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
+- [ ] Há erros comuns destacados?
+- [ ] O conteúdo prepara para OSCE?
+- [ ] A linguagem é direta, médica e adequada ao iniciante?
 - [ ] Há alerta para situações em que atraso terapêutico é perigoso?

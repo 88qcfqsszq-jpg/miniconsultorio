@@ -1,245 +1,229 @@
 # Trilha Raciocínio Clínico — Priorização e erro crítico
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar o que fazer primeiro quando há risco com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a decidir o que fazer primeiro. Em atendimento real e OSCE, erro crítico não é apenas errar diagnóstico; é atrasar uma ação que evitaria dano.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** prioridade clínica é definida por risco, tempo e reversibilidade.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de priorização e erro crítico.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Reconhecer risco imediato.
+2. Diferenciar problema importante de problema urgente.
+3. Identificar erro crítico.
+4. Agir antes de diagnóstico final quando necessário.
+5. Comunicar prioridade.
+6. Reavaliar depois da intervenção.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Priorização e erro crítico é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Priorização e erro crítico**: Priorização e erro crítico é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Nem tudo que é importante é primeiro. A pergunta é:
 
 ```text
-Priorização e erro crítico: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+o que pode matar, piorar rápido ou ser reversível agora?
 ```
+
+**PONTO-CHAVE:**  
+Você pode errar o diagnóstico final e ainda proteger o paciente se reconhece gravidade. Mas pode acertar o diagnóstico e errar gravemente se atrasar conduta essencial.
+
+**NÃO ERRE:**  
+Não deixe paciente hipoxêmico, convulsionando, hipoglicêmico, séptico ou em choque esperando investigação completa.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia do risco
 
-## 1. Mecanismo principal
-
-Em priorização e erro crítico, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Risco clínico aumenta quando há falha em sistemas vitais:
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+A — via aérea
+B — respiração
+C — circulação
+D — neurologia/glicose
+E — exposição/temperatura/dor
 ```
 
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
-
-```text
-observação → interpretação → conduta
-```
-
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+A prioridade vem do ABCDE porque o corpo tolera pouco tempo sem oxigenação, ventilação, perfusão e glicose.
 
 ---
 
-# 3. Semiologia essencial
+# 3. Semiologia de erro crítico
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Situações que exigem ação rápida
 
-## Achados que precisam ser procurados
+- Via aérea ameaçada.
+- Hipoxemia.
+- Choque/hipoperfusão.
+- Convulsão prolongada.
+- Hipoglicemia.
+- Sepse com disfunção.
+- AVC em janela.
+- Dor torácica com SCA provável.
+- Pneumotórax hipertensivo.
+- Anafilaxia.
+- Peritonite/abdome agudo instável.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Sinais que gritam prioridade
 
-## Sinais de alarme
-
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+- Confusão.
+- Cianose.
+- Fala entrecortada.
+- Extremidades frias.
+- Hipotensão.
+- Convulsão.
+- Déficit focal súbito.
+- Dor súbita intensa.
+- Sangramento volumoso.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+risco → tempo → ação → reavaliação
 ```
 
-O raciocínio deve seguir:
+## Tipos de erro crítico
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Não reconhecer gravidade.
+- Atrasar tratamento tempo-dependente.
+- Dar alta sem sinais de alarme.
+- Pedir exame que atrasa conduta.
+- Não reavaliar piora.
+- Ignorar dado vital alterado.
+- Não comunicar urgência.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Organizar atendimento pela ordem do checklist, não pelo risco.
+- Esperar diagnóstico perfeito.
+- Tratar número isolado e esquecer paciente.
+- Não pedir ajuda.
+- Não documentar reavaliação.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Pneumotórax hipertensivo
+## Mini-caso 1 — Hipoglicemia
 
 ### Cenário
-Paciente com apresentação típica relacionada a pneumotórax hipertensivo, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente confuso, sudoreico e sonolento. Ninguém mediu glicemia.
 
 ### Mecanismo principal
-Mecanismo dominante de pneumotórax hipertensivo dentro da trilha priorização e erro crítico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Déficit energético cerebral reversível.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Confusão.
+- Sudorese.
+- Sonolência.
+- Glicemia não checada.
 
 ### Pergunta central
-Qual mecanismo explica pneumotórax hipertensivo?
+Qual erro crítico evitar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Atrasar glicemia capilar e correção da hipoglicemia quando confirmada.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir TC antes de checar causa reversível imediata.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Sepse
+Treine D do ABCDE.
+
+---
+
+## Mini-caso 2 — Pneumotórax hipertensivo
 
 ### Cenário
-Paciente com apresentação típica relacionada a sepse, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente instável com dispneia súbita, MV unilateral abolido, turgência jugular e hipotensão.
 
 ### Mecanismo principal
-Mecanismo dominante de sepse dentro da trilha priorização e erro crítico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Choque obstrutivo por aumento de pressão intratorácica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Hipotensão.
+- MV unilateral abolido.
+- Dispneia súbita.
+- Turgência jugular.
 
 ### Pergunta central
-Qual mecanismo explica sepse?
+Qual seria erro crítico?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Esperar radiografia antes de tratar instabilidade compatível com pneumotórax hipertensivo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Transformar urgência clínica em espera por imagem.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — AVC
+Treine decisão tempo-dependente.
+
+---
+
+## Mini-caso 3 — Sepse
 
 ### Cenário
-Paciente com apresentação típica relacionada a avc, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente febril, confuso, taquicárdico, TEC 5s e PA limítrofe. Equipe quer esperar todos os exames.
 
 ### Mecanismo principal
-Mecanismo dominante de avc dentro da trilha priorização e erro crítico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Infecção com hipoperfusão/disfunção orgânica provável.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Febre.
+- Confusão.
+- Hipoperfusão.
+- Taquicardia.
 
 ### Pergunta central
-Qual mecanismo explica avc?
+Qual prioridade?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Reconhecer sepse grave/choque possível, iniciar protocolo institucional, coleta quando não atrasa, antibiótico e ressuscitação conforme caso.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar confirmação laboratorial.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Anafilaxia
+Treine gravidade infecciosa.
+
+---
+
+## Mini-caso 4 — Alta insegura
 
 ### Cenário
-Paciente com apresentação típica relacionada a anafilaxia, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dengue provável no 4º dia, dor abdominal e vômitos persistentes recebe alta sem orientação.
 
 ### Mecanismo principal
-Mecanismo dominante de anafilaxia dentro da trilha priorização e erro crítico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Risco de fase crítica e extravasamento plasmático.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- 4º dia.
+- Dor abdominal.
+- Vômitos persistentes.
+- Sem orientação de alarme.
 
 ### Pergunta central
-Qual mecanismo explica anafilaxia?
+Qual erro crítico?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Dar alta sem reconhecer sinais de alarme e sem plano de observação/retorno.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Valorizar apenas febre menor.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine alta segura.
 
 ---
 
@@ -247,70 +231,73 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de priorização e erro crítico?
+**Pergunta:** O que é erro crítico?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Ação ou omissão que aumenta risco de dano grave, especialmente por atraso em reconhecer/tratar gravidade.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Qual estrutura ajuda a priorizar?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** ABCDE, porque organiza funções vitais.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Quando agir sem diagnóstico final?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Quando há ameaça imediata: hipóxia, choque, convulsão, hipoglicemia, anafilaxia, sepse grave, pneumotórax hipertensivo.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Reavaliação é conduta?
+
+**Resposta esperada:** Sim. Sem reavaliação, você não sabe se a intervenção funcionou ou se o paciente piorou.
 
 ---
 
 # 7. Mapa final
 
 ```text
-PRIORIZAÇÃO E ERRO CRÍTICO
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+PRIORIZAÇÃO
+├── risco
+│   ├── via aérea
+│   ├── respiração
+│   ├── circulação
+│   └── neurologia/glicose
+├── tempo
+│   ├── imediato
+│   ├── minutos
+│   └── observação
+├── erro crítico
+│   ├── não reconhecer
+│   ├── atrasar
+│   ├── alta insegura
+│   └── não reavaliar
+└── proteção
+    ├── agir
+    ├── pedir ajuda
+    ├── comunicar
+    └── documentar
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- dizer prioridade em voz alta;
+- justificar conduta;
+- pedir ajuda;
+- reavaliar;
+- evitar alta insegura.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você identificou risco imediato?
+- [ ] Usou ABCDE?
+- [ ] Evitou exame que atrasa conduta?
+- [ ] Reavaliou?
+- [ ] Orientou sinais de alarme?

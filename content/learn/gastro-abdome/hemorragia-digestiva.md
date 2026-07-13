@@ -1,245 +1,259 @@
 # Trilha Gastro/Abdome — Hemorragia digestiva
 
+
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
+
 ## Objetivo da trilha
 
-Ensinar hematêmese, melena, hematoquezia e instabilidade com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a reconhecer hemorragia digestiva alta e baixa, estimar gravidade, estabilizar primeiro e só depois localizar a fonte do sangramento.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** na hemorragia digestiva, a pergunta inicial não é “de onde sangrou?”. É: **o paciente está perfundindo?**
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de hemorragia digestiva.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Diferenciar hematêmese, melena e hematoquezia.
+2. Reconhecer choque hemorrágico.
+3. Priorizar ABC, acesso venoso, reposição e monitorização.
+4. Identificar pistas de varizes, úlcera e sangramento baixo.
+5. Evitar atraso por exames em paciente instável.
+6. Apresentar o caso de forma objetiva no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Hemorragia digestiva é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Hemorragia digestiva**: Hemorragia digestiva é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Hemorragia digestiva pode parecer “gastro”, mas é primeiro uma síndrome hemodinâmica.
 
 ```text
-Hemorragia digestiva: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+sangramento → perda de volume → taquicardia → hipotensão → choque
 ```
+
+**PONTO-CHAVE:**  
+Hemoglobina inicial pode não mostrar toda a perda sanguínea. O corpo ainda não redistribuiu volume.
+
+**NÃO ERRE:**  
+Melena sugere sangramento alto até prova contrária, mas sangramento alto volumoso também pode aparecer como hematoquezia.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Hemorragia digestiva alta
 
-Em hemorragia digestiva, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Fonte proximal ao ligamento de Treitz.
+
+Pistas:
+
+- Hematêmese.
+- Melena.
+- Epigastralgia.
+- Uso de AINE.
+- Cirrose/varizes.
+- Instabilidade com evacuação escura ou vermelho vivo.
+
+## Hemorragia digestiva baixa
+
+Fonte distal.
+
+Pistas:
+
+- Hematoquezia.
+- Sangue vivo nas fezes.
+- Dor abdominal tipo colite/diverticular.
+- Idoso, anticoagulado, doença diverticular.
+
+## Varizes esofágicas
+
+Hipertensão portal gera vasos frágeis que podem sangrar muito.
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+cirrose → hipertensão portal → varizes → sangramento volumoso
 ```
 
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
-
-```text
-observação → interpretação → conduta
-```
-
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+**CUIDADO:**  
+Cirrose + hematêmese é variz até prova contrária, mas úlcera também pode ocorrer.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Vomitou sangue?
+- Fezes estão pretas, brilhantes e fétidas?
+- Sangue vivo nas fezes?
+- Houve síncope, tontura, fraqueza?
+- Dor abdominal ou epigástrica?
+- Uso de AINE, AAS, anticoagulante?
+- História de cirrose, álcool, hepatite, varizes?
+- Episódios prévios?
+- Comorbidades cardiovasculares?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame que muda conduta
 
-## Sinais de alarme
+- PA, FC, perfusão, nível de consciência.
+- Ortostatismo quando seguro.
+- Pele fria, enchimento capilar.
+- Sinais de doença hepática crônica.
+- Abdome: dor, massa, ascite.
+- Toque retal quando indicado.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**PONTO-CHAVE:**  
+Taquicardia pode ser o primeiro sinal de perda importante. Não espere hipotensão.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Sequência segura:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+1. Estabilidade.
+2. Volume provável de perda.
+3. Alta vs baixa.
+4. Varicosa vs não varicosa.
+5. Exames e endoscopia/colonoscopia conforme estabilidade.
 ```
 
-O raciocínio deve seguir:
+## Exames iniciais
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Hemograma seriado.
+- Ureia/creatinina.
+- Eletrólitos.
+- Coagulograma.
+- Tipagem/prova cruzada se sangramento relevante.
+- Função hepática se suspeita de cirrose.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Esperar hemoglobina cair para valorizar sangramento.
+- Não reconhecer cirrose/varizes.
+- Não suspender/avaliar anticoagulantes quando indicado.
+- Pedir colonoscopia em paciente instável antes de ressuscitar.
+- Não reavaliar sinais vitais.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — HDA por úlcera
+## Mini-caso 1 — Úlcera péptica sangrante
 
 ### Cenário
-Paciente com apresentação típica relacionada a hda por úlcera, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 58 anos, melena há 2 dias, tontura ao levantar, epigastralgia e uso diário de AINE. PA 100/65, FC 112, palidez. Hb 8,2.
 
 ### Mecanismo principal
-Mecanismo dominante de hda por úlcera dentro da trilha hemorragia digestiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Lesão ulcerosa sangrando para o trato gastrointestinal alto.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Melena.
+- AINE.
+- Epigastralgia.
+- Taquicardia/palidez.
 
 ### Pergunta central
-Qual mecanismo explica hda por úlcera?
+Por que este caso é hemorragia digestiva alta provável?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Melena, epigastralgia e uso de AINE sugerem fonte alta, possivelmente úlcera. A prioridade é estabilização e estratificação para endoscopia.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como anemia isolada sem reconhecer sangramento ativo/recente.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine história medicamentosa e sinais de hipovolemia.
+
+---
+
 ## Mini-caso 2 — Varizes esofágicas
 
 ### Cenário
-Paciente com apresentação típica relacionada a varizes esofágicas, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com cirrose conhecida, ascite, hematêmese volumosa e melena. PA 85/55, FC 132, confuso, extremidades frias.
 
 ### Mecanismo principal
-Mecanismo dominante de varizes esofágicas dentro da trilha hemorragia digestiva.
+Ruptura de varizes por hipertensão portal com sangramento maciço.
 
 ```text
-queixa → achados → mecanismo → decisão
+cirrose → hipertensão portal → varizes → hematêmese/choque
 ```
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Cirrose.
+- Hematêmese volumosa.
+- Ascite.
+- Choque.
 
 ### Pergunta central
-Qual mecanismo explica varizes esofágicas?
+Qual é a prioridade imediata?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+ABC, acesso venoso calibroso, reposição, sangue se indicado, manejo específico de sangramento varicoso conforme protocolo e endoscopia urgente após estabilização.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Focar em “endoscopia” antes de garantir via aérea, perfusão e ressuscitação.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — HDB diverticular
+Treine abordagem de paciente instável e comunicação de risco.
+
+---
+
+## Mini-caso 3 — Hematoquezia em idoso
 
 ### Cenário
-Paciente com apresentação típica relacionada a hdb diverticular, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 74 anos, sangue vivo volumoso nas fezes, sem hematêmese, cólicas leves. Usa anticoagulante. PA 105/70, FC 108.
 
 ### Mecanismo principal
-Mecanismo dominante de hdb diverticular dentro da trilha hemorragia digestiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Sangramento digestivo baixo provável, mas sangramento alto volumoso ainda deve ser considerado se houver instabilidade.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Hematoquezia.
+- Idoso.
+- Anticoagulante.
+- Taquicardia.
 
 ### Pergunta central
-Qual mecanismo explica hdb diverticular?
+Por que não basta dizer “é hemorroida”?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Volume, idade, anticoagulação e taquicardia tornam sangramento significativo provável. Hemorroida é diagnóstico após excluir gravidade.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Atribuir sangue vivo a hemorroida sem avaliar estabilidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Sangramento com choque
+Treine estratificação de gravidade e medicações.
+
+---
+
+## Mini-caso 4 — Melena com Hb inicial normal
 
 ### Cenário
-Paciente com apresentação típica relacionada a sangramento com choque, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente chega 2 horas após evacuação escura e síncope. PA 92/60, FC 124, sudorese. Hb inicial 12,8.
 
 ### Mecanismo principal
-Mecanismo dominante de sangramento com choque dentro da trilha hemorragia digestiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Perda sanguínea aguda antes da hemodiluição laboratorial.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Síncope.
+- Melena.
+- Hipotensão/taquicardia.
+- Hb inicialmente normal.
 
 ### Pergunta central
-Qual mecanismo explica sangramento com choque?
+Por que a Hb normal não tranquiliza?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Na perda aguda, a hemoglobina pode demorar a cair. Sinais vitais e perfusão são mais importantes no início.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dar alta porque “a hemoglobina está boa”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine raciocínio por hemodinâmica, não por número isolado.
 
 ---
 
@@ -247,25 +261,27 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de hemorragia digestiva?
+**Pergunta:** Qual é o primeiro dado em hemorragia digestiva?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Estabilidade hemodinâmica: PA, FC, perfusão, consciência, síncope e sinais de choque.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Melena significa o quê?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Sugere sangramento digestivo alto ou sangue digerido, especialmente se fezes pretas, brilhantes e fétidas.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Por que hemoglobina inicial pode enganar?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Porque na perda aguda ainda não houve hemodiluição suficiente para revelar a queda.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Hematoquezia sempre é baixa?
+
+**Resposta esperada:** Não. Sangramento alto volumoso pode acelerar trânsito e aparecer como sangue vivo, especialmente com instabilidade.
 
 ---
 
@@ -273,44 +289,47 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ```text
 HEMORRAGIA DIGESTIVA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+├── avaliar estabilidade
+│   ├── PA/FC
+│   ├── síncope
+│   ├── perfusão
+│   └── consciência
+├── alta provável
+│   ├── hematêmese
+│   ├── melena
+│   ├── AINE/úlcera
+│   └── cirrose/varizes
+├── baixa provável
+│   ├── hematoquezia
+│   ├── diverticular
+│   ├── colite
+│   └── neoplasia
+└── conduta inicial
+    ├── ABC
+    ├── acesso venoso
+    ├── exames seriados
+    ├── transfusão se indicado
+    └── endoscopia/colonoscopia conforme caso
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- reconhecimento de choque;
+- diferenciação alta/baixa;
+- uso de medicações;
+- história de cirrose;
+- comunicação de urgência.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você avaliou estabilidade antes de localizar fonte?
+- [ ] Perguntou AINE/AAS/anticoagulante?
+- [ ] Procurou cirrose/varizes?
+- [ ] Não confiou cegamente na Hb inicial?
+- [ ] Planejou reavaliação e monitorização?

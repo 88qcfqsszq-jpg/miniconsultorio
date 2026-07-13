@@ -1,245 +1,245 @@
 # Trilha Semiologia Geral — Dor como quinto sinal
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar caracterização da dor e impacto clínico com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a avaliar dor de forma clínica, humana e útil para diagnóstico. Dor não é só intensidade; é localização, qualidade, tempo, mecanismo, impacto e gravidade.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** dor é sintoma e sinal de alarme. Você deve aliviar, investigar e reavaliar.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de dor como quinto sinal.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Medir intensidade da dor sem reduzir tudo a número.
+2. Caracterizar dor por mecanismo.
+3. Reconhecer dor tempo-dependente.
+4. Usar analgesia com reavaliação clínica.
+5. Diferenciar dor nociceptiva, neuropática, visceral e somática.
+6. Comunicar dor de forma objetiva no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Dor como quinto sinal é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Dor como quinto sinal**: Dor como quinto sinal é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+A pergunta “de 0 a 10?” é útil, mas incompleta.
 
 ```text
-Dor como quinto sinal: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+intensidade + localização + qualidade + tempo + sinais associados = raciocínio
 ```
+
+**PONTO-CHAVE:**  
+Dor intensa, súbita, progressiva, associada a instabilidade ou déficit neurológico muda prioridade.
+
+**NÃO ERRE:**  
+Não negue analgesia por medo de “mascarar” diagnóstico. Dor controlada pode melhorar exame e comunicação.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia aplicada
 
-## 1. Mecanismo principal
+## Dor nociceptiva somática
 
-Em dor como quinto sinal, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Vem de pele, músculo, osso e peritônio parietal. Costuma ser localizada.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+## Dor visceral
 
-## 2. Semiologia aplicada
+Vem de vísceras. Pode ser difusa, em cólica, associada a náuseas/sudorese.
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+## Dor neuropática
 
-```text
-observação → interpretação → conduta
-```
+Vem de lesão/irritação nervosa.
 
-## 3. Risco e priorização
+Pistas: queimação, choque, formigamento, alodinia.
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+## Dor isquêmica
 
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+Falta de fluxo.
+
+Pistas: aperto, esforço, dor desproporcional, extremidade fria ou déficit.
+
+**RACIOCÍNIO:**  
+Qualidade da dor aponta mecanismo. Mecanismo aponta risco.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## OPQRST
 
-## Achados que precisam ser procurados
+- **O — Onset:** início.
+- **P — Provocation/Palliation:** piora/melhora.
+- **Q — Quality:** qualidade.
+- **R — Radiation:** irradiação.
+- **S — Severity:** intensidade.
+- **T — Time:** duração/evolução.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Perguntas que mudam conduta
 
-## Sinais de alarme
+- Foi súbita e máxima no início?
+- Está piorando?
+- Acorda à noite?
+- Tem febre?
+- Tem déficit neurológico?
+- Tem síncope?
+- Tem dispneia?
+- Tem sangramento?
+- Tem trauma?
+- Há gravidez possível?
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+## Avalie impacto
+
+- Consegue andar?
+- Consegue comer/beber?
+- Consegue respirar fundo?
+- Consegue dormir?
+- Perdeu função?
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Dor deve ser reavaliada.
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+dor inicial → analgesia → reexame → tendência → decisão
 ```
 
-O raciocínio deve seguir:
+## Red flags
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Dor torácica opressiva.
+- Dor abdominal com rigidez.
+- Cefaleia súbita explosiva.
+- Dor lombar com déficit/esfíncter.
+- Dor em membro frio/pálido.
+- Dor testicular súbita.
+- Dor ocular com perda visual.
+- Dor desproporcional ao exame.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Avaliar só número.
+- Não dar analgesia.
+- Não reavaliar após analgesia.
+- Ignorar dor desproporcional.
+- Não perguntar início súbito.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Dor torácica
+## Mini-caso 1 — Dor abdominal com peritonite
 
 ### Cenário
-Paciente com apresentação típica relacionada a dor torácica, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor 9/10, imóvel, piora ao tossir, defesa involuntária, FC 120.
 
 ### Mecanismo principal
-Mecanismo dominante de dor torácica dentro da trilha dor como quinto sinal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Irritação peritoneal com resposta sistêmica à dor/inflamação.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor intensa.
+- Imobilidade.
+- Defesa.
+- Taquicardia.
 
 ### Pergunta central
-Qual mecanismo explica dor torácica?
+Por que o padrão é grave?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Dor intensa com defesa e piora ao movimento sugere peritonite.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar exame de imagem para reconhecer gravidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Dor abdominal
+Treine analgesia + reavaliação.
+
+---
+
+## Mini-caso 2 — Cefaleia súbita
 
 ### Cenário
-Paciente com apresentação típica relacionada a dor abdominal, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente relata “pior dor de cabeça da vida”, início explosivo, vômitos e rigidez de nuca.
 
 ### Mecanismo principal
-Mecanismo dominante de dor abdominal dentro da trilha dor como quinto sinal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Cefaleia thunderclap, possível sangramento intracraniano ou outra causa grave.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Início súbito.
+- Máxima no início.
+- Vômitos.
+- Rigidez de nuca.
 
 ### Pergunta central
-Qual mecanismo explica dor abdominal?
+Por que não é enxaqueca comum?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+O início explosivo e sinais meníngeos são red flags neurológicas.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Medicar e liberar sem avaliar red flags.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Cefaleia
+Treine cefaleia com sinais de alarme.
+
+---
+
+## Mini-caso 3 — Dor neuropática
 
 ### Cenário
-Paciente com apresentação típica relacionada a cefaleia, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com queimação e choques em trajeto dermatomérico, formigamento, pele sensível ao toque.
 
 ### Mecanismo principal
-Mecanismo dominante de cefaleia dentro da trilha dor como quinto sinal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Irritação/lesão de nervo periférico ou raiz.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Queimação.
+- Choques.
+- Formigamento.
+- Distribuição neural.
 
 ### Pergunta central
-Qual mecanismo explica cefaleia?
+O que a qualidade da dor sugere?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Sugere dor neuropática, diferente de dor muscular ou visceral.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar toda dor como inflamatória/mecânica.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Dor lombar
+Treine qualidade e distribuição.
+
+---
+
+## Mini-caso 4 — Dor torácica isquêmica
 
 ### Cenário
-Paciente com apresentação típica relacionada a dor lombar, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor em aperto ao esforço, irradiando para braço, melhora com repouso, associada a sudorese.
 
 ### Mecanismo principal
-Mecanismo dominante de dor lombar dentro da trilha dor como quinto sinal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Isquemia miocárdica por oferta insuficiente de oxigênio ao músculo cardíaco.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Aperto.
+- Esforço.
+- Irradiação.
+- Sudorese.
 
 ### Pergunta central
-Qual mecanismo explica dor lombar?
+Qual mecanismo preocupa?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Isquemia cardíaca. Exige avaliação cardiovascular e ECG conforme contexto.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Chamar de dor muscular sem avaliar padrão.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine dor torácica orientada por risco.
 
 ---
 
@@ -247,70 +247,74 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de dor como quinto sinal?
+**Pergunta:** Escala de dor basta?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Não. Você precisa de localização, qualidade, início, evolução, irradiação, fatores e sinais associados.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Analgesia mascara diagnóstico?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Analgesia adequada não deve ser negada. O diagnóstico depende de reavaliação e exame bem feito.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** O que é dor desproporcional?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Dor muito intensa com poucos achados no exame, sugerindo causas como isquemia, compartimental, necrosante ou vascular.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Qual dor de cabeça é red flag?
+
+**Resposta esperada:** Súbita, máxima no início, nova, com déficit, febre, rigidez de nuca, papiledema ou alteração de consciência.
 
 ---
 
 # 7. Mapa final
 
 ```text
-DOR COMO QUINTO SINAL
-├── conceito de base
-├── semiologia
+DOR
+├── caracterizar
+│   ├── início
+│   ├── qualidade
+│   ├── localização
+│   ├── irradiação
+│   └── intensidade
+├── mecanismo
+│   ├── somática
+│   ├── visceral
+│   ├── neuropática
+│   └── isquêmica
 ├── gravidade
-├── mini-casos
-└── ponte para OSCE
+│   ├── súbita
+│   ├── progressiva
+│   ├── instabilidade
+│   └── déficit
+└── cuidado
+    ├── analgesia
+    ├── reexame
+    └── orientação
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- OPQRST;
+- escala de dor;
+- red flags;
+- analgesia e reavaliação;
+- comunicação empática.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você caracterizou a dor?
+- [ ] Perguntou início súbito?
+- [ ] Procurou red flags?
+- [ ] Tratou dor e reavaliou?
+- [ ] Relacionou qualidade ao mecanismo?

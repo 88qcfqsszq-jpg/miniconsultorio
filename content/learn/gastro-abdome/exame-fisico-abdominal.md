@@ -1,245 +1,259 @@
 # Trilha Gastro/Abdome — Exame físico abdominal
 
+
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
+
 ## Objetivo da trilha
 
-Ensinar inspeção, ausculta, percussão, palpação e sinais especiais com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a examinar o abdome de forma organizada, interpretando cada achado como pista de mecanismo: inflamação, obstrução, ascite, massa, peritonite ou doença hepática.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** exame abdominal não é ritual. É uma sequência para responder perguntas clínicas.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de exame físico abdominal.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Executar inspeção, ausculta, percussão e palpação.
+2. Reconhecer defesa, rigidez e dor à descompressão.
+3. Identificar distensão, ascite e hérnias.
+4. Examinar fígado, baço e massas.
+5. Integrar achados com hipóteses.
+6. Apresentar achados abdominais no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Exame físico abdominal é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Exame físico abdominal**: Exame físico abdominal é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+O abdome muda com tempo, dor, respiração e toque. Você precisa observar antes de apertar.
 
 ```text
-Exame físico abdominal: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+olhar → ouvir → percutir → palpar → reavaliar
 ```
+
+**PONTO-CHAVE:**  
+Palpação profunda antes da inspeção e ausculta pode piorar dor, contrair musculatura e reduzir qualidade do exame.
+
+**NÃO ERRE:**  
+Não escreva “abdome inocente” sem sinais vitais e sem dizer se há defesa, rigidez, dor localizada ou distensão.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia/semiologia aplicada
 
-## 1. Mecanismo principal
+## Inspeção
 
-Em exame físico abdominal, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Responde:
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+- Está distendido?
+- Há cicatriz cirúrgica?
+- Hérnia?
+- Circulação colateral?
+- Respiração abdominal reduzida?
+- O paciente evita mexer?
 
-## 2. Semiologia aplicada
+## Ausculta
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Ruídos aumentados podem aparecer em obstrução inicial. Ruídos reduzidos podem aparecer em íleo, peritonite ou fase tardia de obstrução.
 
-```text
-observação → interpretação → conduta
-```
+**CUIDADO:**  
+Ruído hidroaéreo isolado raramente fecha diagnóstico. Use como peça do conjunto.
 
-## 3. Risco e priorização
+## Percussão
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+- Timpanismo: gás/distensão.
+- Macicez móvel: ascite.
+- Dor à percussão: irritação peritoneal possível.
 
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+## Palpação
+
+- Superficial: dor, defesa, contratura.
+- Profunda: massas, órgãos, dor localizada.
+- Descompressão: irritação peritoneal, quando indicada e com cuidado.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Defesa voluntária x involuntária
 
-## Achados que precisam ser procurados
+- **Voluntária:** paciente contrai por medo/dor; pode reduzir com respiração e distração.
+- **Involuntária:** rigidez reflexa, preocupante para peritonite.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Rigidez
 
-## Sinais de alarme
+Abdome duro, resistente, pouco depressível.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**PONTO-CHAVE:**  
+Rigidez difusa com dor intensa é sinal de peritonite até prova contrária.
+
+## Ascite
+
+Procure:
+
+- distensão;
+- macicez em flancos;
+- macicez móvel;
+- onda líquida em grandes volumes;
+- sinais de doença hepática.
+
+## Hepatomegalia/esplenomegalia
+
+Palpe com respiração. Não force. Relacione com dor, consistência e contexto.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Quando examinar, pense em perguntas:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+há peritonite?
+há obstrução?
+há ascite?
+há massa?
+há órgão aumentado?
+há hérnia complicada?
 ```
 
-O raciocínio deve seguir:
+## Como descrever bem
+
+Exemplo:
 
 ```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+Abdome plano, ruídos presentes, flácido, doloroso em FID, com defesa localizada, sem rigidez difusa, sem massas palpáveis.
+```
+
+Isso é melhor do que:
+
+```text
+Abdome sem alterações.
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Pular inspeção.
+- Palpar forte logo no início.
+- Não examinar hérnias.
+- Não descrever localização da dor.
+- Não relacionar sinal físico com hipótese.
+- Não reavaliar após analgesia.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Dor em FID
+## Mini-caso 1 — Peritonite localizada
 
 ### Cenário
-Paciente com apresentação típica relacionada a dor em fid, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor em FID. Ao exame: dor localizada, defesa involuntária leve, piora ao tossir, sem distensão.
 
 ### Mecanismo principal
-Mecanismo dominante de dor em fid dentro da trilha exame físico abdominal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Inflamação local irritando peritônio parietal.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor localizada.
+- Defesa involuntária.
+- Dor à tosse.
+- Ausência de distensão importante.
 
 ### Pergunta central
-Qual mecanismo explica dor em fid?
+Qual achado muda a gravidade?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Defesa involuntária e dor ao movimento sugerem irritação peritoneal.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Anotar apenas “dor em FID” sem dizer se há defesa.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Ascite
+Treine descrição objetiva do exame abdominal.
+
+---
+
+## Mini-caso 2 — Obstrução intestinal
 
 ### Cenário
-Paciente com apresentação típica relacionada a ascite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Abdome distendido, timpânico, ruídos aumentados/metálicos, dor em cólica e parada de gases.
 
 ### Mecanismo principal
-Mecanismo dominante de ascite dentro da trilha exame físico abdominal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Acúmulo de gás e conteúdo intestinal por bloqueio mecânico.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Distensão.
+- Timpanismo.
+- Dor em cólica.
+- Parada de gases.
 
 ### Pergunta central
-Qual mecanismo explica ascite?
+O que o exame sugere?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Síndrome obstrutiva. Avaliar gravidade, vômitos, hérnias, cirurgia prévia e sinais de isquemia/peritonite.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Chamar de constipação sem examinar distensão e hérnias.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Murphy positivo
+Treine inspeção e palpação de hérnias.
+
+---
+
+## Mini-caso 3 — Ascite
 
 ### Cenário
-Paciente com apresentação típica relacionada a murphy positivo, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com aumento progressivo do abdome, edema de membros inferiores, macicez móvel e circulação colateral.
 
 ### Mecanismo principal
-Mecanismo dominante de murphy positivo dentro da trilha exame físico abdominal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Acúmulo de líquido peritoneal por hipertensão portal, hipoalbuminemia ou outras causas.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Distensão.
+- Macicez móvel.
+- Edema.
+- Circulação colateral.
 
 ### Pergunta central
-Qual mecanismo explica murphy positivo?
+Qual hipótese sistêmica deve entrar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Doença hepática crônica com hipertensão portal é uma possibilidade importante, mas ascite também pode ter causas cardíacas, renais, neoplásicas ou infecciosas.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Ver abdome aumentado e pensar apenas em gordura/gases.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Peritonismo
+Treine exame de macicez móvel e sinais hepáticos.
+
+---
+
+## Mini-caso 4 — Hérnia encarcerada
 
 ### Cenário
-Paciente com apresentação típica relacionada a peritonismo, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor abdominal e vômitos. Na inspeção, abaulamento inguinal doloroso, irredutível, com distensão abdominal.
 
 ### Mecanismo principal
-Mecanismo dominante de peritonismo dentro da trilha exame físico abdominal.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Alça presa em defeito herniário com risco de obstrução e isquemia.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Abaulamento inguinal.
+- Dor local.
+- Irredutibilidade.
+- Vômitos/distensão.
 
 ### Pergunta central
-Qual mecanismo explica peritonismo?
+Por que examinar hérnias em dor abdominal?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Hérnia encarcerada pode causar obstrução e isquemia. É diagnóstico que se perde quando você examina só o centro do abdome.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Não expor/examinar regiões inguinais.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine exame completo com privacidade e consentimento.
 
 ---
 
@@ -247,70 +261,73 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de exame físico abdominal?
+**Pergunta:** Por que a inspeção vem antes da palpação?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Porque distensão, cicatrizes, hérnias, circulação colateral e postura antálgica já orientam hipóteses antes do toque.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que diferencia defesa voluntária de involuntária?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** A voluntária melhora com distração/respiração; a involuntária é reflexa e sugere irritação peritoneal.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** O que significa abdome rígido?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Pode indicar peritonite, especialmente se associado a dor intensa, febre, taquicardia ou instabilidade.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Como descrever exame abdominal de forma útil?
+
+**Resposta esperada:** Inclua forma, ruídos, flacidez/rigidez, dor localizada, defesa, massas, organomegalias, ascite e sinais de peritonite.
 
 ---
 
 # 7. Mapa final
 
 ```text
-EXAME FÍSICO ABDOMINAL
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+EXAME ABDOMINAL
+├── inspeção
+│   ├── distensão
+│   ├── cicatriz
+│   ├── hérnia
+│   └── circulação colateral
+├── ausculta
+│   ├── ruídos presentes
+│   ├── aumentados
+│   └── reduzidos
+├── percussão
+│   ├── timpanismo
+│   ├── macicez
+│   └── dor
+└── palpação
+    ├── dor localizada
+    ├── defesa
+    ├── rigidez
+    ├── massas
+    └── organomegalias
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- exame com consentimento;
+- sequência correta;
+- descrição objetiva;
+- reconhecimento de peritonite;
+- comunicação do achado relevante.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você inspecionou antes de palpar?
+- [ ] Descreveu localização da dor?
+- [ ] Procurou defesa/rigidez?
+- [ ] Examinou hérnias quando indicado?
+- [ ] Relacionou exame com hipótese?

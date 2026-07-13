@@ -1,245 +1,227 @@
 # Trilha Raciocínio Clínico — Exames que mudam conduta
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar pedir exames com pergunta clínica com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a solicitar exames com propósito. Exame bom responde uma pergunta clínica, muda risco, confirma hipótese importante ou orienta conduta.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** exame não substitui raciocínio. Exame sem pergunta vira ruído.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de exames que mudam conduta.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Formular a pergunta antes de pedir exame.
+2. Diferenciar exame diagnóstico, prognóstico e de segurança.
+3. Evitar painel amplo sem indicação.
+4. Interpretar resultado no contexto.
+5. Repetir exame quando tendência importa.
+6. Explicar pedido no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Exames que mudam conduta é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Exames que mudam conduta**: Exames que mudam conduta é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Antes de pedir exame, diga:
 
 ```text
-Exames que mudam conduta: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+qual pergunta este exame vai responder?
+o resultado muda o que eu farei?
 ```
+
+**PONTO-CHAVE:**  
+Exame normal não exclui doença se foi pedido cedo demais, para a pergunta errada ou em paciente com alta suspeita.
+
+**NÃO ERRE:**  
+Não peça exame para “ver se aparece alguma coisa” em paciente sem hipótese. Isso aumenta falso positivo e confusão.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia da decisão
 
-## 1. Mecanismo principal
+Exames têm funções diferentes:
 
-Em exames que mudam conduta, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+## Confirmar diagnóstico
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+Exemplo: ECG em dor torácica, glicemia em confusão, radiografia em pneumonia provável.
 
-## 2. Semiologia aplicada
+## Avaliar gravidade
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Exemplo: gasometria, lactato, creatinina, eletrólitos, hemograma seriado.
 
-```text
-observação → interpretação → conduta
-```
+## Guiar tratamento
 
-## 3. Risco e priorização
+Exemplo: potássio antes de corrigir distúrbio, cultura antes de antibiótico quando não atrasa, tipagem em sangramento.
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+## Monitorar tendência
 
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+Exemplo: hematócrito na dengue, troponina seriada, lactato seriado, diurese.
 
 ---
 
-# 3. Semiologia essencial
+# 3. Semiologia aplicada aos exames
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Exame deve nascer da clínica
 
-## Achados que precisam ser procurados
+```text
+dispneia + sibilos + fala entrecortada → oximetria/gasometria se grave
+febre + hipotensão + confusão → lactato, culturas, função renal
+dor torácica opressiva → ECG/troponina
+dor abdominal com peritonite → imagem e cirurgia, sem atrasar
+```
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Interprete no contexto
 
-## Sinais de alarme
-
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+- Hemograma normal não exclui infecção inicial.
+- Troponina normal precoce não exclui SCA.
+- Plaqueta baixa isolada não define dengue grave.
+- PCR alta não localiza foco.
+- D-dímero é ruim se usado sem probabilidade pré-teste.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+hipótese → pergunta → exame → resultado → decisão
 ```
 
-O raciocínio deve seguir:
+## Perguntas úteis
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Este exame muda alta vs observação?
+- Muda antibiótico?
+- Muda hidratação?
+- Muda cirurgia?
+- Muda risco?
+- Preciso de tendência?
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Pedir tudo.
+- Interpretar fora do contexto.
+- Não repetir quando tendência importa.
+- Atrasar tratamento para colher exame.
+- Ignorar pré-teste.
+- Tratar número, não paciente.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — ECG
+## Mini-caso 1 — Dor torácica
 
 ### Cenário
-Paciente com apresentação típica relacionada a ecg, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor torácica opressiva há 30 minutos. Você pede ECG imediatamente.
 
 ### Mecanismo principal
-Mecanismo dominante de ecg dentro da trilha exames que mudam conduta.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+ECG detecta isquemia/lesão elétrica que muda conduta tempo-dependente.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor típica.
+- Tempo curto.
+- Risco cardíaco.
+- ECG precoce.
 
 ### Pergunta central
-Qual mecanismo explica ecg?
+Qual pergunta o ECG responde?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Há alteração isquêmica ou arritmia que muda fluxo imediato?
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar troponina para fazer ECG.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — RX tórax
+Treine exame com propósito.
+
+---
+
+## Mini-caso 2 — Dengue
 
 ### Cenário
-Paciente com apresentação típica relacionada a rx tórax, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente no 4º dia de dengue provável, dor abdominal e vômitos. Hematócrito subiu e plaquetas caíram.
 
 ### Mecanismo principal
-Mecanismo dominante de rx tórax dentro da trilha exames que mudam conduta.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Hemoconcentração pode indicar extravasamento plasmático.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Fase crítica.
+- Dor abdominal.
+- Vômitos.
+- Hematócrito em tendência.
 
 ### Pergunta central
-Qual mecanismo explica rx tórax?
+Por que repetir hemograma importa?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque tendência de hematócrito e plaquetas ajuda a avaliar extravasamento e risco, junto da clínica.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Olhar plaqueta isolada.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Hemograma/PCR
+Treine tendência laboratorial.
+
+---
+
+## Mini-caso 3 — Sepse
 
 ### Cenário
-Paciente com apresentação típica relacionada a hemograma/pcr, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente febril, confuso, taquicárdico e mal perfundido. Você solicita lactato, função renal, hemograma, culturas conforme protocolo, sem atrasar antibiótico quando indicado.
 
 ### Mecanismo principal
-Mecanismo dominante de hemograma/pcr dentro da trilha exames que mudam conduta.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Exames avaliam hipoperfusão, disfunção orgânica e etiologia provável.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Confusão.
+- Perfusão ruim.
+- Suspeita infecciosa.
+- Lactato/função renal.
 
 ### Pergunta central
-Qual mecanismo explica hemograma/pcr?
+Qual exame avalia gravidade de perfusão?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Lactato pode ajudar, mas não substitui clínica. Perfusão, PA, diurese e consciência continuam centrais.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar todos os exames para tratar sepse grave.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Gasometria
+Treine exame sem atrasar conduta.
+
+---
+
+## Mini-caso 4 — TEP improvável com D-dímero positivo
 
 ### Cenário
-Paciente com apresentação típica relacionada a gasometria, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente jovem com dor torácica muscular, sem dispneia, sem risco trombótico. D-dímero foi pedido sem probabilidade pré-teste e veio discretamente elevado.
 
 ### Mecanismo principal
-Mecanismo dominante de gasometria dentro da trilha exames que mudam conduta.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Exame sensível, pouco específico, usado fora de contexto gera falso positivo.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Baixa probabilidade.
+- Exame pedido sem pergunta.
+- Resultado inespecífico.
+- Ansiedade/mais exames.
 
 ### Pergunta central
-Qual mecanismo explica gasometria?
+Qual foi o erro?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Pedir exame sem probabilidade pré-teste adequada e sem pergunta clara.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Transformar falso positivo em cascata diagnóstica.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine uso racional de exames.
 
 ---
 
@@ -247,70 +229,71 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de exames que mudam conduta?
+**Pergunta:** Qual pergunta vem antes do exame?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** O que este exame vai responder e como isso muda a conduta?
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Exame normal exclui doença?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Depende da sensibilidade, tempo de doença, pré-teste e qualidade da amostra.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Quando tendência é mais útil que valor isolado?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Dengue, troponina, lactato, hemoglobina/hematócrito, creatinina, sinais vitais.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Qual o problema de pedir exame demais?
+
+**Resposta esperada:** Falso positivo, cascata diagnóstica, custo, ansiedade e decisões ruins.
 
 ---
 
 # 7. Mapa final
 
 ```text
-EXAMES QUE MUDAM CONDUTA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+EXAME ÚTIL
+├── pergunta clínica
+│   ├── diagnóstico
+│   ├── gravidade
+│   ├── segurança
+│   └── tratamento
+├── contexto
+│   ├── pré-teste
+│   ├── tempo de doença
+│   └── risco
+├── interpretação
+│   ├── normal não exclui tudo
+│   ├── alterado não confirma tudo
+│   └── tendência importa
+└── decisão
+    ├── alta
+    ├── observar
+    ├── tratar
+    └── encaminhar
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- justificar exame;
+- interpretar no contexto;
+- não atrasar conduta;
+- reavaliar com resultado.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você formulou a pergunta?
+- [ ] O exame muda conduta?
+- [ ] Considerou pré-teste?
+- [ ] Evitou painel automático?
+- [ ] Interpretou tendência?

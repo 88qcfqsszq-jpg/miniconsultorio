@@ -1,245 +1,260 @@
 # Trilha Gastro/Abdome — Icterícia
 
+
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
+
 ## Objetivo da trilha
 
-Ensinar bilirrubina, colestase, hepatite e obstrução biliar com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a interpretar icterícia pela fisiologia da bilirrubina, separar padrão pré-hepático, hepatocelular e colestático, reconhecer colangite e decidir investigação inicial.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** icterícia não é diagnóstico. É sinal de acúmulo de bilirrubina. A pergunta clínica é: **onde está o problema no caminho da bilirrubina?**
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de icterícia.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Diferenciar bilirrubina direta e indireta.
+2. Reconhecer icterícia colestática.
+3. Identificar colangite como urgência.
+4. Separar hepatite, hemólise e obstrução biliar.
+5. Interpretar AST/ALT, FA, GGT e bilirrubinas em conjunto.
+6. Montar mini-plano de investigação.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Icterícia é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Icterícia**: Icterícia é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+A bilirrubina nasce da degradação do heme. Ela chega ao fígado como indireta, é conjugada e sai pela bile como direta.
 
 ```text
-Icterícia: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+hemácias → bilirrubina indireta → fígado conjuga → bilirrubina direta → bile/intestino
 ```
+
+Se a icterícia aparece, algo falhou em uma dessas etapas.
+
+**PONTO-CHAVE:**  
+Icterícia + febre + dor em hipocôndrio direito = pense em colangite até provar o contrário.
+
+**NÃO ERRE:**  
+Não chame toda icterícia de “hepatite”. Obstrução biliar pode ser mais urgente.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Pré-hepática
 
-Em icterícia, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Produção excessiva de bilirrubina indireta, geralmente por hemólise.
 
 ```text
-observação → interpretação → conduta
+hemólise → muita bilirrubina indireta → fígado não dá conta → icterícia indireta
 ```
 
-## 3. Risco e priorização
+Pistas: anemia, reticulocitose, LDH alto, haptoglobina baixa, urina sem bilirrubina.
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+## Hepatocelular
+
+Lesão do hepatócito reduz captação, conjugação ou excreção.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+hepatócito lesado → AST/ALT elevadas → bilirrubina sobe
 ```
+
+Pistas: hepatite viral, álcool, fármacos, esteatose grave, autoimune.
+
+## Colestática/obstrutiva
+
+Bile não drena adequadamente.
+
+```text
+obstrução biliar → bilirrubina direta sobe → FA/GGT sobem → colúria/acolia/prurido
+```
+
+Pistas: urina escura, fezes claras, prurido, dor biliar, vesícula/via biliar dilatada.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Quando começou a icterícia?
+- Urina ficou escura?
+- Fezes estão claras?
+- Há prurido?
+- Febre ou calafrios?
+- Dor em hipocôndrio direito?
+- Perda de peso?
+- Uso de álcool, fitoterápicos, anabolizantes ou fármacos?
+- Viagem, contato com hepatite, transfusão, tatuagem, exposição sexual?
+- História de cálculo biliar?
+- Anemia, urina escura após esforço ou icterícia recorrente?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame físico
 
-## Sinais de alarme
+- Estado geral e sinais vitais.
+- Escleras e pele.
+- Dor em hipocôndrio direito.
+- Hepatomegalia/esplenomegalia.
+- Sinais de doença hepática crônica: ascite, circulação colateral, eritema palmar.
+- Confusão/asterixis se suspeita de encefalopatia.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**CUIDADO:**  
+Icterícia com rebaixamento, sangramento, INR alargado ou hipoglicemia sugere insuficiência hepática grave.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Comece pelo padrão laboratorial:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+bilirrubina indireta predominante → hemólise/conjugação
+AST/ALT muito altas → hepatocelular
+FA/GGT altas + direta alta → colestase/obstrução
 ```
 
-O raciocínio deve seguir:
+## Colangite
+
+Triade clássica:
 
 ```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+febre + dor HCD + icterícia
 ```
+
+Quando há hipotensão ou confusão, gravidade aumenta.
+
+**PONTO-CHAVE:**  
+Colangite é infecção com obstrução. Antibiótico ajuda, mas pode precisar drenagem biliar.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Avaliar bilirrubina isolada.
+- Não pedir frações direta/indireta.
+- Ignorar febre em paciente ictérico.
+- Não perguntar colúria/acolia.
+- Atrasar encaminhamento em colangite.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Hepatite
+## Mini-caso 1 — Obstrução biliar por cálculo
 
 ### Cenário
-Paciente com apresentação típica relacionada a hepatite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 46 anos, dor em hipocôndrio direito após refeições, náuseas, icterícia, urina escura e fezes claras. FA/GGT elevadas, bilirrubina direta predominante.
 
 ### Mecanismo principal
-Mecanismo dominante de hepatite dentro da trilha icterícia.
+Obstrução do fluxo biliar com refluxo de bilirrubina conjugada para o sangue.
+
+### Achados-chave
+- Colúria.
+- Acolia fecal.
+- FA/GGT elevadas.
+- Bilirrubina direta predominante.
+
+### Pergunta central
+Por que o padrão é colestático?
+
+### Resposta esperada
+Porque a bilirrubina já foi conjugada, mas não consegue drenar pela bile. Isso eleva bilirrubina direta, FA e GGT.
+
+### Erro comum
+Chamar de hepatite sem olhar FA/GGT e sintomas de colestase.
+
+### Ponte para OSCE
+Treine diferenciação entre hepatite e obstrução.
+
+---
+
+## Mini-caso 2 — Colangite
+
+### Cenário
+Paciente com icterícia, febre alta, calafrios e dor em HCD. PA 92/60, FC 122, confuso. Bilirrubina direta alta, FA/GGT altas.
+
+### Mecanismo principal
+Obstrução biliar infectada com risco de sepse.
 
 ```text
-queixa → achados → mecanismo → decisão
+cálculo obstrui → bile infecta → pressão sobe → bacteremia/sepse
 ```
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Febre.
+- Dor HCD.
+- Icterícia.
+- Hipotensão/confusão.
 
 ### Pergunta central
-Qual mecanismo explica hepatite?
+Qual é a prioridade?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Reconhecer colangite grave, iniciar manejo de sepse, antibiótico conforme protocolo e acionar equipe para drenagem biliar quando indicada.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como “hepatite com febre” e atrasar desobstrução.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Coledocolitíase
+Treine urgência: icterícia + sepse = colangite até prova contrária.
+
+---
+
+## Mini-caso 3 — Hepatite aguda
 
 ### Cenário
-Paciente com apresentação típica relacionada a coledocolitíase, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 25 anos com mal-estar, náuseas, dor em hipocôndrio direito leve, icterícia e AST/ALT muito elevadas, FA discreta.
 
 ### Mecanismo principal
-Mecanismo dominante de coledocolitíase dentro da trilha icterícia.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Lesão hepatocelular com redução da capacidade de metabolizar/excretar bilirrubina.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sintomas constitucionais.
+- AST/ALT muito elevadas.
+- FA/GGT menos dominantes.
+- Exposição epidemiológica ou medicamentosa.
 
 ### Pergunta central
-Qual mecanismo explica coledocolitíase?
+Por que parece hepatocelular?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque AST/ALT predominam, sugerindo lesão do hepatócito, não obstrução biliar primária.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Não investigar gravidade com INR, glicemia, encefalopatia e sinais de insuficiência hepática.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Hemólise
+Treine anamnese de exposição e avaliação de gravidade.
+
+---
+
+## Mini-caso 4 — Hemólise
 
 ### Cenário
-Paciente com apresentação típica relacionada a hemólise, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com icterícia leve, anemia, fadiga, urina sem bilirrubina, bilirrubina indireta predominante, LDH elevado e reticulócitos altos.
 
 ### Mecanismo principal
-Mecanismo dominante de hemólise dentro da trilha icterícia.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Destruição aumentada de hemácias com produção excessiva de bilirrubina indireta.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Anemia.
+- Bilirrubina indireta.
+- Reticulocitose.
+- LDH alto.
 
 ### Pergunta central
-Qual mecanismo explica hemólise?
+Por que a urina pode não ter bilirrubina?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque bilirrubina indireta não é hidrossolúvel e não é excretada diretamente na urina.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Investigar só fígado e esquecer hemólise.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Colangite
-
-### Cenário
-Paciente com apresentação típica relacionada a colangite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
-
-### Mecanismo principal
-Mecanismo dominante de colangite dentro da trilha icterícia.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
-
-### Pergunta central
-Qual mecanismo explica colangite?
-
-### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
-
-### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
-
-### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine integração entre icterícia e hemograma.
 
 ---
 
@@ -247,25 +262,27 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de icterícia?
+**Pergunta:** Qual pergunta separa colestase de outras causas?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Há colúria, acolia fecal e prurido? Esses achados sugerem bilirrubina direta elevada e dificuldade de drenagem biliar.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Icterícia com febre e dor em HCD significa o quê?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Colangite é hipótese prioritária. É urgência infecciosa/obstrutiva.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Bilirrubina indireta predominante faz pensar em quê?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Hemólise, problemas de conjugação ou causas benignas como Gilbert, dependendo do contexto.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** O que preocupa em hepatite aguda?
+
+**Resposta esperada:** Encefalopatia, INR elevado, hipoglicemia, sangramento, vômitos persistentes e deterioração sistêmica.
 
 ---
 
@@ -273,44 +290,41 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ```text
 ICTERÍCIA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+├── indireta predominante
+│   ├── hemólise
+│   ├── Gilbert
+│   └── falha de conjugação
+├── hepatocelular
+│   ├── AST/ALT altas
+│   ├── hepatites
+│   ├── álcool/fármacos
+│   └── risco: insuficiência hepática
+├── colestática
+│   ├── direta alta
+│   ├── FA/GGT altas
+│   ├── colúria/acolia/prurido
+│   └── obstrução biliar
+└── emergência
+    └── colangite: febre + dor HCD + icterícia
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- perguntas sobre colúria, acolia, prurido e febre;
+- interpretação de bilirrubina direta/indireta;
+- reconhecimento de colangite;
+- comunicação de urgência.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você fracionou bilirrubina?
+- [ ] Olhou AST/ALT, FA e GGT juntas?
+- [ ] Procurou febre e dor em HCD?
+- [ ] Considerou hemólise?
+- [ ] Avaliou sinais de insuficiência hepática?

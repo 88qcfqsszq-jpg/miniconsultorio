@@ -1,125 +1,137 @@
 # Trilha Cardiovascular — Síncope, palpitações e arritmias
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar avaliação inicial de perda transitória da consciência e palpitações, separando causas benignas de arritmias e red flags cardíacos/neurológicos.
+Ensinar você a diferenciar síncope verdadeira de queda, crise, vertigem e pré-síncope; reconhecer palpitações benignas e perigosas; e identificar sinais de arritmia com risco.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** síncope é perda transitória da consciência por hipoperfusão cerebral global até prova contrária.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Definir síncope.
-2. Diferenciar síncope de crise convulsiva e vertigem.
-3. Reconhecer red flags cardíacos.
-4. Caracterizar palpitações.
-5. Relacionar pulso, ECG e estabilidade.
+1. Definir síncope de forma clínica.
+2. Reconhecer red flags de síncope cardíaca.
+3. Diferenciar vasovagal, ortostática e arrítmica.
+4. Abordar palpitações com ECG e contexto.
+5. Entender bradiarritmia e taquiarritmia como mecanismos.
+6. Apresentar episódio paroxístico no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Perda transitória de consciência por hipoperfusão cerebral global, com recuperação espontânea.
-
-## Conceitos obrigatórios
-
-- **Síncope**: Perda transitória de consciência por hipoperfusão cerebral global, com recuperação espontânea.
-- **Palpitação**: Percepção incômoda do batimento cardíaco; pode ser arritmia ou resposta fisiológica.
-- **Red flag**: Síncope em exercício, dor torácica, história familiar de morte súbita, ECG alterado.
-
-## Frase didática
+A pergunta principal não é “desmaiou?”. É:
 
 ```text
-Síncope, palpitações e arritmias: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+por que o cérebro ficou sem fluxo por alguns segundos?
 ```
+
+**PONTO-CHAVE:**  
+Síncope durante esforço, em repouso sem pródromo, com dor torácica, dispneia, palpitação ou história familiar de morte súbita é preocupante.
+
+**NÃO ERRE:**  
+Nem toda perda de consciência é síncope. Crise epiléptica, hipoglicemia, intoxicação e trauma entram no diferencial.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Hipoperfusão cerebral
+## Vasovagal
 
-Queda transitória do fluxo cerebral causa perda de consciência breve.
-
-```text
-débito/PA ↓ → cérebro perfundido menos → síncope
-```
-
-## 2. Arritmias
-
-Ritmo muito rápido/lento pode reduzir débito e causar palpitação, tontura ou síncope.
+Reflexo autonômico reduz frequência/vasoconstrição.
 
 ```text
-ritmo anormal → enchimento/débito ↓ → sintomas
+gatilho emocional/dor/calor → vasodilatação/bradicardia → hipoperfusão → síncope
 ```
 
-## 3. Vasovagal
+Pistas: náusea, sudorese, calor, visão escurecendo, recuperação rápida.
 
-Gatilho emocional/dor/ortostatismo pode causar bradicardia/vasodilatação transitória.
+## Ortostática
+
+Queda de PA ao levantar.
 
 ```text
-gatilho → reflexo vagal → PA/FC ↓ → síncope
+levantar → sangue acumula nas pernas → retorno venoso cai → hipoperfusão
 ```
+
+Pistas: desidratação, diurético, idosos, neuropatia autonômica.
+
+## Arrítmica
+
+Ritmo muito rápido ou muito lento reduz débito.
+
+```text
+taqui/bradiarritmia → débito cai subitamente → síncope sem aviso
+```
+
+Pistas: sem pródromo, palpitações, cardiopatia, ECG alterado.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Estava em pé, sentado, deitado ou em esforço?
+- Houve pródromo: náusea, calor, escurecimento visual?
+- Palpitações antes?
+- Dor torácica ou dispneia?
+- Quanto tempo durou?
+- Recuperou rápido ou ficou confuso?
+- Houve mordedura de língua, movimentos, perda urinária?
+- Medicamentos: anti-hipertensivos, diuréticos, psicotrópicos?
+- História de cardiopatia?
+- Morte súbita familiar?
 
-- Pródromos: náusea, sudorese, escurecimento visual.
-- Contexto: exercício, repouso, posição.
-- Duração e recuperação.
-- Mordedura de língua, confusão pós-evento.
-- Pulso regular/irregular.
-- Sopro cardíaco.
-- ECG quando indicado.
+## Exame físico
 
-## Sinais de alarme
+- PA e FC.
+- Ortostatismo quando seguro.
+- Ausculta cardíaca.
+- Sopros.
+- Sinais de IC.
+- Déficits neurológicos.
+- ECG.
 
-- Síncope em exercício.
-- Dor torácica.
-- ECG alterado.
-- História familiar de morte súbita.
-- Sopro importante.
+**PONTO-CHAVE:**  
+ECG é exame básico em síncope e palpitações quando há suspeita cardiovascular.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Separe:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+síncope reflexa?
+ortostática?
+cardíaca/arrítmica?
+não é síncope?
 ```
 
-O raciocínio deve seguir:
+## Red flags
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Durante exercício.
+- Em posição supina.
+- Sem pródromo.
+- Dor torácica/dispneia.
+- Palpitação imediatamente antes.
+- Cardiopatia estrutural.
+- ECG anormal.
+- História familiar de morte súbita.
 
 ## Erros comuns
 
-- Não perguntar contexto.
+- Chamar tudo de vasovagal.
+- Não fazer ECG.
 - Ignorar síncope no esforço.
-- Confundir convulsão com síncope sem detalhes.
+- Não diferenciar crise convulsiva.
+- Não perguntar medicamentos.
 
 ---
 
@@ -128,87 +140,112 @@ O raciocínio deve seguir:
 ## Mini-caso 1 — Síncope vasovagal
 
 ### Cenário
-Jovem desmaia após ver sangue, com náusea e sudorese antes.
+Paciente jovem desmaia após ficar em pé em ambiente quente. Antes sentiu náusea, suor frio e visão escurecida. Recuperou rápido ao deitar.
 
 ### Mecanismo principal
-Reflexo vasovagal com vasodilatação/bradicardia.
-
-```text
-gatilho → vagal → PA cai
-```
+Reflexo vasovagal com vasodilatação/bradicardia transitória.
 
 ### Achados-chave
-- gatilho
-- pródromo
-- recuperação rápida
+- Gatilho claro.
+- Pródromo autonômico.
+- Posição em pé.
+- Recuperação rápida.
 
 ### Pergunta central
-Por que parece menos arriscado?
+Por que parece baixo risco?
 
 ### Resposta esperada
-Tem gatilho típico e pródromos; ainda requer avaliação contextual.
+Porque há padrão vasovagal típico, sem red flags cardíacas, com pródromo e recuperação rápida.
 
 ### Erro comum
-Não checar trauma/sinais vitais.
+Pedir exames complexos sem primeiro reconhecer padrão clínico.
 
 ### Ponte para OSCE
-Treinar tranquilização e orientação.
-## Mini-caso 2 — Síncope de esforço
+Treine orientação e sinais de retorno.
+
+---
+
+## Mini-caso 2 — Síncope arrítmica
 
 ### Cenário
-Adolescente desmaia durante exercício, sem pródromo.
+Paciente de 67 anos com cardiopatia desmaia sentado, sem pródromo, após palpitação súbita. ECG mostra alteração de condução.
 
 ### Mecanismo principal
-Pode indicar cardiopatia/arritmia grave.
-
-```text
-esforço + doença cardíaca → débito inadequado
-```
+Arritmia causando queda abrupta do débito cardíaco.
 
 ### Achados-chave
-- exercício
-- sem pródromo
-- história familiar
+- Sem pródromo.
+- Cardiopatia.
+- Palpitação antes.
+- ECG alterado.
 
 ### Pergunta central
-Por que é red flag?
+Por que é alto risco?
 
 ### Resposta esperada
-Síncope durante esforço pode sugerir causa cardíaca potencialmente grave.
+Porque síncope sem aviso, em cardiopata, com ECG alterado sugere causa arrítmica.
 
 ### Erro comum
-Chamar de ansiedade.
+Chamar de “queda de pressão” sem investigar ritmo.
 
 ### Ponte para OSCE
-Treinar encaminhamento e ECG.
-## Mini-caso 3 — Palpitação por taquiarritmia
+Treine comunicação de risco e monitorização.
+
+---
+
+## Mini-caso 3 — Hipotensão ortostática
 
 ### Cenário
-Paciente sente coração disparado, tontura, pulso muito rápido.
+Idoso em uso de diurético levanta à noite para urinar e cai após tontura. PA cai ao ortostatismo, sem dor torácica, ECG sem alteração aguda.
 
 ### Mecanismo principal
-Ritmo rápido reduz enchimento e causa sintomas.
-
-```text
-FC muito alta → débito ↓
-```
+Queda de retorno venoso/PA ao levantar, agravada por medicação e idade.
 
 ### Achados-chave
-- início súbito
-- pulso rápido
-- tontura
+- Relação com levantar.
+- Diurético.
+- Idoso.
+- Queda pressórica ortostática.
+
+### Pergunta central
+Qual dado confirma o mecanismo?
+
+### Resposta esperada
+Medida ortostática de PA/FC associada à história típica.
+
+### Erro comum
+Não medir ortostatismo.
+
+### Ponte para OSCE
+Treine revisão medicamentosa.
+
+---
+
+## Mini-caso 4 — Palpitação por taquiarritmia
+
+### Cenário
+Paciente relata início súbito de palpitações regulares, tontura e falta de ar leve. FC 180, PA preservada.
+
+### Mecanismo principal
+Taquiarritmia reduz tempo de enchimento e pode reduzir débito.
+
+### Achados-chave
+- Início súbito.
+- FC muito alta.
+- Tontura.
+- Regularidade do pulso.
 
 ### Pergunta central
 O que define urgência?
 
 ### Resposta esperada
-Instabilidade: hipotensão, dor torácica, dispneia, síncope.
+Instabilidade: hipotensão, dor torácica, alteração de consciência, choque ou edema agudo. Se instável, conduta muda imediatamente.
 
 ### Erro comum
-Tratar palpitação sem sinais vitais/ECG.
+Tratar palpitação como ansiedade sem medir pulso/ECG.
 
 ### Ponte para OSCE
-Treinar estabilidade hemodinâmica.
+Treine palpitação com sinais vitais e ECG.
 
 ---
 
@@ -216,68 +253,72 @@ Treinar estabilidade hemodinâmica.
 
 ## Questão ativa 1
 
-**Pergunta:** Toda perda de consciência é síncope?
+**Pergunta:** Qual síncope preocupa mais?
 
-**Resposta esperada:** Não. Convulsão, hipoglicemia, intoxicação e trauma entram no diferencial.
+**Resposta esperada:** Sem pródromo, durante esforço, em repouso/supina, com cardiopatia, ECG anormal, palpitações, dor torácica ou história familiar de morte súbita.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 2
 
-**Pergunta:** Qual síncope preocupa mais: após calor ou durante exercício?
+**Pergunta:** Como diferenciar vasovagal de arrítmica?
 
-**Resposta esperada:** Durante exercício, especialmente sem pródromo.
+**Resposta esperada:** Vasovagal costuma ter gatilho e pródromo. Arrítmica pode ser súbita, sem aviso, em cardiopata ou com ECG alterado.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 3
 
-**Pergunta:** Palpitação com hipotensão muda o quê?
+**Pergunta:** Palpitação exige o quê no início?
 
-**Resposta esperada:** Indica instabilidade e exige manejo urgente.
+**Resposta esperada:** Sinais vitais, pulso, estabilidade e ECG quando possível.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
+## Questão ativa 4
+
+**Pergunta:** Confusão prolongada após episódio sugere o quê?
+
+**Resposta esperada:** Pode sugerir crise epiléptica, hipoglicemia, intoxicação ou outra causa não sincopal.
 
 ---
 
 # 7. Mapa final
 
 ```text
-SÍNCOPE/PALPITAÇÃO
-├── vasovagal: gatilho + pródromo
-├── ortostática: levantar + hipovolemia/remédio
-├── cardíaca: esforço, sem pródromo, ECG/sopro
-└── neurológica/metabólica: confusão prolongada, déficits, hipoglicemia
+SÍNCOPE / PALPITAÇÕES
+├── vasovagal
+│   ├── gatilho
+│   ├── pródromo
+│   └── recuperação rápida
+├── ortostática
+│   ├── levantar
+│   ├── desidratação
+│   └── medicação
+├── cardíaca/arrítmica
+│   ├── sem pródromo
+│   ├── esforço/supina
+│   ├── cardiopatia
+│   └── ECG alterado
+└── não síncope
+    ├── crise
+    ├── hipoglicemia
+    └── intoxicação
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- história do evento
-- sinais vitais
-- ECG
-- red flags
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- história do evento;
+- pródromo;
+- recuperação;
+- ECG;
+- red flags cardíacas;
+- orientação de risco.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Confirmou que foi síncope?
+- [ ] Perguntou posição e esforço?
+- [ ] Procurou pródromo?
+- [ ] Fez/solicitou ECG?
+- [ ] Buscou red flags cardíacas?

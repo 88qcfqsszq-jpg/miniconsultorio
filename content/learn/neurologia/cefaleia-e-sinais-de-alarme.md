@@ -2,244 +2,244 @@
 
 ## Objetivo da trilha
 
-Ensinar cefaleia primária, secundária e red flags com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a avaliar cefaleia sem cair em dois extremos: banalizar uma emergência neurológica ou pedir exame para toda dor de cabeça.
 
-A trilha deve sempre conectar três camadas:
+A meta é reconhecer padrões, procurar sinais de alarme e decidir quando a cefaleia pode ser manejada como primária e quando precisa investigação urgente.
 
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+> **PONTO-CHAVE:** cefaleia é sintoma. O primeiro passo não é nomear “enxaqueca”; é decidir se existe risco de causa secundária grave.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de cefaleia e sinais de alarme.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Diferenciar cefaleia primária de cefaleia secundária provável.
+2. Reconhecer sinais de alarme neurológico.
+3. Caracterizar a dor com perguntas úteis.
+4. Fazer exame neurológico dirigido.
+5. Suspeitar de hemorragia subaracnoidea, meningite, hipertensão intracraniana, arterite temporal e trombose venosa cerebral.
+6. Saber quando imagem e encaminhamento são prioridade.
+7. Evitar tratar apenas a dor quando há sinal de gravidade.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Cefaleia e sinais de alarme é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
+A maioria das cefaleias é benigna, mas algumas são a primeira manifestação de uma emergência.
 
-## Conceitos obrigatórios
-
-- **Cefaleia e sinais de alarme**: Cefaleia e sinais de alarme é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Você não deve estudar cefaleia como uma lista de tipos. Estude como uma triagem de risco:
 
 ```text
-Cefaleia e sinais de alarme: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+dor de cabeça → padrão temporal → sinais de alarme → exame neurológico → decisão
 ```
+
+## Não erre
+
+Dor intensa não é sinônimo de gravidade. Dor leve também pode ser grave se vier com febre, rigidez de nuca, déficit focal, alteração de consciência, papiledema, gravidez/puerpério ou início súbito.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Cefaleia primária
 
-Em cefaleia e sinais de alarme, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Na enxaqueca, cefaleia tensional e cefaleia em salvas, a dor vem de circuitos neurovasculares, sensibilidade trigeminal, contração muscular ou ativação autonômica. O exame neurológico costuma ser normal.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+## Cefaleia secundária
 
-## 2. Semiologia aplicada
+Aqui a dor é consequência de outro problema:
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+- sangue no espaço subaracnoideo;
+- infecção meníngea;
+- massa/edema com hipertensão intracraniana;
+- trombose venosa;
+- arterite;
+- crise hipertensiva com lesão de órgão-alvo;
+- trauma.
 
-```text
-observação → interpretação → conduta
-```
-
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+> **RACIOCÍNIO:** se a cefaleia mudou o comportamento do paciente, veio com sinal neurológico ou rompeu o padrão habitual, trate como secundária até provar o contrário.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas que importam
 
-## Achados que precisam ser procurados
+- Quando começou?
+- Foi súbita ou progressiva?
+- É a pior da vida?
+- Acordou o paciente?
+- Mudou em relação às cefaleias anteriores?
+- Há febre, vômitos em jato, rigidez de nuca?
+- Há déficit focal, confusão, convulsão ou síncope?
+- Há gravidez, puerpério, câncer, imunossupressão ou trauma?
+- Piora ao deitar, tossir ou fazer esforço?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame direcionado
 
-## Sinais de alarme
+Você deve procurar:
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+- nível de consciência;
+- pares cranianos;
+- força e sensibilidade;
+- fala;
+- marcha;
+- rigidez de nuca;
+- fundo de olho quando possível;
+- sinais vitais;
+- sinais de infecção ou trauma.
+
+> **NÃO CONFUNDA:** fotofobia pode ocorrer na enxaqueca, mas febre + rigidez de nuca + confusão muda o problema para meningite/encefalite até prova em contrário.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use a lógica:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+1. Há sinal de alarme?
+2. O exame neurológico é normal?
+3. O padrão é típico e recorrente?
+4. Existe contexto de risco?
+5. Precisa imagem, punção, laboratório ou encaminhamento?
 ```
 
-O raciocínio deve seguir:
+## Sinais de alarme
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- início súbito explosivo;
+- pior cefaleia da vida;
+- déficit neurológico focal;
+- rebaixamento ou confusão;
+- febre/rigidez de nuca;
+- papiledema;
+- convulsão;
+- câncer, HIV/imunossupressão;
+- gravidez/puerpério;
+- trauma;
+- início após 50 anos;
+- piora progressiva;
+- cefaleia desencadeada por esforço/tosse/sexo.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Diagnosticar enxaqueca sem exame neurológico.
+- Ignorar “pior dor da vida”.
+- Tratar dor e não investigar febre/rigidez de nuca.
+- Não perguntar gravidez/puerpério.
+- Desvalorizar cefaleia nova em paciente idoso.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Migrânea
+## Mini-caso 1 — Enxaqueca provável
 
 ### Cenário
-Paciente com apresentação típica relacionada a migrânea, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher de 24 anos, cefaleia pulsátil unilateral recorrente há anos, associada a náuseas e fotofobia. Sem febre, sem déficit focal, exame neurológico normal. Episódio semelhante aos anteriores.
 
 ### Mecanismo principal
-Mecanismo dominante de migrânea dentro da trilha cefaleia e sinais de alarme.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Ativação neurovascular/trigeminovascular, com hipersensibilidade a luz, som e movimento.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- cefaleia recorrente e semelhante ao padrão habitual
+- náuseas/fotofobia
+- exame neurológico normal
+- ausência de sinais de alarme
 
 ### Pergunta central
-Qual mecanismo explica migrânea?
+Por que você pode pensar em cefaleia primária?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque o padrão é recorrente, típico, sem mudança de comportamento, sem déficit focal e sem sinais sistêmicos de alarme.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir imagem por toda cefaleia típica sem sinal de alarme.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Cefaleia tensional
+Treinar caracterização da dor, exame neurológico breve e explicação segura ao paciente.
+
+## Mini-caso 2 — Hemorragia subaracnoidea
 
 ### Cenário
-Paciente com apresentação típica relacionada a cefaleia tensional, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 48 anos, início súbito de cefaleia explosiva durante esforço. Diz que foi “a pior dor da vida”. Náuseas, rigidez de nuca leve, PA 180/100. Exame de força sem déficit claro.
 
 ### Mecanismo principal
-Mecanismo dominante de cefaleia tensional dentro da trilha cefaleia e sinais de alarme.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Sangramento no espaço subaracnoideo irrita meninges e aumenta risco de deterioração neurológica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- início súbito
+- pior cefaleia da vida
+- esforço como gatilho
+- rigidez de nuca
+- pressão elevada
 
 ### Pergunta central
-Qual mecanismo explica cefaleia tensional?
+Por que exame motor normal não tranquiliza?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque hemorragia subaracnoidea pode começar com cefaleia súbita e rigidez meníngea, mesmo sem déficit motor inicial. O padrão temporal é o sinal de alarme.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como enxaqueca porque não há hemiparesia.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Hemorragia subaracnoide suspeita
+Treinar reconhecimento de cefaleia explosiva e encaminhamento urgente.
+
+## Mini-caso 3 — Meningite
 
 ### Cenário
-Paciente com apresentação típica relacionada a hemorragia subaracnoide suspeita, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Jovem de 19 anos com febre alta, cefaleia intensa, vômitos, fotofobia e rigidez de nuca. Está sonolento e irritado. PA 100/60, FC 118.
 
 ### Mecanismo principal
-Mecanismo dominante de hemorragia subaracnoide suspeita dentro da trilha cefaleia e sinais de alarme.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Inflamação meníngea por infecção, com risco de sepse, edema cerebral, convulsão e deterioração rápida.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- febre
+- rigidez de nuca
+- alteração de consciência
+- vômitos/fotofobia
+- taquicardia
 
 ### Pergunta central
-Qual mecanismo explica hemorragia subaracnoide suspeita?
+Qual achado muda a prioridade?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+A associação de febre, rigidez de nuca e alteração de consciência. Você deve pensar em meningite/meningoencefalite e não atrasar encaminhamento/tratamento.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar “todos os sinais meníngeos clássicos” antes de agir.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Meningite
+Treinar triagem de cefaleia febril, isolamento/encaminhamento e comunicação de gravidade.
+
+## Mini-caso 4 — Hipertensão intracraniana
 
 ### Cenário
-Paciente com apresentação típica relacionada a meningite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 56 anos com câncer prévio, cefaleia progressiva há semanas, pior pela manhã, vômitos em jato e visão turva. Relata desequilíbrio. Exame mostra papiledema suspeito.
 
 ### Mecanismo principal
-Mecanismo dominante de meningite dentro da trilha cefaleia e sinais de alarme.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Lesão expansiva/edema aumenta pressão intracraniana e compromete estruturas neurológicas.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- progressão subaguda
+- vômitos em jato
+- piora matinal
+- papiledema
+- história de câncer
 
 ### Pergunta central
-Qual mecanismo explica meningite?
+Por que isso não deve ser tratado como cefaleia tensional?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque há progressão, vômitos, sinais de hipertensão intracraniana e contexto oncológico. Esses elementos exigem investigação urgente.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Prescrever analgésico e revisar em semanas sem reconhecer sinais de hipertensão intracraniana.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treinar red flags e indicação de neuroimagem/encaminhamento.
 
 ---
 
@@ -247,37 +247,54 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de cefaleia e sinais de alarme?
+**Pergunta:** Qual é a primeira pergunta diante de uma cefaleia?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Existe sinal de alarme? Se sim, a prioridade muda de analgesia para investigação/encaminhamento.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Você evita perder hemorragia, meningite, tumor, trombose ou AVC.
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** “Pior cefaleia da vida” com início súbito sugere o quê?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Hemorragia subaracnoidea até prova em contrário.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Exame neurológico inicialmente normal não exclui gravidade.
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Febre + cefaleia + rigidez de nuca deve fazer você pensar em quê?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Meningite/meningoencefalite, especialmente se houver alteração de consciência.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Atraso terapêutico aumenta risco de desfecho grave.
+
+## Questão ativa 4
+
+**Pergunta:** Quando a cefaleia recorrente pode ser manejada como primária?
+
+**Resposta esperada:** Quando segue padrão típico, sem mudança relevante, sem déficit focal e sem sinais sistêmicos ou contextos de risco.
+
+**Por que importa:** Você evita investigação excessiva sem perder segurança.
 
 ---
 
 # 7. Mapa final
 
 ```text
-CEFALEIA E SINAIS DE ALARME
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+CEFALEIA
+├── Sem alarme + padrão recorrente
+│   └── pensar em cefaleia primária
+├── Início súbito explosivo
+│   └── hemorragia subaracnoidea
+├── Febre + rigidez de nuca/confusão
+│   └── meningite/encefalite
+├── Déficit focal/convulsão
+│   └── AVC, massa, trombose venosa
+├── Progressiva + vômitos/papiledema
+│   └── hipertensão intracraniana
+└── Idade > 50 anos / câncer / imunossupressão / gravidez
+    └── investigar causa secundária
 ```
 
 ---
@@ -286,31 +303,33 @@ CEFALEIA E SINAIS DE ALARME
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- perguntas dirigidas;
+- exame neurológico focal;
+- reconhecimento de gravidade;
+- diagnóstico sindrômico;
+- comunicação com paciente/família;
+- decisão segura de encaminhamento.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+No módulo clínico, esta trilha pode ser aprofundada com:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
+- evolução temporal do nível de consciência;
+- alteração dinâmica de sinais vitais;
 - piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- resposta a medidas iniciais;
+- comparação entre raciocínio MEDIX e evolução fisiológica.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
+- [ ] A trilha ensina mecanismo, não só lista de sinais?
+- [ ] Você consegue ligar semiologia à decisão?
 - [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
+- [ ] Há erros comuns destacados?
+- [ ] O conteúdo prepara para OSCE?
+- [ ] A linguagem é direta, médica e adequada ao iniciante?
 - [ ] Há alerta para situações em que atraso terapêutico é perigoso?

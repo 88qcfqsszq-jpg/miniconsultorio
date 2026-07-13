@@ -1,245 +1,263 @@
 # Trilha Gastro/Abdome — Hepatologia básica
 
+
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
+
 ## Objetivo da trilha
 
-Ensinar hepatite, cirrose, ascite, encefalopatia e hipertensão portal com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a interpretar sinais de lesão hepática, reconhecer padrões laboratoriais, identificar gravidade e evitar confundir alteração de enzima hepática com diagnóstico fechado.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** hepatologia básica é raciocínio de padrão: hepatocelular, colestático, sintético ou portal.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de hepatologia básica.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Interpretar AST, ALT, FA, GGT, bilirrubina, albumina e INR.
+2. Diferenciar lesão hepática de função hepática.
+3. Reconhecer insuficiência hepática.
+4. Identificar sinais de hipertensão portal.
+5. Pensar em álcool, vírus, fármacos, gordura hepática e obstrução.
+6. Conectar fígado ao exame físico.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Hepatologia básica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Hepatologia básica**: Hepatologia básica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+AST e ALT não medem “função do fígado”. Elas sugerem lesão celular. Função hepática aparece melhor em:
 
 ```text
-Hepatologia básica: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+INR
+albumina
+bilirrubina
+glicemia
+encefalopatia
 ```
+
+**PONTO-CHAVE:**  
+Fígado inflamado pode ainda funcionar. Fígado falhando pode ter enzimas não tão altas.
+
+**NÃO ERRE:**  
+AST/ALT altas chamam atenção, mas INR elevado e encefalopatia assustam mais.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Padrão hepatocelular
 
-Em hepatologia básica, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Predomínio de AST/ALT.
+
+Causas comuns:
+
+- hepatites virais;
+- álcool;
+- fármacos/toxinas;
+- isquemia;
+- esteatose/esteato-hepatite;
+- autoimune.
+
+## Padrão colestático
+
+Predomínio de FA/GGT e bilirrubina direta.
+
+Causas:
+
+- cálculo em via biliar;
+- tumor obstrutivo;
+- colangite;
+- doenças colestáticas intra-hepáticas.
+
+## Função sintética
+
+O fígado produz fatores de coagulação e albumina.
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+fígado falha → INR sobe → albumina cai → sangramento/edema/ascite
 ```
 
-## 2. Semiologia aplicada
+## Hipertensão portal
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
-
-```text
-observação → interpretação → conduta
-```
-
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Resistência ao fluxo no fígado aumenta pressão venosa portal.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+cirrose → hipertensão portal → ascite/varizes/esplenomegalia
 ```
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Álcool: quantidade, frequência, tempo.
+- Fármacos: paracetamol, anticonvulsivantes, antibióticos, fitoterápicos, anabolizantes.
+- Hepatites: exposição sexual, sangue, tatuagem, drogas injetáveis, transfusão antiga.
+- Síndrome metabólica: obesidade, diabetes, dislipidemia.
+- Sintomas: icterícia, colúria, acolia, prurido, fadiga.
+- Descompensação: ascite, sangramento, confusão, sonolência.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame físico
 
-## Sinais de alarme
+- Icterícia.
+- Hepatomegalia.
+- Esplenomegalia.
+- Ascite.
+- Edema.
+- Aranhas vasculares.
+- Eritema palmar.
+- Ginecomastia.
+- Asterixis.
+- Equimoses.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**CUIDADO:**  
+Asterixis e confusão em hepatopata sugerem encefalopatia hepática.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Comece por quatro perguntas:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+1. é lesão hepatocelular?
+2. é colestase?
+3. há falha sintética?
+4. há hipertensão portal?
 ```
 
-O raciocínio deve seguir:
+## Padrões úteis
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- AST/ALT > FA/GGT: hepatocelular.
+- FA/GGT > AST/ALT: colestático.
+- INR alto: risco de insuficiência hepática.
+- Albumina baixa: cronicidade ou inflamação/desnutrição.
+- Plaquetas baixas em cirrose: pode sugerir hipertensão portal/esplenomegalia.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Dizer “função hepática alterada” só por AST/ALT.
+- Ignorar INR.
+- Não perguntar medicamentos.
+- Não reconhecer ascite/encefalopatia.
+- Chamar toda esteatose de “benigna”.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Hepatite aguda
+## Mini-caso 1 — Lesão hepatocelular aguda
 
 ### Cenário
-Paciente com apresentação típica relacionada a hepatite aguda, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 28 anos com mal-estar, náuseas, icterícia discreta. AST/ALT muito elevadas, FA pouco elevada, INR normal, consciente.
 
 ### Mecanismo principal
-Mecanismo dominante de hepatite aguda dentro da trilha hepatologia básica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Lesão de hepatócitos com liberação de transaminases.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- AST/ALT predominantes.
+- Sintomas sistêmicos.
+- INR normal.
+- Sem encefalopatia.
 
 ### Pergunta central
-Qual mecanismo explica hepatite aguda?
+O que define gravidade inicial?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Não é só o valor de AST/ALT. Gravidade depende de INR, encefalopatia, hipoglicemia, sangramento e estado geral.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Achar que transaminase mais alta sempre significa pior função.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Cirrose descompensada
+Treine interpretação de enzimas e função sintética.
+
+---
+
+## Mini-caso 2 — Colestase obstrutiva
 
 ### Cenário
-Paciente com apresentação típica relacionada a cirrose descompensada, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com icterícia, prurido, colúria e acolia. FA/GGT muito elevadas, bilirrubina direta alta, AST/ALT moderadas.
 
 ### Mecanismo principal
-Mecanismo dominante de cirrose descompensada dentro da trilha hepatologia básica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Dificuldade de drenagem biliar.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Colúria/acolia.
+- Prurido.
+- FA/GGT altas.
+- Bilirrubina direta.
 
 ### Pergunta central
-Qual mecanismo explica cirrose descompensada?
+Por que este padrão não é apenas “hepatite”?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque predomina colestase, sugerindo obstrução ou doença biliar. Imagem de vias biliares costuma ser etapa importante.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Interpretar qualquer icterícia como hepatite.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Ascite infectada
+Treine leitura de padrão colestático.
+
+---
+
+## Mini-caso 3 — Cirrose descompensada
 
 ### Cenário
-Paciente com apresentação típica relacionada a ascite infectada, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com aumento abdominal, edema, icterícia leve, plaquetas baixas, albumina baixa e INR alargado. Tem aranhas vasculares e ascite.
 
 ### Mecanismo principal
-Mecanismo dominante de ascite infectada dentro da trilha hepatologia básica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Doença hepática crônica com hipertensão portal e falha sintética.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Ascite.
+- Plaquetopenia.
+- INR alto.
+- Albumina baixa.
 
 ### Pergunta central
-Qual mecanismo explica ascite infectada?
+O que indica cronicidade/descompensação?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Ascite, plaquetopenia, sinais cutâneos, albumina baixa e INR alterado sugerem cirrose descompensada.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Focar apenas em AST/ALT e perder os sinais de função/portal.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Encefalopatia hepática
+Treine exame físico de doença hepática crônica.
+
+---
+
+## Mini-caso 4 — Hepatotoxicidade medicamentosa
 
 ### Cenário
-Paciente com apresentação típica relacionada a encefalopatia hepática, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente iniciou novo medicamento há 3 semanas e agora tem náuseas, icterícia e elevação de transaminases. Usa fitoterápico “natural”.
 
 ### Mecanismo principal
-Mecanismo dominante de encefalopatia hepática dentro da trilha hepatologia básica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Lesão hepática induzida por droga/toxina.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Relação temporal.
+- Medicamento novo.
+- Fitoterápico.
+- Padrão laboratorial variável.
 
 ### Pergunta central
-Qual mecanismo explica encefalopatia hepática?
+Qual pergunta muda o caso?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Uso de fármacos, suplementos, fitoterápicos e doses. “Natural” também pode causar lesão hepática.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Não perguntar suplementos ou automedicação.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine anamnese medicamentosa completa.
 
 ---
 
@@ -247,25 +265,27 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de hepatologia básica?
+**Pergunta:** AST/ALT são função hepática?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Não. São marcadores de lesão hepatocelular. Função é melhor avaliada por INR, albumina, bilirrubina, glicemia e encefalopatia.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que assusta mais em hepatite aguda?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** INR elevado, encefalopatia, hipoglicemia, sangramento, vômitos persistentes e piora clínica.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Como reconhecer padrão colestático?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** FA/GGT e bilirrubina direta predominantes, com colúria, acolia e prurido.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Quais sinais sugerem hipertensão portal?
+
+**Resposta esperada:** Ascite, varizes, esplenomegalia, plaquetopenia e circulação colateral.
 
 ---
 
@@ -273,44 +293,41 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ```text
 HEPATOLOGIA BÁSICA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+├── lesão hepatocelular
+│   ├── AST/ALT
+│   └── vírus/álcool/fármacos/gordura
+├── colestase
+│   ├── FA/GGT
+│   ├── bilirrubina direta
+│   └── obstrução/doença biliar
+├── função sintética
+│   ├── INR
+│   ├── albumina
+│   └── glicemia
+└── hipertensão portal
+    ├── ascite
+    ├── varizes
+    ├── esplenomegalia
+    └── plaquetopenia
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- leitura de padrão laboratorial;
+- exame de icterícia, ascite e asterixis;
+- anamnese de álcool e medicações;
+- reconhecimento de insuficiência hepática.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Separou lesão de função?
+- [ ] Avaliou INR?
+- [ ] Perguntou álcool, fármacos e fitoterápicos?
+- [ ] Procurou colestase?
+- [ ] Procurou hipertensão portal?

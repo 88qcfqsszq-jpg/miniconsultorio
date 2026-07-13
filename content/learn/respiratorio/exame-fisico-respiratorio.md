@@ -1,212 +1,256 @@
 # Trilha Respiratório — Exame físico respiratório
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar exame físico respiratório como ferramenta de raciocínio: inspeção, palpação, percussão e ausculta devem explicar mecanismos e guiar hipóteses.
+Ensinar você a examinar o sistema respiratório de forma útil: observar esforço, contar frequência respiratória, inspecionar tórax, percutir, palpar e auscultar relacionando achados ao mecanismo.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** exame respiratório começa antes do estetoscópio. A fala, a postura e a FR já dizem gravidade.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Executar sequência básica do exame respiratório.
-2. Interpretar inspeção, expansibilidade, frêmito, percussão e ausculta.
-3. Diferenciar consolidação, derrame, pneumotórax e obstrução.
-4. Reconhecer sinais de esforço respiratório.
-5. Aplicar achados em mini-casos.
+1. Avaliar esforço respiratório.
+2. Contar FR corretamente.
+3. Identificar assimetria torácica.
+4. Reconhecer sibilos, crepitações, roncos e redução de murmúrio.
+5. Relacionar achados com obstrução, consolidação, derrame e pneumotórax.
+6. Apresentar exame respiratório no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Mostra gravidade antes da ausculta: padrão, esforço e fala.
-
-## Conceitos obrigatórios
-
-- **Inspeção**: Mostra gravidade antes da ausculta: padrão, esforço e fala.
-- **Percussão**: Ajuda a diferenciar ar excessivo de líquido/consolidação.
-- **Ausculta**: Traduz fluxo aéreo e presença de secreção/alvéolo preenchido.
-
-## Frase didática
+Não comece pela ausculta. Comece olhando:
 
 ```text
-Exame físico respiratório: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+fala → postura → FR → esforço → simetria → ausculta
 ```
+
+**PONTO-CHAVE:**  
+FR é sinal vital. Não estime de longe; conte.
+
+**NÃO ERRE:**  
+Ausculta normal não exclui dispneia grave, especialmente em TEP, acidose ou fadiga.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Consolidação
-
-Alvéolos preenchidos transmitem melhor vibração e podem gerar crepitações/sopro tubário.
+## Obstrução
 
 ```text
-exsudato alveolar → frêmito ↑/macicez/crepitações
+via aérea estreita → sibilos → expiração prolongada → aprisionamento
 ```
 
-## 2. Derrame pleural
-
-Líquido pleural reduz transmissão de som e vibração.
+## Consolidação
 
 ```text
-líquido pleural → MV ↓ + macicez + frêmito ↓
+alvéolo preenchido → crepitações/sopro tubário/broncofonia → troca gasosa ruim
 ```
 
-## 3. Pneumotórax
-
-Ar pleural separa pulmão da parede, reduzindo MV e gerando hipertimpanismo.
+## Derrame pleural
 
 ```text
-ar pleural → MV ↓ + hipertimpanismo
+líquido pleural → MV reduzido + macicez → menor expansibilidade
+```
+
+## Pneumotórax
+
+```text
+ar pleural → MV reduzido + hipertimpanismo → assimetria
+```
+
+## Edema pulmonar
+
+```text
+líquido intersticial/alveolar → crepitações bilaterais → dispneia
 ```
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Inspeção
 
-## Achados que precisam ser procurados
+- Fala frases completas?
+- Está em tripé?
+- Uso de musculatura acessória?
+- Tiragens?
+- Cianose?
+- Assimetria?
+- Cicatrizes/deformidades?
+- Padrão respiratório.
 
-- Fala e nível de conforto.
-- FR e padrão respiratório.
-- Tiragem, musculatura acessória.
-- Expansibilidade simétrica.
+## Palpação
+
+- Expansibilidade.
 - Frêmito toracovocal.
-- Percussão: claro, maciço, timpânico.
-- Ausculta: MV, sibilos, roncos, crepitações.
+- Dor.
+- Enfisema subcutâneo.
 
-## Sinais de alarme
+## Percussão
 
-- Assimetria importante.
-- Esforço intenso.
-- MV abolido unilateral com instabilidade.
+- Som claro pulmonar.
+- Macicez: líquido/consolidação.
+- Hipertimpanismo: ar aumentado/pneumotórax.
+
+## Ausculta
+
+- Murmúrio vesicular presente/reduzido.
+- Sibilos.
+- Roncos.
+- Crepitações finas/grossas.
+- Atrito pleural.
+
+**CUIDADO:**  
+Compare sempre lado a lado.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+achado → mecanismo → hipótese
 ```
 
-O raciocínio deve seguir:
+Exemplos:
 
 ```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+sibilo difuso → obstrução → asma/DPOC/anafilaxia
+crepitação focal → alvéolo comprometido → pneumonia
+MV unilateral reduzido → ar/líquido/obstrução → pneumotórax/derrame/atelectasia
+crepitações bilaterais + ortopneia → congestão → IC
 ```
 
 ## Erros comuns
 
-- Pular inspeção.
-- Auscultar sem comparar lados.
-- Não correlacionar percussão com ausculta.
+- Não contar FR.
+- Auscultar por cima da roupa grossa.
+- Não comparar lados.
+- Dizer “MVF” sem qualificar alterações.
+- Ignorar esforço respiratório.
+- Não reavaliar após tratamento.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Consolidação
+## Mini-caso 1 — Obstrução brônquica
 
 ### Cenário
-Febre, tosse e macicez em base direita.
+Paciente com dispneia, expiração prolongada e sibilos difusos. Fala frases curtas.
 
 ### Mecanismo principal
-Alvéolo preenchido por exsudato.
-
-```text
-alvéolo preenchido → som/vibração alterados
-```
+Estreitamento difuso de vias aéreas.
 
 ### Achados-chave
-- crepitações
-- macicez
-- frêmito aumentado possível
+- Sibilos.
+- Expiração prolongada.
+- Fala curta.
+- Esforço.
 
 ### Pergunta central
-Qual conjunto sugere consolidação?
+O que o exame indica?
 
 ### Resposta esperada
-Febre + achados focais + macicez/crepitações.
+Síndrome obstrutiva com gravidade a ser definida por fala, FR, SpO₂ e esforço.
 
 ### Erro comum
-Valorizar só ausculta e esquecer percussão.
+Descrever só “sibilos” sem gravidade.
 
 ### Ponte para OSCE
-Treinar exame completo.
-## Mini-caso 2 — Derrame pleural
+Treine exame em asma/DPOC.
+
+---
+
+## Mini-caso 2 — Consolidação
 
 ### Cenário
-Dispneia, dor pleurítica e MV reduzido em base com macicez.
+Paciente febril com crepitações em base direita, FR 28, SpO₂ 92%, dor pleurítica.
 
 ### Mecanismo principal
-Líquido no espaço pleural.
-
-```text
-líquido pleural → transmissão ↓
-```
+Alvéolos preenchidos por exsudato inflamatório.
 
 ### Achados-chave
-- macicez
-- MV reduzido
-- frêmito reduzido
+- Crepitação focal.
+- Febre.
+- Taquipneia.
+- Hipoxemia.
 
 ### Pergunta central
-Como diferenciar de pneumotórax?
+Qual hipótese o exame sustenta?
 
 ### Resposta esperada
-Derrame tende a macicez; pneumotórax tende a hipertimpanismo.
+Pneumonia/consolidação, com avaliação de gravidade.
 
 ### Erro comum
-Confundir todo MV reduzido com pneumotórax.
+Ignorar FR/SpO₂ e focar só em antibiótico.
 
 ### Ponte para OSCE
-Treinar percussão.
+Treine pneumonia.
+
+---
+
 ## Mini-caso 3 — Pneumotórax
 
 ### Cenário
-Dor súbita, dispneia, MV abolido e hipertimpanismo.
+Dor súbita, dispneia e murmúrio vesicular muito reduzido unilateralmente, com hipertimpanismo.
 
 ### Mecanismo principal
-Ar no espaço pleural.
-
-```text
-ar pleural → colapso → hipertimpanismo
-```
+Ar no espaço pleural reduz ventilação daquele hemitórax.
 
 ### Achados-chave
-- hipertimpanismo
-- MV abolido
-- dor súbita
+- MV unilateral reduzido.
+- Hipertimpanismo.
+- Dor súbita.
+- Dispneia.
 
 ### Pergunta central
-Por que a percussão importa?
+Por que comparar lados é essencial?
 
 ### Resposta esperada
-Ajuda a reconhecer ar pleural e urgência.
+A assimetria é a pista central para pneumotórax.
 
 ### Erro comum
-Esperar imagem em instável.
+Auscultar apenas pontos anteriores.
 
 ### Ponte para OSCE
-Treinar decisão clínica.
+Treine exame comparativo.
+
+---
+
+## Mini-caso 4 — Derrame pleural
+
+### Cenário
+Paciente com dispneia progressiva, MV reduzido em base, macicez à percussão e expansibilidade reduzida.
+
+### Mecanismo principal
+Líquido no espaço pleural limita expansão e transmite menos som.
+
+### Achados-chave
+- MV reduzido.
+- Macicez.
+- Expansibilidade reduzida.
+- Dispneia.
+
+### Pergunta central
+Qual mecanismo explica macicez?
+
+### Resposta esperada
+Líquido pleural transmite som diferente do pulmão aerado, gerando macicez.
+
+### Erro comum
+Confundir com pneumotórax, que tende a hipertimpanismo.
+
+### Ponte para OSCE
+Treine percussão e ausculta.
 
 ---
 
@@ -214,25 +258,27 @@ Treinar decisão clínica.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual etapa vem antes da ausculta?
+**Pergunta:** Qual é o primeiro dado do exame respiratório?
 
-**Resposta esperada:** Inspeção. Ela pode revelar gravidade imediatamente.
+**Resposta esperada:** Aparência respiratória: fala, postura, FR, esforço e SpO₂.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 2
 
-**Pergunta:** Macicez sugere mais ar ou líquido/tecido?
+**Pergunta:** O que sibilos indicam?
 
-**Resposta esperada:** Líquido/tecido/consolidação, não ar livre.
+**Resposta esperada:** Fluxo por via aérea estreitada, comum em broncoespasmo/obstrução.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 3
 
-**Pergunta:** MV reduzido unilateral com hipertimpanismo sugere?
+**Pergunta:** MV unilateral reduzido sugere o quê?
 
-**Resposta esperada:** Pneumotórax, especialmente se dor e dispneia súbitas.
+**Resposta esperada:** Pneumotórax, derrame, atelectasia, obstrução ou consolidação extensa, conforme percussão/contexto.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
+## Questão ativa 4
+
+**Pergunta:** Crepitação focal com febre sugere o quê?
+
+**Resposta esperada:** Pneumonia/consolidação provável, se o conjunto clínico sustenta.
 
 ---
 
@@ -240,41 +286,41 @@ Treinar decisão clínica.
 
 ```text
 EXAME RESPIRATÓRIO
-├── inspeção: gravidade
-├── palpação: expansibilidade/frêmito
-├── percussão: macicez x hipertimpanismo
-└── ausculta: sibilos/roncos/crepitações/MV
+├── inspeção
+│   ├── fala
+│   ├── FR
+│   ├── esforço
+│   └── simetria
+├── palpação
+│   ├── expansibilidade
+│   └── frêmito
+├── percussão
+│   ├── macicez
+│   └── hipertimpanismo
+└── ausculta
+    ├── sibilos
+    ├── crepitações
+    ├── roncos
+    └── MV reduzido
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- sequência do exame
-- descrição de achados
-- raciocínio por padrões
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- sequência do exame;
+- descrição objetiva;
+- comparação bilateral;
+- ligação achado-mecanismo.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você contou FR?
+- [ ] Observou esforço?
+- [ ] Comparou lados?
+- [ ] Percutiu quando necessário?
+- [ ] Relacionou achado com mecanismo?

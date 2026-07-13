@@ -1,215 +1,260 @@
 # Trilha Respiratório — Dispneia
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar o aluno a transformar a queixa “falta de ar” em raciocínio sindrômico, separando causas respiratórias, cardíacas, metabólicas, neuromusculares e emocionais, sempre começando por gravidade.
+Ensinar você a abordar dispneia como sintoma de risco, diferenciando causas respiratórias, cardíacas, vasculares, metabólicas e funcionais.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** dispneia é sensação de respirar com dificuldade. Pode existir com SpO₂ normal e pode ser grave mesmo antes de aparecer hipoxemia.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Definir dispneia e caracterizá-la na anamnese.
-2. Diferenciar dispneia aguda, subaguda e crônica.
-3. Reconhecer sinais de gravidade respiratória.
-4. Separar padrões respiratórios, cardíacos e metabólicos.
-5. Aplicar o raciocínio em asma, IC, TEP, pneumonia e ansiedade.
+1. Reconhecer dispneia grave.
+2. Diferenciar dispneia respiratória, cardíaca, vascular e metabólica.
+3. Avaliar fala, esforço, FR e SpO₂.
+4. Identificar sibilos, crepitações, dor pleurítica e sinais de IC.
+5. Priorizar conduta inicial.
+6. Apresentar dispneia no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Sensação subjetiva de desconforto respiratório. Não é sinônimo de hipoxemia: pode ocorrer com SpO₂ normal e pode estar ausente em hipoxemia grave.
-
-## Conceitos obrigatórios
-
-- **Dispneia**: Sensação subjetiva de desconforto respiratório. Não é sinônimo de hipoxemia: pode ocorrer com SpO₂ normal e pode estar ausente em hipoxemia grave.
-- **Tempo de instalação**: Início súbito sugere TEP, pneumotórax, aspiração, crise asmática; evolução progressiva sugere pneumonia, IC, DPOC, anemia ou doença intersticial.
-- **Gravidade**: Fala entrecortada, confusão, cianose, exaustão, uso de musculatura acessória e SpO₂ baixa aumentam prioridade.
-
-## Frase didática
+Dispneia não é diagnóstico. É alarme.
 
 ```text
-Dispneia: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+sensação de falta de ar → esforço/hipóxia/acidose/congestão/ansiedade → decisão
 ```
+
+**PONTO-CHAVE:**  
+SpO₂ normal não exclui dispneia grave. Acidose, esforço respiratório, TEP inicial e crise asmática inicial podem ter saturação preservada.
+
+**NÃO ERRE:**  
+Não chame de ansiedade antes de medir sinais vitais, observar fala e examinar pulmão/coração.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Dispneia respiratória
-
-Aumenta quando o sistema respiratório não consegue garantir ventilação ou oxigenação adequadas. Pode vir de obstrução, alvéolo preenchido, colapso ou alteração vascular.
+## Respiratória obstrutiva
 
 ```text
-problema respiratório → maior trabalho ventilatório ou pior troca gasosa → sensação de falta de ar
+vias aéreas estreitas → ar sai mal → sibilos/expiração prolongada → esforço
 ```
 
-## 2. Dispneia cardíaca
+Asma e DPOC são exemplos.
 
-O coração não consegue lidar com o retorno venoso ou manter débito, gerando congestão pulmonar ou baixo débito. Ortopneia e dispneia paroxística noturna ajudam no reconhecimento.
+## Respiratória alveolar
 
 ```text
-pressão pulmonar aumenta → líquido/interstício → receptores pulmonares ativados → dispneia
+alvéolo preenchido → troca gasosa ruim → crepitações/hipoxemia
 ```
 
-## 3. Dispneia metabólica
+Pneumonia e edema pulmonar entram aqui.
 
-Acidose metabólica estimula ventilação para eliminar CO₂. O paciente pode respirar profundamente mesmo sem doença primária pulmonar.
+## Cardíaca
 
 ```text
-acidose → drive ventilatório ↑ → respiração profunda/rápida → sensação de dispneia
+pressão no coração esquerdo ↑ → congestão pulmonar → ortopneia/crepitações
 ```
+
+## Vascular pulmonar
+
+```text
+vaso obstruído → perfusão cai → dispneia súbita + dor pleurítica
+```
+
+## Metabólica
+
+```text
+acidose → corpo aumenta ventilação → FR alta com SpO₂ normal
+```
+
+Exemplo: cetoacidose.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Começou súbita ou progressiva?
+- Consegue falar frases completas?
+- Piora ao deitar?
+- Tem dor torácica?
+- Tem tosse, febre, chiado?
+- Tem edema, ortopneia, ganho de peso?
+- Tem risco trombótico?
+- Há alergia/exposição?
+- Há ansiedade, mas com sinais vitais normais?
+- História de asma, DPOC, IC, trombose?
 
-- Frequência respiratória e padrão respiratório.
-- Capacidade de falar frases completas.
-- Uso de musculatura acessória, tiragem, batimento de asa nasal.
-- Ausculta: sibilos, crepitações, redução de murmúrio vesicular.
-- Sinais cardíacos: turgência jugular, edema, B3, hepatomegalia congestiva.
-- SpO₂, perfusão periférica e nível de consciência.
+## Exame físico
 
-## Sinais de alarme
+- FR.
+- SpO₂.
+- Fala.
+- Uso de musculatura acessória.
+- Sibilos.
+- Crepitações.
+- Assimetria de murmúrio vesicular.
+- Turgência jugular.
+- Edema.
+- Perfusão.
 
-- Fala entrecortada ou incapacidade de falar.
-- Rebaixamento de consciência.
-- Cianose, SpO₂ baixa persistente.
-- Hipotensão ou sinais de choque.
+**CUIDADO:**  
+Silêncio auscultatório em paciente asmático grave pode indicar fluxo muito baixo, não melhora.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+dispneia súbita ou progressiva?
+obstrutiva, alveolar, cardíaca, vascular ou metabólica?
+grave ou compensada?
 ```
 
-O raciocínio deve seguir:
+## Red flags
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Fala entrecortada.
+- Confusão.
+- Cianose.
+- SpO₂ baixa.
+- FR muito alta ou caindo por fadiga.
+- Hipotensão.
+- Dor torácica.
+- MV unilateral reduzido.
+- Sinais de choque.
 
 ## Erros comuns
 
-- Confundir dispneia com hipoxemia.
-- Atribuir dispneia a ansiedade sem excluir gravidade.
-- Esperar exames em paciente instável.
+- Não contar FR.
+- Não observar fala.
+- Não auscultar coração.
+- Ignorar TEP em dispneia súbita.
+- Tratar ansiedade antes de excluir gravidade.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Asma grave
+## Mini-caso 1 — Asma
 
 ### Cenário
-Paciente jovem com dispneia, chiado, fala entrecortada e SpO₂ 89%.
+Paciente jovem, chiado, tosse, dispneia, expiração prolongada, sibilos difusos, fala entrecortada.
 
 ### Mecanismo principal
-Obstrução ao fluxo aéreo com aumento do trabalho respiratório e V/Q baixo.
-
-```text
-broncoespasmo → ar sai com dificuldade → esforço ↑ → dispneia
-```
+Broncoespasmo com obstrução de vias aéreas.
 
 ### Achados-chave
-- sibilos
-- expiração prolongada
-- fala entrecortada
-- uso de musculatura acessória
+- Sibilos.
+- Expiração prolongada.
+- Fala entrecortada.
+- História de asma.
 
 ### Pergunta central
-O que indica gravidade além da saturação?
+Qual dado define gravidade?
 
 ### Resposta esperada
-Fala entrecortada, esforço respiratório, FR elevada e possível redução do murmúrio vesicular.
+Fala entrecortada, FR alta, SpO₂ baixa, uso de musculatura acessória, exaustão e silêncio auscultatório.
 
 ### Erro comum
-Tratar como crise leve apenas porque há sibilos.
+Contar só sibilos e não esforço.
 
 ### Ponte para OSCE
-Treinar avaliação de gravidade e reavaliação após broncodilatador.
+Treine broncoespasmo com reavaliação.
+
+---
+
 ## Mini-caso 2 — Insuficiência cardíaca
 
 ### Cenário
-Paciente idoso com dispneia aos esforços, ortopneia e edema de membros inferiores.
+Paciente com dispneia progressiva, ortopneia, edema de pernas, crepitações bibasais e turgência jugular.
 
 ### Mecanismo principal
-Congestão pulmonar por aumento de pressões cardíacas.
-
-```text
-congestão → interstício pulmonar → complacência ↓ → dispneia
-```
+Congestão pulmonar por aumento de pressão de enchimento do coração esquerdo.
 
 ### Achados-chave
-- ortopneia
-- crepitações
-- edema
-- turgência jugular
+- Ortopneia.
+- Edema.
+- Crepitações.
+- Jugular elevada.
 
 ### Pergunta central
-Por que deitar piora?
+O que sugere origem cardíaca?
 
 ### Resposta esperada
-Aumenta retorno venoso e congestão pulmonar, piorando sensação de falta de ar.
+Ortopneia, edema, turgência jugular, crepitações e história cardiovascular.
 
 ### Erro comum
-Chamar toda dispneia com crepitação de pneumonia.
+Tratar como bronquite sem avaliar congestão.
 
 ### Ponte para OSCE
-Treinar perguntas sobre ortopneia e edema.
+Treine dispneia cardíaca.
+
+---
+
 ## Mini-caso 3 — TEP
 
 ### Cenário
-Dispneia súbita, dor pleurítica, taquicardia e ausculta pouco alterada.
+Paciente com dispneia súbita, dor pleurítica, taquicardia e viagem prolongada recente. Pulmão quase normal à ausculta.
 
 ### Mecanismo principal
-Alteração de perfusão pulmonar com espaço morto.
-
-```text
-êmbolo → perfusão ↓ → V/Q alto → dispneia
-```
+Obstrução vascular pulmonar.
 
 ### Achados-chave
-- início súbito
-- taquicardia
-- dor pleurítica
-- fatores de risco trombótico
+- Súbito.
+- Dor pleurítica.
+- Fator de risco.
+- Taquicardia.
 
 ### Pergunta central
-Por que a ausculta pode estar normal?
+Por que ausculta normal não exclui gravidade?
 
 ### Resposta esperada
-Porque o problema principal é vascular/perfusional, não secreção ou broncoespasmo.
+TEP é problema vascular. O pulmão pode auscultar relativamente normal.
 
 ### Erro comum
-Descartar TEP por ausculta limpa.
+Só valorizar crepitações/sibilos.
 
 ### Ponte para OSCE
-Treinar anamnese dirigida para risco tromboembólico.
+Treine dispneia vascular.
+
+---
+
+## Mini-caso 4 — Acidose metabólica
+
+### Cenário
+Paciente diabético com vômitos, dor abdominal, respiração profunda, FR 34 e SpO₂ 98%.
+
+### Mecanismo principal
+Compensação respiratória de acidose metabólica.
+
+### Achados-chave
+- FR alta.
+- Respiração profunda.
+- SpO₂ normal.
+- Contexto metabólico.
+
+### Pergunta central
+Por que não é tranquilizador?
+
+### Resposta esperada
+Porque a dispneia vem da compensação metabólica. Saturação normal não exclui gravidade.
+
+### Erro comum
+Focar só em pulmão.
+
+### Ponte para OSCE
+Treine dispneia com SpO₂ normal.
 
 ---
 
@@ -217,25 +262,27 @@ Treinar anamnese dirigida para risco tromboembólico.
 
 ## Questão ativa 1
 
-**Pergunta:** SpO₂ normal exclui dispneia grave?
+**Pergunta:** Dispneia com SpO₂ normal pode ser grave?
 
-**Resposta esperada:** Não. O paciente pode ter broncoespasmo inicial, ansiedade, acidose metabólica, IC ou esforço intenso antes da queda de saturação.
+**Resposta esperada:** Sim. Acidose, esforço respiratório, TEP inicial e broncoespasmo podem ter SpO₂ preservada.
 
-**Por que importa:** Evita falsa segurança.
 ## Questão ativa 2
 
-**Pergunta:** Qual pergunta diferencia dispneia respiratória de cardíaca?
+**Pergunta:** O que diferencia asma de IC?
 
-**Resposta esperada:** Ortopneia, dispneia paroxística noturna e edema favorecem cardíaca; sibilos/gatilhos favorecem respiratória, mas há sobreposição.
+**Resposta esperada:** Asma tem sibilos/expiração prolongada; IC sugere ortopneia, crepitações, edema e turgência jugular, embora haja sobreposição.
 
-**Por que importa:** Orienta hipóteses iniciais.
 ## Questão ativa 3
 
-**Pergunta:** Quando dispneia exige ação antes de exames?
+**Pergunta:** Qual dispneia sugere TEP?
 
-**Resposta esperada:** Instabilidade, rebaixamento, cianose, exaustão, silêncio auscultatório, pneumotórax hipertensivo suspeito ou choque.
+**Resposta esperada:** Súbita, com dor pleurítica, taquicardia, hipoxemia ou fator trombótico.
 
-**Por que importa:** Prioriza segurança.
+## Questão ativa 4
+
+**Pergunta:** Qual sinal de fadiga respiratória preocupa?
+
+**Resposta esperada:** Redução de esforço aparente, sonolência, confusão, fala mínima, FR caindo após taquipneia intensa.
 
 ---
 
@@ -243,44 +290,45 @@ Treinar anamnese dirigida para risco tromboembólico.
 
 ```text
 DISPNEIA
-├── respiratória: asma, DPOC, pneumonia, pneumotórax
-├── cardíaca: IC, edema pulmonar, isquemia
-├── vascular: TEP
-├── metabólica: acidose, sepse
-└── funcional/ansiedade: diagnóstico de exclusão em urgência
+├── obstrutiva
+│   ├── asma
+│   └── DPOC
+├── alveolar
+│   ├── pneumonia
+│   └── edema pulmonar
+├── cardíaca
+│   ├── IC
+│   └── SCA
+├── vascular
+│   └── TEP
+├── metabólica
+│   └── acidose
+└── gravidade
+    ├── fala
+    ├── FR
+    ├── SpO₂
+    ├── consciência
+    └── perfusão
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- anamnese de dispneia
-- sinais de gravidade
-- ausculta direcionada
-- hipóteses sindrômicas
-- conduta inicial proporcional ao risco
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- sinais vitais;
+- fala/esforço;
+- ausculta pulmonar e cardíaca;
+- diferenciação de mecanismos;
+- reavaliação após intervenção.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você contou FR?
+- [ ] Observou fala?
+- [ ] Verificou SpO₂?
+- [ ] Pensou em coração, vaso e metabólico?
+- [ ] Procurou red flags?

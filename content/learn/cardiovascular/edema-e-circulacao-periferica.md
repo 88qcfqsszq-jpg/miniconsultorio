@@ -1,245 +1,268 @@
 # Trilha Cardiovascular — Edema e circulação periférica
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar edema, trombose venosa, insuficiência venosa e perfusão arterial com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a interpretar edema periférico e circulação por mecanismo: venoso, cardíaco, renal, hepático, linfático, medicamentoso ou inflamatório.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** edema é sinal de desequilíbrio de forças. A pergunta não é “tem líquido?”, é: **por que esse líquido saiu do vaso ou não drenou?**
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de edema e circulação periférica.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Diferenciar edema localizado e sistêmico.
+2. Reconhecer edema com cacifo e sem cacifo.
+3. Separar causas cardíacas, venosas, renais, hepáticas e linfáticas.
+4. Identificar sinais de TVP e isquemia periférica.
+5. Avaliar pulsos, perfusão e pele.
+6. Apresentar circulação periférica no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Edema e circulação periférica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Edema e circulação periférica**: Edema e circulação periférica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Edema aparece quando a filtração supera a drenagem.
 
 ```text
-Edema e circulação periférica: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+pressão venosa ↑
+albumina ↓
+retenção de sal/água
+permeabilidade ↑
+drenagem linfática ↓
 ```
+
+**PONTO-CHAVE:**  
+Edema unilateral doloroso é diferente de edema bilateral crônico.
+
+**NÃO ERRE:**  
+Não atribua edema unilateral agudo a “retenção de líquido” sem pensar em TVP, trauma, infecção ou linfedema.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Venoso
 
-Em edema e circulação periférica, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Pressão venosa aumentada.
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+insuficiência venosa → sangue acumula → edema vespertino → melhora com elevação
 ```
 
-## 2. Semiologia aplicada
+## Cardíaco
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Congestão sistêmica.
 
 ```text
-observação → interpretação → conduta
+IC direita/global → pressão venosa central ↑ → edema + turgência jugular
 ```
 
-## 3. Risco e priorização
+## Renal
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Retenção de sódio/água ou perda de proteína.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+rim retém sal/água → edema difuso
+síndrome nefrótica → albumina baixa → edema importante
+```
+
+## Hepático
+
+Hipoalbuminemia e hipertensão portal.
+
+```text
+cirrose → albumina baixa + portal ↑ → ascite + edema
+```
+
+## Linfático
+
+Drenagem falha.
+
+```text
+linfa não drena → edema firme, crônico, pouco cacifo
 ```
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Unilateral ou bilateral?
+- Agudo ou crônico?
+- Dói?
+- Piora ao longo do dia?
+- Melhora com elevação?
+- Há dispneia, ortopneia, ganho de peso?
+- Há urina espumosa, redução de diurese?
+- Há doença hepática?
+- Medicamentos: bloqueador de canal de cálcio, AINE, corticoide?
+- Cirurgia, câncer, imobilização, viagem?
+- Febre ou vermelhidão?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame físico
 
-## Sinais de alarme
+- Cacifo.
+- Simetria.
+- Circunferência.
+- Temperatura da pele.
+- Eritema/dor.
+- Pulsos.
+- Enchimento capilar.
+- Turgência jugular.
+- Ascite.
+- Varizes/hiperpigmentação.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**CUIDADO:**  
+Edema com dor, calor, assimetria ou dispneia súbita merece avaliação urgente.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use este eixo:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+localizado ou sistêmico?
+doloroso ou indolor?
+agudo ou crônico?
+com sinais cardíacos/renais/hepáticos?
 ```
 
-O raciocínio deve seguir:
+## Pistas úteis
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Bilateral + ortopneia + jugular: IC.
+- Bilateral + urina espumosa: renal/proteína.
+- Ascite + estigmas hepáticos: cirrose.
+- Vespertino + varizes: venoso.
+- Unilateral agudo doloroso: TVP/celulite/trauma.
+- Firme crônico sem cacifo: linfático.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Chamar todo edema de IC.
+- Não examinar pulsos.
+- Ignorar edema unilateral agudo.
+- Não perguntar medicamentos.
+- Não procurar sinais sistêmicos.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — TVP
+## Mini-caso 1 — Insuficiência venosa
 
 ### Cenário
-Paciente com apresentação típica relacionada a tvp, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com edema bilateral no fim do dia, varizes, hiperpigmentação maleolar e melhora ao elevar pernas. Sem dispneia.
 
 ### Mecanismo principal
-Mecanismo dominante de tvp dentro da trilha edema e circulação periférica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Hipertensão venosa periférica por refluxo/incompetência valvar.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Vespertino.
+- Varizes.
+- Melhora com elevação.
+- Sem congestão central.
 
 ### Pergunta central
-Qual mecanismo explica tvp?
+Por que não parece IC?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Faltam ortopneia, turgência jugular, crepitações e sintomas de congestão cardíaca. O padrão é venoso periférico.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Prescrever diurético sem definir mecanismo.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Insuficiência venosa
+Treine edema por mecanismo.
+
+---
+
+## Mini-caso 2 — Edema por IC
 
 ### Cenário
-Paciente com apresentação típica relacionada a insuficiência venosa, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com edema bilateral, dispneia aos esforços, ortopneia, turgência jugular e crepitações. Ganhou 3 kg em poucos dias.
 
 ### Mecanismo principal
-Mecanismo dominante de insuficiência venosa dentro da trilha edema e circulação periférica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Congestão sistêmica e pulmonar por insuficiência cardíaca.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Ortopneia.
+- Jugular elevada.
+- Crepitações.
+- Ganho de peso.
 
 ### Pergunta central
-Qual mecanismo explica insuficiência venosa?
+O que torna cardíaco?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Associação de edema com congestão pulmonar e venosa central.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Avaliar pernas sem auscultar pulmões e olhar jugular.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Edema medicamentoso
+Treine exame de congestão.
+
+---
+
+## Mini-caso 3 — TVP provável
 
 ### Cenário
-Paciente com apresentação típica relacionada a edema medicamentoso, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com edema unilateral de panturrilha, dor, aumento de circunferência, calor local e viagem prolongada recente.
 
 ### Mecanismo principal
-Mecanismo dominante de edema medicamentoso dentro da trilha edema e circulação periférica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Obstrução venosa aguda por trombo.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Unilateral.
+- Doloroso.
+- Fator de risco.
+- Calor/aumento de circunferência.
 
 ### Pergunta central
-Qual mecanismo explica edema medicamentoso?
+Por que é diferente de edema sistêmico?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+A unilateralidade aguda e dolorosa com risco trombótico sugere TVP.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Massagear ou banalizar como “inchaço comum”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Isquemia arterial aguda
+Treine risco trombótico e sinais de alerta.
+
+---
+
+## Mini-caso 4 — Linfedema
 
 ### Cenário
-Paciente com apresentação típica relacionada a isquemia arterial aguda, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com edema crônico unilateral, firme, pouco cacifo, pele espessada, história de cirurgia/linfonodo ou infecção recorrente.
 
 ### Mecanismo principal
-Mecanismo dominante de isquemia arterial aguda dentro da trilha edema e circulação periférica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Falha de drenagem linfática.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Crônico.
+- Firme.
+- Pouco cacifo.
+- Pele espessada.
 
 ### Pergunta central
-Qual mecanismo explica isquemia arterial aguda?
+Por que o mecanismo é linfático?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque o edema é crônico, firme e não segue padrão de congestão sistêmica ou venosa simples.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como retenção hídrica geral.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine descrição de edema sem cacifo.
 
 ---
 
@@ -247,70 +270,74 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de edema e circulação periférica?
+**Pergunta:** Qual primeira divisão do edema?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Localizado/unilateral versus bilateral/sistêmico.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que sugere edema cardíaco?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Edema com ortopneia, dispneia, turgência jugular, crepitações e ganho de peso.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** O que preocupa no edema unilateral?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** TVP, celulite, trauma, obstrução venosa ou linfática.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Por que perguntar medicamentos?
+
+**Resposta esperada:** Bloqueadores de canal de cálcio, AINEs, corticoides e outros podem causar ou piorar edema.
 
 ---
 
 # 7. Mapa final
 
 ```text
-EDEMA E CIRCULAÇÃO PERIFÉRICA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+EDEMA
+├── unilateral/local
+│   ├── TVP
+│   ├── celulite
+│   ├── trauma
+│   └── linfedema
+├── bilateral/sistêmico
+│   ├── IC
+│   ├── renal
+│   ├── hepático
+│   └── medicamentoso
+├── venoso
+│   ├── vespertino
+│   ├── varizes
+│   └── melhora com elevação
+└── avaliação vascular
+    ├── pulsos
+    ├── perfusão
+    ├── temperatura
+    └── dor
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- inspeção de membros;
+- cacifo;
+- pulsos;
+- sinais de TVP;
+- sinais de congestão cardíaca;
+- raciocínio por mecanismo.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Definiu unilateral/bilateral?
+- [ ] Avaliou cacifo?
+- [ ] Procurou sinais de IC?
+- [ ] Perguntou medicamentos?
+- [ ] Examinou pulsos e perfusão?

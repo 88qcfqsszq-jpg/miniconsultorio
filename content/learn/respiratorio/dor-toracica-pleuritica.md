@@ -1,217 +1,254 @@
 # Trilha Respiratório — Dor torácica pleurítica
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar o aluno a reconhecer dor que piora com respiração/tosse, separando causas pleuropulmonares, musculoesqueléticas e cardiovasculares graves.
+Ensinar você a reconhecer dor torácica pleurítica, diferenciar causas respiratórias e vasculares e identificar quando o quadro pode ser TEP, pneumotórax, pneumonia ou pleurite.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** dor pleurítica piora ao respirar, tossir ou movimentar o tórax. Ela aponta para pleura, pulmão, parede torácica ou vascular pulmonar.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
 1. Definir dor pleurítica.
-2. Diferenciar dor pleurítica de anginosa.
-3. Reconhecer TEP, pneumotórax e pneumonia como hipóteses importantes.
-4. Avaliar sinais de instabilidade.
-5. Aplicar semiologia e decisão por risco.
+2. Diferenciar dor pleurítica de dor isquêmica.
+3. Reconhecer TEP e pneumotórax.
+4. Relacionar dor, dispneia, febre e ausculta.
+5. Pedir exames com propósito.
+6. Apresentar o caso no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Dor aguda que piora com inspiração profunda, tosse ou movimento respiratório.
-
-## Conceitos obrigatórios
-
-- **Dor pleurítica**: Dor aguda que piora com inspiração profunda, tosse ou movimento respiratório.
-- **Pleurite**: Inflamação da pleura parietal, muito sensível à dor.
-- **Instabilidade**: Hipotensão, hipoxemia e taquicardia mudam prioridade.
-
-## Frase didática
+Pleura dói quando inflama, distende ou sofre atrito. O pulmão em si tem pouca sensibilidade dolorosa.
 
 ```text
-Dor torácica pleurítica: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+pleura irritada → dor ventilatório-dependente → respiração curta → piora com tosse
 ```
+
+**PONTO-CHAVE:**  
+Dor pleurítica + dispneia súbita + taquicardia = pense em TEP/pneumotórax.
+
+**NÃO ERRE:**  
+Não confunda dor pleurítica com “dor muscular” sem avaliar SpO₂, FR, ausculta e risco trombótico.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Pleura parietal
+## Pneumonia com pleurite
 
-A pleura visceral tem pouca sensibilidade dolorosa; a parietal é fonte importante de dor pleurítica.
-
-```text
-inflamação/tração pleural → dor à inspiração
-```
-
-## 2. TEP
-
-Pode causar dor pleurítica por infarto/irritação pleural e dispneia súbita.
+Inflamação chega à pleura.
 
 ```text
-êmbolo → isquemia periférica/pleura → dor + dispneia
+consolidação periférica → pleura inflama → dor ao respirar + febre
 ```
 
-## 3. Pneumotórax
+## TEP
 
-Entrada de ar no espaço pleural causa colapso e dor súbita.
+Êmbolo obstrui artéria pulmonar, podendo causar infarto pulmonar periférico.
 
 ```text
-ar pleural → colapso → dor + dispneia
+trombo → isquemia/infarto periférico → dor pleurítica + dispneia
 ```
+
+## Pneumotórax
+
+Ar no espaço pleural separa pulmão da parede torácica.
+
+```text
+ar pleural → colapso parcial → dor súbita + dispneia + MV reduzido
+```
+
+## Dor de parede
+
+Músculo/costela/cartilagem.
+
+Piora com palpação e movimento, sem sinais respiratórios sistêmicos.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Dor piora ao inspirar?
+- Início súbito?
+- Tem dispneia?
+- Febre/tosse?
+- Hemoptise?
+- Fator de risco para trombose?
+- Trauma?
+- Dor reprodutível à palpação?
+- SpO₂ baixa?
+- Uso de anticoncepcional, gravidez/puerpério, câncer, cirurgia, imobilização?
 
-- Início súbito ou progressivo.
-- Relação com inspiração/tosse.
-- Dispneia, síncope, hemoptise.
-- Ausculta e percussão.
+## Exame físico
+
+- FR.
+- SpO₂.
+- Ausculta pulmonar.
+- Assimetria de murmúrio.
+- Crepitações.
+- Atrito pleural.
+- Dor à palpação.
 - Sinais de TVP.
-- Febre/tosse.
-- Instabilidade hemodinâmica.
+- Perfusão/PA.
 
-## Sinais de alarme
-
-- Hipotensão.
-- SpO₂ baixa.
-- Síncope.
-- MV abolido unilateral.
-- Hemoptise com dispneia súbita.
+**CUIDADO:**  
+Ausculta normal não exclui TEP.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+dor pleurítica + febre/tosse → pneumonia/pleurite
+dor pleurítica + súbita + risco trombótico → TEP
+dor pleurítica + súbita + MV reduzido → pneumotórax
+dor localizada + palpável + sem red flags → parede torácica
 ```
 
-O raciocínio deve seguir:
+## Red flags
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Dispneia súbita.
+- Hipoxemia.
+- Taquicardia.
+- Hipotensão.
+- Hemoptise.
+- Síncope.
+- Fator trombótico.
+- MV unilateral reduzido.
+- Febre alta/toxemia.
 
 ## Erros comuns
 
-- Desprezar dor pleurítica em paciente taquicárdico.
-- Não auscultar ambos hemitórax.
-- Não avaliar sinais de TVP.
+- Excluir TEP por ausculta normal.
+- Não perguntar risco trombótico.
+- Não medir SpO₂.
+- Chamar pneumotórax de dor muscular.
+- Não diferenciar dor pleurítica de opressiva.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — TEP
+## Mini-caso 1 — Pneumonia com dor pleurítica
 
 ### Cenário
-Dor pleurítica súbita, dispneia e taquicardia após imobilização.
+Paciente com febre, tosse produtiva, dor lateral que piora ao inspirar, FR 28, crepitações em base esquerda.
 
 ### Mecanismo principal
-Obstrução vascular pulmonar.
-
-```text
-trombo → perfusão ↓ → dor/hipoxemia
-```
+Consolidação periférica com irritação pleural.
 
 ### Achados-chave
-- início súbito
-- risco trombótico
-- taquicardia
-- SpO₂ baixa
+- Febre/tosse.
+- Dor ventilatório-dependente.
+- Crepitações.
+- Taquipneia.
 
 ### Pergunta central
-Qual pista muda o raciocínio?
+Qual mecanismo explica a dor?
 
 ### Resposta esperada
-Fatores de risco e dispneia súbita com ausculta pouco alterada.
+Inflamação pleural adjacente à pneumonia.
 
 ### Erro comum
-Tratar como dor muscular sem avaliar risco.
+Tratar só a dor e ignorar infecção respiratória.
 
 ### Ponte para OSCE
-Treinar estratificação inicial.
-## Mini-caso 2 — Pneumotórax
+Treine pneumonia com pleurite.
+
+---
+
+## Mini-caso 2 — TEP
 
 ### Cenário
-Dor torácica súbita, dispneia e murmúrio reduzido unilateral.
+Paciente em uso de anticoncepcional, dor pleurítica súbita, dispneia, FC 124, SpO₂ 91%, ausculta sem grandes alterações.
 
 ### Mecanismo principal
-Colapso pulmonar por ar pleural.
-
-```text
-ar pleural → colapso → ventilação ↓
-```
+Obstrução vascular pulmonar com alteração V/Q e possível infarto periférico.
 
 ### Achados-chave
-- dor súbita
-- hipertimpanismo
-- MV reduzido
-- dispneia
+- Súbito.
+- Dispneia.
+- Taquicardia.
+- Risco trombótico.
 
 ### Pergunta central
-Por que exame físico pode salvar tempo?
+Por que ausculta normal não tranquiliza?
 
 ### Resposta esperada
-Assimetria de ausculta/percussão sugere diagnóstico urgente.
+Porque TEP é vascular. Pode haver hipoxemia e dor pleurítica sem crepitações/sibilos.
 
 ### Erro comum
-Esperar imagem em instável.
+Chamar de ansiedade/dor muscular.
 
 ### Ponte para OSCE
-Treinar reconhecimento de urgência.
-## Mini-caso 3 — Pneumonia com pleurite
+Treine suspeita clínica.
+
+---
+
+## Mini-caso 3 — Pneumotórax espontâneo
 
 ### Cenário
-Febre, tosse, dor ventilatório-dependente e crepitações.
+Paciente jovem, alto, dor torácica súbita unilateral, dispneia leve, murmúrio vesicular reduzido à direita.
 
 ### Mecanismo principal
-Inflamação pulmonar atingindo pleura.
-
-```text
-infecção → pleura irritada → dor
-```
+Ar no espaço pleural com colapso parcial do pulmão.
 
 ### Achados-chave
-- febre
-- tosse
-- crepitações
-- dor pleurítica
+- Dor súbita unilateral.
+- MV reduzido.
+- Dispneia.
+- Início abrupto.
 
 ### Pergunta central
-O que diferencia de TEP?
+Qual exame confirma se está estável?
 
 ### Resposta esperada
-Febre, evolução infecciosa e achados de consolidação favorecem pneumonia, mas risco deve ser integrado.
+Imagem de tórax, geralmente radiografia ou ultrassom conforme contexto, se o paciente está estável. Se instável e hipertensivo, tratamento não espera.
 
 ### Erro comum
-Achar que dor pleurítica exclui pneumonia.
+Não auscultar comparativamente.
 
 ### Ponte para OSCE
-Treinar integração de sinais.
+Treine assimetria respiratória.
+
+---
+
+## Mini-caso 4 — Dor de parede torácica
+
+### Cenário
+Paciente com dor localizada após treino, piora à palpação e rotação do tronco, sem dispneia, sem febre, SpO₂ normal.
+
+### Mecanismo principal
+Dor musculoesquelética da parede torácica.
+
+### Achados-chave
+- Localizada.
+- Reprodutível.
+- Sem sintomas sistêmicos.
+- Sinais vitais normais.
+
+### Pergunta central
+Por que é menor risco?
+
+### Resposta esperada
+Porque falta dispneia, hipoxemia, febre, taquicardia importante, risco trombótico e alteração auscultatória.
+
+### Erro comum
+Usar reprodutibilidade como único critério sem triagem.
+
+### Ponte para OSCE
+Treine segurança antes de tranquilizar.
 
 ---
 
@@ -219,25 +256,27 @@ Treinar integração de sinais.
 
 ## Questão ativa 1
 
-**Pergunta:** Dor pleurítica é sempre benigna?
+**Pergunta:** O que define dor pleurítica?
 
-**Resposta esperada:** Não. TEP e pneumotórax podem ser graves.
+**Resposta esperada:** Dor que piora com inspiração profunda, tosse ou movimentos respiratórios.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 2
 
-**Pergunta:** O que sugere pneumotórax hipertensivo?
+**Pergunta:** Qual combinação sugere TEP?
 
-**Resposta esperada:** Dispneia intensa, hipotensão, taquicardia, MV abolido unilateral e hipertimpanismo.
+**Resposta esperada:** Dor pleurítica súbita, dispneia, taquicardia, hipoxemia e fator trombótico.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 3
 
-**Pergunta:** Dor torácica que piora ao respirar exclui IAM?
+**Pergunta:** O que sugere pneumotórax?
 
-**Resposta esperada:** Não exclui totalmente; mas muda a probabilidade. Contexto e risco importam.
+**Resposta esperada:** Dor súbita unilateral, dispneia e murmúrio vesicular reduzido assimetricamente.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
+## Questão ativa 4
+
+**Pergunta:** Dor reprodutível exclui causa grave?
+
+**Resposta esperada:** Não sozinha. Ela reduz probabilidade de algumas causas, mas deve ser interpretada com sinais vitais e contexto.
 
 ---
 
@@ -245,42 +284,42 @@ Treinar integração de sinais.
 
 ```text
 DOR PLEURÍTICA
-├── TEP: súbita + risco trombótico + ausculta discreta
-├── pneumotórax: súbita + MV reduzido unilateral
-├── pneumonia: febre + tosse + crepitações
-└── musculoesquelética: reprodutível, sem sinais sistêmicos
+├── pneumonia/pleurite
+│   ├── febre
+│   ├── tosse
+│   └── crepitações
+├── TEP
+│   ├── súbita
+│   ├── dispneia
+│   ├── taquicardia
+│   └── risco trombótico
+├── pneumotórax
+│   ├── súbita unilateral
+│   └── MV reduzido
+└── parede torácica
+    ├── palpável
+    ├── movimento
+    └── sem red flags
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- dor torácica
-- dispneia
-- exame pulmonar
-- red flags
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- caracterizar dor;
+- pesquisar risco trombótico;
+- auscultar comparativamente;
+- medir SpO₂/FR;
+- reconhecer TEP/pneumotórax.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você perguntou se piora ao inspirar?
+- [ ] Mediu SpO₂?
+- [ ] Perguntou risco trombótico?
+- [ ] Auscultou os dois lados?
+- [ ] Pensou em pneumotórax/TEP?

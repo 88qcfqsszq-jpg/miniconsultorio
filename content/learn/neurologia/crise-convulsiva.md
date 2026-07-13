@@ -2,244 +2,242 @@
 
 ## Objetivo da trilha
 
-Ensinar evento paroxístico, pós-ictal, causas provocadas e segurança com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a reconhecer uma crise epiléptica, proteger o paciente, identificar causas provocadas e perceber quando a situação virou emergência.
 
-A trilha deve sempre conectar três camadas:
+Crise convulsiva não é apenas “tremer”. Pode haver alteração de consciência, olhar fixo, automatismos, confusão pós-ictal, queda, mordedura de língua ou perda urinária.
 
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+> **PONTO-CHAVE:** primeiro proteja vida e via aérea. Depois classifique a crise.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de crise convulsiva.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Reconhecer crise focal, generalizada e pós-ictal.
+2. Diferenciar crise de síncope e evento psicogênico sem simplificar.
+3. Identificar causas provocadas: hipoglicemia, febre, álcool, drogas, infecção, distúrbio eletrolítico, AVC, trauma.
+4. Saber quando a crise é status epilepticus.
+5. Fazer abordagem inicial segura.
+6. Evitar condutas perigosas durante a crise.
+7. Orientar risco de recorrência e necessidade de investigação.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Crise convulsiva é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
+Crise epiléptica é descarga elétrica anormal e excessiva no cérebro.
 
-## Conceitos obrigatórios
-
-- **Crise convulsiva**: Crise convulsiva é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Você deve pensar em três perguntas:
 
 ```text
-Crise convulsiva: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+está em crise agora? → recuperou? → há causa provocada ou lesão estrutural?
 ```
+
+## Não erre
+
+Não coloque objetos na boca. Não tente segurar a língua. Não restrinja movimentos com força. Proteja de trauma, posicione quando possível e avalie respiração.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Crise focal
 
-Em crise convulsiva, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Começa em uma rede cerebral localizada. Pode causar sintomas motores, sensitivos, autonômicos, psíquicos ou alteração de consciência.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+## Crise generalizada
 
-## 2. Semiologia aplicada
+Envolve redes bilaterais desde o início ou rapidamente. Pode causar perda de consciência e movimentos tônico-clônicos.
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+## Pós-ictal
 
-```text
-observação → interpretação → conduta
-```
+Após a crise, pode haver sonolência, confusão, cefaleia, dor muscular e déficit focal transitório (paralisia de Todd).
 
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+> **RACIOCÍNIO:** crise + febre/rigidez de nuca = pense em infecção do SNC. Crise + déficit focal persistente = pense em AVC/lesão estrutural.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Durante a crise
 
-## Achados que precisam ser procurados
+Observe:
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+- início focal ou generalizado;
+- desvio ocular;
+- movimentos assimétricos;
+- cianose;
+- duração;
+- queda/trauma;
+- perda de consciência;
+- recuperação respiratória.
 
-## Sinais de alarme
+## Depois da crise
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+Pergunte:
+
+- quanto tempo durou?
+- houve confusão pós-ictal?
+- houve mordedura lateral de língua?
+- perda urinária?
+- febre?
+- uso de álcool/drogas/medicações?
+- diabetes?
+- trauma?
+- gestação/puerpério?
+- crise prévia?
+
+## Exame inicial
+
+Você deve avaliar:
+
+- via aérea e respiração;
+- SpO₂;
+- glicemia capilar;
+- sinais vitais;
+- temperatura;
+- estado mental;
+- déficit focal;
+- rigidez de nuca;
+- sinais de trauma.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use esta sequência:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+ABCDE → glicemia → tempo de crise → causa reversível → sinais de lesão/infeção → encaminhamento
 ```
 
-O raciocínio deve seguir:
+## Status epilepticus
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+Crise prolongada ou crises repetidas sem recuperação adequada entre elas são emergência neurológica.
+
+> **CUIDADO:** quanto mais tempo a crise dura, mais difícil fica controlar e maior o risco de dano.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Colocar objeto na boca.
+- Não medir glicemia.
+- Não cronometrar a crise.
+- Ignorar febre/rigidez de nuca.
+- Dar alta sem investigar primeira crise.
+- Confundir pós-ictal com “paciente está dormindo normalmente”.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Primeira crise
+## Mini-caso 1 — Primeira crise tônico-clônica
 
 ### Cenário
-Paciente com apresentação típica relacionada a primeira crise, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 26 anos teve queda súbita, perda de consciência e movimentos tônico-clônicos por 2 minutos. Depois ficou confuso por 20 minutos. Sem febre. Glicemia 96 mg/dL.
 
 ### Mecanismo principal
-Mecanismo dominante de primeira crise dentro da trilha crise convulsiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Crise generalizada com período pós-ictal.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- perda de consciência
+- movimentos tônico-clônicos
+- confusão pós-ictal
+- glicemia normal
+- primeira crise
 
 ### Pergunta central
-Qual mecanismo explica primeira crise?
+Por que não encerrar o atendimento só porque a crise passou?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Primeira crise exige avaliar causas provocadas, lesão estrutural, uso de substâncias/medicações, distúrbios metabólicos e risco de recorrência.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dizer “foi nervoso” sem investigar.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Epilepsia conhecida
+Treinar história com testemunha e avaliação pós-crise.
+
+## Mini-caso 2 — Hipoglicemia
 
 ### Cenário
-Paciente com apresentação típica relacionada a epilepsia conhecida, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher diabética em uso de insulina apresenta sudorese, confusão e crise convulsiva curta. Glicemia capilar 38 mg/dL.
 
 ### Mecanismo principal
-Mecanismo dominante de epilepsia conhecida dentro da trilha crise convulsiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Neuroglicopenia desencadeando atividade cerebral anormal.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- diabetes/insulina
+- sudorese
+- confusão
+- glicemia baixa
+- crise provocada
 
 ### Pergunta central
-Qual mecanismo explica epilepsia conhecida?
+Qual causa reversível você deve procurar imediatamente?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Hipoglicemia. A glicemia capilar é obrigatória na avaliação inicial.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como epilepsia primária e esquecer glicose.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Crise febril
+Treinar ABCDE, glicemia e correção conforme protocolo local.
+
+## Mini-caso 3 — Crise febril com suspeita de meningite
 
 ### Cenário
-Paciente com apresentação típica relacionada a crise febril, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 18 anos com febre alta, cefaleia, rigidez de nuca e crise convulsiva. Após a crise, mantém sonolência importante.
 
 ### Mecanismo principal
-Mecanismo dominante de crise febril dentro da trilha crise convulsiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Inflamação/infeção do sistema nervoso central reduz limiar convulsivo e pode causar encefalopatia.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- febre alta
+- rigidez de nuca
+- cefaleia
+- convulsão
+- sonolência persistente
 
 ### Pergunta central
-Qual mecanismo explica crise febril?
+Por que essa crise não deve ser tratada como evento isolado?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque há sinais de infecção do SNC e alteração persistente de consciência. Isso exige abordagem emergencial.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Aguardar recuperação completa sem reconhecer meningite/encefalite.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Síncope confundida com crise
+Treinar crise convulsiva com febre e sinais meníngeos.
+
+## Mini-caso 4 — Status epilepticus
 
 ### Cenário
-Paciente com apresentação típica relacionada a síncope confundida com crise, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente chega ainda convulsionando. Familiares relatam crise contínua há cerca de 8 minutos. Está cianótico, com secreção oral e sem recuperação de consciência.
 
 ### Mecanismo principal
-Mecanismo dominante de síncope confundida com crise dentro da trilha crise convulsiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Crise prolongada com risco de hipóxia, acidose, aspiração e lesão neuronal.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- crise prolongada
+- ausência de recuperação
+- cianose
+- risco de via aérea
+- emergência tempo-dependente
 
 ### Pergunta central
-Qual mecanismo explica síncope confundida com crise?
+Qual é a prioridade?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+ABCDE, proteção de via aérea, oxigenação, glicemia, cronômetro da crise e tratamento emergencial conforme protocolo local.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar “passar sozinho” quando a crise já é prolongada.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treinar reconhecimento de emergência e comunicação com equipe.
 
 ---
 
@@ -247,25 +245,35 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de crise convulsiva?
+**Pergunta:** O que você deve fazer antes de classificar a crise?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Garantir segurança, via aérea/respiração, sinais vitais e glicemia.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** A primeira abordagem é suporte de vida, não diagnóstico fino.
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Confusão após crise confirma epilepsia?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Não confirma epilepsia crônica, mas sugere período pós-ictal verdadeiro. A causa ainda precisa ser investigada.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Uma crise pode ser provocada por hipoglicemia, infecção, intoxicação ou AVC.
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** O que diferencia síncope de crise?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Síncope costuma ter pródromos, recuperação rápida e menos confusão prolongada. Crise tem pós-ictal, mordedura lateral de língua, movimentos sustentados e possível déficit pós-ictal.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Evita rotular tudo como “convulsão”.
+
+## Questão ativa 4
+
+**Pergunta:** Quando a crise vira emergência?
+
+**Resposta esperada:** Quando é prolongada, se repete sem recuperação, vem com febre/rigidez, trauma, gestação, hipoglicemia, déficit focal ou rebaixamento persistente.
+
+**Por que importa:** Atraso aumenta risco de hipóxia e lesão.
 
 ---
 
@@ -273,11 +281,19 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ```text
 CRISE CONVULSIVA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+├── ABCDE + proteção
+├── glicemia capilar
+├── tempo de crise
+│   ├── curta + recuperou → investigar causa
+│   └── prolongada/repetida → emergência
+├── febre/rigidez de nuca
+│   └── meningite/encefalite
+├── déficit focal persistente
+│   └── AVC/lesão estrutural
+├── diabetes/medicações/álcool
+│   └── crise provocada
+└── primeira crise
+    └── avaliação etiológica
 ```
 
 ---
@@ -286,31 +302,33 @@ CRISE CONVULSIVA
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- perguntas dirigidas;
+- exame neurológico focal;
+- reconhecimento de gravidade;
+- diagnóstico sindrômico;
+- comunicação com paciente/família;
+- decisão segura de encaminhamento.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+No módulo clínico, esta trilha pode ser aprofundada com:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
+- evolução temporal do nível de consciência;
+- alteração dinâmica de sinais vitais;
 - piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- resposta a medidas iniciais;
+- comparação entre raciocínio MEDIX e evolução fisiológica.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
+- [ ] A trilha ensina mecanismo, não só lista de sinais?
+- [ ] Você consegue ligar semiologia à decisão?
 - [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
+- [ ] Há erros comuns destacados?
+- [ ] O conteúdo prepara para OSCE?
+- [ ] A linguagem é direta, médica e adequada ao iniciante?
 - [ ] Há alerta para situações em que atraso terapêutico é perigoso?

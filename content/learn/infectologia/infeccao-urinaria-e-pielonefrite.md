@@ -2,244 +2,266 @@
 
 ## Objetivo da trilha
 
-Ensinar disúria, febre, dor lombar e risco de infecção sistêmica com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Você vai aprender a diferenciar **cistite baixa**, **pielonefrite** e **urosepse**.
 
-A trilha deve sempre conectar três camadas:
+Essa diferença muda tudo: risco, exame, antibiótico, necessidade de cultura, observação e internação.
+
+A pergunta central é:
 
 ```text
-conceito de base → manifestação clínica → decisão no atendimento
+A infecção está limitada à bexiga ou já atingiu rim/sistema?
 ```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
-
----
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de infecção urinária e pielonefrite.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
-
----
-
-# 1. Microaula — Ideia central
-
-Infecção urinária e pielonefrite é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Infecção urinária e pielonefrite**: Infecção urinária e pielonefrite é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
-
-```text
-Infecção urinária e pielonefrite: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
-```
+1. Reconhecer cistite não complicada.
+2. Identificar sinais de pielonefrite.
+3. Suspeitar de urosepse.
+4. Saber quando pedir urocultura.
+5. Entender por que nitrofurantoína/fosfomicina não servem para pielonefrite.
+6. Considerar gestação, homem, idoso, diabetes, obstrução e cateter como contexto de maior risco.
+7. Evitar tratar bacteriúria assintomática fora das indicações clássicas.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 1. Microaula — ITU não é uma coisa só
 
-## 1. Mecanismo principal
-
-Em infecção urinária e pielonefrite, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Infecção urinária pode ser baixa ou alta.
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+cistite → bexiga
+pielonefrite → rim/parênquima renal
+urosepse → infecção urinária + disfunção sistêmica
 ```
 
-## 2. Semiologia aplicada
+**PONTO-CHAVE:**  
+Disúria com bom estado geral é uma história. Febre com dor lombar é outra. Hipotensão/confusão é outra completamente diferente.
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+**NÃO CONFUNDA:**  
+Urina alterada no exame não é sempre infecção. Você trata paciente com sintomas e contexto, não apenas EAS.
+
+---
+
+# 2. Fisiopatologia aplicada
+
+A maioria das ITUs começa por ascensão bacteriana.
 
 ```text
-observação → interpretação → conduta
+colonização periuretral
+→ entrada pela uretra
+→ bexiga
+→ ureteres/rim se ascende
+→ bacteremia/sepse se ultrapassa barreira local
 ```
 
-## 3. Risco e priorização
+Na cistite, a inflamação fica na mucosa vesical:
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+- disúria;
+- urgência;
+- polaciúria;
+- dor suprapúbica;
+- sem febre alta;
+- sem dor lombar importante.
 
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+Na pielonefrite, há acometimento renal:
+
+- febre;
+- calafrios;
+- dor lombar;
+- náuseas/vômitos;
+- punho-percussão lombar positiva;
+- queda do estado geral.
+
+Na urosepse, há resposta sistêmica:
+
+- taquicardia;
+- hipotensão;
+- confusão;
+- oligúria;
+- extremidades frias;
+- lactato elevado quando disponível.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Cistite provável
 
-## Achados que precisam ser procurados
+- disúria;
+- urgência miccional;
+- polaciúria;
+- dor suprapúbica;
+- ausência de febre alta;
+- ausência de dor lombar;
+- bom estado geral.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Pielonefrite provável
 
-## Sinais de alarme
+- febre;
+- calafrios;
+- dor lombar;
+- náuseas/vômitos;
+- punho-percussão lombar dolorosa;
+- prostração.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+## Urosepse provável
+
+- foco urinário + hipotensão;
+- confusão;
+- taquipneia;
+- oligúria;
+- extremidades frias;
+- comorbidade ou obstrução.
+
+**PONTO DE DESTAQUE:**  
+Dor lombar + febre muda o nível da infecção. Você não está mais tratando “ardência urinária simples”.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use esta sequência:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+1. Há sintomas urinários?
+2. Há febre ou dor lombar?
+3. Há sinais sistêmicos?
+4. É paciente de risco?
+5. Preciso cultura?
+6. Preciso imagem?
+7. Posso tratar ambulatorialmente?
 ```
 
-O raciocínio deve seguir:
+## Contextos de maior risco
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- gestação;
+- homem;
+- diabetes;
+- imunossupressão;
+- idoso frágil;
+- doença renal;
+- litíase/obstrução;
+- cateter;
+- vômitos;
+- falha terapêutica;
+- pielonefrite recorrente.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Tratar bacteriúria assintomática sem indicação.
+- Usar antibiótico de cistite para pielonefrite.
+- Não perguntar febre/dor lombar.
+- Ignorar obstrução urinária.
+- Tratar idoso confuso apenas pela urina alterada sem buscar outras causas.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Cistite
+## Mini-caso 1 — Cistite baixa não complicada
 
 ### Cenário
-Paciente com apresentação típica relacionada a cistite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher de 26 anos, não gestante, com disúria, urgência e polaciúria há 2 dias. Sem febre, sem dor lombar, PA 116/72, FC 84, bom estado geral.
 
-### Mecanismo principal
-Mecanismo dominante de cistite dentro da trilha infecção urinária e pielonefrite.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- sintomas urinários baixos;
+- sem febre;
+- sem dor lombar;
+- estável;
+- sem comorbidade relevante.
 
 ### Pergunta central
-Qual mecanismo explica cistite?
+Por que isso é compatível com cistite baixa?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque os sintomas são vesicais e não há sinais de acometimento renal ou sistêmico.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir exames extensos em quadro típico simples ou usar antibiótico amplo sem necessidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine orientação, sinais de retorno e uso racional de antibiótico.
+
+---
+
 ## Mini-caso 2 — Pielonefrite
 
 ### Cenário
-Paciente com apresentação típica relacionada a pielonefrite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher de 34 anos com febre 39 °C, calafrios, náuseas, dor lombar direita e disúria há 3 dias. FC 112, PA 108/70, punho-percussão lombar direita dolorosa.
 
-### Mecanismo principal
-Mecanismo dominante de pielonefrite dentro da trilha infecção urinária e pielonefrite.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- febre;
+- calafrios;
+- dor lombar;
+- náuseas;
+- punho-percussão positiva;
+- taquicardia.
 
 ### Pergunta central
-Qual mecanismo explica pielonefrite?
+O que diferencia este caso de cistite simples?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+O acometimento sistêmico e renal: febre, calafrios, dor lombar, náuseas e punho-percussão positiva.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Prescrever esquema de cistite simples e não pedir urocultura quando indicado.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — ITU em gestante
+Treine pielonefrite: gravidade, cultura, antibiótico adequado e reavaliação.
+
+---
+
+## Mini-caso 3 — Urosepse em idoso
 
 ### Cenário
-Paciente com apresentação típica relacionada a itu em gestante, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 79 anos com hiperplasia prostática, febre baixa, confusão, fraqueza, PA 88/54, FC 120, FR 26, oligúria. Dor suprapúbica e globo vesical palpável.
 
-### Mecanismo principal
-Mecanismo dominante de itu em gestante dentro da trilha infecção urinária e pielonefrite.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- idoso;
+- obstrução provável;
+- confusão;
+- hipotensão;
+- oligúria;
+- foco urinário.
 
 ### Pergunta central
-Qual mecanismo explica itu em gestante?
+Por que este caso exige abordagem de sepse e não apenas “antibiótico para urina”?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Há instabilidade e hipoperfusão. Além do antibiótico, é necessário avaliar obstrução, suporte, culturas e reavaliação.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Ignorar retenção/obstrução e tratar só com antibiótico.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Urossepse
+Treine urosepse: foco, perfusão, obstrução e prioridade.
+
+---
+
+## Mini-caso 4 — Bacteriúria assintomática
 
 ### Cenário
-Paciente com apresentação típica relacionada a urossepse, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher de 68 anos faz exame de rotina. EAS com nitrito positivo e bacteriúria, mas sem disúria, febre, dor lombar, urgência, polaciúria ou alteração clínica.
 
-### Mecanismo principal
-Mecanismo dominante de urossepse dentro da trilha infecção urinária e pielonefrite.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- exame alterado;
+- sem sintomas;
+- bom estado geral;
+- achado de rotina.
 
 ### Pergunta central
-Qual mecanismo explica urossepse?
+Por que nem toda bacteriúria precisa antibiótico?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque bacteriúria assintomática, em geral, não deve ser tratada fora de situações específicas como gestação e alguns procedimentos urológicos.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar exame em vez de paciente.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine uso racional de antibióticos e interpretação de exames.
 
 ---
 
@@ -247,37 +269,75 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de infecção urinária e pielonefrite?
+**Pergunta:** Disúria + febre + dor lombar é cistite simples?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Não. Esse conjunto sugere pielonefrite.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Muda risco, cultura, antibiótico e seguimento.
+
+---
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Por que nitrofurantoína não é boa escolha para pielonefrite?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Porque atinge concentração adequada na urina/bexiga, mas não é apropriada para infecção do parênquima renal.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Evita subtratamento.
+
+---
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** O que transforma ITU em urgência?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Hipotensão, confusão, oligúria, febre com prostração, vômitos, obstrução, gestação, imunossupressão ou suspeita de sepse.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Evita atraso em urosepse.
+
+---
+
+## Questão ativa 4
+
+**Pergunta:** EAS alterado sem sintomas é ITU?
+
+**Resposta esperada:** Nem sempre. Pode ser bacteriúria assintomática, que geralmente não deve ser tratada.
+
+**Por que importa:** Reduz uso desnecessário de antibióticos.
 
 ---
 
 # 7. Mapa final
 
 ```text
-INFECÇÃO URINÁRIA E PIELONEFRITE
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+SINTOMAS URINÁRIOS
+├── baixo risco
+│   ├── disúria
+│   ├── urgência/polaciúria
+│   ├── sem febre
+│   └── cistite provável
+│
+├── infecção alta
+│   ├── febre
+│   ├── calafrios
+│   ├── dor lombar
+│   ├── náuseas/vômitos
+│   └── pielonefrite
+│
+├── sistêmica
+│   ├── hipotensão
+│   ├── confusão
+│   ├── oligúria
+│   ├── extremidades frias
+│   └── urosepse
+│
+└── atenção especial
+    ├── gestação
+    ├── homem
+    ├── obstrução
+    ├── cateter
+    ├── diabetes/imunossupressão
+    └── idosos frágeis
 ```
 
 ---
@@ -286,31 +346,39 @@ INFECÇÃO URINÁRIA E PIELONEFRITE
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- cistite simples;
+- pielonefrite;
+- idoso com urosepse;
+- bacteriúria assintomática.
+
+Você deve demonstrar:
+
+- anamnese urinária;
+- sinais de pielonefrite;
+- avaliação de gravidade;
+- decisão sobre cultura;
+- orientação de retorno.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+Treine evolução:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- pielonefrite piorando para sepse;
+- obstrução urinária;
+- hipotensão persistente;
+- reavaliação após medidas iniciais.
 
 ---
 
-# 9. Checklist de curadoria
+# Referências-base para curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- Ministério da Saúde. Dengue: diagnóstico e manejo clínico — adulto e criança.
+- Surviving Sepsis Campaign. International Guidelines for Management of Sepsis and Septic Shock 2021.
+- CDC. Bacterial meningitis / meningococcal disease: sinais, sintomas e urgência clínica.
+- WHO. Tuberculosis fact sheet e materiais de diagnóstico/tratamento.
+- WHO AWaRe Antibiotic Book: princípios de uso racional de antimicrobianos.
+- IDSA/NICE: princípios de ITU, pielonefrite e antimicrobianos, com adaptação à realidade local e protocolos institucionais.
+
+> Este material é educacional. Condutas, doses, fluxos e critérios de internação devem ser ajustados ao protocolo local, faixa etária, gestação, comorbidades, alergias, resistência bacteriana e gravidade clínica.

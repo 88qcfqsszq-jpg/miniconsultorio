@@ -1,245 +1,245 @@
 # Trilha Raciocínio Clínico — Hipóteses e diagnóstico diferencial
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar probabilidade, gravidade e mecanismos com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a construir hipóteses clínicas sem pular direto para o diagnóstico final. Você deve aprender a transformar sintomas em síndromes, síndromes em hipóteses e hipóteses em decisões.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** diagnóstico diferencial não é lista grande. É uma lista ordenada por probabilidade, gravidade e urgência.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de hipóteses e diagnóstico diferencial.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Formular hipótese principal.
+2. Criar diferenciais relevantes.
+3. Priorizar diagnósticos que matam.
+4. Justificar cada hipótese com dados positivos e negativos.
+5. Separar hipótese sindrômica, etiológica e fisiopatológica.
+6. Pedir exames para responder perguntas, não por reflexo.
+7. Apresentar raciocínio com segurança no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Hipóteses e diagnóstico diferencial é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Hipóteses e diagnóstico diferencial**: Hipóteses e diagnóstico diferencial é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Você não deve começar dizendo “é pneumonia”, “é dengue” ou “é ansiedade”. Comece com:
 
 ```text
-Hipóteses e diagnóstico diferencial: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+qual síndrome este paciente tem?
+qual mecanismo explica melhor?
+qual diagnóstico perigoso não posso perder?
 ```
+
+**PONTO-CHAVE:**  
+A melhor hipótese não é a mais bonita. É a que explica mais dados com menos contradição.
+
+**NÃO ERRE:**  
+Não escolha diagnóstico porque lembra um caso anterior. Compare os achados.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia do raciocínio clínico
 
-## 1. Mecanismo principal
-
-Em hipóteses e diagnóstico diferencial, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+O cérebro tenta reconhecer padrões. Isso ajuda, mas também cria erro.
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+queixa → padrão → hipótese rápida → checagem → decisão
 ```
 
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+A hipótese rápida precisa ser testada. Pergunte:
 
 ```text
-observação → interpretação → conduta
+o que confirma?
+o que contradiz?
+o que é grave e ainda não descartei?
 ```
 
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+**RACIOCÍNIO:**  
+Diagnóstico diferencial é proteção contra excesso de confiança.
 
 ---
 
-# 3. Semiologia essencial
+# 3. Semiologia aplicada ao diagnóstico diferencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Dados positivos
 
-## Achados que precisam ser procurados
+São achados que sustentam a hipótese.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+Exemplo:
 
-## Sinais de alarme
+```text
+febre + tosse + crepitações + taquipneia → pneumonia provável
+```
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+## Dados negativos
+
+São ausências importantes.
+
+Exemplo:
+
+```text
+sem dor pleurítica, sem risco trombótico, sem hipoxemia → TEP menos provável, mas não impossível
+```
+
+## Dados discriminadores
+
+São achados que separam hipóteses parecidas.
+
+```text
+dor abdominal + vômitos
+├── gastroenterite: diarreia, surto, dor difusa
+├── apendicite: migração, FID, defesa
+└── obstrução: distensão, parada de gases, cirurgia prévia
+```
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use este roteiro:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+1. Defina a síndrome.
+2. Liste 3 a 5 hipóteses.
+3. Marque a hipótese mais provável.
+4. Marque a hipótese mais perigosa.
+5. Procure dados que discriminam.
+6. Peça exame que muda conduta.
+7. Reavalie.
 ```
 
-O raciocínio deve seguir:
+## Tipos de hipótese
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- **Sindrômica:** síndrome febril, dor torácica, abdome agudo.
+- **Topográfica:** pulmão, coração, abdome, sistema nervoso.
+- **Fisiopatológica:** infecciosa, inflamatória, vascular, obstrutiva, metabólica.
+- **Etiológica:** pneumonia pneumocócica, dengue, IAM, TEP.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Ter só uma hipótese.
+- Ignorar diagnóstico perigoso por ser menos comum.
+- Pedir exame sem pergunta.
+- Não atualizar hipótese com novos dados.
+- Confundir achado inespecífico com confirmação.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Hipótese provável
+## Mini-caso 1 — Febre e tosse
 
 ### Cenário
-Paciente com apresentação típica relacionada a hipótese provável, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Você avalia paciente com febre há 3 dias, tosse produtiva, dor torácica pleurítica leve, FR 26, crepitações em base direita e SpO₂ 93%.
 
 ### Mecanismo principal
-Mecanismo dominante de hipótese provável dentro da trilha hipóteses e diagnóstico diferencial.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Síndrome respiratória infecciosa com comprometimento alveolar provável.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Febre.
+- Tosse produtiva.
+- Crepitações localizadas.
+- Taquipneia e SpO₂ reduzida.
 
 ### Pergunta central
-Qual mecanismo explica hipótese provável?
+Qual hipótese principal e qual diferencial perigoso?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Pneumonia é hipótese principal. TEP, pneumotórax, IC e sepse devem ser considerados conforme contexto, sinais vitais e risco.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dizer “pneumonia” sem avaliar gravidade respiratória.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Hipótese perigosa
+Treine hipótese + gravidade + plano.
+
+---
+
+## Mini-caso 2 — Dor torácica
 
 ### Cenário
-Paciente com apresentação típica relacionada a hipótese perigosa, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 62 anos com dor em aperto há 40 minutos, sudorese e náuseas. ECG ainda não feito.
 
 ### Mecanismo principal
-Mecanismo dominante de hipótese perigosa dentro da trilha hipóteses e diagnóstico diferencial.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Dor torácica potencialmente isquêmica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor opressiva prolongada.
+- Sintomas autonômicos.
+- Idade e risco.
+- Necessidade de ECG.
 
 ### Pergunta central
-Qual mecanismo explica hipótese perigosa?
+Como organizar o diferencial?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+SCA é hipótese prioritária. Dissecção, TEP, pneumotórax e causas gastro/musculares entram conforme características e exame.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar troponina antes de ECG.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Hipótese alternativa
+Treine diagnóstico diferencial tempo-dependente.
+
+---
+
+## Mini-caso 3 — Rebaixamento de consciência
 
 ### Cenário
-Paciente com apresentação típica relacionada a hipótese alternativa, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente chega sonolento, confuso, sudoreico. Glicemia capilar ainda não foi medida.
 
 ### Mecanismo principal
-Mecanismo dominante de hipótese alternativa dentro da trilha hipóteses e diagnóstico diferencial.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Alteração do nível de consciência com causas neurológicas, metabólicas, infecciosas, tóxicas ou hipóxicas.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sonolência.
+- Confusão.
+- Sudorese.
+- Glicemia não avaliada.
 
 ### Pergunta central
-Qual mecanismo explica hipótese alternativa?
+Qual hipótese reversível deve ser checada imediatamente?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Hipoglicemia deve ser verificada cedo, junto com ABC, oxigenação, perfusão e sinais neurológicos.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir TC antes de checar glicemia e estabilidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Hipótese descartada
+Treine abordagem de causa reversível.
+
+---
+
+## Mini-caso 4 — Dor abdominal
 
 ### Cenário
-Paciente com apresentação típica relacionada a hipótese descartada, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor em FID, náuseas, anorexia e defesa localizada. Sem exame de imagem ainda.
 
 ### Mecanismo principal
-Mecanismo dominante de hipótese descartada dentro da trilha hipóteses e diagnóstico diferencial.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Síndrome abdominal inflamatória com possível irritação peritoneal.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor localizada.
+- Anorexia.
+- Defesa.
+- Náuseas.
 
 ### Pergunta central
-Qual mecanismo explica hipótese descartada?
+Como montar diferencial?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Apendicite é hipótese importante. Cálculo ureteral, gastroenterite, doença ginecológica e ileíte entram conforme sexo, idade, urina, febre e exame.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Fechar diagnóstico sem considerar gestação/causas ginecológicas quando aplicável.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine hipóteses por região e mecanismo.
 
 ---
 
@@ -247,70 +247,71 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de hipóteses e diagnóstico diferencial?
+**Pergunta:** Qual a diferença entre hipótese principal e hipótese perigosa?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** A principal é a mais provável. A perigosa pode ser menos provável, mas precisa ser descartada porque atraso causa dano.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Quando um exame é útil?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Quando responde uma pergunta clínica, confirma hipótese relevante, muda conduta ou avalia gravidade.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Por que dados negativos importam?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Porque ajudam a reduzir probabilidade de hipóteses e mostram que você pensou no diferencial.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Como evitar diagnóstico por impulso?
+
+**Resposta esperada:** Defina síndrome, liste diferenciais, procure contradições e reavalie com novos dados.
 
 ---
 
 # 7. Mapa final
 
 ```text
-HIPÓTESES E DIAGNÓSTICO DIFERENCIAL
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+DIAGNÓSTICO DIFERENCIAL
+├── síndrome
+│   ├── febril
+│   ├── respiratória
+│   ├── torácica
+│   └── abdominal/neurológica
+├── hipóteses
+│   ├── principal
+│   ├── alternativas
+│   └── perigosas
+├── evidências
+│   ├── dados positivos
+│   ├── dados negativos
+│   └── discriminadores
+└── decisão
+    ├── exame útil
+    ├── tratamento inicial
+    └── reavaliação
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- falar hipótese principal;
+- citar diferenciais;
+- justificar com achados;
+- pedir exames com propósito;
+- atualizar raciocínio.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você definiu a síndrome?
+- [ ] Listou mais de uma hipótese?
+- [ ] Priorizou diagnósticos perigosos?
+- [ ] Justificou com dados?
+- [ ] Pediu exame com pergunta clara?

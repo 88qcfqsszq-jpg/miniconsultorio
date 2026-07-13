@@ -1,214 +1,272 @@
 # Trilha Respiratório — Gasometria básica
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar leitura inicial de gasometria sem decorar fórmulas complexas: pH, PaCO₂, HCO₃⁻, PaO₂/SaO₂ e padrão respiratório/metabólico.
+Ensinar você a interpretar gasometria arterial de forma simples e segura: pH, PaCO₂, HCO₃⁻, PaO₂, compensação e relação com o paciente.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** gasometria não é tabela. É fotografia do equilíbrio entre pulmão, metabolismo e oxigenação.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
 1. Identificar acidemia e alcalemia.
-2. Diferenciar distúrbio respiratório de metabólico.
-3. Relacionar PaCO₂ à ventilação.
-4. Relacionar PaO₂/SaO₂ à oxigenação.
-5. Aplicar em DPOC, asma grave, sepse e hiperventilação.
+2. Diferenciar distúrbio respiratório e metabólico.
+3. Entender PaCO₂ como ventilação.
+4. Entender HCO₃⁻ como componente metabólico.
+5. Avaliar oxigenação com PaO₂/SpO₂.
+6. Reconhecer compensação esperada ou inadequada.
+7. Usar gasometria em asma, DPOC, sepse e acidose.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Mostra acidez/alcalinidade do sangue.
-
-## Conceitos obrigatórios
-
-- **pH**: Mostra acidez/alcalinidade do sangue.
-- **PaCO₂**: Marcador de ventilação alveolar: sobe quando ventila pouco.
-- **HCO₃⁻**: Componente metabólico/renal do equilíbrio ácido-base.
-
-## Frase didática
+Comece sempre pelo pH.
 
 ```text
-Gasometria básica: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+pH baixo → acidemia
+pH alto → alcalemia
 ```
+
+Depois pergunte quem explica:
+
+```text
+PaCO₂ alto causa acidose respiratória
+PaCO₂ baixo causa alcalose respiratória
+HCO₃⁻ baixo causa acidose metabólica
+HCO₃⁻ alto causa alcalose metabólica
+```
+
+**PONTO-CHAVE:**  
+PaCO₂ fala de ventilação alveolar. Se CO₂ sobe, o paciente está ventilando mal ou cansando.
+
+**NÃO ERRE:**  
+SpO₂ e PaO₂ falam de oxigenação. PaCO₂ fala de ventilação. São problemas diferentes.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Acidose respiratória
-
-Ventilação insuficiente leva a retenção de CO₂ e queda do pH.
+## Acidose respiratória
 
 ```text
-hipoventilação → CO₂ ↑ → pH ↓
+ventilação baixa → CO₂ retém → pH cai
 ```
 
-## 2. Alcalose respiratória
+Exemplos: DPOC grave, sedação, fadiga respiratória, doença neuromuscular.
 
-Hiperventilação elimina CO₂ em excesso, elevando pH.
+## Alcalose respiratória
 
 ```text
-ventilação ↑ → CO₂ ↓ → pH ↑
+hiperventilação → CO₂ cai → pH sobe
 ```
 
-## 3. Acidose metabólica
+Exemplos: ansiedade, dor, hipóxia, sepse inicial, TEP, gravidez.
 
-Processo metabólico reduz bicarbonato; o corpo compensa hiperventilando.
+## Acidose metabólica
 
 ```text
-HCO₃⁻ ↓ → pH ↓ → FR ↑ para reduzir CO₂
+ácido sobe ou bicarbonato cai → pH cai → corpo hiperventila para compensar
 ```
+
+Exemplos: sepse/lactato, cetoacidose, insuficiência renal, diarreia.
+
+## Alcalose metabólica
+
+```text
+bicarbonato sobe ou H+ perde → pH sobe
+```
+
+Exemplos: vômitos, diuréticos.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Interprete junto do paciente
 
-## Achados que precisam ser procurados
+Pergunte:
 
-- FR e padrão ventilatório.
-- Sinais de fadiga.
-- Nível de consciência.
-- SpO₂ e necessidade de O₂.
-- História de DPOC, sepse, intoxicação, diabetes.
-- Perfusão e choque.
+- Está dispneico?
+- Está sonolento?
+- Está séptico?
+- Tem DPOC?
+- Usa sedativos?
+- Está vomitando?
+- Tem diarreia?
+- Tem cetoacidose?
+- Recebe oxigênio? Qual fluxo?
+- A amostra é arterial mesmo?
 
-## Sinais de alarme
+## Dados da gasometria
 
-- pH muito baixo.
-- PaCO₂ subindo em paciente cansado.
-- Alteração de consciência.
+- pH.
+- PaCO₂.
+- HCO₃⁻.
+- PaO₂.
+- SatO₂.
+- Lactato, quando disponível.
+- BE/base excess, quando usado.
+
+**CUIDADO:**  
+Gasometria “ruim” em paciente clinicamente bem deve fazer você checar amostra, contexto e coerência.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use 5 passos:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+1. pH: acidemia ou alcalemia?
+2. PaCO₂ explica?
+3. HCO₃⁻ explica?
+4. compensação faz sentido?
+5. oxigenação está adequada?
 ```
 
-O raciocínio deve seguir:
+## Exemplo rápido
 
 ```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+pH 7,25
+PaCO₂ 60
+HCO₃⁻ 26
+→ acidose respiratória
+```
+
+```text
+pH 7,28
+PaCO₂ 25
+HCO₃⁻ 12
+→ acidose metabólica com compensação respiratória
 ```
 
 ## Erros comuns
 
-- Decorar sem olhar paciente.
-- Confundir PaO₂ com SpO₂.
-- Ignorar PaCO₂.
+- Interpretar PaO₂ sem saber O₂ suplementar.
+- Confundir hipoxemia com hipoventilação.
+- Não perceber CO₂ subindo em asmático grave.
+- Não relacionar gaso com clínica.
+- Esquecer compensação.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — DPOC hipercápnico
+## Mini-caso 1 — DPOC com retenção de CO₂
 
 ### Cenário
-DPOC com sonolência, SpO₂ baixa e PaCO₂ elevada.
+Paciente com DPOC exacerbado, sonolento, FR 10, SpO₂ 88%. Gasometria: pH 7,28, PaCO₂ 70, HCO₃⁻ 32.
 
 ### Mecanismo principal
-Hipoventilação alveolar e retenção de CO₂.
-
-```text
-ventilação ↓ → CO₂ ↑ → acidose
-```
+Hipoventilação alveolar com retenção de CO₂, parcialmente compensada metabolicamente.
 
 ### Achados-chave
-- PaCO₂ alta
-- pH baixo
-- sonolência
-- DPOC
+- PaCO₂ alto.
+- pH baixo.
+- HCO₃⁻ elevado.
+- Sonolência.
 
 ### Pergunta central
-Por que SpO₂ não basta?
+Qual distúrbio predomina?
 
 ### Resposta esperada
-Porque pode haver retenção de CO₂ e acidose respiratória.
+Acidose respiratória aguda sobre compensação crônica provável.
 
 ### Erro comum
-Dar oxigênio sem reavaliar ventilação.
+Olhar só SpO₂ e não reconhecer hipercapnia.
 
 ### Ponte para OSCE
-Treinar oxigênio alvo e VNI.
-## Mini-caso 2 — Sepse com acidose
+Treine DPOC e ventilação.
+
+---
+
+## Mini-caso 2 — Cetoacidose diabética
 
 ### Cenário
-Paciente febril, hipotenso, taquipneico, lactato alto.
+Paciente diabético com vômitos, dor abdominal, respiração profunda. Gasometria: pH 7,18, PaCO₂ 22, HCO₃⁻ 8.
 
 ### Mecanismo principal
-Acidose metabólica com compensação respiratória.
-
-```text
-hipoperfusão → lactato ↑ → acidose → hiperventilação
-```
+Acidose metabólica com hiperventilação compensatória.
 
 ### Achados-chave
-- pH baixo
-- HCO₃ baixo
-- FR alta
-- choque
+- HCO₃⁻ baixo.
+- pH baixo.
+- PaCO₂ baixo.
+- Respiração profunda.
 
 ### Pergunta central
-Por que respira rápido?
+Por que PaCO₂ está baixo?
 
 ### Resposta esperada
-Para eliminar CO₂ e compensar acidose metabólica.
+Porque o corpo hiperventila para eliminar CO₂ e compensar acidose metabólica.
 
 ### Erro comum
-Chamar taquipneia de ansiedade.
+Interpretar taquipneia como problema pulmonar primário.
 
 ### Ponte para OSCE
-Treinar reconhecimento de choque.
-## Mini-caso 3 — Asma grave fadigando
+Treine respiração de compensação.
+
+---
+
+## Mini-caso 3 — Sepse inicial
 
 ### Cenário
-Paciente com asma que estava hiperventilando e agora fica sonolento, PaCO₂ normal/alta.
+Paciente febril, taquicárdico, FR 30. Gasometria: pH 7,47, PaCO₂ 28, HCO₃⁻ 21, lactato elevado.
 
 ### Mecanismo principal
-Fadiga ventilatória iminente.
-
-```text
-obstrução + fadiga → ventilação cai → CO₂ sobe
-```
+Hiperventilação por resposta sistêmica, dor, febre, hipóxia relativa ou acidose láctica inicial.
 
 ### Achados-chave
-- asma grave
-- exaustão
-- PaCO₂ subindo
-- fala piorando
+- PaCO₂ baixo.
+- Alcalemia.
+- Lactato elevado.
+- Taquipneia.
 
 ### Pergunta central
-Por que PaCO₂ normal pode ser ruim na asma grave?
+Por que alcalose não tranquiliza?
 
 ### Resposta esperada
-Porque o esperado inicial é CO₂ baixo; normalização pode indicar fadiga.
+Porque sepse inicial pode cursar com alcalose respiratória e lactato elevado. O contexto define gravidade.
 
 ### Erro comum
-Falsa tranquilidade com PaCO₂ normal.
+Achar que pH alto é sempre bom.
 
 ### Ponte para OSCE
-Treinar sinais de falência ventilatória.
+Treine gasometria em sepse.
+
+---
+
+## Mini-caso 4 — Asma grave cansando
+
+### Cenário
+Paciente asmático grave. Antes FR 36 e PaCO₂ 30. Agora está sonolento, FR 18 e PaCO₂ 48.
+
+### Mecanismo principal
+Fadiga ventilatória com perda de compensação.
+
+### Achados-chave
+- PaCO₂ subindo.
+- Sonolência.
+- FR caindo após esforço.
+- Asma grave.
+
+### Pergunta central
+Por que isso é alarmante?
+
+### Resposta esperada
+Em crise asmática, CO₂ normalizando/subindo pode indicar fadiga e ventilação insuficiente, não melhora.
+
+### Erro comum
+Achar que FR menor significa melhora sem olhar clínica.
+
+### Ponte para OSCE
+Treine fadiga respiratória.
 
 ---
 
@@ -216,25 +274,27 @@ Treinar sinais de falência ventilatória.
 
 ## Questão ativa 1
 
-**Pergunta:** PaCO₂ alta fala de oxigenação ou ventilação?
+**Pergunta:** Qual é o primeiro passo da gasometria?
 
-**Resposta esperada:** Ventilação alveolar.
+**Resposta esperada:** Olhar o pH: acidemia, alcalemia ou normal.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 2
 
-**Pergunta:** Acidose metabólica pode causar taquipneia?
+**Pergunta:** PaCO₂ alto significa o quê?
 
-**Resposta esperada:** Sim, como compensação para eliminar CO₂.
+**Resposta esperada:** Hipoventilação alveolar ou ventilação insuficiente em relação à produção de CO₂.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 3
 
-**Pergunta:** SpO₂ normal exclui acidose respiratória?
+**Pergunta:** HCO₃⁻ baixo causa qual distúrbio?
 
-**Resposta esperada:** Não. Pode haver retenção de CO₂ com oxigenação parcialmente mantida.
+**Resposta esperada:** Acidose metabólica.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
+## Questão ativa 4
+
+**Pergunta:** Em asma grave, por que CO₂ subindo preocupa?
+
+**Resposta esperada:** Porque pode indicar fadiga respiratória e falha ventilatória.
 
 ---
 
@@ -242,44 +302,42 @@ Treinar sinais de falência ventilatória.
 
 ```text
 GASOMETRIA
-├── pH: acidemia/alcalemia
-├── PaCO₂: ventilação
-├── HCO₃⁻: metabólico
-├── PaO₂/SaO₂: oxigenação
-└── sempre interpretar com o paciente
+├── pH
+│   ├── baixo: acidemia
+│   └── alto: alcalemia
+├── PaCO₂
+│   ├── alto: acidose respiratória
+│   └── baixo: alcalose respiratória
+├── HCO₃⁻
+│   ├── baixo: acidose metabólica
+│   └── alto: alcalose metabólica
+├── oxigenação
+│   ├── PaO₂
+│   └── SpO₂
+└── contexto
+    ├── O₂ suplementar
+    ├── clínica
+    └── compensação
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- interpretação básica
-- DPOC
-- asma grave
-- sepse
-- decisão de suporte ventilatório
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- interpretar em 5 passos;
+- explicar CO₂ como ventilação;
+- reconhecer acidose metabólica;
+- valorizar fadiga respiratória;
+- correlacionar com o paciente.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você começou pelo pH?
+- [ ] Identificou PaCO₂?
+- [ ] Identificou HCO₃⁻?
+- [ ] Avaliou oxigenação?
+- [ ] Conferiu coerência clínica?

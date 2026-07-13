@@ -1,245 +1,259 @@
 # Trilha Semiologia Geral — Exame físico geral
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar inspeção geral, hidratação, perfusão, pele, mucosas e edema com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a fazer exame físico geral com método, observando aparência, consciência, hidratação, perfusão, respiração, dor e sinais vitais antes de examinar sistemas específicos.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** o exame começa quando você olha para o paciente. Antes do estetoscópio, você já deve perceber gravidade.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de exame físico geral.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Avaliar estado geral.
+2. Reconhecer sinais de gravidade visual.
+3. Descrever consciência, hidratação e perfusão.
+4. Integrar sinais vitais ao exame.
+5. Diferenciar impressão subjetiva de achado objetivo.
+6. Apresentar exame geral no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Exame físico geral é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Exame físico geral**: Exame físico geral é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Exame físico geral responde:
 
 ```text
-Exame físico geral: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+o paciente parece bem, compensado ou grave?
 ```
+
+**PONTO-CHAVE:**  
+“Bom estado geral” não pode ser frase automática. Precisa combinar com sinais vitais, consciência, perfusão e respiração.
+
+**NÃO ERRE:**  
+Não escreva “BEG” em paciente taquicárdico, dispneico, confuso, pálido ou mal perfundido.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia aplicada
 
-## 1. Mecanismo principal
+## Consciência
 
-Em exame físico geral, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Reflete função cerebral, perfusão, oxigenação, metabolismo e intoxicações.
 
 ```text
-observação → interpretação → conduta
+hipóxia / hipoglicemia / sepse / AVC / droga → alteração mental
 ```
 
-## 3. Risco e priorização
+## Perfusão
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Mostra se o sangue está chegando aos tecidos.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+débito baixo / vasoconstrição / choque → extremidades frias + TEC lento
 ```
+
+## Hidratação
+
+Sugere volume intravascular/intersticial, mas precisa ser interpretada com contexto.
+
+```text
+perda hídrica → mucosa seca → taquicardia → oligúria
+```
+
+## Respiração
+
+Fala, postura, musculatura acessória e FR mostram esforço antes da ausculta.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Olhe primeiro
 
-## Achados que precisam ser procurados
+- Está alerta?
+- Fala frases completas?
+- Está sentado inclinado para respirar?
+- Está pálido, cianótico, sudoreico?
+- Parece toxemiado?
+- Tem dor intensa?
+- Está agitado ou sonolento?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Descreva objetivamente
 
-## Sinais de alarme
+Use:
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+```text
+estado geral
+nível de consciência
+orientação
+hidratação
+coloração
+perfusão
+padrão respiratório
+dor aparente
+```
+
+Exemplo:
+
+```text
+Paciente alerta, orientado, corado, hidratado, eupneico em ar ambiente, perfundido, sem dor aparente.
+```
+
+Ou:
+
+```text
+Paciente sonolento, pálido, sudoreico, taquipneico, extremidades frias, enchimento capilar lentificado.
+```
+
+## Sinais de gravidade visual
+
+- Confusão.
+- Sonolência.
+- Cianose.
+- Sudorese fria.
+- Uso de musculatura acessória.
+- Fala entrecortada.
+- Extremidades frias.
+- Dor intensa.
+- Incapacidade de manter-se sentado/em pé.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Não separe exame geral dos sinais vitais.
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
-```
-
-O raciocínio deve seguir:
-
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+aparência + sinais vitais + perfusão + consciência = gravidade
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Usar “BEG” como decoração.
+- Não olhar perfusão.
+- Não medir FR.
+- Ignorar dor.
+- Descrever hidratação sem examinar mucosa/perfusão/diurese.
+- Dizer “eupneico” sem observar fala e FR.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Paciente toxemiado
+## Mini-caso 1 — Paciente aparentemente grave
 
 ### Cenário
-Paciente com apresentação típica relacionada a paciente toxemiado, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente chega sentado, inclinado para frente, fala palavras soltas, sudoreico, FR 32, SpO₂ 89%, uso de musculatura acessória.
 
 ### Mecanismo principal
-Mecanismo dominante de paciente toxemiado dentro da trilha exame físico geral.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Aumento do trabalho respiratório com possível insuficiência respiratória.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Fala entrecortada.
+- Taquipneia.
+- Uso de musculatura acessória.
+- Hipoxemia.
 
 ### Pergunta central
-Qual mecanismo explica paciente toxemiado?
+O que você percebe antes da ausculta?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Gravidade respiratória. O exame geral já indica risco e necessidade de intervenção/monitorização.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Começar anamnese longa sem reconhecer desconforto respiratório.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Desidratação
+Treine priorização visual.
+
+---
+
+## Mini-caso 2 — Hipoperfusão
 
 ### Cenário
-Paciente com apresentação típica relacionada a desidratação, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente pálido, sudoreico, extremidades frias, enchimento capilar 4s, FC 128, confuso.
 
 ### Mecanismo principal
-Mecanismo dominante de desidratação dentro da trilha exame físico geral.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Perfusão tecidual inadequada, possível choque.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- TEC lento.
+- Extremidades frias.
+- Confusão.
+- Taquicardia.
 
 ### Pergunta central
-Qual mecanismo explica desidratação?
+Por que isso é mais importante que a queixa inicial?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque hipoperfusão indica risco sistêmico. A prioridade é estabilizar e entender mecanismo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar PA cair para reconhecer choque.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Edema
+Treine choque compensado.
+
+---
+
+## Mini-caso 3 — Dor intensa
 
 ### Cenário
-Paciente com apresentação típica relacionada a edema, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente imóvel na maca, evita respirar fundo, dor abdominal 9/10, FC 118, defesa ao toque.
 
 ### Mecanismo principal
-Mecanismo dominante de edema dentro da trilha exame físico geral.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Dor intensa pode sinalizar processo inflamatório/peritoneal e ativa resposta adrenérgica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Imobilidade.
+- Dor intensa.
+- Taquicardia.
+- Defesa.
 
 ### Pergunta central
-Qual mecanismo explica edema?
+O que a postura indica?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Pode indicar irritação peritoneal ou dor grave. A postura é achado semiológico.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Ignorar dor porque “ainda não tem exame”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Cianose
+Treine analgesia e reavaliação.
+
+---
+
+## Mini-caso 4 — Exame geral normal bem descrito
 
 ### Cenário
-Paciente com apresentação típica relacionada a cianose, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente conversa normalmente, orientado, corado, hidratado, eupneico, perfundido, sinais vitais normais.
 
 ### Mecanismo principal
-Mecanismo dominante de cianose dentro da trilha exame físico geral.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Ausência de sinais gerais de gravidade no momento.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Alerta/orientado.
+- Eupneico.
+- Perfundido.
+- Sinais vitais normais.
 
 ### Pergunta central
-Qual mecanismo explica cianose?
+Isso exclui doença grave?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Não totalmente. Reduz preocupação imediata, mas deve ser interpretado com história, evolução e reavaliação.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Confundir exame geral normal com diagnóstico fechado.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine descrição clara.
 
 ---
 
@@ -247,70 +261,73 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de exame físico geral?
+**Pergunta:** O exame físico começa quando?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Assim que você vê o paciente: postura, fala, respiração, consciência, cor e perfusão já informam gravidade.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Por que “BEG” pode ser ruim?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Porque é vago se não vier acompanhado de dados objetivos.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** O que indica hipoperfusão?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** TEC lento, extremidades frias, confusão, oligúria, pele moteada, pulso fino e taquicardia.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** O que observar na respiração antes da ausculta?
+
+**Resposta esperada:** FR, fala, postura, uso de musculatura acessória, tiragens e cianose.
 
 ---
 
 # 7. Mapa final
 
 ```text
-EXAME FÍSICO GERAL
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+EXAME GERAL
+├── consciência
+│   ├── alerta
+│   ├── sonolento
+│   └── confuso
+├── respiração
+│   ├── FR
+│   ├── fala
+│   └── esforço
+├── perfusão
+│   ├── cor
+│   ├── temperatura
+│   └── TEC
+├── hidratação
+│   ├── mucosas
+│   ├── turgor/contexto
+│   └── diurese
+└── gravidade
+    ├── dor
+    ├── toxemia
+    └── instabilidade
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- descrição objetiva do paciente;
+- reconhecimento visual de gravidade;
+- integração com sinais vitais;
+- transição para exame específico.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você observou antes de tocar?
+- [ ] Descreveu consciência?
+- [ ] Avaliou respiração?
+- [ ] Avaliou perfusão?
+- [ ] Evitou “BEG” vazio?

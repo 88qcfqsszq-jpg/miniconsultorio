@@ -1,534 +1,373 @@
 # Trilha Respiratório — Hipoxemia
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Fazer o aluno entender profundamente por que a SpO₂ cai, o que isso significa e quando o oxigênio resolve ou não resolve.
+Ensinar você a entender por que a saturação cai, quando o oxigênio ajuda, quando ele não resolve o problema e como ligar SpO₂, semiologia respiratória e decisão clínica.
 
-A trilha deve combater a ideia simplista de que “saturou baixo, dá oxigênio e pronto”. O aluno deve aprender que hipoxemia é uma manifestação final de mecanismos diferentes.
+**Ideia central:** hipoxemia não é diagnóstico. É sinal de que o sangue arterial está levando menos oxigênio do que deveria.
+
+---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar o que é SpO₂.
-2. Diferenciar oxigenação de ventilação.
+1. Explicar o que a SpO₂ mede.
+2. Diferenciar oxigenação, ventilação e perfusão.
 3. Entender V/Q baixo, V/Q alto, shunt e hipoventilação.
-4. Reconhecer sinais semiológicos de hipoxemia.
-5. Interpretar por que oxigênio ajuda em alguns quadros e é insuficiente em outros.
-6. Aplicar o raciocínio em asma, pneumonia, TEP e pneumotórax.
-7. Transferir o aprendizado para um atendimento OSCE.
+4. Reconhecer sinais clínicos de hipoxemia.
+5. Interpretar resposta ao oxigênio.
+6. Identificar quando o problema exige mais que O₂.
+7. Transferir o raciocínio para asma, pneumonia, TEP e pneumotórax.
 
 ---
 
-# 1. Microaula — O que é SpO₂
+# 1. Microaula — Ideia central
 
-SpO₂ é a saturação periférica de oxigênio estimada pelo oxímetro. Ela indica, de forma indireta, a porcentagem de hemoglobina arterial ligada ao oxigênio.
-
-Ela responde à pergunta:
-
-> Do oxigênio que poderia estar ligado à hemoglobina, quanto está realmente ligado?
-
-Mas ela não responde sozinha a todas as perguntas importantes.
-
-SpO₂ não mede diretamente:
-
-- ventilação;
-- eliminação de CO₂;
-- trabalho respiratório;
-- perfusão tecidual;
-- causa da hipoxemia;
-- gravidade global do paciente.
-
-Por isso, uma SpO₂ aparentemente aceitável não elimina gravidade, especialmente se o paciente tem esforço respiratório, alteração de consciência ou risco de retenção de CO₂.
-
-## Ideia-chave
+SpO₂ é a estimativa da saturação periférica de oxigênio. Ela responde:
 
 ```text
-SpO₂ fala sobre oxigenação.
-Ela não garante ventilação adequada.
+quanto da hemoglobina disponível está carregando oxigênio?
 ```
+
+Ela não informa tudo.
+
+**PONTO-CHAVE:**  
+SpO₂ não mede CO₂, esforço respiratório, perfusão global ou causa da doença.
+
+**NÃO ERRE:**  
+Saturação baixa não significa “dar oxigênio e acabou”. Você precisa entender por que caiu.
 
 ---
 
-# 2. Oxigenação vs ventilação
+# 2. Fisiopatologia aplicada
 
 ## Oxigenação
 
-É a entrada de oxigênio no sangue arterial.
+É a entrada de O₂ no sangue arterial.
 
-Depende de:
-
-- ar chegando aos alvéolos;
-- alvéolos funcionantes;
-- sangue passando pelos capilares pulmonares;
-- difusão adequada;
-- hemoglobina disponível.
+```text
+alvéolo ventilado + capilar perfundido → troca gasosa → O₂ no sangue
+```
 
 ## Ventilação
 
-É a entrada e saída de ar dos pulmões, especialmente a eliminação de CO₂.
-
-A melhor medida de ventilação, do ponto de vista gasométrico, é a PaCO₂.
-
-## Diferença prática
-
-Um paciente pode estar hipoxêmico por problema de oxigenação. Outro pode estar hipercápnico por problema de ventilação. Alguns têm ambos.
-
-Exemplos:
-
-- Pneumonia: problema importante de oxigenação por alvéolo preenchido.
-- DPOC grave: pode ter problema de ventilação com retenção de CO₂.
-- Asma grave: pode começar com hipoxemia e evoluir para fadiga ventilatória.
-
-## Frase didática
+É entrada e saída de ar, principalmente ligada à eliminação de CO₂.
 
 ```text
-Oxigenação é colocar O₂ no sangue.
-Ventilação é tirar CO₂ do corpo.
+ventilação ruim → CO₂ sobe → acidose respiratória possível
 ```
 
----
-
-# 3. Relação V/Q
-
-V/Q significa ventilação/perfusão.
-
-- **V** = ar chegando ao alvéolo.
-- **Q** = sangue chegando ao capilar pulmonar.
-
-Para a troca gasosa funcionar, precisa haver equilíbrio: ar e sangue no mesmo lugar ao mesmo tempo.
-
-## V/Q normal
-
-O alvéolo recebe ar e recebe sangue. A troca acontece bem.
+**PONTO-CHAVE:**  
+O₂ pode melhorar SpO₂ e ainda assim o paciente continuar ventilando mal.
 
 ## V/Q baixo
 
-Há pouco ar para o sangue que chega.
+Há sangue chegando, mas pouco ar ventilando.
 
 Exemplos:
 
 - asma;
 - DPOC;
 - pneumonia;
-- atelectasia parcial.
+- atelectasia.
 
-O sangue passa por áreas mal ventiladas e sai menos oxigenado.
+```text
+ar baixo / sangue preservado → V/Q baixo → hipoxemia
+```
 
-## V/Q alto / espaço morto
+## V/Q alto
 
-Há ar, mas pouco sangue passando.
+Há ar, mas pouco sangue perfundindo.
 
-Exemplo clássico:
+Exemplo:
 
 - TEP.
 
-O alvéolo ventila, mas não perfunde adequadamente. Isso gera espaço morto fisiológico.
-
-## Frase didática
-
 ```text
-V/Q baixo: tem sangue, falta ar.
-V/Q alto: tem ar, falta sangue.
+ar preservado / sangue reduzido → V/Q alto → espaço morto
 ```
 
----
+## Shunt
 
-# 4. Shunt
-
-Shunt é quando o sangue passa pelo pulmão sem ser adequadamente oxigenado.
-
-Pode acontecer quando o alvéolo está preenchido, colabado ou inacessível para ventilação.
+Sangue passa por área não ventilada. O oxigênio pode responder pouco.
 
 Exemplos:
 
 - pneumonia extensa;
-- atelectasia;
-- edema alveolar;
-- síndrome do desconforto respiratório.
+- atelectasia importante;
+- edema alveolar grave.
 
-## Por que oxigênio pode não resolver bem?
+## Hipoventilação
 
-Se o sangue passa por uma região que não recebe ar, aumentar a concentração de oxigênio no ar inspirado pode ter pouco efeito naquela região. O oxigênio ajuda as áreas ainda ventiladas, mas não corrige a área sem ventilação.
-
-## Frase didática
-
-```text
-No shunt, o sangue passa por uma área que não conversa com o ar.
-```
-
----
-
-# 5. Hipoventilação
-
-Hipoventilação é ventilação alveolar insuficiente.
-
-O problema principal é que o paciente não movimenta ar o bastante para eliminar CO₂.
-
-Pode acontecer em:
-
-- depressão do sistema nervoso central;
-- doenças neuromusculares;
-- fadiga respiratória;
-- DPOC avançado;
-- obesidade hipoventilação;
-- sedação.
-
-## Padrão esperado
-
-- PaCO₂ sobe.
-- PaO₂ pode cair.
-- Oxigênio pode melhorar a PaO₂/SpO₂, mas não corrige a eliminação de CO₂.
-
-## Frase didática
-
-```text
-Na hipoventilação, o problema não é só falta de oxigênio; é ar entrando e saindo pouco.
-```
-
----
-
-# 6. Quando oxigênio resolve
-
-Oxigênio tende a ajudar quando há áreas pulmonares ainda ventiladas que podem receber maior concentração de O₂.
+Pouco ar entra/sai do pulmão.
 
 Exemplos:
 
-- V/Q baixo leve/moderado;
-- baixa FiO₂ ambiental;
-- parte dos casos de asma;
-- parte dos casos de pneumonia;
-- parte dos casos de DPOC, com cautela e alvo adequado.
-
-## Ideia prática
-
-Se o problema é principalmente “pouco oxigênio chegando a áreas ainda funcionantes”, aumentar a oferta de O₂ pode melhorar a saturação.
+- rebaixamento de consciência;
+- intoxicação sedativa;
+- doença neuromuscular;
+- fadiga respiratória.
 
 ---
 
-# 7. Quando oxigênio não resolve sozinho
+# 3. Semiologia essencial
 
-Oxigênio não resolve a causa quando há:
-
-- obstrução mecânica grave;
-- pneumotórax hipertensivo;
-- shunt importante;
-- fadiga ventilatória;
-- retenção de CO₂ significativa;
-- causa infecciosa/embólica que precisa de tratamento específico.
-
-Exemplos:
-
-- Pneumotórax hipertensivo: precisa descompressão/drenagem.
-- Pneumonia bacteriana grave: precisa antibiótico e suporte.
-- TEP significativo: precisa diagnóstico e anticoagulação/reperfusão conforme gravidade.
-- DPOC hipercápnico: pode precisar ventilação não invasiva.
-
-## Frase didática
-
-```text
-Oxigênio pode ganhar tempo.
-Mas nem sempre remove o mecanismo que causou a hipoxemia.
-```
-
----
-
-# 8. Semiologia da hipoxemia
-
-O aluno deve aprender a olhar para o paciente antes de olhar só para o número.
-
-## Achados importantes
+## Sinais de hipoxemia
 
 - SpO₂ baixa.
+- Cianose em casos mais intensos.
+- Agitação, confusão ou sonolência.
 - Taquipneia.
 - Fala entrecortada.
 - Uso de musculatura acessória.
-- Tiragem.
 - Batimento de asa nasal em crianças.
-- Cianose em casos mais graves.
-- Alteração de consciência.
-- Sudorese/frialdade se choque associado.
-- Ausculta alterada ou, às vezes, surpreendentemente normal.
+- Sudorese e sensação de morte iminente em quadros graves.
 
-## Armadilha
+## Sinais de esforço respiratório
 
-Ausculta normal não exclui gravidade. No TEP, por exemplo, a ausculta pode estar pouco alterada apesar de hipoxemia importante.
+- Tiragens.
+- Retração supraclavicular/intercostal.
+- Expiração prolongada.
+- Posição tripé.
+- Incapacidade de falar frases completas.
+- Fadiga.
+
+**CUIDADO:**  
+Paciente cansando pode reduzir esforço e parecer “mais quieto” antes de piorar.
 
 ---
 
-# 9. Mini-caso 1 — Asma grave
+# 4. Raciocínio clínico
 
-## Cenário
-
-Paciente jovem chega com falta de ar, chiado no peito, fala entrecortada e SpO₂ 88% em ar ambiente. Ausculta com sibilos difusos e expiração prolongada.
-
-## Mecanismo principal
-
-Obstrução de vias aéreas por broncoespasmo, inflamação e muco, gerando V/Q baixo.
+Use este roteiro:
 
 ```text
-vias aéreas estreitas
-→ ar entra e sai com dificuldade
-→ algumas regiões ventilam mal
-→ sangue passa por áreas pouco ventiladas
-→ SpO₂ cai
+1. SpO₂ está baixa?
+2. O paciente está fazendo esforço?
+3. Há retenção de CO₂ possível?
+4. Qual mecanismo: V/Q baixo, V/Q alto, shunt ou hipoventilação?
+5. O oxigênio resolveu ou só comprou tempo?
+6. Precisa tratar causa?
 ```
 
-## Achados-chave
+## O₂ ajuda mais quando
 
+- há V/Q baixo moderado;
+- há hipóxia por doença pulmonar reversível;
+- o paciente precisa de suporte enquanto a causa é tratada.
+
+## O₂ não resolve sozinho quando
+
+- há broncoespasmo grave sem broncodilatação;
+- há pneumotórax hipertensivo;
+- há TEP com choque;
+- há shunt importante;
+- há hipoventilação com CO₂ alto;
+- há fadiga respiratória.
+
+## Erros comuns
+
+- Tratar SpO₂ e esquecer esforço.
+- Não contar FR.
+- Não diferenciar oxigenação de ventilação.
+- Ignorar hipercapnia.
+- Atrasar tratamento da causa.
+
+---
+
+# 5. Mini-casos
+
+## Mini-caso 1 — Asma grave
+
+### Cenário
+Paciente com dispneia, sibilos difusos, expiração prolongada, fala entrecortada, FR 34 e SpO₂ 90%.
+
+### Mecanismo principal
+Broncoespasmo e aprisionamento aéreo geram V/Q baixo e aumento do trabalho respiratório.
+
+### Achados-chave
 - Sibilos.
 - Expiração prolongada.
 - Fala entrecortada.
-- FR elevada.
 - SpO₂ baixa.
-- Uso de musculatura acessória.
 
-## Pergunta central
+### Pergunta central
+Por que O₂ sozinho não basta?
 
-Por que esse paciente está hipoxêmico se o problema principal está nas vias aéreas?
+### Resposta esperada
+Porque o mecanismo principal é obstrução das vias aéreas. Você precisa broncodilatar, reduzir inflamação, monitorar resposta e reconhecer fadiga.
 
-## Resposta esperada
+### Erro comum
+Melhorar saturação e ignorar broncoespasmo persistente.
 
-Porque a obstrução causa ventilação desigual. Algumas áreas recebem sangue, mas recebem pouco ar. Isso gera alteração V/Q e reduz a oxigenação.
-
-## Erro comum
-
-Achar que sibilo sempre significa crise leve. Em crise muito grave, pode haver redução importante do murmúrio vesicular e até “silêncio auscultatório”.
-
-## Ponte para OSCE
-
-No OSCE, o aluno deve avaliar fala, FR, SpO₂, esforço respiratório, ausculta, uso prévio de medicação, internações anteriores e resposta ao tratamento.
+### Ponte para OSCE
+Treine crise asmática com reavaliação.
 
 ---
 
-# 10. Mini-caso 2 — Pneumonia
+## Mini-caso 2 — Pneumonia com shunt relativo
 
-## Cenário
+### Cenário
+Paciente febril, tosse produtiva, crepitações em base direita, FR 28, SpO₂ 91%. Radiografia sugere consolidação.
 
-Paciente com febre, tosse produtiva, dor torácica ventilatório-dependente e SpO₂ 89%. Ausculta com crepitações em base direita.
-
-## Mecanismo principal
-
-Alvéolos preenchidos por exsudato inflamatório, causando V/Q baixo e shunt parcial.
+### Mecanismo principal
+Alvéolos preenchidos por exsudato ventilam mal, mas ainda recebem sangue.
 
 ```text
-alvéolo preenchido
-→ ar chega pouco ou não chega
-→ sangue continua passando
-→ troca gasosa prejudicada
-→ hipoxemia
+consolidação → alvéolo sem ar → sangue pouco oxigenado → hipoxemia
 ```
 
-## Achados-chave
-
-- Febre.
-- Tosse produtiva.
+### Achados-chave
+- Febre/tosse.
 - Crepitações.
-- Dor pleurítica.
 - Taquipneia.
-- SpO₂ baixa.
+- Consolidação.
 
-## Pergunta central
+### Pergunta central
+Por que pode responder parcialmente ao O₂?
 
-Por que oxigênio ajuda, mas não resolve a causa?
+### Resposta esperada
+Porque áreas com V/Q baixo podem melhorar, mas áreas em shunt verdadeiro respondem menos. A causa infecciosa também precisa ser tratada.
 
-## Resposta esperada
+### Erro comum
+Achar que SpO₂ melhorou e a pneumonia está resolvida.
 
-Porque oxigênio aumenta a oferta para áreas ainda ventiladas, mas não remove o exsudato infeccioso/inflamatório. O tratamento da causa envolve antibiótico quando indicado, suporte e reavaliação.
-
-## Erro comum
-
-Tratar a saturação e esquecer a infecção ou gravidade sistêmica.
-
-## Ponte para OSCE
-
-No OSCE, o aluno deve reconhecer sinais de gravidade, pedir exames apropriados sem atrasar conduta quando grave e propor tratamento coerente.
+### Ponte para OSCE
+Treine pneumonia com oxigenação e gravidade.
 
 ---
 
-# 11. Mini-caso 3 — TEP
+## Mini-caso 3 — TEP
 
-## Cenário
+### Cenário
+Paciente com dispneia súbita, dor pleurítica, taquicardia, SpO₂ 92% e pós-operatório recente.
 
-Paciente com dispneia súbita, dor torácica pleurítica, taquicardia e SpO₂ 90%. Ausculta pulmonar sem grandes alterações.
+### Mecanismo principal
+Obstrução vascular pulmonar gera área ventilada, mas pouco perfundida.
 
-## Mecanismo principal
-
-Obstrução da perfusão pulmonar. O alvéolo pode ventilar, mas o sangue não chega adequadamente.
-
-```text
-ar chega ao alvéolo
-→ sangue não perfunde bem
-→ troca gasosa ineficiente
-→ V/Q alto / espaço morto
-```
-
-## Achados-chave
-
+### Achados-chave
 - Dispneia súbita.
 - Dor pleurítica.
+- Fator trombótico.
 - Taquicardia.
+
+### Pergunta central
+Qual mecanismo de V/Q predomina?
+
+### Resposta esperada
+V/Q alto/espaço morto: há ventilação em áreas que não recebem sangue adequadamente.
+
+### Erro comum
+Tratar como ansiedade sem olhar risco trombótico e sinais vitais.
+
+### Ponte para OSCE
+Treine dispneia súbita.
+
+---
+
+## Mini-caso 4 — Hipoventilação por sedativo
+
+### Cenário
+Paciente sonolento, respiração lenta, SpO₂ 88%, pupilas pequenas e história de uso de sedativos/opioide.
+
+### Mecanismo principal
+Redução do drive ventilatório, com hipoxemia e risco de hipercapnia.
+
+### Achados-chave
+- Sonolência.
+- Bradipneia.
+- Uso de depressor do SNC.
 - SpO₂ baixa.
-- Ausculta pouco alterada.
-- Fatores de risco tromboembólicos.
 
-## Pergunta central
+### Pergunta central
+Por que O₂ pode esconder gravidade?
 
-Como o paciente pode estar hipoxêmico com ausculta quase normal?
+### Resposta esperada
+Porque melhora saturação, mas não corrige hipoventilação nem retenção de CO₂. Via aérea, ventilação e antídoto quando indicado são centrais.
 
-## Resposta esperada
+### Erro comum
+Olhar só SpO₂ e esquecer FR/consciência.
 
-Porque o problema não é necessariamente o alvéolo cheio de secreção ou broncoespasmo. O problema é a perfusão: há áreas ventiladas que não recebem sangue adequadamente.
-
-## Erro comum
-
-Descartar TEP porque “o pulmão está limpo”.
-
-## Ponte para OSCE
-
-No OSCE, o aluno deve perguntar sobre início súbito, dor pleurítica, imobilização, cirurgia recente, trombose prévia, uso hormonal e sinais de instabilidade.
+### Ponte para OSCE
+Treine oxigenação versus ventilação.
 
 ---
 
-# 12. Mini-caso 4 — Pneumotórax hipertensivo
+# 6. Questões ativas
 
-## Cenário
+## Questão ativa 1
 
-Paciente com dor torácica súbita, dispneia intensa, SpO₂ 84%, hipotensão e murmúrio vesicular abolido à direita. Há hipertimpanismo à percussão.
+**Pergunta:** SpO₂ mede ventilação?
 
-## Mecanismo principal
+**Resposta esperada:** Não. Ela estima saturação de O₂. Ventilação envolve eliminação de CO₂ e volume/minuto ventilatório.
 
-Colapso pulmonar com aumento de pressão intratorácica, reduzindo ventilação daquele lado e podendo comprometer retorno venoso.
+## Questão ativa 2
 
-```text
-ar no espaço pleural sob pressão
-→ pulmão colaba
-→ ventilação cai
-→ hipoxemia
-→ pressão intratorácica sobe
-→ choque obstrutivo se hipertensivo
-```
+**Pergunta:** O que é V/Q baixo?
 
-## Achados-chave
+**Resposta esperada:** Sangue chega ao pulmão, mas a ventilação está reduzida naquela região, causando hipoxemia.
 
-- Dor súbita.
-- Dispneia intensa.
-- Murmúrio vesicular abolido unilateral.
-- Hipertimpanismo.
-- Hipotensão se hipertensivo.
-- Taquicardia.
-- Desvio traqueal pode ocorrer, mas é tardio.
+## Questão ativa 3
 
-## Pergunta central
+**Pergunta:** Quando oxigênio não resolve sozinho?
 
-Por que oxigênio sozinho não resolve?
+**Resposta esperada:** Broncoespasmo grave, pneumotórax hipertensivo, TEP grave, shunt importante, hipoventilação e fadiga respiratória.
 
-## Resposta esperada
+## Questão ativa 4
 
-Porque há um problema mecânico: o pulmão está colabado por ar sob pressão no espaço pleural. Oxigênio pode ajudar temporariamente, mas a intervenção salvadora é descompressão/drenagem quando indicado.
+**Pergunta:** Qual sinal mostra gravidade mesmo com SpO₂ aceitável?
 
-## Erro comum
-
-Aguardar imagem em paciente instável com quadro compatível.
-
-## Ponte para OSCE
-
-No OSCE, o aluno deve reconhecer urgência, não atrasar descompressão e reavaliar após intervenção.
+**Resposta esperada:** Fala entrecortada, uso de musculatura acessória, FR muito alta, confusão, fadiga ou hipoperfusão.
 
 ---
 
-# 13. Questões ativas
-
-## Questão 1
-
-SpO₂ baixa significa sempre que o paciente está ventilando mal?
-
-**Resposta esperada:** Não. SpO₂ baixa indica problema de oxigenação, mas ventilação é avaliada melhor pela eliminação de CO₂. Um paciente pode estar hipoxêmico por V/Q, shunt, difusão ou baixa FiO₂ sem necessariamente ter hipoventilação como causa principal.
-
-## Questão 2
-
-Qual mecanismo explica hipoxemia com ausculta normal ou pouco alterada?
-
-**Resposta esperada:** TEP é exemplo clássico. O problema pode estar na perfusão, gerando V/Q alto/espaço morto.
-
-## Questão 3
-
-Por que pneumonia pode melhorar parcialmente com oxigênio, mas ainda exigir tratamento etiológico?
-
-**Resposta esperada:** O oxigênio melhora áreas ventiladas, mas não remove exsudato, inflamação ou infecção nos alvéolos.
-
-## Questão 4
-
-Qual situação respiratória não deve esperar RX se o paciente estiver instável?
-
-**Resposta esperada:** Pneumotórax hipertensivo suspeito clinicamente.
-
-## Questão 5
-
-Qual é a diferença prática entre V/Q baixo e V/Q alto?
-
-**Resposta esperada:** V/Q baixo: há sangue passando por área mal ventilada. V/Q alto: há ventilação em área pouco perfundida.
-
----
-
-# 14. Mapa final
+# 7. Mapa final
 
 ```text
 HIPOXEMIA
-├── Baixa FiO₂
-│   └── pouco oxigênio inspirado; tende a melhorar com O₂
-├── Hipoventilação
-│   └── ar entra/sai pouco; CO₂ sobe; O₂ pode ajudar, mas não corrige ventilação
 ├── V/Q baixo
-│   ├── tem sangue, falta ar
-│   ├── asma, DPOC, pneumonia
-│   └── melhora variável com O₂
-├── V/Q alto / espaço morto
-│   ├── tem ar, falta sangue
-│   ├── TEP
-│   └── ausculta pode ser normal
-├── Shunt
-│   ├── sangue passa sem oxigenar
-│   ├── pneumonia extensa, atelectasia, edema alveolar
-│   └── resposta limitada ao O₂
-└── Problema mecânico
-    ├── pneumotórax hipertensivo
-    └── O₂ não resolve sem intervenção mecânica
+│   ├── asma
+│   ├── DPOC
+│   ├── pneumonia
+│   └── atelectasia
+├── V/Q alto
+│   └── TEP
+├── shunt
+│   ├── consolidação extensa
+│   ├── edema alveolar
+│   └── atelectasia importante
+├── hipoventilação
+│   ├── sedação
+│   ├── rebaixamento
+│   └── fadiga
+└── decisão
+    ├── O₂
+    ├── tratar causa
+    ├── avaliar CO₂
+    └── reavaliar esforço
 ```
 
 ---
 
-# 15. Ponte para OSCE
+# 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-Treinar:
-
-- anamnese de dispneia;
-- identificação de sinais de gravidade;
-- exame físico respiratório;
-- interpretação de SpO₂;
-- raciocínio diagnóstico inicial.
-
-## MEDIX OSCE Clínico
-
-Treinar:
-
-- evolução temporal da SpO₂;
-- resposta a oxigênio;
-- resposta a broncodilatador;
-- piora por atraso terapêutico;
-- casos com simulação fisiológica avançada.
+- identificar mecanismo;
+- pedir SpO₂/FR;
+- avaliar fala e esforço;
+- tratar causa;
+- reavaliar após O₂.
 
 ---
 
-# 16. Checklist de curadoria
+# 9. Checklist de curadoria
 
-- [ ] O aluno entende que SpO₂ não mede ventilação?
-- [ ] O aluno diferencia V/Q baixo de V/Q alto?
-- [ ] O aluno entende shunt?
-- [ ] O aluno sabe por que TEP pode ter ausculta normal?
-- [ ] O aluno sabe por que pneumotórax hipertensivo não espera RX?
-- [ ] O aluno entende quando oxigênio ajuda e quando não resolve?
-- [ ] Os mini-casos conectam fisiologia e semiologia?
-- [ ] Há ponte clara para OSCE?
+- [ ] Você diferenciou oxigenação de ventilação?
+- [ ] Contou FR?
+- [ ] Procurou esforço respiratório?
+- [ ] Identificou mecanismo V/Q?
+- [ ] Reavaliou resposta ao O₂?

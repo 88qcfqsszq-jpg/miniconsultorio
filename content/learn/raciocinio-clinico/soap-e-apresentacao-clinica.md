@@ -1,245 +1,241 @@
 # Trilha Raciocínio Clínico — SOAP e apresentação clínica
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar organizar raciocínio em prontuário e comunicação com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a organizar informações clínicas em SOAP e apresentar casos com clareza. O objetivo é transformar dados soltos em raciocínio comunicável.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** quem ouve sua apresentação deve entender rapidamente quem é o paciente, qual o problema, qual o risco e qual o plano.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de soap e apresentação clínica.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Diferenciar subjetivo, objetivo, avaliação e plano.
+2. Escrever SOAP útil.
+3. Apresentar caso oralmente em ordem lógica.
+4. Destacar gravidade e dados relevantes.
+5. Evitar excesso de informação.
+6. Comunicar incerteza com segurança.
 
 ---
 
 # 1. Microaula — Ideia central
 
-SOAP e apresentação clínica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **SOAP e apresentação clínica**: SOAP e apresentação clínica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+SOAP organiza pensamento:
 
 ```text
-SOAP e apresentação clínica: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+S — Subjetivo: o que o paciente relata
+O — Objetivo: o que você mede/encontra
+A — Avaliação: sua interpretação
+P — Plano: o que fará
+```
+
+**PONTO-CHAVE:**  
+SOAP não é transcrição. É seleção clínica.
+
+**NÃO ERRE:**  
+Não coloque exame físico no S, nem hipótese no O. Cada coisa tem lugar.
+
+---
+
+# 2. Fisiologia da comunicação clínica
+
+Apresentação boa reduz carga cognitiva da equipe.
+
+```text
+dados organizados → risco claro → decisão mais rápida
+```
+
+Uma apresentação ruim esconde gravidade em detalhes irrelevantes.
+
+## Ordem mental
+
+```text
+identificação → queixa → tempo → achados-chave → gravidade → hipótese → plano
 ```
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 3. Semiologia aplicada ao SOAP
 
-## 1. Mecanismo principal
+## S — Subjetivo
 
-Em soap e apresentação clínica, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Inclui:
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+- queixa principal;
+- história da doença;
+- sintomas associados;
+- antecedentes relevantes;
+- medicamentos;
+- alergias;
+- contexto.
 
-## 2. Semiologia aplicada
+## O — Objetivo
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Inclui:
 
-```text
-observação → interpretação → conduta
-```
+- sinais vitais;
+- exame físico;
+- exames complementares;
+- dados mensuráveis.
 
-## 3. Risco e priorização
+## A — Avaliação
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Inclui:
 
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+- síndrome;
+- hipótese principal;
+- diferenciais;
+- gravidade;
+- problemas ativos.
 
----
+## P — Plano
 
-# 3. Semiologia essencial
+Inclui:
 
-O aluno deve aprender a observar antes de decorar conduta.
-
-## Achados que precisam ser procurados
-
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
-
-## Sinais de alarme
-
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+- conduta;
+- exames;
+- tratamento;
+- reavaliação;
+- orientação;
+- encaminhamento.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+## Apresentação em 30 segundos
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
-```
-
-O raciocínio deve seguir:
-
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+Paciente de X anos, com [comorbidade relevante], apresenta [queixa] há [tempo], associado a [achados-chave]. Ao exame, [sinais vitais/exame relevante]. Minha avaliação é [síndrome/hipótese], com preocupação para [gravidade]. Plano: [conduta].
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Contar tudo em ordem cronológica longa.
+- Omitir sinais vitais.
+- Não dizer hipótese.
+- Não dizer gravidade.
+- Misturar dados subjetivos e objetivos.
+- Plano sem reavaliação.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Caso respiratório
+## Mini-caso 1 — SOAP de pneumonia
 
 ### Cenário
-Paciente com apresentação típica relacionada a caso respiratório, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com febre, tosse produtiva, dispneia leve, FR 26, SpO₂ 93%, crepitações em base direita.
 
 ### Mecanismo principal
-Mecanismo dominante de caso respiratório dentro da trilha soap e apresentação clínica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Síndrome respiratória infecciosa com provável acometimento alveolar.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Febre/tosse.
+- Taquipneia.
+- SpO₂ reduzida.
+- Crepitações.
 
 ### Pergunta central
-Qual mecanismo explica caso respiratório?
+Como fica a avaliação?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Síndrome respiratória infecciosa, pneumonia provável, com necessidade de avaliar gravidade pela oxigenação, FR, comorbidades e estado geral.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Escrever só “tosse e febre” sem gravidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Caso abdominal
+Treine SOAP com hipótese e risco.
+
+---
+
+## Mini-caso 2 — Apresentação de dor torácica
 
 ### Cenário
-Paciente com apresentação típica relacionada a caso abdominal, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 58 anos, diabético, dor torácica opressiva há 40 minutos, sudorese. PA 150/90, FC 104.
 
 ### Mecanismo principal
-Mecanismo dominante de caso abdominal dentro da trilha soap e apresentação clínica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Dor torácica potencialmente isquêmica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Idade/diabetes.
+- Dor opressiva.
+- Duração.
+- Sudorese.
 
 ### Pergunta central
-Qual mecanismo explica caso abdominal?
+O que deve aparecer nos primeiros 15 segundos?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Paciente de risco com dor torácica típica e sintomas autonômicos; preocupação para SCA; ECG imediato.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Começar falando antecedentes irrelevantes e atrasar risco.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Caso neurológico
+Treine apresentação objetiva.
+
+---
+
+## Mini-caso 3 — Plano incompleto
 
 ### Cenário
-Paciente com apresentação típica relacionada a caso neurológico, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Você escreve: “Plano: medicar e observar”. Não define medicamento, objetivo, tempo de reavaliação nem sinais de piora.
 
 ### Mecanismo principal
-Mecanismo dominante de caso neurológico dentro da trilha soap e apresentação clínica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Plano sem operacionalização.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sem objetivo.
+- Sem tempo.
+- Sem critério.
+- Sem reavaliação.
 
 ### Pergunta central
-Qual mecanismo explica caso neurológico?
+Como corrigir?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Especificar intervenção, objetivo e reavaliação: “analgesia, hidratação oral assistida, reavaliar dor/sinais vitais em X tempo; se piora, ampliar investigação”.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Plano genérico.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Caso infeccioso
+Treine conduta clara.
+
+---
+
+## Mini-caso 4 — Alta segura
 
 ### Cenário
-Paciente com apresentação típica relacionada a caso infeccioso, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com quadro leve, sem sinais de alarme, melhora após conduta inicial. Você precisa orientar alta.
 
 ### Mecanismo principal
-Mecanismo dominante de caso infeccioso dentro da trilha soap e apresentação clínica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Comunicação de segurança e retorno.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Melhora.
+- Sem red flags.
+- Plano domiciliar.
+- Sinais de alarme.
 
 ### Pergunta central
-Qual mecanismo explica caso infeccioso?
+O que não pode faltar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Hipótese, cuidados, medicações, sinais de alarme, prazo de retorno e checagem de compreensão.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dar alta sem orientação específica.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine fechamento seguro.
 
 ---
 
@@ -247,70 +243,73 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de soap e apresentação clínica?
+**Pergunta:** O que entra no S?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Dados relatados pelo paciente: queixa, história, sintomas, contexto, antecedentes, medicamentos e alergias.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que entra no O?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Sinais vitais, exame físico e exames complementares.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** O que diferencia A de P?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** A é interpretação/hipótese/problema. P é o que você fará.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** O que torna apresentação clínica boa?
+
+**Resposta esperada:** Clareza, ordem, relevância, gravidade explícita e plano objetivo.
 
 ---
 
 # 7. Mapa final
 
 ```text
-SOAP E APRESENTAÇÃO CLÍNICA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+SOAP
+├── S
+│   ├── queixa
+│   ├── HDA
+│   ├── antecedentes
+│   └── medicamentos/alergias
+├── O
+│   ├── sinais vitais
+│   ├── exame físico
+│   └── exames
+├── A
+│   ├── síndrome
+│   ├── hipótese
+│   ├── diferenciais
+│   └── gravidade
+└── P
+    ├── conduta
+    ├── exames
+    ├── reavaliação
+    └── orientação
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- SOAP escrito;
+- apresentação oral de 30 segundos;
+- avaliação com hipótese;
+- plano com reavaliação;
+- alta segura.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Separou S, O, A e P?
+- [ ] Colocou sinais vitais?
+- [ ] Declarou hipótese?
+- [ ] Declarou gravidade?
+- [ ] Plano tem reavaliação?

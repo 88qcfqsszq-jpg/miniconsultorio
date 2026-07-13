@@ -1,124 +1,103 @@
 # Trilha Raciocínio Clínico — Conduta inicial e reavaliação
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar intervir, medir resposta e corrigir rota com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a propor conduta inicial segura e reavaliar resposta. O atendimento não termina na primeira prescrição; ele melhora ou piora ao longo do tempo.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** conduta boa tem objetivo, tempo e critério de reavaliação.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de conduta inicial e reavaliação.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Definir conduta inicial por gravidade.
+2. Explicar objetivo de cada intervenção.
+3. Reavaliar sinais vitais, sintomas e exame.
+4. Identificar falha terapêutica.
+5. Ajustar plano com novos dados.
+6. Comunicar evolução no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Conduta inicial e reavaliação é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Conduta inicial e reavaliação**: Conduta inicial e reavaliação é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Conduta inicial não é lista de remédios. É plano.
 
 ```text
-Conduta inicial e reavaliação: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+problema → intervenção → objetivo → reavaliação → ajuste
 ```
+
+**PONTO-CHAVE:**  
+Toda conduta deve ter uma pergunta de retorno: “melhorou o quê?”
+
+**NÃO ERRE:**  
+Não prescreva e desapareça. Reavaliação é parte da conduta.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia da resposta clínica
 
-## 1. Mecanismo principal
+Intervenções mudam mecanismos:
 
-Em conduta inicial e reavaliação, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+- oxigênio melhora oxigenação, mas não corrige tudo;
+- broncodilatador reduz broncoespasmo;
+- volume melhora hipovolemia, mas pode piorar congestão;
+- antibiótico trata infecção bacteriana, mas não reverte choque imediatamente;
+- analgesia melhora dor e permite exame melhor;
+- antitérmico reduz desconforto, não trata causa.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
-
-```text
-observação → interpretação → conduta
-```
-
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+**RACIOCÍNIO:**  
+Você precisa saber o que espera de cada conduta.
 
 ---
 
-# 3. Semiologia essencial
+# 3. Semiologia da reavaliação
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Reavaliar significa medir de novo
 
-## Achados que precisam ser procurados
+- PA, FC, FR, SpO₂, temperatura.
+- Dor.
+- Consciência.
+- Perfusão.
+- Diurese.
+- Ausculta/exame focal.
+- Sintoma principal.
+- Efeitos adversos.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Tempo importa
 
-## Sinais de alarme
-
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+- Broncoespasmo: minutos após broncodilatador.
+- Hipoglicemia: minutos após correção.
+- Dor: após analgesia.
+- Sepse: perfusão, PA, lactato/diurese ao longo do tempo.
+- Dengue: tendência de sinais, Ht, vômitos, dor abdominal.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
-```
-
-O raciocínio deve seguir:
-
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+qual era o problema?
+o que fiz?
+o que esperava melhorar?
+melhorou?
+se não, por quê?
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Não definir objetivo.
+- Não repetir sinais vitais.
+- Não reconhecer piora.
+- Manter hipótese apesar de resposta incompatível.
+- Não orientar retorno.
+- Não documentar evolução.
 
 ---
 
@@ -127,119 +106,112 @@ O raciocínio deve seguir:
 ## Mini-caso 1 — Asma
 
 ### Cenário
-Paciente com apresentação típica relacionada a asma, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com sibilos, fala entrecortada, SpO₂ 91%, FR 32. Recebe broncodilatador e oxigênio.
 
 ### Mecanismo principal
-Mecanismo dominante de asma dentro da trilha conduta inicial e reavaliação.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Broncoespasmo com aumento do trabalho respiratório e alteração V/Q.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sibilos.
+- Fala entrecortada.
+- Hipoxemia.
+- FR alta.
 
 ### Pergunta central
-Qual mecanismo explica asma?
+O que reavaliar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+FR, fala, esforço respiratório, SpO₂, ausculta, FC e necessidade de novas medidas.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dar salbutamol e não voltar para examinar.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Sepse
+Treine resposta terapêutica.
+
+---
+
+## Mini-caso 2 — Hipovolemia
 
 ### Cenário
-Paciente com apresentação típica relacionada a sepse, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com diarreia, mucosas secas, FC 126, TEC 4s. Recebe hidratação.
 
 ### Mecanismo principal
-Mecanismo dominante de sepse dentro da trilha conduta inicial e reavaliação.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Déficit de volume com hipoperfusão.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Taquicardia.
+- TEC lento.
+- Mucosas secas.
+- Perda gastrointestinal.
 
 ### Pergunta central
-Qual mecanismo explica sepse?
+Como saber se melhorou?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Melhora de FC, perfusão, diurese, tontura, mucosas e estado geral. PA isolada não basta.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Avaliar só “pressão subiu”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — IC
+Treine reavaliação de perfusão.
+
+---
+
+## Mini-caso 3 — Dor abdominal
 
 ### Cenário
-Paciente com apresentação típica relacionada a ic, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor abdominal recebe analgesia. Depois, ainda tem defesa localizada e taquicardia.
 
 ### Mecanismo principal
-Mecanismo dominante de ic dentro da trilha conduta inicial e reavaliação.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Analgesia reduz dor, mas não elimina inflamação/peritonite.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor persiste.
+- Defesa.
+- Taquicardia.
+- Reexame positivo.
 
 ### Pergunta central
-Qual mecanismo explica ic?
+Analgesia normaliza o caso?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Não. Você reavalia. Persistência de defesa/taquicardia mantém preocupação.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dar alta porque “a dor melhorou um pouco”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — DPOC
+Treine analgesia sem perder gravidade.
+
+---
+
+## Mini-caso 4 — Dengue
 
 ### Cenário
-Paciente com apresentação típica relacionada a dpoc, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dengue e vômitos. Após hidratação oral assistida, continua vomitando e com tontura ao levantar.
 
 ### Mecanismo principal
-Mecanismo dominante de dpoc dentro da trilha conduta inicial e reavaliação.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Risco de desidratação/extravasamento e falha de manejo ambulatorial.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Vômitos persistentes.
+- Tontura.
+- Fase crítica possível.
+- Reavaliação ruim.
 
 ### Pergunta central
-Qual mecanismo explica dpoc?
+Qual decisão muda?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Não manter alta simples. Precisa observação, hidratação supervisionada e avaliação de sinais de alarme conforme protocolo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Orientar casa sem testar tolerância.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine reavaliação antes da alta.
 
 ---
 
@@ -247,70 +219,73 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de conduta inicial e reavaliação?
+**Pergunta:** Toda conduta precisa de quê?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Objetivo e critério de reavaliação.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que é falha terapêutica?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Ausência de melhora esperada ou piora após intervenção adequada, exigindo revisão de hipótese e plano.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Por que reavaliar sinais vitais?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Porque tendência mostra resposta ou deterioração.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Alta segura depende de quê?
+
+**Resposta esperada:** Estabilidade, melhora ou baixo risco, orientação clara, sinais de alarme e plano de retorno.
 
 ---
 
 # 7. Mapa final
 
 ```text
-CONDUTA INICIAL E REAVALIAÇÃO
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+CONDUTA
+├── problema
+│   ├── hipóxia
+│   ├── dor
+│   ├── hipoperfusão
+│   └── infecção
+├── intervenção
+│   ├── oxigênio
+│   ├── hidratação
+│   ├── analgesia
+│   └── antibiótico/medidas específicas
+├── reavaliação
+│   ├── sintomas
+│   ├── sinais vitais
+│   ├── exame físico
+│   └── diurese/perfusão
+└── decisão
+    ├── alta
+    ├── observar
+    ├── intensificar
+    └── encaminhar
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- explicar objetivo da conduta;
+- reavaliar após intervenção;
+- modificar plano;
+- justificar alta ou observação.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você definiu objetivo?
+- [ ] Reavaliou sinais vitais?
+- [ ] Repetiu exame focal?
+- [ ] Identificou falha?
+- [ ] Orientou retorno?

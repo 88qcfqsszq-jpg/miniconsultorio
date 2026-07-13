@@ -1,245 +1,241 @@
 # Trilha Semiologia Geral — Comunicação clínica
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar acolhimento, linguagem clara, segurança e fechamento da consulta com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a se comunicar com clareza, empatia e segurança em atendimentos clínicos e OSCE. Comunicação não é enfeite: ela reduz erro, melhora adesão e organiza raciocínio.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** você deve explicar sem assustar, acolher sem perder objetividade e orientar sem deixar dúvida.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de comunicação clínica.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Abrir a consulta com postura profissional.
+2. Usar linguagem simples sem perder precisão.
+3. Explicar hipótese e plano.
+4. Checar compreensão.
+5. Orientar sinais de alarme.
+6. Lidar com emoção.
+7. Encerrar com segurança.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Comunicação clínica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Comunicação clínica**: Comunicação clínica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Boa comunicação tem estrutura:
 
 ```text
-Comunicação clínica: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+acolher → entender → explicar → confirmar → orientar
+```
+
+**PONTO-CHAVE:**  
+O paciente não precisa decorar termos técnicos. Ele precisa entender o que você suspeita, o que será feito e quando deve procurar ajuda.
+
+**NÃO ERRE:**  
+Não dê alta sem sinais de alarme claros.
+
+---
+
+# 2. Fisiologia da consulta
+
+A consulta é uma troca de informação sob estresse. Dor, medo e ansiedade reduzem compreensão.
+
+Por isso, use:
+
+- frases curtas;
+- ordem lógica;
+- pausas;
+- checagem de entendimento;
+- exemplos concretos.
+
+```text
+informação demais + medo → baixa retenção
+informação organizada + confirmação → segurança
 ```
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 3. Semiologia comunicacional
 
-## 1. Mecanismo principal
+## Abertura
 
-Em comunicação clínica, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+- Cumprimente.
+- Apresente-se.
+- Confirme nome/idade.
+- Explique o que vai fazer.
+- Peça permissão para examinar.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+## Durante
 
-## 2. Semiologia aplicada
+- Não interrompa cedo demais.
+- Valide emoção.
+- Explique o raciocínio em passos.
+- Evite jargão.
+- Use “vou te explicar o que me preocupa”.
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+## Fechamento
 
-```text
-observação → interpretação → conduta
-```
+- Resuma.
+- Oriente plano.
+- Dê sinais de alarme.
+- Confirme compreensão.
+- Pergunte se há dúvida.
 
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
-
----
-
-# 3. Semiologia essencial
-
-O aluno deve aprender a observar antes de decorar conduta.
-
-## Achados que precisam ser procurados
-
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
-
-## Sinais de alarme
-
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**PONTO-CHAVE:**  
+“Entendeu?” costuma gerar “sim”. Melhor: “só para eu confirmar que expliquei bem, o que você vai observar em casa?”
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Comunicação deve acompanhar gravidade.
+
+## Caso leve
+
+Explique hipótese provável, autocuidado, retorno e sinais de alerta.
+
+## Caso incerto
+
+Explique incerteza:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+“Hoje não vejo sinal de gravidade, mas algumas doenças começam assim. Por isso, estes sinais exigem retorno.”
 ```
 
-O raciocínio deve seguir:
+## Caso grave
+
+Seja direto, calmo e transparente:
 
 ```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+“Há sinais de que seu corpo pode estar sofrendo. Vamos monitorar e agir rápido.”
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Usar jargão.
+- Não checar entendimento.
+- Minimizar medo.
+- Prometer certeza.
+- Não orientar retorno.
+- Falar com acompanhante e ignorar paciente.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Notícia simples
+## Mini-caso 1 — Explicando dengue sem alarme
 
 ### Cenário
-Paciente com apresentação típica relacionada a notícia simples, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dengue provável, sinais vitais normais, sem sinais de alarme, ansioso com plaquetas.
 
 ### Mecanismo principal
-Mecanismo dominante de notícia simples dentro da trilha comunicação clínica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Comunicação de risco: tranquilizar sem banalizar.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Diagnóstico provável.
+- Sem alarme.
+- Medo de piora.
+- Necessidade de retorno.
 
 ### Pergunta central
-Qual mecanismo explica notícia simples?
+Como explicar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Diga que o quadro parece sem gravidade agora, mas dengue pode piorar na fase crítica; explique hidratação, medicações seguras e sinais de alarme.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dizer “é só virose” e não orientar retorno.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Orientação de alarme
+Treine alta segura.
+
+---
+
+## Mini-caso 2 — Paciente com dor torácica
 
 ### Cenário
-Paciente com apresentação típica relacionada a orientação de alarme, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente teme infarto. Você precisa pedir ECG e monitorização.
 
 ### Mecanismo principal
-Mecanismo dominante de orientação de alarme dentro da trilha comunicação clínica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Comunicação de incerteza com segurança.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sintoma potencialmente grave.
+- Necessidade de exame rápido.
+- Medo.
+- Plano imediato.
 
 ### Pergunta central
-Qual mecanismo explica orientação de alarme?
+Como evitar alarmismo?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Explique que algumas causas precisam ser excluídas rapidamente e que o ECG ajuda a decidir o próximo passo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dizer “pode ser infarto” sem plano ou acolhimento.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Paciente ansioso
+Treine gravidade com calma.
+
+---
+
+## Mini-caso 3 — Exame físico íntimo
 
 ### Cenário
-Paciente com apresentação típica relacionada a paciente ansioso, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Você precisa examinar abdome/virilha por suspeita de hérnia.
 
 ### Mecanismo principal
-Mecanismo dominante de paciente ansioso dentro da trilha comunicação clínica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Consentimento, privacidade e explicação.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Exame necessário.
+- Área sensível.
+- Privacidade.
+- Consentimento.
 
 ### Pergunta central
-Qual mecanismo explica paciente ansioso?
+Como conduzir?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Explique por que o exame é necessário, peça autorização, ofereça privacidade e presença de acompanhante/profissional quando adequado.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Examinar sem explicar.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Adesão baixa
+Treine ética e consentimento.
+
+---
+
+## Mini-caso 4 — Paciente irritado
 
 ### Cenário
-Paciente com apresentação típica relacionada a adesão baixa, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente está irritado por esperar muito e fala de forma ríspida.
 
 ### Mecanismo principal
-Mecanismo dominante de adesão baixa dentro da trilha comunicação clínica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Emoção alta reduz escuta e aumenta conflito.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Irritação.
+- Queixa legítima.
+- Necessidade de redirecionar.
+- Segurança.
 
 ### Pergunta central
-Qual mecanismo explica adesão baixa?
+Como responder?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Reconheça a frustração, mantenha tom calmo e direcione para cuidado: “entendo que esperar é ruim; agora vou focar em entender o que está acontecendo com segurança.”
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Responder defensivamente.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine postura profissional.
 
 ---
 
@@ -247,70 +243,72 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de comunicação clínica?
+**Pergunta:** Qual é a função da comunicação clínica?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Aumentar segurança, compreensão, adesão e qualidade da decisão.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Como checar compreensão?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Peça para a pessoa repetir o plano com as próprias palavras.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** O que não pode faltar em alta?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Hipótese, plano, medicação/cuidados, sinais de alarme, retorno e dúvidas.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Como explicar incerteza?
+
+**Resposta esperada:** Diga o que é provável, o que preocupa, o que será observado e quando retornar.
 
 ---
 
 # 7. Mapa final
 
 ```text
-COMUNICAÇÃO CLÍNICA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+COMUNICAÇÃO
+├── abrir
+│   ├── apresentar-se
+│   ├── ouvir
+│   └── explicar fluxo
+├── conduzir
+│   ├── linguagem simples
+│   ├── empatia
+│   └── raciocínio claro
+├── examinar
+│   ├── consentimento
+│   ├── privacidade
+│   └── respeito
+└── fechar
+    ├── resumo
+    ├── plano
+    ├── sinais de alarme
+    └── checar compreensão
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- apresentação;
+- escuta;
+- explicação de hipótese;
+- consentimento para exame;
+- sinais de alarme;
+- fechamento.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você se apresentou?
+- [ ] Explicou o que faria?
+- [ ] Usou linguagem simples?
+- [ ] Orientou sinais de alarme?
+- [ ] Checou compreensão?

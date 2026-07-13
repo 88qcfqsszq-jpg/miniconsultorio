@@ -1,245 +1,248 @@
 # Trilha Cardiovascular — Sopros e valvopatias para o básico
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar raciocínio inicial dos sopros, irradiação e repercussão clínica com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a ouvir sopros com método, descrever achados essenciais e reconhecer quando um sopro sugere valvopatia importante.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** sopro é turbulência. A pergunta clínica é: **essa turbulência é inocente, funcional ou sinal de doença estrutural?**
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de sopros e valvopatias para o básico.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Localizar focos de ausculta.
+2. Diferenciar sopro sistólico e diastólico.
+3. Descrever intensidade, irradiação e manobras simples.
+4. Reconhecer red flags de valvopatia.
+5. Relacionar sopros com estenose/insuficiência.
+6. Apresentar ausculta no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Sopros e valvopatias para o básico é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Sopros e valvopatias para o básico**: Sopros e valvopatias para o básico é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+O sopro nasce quando o fluxo deixa de ser laminar.
 
 ```text
-Sopros e valvopatias para o básico: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+fluxo rápido / válvula estreita / refluxo / comunicação anormal → turbulência → sopro
 ```
+
+**PONTO-CHAVE:**  
+Sopro diastólico é patológico até prova contrária.
+
+**NÃO ERRE:**  
+Não descreva “sopro presente” apenas. Diga: foco, tempo, intensidade, irradiação e sintomas associados.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Estenose
 
-Em sopros e valvopatias para o básico, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+A válvula não abre bem.
 
 ```text
-observação → interpretação → conduta
+orifício estreito → pressão antes da válvula sobe → sopro de ejeção
 ```
 
-## 3. Risco e priorização
+Exemplo: estenose aórtica.
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+## Insuficiência
+
+A válvula não fecha bem.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+refluxo → volume retorna → sobrecarga de câmara → sopro regurgitativo
 ```
+
+Exemplo: insuficiência mitral.
+
+## Sopro funcional
+
+Fluxo aumentado sem valvopatia estrutural importante.
+
+Exemplos: febre, anemia, gestação, exercício.
+
+**CUIDADO:**  
+Sopro funcional deve ser diagnóstico cuidadoso. Sintomas ou achados anormais pedem investigação.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Focos
 
-## Achados que precisam ser procurados
+- Aórtico: 2º EIC direito.
+- Pulmonar: 2º EIC esquerdo.
+- Tricúspide: borda esternal inferior esquerda.
+- Mitral: ápice.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## O que descrever
 
-## Sinais de alarme
+- Sistólico ou diastólico.
+- Intensidade.
+- Foco máximo.
+- Irradiação.
+- Timbre.
+- Manobras/postura.
+- Presença de frêmito.
+- B2, B3, B4, cliques.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+## Sintomas de alerta
+
+- Dispneia.
+- Dor torácica.
+- Síncope.
+- Palpitações.
+- Edema.
+- Queda de tolerância ao esforço.
+- Febre persistente em risco de endocardite.
+
+**PONTO-CHAVE:**  
+Estenose aórtica sintomática costuma preocupar quando há dispneia, angina ou síncope.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use este roteiro:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+tempo do sopro → foco → irradiação → sintomas → necessidade de eco
 ```
 
-O raciocínio deve seguir:
+## Pistas úteis
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Sistólico em foco aórtico irradiando para carótidas: pense em estenose aórtica.
+- Holossistólico no ápice irradiando para axila: pense em insuficiência mitral.
+- Diastólico em borda esternal: valvopatia deve ser investigada.
+- Sopro + febre + fatores de risco: pense em endocardite.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Ignorar sopro diastólico.
+- Não perguntar sintomas.
+- Não auscultar carótidas/ápice.
+- Confundir B3 com sopro.
+- Não relacionar sopro novo com febre/endocardite.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Estenose aórtica
+## Mini-caso 1 — Estenose aórtica provável
 
 ### Cenário
-Paciente com apresentação típica relacionada a estenose aórtica, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente idoso com síncope ao esforço e sopro sistólico ejetivo em foco aórtico, irradiando para carótidas.
 
 ### Mecanismo principal
-Mecanismo dominante de estenose aórtica dentro da trilha sopros e valvopatias para o básico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Válvula aórtica estreita limitando fluxo de saída do ventrículo esquerdo.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sopro sistólico ejetivo.
+- Irradiação para carótidas.
+- Síncope ao esforço.
+- Idoso.
 
 ### Pergunta central
-Qual mecanismo explica estenose aórtica?
+Por que a síncope importa?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque sugere limitação de débito em esforço e pode indicar valvopatia significativa.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Chamar de labirintite sem auscultar coração.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine ausculta e sintomas de valvopatia.
+
+---
+
 ## Mini-caso 2 — Insuficiência mitral
 
 ### Cenário
-Paciente com apresentação típica relacionada a insuficiência mitral, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dispneia aos esforços e sopro holossistólico em ápice, irradiando para axila.
 
 ### Mecanismo principal
-Mecanismo dominante de insuficiência mitral dentro da trilha sopros e valvopatias para o básico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Refluxo do ventrículo esquerdo para átrio esquerdo durante sístole.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Holossistólico.
+- Ápice.
+- Irradiação para axila.
+- Dispneia.
 
 ### Pergunta central
-Qual mecanismo explica insuficiência mitral?
+Por que o foco/irradiação orienta?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque o padrão apical irradiado para axila é típico de regurgitação mitral.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Descrever só “sopro sistólico” sem localização.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Sopro inocente
+Treine descrição completa do sopro.
+
+---
+
+## Mini-caso 3 — Sopro funcional por anemia
 
 ### Cenário
-Paciente com apresentação típica relacionada a sopro inocente, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente jovem com fadiga, palidez, Hb baixa, sopro sistólico suave, sem sintomas cardíacos específicos, sem irradiação importante.
 
 ### Mecanismo principal
-Mecanismo dominante de sopro inocente dentro da trilha sopros e valvopatias para o básico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Fluxo aumentado/hiperdinâmico gerando turbulência sem valvopatia estrutural primária.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Anemia.
+- Sopro suave.
+- Sem red flags.
+- Contexto hiperdinâmico.
 
 ### Pergunta central
-Qual mecanismo explica sopro inocente?
+Por que pode ser funcional?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque anemia aumenta fluxo e turbulência. Ainda assim, a avaliação depende do conjunto clínico.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Ignorar anemia e investigar apenas válvula.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Endocardite suspeita
+Treine mecanismo de sopro funcional.
+
+---
+
+## Mini-caso 4 — Sopro e febre
 
 ### Cenário
-Paciente com apresentação típica relacionada a endocardite suspeita, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com febre persistente, sopro novo, mal-estar e história de procedimento dentário recente.
 
 ### Mecanismo principal
-Mecanismo dominante de endocardite suspeita dentro da trilha sopros e valvopatias para o básico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Possível infecção endocárdica comprometendo válvula.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Febre persistente.
+- Sopro novo.
+- Fator de risco.
+- Sintomas sistêmicos.
 
 ### Pergunta central
-Qual mecanismo explica endocardite suspeita?
+Qual hipótese não pode ser perdida?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Endocardite infecciosa deve ser considerada, especialmente com sopro novo e febre sem foco claro.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar febre repetidamente sem auscultar ou investigar foco.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine febre + sopro.
 
 ---
 
@@ -247,70 +250,69 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de sopros e valvopatias para o básico?
+**Pergunta:** O que você deve descrever em um sopro?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Tempo, foco, intensidade, irradiação, timbre, manobras e sintomas associados.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Qual sopro é sempre preocupante?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Sopro diastólico deve ser investigado como patológico até prova contrária.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Qual tríade sugere estenose aórtica sintomática?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Dispneia, angina e síncope.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4**
+
+**Pergunta:** Febre + sopro novo sugere o quê?
+
+**Resposta esperada:** Endocardite deve entrar no diferencial.
 
 ---
 
 # 7. Mapa final
 
 ```text
-SOPROS E VALVOPATIAS PARA O BÁSICO
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+SOPROS
+├── sistólico
+│   ├── ejeção: estenose/fluxo aumentado
+│   └── holossistólico: regurgitação
+├── diastólico
+│   └── patológico até prova contrária
+├── descrição
+│   ├── foco
+│   ├── intensidade
+│   ├── irradiação
+│   └── sintomas
+└── red flags
+    ├── síncope
+    ├── angina
+    ├── dispneia
+    ├── febre
+    └── sopro novo
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- focos de ausculta;
+- descrição correta;
+- sintomas associados;
+- indicação de ecocardiograma quando suspeita estrutural.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você identificou sistólico/diastólico?
+- [ ] Localizou foco máximo?
+- [ ] Procurou irradiação?
+- [ ] Perguntou dispneia, síncope e dor?
+- [ ] Pensou em endocardite quando febre + sopro?

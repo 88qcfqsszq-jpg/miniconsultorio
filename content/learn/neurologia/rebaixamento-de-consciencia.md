@@ -2,123 +2,122 @@
 
 ## Objetivo da trilha
 
-Ensinar coma, delirium, hipoglicemia, intoxicação e causas estruturais com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a abordar sonolência, confusão, delirium, estupor e coma sem perder causas reversíveis.
 
-A trilha deve sempre conectar três camadas:
+Rebaixamento de consciência não é diagnóstico. É uma síndrome de risco. Você precisa proteger vida, medir glicemia, avaliar respiração, procurar foco infeccioso, intoxicação, trauma, AVC e distúrbio metabólico.
 
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+> **PONTO-CHAVE:** paciente rebaixado não espera anamnese perfeita. Primeiro segurança e ABCDE; depois hipótese.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de rebaixamento de consciência.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Diferenciar confusão, delirium, sonolência, estupor e coma.
+2. Usar Glasgow como linguagem objetiva.
+3. Aplicar ABCDE no paciente neurológico.
+4. Medir glicemia capilar imediatamente.
+5. Reconhecer causas metabólicas, infecciosas, tóxicas e estruturais.
+6. Procurar pupilas, sinais focais, rigidez de nuca e trauma.
+7. Evitar atrasar tratamento de causas reversíveis.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Rebaixamento de consciência é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
+Consciência depende de duas coisas:
 
-## Conceitos obrigatórios
+- tronco encefálico/sistema reticular ativador, que mantém vigília;
+- córtex cerebral difuso, que sustenta conteúdo mental.
 
-- **Rebaixamento de consciência**: Rebaixamento de consciência é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+O paciente pode rebaixar por lesão estrutural, hipóxia, hipoglicemia, sepse, intoxicação, crise convulsiva, distúrbio metabólico ou trauma.
 
 ```text
-Rebaixamento de consciência: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+rebaixamento → ABCDE → glicemia → pupilas/focalidade → infecção/tox/metabólico/estrutural
 ```
+
+## Não erre
+
+Nunca diga “está dormindo” antes de avaliar resposta verbal, resposta motora, pupilas, glicemia, respiração e perfusão.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Metabólico/tóxico
 
-Em rebaixamento de consciência, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Afeta o cérebro de forma difusa. Exemplos: hipoglicemia, hiponatremia, hipóxia, uremia, sepse, sedativos, opioides, álcool.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+Padrão comum: alteração global, flutuação, pouca focalidade inicial.
 
-## 2. Semiologia aplicada
+## Estrutural
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Lesão focal ou aumento de pressão: AVC, hemorragia, tumor, trauma, abscesso.
 
-```text
-observação → interpretação → conduta
-```
+Padrão comum: déficit focal, anisocoria, assimetria motora, cefaleia/vômitos, piora progressiva.
 
-## 3. Risco e priorização
+## Delirium
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Estado confusional agudo, flutuante, com desatenção. Em idosos, pode ser a apresentação de sepse, ITU, pneumonia, desidratação, medicação ou dor.
 
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+> **RACIOCÍNIO:** no idoso, confusão aguda é infecção/metabólico/medicação até prova em contrário.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Avaliação inicial
 
-## Achados que precisam ser procurados
+Você deve observar:
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+- vias aéreas;
+- padrão respiratório;
+- SpO₂;
+- pressão e perfusão;
+- temperatura;
+- glicemia capilar;
+- escala de Glasgow;
+- pupilas;
+- rigidez de nuca;
+- sinais focais;
+- sinais de trauma;
+- odor, medicações, substâncias.
 
-## Sinais de alarme
+## Glasgow de forma útil
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+Não use Glasgow como número decorado. Use para comunicar gravidade:
+
+- abertura ocular;
+- resposta verbal;
+- resposta motora.
+
+> **PONTO-CHAVE:** queda de Glasgow, assimetria pupilar, déficit focal, rigidez de nuca ou hipoglicemia mudam a prioridade.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use a sequência:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
-```
-
-O raciocínio deve seguir:
-
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+1. O paciente protege via aérea?
+2. Está oxigenando e perfundindo?
+3. Qual a glicemia?
+4. Há febre/sepse?
+5. Há pupila alterada ou déficit focal?
+6. Houve convulsão, trauma ou intoxicação?
+7. O padrão é metabólico difuso ou estrutural focal?
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Não medir glicemia.
+- Não reconhecer delirium como gravidade em idoso.
+- Atribuir rebaixamento a “psicológico”.
+- Esquecer intoxicação medicamentosa.
+- Não procurar sinais focais.
+- Não reavaliar Glasgow.
 
 ---
 
@@ -127,119 +126,110 @@ O raciocínio deve seguir:
 ## Mini-caso 1 — Hipoglicemia
 
 ### Cenário
-Paciente com apresentação típica relacionada a hipoglicemia, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente diabético encontrado sonolento, sudoreico e confuso. PA 130/80, FC 105, SpO₂ 97%. Glicemia capilar 38 mg/dL.
 
 ### Mecanismo principal
-Mecanismo dominante de hipoglicemia dentro da trilha rebaixamento de consciência.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Neuroglicopenia: falta de glicose para o cérebro.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- diabetes/insulina
+- sudorese
+- confusão
+- glicemia baixa
+- causa reversível
 
 ### Pergunta central
-Qual mecanismo explica hipoglicemia?
+Qual exame é imediato?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Glicemia capilar. Hipoglicemia deve ser corrigida rapidamente conforme protocolo local.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir TC antes de medir glicose.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treinar ABCDE neurológico e causa reversível.
+
 ## Mini-caso 2 — Sepse com delirium
 
 ### Cenário
-Paciente com apresentação típica relacionada a sepse com delirium, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Idosa de 82 anos, previamente independente, agora confusa e sonolenta. Febre 38,8°C, FC 118, PA 92/58, FR 26. Família relata tosse e redução da ingesta há 2 dias.
 
 ### Mecanismo principal
-Mecanismo dominante de sepse com delirium dentro da trilha rebaixamento de consciência.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Inflamação sistêmica e hipoperfusão cerebral causando delirium e encefalopatia séptica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- idosa
+- confusão aguda
+- febre
+- hipotensão/taquicardia
+- foco infeccioso provável
 
 ### Pergunta central
-Qual mecanismo explica sepse com delirium?
+Por que isso é sepse possível e não “demência piorou”?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque a alteração foi aguda, com febre, hipotensão e sinais sistêmicos. Delirium em idoso é sinal de gravidade.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Atribuir confusão a idade sem sinais vitais.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treinar febre + delirium + instabilidade.
+
 ## Mini-caso 3 — Intoxicação sedativa
 
 ### Cenário
-Paciente com apresentação típica relacionada a intoxicação sedativa, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 35 anos encontrado sonolento, fala arrastada, pupilas pequenas, FR 8 irpm, SpO₂ 89%. Familiares relatam uso de sedativos.
 
 ### Mecanismo principal
-Mecanismo dominante de intoxicação sedativa dentro da trilha rebaixamento de consciência.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Depressão do sistema nervoso central e do drive respiratório.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- sonolência
+- bradipneia
+- hipoxemia
+- pupilas alteradas
+- exposição medicamentosa
 
 ### Pergunta central
-Qual mecanismo explica intoxicação sedativa?
+Qual risco imediato?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Hipoventilação e perda de proteção de via aérea. A prioridade é ABCDE, oxigenação/ventilação e suporte conforme protocolo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Focar só no nível de consciência e não perceber FR 8.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — AVC extenso
+Treinar rebaixamento por intoxicação e risco respiratório.
+
+## Mini-caso 4 — AVC/hemorragia com rebaixamento
 
 ### Cenário
-Paciente com apresentação típica relacionada a avc extenso, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 64 anos, início súbito de cefaleia intensa, vômitos e sonolência. PA 220/120. Pupila direita maior e hemiparesia esquerda.
 
 ### Mecanismo principal
-Mecanismo dominante de avc extenso dentro da trilha rebaixamento de consciência.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Lesão estrutural com efeito de massa/hipertensão intracraniana.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- início súbito
+- cefaleia e vômitos
+- anisocoria
+- déficit focal
+- hipertensão importante
 
 ### Pergunta central
-Qual mecanismo explica avc extenso?
+Qual padrão sugere causa estrutural?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Déficit focal, anisocoria e início súbito com cefaleia/vômitos sugerem lesão estrutural grave.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar apenas como “pressão alta”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treinar focalidade neurológica e emergência.
 
 ---
 
@@ -247,25 +237,35 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de rebaixamento de consciência?
+**Pergunta:** Qual exame simples você não pode esquecer no paciente rebaixado?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Glicemia capilar.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Hipoglicemia é reversível e pode matar ou simular AVC/coma.
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Confusão aguda em idoso é normal?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Não. É delirium até prova em contrário e pode ser sepse, hipoxemia, desidratação, medicação ou distúrbio metabólico.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Evita banalizar gravidade.
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** O que sugere causa estrutural?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Déficit focal, anisocoria, trauma, cefaleia intensa, vômitos, convulsão focal ou piora progressiva.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Orienta neuroimagem e emergência.
+
+## Questão ativa 4
+
+**Pergunta:** O que sugere causa metabólica/tóxica?
+
+**Resposta esperada:** Alteração difusa, flutuante, sem focalidade clara, com hipoglicemia, hipoxemia, sepse, sedativos ou distúrbios eletrolíticos.
+
+**Por que importa:** Muitas causas são reversíveis.
 
 ---
 
@@ -273,11 +273,23 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ```text
 REBAIXAMENTO DE CONSCIÊNCIA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+├── ABCDE
+│   ├── via aérea
+│   ├── respiração
+│   └── perfusão
+├── glicemia capilar
+├── Glasgow + pupilas
+├── padrão difuso
+│   ├── hipoglicemia
+│   ├── sepse/delirium
+│   ├── intoxicação
+│   └── distúrbio metabólico
+├── padrão focal
+│   ├── AVC
+│   ├── hemorragia
+│   ├── trauma
+│   └── massa/edema
+└── reavaliar sempre
 ```
 
 ---
@@ -286,31 +298,33 @@ REBAIXAMENTO DE CONSCIÊNCIA
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- perguntas dirigidas;
+- exame neurológico focal;
+- reconhecimento de gravidade;
+- diagnóstico sindrômico;
+- comunicação com paciente/família;
+- decisão segura de encaminhamento.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+No módulo clínico, esta trilha pode ser aprofundada com:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
+- evolução temporal do nível de consciência;
+- alteração dinâmica de sinais vitais;
 - piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- resposta a medidas iniciais;
+- comparação entre raciocínio MEDIX e evolução fisiológica.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
+- [ ] A trilha ensina mecanismo, não só lista de sinais?
+- [ ] Você consegue ligar semiologia à decisão?
 - [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
+- [ ] Há erros comuns destacados?
+- [ ] O conteúdo prepara para OSCE?
+- [ ] A linguagem é direta, médica e adequada ao iniciante?
 - [ ] Há alerta para situações em que atraso terapêutico é perigoso?

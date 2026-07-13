@@ -2,244 +2,246 @@
 
 ## Objetivo da trilha
 
-Ensinar cefaleia febril, rigidez de nuca e urgência neurológica infecciosa com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Você vai aprender a reconhecer meningite como emergência tempo-dependente.
 
-A trilha deve sempre conectar três camadas:
+A pergunta central é:
 
 ```text
-conceito de base → manifestação clínica → decisão no atendimento
+Esse paciente com febre e sintomas neurológicos pode ter infecção do sistema nervoso central?
 ```
 
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
-
----
+Meningite não espera. O erro mais grave é tratar cefaleia febril com alteração mental como virose comum.
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de meningite e sinais meníngeos.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Reconhecer o padrão febre + cefaleia + rigidez de nuca.
+2. Valorizar alteração do estado mental.
+3. Identificar sinais de meningococcemia e gravidade.
+4. Diferenciar meningite de cefaleia comum.
+5. Saber quando antibiótico não deve esperar.
+6. Entender quando neuroimagem pode ser necessária antes da punção, sem atrasar tratamento em casos graves.
+7. Comunicar risco e necessidade de urgência.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Meningite e sinais meníngeos é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
+Meningite é inflamação das meninges, geralmente infecciosa. Pode ser viral, bacteriana, fúngica ou por outras causas, mas a meningite bacteriana é a que você não pode perder.
 
-## Conceitos obrigatórios
+**PONTO-CHAVE:**  
+Febre + cefaleia intensa + rigidez de nuca é alerta. Se vier com confusão, convulsão, púrpura, hipotensão ou rebaixamento, é emergência.
 
-- **Meningite e sinais meníngeos**: Meningite e sinais meníngeos é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
-
-```text
-Meningite e sinais meníngeos: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
-```
+**NÃO ERRE:**  
+Nem todo paciente com meningite tem a tríade completa. A ausência de rigidez de nuca não exclui, principalmente em extremos de idade ou imunossuprimidos.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
-
-Em meningite e sinais meníngeos, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+A infecção chega ao SNC por via hematogênica, contiguidade ou trauma/procedimento.
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+patógeno
+→ inflamação meníngea
+→ irritação das meninges
+→ cefaleia, rigidez, fotofobia
+→ aumento de permeabilidade
+→ edema, pressão intracraniana
+→ alteração de consciência/convulsão
 ```
 
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Na meningococcemia, o problema pode ser sistêmico:
 
 ```text
-observação → interpretação → conduta
+bactéria na corrente sanguínea
+→ endotoxina
+→ sepse
+→ púrpura
+→ choque
+→ coagulação/disfunção orgânica
 ```
 
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+**RACIOCÍNIO:**  
+Quando a infecção do SNC aparece com instabilidade sistêmica, você trata como urgência máxima.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas dirigidas
 
-## Achados que precisam ser procurados
+- Cefaleia é nova, intensa ou diferente?
+- Há febre?
+- Há rigidez de nuca?
+- Há fotofobia?
+- Houve vômitos?
+- Há confusão, sonolência ou irritabilidade?
+- Houve convulsão?
+- Há rash, petéquias ou púrpura?
+- Há imunossupressão?
+- Há sinusite/otite recente?
+- Há trauma, cirurgia ou derivação ventricular?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame físico
 
-## Sinais de alarme
+- estado mental;
+- sinais vitais;
+- rigidez de nuca;
+- fotofobia;
+- sinais focais;
+- papiledema se avaliável;
+- pele: petéquias/púrpura;
+- perfusão;
+- glicemia capilar se rebaixado.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**PONTO DE DESTAQUE:**  
+Rash petequial/purpúrico em paciente febril é sinal de alarme. Não espere o quadro “ficar clássico”.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use esta lógica:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+febre + cefaleia intensa
+→ procure rigidez/fotofobia/vômitos
+→ avalie consciência
+→ procure sinais de sepse/púrpura
+→ decida urgência
 ```
 
-O raciocínio deve seguir:
+## Situações que aumentam gravidade
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- rebaixamento de consciência;
+- convulsão;
+- déficit focal;
+- imunossupressão;
+- papiledema;
+- sinais de choque;
+- petéquias/púrpura;
+- idade extrema;
+- suspeita de hipertensão intracraniana.
+
+**NÃO ERRE:**  
+Se o paciente está instável, antibiótico e suporte não devem esperar a punção.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Tratar como enxaqueca sem medir temperatura.
+- Ignorar confusão.
+- Aguardar exames em paciente séptico.
+- Não examinar pele.
+- Não considerar meningite em idoso com delirium febril.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Meningite bacteriana
+## Mini-caso 1 — Meningite bacteriana clássica
 
 ### Cenário
-Paciente com apresentação típica relacionada a meningite bacteriana, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Jovem de 20 anos com febre alta, cefaleia intensa, vômitos, fotofobia e rigidez de nuca. FC 120, PA 110/70, irritado e sonolento.
 
-### Mecanismo principal
-Mecanismo dominante de meningite bacteriana dentro da trilha meningite e sinais meníngeos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- febre;
+- cefaleia intensa;
+- rigidez de nuca;
+- fotofobia;
+- vômitos;
+- alteração mental.
 
 ### Pergunta central
-Qual mecanismo explica meningite bacteriana?
+Por que este caso é emergência?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque o padrão sugere meningite bacteriana, que pode evoluir rapidamente com edema, convulsão, sepse e morte.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Dar analgésico e mandar observar em casa.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Meningite viral
+Treine reconhecimento, isolamento conforme protocolo, antibiótico precoce e investigação.
+
+---
+
+## Mini-caso 2 — Meningococcemia
 
 ### Cenário
-Paciente com apresentação típica relacionada a meningite viral, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Adolescente com febre, mal-estar intenso, dor em pernas, vômitos, manchas arroxeadas na pele, FC 140, PA 86/48, extremidades frias.
 
-### Mecanismo principal
-Mecanismo dominante de meningite viral dentro da trilha meningite e sinais meníngeos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- febre;
+- púrpura/petéquias;
+- hipotensão;
+- extremidades frias;
+- choque provável.
 
 ### Pergunta central
-Qual mecanismo explica meningite viral?
+Por que o rash muda a prioridade?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Rash petequial/purpúrico com febre sugere doença meningocócica invasiva e sepse. O risco é imediato.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar manchas como alergia e atrasar antibiótico/suporte.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Sepse meningocócica
+Treine choque infeccioso com suspeita meningocócica.
+
+---
+
+## Mini-caso 3 — Idoso com meningite sem quadro clássico
 
 ### Cenário
-Paciente com apresentação típica relacionada a sepse meningocócica, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 78 anos com febre baixa, confusão e sonolência. Sem queixa clara de cefaleia. PA 100/64, FC 112. Rigidez de nuca discreta. Família relata piora rápida em 24h.
 
-### Mecanismo principal
-Mecanismo dominante de sepse meningocócica dentro da trilha meningite e sinais meníngeos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- idoso;
+- delirium;
+- febre baixa;
+- rigidez discreta;
+- piora rápida.
 
 ### Pergunta central
-Qual mecanismo explica sepse meningocócica?
+Por que a ausência de cefaleia intensa não exclui meningite?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Idosos podem ter apresentação atípica. Delirium febril com piora rápida exige considerar infecção do SNC e sepse.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Atribuir tudo a demência ou desidratação.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Cefaleia febril sem meningismo
+Treine idoso febril confuso: não perder meningite, sepse e causas metabólicas.
+
+---
+
+## Mini-caso 4 — Cefaleia febril com déficit focal
 
 ### Cenário
-Paciente com apresentação típica relacionada a cefaleia febril sem meningismo, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com febre, cefaleia, sonolência e fraqueza em braço direito. Teve convulsão na sala de espera. PA 130/80, FC 116.
 
-### Mecanismo principal
-Mecanismo dominante de cefaleia febril sem meningismo dentro da trilha meningite e sinais meníngeos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- febre;
+- cefaleia;
+- déficit focal;
+- convulsão;
+- sonolência.
 
 ### Pergunta central
-Qual mecanismo explica cefaleia febril sem meningismo?
+O que muda quando há déficit focal/convulsão?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Aumenta preocupação com lesão intracraniana, abscesso, encefalite ou hipertensão intracraniana. A avaliação deve ser urgente e guiada por protocolo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Fazer punção sem avaliar contraindicações/contexto de risco.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine neuroinfecção: ABCDE, glicemia, exame neurológico, imagem quando indicada e tratamento precoce.
 
 ---
 
@@ -247,37 +249,68 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de meningite e sinais meníngeos?
+**Pergunta:** A tríade febre + cefaleia + rigidez de nuca precisa estar completa?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Não. Ausência de um item não exclui meningite, principalmente em idosos, crianças pequenas e imunossuprimidos.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Evita falso negativo.
+
+---
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Qual achado cutâneo preocupa em meningococcemia?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Petéquias ou púrpura em paciente febril, especialmente com instabilidade.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Pode indicar sepse meningocócica.
+
+---
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Quando antibiótico não deve esperar punção?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Quando há instabilidade, forte suspeita bacteriana, sepse, choque ou atraso previsto para punção/imagem.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Meningite bacteriana é tempo-dependente.
+
+---
+
+## Questão ativa 4
+
+**Pergunta:** Por que avaliar glicemia no paciente rebaixado?
+
+**Resposta esperada:** Hipoglicemia pode simular alteração neurológica grave e é reversível rapidamente.
+
+**Por que importa:** ABCD neurológico começa com causas tratáveis.
 
 ---
 
 # 7. Mapa final
 
 ```text
-MENINGITE E SINAIS MENÍNGEOS
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+FEBRE + SINTOMA NEUROLÓGICO
+├── cefaleia intensa + rigidez/fotofobia
+│   └── meningite provável
+│
+├── confusão/sonolência
+│   ├── meningite
+│   ├── encefalite
+│   ├── sepse
+│   └── causa metabólica
+│
+├── petéquias/púrpura
+│   └── meningococcemia até prova em contrário
+│
+├── déficit focal/convulsão
+│   ├── encefalite
+│   ├── abscesso
+│   ├── AVC + febre
+│   └── contraindicação relativa à punção imediata
+│
+└── instabilidade
+    └── suporte + antibiótico precoce conforme protocolo
 ```
 
 ---
@@ -286,31 +319,38 @@ MENINGITE E SINAIS MENÍNGEOS
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- cefaleia febril;
+- meningite clássica;
+- idoso confuso;
+- meningococcemia.
+
+Você deve demonstrar:
+
+- reconhecimento de gravidade;
+- exame neurológico inicial;
+- pele e perfusão;
+- comunicação de urgência.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+Treine:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- piora de consciência;
+- choque séptico;
+- convulsão;
+- decisão entre imagem, punção e antibiótico sem atraso inseguro.
 
 ---
 
-# 9. Checklist de curadoria
+# Referências-base para curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- Ministério da Saúde. Dengue: diagnóstico e manejo clínico — adulto e criança.
+- Surviving Sepsis Campaign. International Guidelines for Management of Sepsis and Septic Shock 2021.
+- CDC. Bacterial meningitis / meningococcal disease: sinais, sintomas e urgência clínica.
+- WHO. Tuberculosis fact sheet e materiais de diagnóstico/tratamento.
+- WHO AWaRe Antibiotic Book: princípios de uso racional de antimicrobianos.
+- IDSA/NICE: princípios de ITU, pielonefrite e antimicrobianos, com adaptação à realidade local e protocolos institucionais.
+
+> Este material é educacional. Condutas, doses, fluxos e critérios de internação devem ser ajustados ao protocolo local, faixa etária, gestação, comorbidades, alergias, resistência bacteriana e gravidade clínica.

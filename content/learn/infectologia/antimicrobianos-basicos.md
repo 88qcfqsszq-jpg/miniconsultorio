@@ -2,244 +2,239 @@
 
 ## Objetivo da trilha
 
-Ensinar raciocínio inicial de antibiótico por foco, gravidade, espectro e reavaliação com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Você vai aprender a pensar em antibiótico como decisão clínica, não como lista decorada.
 
-A trilha deve sempre conectar três camadas:
+Antibiótico bom é aquele que responde a três perguntas:
 
 ```text
-conceito de base → manifestação clínica → decisão no atendimento
+Qual foco?
+Qual gravidade?
+Qual microrganismo provável?
 ```
 
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+E também a uma quarta:
 
----
+```text
+Esse antibiótico chega onde a infecção está?
+```
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de antimicrobianos básicos.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
-
----
-
-# 1. Microaula — Ideia central
-
-Antimicrobianos básicos é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Antimicrobianos básicos**: Antimicrobianos básicos é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
-
-```text
-Antimicrobianos básicos: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
-```
+1. Diferenciar colonização, infecção e inflamação não infecciosa.
+2. Escolher antimicrobiano por foco provável.
+3. Entender espectro: Gram positivo, Gram negativo, anaeróbio e atípicos.
+4. Saber quando coletar cultura.
+5. Reconhecer quando tratamento empírico é urgente.
+6. Evitar antibiótico desnecessário.
+7. Entender descalonamento e duração como parte do tratamento.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 1. Microaula — Antibiótico não trata febre, trata infecção bacteriana provável
 
-## 1. Mecanismo principal
+Febre pode ser viral, inflamatória, tromboembólica, autoimune ou medicamentosa. Antibiótico não é antitérmico.
 
-Em antimicrobianos básicos, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+**PONTO-CHAVE:**  
+Antes de prescrever, defina foco, gravidade e hipótese bacteriana.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
-
-```text
-observação → interpretação → conduta
-```
-
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+**NÃO ERRE:**  
+“Cobrir tudo” parece seguro, mas pode aumentar resistência, toxicidade, efeitos adversos e confundir a evolução.
 
 ---
 
-# 3. Semiologia essencial
+# 2. Fisiologia / farmacologia aplicada
 
-O aluno deve aprender a observar antes de decorar conduta.
+Você deve pensar em quatro camadas:
 
-## Achados que precisam ser procurados
+```text
+1. espectro
+2. penetração no sítio
+3. gravidade
+4. resistência local
+```
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Espectro
 
-## Sinais de alarme
+- Gram positivos: pele, algumas pneumonias, endocardite, dispositivos.
+- Gram negativos: urina, abdome, trato biliar, hospitalar.
+- Anaeróbios: abdome, aspiração, abscesso, necrose.
+- Atípicos: pneumonia atípica, zoonoses, algumas ISTs.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+## Penetração
+
+- Nitrofurantoína concentra na urina, não serve para pielonefrite.
+- Alguns antibióticos penetram melhor no SNC; isso importa em meningite.
+- Abscesso pode exigir drenagem, não apenas antibiótico.
+- Biofilme em dispositivo pode exigir remoção.
+
+**RACIOCÍNIO:**  
+A bactéria pode até ser sensível no papel; se o antibiótico não chega bem ao local, a resposta falha.
+
+---
+
+# 3. Semiologia essencial antes do antibiótico
+
+Pergunte:
+
+- Qual é o foco provável?
+- Há sepse?
+- É comunitário ou hospitalar?
+- Houve antibiótico recente?
+- Há alergia real?
+- Há gestação?
+- Há disfunção renal/hepática?
+- Há imunossupressão?
+- Há prótese, cateter ou dispositivo?
+- Precisa cultura antes?
+- Precisa drenagem/controle de foco?
+
+**PONTO DE DESTAQUE:**  
+Em paciente instável, cultura deve ser coletada quando possível, mas não pode atrasar antibiótico e suporte.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use a sequência:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+foco → gravidade → germe provável → antibiótico provável → reavaliação
 ```
 
-O raciocínio deve seguir:
+## Conduta empírica
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+É tratamento antes da confirmação microbiológica. É correta quando a probabilidade e a gravidade justificam.
+
+Exemplos:
+
+- sepse;
+- meningite bacteriana;
+- pneumonia grave;
+- pielonefrite com febre;
+- celulite extensa com sinais sistêmicos.
+
+## Descalonamento
+
+Quando cultura e evolução permitem, você reduz espectro.
+
+**PONTO-CHAVE:**  
+Começar amplo pode ser necessário em gravidade. Manter amplo sem motivo é erro.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Prescrever antibiótico para virose.
+- Não ajustar à função renal.
+- Não considerar alergia verdadeira.
+- Usar antibiótico que não penetra no sítio.
+- Esquecer controle de foco.
+- Não reavaliar em 48–72h.
+- Não suspender/descalonar quando possível.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Pneumonia
+## Mini-caso 1 — Virose com antibiótico desnecessário
 
 ### Cenário
-Paciente com apresentação típica relacionada a pneumonia, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 22 anos com coriza, dor de garganta leve, tosse seca, febre baixa há 24h. Bom estado geral, ausculta normal, SpO₂ 98%, sem exsudato, sem sinais de gravidade.
 
-### Mecanismo principal
-Mecanismo dominante de pneumonia dentro da trilha antimicrobianos básicos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- sintomas de vias aéreas superiores;
+- bom estado geral;
+- sem foco bacteriano claro;
+- sem gravidade.
 
 ### Pergunta central
-Qual mecanismo explica pneumonia?
+Por que antibiótico não é a melhor decisão?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque o quadro é compatível com infecção viral e não há sinais de bactéria ou gravidade que justifiquem antibiótico.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Prescrever “para evitar piora”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — ITU
+Treine comunicação: explicar por que não usar antibiótico também é conduta.
+
+---
+
+## Mini-caso 2 — Pneumonia grave
 
 ### Cenário
-Paciente com apresentação típica relacionada a itu, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 70 anos com febre, tosse purulenta, dispneia, FR 32, SpO₂ 88%, crepitações, confusão leve. PA 100/60.
 
-### Mecanismo principal
-Mecanismo dominante de itu dentro da trilha antimicrobianos básicos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- foco pulmonar;
+- hipoxemia;
+- taquipneia;
+- alteração mental;
+- idade.
 
 ### Pergunta central
-Qual mecanismo explica itu?
+Por que aqui o antibiótico não deve esperar confirmação extensa?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Há pneumonia grave provável com disfunção/risco de sepse. O tratamento empírico deve ser iniciado conforme protocolo após coleta útil se possível, sem atraso inseguro.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Aguardar tomografia para iniciar tratamento.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Celulite
+Treine pneumonia: gravidade, suporte, antibiótico e reavaliação.
+
+---
+
+## Mini-caso 3 — Pielonefrite tratada como cistite
 
 ### Cenário
-Paciente com apresentação típica relacionada a celulite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher de 35 anos com febre, calafrios, dor lombar e disúria. Recebeu nitrofurantoína e piorou após 48h.
 
-### Mecanismo principal
-Mecanismo dominante de celulite dentro da trilha antimicrobianos básicos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- febre;
+- dor lombar;
+- calafrios;
+- infecção alta;
+- antibiótico inadequado ao sítio.
 
 ### Pergunta central
-Qual mecanismo explica celulite?
+Qual foi o erro de raciocínio?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Confundiu pielonefrite com cistite baixa e escolheu antibiótico que não trata adequadamente parênquima renal.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Escolher antibiótico pela “infecção urinária” sem localizar o nível da infecção.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Sepse sem foco claro
+Treine ITU: local da infecção muda antibiótico.
+
+---
+
+## Mini-caso 4 — Abscesso que não melhora
 
 ### Cenário
-Paciente com apresentação típica relacionada a sepse sem foco claro, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com lesão dolorosa, flutuante, eritematosa em coxa. Febre baixa. Recebeu antibiótico oral e não melhorou. Exame mostra coleção purulenta.
 
-### Mecanismo principal
-Mecanismo dominante de sepse sem foco claro dentro da trilha antimicrobianos básicos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- abscesso;
+- flutuação;
+- pus;
+- falha com antibiótico isolado.
 
 ### Pergunta central
-Qual mecanismo explica sepse sem foco claro?
+Por que antibiótico pode falhar sozinho?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque há coleção. Em abscesso, controle de foco com drenagem pode ser decisivo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Trocar antibiótico repetidamente sem avaliar drenagem.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine pele/partes moles: celulite vs abscesso.
 
 ---
 
@@ -247,37 +242,56 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de antimicrobianos básicos?
+**Pergunta:** Antibiótico é indicado para toda febre?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Não. Febre é síndrome; antibiótico depende de suspeita bacteriana, foco, gravidade e risco.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Evita uso irracional.
+
+---
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que é controle de foco?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Medida para remover ou controlar a fonte infecciosa: drenar abscesso, desobstruir via urinária, retirar cateter infectado, tratar coleção abdominal.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Antibiótico sem controle de foco pode falhar.
+
+---
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Quando culturas importam mais?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Em sepse, infecção grave, hospitalar, recorrente, falha terapêutica, imunossupressão e antes de antibiótico quando isso não atrasa tratamento.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Permite ajustar e descalonar.
+
+---
+
+## Questão ativa 4
+
+**Pergunta:** O que é descalonamento?
+
+**Resposta esperada:** Reduzir espectro, trocar ou suspender antibiótico conforme cultura, evolução e diagnóstico.
+
+**Por que importa:** É parte do tratamento seguro.
 
 ---
 
 # 7. Mapa final
 
 ```text
-ANTIMICROBIANOS BÁSICOS
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+ANTES DO ANTIBIÓTICO
+├── há infecção bacteriana provável?
+├── qual foco?
+├── qual gravidade?
+├── qual germe provável?
+├── o antibiótico chega ao sítio?
+├── preciso cultura?
+├── preciso controle de foco?
+└── como vou reavaliar?
 ```
 
 ---
@@ -286,31 +300,40 @@ ANTIMICROBIANOS BÁSICOS
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- virose sem antibiótico;
+- pneumonia;
+- pielonefrite;
+- abscesso;
+- sepse.
+
+Você deve demonstrar:
+
+- raciocínio por foco;
+- comunicação de não prescrição;
+- escolha de exames úteis;
+- reavaliação.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+Treine:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- falha terapêutica;
+- cultura retornando;
+- descalonamento;
+- abscesso com necessidade de drenagem;
+- sepse com antibiótico precoce.
 
 ---
 
-# 9. Checklist de curadoria
+# Referências-base para curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- Ministério da Saúde. Dengue: diagnóstico e manejo clínico — adulto e criança.
+- Surviving Sepsis Campaign. International Guidelines for Management of Sepsis and Septic Shock 2021.
+- CDC. Bacterial meningitis / meningococcal disease: sinais, sintomas e urgência clínica.
+- WHO. Tuberculosis fact sheet e materiais de diagnóstico/tratamento.
+- WHO AWaRe Antibiotic Book: princípios de uso racional de antimicrobianos.
+- IDSA/NICE: princípios de ITU, pielonefrite e antimicrobianos, com adaptação à realidade local e protocolos institucionais.
+
+> Este material é educacional. Condutas, doses, fluxos e critérios de internação devem ser ajustados ao protocolo local, faixa etária, gestação, comorbidades, alergias, resistência bacteriana e gravidade clínica.

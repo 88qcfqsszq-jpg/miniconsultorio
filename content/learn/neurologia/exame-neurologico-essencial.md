@@ -2,244 +2,225 @@
 
 ## Objetivo da trilha
 
-Ensinar força, sensibilidade, pares cranianos, coordenação e marcha com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a fazer um exame neurológico útil, rápido e direcionado para o nível inicial.
 
-A trilha deve sempre conectar três camadas:
+O objetivo não é decorar manobras. É localizar o problema e reconhecer gravidade.
 
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+> **PONTO-CHAVE:** exame neurológico bom responde: há déficit focal? onde localiza? é urgente?
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de exame neurológico essencial.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Avaliar estado mental e linguagem.
+2. Examinar pares cranianos principais.
+3. Testar força, tônus e reflexos de forma básica.
+4. Avaliar sensibilidade de modo orientado.
+5. Avaliar coordenação e marcha.
+6. Reconhecer sinais piramidais, cerebelares e meníngeos.
+7. Comunicar achados com precisão.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Exame neurológico essencial é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Exame neurológico essencial**: Exame neurológico essencial é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Neurologia assusta quando vira lista. Facilita quando vira localização.
 
 ```text
-Exame neurológico essencial: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+consciência → linguagem → pares cranianos → força → sensibilidade → coordenação → marcha
 ```
+
+Você não precisa fazer tudo em todos os pacientes. Você precisa fazer o essencial para a queixa e para gravidade.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Neuroanatomia aplicada
 
-## 1. Mecanismo principal
+## Córtex/lobo frontal
 
-Em exame neurológico essencial, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Força, comportamento, função executiva e linguagem expressiva.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
+## Lobo parietal
 
-## 2. Semiologia aplicada
+Sensibilidade e integração espacial.
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+## Tronco encefálico
 
-```text
-observação → interpretação → conduta
-```
+Pares cranianos, consciência, respiração, vias longas.
 
-## 3. Risco e priorização
+## Cerebelo
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Coordenação, equilíbrio, marcha, precisão do movimento.
 
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+## Medula/raízes
+
+Força segmentar, sensibilidade em dermátomos, reflexos, esfíncteres.
+
+> **RACIOCÍNIO:** face + braço + fala sugere cérebro; pares cranianos cruzados ou diplopia sugerem tronco; ataxia sugere cerebelo.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Estado mental
 
-## Achados que precisam ser procurados
+- alerta, sonolento, confuso, agitado;
+- orientação;
+- atenção;
+- comando simples;
+- fala: fluência, compreensão, nomeação.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Pares cranianos úteis
 
-## Sinais de alarme
+- pupilas;
+- movimentos oculares;
+- face;
+- fala/deglutição;
+- língua;
+- campo visual grosseiro.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+## Motor
+
+- força proximal/distal;
+- queda de braço;
+- força em pernas;
+- assimetria;
+- reflexos;
+- sinal de Babinski quando indicado.
+
+## Coordenação e marcha
+
+- dedo-nariz;
+- calcanhar-joelho;
+- marcha;
+- Romberg quando seguro.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
-
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
-```
-
-O raciocínio deve seguir:
-
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+déficit focal? → localização → tempo de instalação → gravidade
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Dizer “sem déficit” sem testar força.
+- Não avaliar fala.
+- Não examinar marcha em tontura.
+- Não comparar lados.
+- Confundir fraqueza por dor com déficit motor verdadeiro.
+- Não documentar nível de consciência.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Déficit motor focal
+## Mini-caso 1 — Afasia
 
 ### Cenário
-Paciente com apresentação típica relacionada a déficit motor focal, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente fala palavras sem sentido, não compreende comandos simples e tem força preservada.
 
 ### Mecanismo principal
-Mecanismo dominante de déficit motor focal dentro da trilha exame neurológico essencial.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Comprometimento de área de linguagem no hemisfério dominante.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- fala alterada
+- compreensão prejudicada
+- força preservada
+- déficit cortical
 
 ### Pergunta central
-Qual mecanismo explica déficit motor focal?
+Por que isso é focal mesmo sem fraqueza?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque linguagem é função cortical. Afasia é déficit neurológico focal.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Chamar de confusão sem testar compreensão.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Paralisia facial
+Treinar linguagem no exame neurológico.
+
+## Mini-caso 2 — Hemiparesia
 
 ### Cenário
-Paciente com apresentação típica relacionada a paralisia facial, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com fraqueza súbita em face e braço direitos, fala arrastada e desvio da rima.
 
 ### Mecanismo principal
-Mecanismo dominante de paralisia facial dentro da trilha exame neurológico essencial.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Lesão de via motora central, provavelmente vascular aguda.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- assimetria facial
+- fraqueza de braço
+- início súbito
+- fala alterada
 
 ### Pergunta central
-Qual mecanismo explica paralisia facial?
+O que você deve documentar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Lado, força, fala, horário de início e glicemia.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Descrever apenas “membro fraco” sem lateralidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Ataxia
+Treinar exame motor e AVC.
+
+## Mini-caso 3 — Síndrome cerebelar
 
 ### Cenário
-Paciente com apresentação típica relacionada a ataxia, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com fala escandida, dismetria, marcha de base alargada e queda para um lado.
 
 ### Mecanismo principal
-Mecanismo dominante de ataxia dentro da trilha exame neurológico essencial.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Disfunção cerebelar ou vias cerebelares.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- ataxia
+- dismetria
+- marcha instável
+- fala escandida
 
 ### Pergunta central
-Qual mecanismo explica ataxia?
+Por que isso preocupa em vertigem?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque ataxia em vertigem sugere causa central, como AVC posterior.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Não testar marcha.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Neuropatia periférica
+Treinar coordenação e marcha.
+
+## Mini-caso 4 — Sinais meníngeos
 
 ### Cenário
-Paciente com apresentação típica relacionada a neuropatia periférica, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com febre, cefaleia intensa, fotofobia e rigidez de nuca.
 
 ### Mecanismo principal
-Mecanismo dominante de neuropatia periférica dentro da trilha exame neurológico essencial.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Irritação meníngea por infecção ou sangue.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- febre
+- rigidez de nuca
+- fotofobia
+- cefaleia
 
 ### Pergunta central
-Qual mecanismo explica neuropatia periférica?
+Qual é o valor do exame?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Sugere irritação meníngea, mas ausência de rigidez não exclui meningite se o quadro for grave.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar sinal meníngeo clássico para agir.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treinar meningite e cefaleia febril.
 
 ---
 
@@ -247,25 +228,35 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de exame neurológico essencial?
+**Pergunta:** Qual é a pergunta central do exame neurológico inicial?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Existe déficit focal ou alteração de consciência que muda a urgência?
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Direciona a conduta.
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Por que você deve comparar lados?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Porque assimetria é um dos sinais mais úteis de lesão focal.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Evita perder hemiparesia sutil.
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Afasia é confusão?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Não necessariamente. Afasia é alteração de linguagem por lesão cortical.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Afasia pode ser AVC.
+
+## Questão ativa 4
+
+**Pergunta:** Por que marcha importa?
+
+**Resposta esperada:** Ataxia, queda e base alargada podem revelar cerebelo/tronco mesmo com força normal.
+
+**Por que importa:** Especialmente em vertigem, muda conduta.
 
 ---
 
@@ -273,11 +264,19 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ```text
 EXAME NEUROLÓGICO ESSENCIAL
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+├── consciência
+├── linguagem
+├── pupilas/olhos/face
+├── força
+├── sensibilidade
+├── coordenação
+├── marcha
+└── localização
+    ├── cortical
+    ├── tronco
+    ├── cerebelo
+    ├── medula
+    └── periférico
 ```
 
 ---
@@ -286,31 +285,33 @@ EXAME NEUROLÓGICO ESSENCIAL
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- perguntas dirigidas;
+- exame neurológico focal;
+- reconhecimento de gravidade;
+- diagnóstico sindrômico;
+- comunicação com paciente/família;
+- decisão segura de encaminhamento.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+No módulo clínico, esta trilha pode ser aprofundada com:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
+- evolução temporal do nível de consciência;
+- alteração dinâmica de sinais vitais;
 - piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- resposta a medidas iniciais;
+- comparação entre raciocínio MEDIX e evolução fisiológica.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
+- [ ] A trilha ensina mecanismo, não só lista de sinais?
+- [ ] Você consegue ligar semiologia à decisão?
 - [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
+- [ ] Há erros comuns destacados?
+- [ ] O conteúdo prepara para OSCE?
+- [ ] A linguagem é direta, médica e adequada ao iniciante?
 - [ ] Há alerta para situações em que atraso terapêutico é perigoso?

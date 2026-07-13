@@ -1,245 +1,279 @@
 # Trilha Gastro/Abdome — Dor abdominal
 
+
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
+
 ## Objetivo da trilha
 
-Ensinar localização, tempo, peritonismo e hipóteses por quadrante com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a abordar dor abdominal como síndrome clínica, não como lista de diagnósticos. Você deve sair desta trilha sabendo localizar a dor, reconhecer gravidade, montar hipóteses por mecanismo e decidir quando observar, investigar, analgesiar, chamar cirurgia ou encaminhar.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** dor abdominal é perigosa quando vem com instabilidade, irritação peritoneal, sangramento, obstrução, sepse, isquemia ou gravidez possível.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de dor abdominal.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Localizar a dor e relacionar com órgãos prováveis.
+2. Diferenciar dor visceral, parietal e referida.
+3. Reconhecer sinais de abdome agudo.
+4. Priorizar diagnósticos que matam antes dos diagnósticos comuns.
+5. Solicitar exames que mudam conduta.
+6. Explicar por que analgesia não “apaga” o diagnóstico.
+7. Apresentar um caso abdominal de forma objetiva no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Dor abdominal é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Dor abdominal**: Dor abdominal é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Dor abdominal não começa com “qual exame pedir”. Começa com três perguntas:
 
 ```text
-Dor abdominal: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+Está instável?
+Tem peritonite?
+Existe diagnóstico tempo-dependente?
 ```
+
+Se sim, o caso deixa de ser apenas “dor” e vira **risco abdominal agudo**.
+
+**PONTO-CHAVE:**  
+A localização ajuda, mas não manda sozinha. A mesma dor em fossa ilíaca direita pode ser apendicite, doença ginecológica, cálculo ureteral, gastroenterite inicial ou adenite mesentérica.
+
+**NÃO ERRE:**  
+Dor abdominal com PA baixa, taquicardia, febre alta, confusão, síncope, rigidez abdominal ou sangramento não deve esperar “melhorar para ver”.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Dor visceral
 
-Em dor abdominal, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Vem da distensão, inflamação ou isquemia de vísceras. Costuma ser mal localizada, em cólica ou pressão.
 
 ```text
-observação → interpretação → conduta
+distensão/inflamação visceral → dor difusa → náuseas/sudorese → localização inicial pobre
 ```
 
-## 3. Risco e priorização
+Exemplos: obstrução intestinal, gastroenterite, cólica biliar inicial.
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+## Dor parietal
+
+Surge quando o peritônio parietal é irritado. É mais localizada, piora com movimento, tosse e palpação.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+inflamação toca peritônio → dor localizada → defesa/rigidez → risco cirúrgico
 ```
+
+Exemplo: apendicite evoluindo para irritação peritoneal.
+
+## Dor referida
+
+O cérebro interpreta estímulos de órgãos profundos como dor em outra área.
+
+```text
+diafragma irritado → dor em ombro
+biliar → dor em hipocôndrio direito/escápula
+ureter → dor lombar irradiada para virilha
+```
+
+**RACIOCÍNIO:**  
+Não tente decorar todos os diagnósticos. Pergunte: é inflamatório, obstrutivo, vascular, perfurativo, urinário, ginecológico ou metabólico?
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas que você não pode esquecer
 
-## Achados que precisam ser procurados
+- Quando começou?
+- Foi súbita ou progressiva?
+- Onde começou e para onde migrou?
+- É cólica, queimação, pontada, pressão ou rasgo?
+- Há vômitos, diarreia, febre, icterícia, disúria, sangramento?
+- Última evacuação e eliminação de gases?
+- Uso de AINE, anticoagulante, álcool ou antibiótico?
+- Ciclo menstrual, atraso menstrual ou possibilidade de gestação?
+- Cirurgias abdominais prévias?
+- Dor piora ao andar, tossir ou mexer?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame físico que muda conduta
 
-## Sinais de alarme
+- Estado geral, perfusão, nível de consciência.
+- PA, FC, FR, temperatura, SpO₂.
+- Inspeção: distensão, cicatrizes, hérnias.
+- Ausculta: ruídos reduzidos, aumentados ou metálicos.
+- Palpação: dor localizada, defesa, rigidez, massa.
+- Percussão: timpanismo, dor à percussão.
+- Sinais de irritação peritoneal.
+- Punho-percussão lombar.
+- Toque retal/ginecológico quando indicado e supervisionado.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**PONTO-CHAVE:**  
+Exame abdominal normal não exclui doença grave no início. Reavaliação é parte do diagnóstico.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use uma sequência fixa:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+1. Estabilidade hemodinâmica.
+2. Sinais de peritonite.
+3. Síndrome principal.
+4. Diagnósticos tempo-dependentes.
+5. Exame que muda conduta.
+6. Reavaliação.
 ```
 
-O raciocínio deve seguir:
+## Síndromes úteis
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- **Epigástrica:** gastrite, úlcera, pancreatite, IAM inferior.
+- **Hipocôndrio direito:** colecistite, colangite, hepatite.
+- **Fossa ilíaca direita:** apendicite, ileíte, cálculo, causa ginecológica.
+- **Fossa ilíaca esquerda:** diverticulite, colite, cálculo.
+- **Dor difusa + distensão:** obstrução, íleo, peritonite.
+- **Dor súbita intensa:** perfuração, isquemia, aneurisma, torção.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Dar alta sem sinais vitais.
+- Não perguntar possibilidade de gravidez.
+- Pedir tomografia antes de estabilizar paciente instável.
+- Ignorar dor desproporcional ao exame.
+- Tratar “virose” sem reavaliar dor progressiva.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Apendicite
+## Mini-caso 1 — Dor migratória e apendicite provável
 
 ### Cenário
-Paciente com apresentação típica relacionada a apendicite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Você atende paciente de 19 anos com dor que começou periumbilical há 14 horas e migrou para fossa ilíaca direita. Náuseas, anorexia, febre baixa. FC 104, T 37,9 °C. Dor localizada, piora ao andar, defesa leve em FID.
 
 ### Mecanismo principal
-Mecanismo dominante de apendicite dentro da trilha dor abdominal.
+Obstrução/inflamação apendicular com progressão de dor visceral para dor parietal.
 
 ```text
-queixa → achados → mecanismo → decisão
+dor periumbilical → migração para FID → peritônio irritado → hipótese cirúrgica
 ```
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor migratória.
+- Anorexia e náuseas.
+- Febre baixa e taquicardia.
+- Defesa localizada.
 
 ### Pergunta central
-Qual mecanismo explica apendicite?
+Por que a migração da dor importa?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque sugere passagem de dor visceral inicial para irritação peritoneal localizada, padrão clássico de apendicite em evolução.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Excluir apendicite porque a febre é baixa ou porque o hemograma ainda não é exuberante.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Colecistite
+Treine anamnese dirigida, exame abdominal cuidadoso, analgesia segura, hipótese e encaminhamento.
+
+---
+
+## Mini-caso 2 — Dor epigástrica que pode ser pancreatite
 
 ### Cenário
-Paciente com apresentação típica relacionada a colecistite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 42 anos, dor epigástrica intensa irradiando para dorso, náuseas e vômitos. Refere ingesta alcoólica recente. FC 118, dor persistente, abdome doloroso em epigástrio, sem rigidez difusa.
 
 ### Mecanismo principal
-Mecanismo dominante de colecistite dentro da trilha dor abdominal.
+Inflamação pancreática com dor visceral profunda e resposta inflamatória sistêmica.
 
 ```text
-queixa → achados → mecanismo → decisão
+pâncreas inflamado → dor epigástrica para dorso → vômitos → risco sistêmico
 ```
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor epigástrica intensa.
+- Irradiação para dorso.
+- Vômitos.
+- Taquicardia.
 
 ### Pergunta central
-Qual mecanismo explica colecistite?
+Qual exame muda a hipótese inicial?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Lipase/amílase ajudam a confirmar pancreatite no contexto clínico. Gravidade depende de estado geral, sinais vitais, hidratação, função renal, oxigenação e evolução.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como gastrite sem considerar pancreatite quando a dor é intensa, persistente e irradiada.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Pancreatite
+Treine dor abdominal alta com avaliação de gravidade e hidratação.
+
+---
+
+## Mini-caso 3 — Dor súbita e abdome rígido
 
 ### Cenário
-Paciente com apresentação típica relacionada a pancreatite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 61 anos, dor abdominal súbita e intensa, “como facada”, iniciada em epigástrio. Usa AINE frequentemente. PA 90/60, FC 124, sudorese, abdome rígido, dor à descompressão.
 
 ### Mecanismo principal
-Mecanismo dominante de pancreatite dentro da trilha dor abdominal.
+Perfuração de víscera oca com irritação peritoneal difusa e risco de choque.
 
 ```text
-queixa → achados → mecanismo → decisão
+perfuração → conteúdo no peritônio → peritonite → sepse/choque
 ```
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Início súbito.
+- Instabilidade.
+- Abdome em tábua.
+- Uso de AINE.
 
 ### Pergunta central
-Qual mecanismo explica pancreatite?
+Por que este caso não espera investigação lenta?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque há sinais de peritonite e instabilidade. A prioridade é estabilização, analgesia, antibiótico conforme protocolo, cirurgia e imagem sem atrasar manejo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir vários exames antes de reconhecer abdome agudo cirúrgico.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Dor funcional
+Treine comunicação objetiva: “abdome agudo perfurativo provável, instável, precisa avaliação cirúrgica”.
+
+---
+
+## Mini-caso 4 — Dor em hipocôndrio direito
 
 ### Cenário
-Paciente com apresentação típica relacionada a dor funcional, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente de 38 anos, dor em hipocôndrio direito após refeição gordurosa, náuseas, febre baixa. Dor à palpação em HCD e interrupção da inspiração durante palpação profunda.
 
 ### Mecanismo principal
-Mecanismo dominante de dor funcional dentro da trilha dor abdominal.
+Obstrução/inflamação da vesícula biliar com dor localizada e resposta inflamatória.
 
 ```text
-queixa → achados → mecanismo → decisão
+cálculo impactado → distensão/inflamação vesicular → dor HCD → Murphy positivo
 ```
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor HCD pós-prandial.
+- Náuseas.
+- Febre baixa.
+- Murphy clínico positivo.
 
 ### Pergunta central
-Qual mecanismo explica dor funcional?
+Qual síndrome abdominal está mais provável?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Síndrome biliar inflamatória, especialmente colecistite, se dor persistente e febre. Ultrassom costuma ser exame inicial útil.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Chamar toda dor biliar de “cólica” e ignorar febre/dor persistente.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine diferenciação entre cólica biliar, colecistite e colangite.
 
 ---
 
@@ -247,25 +281,35 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de dor abdominal?
+**Pergunta:** Dor abdominal intensa sempre precisa de tomografia?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Não. Primeiro você define estabilidade e peritonite. Paciente instável deve ser estabilizado e avaliado por equipe cirúrgica; exames não devem atrasar medidas essenciais.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Evita transformar exame em substituto de raciocínio.
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Analgesia atrapalha o diagnóstico?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Não deve ser negada por medo de “mascarar” o quadro. Dor controlada permite exame melhor e cuidado humano. O raciocínio depende de reavaliação, não de deixar o paciente sofrendo.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Segurança clínica também inclui alívio de dor.
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Qual dor abdominal preocupa mesmo com exame inicial discreto?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Dor súbita intensa, dor desproporcional ao exame, dor progressiva, dor com instabilidade, dor em idoso, imunossuprimido, gestante ou paciente anticoagulado.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Doenças graves podem começar com poucos achados.
+
+## Questão ativa 4
+
+**Pergunta:** Quando pensar em abdome vascular?
+
+**Resposta esperada:** Dor súbita, intensa, desproporcional, fatores de risco cardiovascular, arritmia, hipotensão ou lactato elevado sugerem isquemia mesentérica, aneurisma ou evento vascular.
+
+**Por que importa:** Abdome vascular é tempo-dependente.
 
 ---
 
@@ -273,11 +317,31 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ```text
 DOR ABDOMINAL
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+├── primeiro: estabilidade
+│   ├── PA baixa
+│   ├── taquicardia
+│   ├── febre/sepse
+│   └── perfusão ruim
+│
+├── segundo: peritonite
+│   ├── defesa
+│   ├── rigidez
+│   ├── descompressão dolorosa
+│   └── dor ao movimento
+│
+├── mecanismos
+│   ├── inflamatório: apendicite, colecistite, diverticulite
+│   ├── obstrutivo: obstrução intestinal, cálculo
+│   ├── perfurativo: úlcera perfurada
+│   ├── vascular: isquemia, aneurisma
+│   ├── infeccioso: gastroenterite, colite
+│   └── extra-abdominal: IAM, pneumonia basal, cetoacidose
+│
+└── decisão
+    ├── alta orientada
+    ├── observação/reavaliação
+    ├── exames direcionados
+    └── cirurgia/emergência
 ```
 
 ---
@@ -286,31 +350,31 @@ DOR ABDOMINAL
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Você deve treinar:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- localização e cronologia da dor;
+- sinais vitais antes de hipótese;
+- exame abdominal por etapas;
+- comunicação de sinais de alarme;
+- hipótese sindrômica e plano inicial.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+O módulo clínico pode simular:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- dor que migra;
+- paciente que piora na observação;
+- taquicardia progressiva;
+- resposta à hidratação/analgesia;
+- atraso em reconhecer peritonite.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você identificou estabilidade antes de diagnóstico?
+- [ ] Procurou peritonite?
+- [ ] Considerou gravidez quando aplicável?
+- [ ] Pensou em diagnóstico vascular quando dor é desproporcional?
+- [ ] Pediu exames que mudam conduta?
+- [ ] Reavaliou após analgesia/hidratação?

@@ -1,217 +1,256 @@
 # Trilha Cardiovascular — Insuficiência cardíaca, congestão e edema
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar a reconhecer IC como síndrome de congestão e/ou baixo débito, conectando dispneia, edema, ortopneia, crepitações e resposta terapêutica.
+Ensinar você a reconhecer insuficiência cardíaca como síndrome de bomba e congestão, diferenciar congestão pulmonar e sistêmica, identificar descompensação e entender por que edema não é sinônimo de insuficiência cardíaca.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** insuficiência cardíaca é incapacidade do coração de atender às demandas do corpo sem elevar pressões de enchimento.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Reconhecer sinais de congestão pulmonar e sistêmica.
-2. Diferenciar edema cardíaco de outras causas.
-3. Entender ortopneia e DPN.
-4. Avaliar gravidade e perfusão.
-5. Aplicar em IC descompensada e edema agudo de pulmão.
+1. Reconhecer congestão pulmonar e sistêmica.
+2. Diferenciar dispneia cardíaca de respiratória.
+3. Interpretar edema por mecanismo.
+4. Identificar sinais de baixo débito.
+5. Relacionar IC esquerda, direita e global.
+6. Apresentar um caso de IC no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Incapacidade do coração de suprir demanda ou fazê-lo às custas de pressões elevadas.
-
-## Conceitos obrigatórios
-
-- **Insuficiência cardíaca**: Incapacidade do coração de suprir demanda ou fazê-lo às custas de pressões elevadas.
-- **Congestão**: Acúmulo de líquido por pressão venosa elevada.
-- **Baixo débito**: Perfusão insuficiente, fadiga, oligúria, confusão e extremidades frias.
-
-## Frase didática
+Na IC, há dois problemas principais:
 
 ```text
-Insuficiência cardíaca, congestão e edema: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+congestão → líquido acumulando onde não deveria
+baixo débito → sangue chegando pouco aos tecidos
 ```
+
+**PONTO-CHAVE:**  
+O paciente pode estar “molhado”, “frio”, os dois ou nenhum dos dois. Essa leitura muda conduta.
+
+**NÃO ERRE:**  
+Edema em perna pode ser venoso, renal, hepático, medicamentoso ou linfático. Não é automaticamente IC.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Congestão pulmonar
+## Congestão pulmonar
 
-Pressão retrógrada aumenta líquido intersticial/alveolar, causando dispneia e crepitações.
+Pressão aumenta no lado esquerdo e volta para pulmões.
 
 ```text
-VE falha → pressão pulmonar ↑ → edema → dispneia
+VE falha → pressão átrio esquerdo sobe → congestão pulmonar → dispneia/ortopneia/crepitações
 ```
 
-## 2. Congestão sistêmica
+## Congestão sistêmica
 
-Pressões direitas elevadas geram edema, turgência jugular e congestão hepática.
+Pressão aumenta no lado direito e volta para veias sistêmicas.
 
 ```text
-VD/pressão venosa ↑ → edema periférico
+VD falha → pressão venosa sobe → turgência jugular/edema/ascite/hepatomegalia
 ```
 
-## 3. Edema agudo
+## Baixo débito
 
-Quando líquido alveolar aumenta rapidamente, há dispneia intensa e hipoxemia.
+Bomba não entrega fluxo suficiente.
 
 ```text
-edema alveolar → troca gasosa ↓ → hipoxemia
+débito baixo → fadiga/confusão/extremidades frias/oligúria
+```
+
+## Edema
+
+Edema surge quando filtração supera drenagem.
+
+```text
+pressão hidrostática ↑ / oncótica ↓ / linfático falha / permeabilidade ↑
 ```
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Dispneia aos esforços?
+- Ortopneia?
+- Dispneia paroxística noturna?
+- Edema vespertino?
+- Ganho de peso rápido?
+- Dor torácica, palpitações, síncope?
+- Redução de diurese?
+- Uso de sal, AINE, corticoide?
+- Adesão a medicações?
+- História de HAS, IAM, valvopatia, Chagas?
 
-- Ortopneia e DPN.
-- Edema bilateral, ganho de peso.
-- Turgência jugular.
+## Exame físico
+
+- PA, FC, FR, SpO₂.
+- Estase jugular.
 - Crepitações.
 - B3.
-- Perfusão, PA, diurese.
-- SpO₂ e esforço respiratório.
+- Hepatomegalia dolorosa.
+- Edema com cacifo.
+- Perfusão periférica.
+- Peso e diurese.
 
-## Sinais de alarme
-
-- SpO₂ baixa.
-- Crepitações difusas.
-- Hipotensão.
-- Confusão.
-- Oligúria.
+**CUIDADO:**  
+Crepitação não é obrigatória em toda IC, e edema periférico pode aparecer sem congestão pulmonar.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Organize assim:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+tem congestão?
+tem baixo débito?
+qual foi o gatilho?
+há risco imediato?
 ```
 
-O raciocínio deve seguir:
+## Gatilhos comuns de descompensação
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Infecção.
+- Má adesão.
+- Excesso de sal/volume.
+- Arritmia.
+- Isquemia.
+- Crise hipertensiva.
+- Anemia.
+- Insuficiência renal.
+- Medicamentos que retêm líquido.
 
 ## Erros comuns
 
-- Confundir toda crepitação com pneumonia.
-- Ignorar perfusão.
+- Chamar todo edema de IC.
 - Não perguntar ortopneia.
+- Não procurar gatilho.
+- Dar volume sem avaliar congestão.
+- Não reconhecer baixo débito.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — IC descompensada
+## Mini-caso 1 — IC descompensada congestiva
 
 ### Cenário
-Idoso com dispneia progressiva, ortopneia e edema bilateral.
+Paciente com dispneia progressiva, ortopneia, edema de pernas e ganho de 4 kg em 1 semana. Crepitações, turgência jugular e edema com cacifo.
 
 ### Mecanismo principal
-Congestão por pressões cardíacas elevadas.
-
-```text
-pressão venosa ↑ → líquido pulmonar
-```
+Elevação de pressões de enchimento com congestão pulmonar e sistêmica.
 
 ### Achados-chave
-- ortopneia
-- edema
-- crepitações
-- turgência jugular
+- Ortopneia.
+- Ganho de peso.
+- Turgência jugular.
+- Crepitações/edema.
 
 ### Pergunta central
-Por que ortopneia é importante?
+Qual síndrome está presente?
 
 ### Resposta esperada
-Sugere congestão pulmonar que piora em decúbito.
+Congestão por IC descompensada provável. É preciso avaliar gravidade, oxigenação, perfusão e gatilho.
 
 ### Erro comum
-Tratar como pneumonia sem febre/foco.
+Tratar só a falta de ar sem identificar congestão sistêmica.
 
 ### Ponte para OSCE
-Treinar diferenciação congestão vs infecção.
-## Mini-caso 2 — Edema agudo de pulmão
+Treine dispneia cardíaca.
+
+---
+
+## Mini-caso 2 — Edema venoso, não IC
 
 ### Cenário
-Dispneia intensa, sudorese, crepitações difusas e SpO₂ baixa.
+Paciente com edema bilateral leve no fim do dia, melhora ao elevar pernas, sem dispneia, sem ortopneia, sem turgência jugular, pulmões limpos.
 
 ### Mecanismo principal
-Edema alveolar agudo por falência cardíaca/pressão elevada.
-
-```text
-alvéolo com líquido → troca ↓
-```
+Insuficiência venosa periférica com aumento de pressão hidrostática local.
 
 ### Achados-chave
-- dispneia intensa
-- crepitações difusas
-- hipoxemia
-- ansiedade/sudorese
+- Edema vespertino.
+- Melhora com elevação.
+- Sem sintomas respiratórios.
+- Sem sinais de congestão central.
 
 ### Pergunta central
-Qual risco imediato?
+Por que não concluir IC?
 
 ### Resposta esperada
-Falência respiratória/hipoxemia; precisa suporte e tratamento urgente.
+Faltam sinais de congestão cardíaca. Edema periférico tem múltiplas causas.
 
 ### Erro comum
-Esperar exames sem suporte.
+Prescrever diurético sem investigar mecanismo.
 
 ### Ponte para OSCE
-Treinar intervenção inicial.
-## Mini-caso 3 — Edema não cardíaco
+Treine diagnóstico diferencial de edema.
+
+---
+
+## Mini-caso 3 — IC com baixo débito
 
 ### Cenário
-Edema de MMII sem dispneia, com proteinúria.
+Paciente com IC conhecida, confuso, extremidades frias, oligúria, PA 86/60, pouca crepitação, turgência jugular discreta.
 
 ### Mecanismo principal
-Perda de proteína/alteração renal pode causar edema.
-
-```text
-oncótica ↓/renal → edema
-```
+Débito cardíaco reduzido com hipoperfusão tecidual.
 
 ### Achados-chave
-- edema
-- proteinúria
-- sem ortopneia
-- PA variável
+- Confusão.
+- Oligúria.
+- Extremidades frias.
+- Hipotensão.
 
 ### Pergunta central
-Como evitar erro?
+O que preocupa mais que edema?
 
 ### Resposta esperada
-Edema não é sinônimo de IC; integrar pulmão, jugular, urina e história.
+Baixo débito/hipoperfusão. O caso exige avaliação urgente e manejo supervisionado.
 
 ### Erro comum
-Dar diurético sem entender causa.
+Achar que IC grave sempre tem edema exuberante.
 
 ### Ponte para OSCE
-Treinar raciocínio de edema.
+Treine leitura “frio/quente” e “seco/molhado”.
+
+---
+
+## Mini-caso 4 — IC precipitada por arritmia
+
+### Cenário
+Paciente com dispneia súbita, palpitações, FC 150 irregular, crepitações leves e história de IC.
+
+### Mecanismo principal
+Arritmia reduz tempo de enchimento e eficiência de bomba, precipitando congestão.
+
+### Achados-chave
+- Palpitações.
+- FC irregular elevada.
+- IC prévia.
+- Dispneia aguda.
+
+### Pergunta central
+Qual gatilho deve ser tratado?
+
+### Resposta esperada
+Arritmia como precipitante da descompensação, além de avaliar congestão e estabilidade.
+
+### Erro comum
+Focar apenas em diurético e ignorar ritmo.
+
+### Ponte para OSCE
+Treine ECG e gatilhos de IC.
 
 ---
 
@@ -219,68 +258,72 @@ Treinar raciocínio de edema.
 
 ## Questão ativa 1
 
-**Pergunta:** Edema bilateral sempre é coração?
+**Pergunta:** O que diferencia dispneia cardíaca?
 
-**Resposta esperada:** Não. Pode ser renal, hepático, venoso, medicamentoso ou hipoalbuminemia.
+**Resposta esperada:** Ortopneia, dispneia paroxística noturna, ganho de peso, edema, turgência jugular, B3 e crepitações ajudam.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 2
 
-**Pergunta:** O que é DPN?
+**Pergunta:** Edema bilateral é sempre IC?
 
-**Resposta esperada:** Dispneia paroxística noturna, despertar súbito por falta de ar, sugestiva de congestão.
+**Resposta esperada:** Não. Pode ser venoso, renal, hepático, medicamentoso, linfático ou por hipoalbuminemia.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 3
 
-**Pergunta:** Crepitação sempre é pneumonia?
+**Pergunta:** O que significa “frio e molhado”?
 
-**Resposta esperada:** Não. Pode ser edema pulmonar, fibrose ou atelectasia.
+**Resposta esperada:** Hipoperfusão com congestão. É perfil de maior gravidade.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
+## Questão ativa 4
+
+**Pergunta:** Qual pergunta sempre fazer em IC descompensada?
+
+**Resposta esperada:** Qual foi o gatilho: infecção, arritmia, isquemia, sal, má adesão, renal, anemia ou medicamento?
 
 ---
 
 # 7. Mapa final
 
 ```text
-IC
-├── congestão esquerda: dispneia, ortopneia, crepitações
-├── congestão direita: edema, turgência jugular, hepatomegalia
-├── baixo débito: frio, oligúria, confusão
-└── edema agudo: urgência respiratória
+INSUFICIÊNCIA CARDÍACA
+├── congestão esquerda
+│   ├── dispneia
+│   ├── ortopneia
+│   └── crepitações
+├── congestão direita
+│   ├── turgência jugular
+│   ├── edema
+│   └── ascite/hepatomegalia
+├── baixo débito
+│   ├── frio
+│   ├── confusão
+│   └── oligúria
+└── gatilhos
+    ├── infecção
+    ├── arritmia
+    ├── isquemia
+    ├── sal/adesão
+    └── renal/anemia
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- anamnese de dispneia
-- edema
-- exame cardiovascular
-- conduta inicial
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- perguntas de ortopneia e DPN;
+- exame de jugular/edema;
+- ausculta pulmonar;
+- avaliação de perfusão;
+- identificação de gatilhos.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Separou congestão de baixo débito?
+- [ ] Procurou turgência jugular?
+- [ ] Perguntou ortopneia?
+- [ ] Avaliou gatilho?
+- [ ] Considerou causas não cardíacas de edema?

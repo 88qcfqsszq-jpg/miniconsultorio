@@ -1,245 +1,254 @@
-# Trilha Semiologia Geral — Idoso — apresentação atípica
+# Trilha Semiologia Geral — Idoso e apresentação atípica
+
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
 
 ## Objetivo da trilha
 
-Ensinar delirium, queda, polifarmácia e infecção sem febre com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a reconhecer que idosos podem apresentar doenças graves de forma discreta, sem febre, sem dor típica ou com queixa inespecífica. O foco é evitar falsa segurança.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** no idoso, alteração funcional aguda pode ser sinal de doença grave.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de idoso — apresentação atípica.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Valorizar confusão, queda e perda funcional.
+2. Reconhecer infecção sem febre.
+3. Investigar medicamentos e fragilidade.
+4. Diferenciar delirium de demência.
+5. Avaliar hidratação, perfusão e dor atípica.
+6. Apresentar idoso frágil no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Idoso — apresentação atípica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Idoso — apresentação atípica**: Idoso — apresentação atípica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+O idoso pode não dizer “estou com pneumonia” ou “estou com infecção urinária”. Pode chegar assim:
 
 ```text
-Idoso — apresentação atípica: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+caiu
+parou de comer
+ficou confuso
+não levanta
+sonolento
+piorou da memória de repente
 ```
+
+**PONTO-CHAVE:**  
+Mudança aguda do basal é dado clínico forte.
+
+**NÃO ERRE:**  
+Não atribua confusão nova à “idade” sem procurar delirium, infecção, hipoglicemia, hipóxia, AVC, desidratação ou medicamento.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia aplicada
 
-## 1. Mecanismo principal
+## Reserva fisiológica menor
 
-Em idoso — apresentação atípica, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Idosos compensam pior.
 
 ```text
-observação → interpretação → conduta
+infecção/desidratação/medicação → pequena agressão → grande perda funcional
 ```
 
-## 3. Risco e priorização
+## Febre pode faltar
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Resposta imune e térmica pode ser menos exuberante.
 
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+## Dor pode ser atípica
+
+IAM, abdome agudo e infecções podem ter dor discreta ou sintomas vagos.
+
+## Polifarmácia
+
+Medicamentos podem causar queda, confusão, hipotensão, sangramento e retenção urinária.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Qual era o basal?
+- O que mudou e quando?
+- Caiu?
+- Está comendo/bebendo?
+- Urinou?
+- Está mais confuso?
+- Dormiu diferente?
+- Nova medicação?
+- Febre, tosse, falta de ar, dor, disúria?
+- Quem cuida? Mora sozinho?
+- Usa anticoagulante?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame físico
 
-## Sinais de alarme
+- Sinais vitais, inclusive FR e SpO₂.
+- Estado mental.
+- Hidratação/perfusão.
+- Marcha quando seguro.
+- Pele: lesões, infecção, trauma.
+- Pulmões, coração, abdome.
+- Dor à palpação.
+- Déficits neurológicos.
+- Retenção urinária/fecal quando suspeita.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**CUIDADO:**  
+Queda em idoso anticoagulado merece atenção especial para trauma e sangramento.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+mudança aguda do basal → procurar causa clínica até prova contrária
 ```
 
-O raciocínio deve seguir:
+## Delirium x demência
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Delirium: agudo, flutuante, atenção reduzida.
+- Demência: crônico, progressivo.
+- Delirium pode ocorrer sobre demência.
+
+## Causas frequentes de piora aguda
+
+- Infecção.
+- Desidratação.
+- Hipóxia.
+- Hipoglicemia.
+- AVC.
+- Dor.
+- Constipação/retensão urinária.
+- Medicamentos.
+- Trauma.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Chamar de “idade”.
+- Não perguntar basal.
+- Não revisar medicações.
+- Não contar FR.
+- Não procurar queda/trauma.
+- Subestimar ausência de febre.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Idoso confuso
+## Mini-caso 1 — Pneumonia sem febre alta
 
 ### Cenário
-Paciente com apresentação típica relacionada a idoso confuso, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Idoso de 84 anos, sem febre, mas com confusão nova, queda, FR 28, SpO₂ 91%, tosse discreta e crepitações em base.
 
 ### Mecanismo principal
-Mecanismo dominante de idoso confuso dentro da trilha idoso — apresentação atípica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Infecção respiratória com apresentação atípica e delirium.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Confusão nova.
+- Taquipneia.
+- Hipoxemia.
+- Crepitações.
 
 ### Pergunta central
-Qual mecanismo explica idoso confuso?
+Por que não tranquiliza a ausência de febre?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Idosos podem não montar febre exuberante. FR alta, hipoxemia e delirium são sinais de gravidade.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Liberar por “sem febre”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Queda
+Treine sinais vitais em idoso.
+
+---
+
+## Mini-caso 2 — Delirium por medicamento
 
 ### Cenário
-Paciente com apresentação típica relacionada a queda, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Idosa iniciou benzodiazepínico para dormir. Dois dias depois, sonolência, confusão e queda.
 
 ### Mecanismo principal
-Mecanismo dominante de queda dentro da trilha idoso — apresentação atípica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Efeito medicamentoso no sistema nervoso central com perda de equilíbrio e atenção.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Medicação nova.
+- Sonolência.
+- Confusão aguda.
+- Queda.
 
 ### Pergunta central
-Qual mecanismo explica queda?
+Qual pergunta muda o diagnóstico?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Revisão de medicações recentes, doses, interações e automedicação.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Investigar só neurologia e esquecer polifarmácia.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Infecção sem febre
+Treine anamnese medicamentosa.
+
+---
+
+## Mini-caso 3 — IAM atípico
 
 ### Cenário
-Paciente com apresentação típica relacionada a infecção sem febre, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Idoso diabético com fraqueza, náuseas, sudorese e falta de ar, sem dor torácica típica.
 
 ### Mecanismo principal
-Mecanismo dominante de infecção sem febre dentro da trilha idoso — apresentação atípica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Isquemia miocárdica com apresentação atípica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Diabetes.
+- Dispneia.
+- Sudorese.
+- Fraqueza/náuseas.
 
 ### Pergunta central
-Qual mecanismo explica infecção sem febre?
+Por que pensar em coração?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Idosos e diabéticos podem ter SCA sem dor típica. Sintomas autonômicos e dispneia importam.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Chamar de “mal-estar” sem ECG.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Descompensação funcional
+Treine dor torácica atípica.
+
+---
+
+## Mini-caso 4 — Desidratação e queda funcional
 
 ### Cenário
-Paciente com apresentação típica relacionada a descompensação funcional, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Idoso com diarreia leve, pouca ingesta, tontura ao levantar, PA cai em ortostatismo e reduziu diurese.
 
 ### Mecanismo principal
-Mecanismo dominante de descompensação funcional dentro da trilha idoso — apresentação atípica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Hipovolemia com hipotensão ortostática e perda funcional.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Pouca ingesta.
+- Oligúria.
+- Ortostatismo.
+- Queda funcional.
 
 ### Pergunta central
-Qual mecanismo explica descompensação funcional?
+Por que o quadro pode ser grave?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Pequenas perdas podem causar grande impacto em idoso, com risco de queda, lesão renal e delirium.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Subestimar “diarreia leve”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine fragilidade e hidratação.
 
 ---
 
@@ -247,70 +256,74 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de idoso — apresentação atípica?
+**Pergunta:** Qual dado é essencial no idoso?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** O basal funcional e cognitivo. Sem isso, você não sabe o que mudou.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Confusão nova é demência?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Não até prova contrária. Confusão aguda sugere delirium e exige causa.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Febre ausente exclui infecção?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Não. Idosos podem ter infecção com pouca febre.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Por que revisar medicações?
+
+**Resposta esperada:** Polifarmácia causa queda, delirium, hipotensão, sangramento, retenção urinária e sedação.
 
 ---
 
 # 7. Mapa final
 
 ```text
-IDOSO — APRESENTAÇÃO ATÍPICA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+IDOSO
+├── mudança aguda
+│   ├── confusão
+│   ├── queda
+│   ├── perda funcional
+│   └── sonolência
+├── causas comuns
+│   ├── infecção
+│   ├── desidratação
+│   ├── medicação
+│   ├── hipóxia
+│   └── AVC/IAM
+├── avaliação
+│   ├── basal
+│   ├── sinais vitais
+│   ├── medicações
+│   └── cuidador
+└── cuidado
+    ├── não banalizar
+    ├── reavaliar
+    └── prevenir queda
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- perguntar basal;
+- conversar com cuidador;
+- revisar medicamentos;
+- reconhecer delirium;
+- avaliar risco de queda.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você perguntou basal?
+- [ ] Diferenciou delirium de demência?
+- [ ] Revisou medicações?
+- [ ] Considerou infecção sem febre?
+- [ ] Avaliou queda/trauma?

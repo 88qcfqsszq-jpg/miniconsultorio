@@ -1,245 +1,242 @@
 # Trilha Raciocínio Clínico — Síndromes antes de diagnósticos
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar organizar queixas em síndromes para reduzir erro com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a pensar por síndromes antes de decorar doenças. Esse método evita fechamento precoce e ajuda a agir com segurança mesmo quando o diagnóstico final ainda não está claro.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** no início do atendimento, você quase nunca tem diagnóstico. Você tem uma síndrome e um risco.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de síndromes antes de diagnósticos.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Transformar queixa em síndrome.
+2. Identificar gravidade antes do diagnóstico final.
+3. Escolher conduta inicial pela síndrome.
+4. Construir diagnóstico diferencial por mecanismo.
+5. Evitar fechamento precoce.
+6. Apresentar raciocínio sindrômico no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Síndromes antes de diagnósticos é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Síndromes antes de diagnósticos**: Síndromes antes de diagnósticos é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Quando o paciente chega, você escuta sintomas soltos:
 
 ```text
-Síndromes antes de diagnósticos: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+febre
+dor
+falta de ar
+tontura
+vômitos
+confusão
 ```
+
+Sua tarefa é organizar:
+
+```text
+sintoma → síndrome → gravidade → hipótese → conduta
+```
+
+**PONTO-CHAVE:**  
+Síndrome é um conjunto de achados que aponta um caminho. Diagnóstico é uma conclusão mais específica.
+
+**NÃO ERRE:**  
+Não espere diagnóstico final para tratar risco evidente.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia do método sindrômico
 
-## 1. Mecanismo principal
+O corpo responde a agressões com padrões:
 
-Em síndromes antes de diagnósticos, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+- infecção → febre, taquicardia, inflamação;
+- hipóxia → taquipneia, cianose, confusão;
+- choque → hipoperfusão, taquicardia, oligúria;
+- obstrução → dor em cólica, distensão, vômitos;
+- irritação meníngea → cefaleia, febre, rigidez;
+- AVC → déficit focal súbito.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
-
-```text
-observação → interpretação → conduta
-```
-
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+**RACIOCÍNIO:**  
+A síndrome diz qual trilha de decisão você deve seguir.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Exemplos de síndromes
 
-## Achados que precisam ser procurados
+### Síndrome febril
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+```text
+febre + sintomas sistêmicos ± foco
+```
 
-## Sinais de alarme
+Pergunta: há sepse, meningite, dengue com alarme, pneumonia ou foco grave?
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+### Síndrome respiratória
+
+```text
+dispneia + tosse/sibilo/crepitação/hipoxemia
+```
+
+Pergunta: asma, pneumonia, IC, TEP, pneumotórax?
+
+### Síndrome neurológica focal
+
+```text
+déficit súbito + assimetria neurológica
+```
+
+Pergunta: AVC até prova contrária?
+
+### Síndrome abdominal aguda
+
+```text
+dor abdominal + sinais de peritonite/obstrução/instabilidade
+```
+
+Pergunta: precisa cirurgia ou observação?
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use este roteiro:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
-```
-
-O raciocínio deve seguir:
-
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+1. Dê nome à síndrome.
+2. Procure sinais de gravidade.
+3. Liste mecanismos possíveis.
+4. Defina ação inicial segura.
+5. Busque diagnóstico específico.
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
+- Querer diagnóstico perfeito antes da primeira conduta.
+- Confundir síndrome com etiologia.
+- Não comunicar incerteza.
 - Não reavaliar.
+- Ignorar gravidade porque “ainda não fechou”.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Dispneia
+## Mini-caso 1 — Síndrome febril com alarme
 
 ### Cenário
-Paciente com apresentação típica relacionada a dispneia, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com febre, taquicardia, sonolência e extremidades frias. Foco ainda incerto.
 
 ### Mecanismo principal
-Mecanismo dominante de dispneia dentro da trilha síndromes antes de diagnósticos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Síndrome febril com hipoperfusão possível.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Febre.
+- Alteração mental.
+- Perfusão ruim.
+- Taquicardia.
 
 ### Pergunta central
-Qual mecanismo explica dispneia?
+Qual síndrome vem antes do diagnóstico?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Síndrome infecciosa/febril com sinais de gravidade. A prioridade é avaliar sepse e perfusão, mesmo sem foco definido.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar foco para reconhecer gravidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Dor torácica
+Treine síndrome antes de etiologia.
+
+---
+
+## Mini-caso 2 — Síndrome neurológica focal
 
 ### Cenário
-Paciente com apresentação típica relacionada a dor torácica, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com fala enrolada e fraqueza em braço direito há 50 minutos.
 
 ### Mecanismo principal
-Mecanismo dominante de dor torácica dentro da trilha síndromes antes de diagnósticos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Déficit neurológico focal agudo por possível evento vascular.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Início súbito.
+- Déficit focal.
+- Janela temporal.
+- Necessidade de glicemia e protocolo.
 
 ### Pergunta central
-Qual mecanismo explica dor torácica?
+Qual síndrome deve ser reconhecida?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Síndrome neurológica focal aguda. AVC é prioridade até prova contrária.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Chamar de ansiedade ou labirintite sem exame neurológico.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Febre
+Treine reconhecimento de AVC.
+
+---
+
+## Mini-caso 3 — Síndrome obstrutiva abdominal
 
 ### Cenário
-Paciente com apresentação típica relacionada a febre, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com vômitos, distensão, dor em cólica e parada de gases.
 
 ### Mecanismo principal
-Mecanismo dominante de febre dentro da trilha síndromes antes de diagnósticos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Trânsito intestinal bloqueado.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Vômitos.
+- Distensão.
+- Parada de gases.
+- Dor cólica.
 
 ### Pergunta central
-Qual mecanismo explica febre?
+Qual síndrome organiza o caso?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Síndrome obstrutiva abdominal. A etiologia pode ser aderência, hérnia, tumor, volvo, mas a síndrome já orienta gravidade.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como gastroenterite.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Dor abdominal
+Treine reconhecimento sindrômico.
+
+---
+
+## Mini-caso 4 — Síndrome respiratória obstrutiva
 
 ### Cenário
-Paciente com apresentação típica relacionada a dor abdominal, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dispneia, sibilos, expiração prolongada e fala entrecortada.
 
 ### Mecanismo principal
-Mecanismo dominante de dor abdominal dentro da trilha síndromes antes de diagnósticos.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Obstrução de vias aéreas com aumento do trabalho respiratório.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sibilos.
+- Expiração prolongada.
+- Fala entrecortada.
+- Dispneia.
 
 ### Pergunta central
-Qual mecanismo explica dor abdominal?
+Qual conduta pode ser iniciada antes do diagnóstico final?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Tratamento da obstrução e avaliação de gravidade, enquanto se diferencia asma, DPOC, anafilaxia ou corpo estranho.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar exame para tratar broncoespasmo grave.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine síndrome e ação inicial.
 
 ---
 
@@ -247,70 +244,69 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de síndromes antes de diagnósticos?
+**Pergunta:** Por que pensar por síndrome?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Porque permite agir com segurança antes de fechar diagnóstico específico.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Síndrome é diagnóstico?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Não. É um conjunto de achados que orienta hipóteses e conduta inicial.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Quando tratar antes do diagnóstico final?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Quando há risco: hipoxemia, choque, convulsão, sepse, anafilaxia, AVC em janela, peritonite.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Como comunicar incerteza?
+
+**Resposta esperada:** Diga a síndrome, o risco e o próximo passo: “tem sinais de síndrome respiratória com esforço; vamos tratar e investigar a causa”.
 
 ---
 
 # 7. Mapa final
 
 ```text
-SÍNDROMES ANTES DE DIAGNÓSTICOS
-├── conceito de base
-├── semiologia
+SÍNDROME ANTES DO DIAGNÓSTICO
+├── sintoma
+│   └── queixa bruta
+├── síndrome
+│   ├── febril
+│   ├── respiratória
+│   ├── neurológica
+│   ├── abdominal
+│   └── circulatória
 ├── gravidade
-├── mini-casos
-└── ponte para OSCE
+│   ├── instável
+│   ├── hipoxêmico
+│   ├── hipoperfundido
+│   └── neurológico
+└── decisão
+    ├── tratar risco
+    ├── investigar causa
+    └── reavaliar
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- nomear síndrome;
+- falar gravidade;
+- justificar conduta inicial;
+- manter diagnóstico aberto.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você nomeou a síndrome?
+- [ ] Procurou gravidade?
+- [ ] Pensou em mecanismos?
+- [ ] Agiu antes do diagnóstico quando necessário?

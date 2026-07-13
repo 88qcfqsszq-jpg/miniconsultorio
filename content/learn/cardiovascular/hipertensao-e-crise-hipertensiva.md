@@ -1,245 +1,262 @@
 # Trilha Cardiovascular — Hipertensão e crise hipertensiva
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar pa elevada, lesão de órgão-alvo e diferença entre urgência/emergência com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a diferenciar hipertensão crônica, urgência hipertensiva e emergência hipertensiva, reconhecendo lesão aguda de órgão-alvo.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** na PA muito alta, a pergunta principal não é o número. É: **há lesão aguda de órgão-alvo?**
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de hipertensão e crise hipertensiva.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Medir e confirmar PA corretamente.
+2. Reconhecer sintomas de lesão de órgão-alvo.
+3. Diferenciar urgência de emergência hipertensiva.
+4. Evitar redução rápida indevida da PA em paciente sem emergência.
+5. Relacionar cérebro, coração, rim, retina e aorta.
+6. Apresentar crise hipertensiva no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Hipertensão e crise hipertensiva é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Hipertensão e crise hipertensiva**: Hipertensão e crise hipertensiva é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+PA alta isolada pode assustar, mas não define emergência. Emergência hipertensiva exige dano agudo.
 
 ```text
-Hipertensão e crise hipertensiva: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+PA muito alta + órgão sofrendo agora = emergência hipertensiva
 ```
+
+Órgãos-alvo:
+
+- cérebro;
+- coração;
+- aorta;
+- rins;
+- retina;
+- gestação.
+
+**PONTO-CHAVE:**  
+Reduzir PA rápido demais em quem não tem emergência pode causar hipoperfusão.
+
+**NÃO ERRE:**  
+“180/110” sem lesão aguda não é automaticamente UTI. Mas dor torácica, déficit neurológico, edema agudo ou dissecção mudam tudo.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Hipertensão crônica
 
-Em hipertensão e crise hipertensiva, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Aumenta risco cardiovascular ao longo do tempo.
 
 ```text
-observação → interpretação → conduta
+pressão alta sustentada → remodelamento vascular → coração/rim/cérebro sofrem
 ```
 
-## 3. Risco e priorização
+## Urgência hipertensiva
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+PA muito elevada, sem lesão aguda de órgão-alvo.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+PA alta → sem dano agudo → ajuste gradual e seguimento
 ```
+
+## Emergência hipertensiva
+
+PA elevada com lesão aguda.
+
+```text
+PA alta + dano agudo → redução controlada em ambiente monitorado
+```
+
+Exemplos:
+
+- AVC/encefalopatia hipertensiva;
+- SCA;
+- edema agudo de pulmão;
+- dissecção de aorta;
+- lesão renal aguda;
+- eclâmpsia/pré-eclâmpsia grave.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Cefaleia intensa nova?
+- Confusão, sonolência, convulsão?
+- Déficit focal?
+- Dor torácica?
+- Dispneia/ortopneia?
+- Dor dorsal súbita?
+- Redução de diurese?
+- Alteração visual?
+- Gestação/puerpério?
+- Uso de medicação e adesão?
+- Drogas/estimulantes, dor, ansiedade, AINE, descongestionantes?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame físico
 
-## Sinais de alarme
+- Repetir PA com técnica correta.
+- PA nos dois braços quando suspeita de dissecção.
+- Estado mental e déficits focais.
+- Ausculta pulmonar.
+- Sinais de IC.
+- Pulsos.
+- Edema.
+- Fundoscopia quando disponível.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**CUIDADO:**  
+Dor, ansiedade e técnica inadequada podem elevar PA. Isso não exclui risco, mas exige confirmação.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use este algoritmo mental:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+PA alta → confirmar medida → procurar órgão-alvo → classificar urgência vs emergência
 ```
 
-O raciocínio deve seguir:
+## Sinais de emergência
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Dor torácica isquêmica.
+- Dispneia com edema pulmonar.
+- Déficit neurológico.
+- Confusão/convulsão.
+- Dor dorsal súbita.
+- Lesão renal aguda.
+- Papiledema/alteração visual grave.
+- Gestação com sinais de gravidade.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Tratar número, não paciente.
+- Baixar PA rápido sem emergência.
+- Não perguntar sintomas neurológicos/cardiopulmonares.
+- Não investigar adesão.
+- Ignorar dissecção quando dor torácica/dorsal súbita.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — HAS assintomática
+## Mini-caso 1 — PA alta sem lesão aguda
 
 ### Cenário
-Paciente com apresentação típica relacionada a has assintomática, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente assintomático, PA 188/108 em triagem, ansioso, sem dor torácica, sem dispneia, exame neurológico normal. Repetição após repouso: 172/100.
 
 ### Mecanismo principal
-Mecanismo dominante de has assintomática dentro da trilha hipertensão e crise hipertensiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Elevação pressórica sem evidência de dano agudo.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sem sintomas de órgão-alvo.
+- Exame normal.
+- PA reduziu com repouso.
+- Necessita seguimento/ajuste.
 
 ### Pergunta central
-Qual mecanismo explica has assintomática?
+Por que não baixar rapidamente?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque não há emergência hipertensiva. Redução abrupta pode causar hipoperfusão em quem está adaptado a níveis altos.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Usar medicação de ação rápida apenas para “normalizar número”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Emergência hipertensiva
+Treine orientação e adesão.
+
+---
+
+## Mini-caso 2 — Emergência: edema agudo de pulmão
 
 ### Cenário
-Paciente com apresentação típica relacionada a emergência hipertensiva, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com PA 220/130, dispneia intensa, ortopneia, crepitações difusas, SpO₂ baixa e sudorese.
 
 ### Mecanismo principal
-Mecanismo dominante de emergência hipertensiva dentro da trilha hipertensão e crise hipertensiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Sobrecarga aguda de pressão com congestão pulmonar e falência ventricular.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- PA muito alta.
+- Dispneia/hipoxemia.
+- Crepitações.
+- Sudorese.
 
 ### Pergunta central
-Qual mecanismo explica emergência hipertensiva?
+Por que é emergência?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Há lesão aguda cardiopulmonar: edema agudo de pulmão. Precisa manejo monitorado e redução controlada conforme protocolo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como ansiedade por “falta de ar”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Cefaleia sem lesão de órgão
+Treine PA alta + dispneia = órgão-alvo.
+
+---
+
+## Mini-caso 3 — Emergência: déficit neurológico
 
 ### Cenário
-Paciente com apresentação típica relacionada a cefaleia sem lesão de órgão, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com PA 210/115, início súbito de fraqueza em hemicorpo e fala arrastada há 1 hora.
 
 ### Mecanismo principal
-Mecanismo dominante de cefaleia sem lesão de órgão dentro da trilha hipertensão e crise hipertensiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Possível AVC associado a hipertensão, exigindo protocolo neurológico.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Déficit focal.
+- Início súbito.
+- Janela temporal.
+- PA elevada.
 
 ### Pergunta central
-Qual mecanismo explica cefaleia sem lesão de órgão?
+Qual erro evitar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Não baixar PA de forma indiscriminada sem considerar protocolo de AVC e elegibilidade terapêutica. A prioridade é fluxo de AVC.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar PA antes de organizar AVC.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Edema agudo com PA alta
+Treine neurologia + pressão.
+
+---
+
+## Mini-caso 4 — Dissecção de aorta
 
 ### Cenário
-Paciente com apresentação típica relacionada a edema agudo com pa alta, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com PA 230/120, dor torácica súbita irradiada para dorso, assimetria de pulso e sudorese.
 
 ### Mecanismo principal
-Mecanismo dominante de edema agudo com pa alta dentro da trilha hipertensão e crise hipertensiva.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Lesão aguda da aorta sob alta pressão de parede.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor súbita dorsal.
+- PA muito alta.
+- Assimetria de pulso.
+- Instabilidade potencial.
 
 ### Pergunta central
-Qual mecanismo explica edema agudo com pa alta?
+Por que esse caso é tempo-dependente?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Dissecção pode romper ou comprometer ramos arteriais. Exige controle hemodinâmico específico e avaliação urgente.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Confundir com dor muscular ou SCA simples.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine red flags de aorta.
 
 ---
 
@@ -247,70 +264,70 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de hipertensão e crise hipertensiva?
+**Pergunta:** O que define emergência hipertensiva?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** PA elevada com lesão aguda de órgão-alvo, não o número isolado.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Quais órgãos você deve procurar?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Cérebro, coração, aorta, rins, retina e gestação/puerpério.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Por que reduzir PA rápido pode ser ruim?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Pode reduzir perfusão cerebral, coronariana ou renal, especialmente em hipertensos crônicos.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** PA alta com dor torácica súbita dorsal sugere o quê?
+
+**Resposta esperada:** Dissecção de aorta deve ser considerada com prioridade.
 
 ---
 
 # 7. Mapa final
 
 ```text
-HIPERTENSÃO E CRISE HIPERTENSIVA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+PA MUITO ALTA
+├── confirmar medida
+│   ├── técnica
+│   ├── repouso
+│   └── repetir
+├── sem órgão-alvo
+│   └── urgência/controle gradual
+├── com órgão-alvo
+│   ├── cérebro: déficit/confusão/convulsão
+│   ├── coração: SCA/EAP
+│   ├── aorta: dissecção
+│   ├── rim: lesão aguda
+│   └── gestação: pré-eclâmpsia/eclâmpsia
+└── decisão
+    ├── não tratar só número
+    ├── reduzir com controle
+    └── monitorar se emergência
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- confirmação da PA;
+- perguntas de órgão-alvo;
+- diferenciação urgência/emergência;
+- comunicação de risco;
+- não tratar número isolado.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Confirmou medida?
+- [ ] Procurou órgão-alvo?
+- [ ] Diferenciou urgência de emergência?
+- [ ] Evitou redução rápida indevida?
+- [ ] Identificou dissecção/AVC/EAP?

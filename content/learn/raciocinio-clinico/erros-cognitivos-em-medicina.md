@@ -1,245 +1,229 @@
 # Trilha Raciocínio Clínico — Erros cognitivos em medicina
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar ancoragem, fechamento precoce, disponibilidade e viés de confirmação com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a reconhecer armadilhas mentais comuns no raciocínio clínico. O objetivo não é “pensar devagar sempre”, mas saber quando sua primeira impressão precisa ser testada.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** erro cognitivo acontece quando o raciocínio parece certo cedo demais.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de erros cognitivos em medicina.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Reconhecer fechamento precoce.
+2. Identificar viés de ancoragem.
+3. Evitar disponibilidade.
+4. Usar dados negativos.
+5. Reabrir hipótese quando o paciente não evolui como esperado.
+6. Criar hábitos de segurança no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Erros cognitivos em medicina é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Erros cognitivos em medicina**: Erros cognitivos em medicina é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+O cérebro gosta de atalhos. Em medicina, atalhos ajudam, mas podem enganar.
 
 ```text
-Erros cognitivos em medicina: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+caso parecido → diagnóstico lembrado → confiança rápida → erro se não checar
 ```
+
+**PONTO-CHAVE:**  
+Confiança não é evidência. Você precisa justificar.
+
+**NÃO ERRE:**  
+Quando o paciente não melhora como esperado, a hipótese deve ser reaberta.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia do erro cognitivo
 
-## 1. Mecanismo principal
+## Ancoragem
 
-Em erros cognitivos em medicina, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Você prende o raciocínio na primeira informação.
 
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Exemplo:
 
 ```text
-observação → interpretação → conduta
+“é ansiedade” → ignora dor torácica e ECG
 ```
 
-## 3. Risco e priorização
+## Fechamento precoce
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Você para de pensar cedo demais.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+achou um diagnóstico plausível → não procura diagnóstico perigoso
 ```
+
+## Disponibilidade
+
+Você lembra do último caso parecido e aplica ao atual.
+
+## Confirmação
+
+Você busca só dados que confirmam sua hipótese.
+
+## Representatividade
+
+Você rejeita diagnóstico porque a apresentação não é “clássica”.
 
 ---
 
-# 3. Semiologia essencial
+# 3. Semiologia de segurança
 
-O aluno deve aprender a observar antes de decorar conduta.
+Perguntas anti-erro:
 
-## Achados que precisam ser procurados
+- O que não encaixa?
+- Qual diagnóstico perigoso ainda não descartei?
+- Há dado vital alterado?
+- O paciente melhorou como esperado?
+- Estou ignorando dado porque atrapalha minha hipótese?
+- Existe causa reversível simples?
+- Preciso pedir ajuda?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
-
-## Sinais de alarme
-
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**PONTO-CHAVE:**  
+A frase “não parece” deve vir acompanhada de justificativa.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use pausas cognitivas:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
-```
-
-O raciocínio deve seguir:
-
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+antes da alta
+antes de fechar diagnóstico
+quando há piora
+quando há dado discordante
+quando alguém da equipe está preocupado
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
+- Diagnóstico por aparência.
+- Ignorar sinais vitais.
+- Não ouvir acompanhante.
 - Não reavaliar.
+- Não considerar apresentações atípicas.
+- Repetir conduta que não funcionou.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — TEP ignorado
+## Mini-caso 1 — “Ansiedade” com TEP
 
 ### Cenário
-Paciente com apresentação típica relacionada a tep ignorado, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente jovem, ansiosa, dispneia súbita e dor pleurítica. Pós-operatório recente. SpO₂ 91%, FC 122.
 
 ### Mecanismo principal
-Mecanismo dominante de tep ignorado dentro da trilha erros cognitivos em medicina.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Ancoragem em ansiedade ignorando risco tromboembólico.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dispneia súbita.
+- Dor pleurítica.
+- Pós-operatório.
+- Taquicardia/hipoxemia.
 
 ### Pergunta central
-Qual mecanismo explica tep ignorado?
+Qual viés ocorreu?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Ancoragem e fechamento precoce. Ansiedade não explica bem hipoxemia e risco trombótico.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Medicar ansiedade sem avaliar sinais vitais.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Pneumonia presumida
+Treine red flags contra diagnóstico benigno.
+
+---
+
+## Mini-caso 2 — “Virose” que era sepse
 
 ### Cenário
-Paciente com apresentação típica relacionada a pneumonia presumida, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente febril com fraqueza, FC 130, FR 30, confusão leve e extremidades frias.
 
 ### Mecanismo principal
-Mecanismo dominante de pneumonia presumida dentro da trilha erros cognitivos em medicina.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Disponibilidade/banalização de síndrome viral comum.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Taquicardia.
+- Taquipneia.
+- Confusão.
+- Perfusão ruim.
 
 ### Pergunta central
-Qual mecanismo explica pneumonia presumida?
+O que contradiz virose simples?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Alteração mental, perfusão ruim e sinais vitais alterados sugerem gravidade sistêmica.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Olhar só febre e dor no corpo.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Ansiedade prematura
+Treine gravidade em febre.
+
+---
+
+## Mini-caso 3 — “Labirintite” que era AVC posterior
 
 ### Cenário
-Paciente com apresentação típica relacionada a ansiedade prematura, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com vertigem súbita, vômitos, marcha impossível, nistagmo atípico e hipertensão.
 
 ### Mecanismo principal
-Mecanismo dominante de ansiedade prematura dentro da trilha erros cognitivos em medicina.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Representatividade: achar que AVC sempre tem fraqueza evidente.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Marcha impossível.
+- Início súbito.
+- Fatores vasculares.
+- Sinais neurológicos sutis.
 
 ### Pergunta central
-Qual mecanismo explica ansiedade prematura?
+Qual erro evitar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Excluir AVC porque não há hemiparesia. AVC posterior pode simular vestibular periférico.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Alta com “labirintite” sem exame neurológico.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Exame supervalorizado
+Treine vertigem com red flags.
+
+---
+
+## Mini-caso 4 — “Gastroenterite” que era obstrução
 
 ### Cenário
-Paciente com apresentação típica relacionada a exame supervalorizado, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com vômitos, dor em cólica, distensão e parada de gases. Cirurgia abdominal prévia.
 
 ### Mecanismo principal
-Mecanismo dominante de exame supervalorizado dentro da trilha erros cognitivos em medicina.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Fechamento precoce em gastroenterite sem valorizar obstrução.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Distensão.
+- Parada de gases.
+- Cirurgia prévia.
+- Vômitos.
 
 ### Pergunta central
-Qual mecanismo explica exame supervalorizado?
+Que dado quebra a hipótese inicial?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Parada de gases e distensão sugerem obstrução, não gastroenterite simples.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Não perguntar eliminação de gases/fezes.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine dados que desconfirmam.
 
 ---
 
@@ -247,70 +231,67 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de erros cognitivos em medicina?
+**Pergunta:** O que é fechamento precoce?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Encerrar raciocínio antes de considerar dados discordantes e diagnósticos perigosos.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Como combater ancoragem?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Pergunte “o que mais pode ser?” e “o que não encaixa?”.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Quando reabrir hipótese?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Quando há piora, falta de resposta esperada, novo dado, sinal vital alterado ou discordância clínica.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Qual hábito reduz erro?
+
+**Resposta esperada:** Pausa diagnóstica antes de alta ou conduta crítica.
 
 ---
 
 # 7. Mapa final
 
 ```text
-ERROS COGNITIVOS EM MEDICINA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+ERROS COGNITIVOS
+├── ancoragem
+│   └── primeira impressão domina
+├── fechamento precoce
+│   └── para de pensar cedo
+├── disponibilidade
+│   └── último caso influencia
+├── confirmação
+│   └── só busca o que confirma
+└── proteção
+    ├── dados discordantes
+    ├── diagnóstico perigoso
+    ├── reavaliação
+    └── pedir ajuda
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- justificar hipótese;
+- citar diferencial perigoso;
+- reavaliar;
+- reconhecer dado discordante;
+- não dar alta insegura.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você procurou o que não encaixa?
+- [ ] Considerou diagnóstico perigoso?
+- [ ] Reavaliou resposta?
+- [ ] Evitou “parece só”?
+- [ ] Pediu ajuda quando necessário?

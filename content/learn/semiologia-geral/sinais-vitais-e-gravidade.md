@@ -1,245 +1,245 @@
 # Trilha Semiologia Geral — Sinais vitais e gravidade
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar pa, fc, fr, temperatura, spo₂, dor, glicemia e estado geral com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a usar sinais vitais como ferramenta de gravidade, não como números isolados. Você deve reconhecer padrões de instabilidade, compensação e deterioração.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** sinais vitais são a linguagem do corpo tentando compensar uma ameaça.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de sinais vitais e gravidade.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Interpretar FC, PA, FR, SpO₂, temperatura e dor.
+2. Reconhecer choque compensado.
+3. Valorizar frequência respiratória.
+4. Integrar sinais vitais com aparência clínica.
+5. Identificar red flags por faixa etária.
+6. Reavaliar tendência, não só medida única.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Sinais vitais e gravidade é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Sinais vitais e gravidade**: Sinais vitais e gravidade é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Um sinal vital isolado raramente fecha diagnóstico. O conjunto mostra direção.
 
 ```text
-Sinais vitais e gravidade: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+FC alta + FR alta + febre + confusão = gravidade possível
+PA normal + extremidades frias + TEC lento = compensação possível
 ```
+
+**PONTO-CHAVE:**  
+Frequência respiratória é um dos sinais vitais mais negligenciados e um dos mais úteis para gravidade.
+
+**NÃO ERRE:**  
+Não tranquilize paciente só porque a PA está normal. O corpo pode estar compensando.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia aplicada
 
-## 1. Mecanismo principal
+## Frequência cardíaca
 
-Em sinais vitais e gravidade, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Sobe por febre, dor, ansiedade, hipovolemia, hipóxia, sepse, anemia e arritmia.
 
 ```text
-observação → interpretação → conduta
+demanda/estresse ↑ → simpático ↑ → FC ↑
 ```
 
-## 3. Risco e priorização
+## Pressão arterial
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Depende de débito cardíaco e resistência vascular.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+PA = débito cardíaco x resistência vascular
 ```
+
+Pode ficar normal no choque inicial por vasoconstrição.
+
+## Frequência respiratória
+
+Sobe por hipóxia, acidose, febre, dor, ansiedade, sepse, TEP, pneumonia, asma e IC.
+
+## SpO₂
+
+Mostra saturação periférica, não ventilação completa nem perfusão global.
+
+## Temperatura
+
+Febre sugere inflamação/infecção, mas hipotermia em infecção pode ser sinal grave.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Sempre registre
 
-## Achados que precisam ser procurados
+- FC.
+- PA.
+- FR.
+- SpO₂.
+- Temperatura.
+- Dor.
+- Nível de consciência.
+- Perfusão.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Padrões de alerta
 
-## Sinais de alarme
+- FR elevada persistente.
+- FC muito alta ou incompatível com contexto.
+- Hipotensão.
+- PA normal com perfusão ruim.
+- SpO₂ baixa.
+- Febre + confusão.
+- Hipotermia em paciente grave.
+- Dor intensa com taquicardia.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**CUIDADO:**  
+Tendência importa: piora progressiva de FC/FR pode ser mais importante que um número isolado.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+número → mecanismo → risco → reavaliação
 ```
 
-O raciocínio deve seguir:
+Exemplo:
 
 ```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+FR 32 não é só “taquipneia”
+pode ser hipóxia, acidose, sepse, dor, TEP ou fadiga respiratória em evolução
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Não contar FR.
+- Copiar sinais vitais antigos.
+- Ignorar tendência.
+- Não relacionar dor com FC/PA.
+- Não medir SpO₂ em dispneia.
+- Não reavaliar após intervenção.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Taquicardia
+## Mini-caso 1 — Choque compensado
 
 ### Cenário
-Paciente com apresentação típica relacionada a taquicardia, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com vômitos e diarreia, PA 112/70, FC 124, extremidades frias, mucosas secas, TEC 4s.
 
 ### Mecanismo principal
-Mecanismo dominante de taquicardia dentro da trilha sinais vitais e gravidade.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Hipovolemia com manutenção temporária da PA por compensação simpática.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- FC alta.
+- PA ainda normal.
+- TEC lento.
+- Mucosas secas.
 
 ### Pergunta central
-Qual mecanismo explica taquicardia?
+Por que não está “estável”?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque há sinais de hipoperfusão apesar da PA normal. É compensação, não normalidade.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Olhar apenas PA.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Hipotensão
+Treine choque antes da hipotensão.
+
+---
+
+## Mini-caso 2 — FR como sinal de gravidade
 
 ### Cenário
-Paciente com apresentação típica relacionada a hipotensão, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente febril com FR 30, FC 118, SpO₂ 94%, fala cansada, mas PA normal.
 
 ### Mecanismo principal
-Mecanismo dominante de hipotensão dentro da trilha sinais vitais e gravidade.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Aumento de demanda ventilatória por infecção, acidose, hipóxia inicial ou esforço respiratório.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- FR elevada.
+- Febre.
+- Taquicardia.
+- Cansaço.
 
 ### Pergunta central
-Qual mecanismo explica hipotensão?
+Por que a FR preocupa?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque pode sinalizar deterioração respiratória ou sistêmica antes da queda de SpO₂/PA.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Registrar FR sem interpretar.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Febre
+Treine valorização da FR.
+
+---
+
+## Mini-caso 3 — Febre com toxemia
 
 ### Cenário
-Paciente com apresentação típica relacionada a febre, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente febril, sonolento, pele moteada, FC 132, PA 96/60, FR 28.
 
 ### Mecanismo principal
-Mecanismo dominante de febre dentro da trilha sinais vitais e gravidade.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Resposta sistêmica com possível sepse e hipoperfusão.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Febre.
+- Sonolência.
+- Moteamento.
+- Taquicardia/taquipneia.
 
 ### Pergunta central
-Qual mecanismo explica febre?
+O que muda gravidade?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Alteração mental e perfusão ruim tornam o quadro potencialmente grave, independentemente do foco definido.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar só a febre com antitérmico e não avaliar sepse.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Hipoxemia
+Treine sinais vitais + aparência.
+
+---
+
+## Mini-caso 4 — SpO₂ normal com gravidade
 
 ### Cenário
-Paciente com apresentação típica relacionada a hipoxemia, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com cetoacidose diabética suspeita, FR 34, respiração profunda, SpO₂ 98%, dor abdominal e vômitos.
 
 ### Mecanismo principal
-Mecanismo dominante de hipoxemia dentro da trilha sinais vitais e gravidade.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Compensação respiratória de acidose metabólica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- FR alta.
+- Respiração profunda.
+- SpO₂ normal.
+- Vômitos/dor abdominal.
 
 ### Pergunta central
-Qual mecanismo explica hipoxemia?
+Por que SpO₂ normal não tranquiliza?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque o problema pode ser ventilatório/metabólico, não oxigenação periférica. FR alta é sinal de compensação.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Achar que saturação normal exclui gravidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine oxigenação versus ventilação/metabolismo.
 
 ---
 
@@ -247,70 +247,73 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de sinais vitais e gravidade?
+**Pergunta:** Qual sinal vital é mais negligenciado?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Frequência respiratória, apesar de ser muito útil para gravidade.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** PA normal exclui choque?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Não. Pode haver choque compensado com taquicardia, TEC lento, extremidades frias e alteração mental.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** SpO₂ normal exclui doença grave?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Não. Acidose, choque, dor, sepse e fadiga inicial podem coexistir com SpO₂ normal.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** O que é tendência de sinais vitais?
+
+**Resposta esperada:** Comparar medidas ao longo do tempo para perceber melhora ou deterioração.
 
 ---
 
 # 7. Mapa final
 
 ```text
-SINAIS VITAIS E GRAVIDADE
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+SINAIS VITAIS
+├── FC
+│   ├── dor/febre
+│   ├── hipovolemia
+│   └── arritmia
+├── PA
+│   ├── débito
+│   ├── resistência
+│   └── choque tardio
+├── FR
+│   ├── hipóxia
+│   ├── acidose
+│   ├── sepse
+│   └── esforço
+├── SpO₂
+│   ├── oxigenação
+│   └── não mede CO₂/perfusão
+└── gravidade
+    ├── consciência
+    ├── perfusão
+    └── tendência
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- pedir sinais vitais cedo;
+- interpretar conjunto;
+- reavaliar após conduta;
+- comunicar deterioração.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você contou FR?
+- [ ] Olhou tendência?
+- [ ] Avaliou perfusão?
+- [ ] Relacionou sinais vitais com hipótese?
+- [ ] Reavaliou após intervenção?

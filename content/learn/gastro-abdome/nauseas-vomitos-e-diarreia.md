@@ -1,245 +1,261 @@
 # Trilha Gastro/Abdome — Náuseas, vômitos e diarreia
 
+
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
+
 ## Objetivo da trilha
 
-Ensinar perdas hidroeletrolíticas, desidratação e causas infecciosas/não infecciosas com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a abordar náuseas, vômitos e diarreia sem cair no rótulo automático de “gastroenterite”. Você deve reconhecer desidratação, abdome agudo, sepse, obstrução, intoxicação, gravidez e risco em vulneráveis.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** vômito e diarreia são sintomas. A decisão depende de gravidade, hidratação, tempo de evolução, sangue, dor e contexto.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de náuseas, vômitos e diarreia.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Avaliar hidratação e perfusão.
+2. Diferenciar gastroenterite simples de doença grave.
+3. Reconhecer diarreia inflamatória.
+4. Identificar vômitos por obstrução ou abdome agudo.
+5. Decidir hidratação oral vs venosa.
+6. Orientar sinais de alarme e retorno.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Náuseas, vômitos e diarreia é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Náuseas, vômitos e diarreia**: Náuseas, vômitos e diarreia é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+A maioria dos quadros agudos é autolimitada, mas você não pode começar por essa suposição. Primeiro exclua gravidade.
 
 ```text
-Náuseas, vômitos e diarreia: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+vômitos/diarreia → perda de água e eletrólitos → desidratação → choque se grave
 ```
+
+**PONTO-CHAVE:**  
+O exame mais importante no início é hidratação/perfusão: mucosas, pulso, PA, enchimento capilar, diurese e estado mental.
+
+**NÃO ERRE:**  
+Diarreia com sangue, febre alta, dor intensa, desidratação, idoso frágil ou imunossuprimido não é “virose simples”.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Gastroenterite secretora/osmótica
 
-Em náuseas, vômitos e diarreia, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Perda de água e eletrólitos, muitas vezes com diarreia aquosa.
 
 ```text
-observação → interpretação → conduta
+mucosa irritada → secreção/perda de água → diarreia → desidratação
 ```
 
-## 3. Risco e priorização
+## Diarreia inflamatória
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Invasão/inflamação da mucosa.
+
+Pistas:
+
+- febre;
+- sangue;
+- muco;
+- dor abdominal importante;
+- tenesmo.
+
+## Vômitos por obstrução
+
+O conteúdo não progride.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+bloqueio intestinal → distensão → náuseas/vômitos → parada de gases/fezes
 ```
+
+## Vômitos sistêmicos/metabólicos
+
+Podem ocorrer em cetoacidose, uremia, gravidez, intoxicações, hipertensão intracraniana e sepse.
+
+**RACIOCÍNIO:**  
+Vômito sem diarreia pede mais cuidado com abdome agudo, obstrução, gravidez, metabólico e neurológico.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Quantas evacuações/vômitos por dia?
+- Há sangue ou muco?
+- Febre?
+- Dor abdominal intensa ou localizada?
+- Consegue ingerir líquidos?
+- Urinou nas últimas horas?
+- Tontura ao levantar?
+- Viagem, alimento suspeito, surto familiar?
+- Uso recente de antibiótico?
+- Comorbidades, imunossupressão, idade extrema?
+- Possibilidade de gravidez?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame físico
 
-## Sinais de alarme
+- Estado geral.
+- Mucosas.
+- PA/FC, inclusive ortostatismo quando seguro.
+- Enchimento capilar.
+- Perfusão periférica.
+- Abdome: dor localizada, distensão, ruídos, defesa.
+- Sinais neurológicos se vômitos sem causa abdominal.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**CUIDADO:**  
+Desidratação grave pode aparecer com letargia, hipotensão, extremidades frias e pouca urina.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use este roteiro:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+1. está desidratado?
+2. há sangue/febre alta?
+3. há dor localizada ou peritonite?
+4. há obstrução?
+5. há fator de risco?
+6. precisa hidratação venosa, exame ou observação?
 ```
 
-O raciocínio deve seguir:
+## Sinais de alarme
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Sangue nas fezes.
+- Dor abdominal intensa ou localizada.
+- Febre alta persistente.
+- Vômitos incoercíveis.
+- Sinais de desidratação.
+- Hipotensão, síncope ou confusão.
+- Idoso frágil, bebê, gestante, imunossuprimido.
+- Uso recente de antibiótico com diarreia importante.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Diagnosticar “virose” sem examinar abdome.
+- Não avaliar diurese.
+- Ignorar sangue nas fezes.
+- Não pensar em obstrução quando há vômitos + distensão + parada de gases.
+- Esquecer gravidez.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Gastroenterite
+## Mini-caso 1 — Gastroenterite leve
 
 ### Cenário
-Paciente com apresentação típica relacionada a gastroenterite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente jovem, diarreia aquosa há 18 horas, náuseas, sem sangue, sem febre alta, dor cólica leve difusa. PA/FC normais, mucosas levemente secas, abdome flácido.
 
 ### Mecanismo principal
-Mecanismo dominante de gastroenterite dentro da trilha náuseas, vômitos e diarreia.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Perda hídrica leve por gastroenterite provável, sem sinais de invasão ou abdome agudo.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Diarreia aquosa.
+- Sem sangue.
+- Sinais vitais normais.
+- Abdome flácido.
 
 ### Pergunta central
-Qual mecanismo explica gastroenterite?
+Por que pode ser manejo ambulatorial?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque não há sinais de alarme, instabilidade, sangue, dor localizada importante ou desidratação moderada/grave.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir exames extensos em quadro leve e inicial sem red flags.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Desidratação
+Treine orientação de hidratação e retorno.
+
+---
+
+## Mini-caso 2 — Diarreia inflamatória
 
 ### Cenário
-Paciente com apresentação típica relacionada a desidratação, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com febre 39 °C, dor abdominal tipo cólica, diarreia com sangue e muco há 2 dias. FC 116, dor difusa sem rigidez.
 
 ### Mecanismo principal
-Mecanismo dominante de desidratação dentro da trilha náuseas, vômitos e diarreia.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Inflamação/invasão da mucosa intestinal com resposta sistêmica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sangue/muco.
+- Febre alta.
+- Taquicardia.
+- Dor abdominal.
 
 ### Pergunta central
-Qual mecanismo explica desidratação?
+Por que não é diarreia simples?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Sangue, febre alta e taquicardia sugerem diarreia inflamatória ou invasiva, exigindo avaliação mais cuidadosa e conduta conforme contexto.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Orientar apenas “soro e casa” sem avaliar gravidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Obstrução intestinal
+Treine diferenciação entre aquosa simples e inflamatória.
+
+---
+
+## Mini-caso 3 — Vômitos por obstrução
 
 ### Cenário
-Paciente com apresentação típica relacionada a obstrução intestinal, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com vômitos repetidos, distensão abdominal, dor em cólica e parada de gases. Cirurgia abdominal prévia.
 
 ### Mecanismo principal
-Mecanismo dominante de obstrução intestinal dentro da trilha náuseas, vômitos e diarreia.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Obstrução intestinal com acúmulo proximal de conteúdo.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Vômitos persistentes.
+- Distensão.
+- Parada de gases.
+- Cirurgia prévia.
 
 ### Pergunta central
-Qual mecanismo explica obstrução intestinal?
+Qual pista tira o caso de gastroenterite?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Distensão e parada de gases/fezes com vômitos sugerem obstrução intestinal.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Chamar de virose sem perguntar eliminação de gases e cirurgias prévias.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Vômitos por hipertensão intracraniana
+Treine abdome obstrutivo.
+
+---
+
+## Mini-caso 4 — Desidratação importante
 
 ### Cenário
-Paciente com apresentação típica relacionada a vômitos por hipertensão intracraniana, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Idoso com vômitos e diarreia há 3 dias, pouca ingesta, tontura, oligúria. PA 90/60, FC 124, mucosas secas, confuso.
 
 ### Mecanismo principal
-Mecanismo dominante de vômitos por hipertensão intracraniana dentro da trilha náuseas, vômitos e diarreia.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Perda hídrica e eletrolítica com hipovolemia e hipoperfusão.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Idoso.
+- Oligúria.
+- Hipotensão/taquicardia.
+- Confusão.
 
 ### Pergunta central
-Qual mecanismo explica vômitos por hipertensão intracraniana?
+Qual é a prioridade?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Reidratação e avaliação de eletrólitos/função renal, além de procurar causa e sinais de infecção/abdome agudo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Subestimar vômitos/diarreia em idoso.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine avaliação de hidratação e risco.
 
 ---
 
@@ -247,70 +263,76 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de náuseas, vômitos e diarreia?
+**Pergunta:** Qual dado mais importa em vômitos e diarreia?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Estado de hidratação/perfusão: PA, FC, mucosas, enchimento capilar, diurese e estado mental.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que define diarreia inflamatória?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Sangue, muco, febre alta, dor abdominal importante e tenesmo sugerem inflamação/invasão.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Quando vômitos sugerem obstrução?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Quando há distensão, dor em cólica, parada de gases/fezes e cirurgia abdominal prévia ou hérnia.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** Quem merece mais cautela?
+
+**Resposta esperada:** Idosos, crianças pequenas, gestantes, imunossuprimidos, pacientes com comorbidades, sinais de desidratação ou incapacidade de ingerir líquidos.
 
 ---
 
 # 7. Mapa final
 
 ```text
-NÁUSEAS, VÔMITOS E DIARREIA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+NÁUSEAS / VÔMITOS / DIARREIA
+├── avaliar hidratação
+│   ├── mucosas
+│   ├── PA/FC
+│   ├── diurese
+│   └── consciência
+├── diarreia aquosa
+│   └── hidratação + sinais de retorno
+├── diarreia inflamatória
+│   ├── sangue/muco
+│   ├── febre
+│   └── dor importante
+├── vômitos isolados
+│   ├── abdome agudo
+│   ├── obstrução
+│   ├── gravidez
+│   └── metabólico/neurológico
+└── decisão
+    ├── oral
+    ├── venosa
+    ├── exames
+    └── observação/encaminhamento
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- hidratação e sinais vitais;
+- história alimentar/epidemiológica;
+- sangue nas fezes;
+- abdome obstrutivo;
+- orientação de retorno.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você avaliou hidratação?
+- [ ] Perguntou sangue/muco?
+- [ ] Procurou dor localizada?
+- [ ] Considerou obstrução?
+- [ ] Pensou em vulneráveis?
+- [ ] Orientou retorno?

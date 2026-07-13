@@ -1,215 +1,260 @@
 # Trilha Respiratório — Sibilância e broncoespasmo
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar que sibilância é manifestação de fluxo turbulento em vias aéreas estreitadas, e que o aluno deve reconhecer gravidade, silêncio auscultatório e diferenças entre asma, DPOC e outras causas.
+Ensinar você a reconhecer sibilância, entender broncoespasmo, avaliar gravidade e diferenciar asma, DPOC, anafilaxia, corpo estranho e edema pulmonar.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** sibilo é som de fluxo passando por via aérea estreitada. Nem todo sibilo é asma.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar o mecanismo do sibilo.
-2. Diferenciar asma e DPOC no raciocínio inicial.
-3. Reconhecer crise grave mesmo quando o sibilo diminui.
-4. Relacionar broncodilatadores à fisiologia do fluxo aéreo.
-5. Aplicar em mini-casos de asma, DPOC e anafilaxia.
+1. Explicar broncoespasmo.
+2. Reconhecer sibilância e expiração prolongada.
+3. Avaliar gravidade da crise.
+4. Diferenciar causas de sibilo.
+5. Entender silêncio auscultatório como sinal grave.
+6. Reavaliar resposta ao broncodilatador.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Som musical, geralmente expiratório, causado por estreitamento de vias aéreas.
-
-## Conceitos obrigatórios
-
-- **Sibilo**: Som musical, geralmente expiratório, causado por estreitamento de vias aéreas.
-- **Broncoespasmo**: Contração da musculatura brônquica com aumento de resistência ao fluxo.
-- **Silêncio auscultatório**: Achado grave: pode significar pouco fluxo de ar, não melhora.
-
-## Frase didática
+Broncoespasmo estreita vias aéreas. O ar entra, mas sai com dificuldade.
 
 ```text
-Sibilância e broncoespasmo: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+via aérea estreita → expiração prolongada → aprisionamento aéreo → esforço
 ```
+
+**PONTO-CHAVE:**  
+Mais sibilo nem sempre significa mais gravidade. Em crise muito grave, pode haver pouco fluxo e pouco som.
+
+**NÃO ERRE:**  
+Silêncio auscultatório em paciente cansado não é melhora.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Resistência ao fluxo
+## Asma
 
-Pequenas reduções no raio da via aérea aumentam muito a resistência, elevando trabalho respiratório.
-
-```text
-via aérea estreita → resistência ↑ → expiração prolongada → sibilo
-```
-
-## 2. Aprisionamento aéreo
-
-Na obstrução, o ar sai com dificuldade. Pode haver hiperinsuflação, fadiga e piora ventilatória.
+Inflamação e hiperresponsividade brônquica.
 
 ```text
-expiração limitada → ar preso → diafragma desfavorável → esforço ↑
+gatilho → inflamação + broncoespasmo → sibilos → V/Q baixo
 ```
 
-## 3. Resposta ao broncodilatador
+## DPOC
 
-SABA relaxa musculatura lisa brônquica e tende a melhorar fluxo; corticoide atua mais lentamente na inflamação.
+Limitação crônica ao fluxo, com exacerbações.
 
 ```text
-β2 agonista → broncodilatação → resistência ↓ → fluxo ↑
+via aérea cronicamente estreita → infecção/poluição → piora aguda
 ```
+
+## Anafilaxia
+
+Broncoespasmo associado a reação sistêmica.
+
+```text
+alérgeno → vasodilatação + edema + broncoespasmo → risco de choque
+```
+
+## Corpo estranho
+
+Obstrução localizada.
+
+```text
+aspiração → sibilo unilateral / tosse súbita / assimetria
+```
+
+## Edema pulmonar
+
+Pode gerar “asma cardíaca” com sibilos por congestão.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Avalie gravidade
 
-## Achados que precisam ser procurados
-
-- Sibilos difusos ou localizados.
-- Expiração prolongada.
-- Fala, FR, esforço e saturação.
-- Murmúrio vesicular reduzido.
+- Fala frases completas?
+- FR.
+- SpO₂.
 - Uso de musculatura acessória.
-- História de asma, tabagismo, DPOC ou alergia.
-
-## Sinais de alarme
-
-- Silêncio auscultatório.
+- Tiragens.
+- Pulso paradoxal quando disponível.
+- Nível de consciência.
 - Exaustão.
-- Alteração de consciência.
-- Hipotensão ou anafilaxia.
+- Ausculta: sibilos difusos ou silêncio.
+
+## Perguntas obrigatórias
+
+- Já teve asma/DPOC?
+- Usa bombinha?
+- Internações/UTI/intubação prévia?
+- Gatilho: infecção, alérgeno, exercício, fumaça?
+- Dor torácica?
+- Febre?
+- Exposição alimentar/medicamentosa?
+- Engasgo súbito?
+
+**CUIDADO:**  
+História de intubação prévia por asma aumenta risco.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+sibilo difuso ou localizado?
+agudo ou crônico?
+tem alergia sistêmica?
+tem infecção?
+tem sinais de coração?
+está grave?
 ```
 
-O raciocínio deve seguir:
+## Red flags
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Fala palavras soltas.
+- Sonolência/confusão.
+- Cianose.
+- SpO₂ baixa.
+- Silêncio auscultatório.
+- Exaustão.
+- Hipotensão.
+- Urticária/edema de face.
+- Início após engasgo.
 
 ## Erros comuns
 
-- Chamar sibilo de bronquite sem avaliar gravidade.
-- Não medir SpO₂.
-- Ignorar redução do murmúrio vesicular.
+- Chamar todo sibilo de asma.
+- Não avaliar fala.
+- Não reavaliar após broncodilatador.
+- Não reconhecer anafilaxia.
+- Ignorar silêncio auscultatório.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Asma grave
+## Mini-caso 1 — Asma moderada/grave
 
 ### Cenário
-Paciente com chiado difuso, dispneia e fala entrecortada.
+Paciente com sibilos difusos, expiração prolongada, fala entrecortada, FR 32, SpO₂ 91%.
 
 ### Mecanismo principal
-Broncoespasmo reversível e inflamação de vias aéreas.
-
-```text
-broncoespasmo → V/Q baixo → dispneia
-```
+Broncoespasmo difuso com aprisionamento aéreo.
 
 ### Achados-chave
-- sibilos difusos
-- gatilho alérgico
-- jovem
-- resposta a SABA
+- Sibilos difusos.
+- Expiração prolongada.
+- Fala entrecortada.
+- SpO₂ baixa.
 
 ### Pergunta central
-O que torna a crise grave?
+Como reavaliar?
 
 ### Resposta esperada
-Fala entrecortada, esforço, SpO₂ baixa, exaustão ou murmúrio reduzido.
+Fala, FR, SpO₂, esforço, ausculta e sensação de melhora após broncodilatador.
 
 ### Erro comum
-Achar que todo sibilo intenso é pior que silêncio auscultatório.
+Dar broncodilatador e não medir resposta.
 
 ### Ponte para OSCE
-Treinar gravidade e sequência terapêutica.
-## Mini-caso 2 — DPOC exacerbado
+Treine crise asmática.
+
+---
+
+## Mini-caso 2 — Anafilaxia
 
 ### Cenário
-Tabagista com dispneia progressiva, tosse crônica e sibilos.
+Paciente após alimento novo com urticária, edema labial, chiado, rouquidão e tontura.
 
 ### Mecanismo principal
-Obstrução crônica com limitação ao fluxo e possível retenção de CO₂.
-
-```text
-obstrução crônica → ventilação alveolar ↓ → CO₂ pode subir
-```
+Reação sistêmica com broncoespasmo, edema de via aérea e vasodilatação.
 
 ### Achados-chave
-- idade maior
-- tabagismo
-- tórax em tonel
-- saturação alvo cautelosa
+- Urticária.
+- Edema labial.
+- Sibilos.
+- Tontura/hipotensão possível.
 
 ### Pergunta central
-Por que oxigênio deve ter alvo?
+Por que não é só asma?
 
 ### Resposta esperada
-Porque alguns pacientes retêm CO₂ e precisam oxigênio controlado, não hiperóxia indiscriminada.
+Porque há sinais cutâneos e de via aérea sistêmica após exposição. Anafilaxia é emergência.
 
 ### Erro comum
-Dar alto fluxo sem reavaliar CO₂ em DPOC retentor.
+Tratar apenas com broncodilatador.
 
 ### Ponte para OSCE
-Treinar oxigênio controlado e VNI quando indicado.
-## Mini-caso 3 — Anafilaxia
+Treine alergia sistêmica.
+
+---
+
+## Mini-caso 3 — Corpo estranho
 
 ### Cenário
-Sibilância súbita após alimento/medicamento, urticária e hipotensão.
+Criança com tosse súbita após comer amendoim, sibilo unilateral e assimetria de murmúrio vesicular.
 
 ### Mecanismo principal
-Broncoespasmo associado a reação sistêmica.
-
-```text
-mediadores → broncoespasmo + vasodilatação → choque
-```
+Obstrução localizada de via aérea.
 
 ### Achados-chave
-- urticária
-- edema
-- hipotensão
-- início súbito
+- Início súbito.
+- Engasgo.
+- Assimetria.
+- Sibilo unilateral.
 
 ### Pergunta central
-Por que não tratar como asma comum?
+Qual dado muda hipótese?
 
 ### Resposta esperada
-Porque é quadro sistêmico com risco de choque e via aérea.
+Início súbito durante alimentação e assimetria sugerem corpo estranho.
 
 ### Erro comum
-Esquecer adrenalina quando há anafilaxia.
+Tratar como bronquite.
 
 ### Ponte para OSCE
-Treinar reconhecimento de emergência alérgica.
+Treine história de engasgo.
+
+---
+
+## Mini-caso 4 — Asma cardíaca
+
+### Cenário
+Idoso com dispneia, sibilos, crepitações, ortopneia, edema e turgência jugular.
+
+### Mecanismo principal
+Congestão pulmonar pode estreitar vias aéreas e produzir sibilos.
+
+### Achados-chave
+- Ortopneia.
+- Crepitações.
+- Edema.
+- Jugular elevada.
+
+### Pergunta central
+Por que pode não ser asma?
+
+### Resposta esperada
+Sinais de congestão cardíaca apontam para IC/edema pulmonar com sibilância secundária.
+
+### Erro comum
+Ignorar coração diante de sibilo.
+
+### Ponte para OSCE
+Treine diferencial cardio-respiratório.
 
 ---
 
@@ -217,25 +262,27 @@ Treinar reconhecimento de emergência alérgica.
 
 ## Questão ativa 1
 
-**Pergunta:** Sibilo sempre significa asma?
+**Pergunta:** Todo sibilo é asma?
 
-**Resposta esperada:** Não. Pode ocorrer em DPOC, anafilaxia, corpo estranho, edema pulmonar e compressões de via aérea.
+**Resposta esperada:** Não. Pode ser DPOC, anafilaxia, corpo estranho, edema pulmonar, tumor ou bronquiolite em crianças.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 2
 
-**Pergunta:** Por que silêncio auscultatório é perigoso?
+**Pergunta:** Qual sibilância é mais grave: barulhenta ou silenciosa?
 
-**Resposta esperada:** Pode indicar fluxo de ar muito reduzido por obstrução extrema e fadiga.
+**Resposta esperada:** O silêncio em paciente grave pode indicar fluxo muito baixo e fadiga, sendo mais preocupante.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 3
 
-**Pergunta:** Corticoide melhora imediatamente a ausculta?
+**Pergunta:** O que reavaliar após broncodilatador?
 
-**Resposta esperada:** Não costuma ser imediato; reduz inflamação e recorrência, enquanto broncodilatador age mais rapidamente no broncoespasmo.
+**Resposta esperada:** Fala, FR, SpO₂, esforço, ausculta, FC e estado mental.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
+## Questão ativa 4
+
+**Pergunta:** Sibilo com urticária e edema sugere o quê?
+
+**Resposta esperada:** Anafilaxia até prova contrária.
 
 ---
 
@@ -243,42 +290,44 @@ Treinar reconhecimento de emergência alérgica.
 
 ```text
 SIBILÂNCIA
-├── difusa: asma, DPOC, anafilaxia
-├── localizada: corpo estranho, lesão obstrutiva
-├── com urticária/choque: anafilaxia
-└── silêncio auscultatório: gravidade extrema
+├── asma
+│   ├── gatilho
+│   ├── sibilos difusos
+│   └── reversibilidade
+├── DPOC
+│   ├── tabagismo
+│   └── limitação crônica
+├── anafilaxia
+│   ├── urticária
+│   ├── edema
+│   └── hipotensão
+├── corpo estranho
+│   ├── súbito
+│   └── unilateral
+└── gravidade
+    ├── fala
+    ├── SpO₂
+    ├── esforço
+    └── silêncio
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- ausculta respiratória
-- classificação de crise asmática
-- tratamento inicial e reavaliação
-- diferenciação asma/DPOC
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- ausculta;
+- gravidade da crise;
+- diferenciais de sibilo;
+- reavaliação pós-conduta.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você avaliou fala?
+- [ ] Procurou silêncio auscultatório?
+- [ ] Pensou em anafilaxia?
+- [ ] Perguntou engasgo?
+- [ ] Reavaliou após broncodilatador?

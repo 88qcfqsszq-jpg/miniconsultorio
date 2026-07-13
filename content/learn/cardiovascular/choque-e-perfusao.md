@@ -1,245 +1,248 @@
 # Trilha Cardiovascular — Choque e perfusão
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar hipoperfusão tecidual por mecanismos hipovolêmico, cardiogênico, obstrutivo e distributivo com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a reconhecer choque antes da hipotensão tardia, entender perfusão tecidual e classificar os mecanismos principais: hipovolêmico, distributivo, cardiogênico e obstrutivo.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** choque é falha de entrega de oxigênio aos tecidos. PA baixa ajuda, mas não é obrigatória no começo.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de choque e perfusão.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Reconhecer sinais clínicos de hipoperfusão.
+2. Diferenciar choque compensado e descompensado.
+3. Separar mecanismos de choque.
+4. Relacionar pele, pulso, pressão, consciência e diurese.
+5. Identificar condutas iniciais seguras por mecanismo.
+6. Apresentar choque no OSCE sem depender de diagnóstico fechado.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Choque e perfusão é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Choque e perfusão**: Choque e perfusão é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Choque não é sinônimo de pressão baixa. Pressão baixa pode ser tarde.
 
 ```text
-Choque e perfusão: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+falha de circulação → menos O₂ nos tecidos → metabolismo anaeróbio → lactato → disfunção orgânica
 ```
+
+**PONTO-CHAVE:**  
+Extremidades frias, confusão, oligúria, enchimento capilar lento e taquicardia podem avisar antes da hipotensão.
+
+**NÃO ERRE:**  
+Paciente “normotenso” com má perfusão pode estar em choque compensado.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
+## Choque hipovolêmico
 
-Em choque e perfusão, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+Falta volume intravascular.
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+hemorragia/desidratação → pré-carga cai → débito cardíaco cai → pele fria/taquicardia
 ```
 
-## 2. Semiologia aplicada
+## Choque distributivo
 
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Vasodilatação e má distribuição do fluxo.
 
 ```text
-observação → interpretação → conduta
+sepse/anafilaxia/neurogênico → vasodilatação → resistência cai → perfusão inadequada
 ```
 
-## 3. Risco e priorização
+Na sepse inicial, pele pode estar quente. Depois pode ficar fria.
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+## Choque cardiogênico
+
+Bomba falha.
 
 ```text
-red flag → estabilizar/encaminhar → investigar
+IAM/arritmia/IC grave → débito cai → congestão + hipoperfusão
+```
+
+Pistas: crepitações, turgência jugular, B3, edema, dor torácica.
+
+## Choque obstrutivo
+
+Algo impede enchimento ou ejeção.
+
+```text
+TEP maciço / tamponamento / pneumotórax hipertensivo → retorno ou ejeção prejudicados
 ```
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Procure hipoperfusão
 
-## Achados que precisam ser procurados
+- Confusão, sonolência ou agitação.
+- Extremidades frias/moteadas.
+- Enchimento capilar > 3 s.
+- Pulso fino.
+- Oligúria.
+- Taquicardia.
+- Lactato elevado quando disponível.
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Leia a pele
 
-## Sinais de alarme
+- Fria e úmida: hipovolêmico, cardiogênico ou fase tardia.
+- Quente e ruborizada: distributivo inicial possível.
+- Cianose/moteamento: perfusão ruim.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+## Pressão de pulso
+
+- Estreita: baixo volume sistólico.
+- Ampla: vasodilatação/distributivo possível.
+
+**CUIDADO:**  
+Beta-bloqueador, idoso e marcapasso podem reduzir resposta taquicárdica.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use a pergunta:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+o problema é volume, vaso, bomba ou obstrução?
 ```
 
-O raciocínio deve seguir:
+## Atalhos clínicos
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Hemorragia/vômitos/diarreia → hipovolêmico.
+- Febre/foco infeccioso → distributivo séptico.
+- Dor torácica/crepitações/B3 → cardiogênico.
+- Dispneia súbita/JVP/pneumotórax/tamponamento → obstrutivo.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Esperar PA cair.
+- Dar muito volume em choque cardiogênico sem reavaliar congestão.
+- Não procurar sangramento oculto.
+- Não medir diurese.
+- Não reavaliar após intervenção.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Choque séptico
+## Mini-caso 1 — Choque séptico inicial
 
 ### Cenário
-Paciente com apresentação típica relacionada a choque séptico, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente febril, confuso, FC 126, PA 104/68, extremidades quentes, enchimento capilar 4s, lactato elevado. Suspeita de pneumonia.
 
 ### Mecanismo principal
-Mecanismo dominante de choque séptico dentro da trilha choque e perfusão.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Vasodilatação e disfunção microcirculatória por resposta inflamatória sistêmica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Febre/foco infeccioso.
+- Confusão.
+- Taquicardia.
+- Lactato/perfusão ruim.
 
 ### Pergunta central
-Qual mecanismo explica choque séptico?
+Por que pode ser choque mesmo sem hipotensão?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque há hipoperfusão: confusão, enchimento lento, lactato elevado e taquicardia. A PA pode estar compensada.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Esperar hipotensão para agir.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Choque cardiogênico
+Treine sepse como perfusão, não apenas febre.
+
+---
+
+## Mini-caso 2 — Choque hipovolêmico
 
 ### Cenário
-Paciente com apresentação típica relacionada a choque cardiogênico, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com hematêmese, palidez, sudorese, FC 138, PA 88/54, extremidades frias, pulso fino.
 
 ### Mecanismo principal
-Mecanismo dominante de choque cardiogênico dentro da trilha choque e perfusão.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Perda de volume intravascular com queda de pré-carga e débito cardíaco.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Sangramento.
+- Pele fria.
+- Taquicardia.
+- Hipotensão.
 
 ### Pergunta central
-Qual mecanismo explica choque cardiogênico?
+Qual é o mecanismo dominante?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Hipovolemia por sangramento. A prioridade é ABC, acesso venoso, reposição, hemoderivados quando indicado e controle da fonte.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Focar no diagnóstico etiológico antes de ressuscitar.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — TEP maciço
+Treine choque hemorrágico.
+
+---
+
+## Mini-caso 3 — Choque cardiogênico
 
 ### Cenário
-Paciente com apresentação típica relacionada a tep maciço, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dor torácica, dispneia, PA 82/60, FC 118, crepitações difusas, extremidades frias e turgência jugular.
 
 ### Mecanismo principal
-Mecanismo dominante de tep maciço dentro da trilha choque e perfusão.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Falha de bomba com congestão pulmonar e baixo débito.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dor torácica.
+- Congestão pulmonar.
+- Turgência jugular.
+- Hipoperfusão.
 
 ### Pergunta central
-Qual mecanismo explica tep maciço?
+Por que volume excessivo pode piorar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque o problema é bomba/congestão, não apenas falta de volume. Fluido pode agravar edema pulmonar.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar todo choque com grande volume sem classificar mecanismo.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Hemorragia
+Treine perfusão + congestão.
+
+---
+
+## Mini-caso 4 — Choque obstrutivo por pneumotórax hipertensivo
 
 ### Cenário
-Paciente com apresentação típica relacionada a hemorragia, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com dispneia súbita, dor torácica, hipotensão, turgência jugular, murmúrio vesicular muito reduzido unilateral e desvio traqueal tardio.
 
 ### Mecanismo principal
-Mecanismo dominante de hemorragia dentro da trilha choque e perfusão.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Aumento da pressão intratorácica reduz retorno venoso e gera choque obstrutivo.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Dispneia súbita.
+- MV unilateral reduzido.
+- Turgência jugular.
+- Hipotensão.
 
 ### Pergunta central
-Qual mecanismo explica hemorragia?
+Por que não esperar radiografia?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque pneumotórax hipertensivo é diagnóstico clínico em paciente instável. Atraso em descompressão pode ser fatal.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir imagem antes de tratar instabilidade evidente.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine decisão tempo-dependente.
 
 ---
 
@@ -247,70 +250,67 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de choque e perfusão?
+**Pergunta:** Choque exige hipotensão?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Não. Choque é hipoperfusão. Hipotensão pode aparecer tarde.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** Como diferenciar cardiogênico de hipovolêmico?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Cardiogênico costuma ter congestão, turgência jugular, crepitações ou dor torácica. Hipovolêmico tem história de perda e pouca congestão.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Qual pergunta organiza choque?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** O problema é volume, vaso, bomba ou obstrução?
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** O que você reavalia após intervenção?
+
+**Resposta esperada:** PA, FC, perfusão, consciência, diurese, SpO₂, ausculta pulmonar e lactato quando disponível.
 
 ---
 
 # 7. Mapa final
 
 ```text
-CHOQUE E PERFUSÃO
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+CHOQUE
+├── hipovolêmico
+│   ├── sangramento
+│   └── desidratação
+├── distributivo
+│   ├── sepse
+│   ├── anafilaxia
+│   └── neurogênico
+├── cardiogênico
+│   ├── IAM
+│   ├── arritmia
+│   └── IC grave
+└── obstrutivo
+    ├── TEP maciço
+    ├── tamponamento
+    └── pneumotórax hipertensivo
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- reconhecer hipoperfusão;
+- classificar mecanismo;
+- reavaliar após conduta;
+- comunicar choque sem diagnóstico fechado.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você procurou hipoperfusão?
+- [ ] Classificou volume/vaso/bomba/obstrução?
+- [ ] Evitou tratar todos com a mesma conduta?
+- [ ] Reavaliou resposta?

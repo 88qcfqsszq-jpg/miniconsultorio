@@ -2,244 +2,266 @@
 
 ## Objetivo da trilha
 
-Ensinar resposta infecciosa sistêmica com disfunção orgânica e risco de choque com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Você vai aprender a reconhecer sepse como **infecção com disfunção orgânica**, não como “infecção forte”.
 
-A trilha deve sempre conectar três camadas:
+Choque séptico é ainda mais grave: há falência circulatória/metabólica com risco alto de morte se você atrasar reconhecimento, ressuscitação e controle do foco.
+
+A pergunta central é:
 
 ```text
-conceito de base → manifestação clínica → decisão no atendimento
+Este paciente infectado está perfundindo órgãos adequadamente?
 ```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
-
----
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de sepse e choque séptico.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Suspeitar de sepse antes do resultado dos exames.
+2. Reconhecer sinais de hipoperfusão.
+3. Diferenciar infecção localizada, sepse e choque séptico.
+4. Entender lactato, oligúria, confusão e hipotensão como sinais de disfunção.
+5. Priorizar ABCDE, acesso venoso, coleta útil, antibiótico e reposição volêmica conforme gravidade/protocolo.
+6. Evitar atraso terapêutico por busca excessiva de confirmação.
+7. Reavaliar resposta clínica.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Sepse e choque séptico é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
+Sepse não é sinônimo de febre. Sepse é infecção com órgão sofrendo.
 
-## Conceitos obrigatórios
+Você deve pensar em sepse quando uma infecção vem acompanhada de:
 
-- **Sepse e choque séptico**: Sepse e choque séptico é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
+- confusão;
+- hipotensão;
+- taquipneia;
+- hipoxemia;
+- oligúria;
+- extremidades frias;
+- lactato elevado;
+- piora rápida;
+- plaquetopenia ou disfunção renal/hepática.
 
-## Frase didática
+**PONTO-CHAVE:**  
+O paciente pode estar séptico sem febre alta. Idosos, imunossuprimidos e pacientes graves podem ter febre baixa, hipotermia ou ausência de febre.
 
-```text
-Sepse e choque séptico: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
-```
+**NÃO ERRE:**  
+Não espere cultura para tratar paciente instável. Cultura ajuda a ajustar. A clínica decide a urgência inicial.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
-
-Em sepse e choque séptico, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+A sepse começa com infecção, mas o dano vem da resposta sistêmica desregulada.
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+infecção
+→ resposta inflamatória sistêmica
+→ vasodilatação
+→ extravasamento capilar
+→ microtrombose/disfunção endotelial
+→ hipoperfusão
+→ disfunção orgânica
 ```
 
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+No choque séptico, a circulação falha:
 
 ```text
-observação → interpretação → conduta
+vasodilatação intensa + extravasamento
+→ queda do volume circulante efetivo
+→ hipotensão
+→ menor entrega de O₂ aos tecidos
+→ lactato pode subir
+→ órgãos começam a falhar
 ```
 
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+**RACIOCÍNIO:**  
+A PA pode estar normal no começo. Taquicardia, extremidades frias, confusão, oligúria e lactato alterado podem aparecer antes do colapso evidente.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+Você deve examinar perfusão, consciência, respiração e foco.
 
-## Achados que precisam ser procurados
+## Perfusão
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+- PA baixa ou queda da PA habitual.
+- FC elevada.
+- Extremidades frias.
+- TEC lento.
+- Pele marmórea.
+- Oligúria.
+- Tontura ou síncope.
+- Lactato elevado quando disponível.
 
-## Sinais de alarme
+## Consciência
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+- confusão;
+- sonolência;
+- delirium;
+- agitação;
+- piora do contato.
+
+## Respiração
+
+- FR elevada;
+- dispneia;
+- SpO₂ baixa;
+- uso de musculatura acessória.
+
+## Foco provável
+
+- Pulmão: tosse, crepitações, hipoxemia.
+- Urina: disúria, dor lombar, dor suprapúbica.
+- Abdome: dor localizada, icterícia, peritonite.
+- SNC: cefaleia, meningismo, convulsão.
+- Pele: celulite, ferida, abscesso, necrose.
+
+**PONTO-CHAVE:**  
+FR alta em sepse pode ser compensação metabólica, não apenas problema pulmonar.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use uma lógica simples:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+infecção suspeita
++ sinal de órgão sofrendo
+= pense em sepse
 ```
 
-O raciocínio deve seguir:
+Depois pergunte:
 
 ```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
+1. Preciso estabilizar agora?
+2. Qual foco é provável?
+3. O paciente precisa antibiótico precoce?
+4. Preciso coletar culturas sem atrasar tratamento?
+5. Preciso volume? oxigênio? vasopressor? UTI?
+6. Como vou reavaliar resposta?
 ```
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Achar que sepse precisa de febre alta.
+- Esperar leucocitose para agir.
+- Pedir muitos exames antes de tratar paciente instável.
+- Não medir/reavaliar PA, perfusão e diurese.
+- Dar volume sem reavaliar congestão, especialmente em IC/DRC.
+- Não procurar foco.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Sepse respiratória
+## Mini-caso 1 — Sepse respiratória por pneumonia
 
 ### Cenário
-Paciente com apresentação típica relacionada a sepse respiratória, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 71 anos com febre, tosse purulenta e dispneia há 3 dias. PA 92/58, FC 124, FR 32, SpO₂ 88%, confuso, crepitações em base direita, extremidades frias.
 
-### Mecanismo principal
-Mecanismo dominante de sepse respiratória dentro da trilha sepse e choque séptico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- foco respiratório provável;
+- hipoxemia;
+- hipotensão;
+- confusão;
+- taquipneia;
+- hipoperfusão.
 
 ### Pergunta central
-Qual mecanismo explica sepse respiratória?
+Por que este caso já é sepse provável, e não apenas pneumonia?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque há infecção provável associada a disfunção orgânica/hipoperfusão: confusão, hipotensão, hipoxemia e extremidades frias.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir RX e esperar resultado antes de oxigenar, monitorar e iniciar abordagem de sepse.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Sepse urinária
+Treine pneumonia grave: ABCDE, oxigênio, acesso, exames úteis, antibiótico conforme protocolo e reavaliação.
+
+---
+
+## Mini-caso 2 — Sepse urinária / pielonefrite
 
 ### Cenário
-Paciente com apresentação típica relacionada a sepse urinária, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher de 58 anos, diabética, febre, calafrios, disúria e dor lombar direita. PA 100/64, FC 116, FR 24, dor à punho-percussão lombar, náuseas, prostração.
 
-### Mecanismo principal
-Mecanismo dominante de sepse urinária dentro da trilha sepse e choque séptico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- foco urinário alto;
+- diabetes;
+- febre com calafrios;
+- taquicardia;
+- prostração;
+- dor lombar.
 
 ### Pergunta central
-Qual mecanismo explica sepse urinária?
+O que diferencia cistite simples de pielonefrite com risco sistêmico?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Febre, calafrios, dor lombar, náuseas, prostração e sinais vitais alterados indicam infecção alta/sistêmica, não apenas bexiga.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Tratar como cistite simples e usar esquema inadequado para pielonefrite.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine ITU/pielonefrite: diferenciar infecção baixa, alta e urosepse.
+
+---
+
 ## Mini-caso 3 — Choque séptico
 
 ### Cenário
-Paciente com apresentação típica relacionada a choque séptico, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com infecção abdominal suspeita. PA 78/46, FC 138, FR 34, pele fria/marmórea, confuso, oligúria, lactato elevado. Dor abdominal difusa com defesa.
 
-### Mecanismo principal
-Mecanismo dominante de choque séptico dentro da trilha sepse e choque séptico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- hipotensão importante;
+- hipoperfusão;
+- alteração mental;
+- oligúria;
+- provável foco abdominal;
+- lactato elevado.
 
 ### Pergunta central
-Qual mecanismo explica choque séptico?
+Por que este paciente não pode esperar investigação completa antes de intervenção?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Porque há choque: órgãos não estão perfundindo. A investigação deve ocorrer em paralelo à ressuscitação, antibiótico e controle do foco conforme protocolo.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Pedir tomografia antes de iniciar medidas de estabilização.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Paciente idoso confuso
+Treine priorização: estabilizar, tratar, reavaliar e acionar suporte.
+
+---
+
+## Mini-caso 4 — Idoso com sepse atípica
 
 ### Cenário
-Paciente com apresentação típica relacionada a paciente idoso confuso, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mulher de 84 anos trazida por “sonolência e queda”. Afebril no momento. PA 94/60, FC 108, FR 26. Família relata redução de ingesta e diurese. Urina com odor forte. Está desorientada.
 
-### Mecanismo principal
-Mecanismo dominante de paciente idoso confuso dentro da trilha sepse e choque séptico.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- idosa frágil;
+- ausência de febre não tranquiliza;
+- delirium;
+- oligúria;
+- taquipneia;
+- foco urinário possível.
 
 ### Pergunta central
-Qual mecanismo explica paciente idoso confuso?
+Por que você deve pensar em sepse mesmo sem febre alta?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Idosos podem ter resposta febril menor. Delirium, taquipneia, hipotensão relativa e oligúria são sinais de gravidade.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Atribuir sonolência à idade ou sedação sem investigar infecção e perfusão.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine apresentação atípica no idoso: sinais vitais, foco, delirium e risco.
 
 ---
 
@@ -247,37 +269,65 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de sepse e choque séptico?
+**Pergunta:** Sepse precisa de febre alta?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Não. Sepse é infecção com disfunção orgânica. Pode ocorrer com febre baixa, hipotermia ou sem febre, especialmente em idosos e imunossuprimidos.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Evita atraso diagnóstico.
+
+---
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que pesa mais: leucócitos normais ou paciente confuso e hipotenso?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** A clínica. Confusão e hipotensão sugerem disfunção/hipoperfusão mesmo que o hemograma ainda não esteja marcante.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Sepse é tempo-dependente.
+
+---
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Por que coletar cultura não pode atrasar antibiótico em paciente instável?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Cultura ajuda a ajustar tratamento, mas em choque a prioridade é reduzir tempo até terapia efetiva e suporte hemodinâmico.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** Atraso aumenta risco de pior evolução.
+
+---
+
+## Questão ativa 4
+
+**Pergunta:** Como você reavalia resposta inicial?
+
+**Resposta esperada:** PA, FC, FR, SpO₂, consciência, perfusão periférica, diurese, lactato quando disponível e necessidade de suporte.
+
+**Por que importa:** Conduta sem reavaliação é incompleta.
 
 ---
 
 # 7. Mapa final
 
 ```text
-SEPSE E CHOQUE SÉPTICO
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+INFECÇÃO SUSPEITA
+├── sem disfunção
+│   └── investigar foco + tratar conforme gravidade
+│
+├── sepse
+│   ├── confusão
+│   ├── taquipneia
+│   ├── hipoxemia
+│   ├── oligúria
+│   ├── hipotensão relativa
+│   └── disfunção laboratorial
+│
+└── choque séptico
+    ├── hipotensão persistente
+    ├── hipoperfusão
+    ├── lactato elevado
+    ├── necessidade de suporte hemodinâmico
+    └── risco alto de morte
 ```
 
 ---
@@ -286,31 +336,41 @@ SEPSE E CHOQUE SÉPTICO
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- pneumonia grave;
+- pielonefrite;
+- sepse abdominal;
+- idoso confuso.
+
+Você deve demonstrar:
+
+- reconhecimento de gravidade;
+- exame dirigido;
+- hipótese sindrômica;
+- conduta inicial;
+- comunicação de risco.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+Treine evolução:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- paciente séptico compensado piorando;
+- choque com resposta parcial a volume;
+- hipoxemia associada;
+- necessidade de reavaliação seriada.
+
+Você deve aprender que sepse é dinâmica: o paciente pode mudar em minutos.
 
 ---
 
-# 9. Checklist de curadoria
+# Referências-base para curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- Ministério da Saúde. Dengue: diagnóstico e manejo clínico — adulto e criança.
+- Surviving Sepsis Campaign. International Guidelines for Management of Sepsis and Septic Shock 2021.
+- CDC. Bacterial meningitis / meningococcal disease: sinais, sintomas e urgência clínica.
+- WHO. Tuberculosis fact sheet e materiais de diagnóstico/tratamento.
+- WHO AWaRe Antibiotic Book: princípios de uso racional de antimicrobianos.
+- IDSA/NICE: princípios de ITU, pielonefrite e antimicrobianos, com adaptação à realidade local e protocolos institucionais.
+
+> Este material é educacional. Condutas, doses, fluxos e critérios de internação devem ser ajustados ao protocolo local, faixa etária, gestação, comorbidades, alergias, resistência bacteriana e gravidade clínica.

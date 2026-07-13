@@ -1,216 +1,269 @@
 # Trilha Cardiovascular — Dor torácica e síndrome coronariana
 
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
+
 ## Objetivo da trilha
 
-Ensinar a separar dor torácica potencialmente isquêmica de causas respiratórias, digestivas e musculoesqueléticas, priorizando risco e sinais de instabilidade.
+Ensinar você a abordar dor torácica com segurança: reconhecer risco imediato, diferenciar causas cardíacas e não cardíacas, identificar síndrome coronariana aguda e não atrasar ECG, monitorização e conduta inicial.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** dor torácica não começa com “é ansiedade ou infarto?”. Começa com: **esse paciente pode morrer agora?**
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Caracterizar dor torácica por localização, qualidade, irradiação, duração, gatilhos e alívio.
-2. Reconhecer padrão anginoso.
-3. Identificar sinais de instabilidade.
-4. Diferenciar SCA, TEP, dissecção, pneumotórax e refluxo.
-5. Saber quando ECG e conduta não devem atrasar.
+1. Reconhecer dor torácica potencialmente grave.
+2. Diferenciar SCA, dissecção, TEP, pneumotórax e causas benignas.
+3. Entender por que ECG precoce muda conduta.
+4. Usar sinais vitais e perfusão como prioridade.
+5. Interpretar troponina dentro do tempo de dor.
+6. Apresentar dor torácica de forma objetiva no OSCE.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Desconforto retroesternal em pressão/aperto, precipitado por esforço ou estresse e aliviado por repouso/nitrato.
-
-## Conceitos obrigatórios
-
-- **Dor anginosa**: Desconforto retroesternal em pressão/aperto, precipitado por esforço ou estresse e aliviado por repouso/nitrato.
-- **Equivalentes anginosos**: Dispneia, náusea, sudorese, fadiga ou dor epigástrica podem representar isquemia.
-- **Risco**: Idade, diabetes, hipertensão, tabagismo e história familiar aumentam probabilidade.
-
-## Frase didática
+Dor torácica é uma síndrome tempo-dependente. Você precisa excluir primeiro as causas que matam:
 
 ```text
-Dor torácica e síndrome coronariana: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+SCA → arritmia/choque/necrose
+dissecção → ruptura/isquemia
+TEP → hipóxia/choque
+pneumotórax hipertensivo → choque obstrutivo
+tamponamento → choque obstrutivo
 ```
+
+**PONTO-CHAVE:**  
+ECG normal não encerra investigação se a história for preocupante. Troponina normal muito precoce também não exclui infarto.
+
+**NÃO ERRE:**  
+Não chame de ansiedade antes de avaliar sinais vitais, ECG, fatores de risco e características da dor.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Isquemia miocárdica
+## Síndrome coronariana aguda
 
-Oferta de oxigênio ao miocárdio fica insuficiente para demanda, gerando dor/alterações elétricas.
+O problema é redução súbita do fluxo coronariano.
 
 ```text
-placa/trombo → fluxo coronário ↓ → isquemia → dor/ECG/troponina
+placa instável → trombo → isquemia miocárdica → dor/alteração ECG/troponina
 ```
 
-## 2. Dor não cardíaca
+A apresentação pode ser típica ou atípica, especialmente em mulheres, idosos e diabéticos.
 
-Dor reprodutível, pontada localizada e dependente de movimento favorece parede torácica, mas não exclui risco em paciente vulnerável.
+## Dissecção de aorta
+
+Ruptura da camada íntima da aorta cria falso lúmen.
 
 ```text
-músculo/costela → dor localizada → piora com movimento/palpação
+dor súbita intensa → irradiação dorsal → assimetria de pulso/PA → risco de ruptura
 ```
 
-## 3. Emergências mimetizadoras
+## TEP
 
-TEP, dissecção e pneumotórax podem matar e precisam entrar no diferencial conforme início e sinais associados.
+Obstrução vascular pulmonar.
 
 ```text
-dor torácica + instabilidade → pensar além de SCA
+trombo → aumento de resistência pulmonar → dispneia/dor pleurítica/hipoxemia/choque
+```
+
+## Pneumotórax hipertensivo
+
+Ar entra no tórax e não sai.
+
+```text
+pressão intratorácica sobe → retorno venoso cai → choque obstrutivo
 ```
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas obrigatórias
 
-## Achados que precisam ser procurados
+- Início súbito ou progressivo?
+- Dor em aperto, peso, queimação, facada ou rasgo?
+- Irradia para braço, mandíbula, dorso?
+- Duração maior que 20 minutos?
+- Piora com esforço?
+- Melhora com repouso?
+- Dispneia, síncope, sudorese, náuseas?
+- Fatores de risco: HAS, diabetes, tabagismo, dislipidemia, DAC prévia?
+- Uso de cocaína/estimulantes? Trauma? Imobilização? Cirurgia recente?
+- Dor pleurítica ou dependente de posição?
 
-- Características da dor.
-- Irradiação para braço, mandíbula, dorso.
-- Sudorese, náusea, dispneia.
-- PA nos dois braços se suspeita dissecção.
-- Ausculta cardíaca/pulmonar.
-- Sinais de choque.
-- ECG precoce em dor suspeita.
+## Exame físico
 
-## Sinais de alarme
+- PA nos dois braços quando suspeita de dissecção.
+- FC, FR, SpO₂, temperatura.
+- Perfusão, sudorese, estado mental.
+- Ausculta cardíaca: sopros, B3, atrito.
+- Ausculta pulmonar: assimetria, crepitações, MV reduzido.
+- Pulsos periféricos.
+- Sinais de TVP.
 
-- Hipotensão.
-- Síncope.
-- Sudorese intensa.
-- Dor súbita máxima.
-- Déficit neurológico.
+**PONTO-CHAVE:**  
+Paciente com dor torácica e instabilidade é grave mesmo antes de diagnóstico fechado.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Sequência segura:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+1. sinais vitais e estabilidade
+2. ECG precoce
+3. hipóteses que matam
+4. troponina seriada quando indicado
+5. imagem direcionada se suspeita não coronariana grave
+6. reavaliação
 ```
 
-O raciocínio deve seguir:
+## Pistas de SCA
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Dor opressiva retroesternal.
+- Esforço ou repouso prolongado.
+- Irradiação.
+- Sudorese, náuseas, dispneia.
+- Fatores de risco.
+- ECG/troponina alterados.
+
+## Pistas contra “dor benigna”
+
+- Síncope.
+- Hipotensão.
+- Hipoxemia.
+- Dor súbita máxima no início.
+- Déficit neurológico.
+- Assimetria de pulso.
+- Dor persistente com sudorese.
 
 ## Erros comuns
 
-- Banalizar dor em jovem sem avaliar red flags.
-- Esquecer equivalentes anginosos em mulheres/diabéticos.
-- Não registrar sinais vitais.
+- Esperar troponina para fazer ECG.
+- Valorizar menos dor em mulheres, idosos ou diabéticos.
+- Usar “dor reprodutível” para excluir SCA de forma absoluta.
+- Não pensar em dissecção quando dor irradia para dorso.
+- Dar alta sem reavaliar dor persistente.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — SCA
+## Mini-caso 1 — SCA provável
 
 ### Cenário
-Homem 58a com pressão retroesternal ao esforço, irradiação para braço esquerdo e sudorese.
+Paciente de 58 anos, hipertenso e diabético, dor retroesternal em aperto há 40 minutos, irradiando para braço esquerdo, com sudorese e náuseas. PA 150/90, FC 104. ECG deve ser feito imediatamente.
 
 ### Mecanismo principal
-Isquemia miocárdica por redução de fluxo coronariano.
-
-```text
-trombo coronário → isquemia → dor
-```
+Isquemia miocárdica por redução aguda do fluxo coronariano.
 
 ### Achados-chave
-- dor em aperto
-- irradiação
-- sudorese
-- fatores de risco
+- Dor opressiva prolongada.
+- Irradiação.
+- Sudorese/náuseas.
+- Fatores de risco.
 
 ### Pergunta central
-Qual primeira prioridade diagnóstica?
+Qual é o primeiro exame que muda conduta?
 
 ### Resposta esperada
-Reconhecer risco e obter ECG/avaliação urgente sem banalizar sintomas.
+ECG precoce, porque identifica supradesnivelamento, arritmias ou sinais de isquemia que mudam prioridade e fluxo de atendimento.
 
 ### Erro comum
-Chamar de gastrite sem avaliar risco.
+Pedir enzimas e esperar resultado antes do ECG.
 
 ### Ponte para OSCE
-Treinar dor torácica no OSCE.
+Treine abordagem rápida, linguagem objetiva e comunicação de risco.
+
+---
+
 ## Mini-caso 2 — Dissecção de aorta
 
 ### Cenário
-Dor súbita intensa em rasgo irradiando para dorso, PA elevada.
+Paciente de 64 anos, hipertenso, dor torácica súbita, máxima no início, irradiando para dorso. PA diferente entre braços, sudorese, dor persistente.
 
 ### Mecanismo principal
-Ruptura da íntima com dissecção da parede aórtica.
-
-```text
-aorta → parede dissecada → dor intensa
-```
+Dissecção da parede aórtica com risco de ruptura e isquemia de ramos.
 
 ### Achados-chave
-- dor abrupta
-- dorso
-- assimetria de pulsos possível
-- déficits neurológicos
+- Dor súbita máxima.
+- Irradiação dorsal.
+- Hipertensão.
+- Assimetria de PA/pulso.
 
 ### Pergunta central
-Por que é red flag?
+Por que não tratar como SCA simples?
 
 ### Resposta esperada
-Porque exige suspeita imediata e controle/diagnóstico urgente.
+Porque dissecção muda completamente o risco e o manejo. Anticoagulação/antiagregação sem considerar dissecção pode ser perigosa.
 
 ### Erro comum
-Tratar como SCA sem considerar dissecção.
+Ignorar característica “rasgo/dorso/máxima no início”.
 
 ### Ponte para OSCE
-Treinar sinais de alarme.
+Treine diagnóstico diferencial de dor torácica fatal.
+
+---
+
 ## Mini-caso 3 — TEP
 
 ### Cenário
-Dor pleurítica, dispneia súbita, taquicardia.
+Paciente no pós-operatório recente, dispneia súbita, dor torácica pleurítica, taquicardia e SpO₂ 90%. Sem crepitações importantes.
 
 ### Mecanismo principal
-Obstrução vascular pulmonar.
-
-```text
-êmbolo → perfusão ↓ → dor/dispneia
-```
+Tromboembolismo pulmonar com aumento de resistência vascular pulmonar e alteração V/Q.
 
 ### Achados-chave
-- dispneia
-- pleurítica
-- risco trombótico
+- Dispneia súbita.
+- Dor pleurítica.
+- Pós-operatório/imobilização.
+- Hipoxemia/taquicardia.
 
 ### Pergunta central
-Como diferencia de dor anginosa típica?
+Qual pista separa TEP de SCA?
 
 ### Resposta esperada
-Pleurítica, súbita e com fatores trombóticos sugere TEP; ambos podem coexistir no diferencial.
+Dor pleurítica, dispneia súbita, hipoxemia e fator de risco tromboembólico aumentam suspeita de TEP.
 
 ### Erro comum
-Ausculta normal = sem gravidade.
+Atribuir toda dor torácica a “coração” e não perguntar risco trombótico.
 
 ### Ponte para OSCE
-Treinar perguntas de risco.
+Treine integração cardio-respiratória.
+
+---
+
+## Mini-caso 4 — Dor musculoesquelética sem red flags
+
+### Cenário
+Paciente jovem, dor localizada após esforço físico, piora com movimento do tronco e palpação, sem dispneia, sem síncope, sinais vitais normais.
+
+### Mecanismo principal
+Dor da parede torácica por sobrecarga musculoesquelética.
+
+### Achados-chave
+- Dor localizada.
+- Reprodutível.
+- Sem sintomas sistêmicos.
+- Sinais vitais normais.
+
+### Pergunta central
+Por que ainda é preciso fazer triagem?
+
+### Resposta esperada
+Porque dor reprodutível reduz probabilidade de SCA, mas não substitui avaliação de risco, sinais vitais e contexto.
+
+### Erro comum
+Pular avaliação inicial por parecer “dor muscular”.
+
+### Ponte para OSCE
+Treine tranquilizar sem banalizar.
 
 ---
 
@@ -218,25 +271,27 @@ Treinar perguntas de risco.
 
 ## Questão ativa 1
 
-**Pergunta:** Dor torácica em pontada exclui IAM?
+**Pergunta:** ECG normal exclui SCA?
 
-**Resposta esperada:** Não exclui, mas reduz probabilidade se isolada. Contexto, risco e sintomas associados importam.
+**Resposta esperada:** Não. Pode estar normal no início ou em alguns quadros. História, risco, troponina seriada e reavaliação importam.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 2
 
-**Pergunta:** Qual exame inicial é prioritário em dor suspeita de SCA?
+**Pergunta:** Qual dor sugere dissecção?
 
-**Resposta esperada:** ECG precoce, junto de avaliação clínica e sinais vitais.
+**Resposta esperada:** Dor súbita, máxima no início, intensa, irradiada para dorso, com assimetria de pulso/PA ou sinais neurológicos.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
 ## Questão ativa 3
 
-**Pergunta:** Qual dor torácica faz pensar em dissecção?
+**Pergunta:** Troponina normal precoce tranquiliza?
 
-**Resposta esperada:** Dor súbita, muito intensa, em rasgo, irradiada para dorso, com assimetria de pulsos ou déficit neurológico.
+**Resposta esperada:** Não completamente. Depende do tempo desde início da dor e do protocolo de troponina seriada.
 
-**Por que importa:** Ajuda o aluno a transformar conceito em decisão clínica.
+## Questão ativa 4
+
+**Pergunta:** O que você nunca deve perder em dor torácica?
+
+**Resposta esperada:** SCA, dissecção, TEP, pneumotórax hipertensivo e tamponamento.
 
 ---
 
@@ -244,43 +299,46 @@ Treinar perguntas de risco.
 
 ```text
 DOR TORÁCICA
-├── SCA: pressão/aperto + irradiação + risco
-├── TEP: pleurítica + dispneia súbita + risco trombótico
-├── dissecção: rasgo súbito + dorso
-├── pneumotórax: súbita + MV reduzido
-└── parede/refluxo: considerar após excluir risco
+├── primeiro: instabilidade
+│   ├── hipotensão
+│   ├── hipóxia
+│   ├── síncope
+│   └── sudorese/confusão
+├── SCA
+│   ├── aperto/opressão
+│   ├── irradiação
+│   ├── ECG
+│   └── troponina seriada
+├── dissecção
+│   ├── súbita/máxima
+│   ├── dorso
+│   └── assimetria
+├── TEP
+│   ├── dispneia súbita
+│   ├── pleurítica
+│   └── risco trombótico
+└── parede torácica
+    └── diagnóstico após excluir gravidade
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- anamnese dirigida
-- ECG
-- red flags
-- comunicação de urgência
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- abordagem em até poucos minutos;
+- pedido de ECG precoce;
+- comunicação de suspeita;
+- diferenciação SCA/dissecção/TEP;
+- reavaliação de dor e sinais vitais.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você avaliou estabilidade?
+- [ ] Pediu ECG precoce?
+- [ ] Pensou nas causas fatais?
+- [ ] Relacionou troponina com tempo de dor?
+- [ ] Evitou chamar de ansiedade cedo demais?

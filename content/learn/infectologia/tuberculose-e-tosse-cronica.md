@@ -2,244 +2,254 @@
 
 ## Objetivo da trilha
 
-Ensinar tosse prolongada, sintomas constitucionais e abordagem semiológica com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Você vai aprender a pensar em tuberculose quando a tosse deixa de ser apenas sintoma respiratório comum e passa a representar risco individual e coletivo.
 
-A trilha deve sempre conectar três camadas:
+A pergunta central é:
 
 ```text
-conceito de base → manifestação clínica → decisão no atendimento
+Essa tosse crônica pode ser tuberculose, e eu preciso investigar/transmitir orientação agora?
 ```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
-
----
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de tuberculose e tosse crônica.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Reconhecer tosse crônica suspeita.
+2. Identificar sintomas constitucionais de TB.
+3. Diferenciar TB de asma, DPOC, refluxo, pneumonia e câncer.
+4. Entender transmissão aérea e importância de isolamento/orientação.
+5. Saber quais exames entram: escarro, teste molecular, baciloscopia, cultura, RX.
+6. Reconhecer sinais de gravidade e TB extrapulmonar.
+7. Entender por que adesão ao tratamento é parte da cura.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Tuberculose e tosse crônica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
+Tuberculose pulmonar costuma ser subaguda/crônica.
 
-## Conceitos obrigatórios
+Você deve suspeitar quando há:
 
-- **Tuberculose e tosse crônica**: Tuberculose e tosse crônica é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
+- tosse persistente;
+- febre vespertina;
+- sudorese noturna;
+- perda de peso;
+- cansaço;
+- hemoptise;
+- contato com caso de TB;
+- imunossupressão;
+- situação de vulnerabilidade social.
 
-## Frase didática
+**PONTO-CHAVE:**  
+Tosse por semanas não é “gripe arrastada” até prova em contrário. Você precisa perguntar duração, perda de peso, suor noturno e contato.
 
-```text
-Tuberculose e tosse crônica: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
-```
+**NÃO ERRE:**  
+RX normal não exclui completamente TB em todos os contextos, especialmente em imunossuprimidos. A investigação depende do risco e da clínica.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiopatologia aplicada
 
-## 1. Mecanismo principal
-
-Em tuberculose e tosse crônica, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
+A TB é causada pelo *Mycobacterium tuberculosis*. A transmissão é aérea.
 
 ```text
-mecanismo → sinal/sintoma → hipótese → decisão
+aerossol com bacilos
+→ inalação
+→ pulmão
+→ resposta imune granulomatosa
+→ doença latente ou ativa
 ```
 
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+Na doença ativa pulmonar, há inflamação e destruição tecidual, podendo formar cavitações.
 
 ```text
-observação → interpretação → conduta
+cavitação
+→ maior carga bacilar
+→ maior transmissibilidade
+→ tosse persistente/hemoptise
 ```
 
-## 3. Risco e priorização
-
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
-
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+**RACIOCÍNIO:**  
+Você não investiga TB apenas para tratar o paciente. Você investiga para interromper transmissão.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Perguntas dirigidas
 
-## Achados que precisam ser procurados
+- Há quanto tempo tosse?
+- Tem escarro?
+- Teve sangue no escarro?
+- Há febre vespertina?
+- Sudorese noturna?
+- Perda de peso?
+- Contato com TB?
+- Já tratou TB antes?
+- Mora/trabalha em ambiente coletivo?
+- Há HIV, diabetes, corticoide, imunossupressão?
+- Há dor torácica, dispneia ou rouquidão?
+- Há linfonodos, dor óssea, sintomas neurológicos?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Exame físico
 
-## Sinais de alarme
+- peso/estado nutricional;
+- linfonodos;
+- ausculta pulmonar;
+- sinais de derrame pleural;
+- sinais meníngeos se sintomas neurológicos;
+- avaliação geral de gravidade.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**PONTO DE DESTAQUE:**  
+TB pode ter exame pulmonar pobre. A história pode ser mais forte que a ausculta.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Use esta sequência:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+tosse ≥ semanas
++ sintomas constitucionais
++ risco epidemiológico
+= investigar TB
 ```
 
-O raciocínio deve seguir:
+## Exames que mudam conduta
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- escarro para teste molecular rápido quando disponível;
+- baciloscopia;
+- cultura e teste de sensibilidade;
+- RX de tórax;
+- HIV e outras avaliações conforme protocolo;
+- investigação de contatos.
+
+## Diagnósticos diferenciais
+
+- asma;
+- DPOC;
+- pneumonia;
+- bronquiectasias;
+- refluxo;
+- neoplasia;
+- insuficiência cardíaca;
+- uso de IECA;
+- micoses/endêmicas conforme região.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Tratar tosse crônica repetidamente com antibiótico curto.
+- Não perguntar perda de peso/sudorese.
+- Não investigar contato.
+- Ignorar hemoptise.
+- Esquecer HIV/imunossupressão.
+- Não orientar etiqueta respiratória e fluxo de investigação.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — TB pulmonar
+## Mini-caso 1 — TB pulmonar clássica
 
 ### Cenário
-Paciente com apresentação típica relacionada a tb pulmonar, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 38 anos com tosse há 5 semanas, perda de 6 kg, febre vespertina, sudorese noturna e escarro com raias de sangue. Mora com várias pessoas. Ausculta pouco alterada.
 
-### Mecanismo principal
-Mecanismo dominante de tb pulmonar dentro da trilha tuberculose e tosse crônica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- tosse crônica;
+- perda de peso;
+- febre vespertina;
+- sudorese noturna;
+- hemoptise leve;
+- risco de transmissão.
 
 ### Pergunta central
-Qual mecanismo explica tb pulmonar?
+Por que a ausculta pouco alterada não afasta TB?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+TB pode ter exame pulmonar discreto. A história e o risco epidemiológico sustentam investigação.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Prescrever xarope/antibiótico curto e não solicitar investigação.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Hemoptise leve
+Treine tosse crônica: duração, sintomas B, contato e investigação.
+
+---
+
+## Mini-caso 2 — Tosse crônica em imunossuprimido
 
 ### Cenário
-Paciente com apresentação típica relacionada a hemoptise leve, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Paciente com HIV sem acompanhamento, tosse há 3 semanas, febre baixa, emagrecimento e dispneia. RX sem cavitação evidente.
 
-### Mecanismo principal
-Mecanismo dominante de hemoptise leve dentro da trilha tuberculose e tosse crônica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- imunossupressão;
+- sintomas sistêmicos;
+- tosse subaguda;
+- RX pode ser atípico.
 
 ### Pergunta central
-Qual mecanismo explica hemoptise leve?
+Por que a apresentação pode ser menos clássica?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Imunossuprimidos podem não formar cavitações típicas e podem ter manifestações atípicas/disseminadas.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Excluir TB por ausência de cavitação.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Contato domiciliar
+Treine TB em paciente vulnerável: risco, exames e proteção.
+
+---
+
+## Mini-caso 3 — Hemoptise
 
 ### Cenário
-Paciente com apresentação típica relacionada a contato domiciliar, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Homem de 52 anos, tabagista, tosse há 2 meses, emagrecimento e episódios de hemoptise. Nega febre importante. Tem sudorese noturna ocasional.
 
-### Mecanismo principal
-Mecanismo dominante de contato domiciliar dentro da trilha tuberculose e tosse crônica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- tosse crônica;
+- hemoptise;
+- emagrecimento;
+- tabagismo;
+- diferencial com câncer.
 
 ### Pergunta central
-Qual mecanismo explica contato domiciliar?
+Quais diagnósticos perigosos você deve considerar?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+TB e neoplasia pulmonar são diagnósticos importantes. A investigação deve incluir imagem e avaliação microbiológica conforme contexto.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Atribuir hemoptise a “garganta irritada”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Tosse crônica não infecciosa
+Treine raciocínio diferencial de tosse crônica com sangue.
+
+---
+
+## Mini-caso 4 — Contato domiciliar
 
 ### Cenário
-Paciente com apresentação típica relacionada a tosse crônica não infecciosa, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Criança mora com avô recém-diagnosticado com TB pulmonar bacilífera. Está assintomática. Família pergunta se precisa fazer algo.
 
-### Mecanismo principal
-Mecanismo dominante de tosse crônica não infecciosa dentro da trilha tuberculose e tosse crônica.
-
-```text
-queixa → achados → mecanismo → decisão
-```
-
-### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+### Dados-chave
+- contato próximo;
+- caso bacilífero;
+- criança;
+- assintomática.
 
 ### Pergunta central
-Qual mecanismo explica tosse crônica não infecciosa?
+Por que contato assintomático também importa?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Contato domiciliar deve ser avaliado conforme protocolo, pois pode haver infecção latente ou doença inicial, especialmente em crianças.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Aguardar sintomas para investigar contato de alto risco.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine orientação familiar e saúde pública.
 
 ---
 
@@ -247,37 +257,72 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de tuberculose e tosse crônica?
+**Pergunta:** Qual pergunta não pode faltar em tosse crônica?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Há quanto tempo tosse? Depois: perda de peso, febre vespertina, sudorese noturna, hemoptise e contato com TB.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
+**Por que importa:** Duração muda completamente o raciocínio.
+
+---
+
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** TB sempre dá ausculta alterada?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Não. O exame pode ser discreto. História, epidemiologia e exames são decisivos.
 
-**Por que importa:** Forma raciocínio clínico.
+**Por que importa:** Evita falso conforto.
+
+---
+
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Por que investigar contatos?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Porque TB é transmissível por via aérea e contatos podem ter infecção latente ou doença ativa.
 
-**Por que importa:** Evita investigação inútil.
+**Por que importa:** TB é clínica individual e saúde pública.
+
+---
+
+## Questão ativa 4
+
+**Pergunta:** O que sugere TB mais transmissível?
+
+**Resposta esperada:** Doença pulmonar/laríngea com tosse, baciloscopia positiva ou cavitação.
+
+**Por que importa:** Orienta isolamento, investigação e busca de contatos.
 
 ---
 
 # 7. Mapa final
 
 ```text
-TUBERCULOSE E TOSSE CRÔNICA
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+TOSSE CRÔNICA
+├── sintomas constitucionais
+│   ├── perda de peso
+│   ├── febre vespertina
+│   └── sudorese noturna
+│
+├── sinais de alerta
+│   ├── hemoptise
+│   ├── dispneia progressiva
+│   ├── dor torácica
+│   └── imunossupressão
+│
+├── pensar em TB
+│   ├── contato
+│   ├── vulnerabilidade
+│   ├── HIV/diabetes
+│   ├── ambiente coletivo
+│   └── tratamento prévio
+│
+└── investigar
+    ├── escarro/teste molecular
+    ├── baciloscopia/cultura
+    ├── RX de tórax
+    ├── HIV quando indicado
+    └── contatos
 ```
 
 ---
@@ -286,31 +331,41 @@ TUBERCULOSE E TOSSE CRÔNICA
 
 ## MEDIX OSCE Ciclo Básico
 
-O aluno deve treinar:
+Treine:
 
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
+- tosse crônica;
+- hemoptise;
+- perda de peso;
+- contato domiciliar;
+- TB em imunossuprimido.
+
+Você deve demonstrar:
+
+- anamnese epidemiológica;
+- sintomas constitucionais;
+- exame físico;
+- investigação inicial;
+- orientação de transmissão.
 
 ## MEDIX OSCE Clínico
 
-No módulo clínico, essa trilha pode ser aprofundada com:
+Treine:
 
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- paciente que abandona tratamento;
+- suspeita de resistência;
+- piora respiratória;
+- coinfecção;
+- abordagem de contatos.
 
 ---
 
-# 9. Checklist de curadoria
+# Referências-base para curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- Ministério da Saúde. Dengue: diagnóstico e manejo clínico — adulto e criança.
+- Surviving Sepsis Campaign. International Guidelines for Management of Sepsis and Septic Shock 2021.
+- CDC. Bacterial meningitis / meningococcal disease: sinais, sintomas e urgência clínica.
+- WHO. Tuberculosis fact sheet e materiais de diagnóstico/tratamento.
+- WHO AWaRe Antibiotic Book: princípios de uso racional de antimicrobianos.
+- IDSA/NICE: princípios de ITU, pielonefrite e antimicrobianos, com adaptação à realidade local e protocolos institucionais.
+
+> Este material é educacional. Condutas, doses, fluxos e critérios de internação devem ser ajustados ao protocolo local, faixa etária, gestação, comorbidades, alergias, resistência bacteriana e gravidade clínica.

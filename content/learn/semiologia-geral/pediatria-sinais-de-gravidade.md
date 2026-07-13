@@ -1,245 +1,258 @@
-# Trilha Semiologia Geral — Pediatria — sinais de gravidade
+# Trilha Semiologia Geral — Pediatria: sinais de gravidade
+
+> Material educacional para treino clínico. Use para raciocínio, simulação e OSCE. Em atendimento real, siga protocolos locais, supervisão e avaliação médica.
 
 ## Objetivo da trilha
 
-Ensinar diferenças pediátricas em respiração, hidratação, febre e estado geral com foco em base, semiologia e raciocínio clínico, preparando o aluno para reconhecer padrões, avaliar gravidade e transferir o aprendizado para OSCE.
+Ensinar você a reconhecer sinais de gravidade em crianças antes de fechar diagnóstico. Em pediatria, aparência, respiração, perfusão, hidratação e interação são decisivos.
 
-A trilha deve sempre conectar três camadas:
-
-```text
-conceito de base → manifestação clínica → decisão no atendimento
-```
-
-O aluno não deve terminar a trilha apenas decorando nomes. Ele deve conseguir olhar para um paciente, reconhecer padrões, explicar o mecanismo provável e decidir o próximo passo com segurança proporcional ao nível de formação.
+**Ideia central:** criança grave pode não explicar sintomas. Você precisa ler comportamento, esforço respiratório e perfusão.
 
 ---
 
 ## Competências ao final
 
-O aluno deve conseguir:
+Você deve conseguir:
 
-1. Explicar os conceitos centrais de pediatria — sinais de gravidade.
-2. Reconhecer achados semiológicos relevantes.
-3. Separar apresentações leves de sinais de gravidade.
-4. Construir hipóteses por mecanismo.
-5. Aplicar o raciocínio em mini-casos.
+1. Avaliar aparência geral da criança.
+2. Reconhecer desconforto respiratório.
+3. Identificar desidratação e má perfusão.
+4. Valorizar irritabilidade, letargia e baixa interação.
+5. Reconhecer febre com red flags.
+6. Comunicar risco aos responsáveis.
 
 ---
 
 # 1. Microaula — Ideia central
 
-Pediatria — sinais de gravidade é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-
-## Conceitos obrigatórios
-
-- **Pediatria — sinais de gravidade**: Pediatria — sinais de gravidade é uma trilha de integração entre conhecimento de base e decisão clínica. O aluno deve entender o mecanismo antes de decorar condutas.
-- **Gravidade**: A primeira pergunta em qualquer atendimento é se o paciente está instável ou possui sinal de alarme.
-- **Transferência**: O conteúdo deve ser aplicado em mini-casos e depois levado ao OSCE.
-
-## Frase didática
+Em pediatria, comece pelo triângulo visual:
 
 ```text
-Pediatria — sinais de gravidade: não é uma lista de sinais; é um padrão clínico que precisa ser explicado por mecanismo.
+aparência
+respiração
+circulação/perfusão
 ```
+
+**PONTO-CHAVE:**  
+Criança que não interage, não aceita líquidos, respira com esforço ou está mal perfundida precisa de atenção rápida.
+
+**NÃO ERRE:**  
+Não tranquilize só porque a criança “não sabe explicar”. Observe comportamento.
 
 ---
 
-# 2. Fisiologia / fisiopatologia aplicada
+# 2. Fisiologia aplicada
 
-## 1. Mecanismo principal
+## Criança compensa até piorar rápido
 
-Em pediatria — sinais de gravidade, o aluno deve identificar o mecanismo dominante e como ele aparece no paciente.
-
-```text
-mecanismo → sinal/sintoma → hipótese → decisão
-```
-
-## 2. Semiologia aplicada
-
-Os sinais não são decorados isoladamente: cada achado deve responder a uma pergunta clínica.
+A criança pode manter PA normal por tempo, mas com taquicardia e perfusão ruim.
 
 ```text
-observação → interpretação → conduta
+perda/infecção/hipóxia → compensação → deterioração rápida se reserva acaba
 ```
 
-## 3. Risco e priorização
+## Respiração
 
-Sinais de alarme mudam a ordem do atendimento e podem exigir ação antes de investigação completa.
+Sinais de esforço:
 
-```text
-red flag → estabilizar/encaminhar → investigar
-```
+- tiragens;
+- batimento de asa nasal;
+- gemência;
+- cianose;
+- fala/choro fraco;
+- sonolência.
+
+## Hidratação/perfusão
+
+- mucosas secas;
+- ausência de lágrimas;
+- redução de diurese;
+- enchimento capilar lento;
+- extremidades frias;
+- letargia.
 
 ---
 
 # 3. Semiologia essencial
 
-O aluno deve aprender a observar antes de decorar conduta.
+## Observe antes de tocar
 
-## Achados que precisam ser procurados
+- A criança olha para você?
+- Chora forte ou fraco?
+- Consola no colo?
+- Está mole ou irritada?
+- Brinca?
+- Respira com esforço?
+- A cor está normal?
+- Está hidratada?
 
-- Sinais vitais e estado geral.
-- Início, duração e progressão.
-- Fatores precipitantes e antecedentes.
-- Exame físico direcionado.
-- Sinais de alarme.
-- Impacto funcional.
-- Resposta a medidas iniciais.
+## Perguntas aos responsáveis
 
-## Sinais de alarme
+- Está mamando/comendo?
+- Quantas fraldas/diurese?
+- Teve convulsão?
+- Está sonolenta ou muito irritada?
+- Febre há quanto tempo?
+- Vômitos persistentes?
+- Diarreia?
+- Manchas na pele?
+- Dificuldade para respirar?
+- Vacinas em dia?
+- Idade exata.
 
-- Instabilidade hemodinâmica.
-- Alteração de consciência.
-- Dor intensa ou progressiva.
-- Sinais neurológicos focais quando aplicável.
+**CUIDADO:**  
+Menores de 3 meses com febre merecem avaliação cuidadosa e protocolos específicos.
 
 ---
 
 # 4. Raciocínio clínico
 
-A pergunta-guia desta trilha é:
+Antes do diagnóstico, classifique gravidade:
 
 ```text
-Qual mecanismo explica melhor o conjunto de sintomas, sinais e dados objetivos?
+bem aparente
+preocupante
+grave
 ```
 
-O raciocínio deve seguir:
+## Red flags pediátricas
 
-```text
-1. reconhecer a síndrome;
-2. avaliar gravidade;
-3. formular hipóteses por mecanismo;
-4. procurar achados que confirmem ou afastem hipóteses;
-5. escolher exames que mudam conduta;
-6. iniciar medidas prioritárias quando houver risco.
-```
+- Letargia.
+- Irritabilidade inconsolável.
+- Cianose.
+- Apneia.
+- Gemência.
+- Tiragens importantes.
+- Enchimento capilar lento.
+- Rigidez de nuca.
+- Convulsão.
+- Petéquias/púrpura.
+- Desidratação moderada/grave.
+- Não aceitar líquidos.
+- Febre em lactente pequeno.
 
 ## Erros comuns
 
-- Pular sinais vitais.
-- Pedir exames sem hipótese.
-- Não reavaliar.
+- Subestimar taquipneia.
+- Não perguntar diurese.
+- Não observar interação.
+- Não despir/examinar pele.
+- Não valorizar relato do cuidador de “não está normal”.
+- Não orientar retorno.
 
 ---
 
 # 5. Mini-casos
 
-## Mini-caso 1 — Lactente febril
+## Mini-caso 1 — Bronquiolite/desconforto respiratório
 
 ### Cenário
-Paciente com apresentação típica relacionada a lactente febril, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Lactente com tosse, chiado, tiragens subcostais, batimento de asa nasal, mamando pouco e SpO₂ baixa.
 
 ### Mecanismo principal
-Mecanismo dominante de lactente febril dentro da trilha pediatria — sinais de gravidade.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Obstrução de pequenas vias aéreas com aumento do trabalho respiratório.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Tiragens.
+- Batimento de asa nasal.
+- Baixa ingesta.
+- Hipoxemia.
 
 ### Pergunta central
-Qual mecanismo explica lactente febril?
+O que preocupa além do chiado?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Esforço respiratório, baixa ingesta e hipoxemia mostram gravidade.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Avaliar só ausculta e ignorar esforço.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 2 — Bronquiolite
+Treine respiração pediátrica.
+
+---
+
+## Mini-caso 2 — Desidratação
 
 ### Cenário
-Paciente com apresentação típica relacionada a bronquiolite, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Criança com vômitos e diarreia, mucosas secas, sem lágrimas, pouca urina, sonolenta e enchimento capilar 4s.
 
 ### Mecanismo principal
-Mecanismo dominante de bronquiolite dentro da trilha pediatria — sinais de gravidade.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Perda hídrica com hipovolemia e hipoperfusão.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Pouca diurese.
+- Sem lágrimas.
+- Sonolência.
+- TEC lento.
 
 ### Pergunta central
-Qual mecanismo explica bronquiolite?
+Qual dado muda conduta?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Sinais de desidratação moderada/grave e perfusão ruim indicam necessidade de avaliação e reidratação supervisionada.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Orientar apenas soro oral sem avaliar gravidade.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 3 — Desidratação infantil
+Treine hidratação e perfusão.
+
+---
+
+## Mini-caso 3 — Febre com petéquias
 
 ### Cenário
-Paciente com apresentação típica relacionada a desidratação infantil, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Criança febril, prostrada, com manchas que não desaparecem à pressão, extremidades frias e taquicardia.
 
 ### Mecanismo principal
-Mecanismo dominante de desidratação infantil dentro da trilha pediatria — sinais de gravidade.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Possível infecção sistêmica grave com alteração vascular/perfusão.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Petéquias/púrpura.
+- Febre.
+- Prostração.
+- Má perfusão.
 
 ### Pergunta central
-Qual mecanismo explica desidratação infantil?
+Por que é emergência?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Febre com rash não branqueável e má perfusão pode indicar doença grave, como sepse/meningococcemia, exigindo ação rápida.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Chamar de alergia sem testar branqueamento e perfusão.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
-## Mini-caso 4 — Criança prostrada
+Treine rash febril grave.
+
+---
+
+## Mini-caso 4 — Criança “diferente”
 
 ### Cenário
-Paciente com apresentação típica relacionada a criança prostrada, exigindo que o aluno conecte queixa, sinais vitais e exame físico.
+Mãe diz: “ela não está normal”. Criança pouco interativa, não brinca, choro fraco, aceita pouco líquido. Sinais vitais limítrofes.
 
 ### Mecanismo principal
-Mecanismo dominante de criança prostrada dentro da trilha pediatria — sinais de gravidade.
-
-```text
-queixa → achados → mecanismo → decisão
-```
+Alteração de comportamento pode ser marcador precoce de doença sistêmica.
 
 ### Achados-chave
-- queixa principal
-- sinal objetivo
-- achado de exame
-- contexto clínico
+- Baixa interação.
+- Choro fraco.
+- Pouca ingesta.
+- Relato do cuidador.
 
 ### Pergunta central
-Qual mecanismo explica criança prostrada?
+Por que valorizar o relato?
 
 ### Resposta esperada
-O aluno deve identificar o mecanismo provável, sinais de gravidade e próximo passo seguro.
+Cuidadores reconhecem mudança do basal. Em pediatria, comportamento e interação são sinais clínicos centrais.
 
 ### Erro comum
-Decorar o diagnóstico sem justificar por sinais e mecanismos.
+Ignorar porque “os exames estão bons”.
 
 ### Ponte para OSCE
-Treinar atendimento dirigido e feedback no MEDIX OSCE.
+Treine escuta dos responsáveis.
 
 ---
 
@@ -247,70 +260,75 @@ Treinar atendimento dirigido e feedback no MEDIX OSCE.
 
 ## Questão ativa 1
 
-**Pergunta:** Qual é a primeira pergunta diante de pediatria — sinais de gravidade?
+**Pergunta:** Qual é o triângulo visual pediátrico?
 
-**Resposta esperada:** Há instabilidade ou sinal de alarme que muda a prioridade?
+**Resposta esperada:** Aparência, respiração e circulação/perfusão.
 
-**Por que importa:** Segurança antes de diagnóstico definitivo.
 ## Questão ativa 2
 
-**Pergunta:** Como evitar decorar listas?
+**Pergunta:** O que indica esforço respiratório?
 
-**Resposta esperada:** Explicando cada achado por mecanismo e aplicando em mini-casos.
+**Resposta esperada:** Tiragens, batimento de asa nasal, gemência, cianose, fala/choro fraco e exaustão.
 
-**Por que importa:** Forma raciocínio clínico.
 ## Questão ativa 3
 
-**Pergunta:** Quando exames entram?
+**Pergunta:** Qual pergunta é essencial em vômitos/diarreia?
 
-**Resposta esperada:** Quando ajudam a confirmar hipótese ou mudam conduta, sem atrasar medida prioritária.
+**Resposta esperada:** Diurese/fraldas molhadas, ingesta e nível de atividade.
 
-**Por que importa:** Evita investigação inútil.
+## Questão ativa 4
+
+**Pergunta:** O que fazer com febre e petéquias/púrpura?
+
+**Resposta esperada:** Tratar como sinal de possível doença grave e encaminhar/avaliar urgentemente conforme protocolo.
 
 ---
 
 # 7. Mapa final
 
 ```text
-PEDIATRIA — SINAIS DE GRAVIDADE
-├── conceito de base
-├── semiologia
-├── gravidade
-├── mini-casos
-└── ponte para OSCE
+PEDIATRIA — GRAVIDADE
+├── aparência
+│   ├── interação
+│   ├── choro
+│   ├── consolabilidade
+│   └── consciência
+├── respiração
+│   ├── FR
+│   ├── tiragens
+│   ├── asa nasal
+│   └── gemência
+├── circulação
+│   ├── cor
+│   ├── TEC
+│   ├── extremidades
+│   └── pulso
+└── alertas
+    ├── febre em lactente pequeno
+    ├── petéquias
+    ├── convulsão
+    ├── desidratação
+    └── não aceitar líquidos
 ```
 
 ---
 
 # 8. Ponte para OSCE
 
-## MEDIX OSCE Ciclo Básico
+Você deve treinar:
 
-O aluno deve treinar:
-
-- perguntas dirigidas
-- exame físico focal
-- diagnóstico sindrômico
-- conduta inicial
-- comunicação
-
-## MEDIX OSCE Clínico
-
-No módulo clínico, essa trilha pode ser aprofundada com:
-
-- evolução temporal dos sinais vitais;
-- resposta a intervenção;
-- piora por atraso terapêutico;
-- comparação entre o raciocínio MEDIX e a fisiologia dinâmica.
+- observação antes do toque;
+- perguntas ao responsável;
+- sinais respiratórios;
+- hidratação;
+- orientação de retorno.
 
 ---
 
 # 9. Checklist de curadoria
 
-- [ ] A trilha ensina mecanismo, e não apenas definição?
-- [ ] Há conexão explícita entre fisiologia e semiologia?
-- [ ] Os mini-casos cobrem apresentações diferentes?
-- [ ] Existem erros comuns bem destacados?
-- [ ] O aluno consegue transferir o conteúdo para um atendimento OSCE?
-- [ ] A linguagem é adequada para estudante em formação?
-- [ ] Há alerta para situações em que atraso terapêutico é perigoso?
+- [ ] Você avaliou aparência?
+- [ ] Observou esforço respiratório?
+- [ ] Perguntou diurese?
+- [ ] Procurou rash?
+- [ ] Valorizou relato do cuidador?
