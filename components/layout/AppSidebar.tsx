@@ -25,6 +25,7 @@ const ICON_BASE = "/assets/dashboard/sidebar-icons";
 const NAV_ITEMS: Array<{ key: string; label: string; icon: string; href: string }> = [
   { key: "dashboard", label: "Dashboard", icon: "icon-dashboard.png", href: "/dashboard-landing" },
   { key: "guia", label: "Guia Clínico", icon: "icon-conteudos.png", href: "/guia" },
+  { key: "learn", label: "MEDIX Learn", icon: "icon-simulacao.png", href: "/learn" },
   { key: "desempenho", label: "Desempenho", icon: "icon-desempenho.png", href: "#" },
   { key: "centro-clinico", label: "Centro Clínico", icon: "icon-biblioteca.png", href: "/centro-clinico" },
   // Entrada paralela discreta para o módulo beta (não substitui nenhum fluxo atual).
@@ -39,6 +40,7 @@ function isNavActive(href: string, pathname: string): boolean {
   if (href === "/guia") return pathname.startsWith("/guia");
   if (href === "/centro-clinico") return pathname.startsWith("/centro-clinico");
   if (href === "/casos-dinamicos") return pathname.startsWith("/casos-dinamicos");
+  if (href === "/learn") return pathname.startsWith("/learn");
   if (href === "/meu-perfil") return pathname.startsWith("/meu-perfil");
   return false;
 }

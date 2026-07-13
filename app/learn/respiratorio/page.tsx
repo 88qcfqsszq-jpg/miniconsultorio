@@ -1,9 +1,9 @@
-import LearnRespiratorioPage from "@/components/medix-learn/LearnRespiratorioPage";
+import LearnSystemPage from "@/components/medix-learn/LearnSystemPage";
 
 export const metadata = {
   title: "Respiratório — MEDIX Learn",
 };
 
 export default function Respiratorio() {
-  return <LearnRespiratorioPage />;
+  return <LearnSystemPage systemId="respiratorio" />;
 }
