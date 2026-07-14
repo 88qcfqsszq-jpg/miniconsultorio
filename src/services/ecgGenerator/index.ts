@@ -15,7 +15,7 @@
  */
 
 import type { ECGLead } from '@/lib/ecg/types'
-import type { ParametrosGeracaoECG, RespostaGeracaoECG, PoliticaFrequenciaECG } from './types'
+import type { ParametrosGeracaoECG, RespostaGeracaoECG, PoliticaFrequenciaECG, InterpretacaoECG, DerivacaoClinica } from './types'
 import { ecgsynAdapter } from './ecgsynAdapter'
 import { getPresetById, normalizePresetId } from './presets'
 import { transformarEm12Derivacoes } from './leadTransform'
@@ -283,6 +283,59 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
   // 6. CONSTRUIR RESPOSTA
   // ========================================================================
 
+  // Interpretação base: FC clínica e ritmo derivado pelo classificador.
+  const interpretacao: InterpretacaoECG = {
+    frequenciaCardiaca: frequenciaResolvida,
+    ritmo: classificarRitmoSinusalAdulto(
+      normalizedId,
+      frequenciaResolvida,
+      ecgPreset.expectedInterpretation[0] || 'Sinusal',
+    ),
+    eixoMedio: 60,
+    intervalosPR,
+    duracoesQRS,
+    duracaoQTc: Math.round(QTc),
+  }
+
+  // Augmentação estruturada para presets de isquemia com modificadores por derivação.
+  // O campo `ritmo` descreve o mecanismo sinusal; `diagnosticoPrincipal` carrega o diagnóstico.
+  // Presets sem `category === 'isquemia'` ou sem `leadModifiers` não entram aqui.
+  if (ecgPreset.category === 'isquemia' && ecgPreset.leadModifiers) {
+    const ei = ecgPreset.expectedInterpretation
+    // [0] = diagnóstico principal; [1] = descrição do ritmo; [2..] = achados específicos
+    interpretacao.diagnosticoPrincipal = ei[0]
+    interpretacao.ritmo = ei[1] ?? interpretacao.ritmo
+    if (ei.length > 2) {
+      interpretacao.achados = ei.slice(2)
+    }
+    const stText = ei[2] ?? 'Alteração de ST'
+    interpretacao.laudo =
+      `${interpretacao.ritmo}, FC ${frequenciaResolvida} bpm. ` +
+      `${stText}, compatível com ${ei[0]}.`
+
+    // alteracoesST derivado dos leadModifiers: agrupa derivações por (tipo, amplitudeMv).
+    const grupos = new Map<string, {
+      tipo: 'elevation' | 'depression'
+      amplitudeMv: number
+      derivacoes: DerivacaoClinica[]
+    }>()
+    for (const [leadName, mod] of Object.entries(ecgPreset.leadModifiers)) {
+      if (!mod?.stShift) continue
+      const chave = `${mod.stShift.tipo}:${mod.stShift.amplitudeMv}`
+      if (!grupos.has(chave)) {
+        grupos.set(chave, { tipo: mod.stShift.tipo, amplitudeMv: mod.stShift.amplitudeMv, derivacoes: [] })
+      }
+      grupos.get(chave)!.derivacoes.push(leadName as DerivacaoClinica)
+    }
+    if (grupos.size > 0) {
+      interpretacao.alteracoesST = [...grupos.values()].map(g => ({
+        derivacoes: g.derivacoes,
+        tipo: g.tipo,
+        amplitudeMv: g.amplitudeMv,
+      }))
+    }
+  }
+
   const resposta: RespostaGeracaoECG = {
     samplingRate: parametrosECGSyn.frequenciaAmostragem,
     duration: parametrosECGSyn.duracao,
@@ -290,19 +343,7 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
       [lead in ECGLead]?: number[]
     },
 
-    interpretation: {
-      // FC clínica (frequenciaResolvida), não a medida no sinal sintético.
-      frequenciaCardiaca: frequenciaResolvida,
-      ritmo: classificarRitmoSinusalAdulto(
-        normalizedId,
-        frequenciaResolvida,
-        ecgPreset.expectedInterpretation[0] || 'Sinusal',
-      ),
-      eixoMedio: 60,
-      intervalosPR,
-      duracoesQRS,
-      duracaoQTc: Math.round(QTc),
-    },
+    interpretation: interpretacao,
 
     teachingPoints: ecgPreset.teachingPoints,
 
