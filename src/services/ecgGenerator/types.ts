@@ -76,6 +76,39 @@ export interface Dados12Derivacoes {
   [key: string]: number[] // chave: 'I', 'II', 'III', 'aVR', 'aVL', 'aVF', 'V1'-'V6'
 }
 
+// ============================================================================
+// MODIFICADORES MORFOLÓGICOS POR DERIVAÇÃO
+// Contrato de tipos (Commit 3a). Sem runtime nesta etapa.
+// ============================================================================
+
+/**
+ * Desvio do segmento ST em uma derivação. Discriminado por `tipo` para impedir
+ * estado inválido (elevação e depressão simultâneas na mesma derivação).
+ */
+export interface DesvioSTDerivacao {
+  tipo: 'elevation' | 'depression'
+  amplitudeMv: number
+}
+
+/**
+ * Modificador morfológico aplicável a uma derivação específica.
+ * Referencia DerivacaoClinica (declarada adiante) via ModificadoresPorDerivacao.
+ */
+export interface ModificadorDerivacaoECG {
+  stShift?: DesvioSTDerivacao
+  tWavePolarity?: 'positive' | 'negative' | 'biphasic'
+}
+
+export type ModificadoresPorDerivacao =
+  Partial<Record<DerivacaoClinica, ModificadorDerivacaoECG>>
+
+/** Alteração de ST agregada por conjunto de derivações, para o laudo interpretado. */
+export interface AlteracaoSTInterpretada {
+  derivacoes: DerivacaoClinica[]
+  tipo: 'elevation' | 'depression'
+  amplitudeMv?: number
+}
+
 export interface InterpretacaoECG {
   frequenciaCardiaca: number
   ritmo: string
@@ -83,6 +116,11 @@ export interface InterpretacaoECG {
   intervalosPR: number[]
   duracoesQRS: number[]
   duracaoQTc: number
+  // Extensão aditiva (Commit 3a) — opcionais; não alteram o significado dos campos acima.
+  diagnosticoPrincipal?: string
+  achados?: string[]
+  laudo?: string
+  alteracoesST?: AlteracaoSTInterpretada[]
 }
 
 export interface RespostaGeracaoECG {
@@ -194,6 +232,9 @@ export interface ECGPreset {
   expectedInterpretation: string[]
   teachingPoints: string[]
   warning?: string // Ex: "Padrão sintético educacional. Não usar para diagnóstico real."
+
+  // Modificadores morfológicos por derivação (Commit 3a — contrato; sem runtime ainda)
+  leadModifiers?: ModificadoresPorDerivacao
 
   // Compatibilidade com sistema antigo
   parametrosECGSyn?: ParametrosECGSyn
