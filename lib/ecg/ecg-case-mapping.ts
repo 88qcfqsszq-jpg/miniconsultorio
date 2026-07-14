@@ -243,15 +243,33 @@ function normalizar(s: unknown): string {
 }
 
 function presetNormalPorIdade(caso: any): string {
+  // 1. faixaEtaria explícita — caminho mais confiável
   const faixa = caso?.paciente?.dadosPediatricos?.faixaEtaria
   if (faixa) return getDefaultECGPresetByAgeGroup(faixa)
-  if (caso?.tipoPaciente === 'pediatrico' && typeof caso?.paciente?.idade === 'number') {
-    const idade = caso.paciente.idade
-    if (idade < 1) return 'normal_neonato'
-    if (idade < 3) return 'normal_lactente'
-    if (idade < 6) return 'normal_pre_escolar'
-    if (idade < 12) return 'normal_escolar'
-    return 'normal_adolescente'
+
+  if (caso?.tipoPaciente === 'pediatrico') {
+    // 2. idadeMeses (inteiro em meses; usa a granularidade disponível no campo)
+    // Faixas em meses: neonato = idadeMeses < 1 (faixa neonatal na granularidade
+    // disponível no campo), lactente 1-23 m, pré-escolar 24-71 m (2-5 a),
+    // escolar 72-143 m (6-11 a), adolescente ≥144 m.
+    const idadeMeses: number | undefined = caso?.paciente?.dadosPediatricos?.idadeMeses
+    if (typeof idadeMeses === 'number' && idadeMeses >= 0) {
+      if (idadeMeses < 1) return 'normal_neonato'     // faixa neonatal na granularidade disponível
+      if (idadeMeses < 24) return 'normal_lactente'   // 1-23 meses
+      if (idadeMeses < 72) return 'normal_pre_escolar' // 24-71 meses
+      if (idadeMeses < 144) return 'normal_escolar'   // 72-143 meses
+      return 'normal_adolescente'
+    }
+    // 3. paciente.idade em anos — fallback documentado, menos preciso.
+    // Neonatal ≈ idadeAnos < 0.083 (< ~1 mês). Unidade: anos decimais.
+    if (typeof caso?.paciente?.idade === 'number') {
+      const idadeAnos = caso.paciente.idade
+      if (idadeAnos < 0.083) return 'normal_neonato'
+      if (idadeAnos < 2) return 'normal_lactente'
+      if (idadeAnos < 6) return 'normal_pre_escolar'
+      if (idadeAnos < 12) return 'normal_escolar'
+      return 'normal_adolescente'
+    }
   }
   return 'normal_adulto'
 }
@@ -263,12 +281,22 @@ export interface ECGResolucaoCaso {
   origem: 'esperado' | 'tema' | 'diagnostico' | 'idade'
 }
 
-/** Presets patológicos disponíveis mapeados por palavra-chave de diagnóstico. */
+/** Presets patológicos disponíveis mapeados por palavra-chave de diagnóstico.
+ *  A ordem importa: a primeira regex que casar define o preset.
+ */
 const DIAGNOSTICO_PRESET: Array<[RegExp, string]> = [
   [/fibrilacao atrial|flutter atrial|\bfa\b paroxist/, 'fibrilacao_atrial'],
   [/taquicardia supraventricular|\btsv\b|palpitac/, 'taquicardia_supraventricular'],
   [/bradicardia|bloqueio atrioventricular|\bbav\b|bloqueio av/, 'bradicardia_sinusal'],
-  [/infarto|\biam\b|sindrome coronarian|\bsca\b|angina|isquemia miocard/, 'taquicardia_sinusal_adulto'],
+  // Angina estável / DAC estável / esforço: ECG de repouso basal normal.
+  // A FC será fornecida pelos sinais vitais do caso via patientHeartRate.
+  // normalizar() já removeu os acentos; as formas abaixo são sem diacríticos.
+  // Requer o qualificador "estavel"/"esforco" para NÃO capturar formas instáveis/SCA.
+  [/angina est[a-z]*|angina de esfor|dac est[a-z]*|cardiopatia isquemica est[a-z]*|doenca (arterial )?coronarian[a-z]* est[a-z]*/, 'normal_adulto'],
+  // SCA aguda, IAM, angina/DAC instável, cardiopatia isquêmica instável:
+  // traçado taquicárdico (reação adrenérgica esperada). Sem acento (normalizar()).
+  // As formas "instável" devem cair aqui, NUNCA no ECG normal do adulto.
+  [/infarto|\biam\b|sindrome coronarian|\bsca\b|angina inst[a-z]*|nstemi|stemi|isquemia miocard|(doenca (arterial )?coronarian[a-z]*|cardiopatia isquemica) inst[a-z]*/, 'taquicardia_sinusal_adulto'],
 ]
 
 /** Diagnósticos cardíacos em que um ECG normal NÃO exclui a doença. */

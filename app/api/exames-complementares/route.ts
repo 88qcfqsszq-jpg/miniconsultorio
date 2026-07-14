@@ -39,17 +39,31 @@ export async function POST(request: NextRequest) {
           .join("\n")
       : "";
 
-    const prompt = criarPromptAgentExames(
-      caso as any,
-      exameSolicitado,
-      historico,
-      examesDisponiveisTexto
-    );
+    // PRIORIDADE 1: Buscar no caso V2 estruturado ANTES de qualquer IA.
+    // Assim, exames encontrados e exames reconhecidos-mas-indisponíveis (ex.: ECG
+    // de um contexto não cadastrado) nunca acionam o gpt-4o-mini.
+    const resultadoV2 = buscarExameNoCasoV2(caso, exameSolicitado);
+    if (resultadoV2.encontrado) {
+      return NextResponse.json(resultadoV2);
+    }
+    // Exame reconhecido, porém o contexto solicitado não existe no caso:
+    // resposta DEFINITIVA (sem IA, sem substituir por outro contexto).
+    if ((resultadoV2 as any).indisponivel) {
+      return NextResponse.json(resultadoV2);
+    }
 
+    // Exame não localizado no caso estruturado: só agora tentar a IA.
     let resposta: string | null = null;
 
     if (openai) {
       try {
+        const prompt = criarPromptAgentExames(
+          caso as any,
+          exameSolicitado,
+          historico,
+          examesDisponiveisTexto
+        );
+
         const response = await openai.chat.completions.create({
           model: "gpt-4o-mini",
           messages: [
@@ -72,12 +86,6 @@ export async function POST(request: NextRequest) {
         console.error("Erro ao chamar OpenAI:", error);
         resposta = null;
       }
-    }
-
-    // PRIORIDADE 1: Buscar no caso V2 estruturado
-    const resultadoV2 = buscarExameNoCasoV2(caso, exameSolicitado);
-    if (resultadoV2.encontrado) {
-      return NextResponse.json(resultadoV2);
     }
 
     // Fallback se API falhar
@@ -113,8 +121,41 @@ function normalizarTexto(texto: string): string {
     .trim();
 }
 
+// Reconhecimento canônico de solicitação/laudo de ECG.
+// Distingue ECG de ecocardiograma e preserva o contexto repouso × esforço.
+type ContextoECG = "repouso" | "esforco" | "generico";
+interface CanonECG {
+  isECG: boolean;
+  contexto: ContextoECG;
+}
+
+/**
+ * Classifica um texto normalizado (solicitação do usuário OU nome do item)
+ * como ECG e determina o contexto. NÃO trata ecocardiograma como ECG e não
+ * usa substring ampla ("eco"): exige as formas próprias do eletrocardiograma.
+ */
+function canonizarECG(textoNorm: string): CanonECG {
+  const ehEco = /ecocardiograma|ecocardiografia|\beco\b/.test(textoNorm);
+  const ehECG =
+    !ehEco &&
+    (/\becg\b/.test(textoNorm) ||
+      /eletrocardiograma/.test(textoNorm) ||
+      /ergometri/.test(textoNorm) || // teste ergométrico / ergometria
+      /teste de esforco/.test(textoNorm));
+  if (!ehECG) return { isECG: false, contexto: "generico" };
+
+  let contexto: ContextoECG = "generico";
+  if (/esforco|ergometri|estresse/.test(textoNorm)) contexto = "esforco";
+  else if (/repouso|basal/.test(textoNorm)) contexto = "repouso";
+  return { isECG: true, contexto };
+}
+
 function gerarResultadoFormatado(campo: string, exame: any): string {
-  // Se já tem interpretação, usa ela como base
+  // resultado é o achado clínico registrado no caso (ex.: laudo de ECG, valor laboratorial).
+  // interpretacao é anotação educacional — aparece como fallback quando resultado ausente.
+  if (exame?.resultado) {
+    return exame.resultado;
+  }
   if (exame?.interpretacao) {
     return exame.interpretacao;
   }
@@ -234,28 +275,86 @@ function buscarExameNoCasoV2(caso: any, exameSolicitado: string) {
     }
   }
 
-  // 3. Buscar em complementaresOriginais
-  const originais = caso?.exames?.complementaresOriginais;
+  // 3. Buscar em complementaresOriginais (nome antigo) ou
+  //    complementaresDisponiveisOriginais (nome atual nos casos V2)
+  const usouCampoAntigo = caso?.exames?.complementaresOriginais != null;
+  const originais = usouCampoAntigo
+    ? caso?.exames?.complementaresOriginais
+    : caso?.exames?.complementaresDisponiveisOriginais;
+  const grupoOrigem = usouCampoAntigo
+    ? "complementaresOriginais"
+    : "complementaresDisponiveisOriginais";
+
+  const montarRetornoOriginal = (item: any) => ({
+    encontrado: true,
+    tipo: "complementarOriginal",
+    grupo: grupoOrigem,
+    campo: item?.nome || "exame",
+    resultado: gerarResultadoFormatado(item?.nome || "exame", item),
+    valores: item?.valores,
+    interpretacao: item?.interpretacao,
+    prioridade: item?.prioridade,
+    observacao: item?.observacao,
+    valoresReferenciaPediatricos: item?.valoresReferenciaPediatricos,
+    exameCompleto: item,
+  });
 
   if (Array.isArray(originais)) {
+    // 3a. ECG por contexto (repouso × esforço), com sinônimos canônicos.
+    // Evita cair na IA quando o caso possui o laudo estruturado do ECG.
+    const solicitacaoECG = canonizarECG(termo);
+    if (solicitacaoECG.isECG) {
+      const itensECG = originais
+        .map((item: any) => ({ item, canon: canonizarECG(normalizarTexto(item?.nome || item?.exame || item?.titulo || item?.tipo || "")) }))
+        .filter((x: any) => x.canon.isECG);
+
+      if (itensECG.length > 0) {
+        // Contexto explícito NÃO admite substituição pelo outro contexto:
+        // se o item pedido não existir, retorna estado DEFINITIVO (reconhecido +
+        // indisponível). O POST reconhece esse estado e NÃO aciona a IA.
+        if (solicitacaoECG.contexto === "esforco") {
+          const e = itensECG.find((x: any) => x.canon.contexto === "esforco");
+          if (e) return montarRetornoOriginal(e.item);
+          const mensagem = "ECG sob esforço não disponível neste caso.";
+          // resultado espelha a mensagem: a interface exibe apenas data.resultado.
+          return {
+            encontrado: false,
+            indisponivel: true,
+            reconhecido: true,
+            campo: "ECG sob esforço",
+            campoSolicitado: "ECG sob esforço",
+            resultado: mensagem,
+            mensagem,
+          };
+        }
+        if (solicitacaoECG.contexto === "repouso") {
+          const r = itensECG.find((x: any) => x.canon.contexto === "repouso");
+          if (r) return montarRetornoOriginal(r.item);
+          const mensagem = "ECG em repouso não disponível neste caso.";
+          // resultado espelha a mensagem: a interface exibe apenas data.resultado.
+          return {
+            encontrado: false,
+            indisponivel: true,
+            reconhecido: true,
+            campo: "ECG em repouso",
+            campoSolicitado: "ECG em repouso",
+            resultado: mensagem,
+            mensagem,
+          };
+        }
+        // Genérico: preferir repouso; na ausência, usar o primeiro ECG disponível.
+        const g = itensECG.find((x: any) => x.canon.contexto === "repouso") ?? itensECG[0];
+        return montarRetornoOriginal(g.item);
+      }
+      // Nenhum item de ECG neste caso: segue para o fluxo genérico abaixo
+      // (o laudo pode estar cadastrado sob outro nome de exame).
+    }
+
+    // 3b. Correspondência genérica por nome (demais exames).
     for (const item of originais) {
       const nome = normalizarTexto(item?.nome || item?.exame || item?.titulo || item?.tipo || "");
       if (nome && (termo.includes(nome) || nome.includes(termo))) {
-        const resultadoFormatado = gerarResultadoFormatado(item?.nome || "exame", item);
-
-        return {
-          encontrado: true,
-          tipo: "complementarOriginal",
-          grupo: "complementaresOriginais",
-          campo: item?.nome || "exame",
-          resultado: resultadoFormatado,
-          valores: item?.valores,
-          interpretacao: item?.interpretacao,
-          prioridade: item?.prioridade,
-          observacao: item?.observacao,
-          valoresReferenciaPediatricos: item?.valoresReferenciaPediatricos,
-          exameCompleto: item,
-        };
+        return montarRetornoOriginal(item);
       }
     }
   }
