@@ -19,6 +19,7 @@ import type { ParametrosGeracaoECG, RespostaGeracaoECG, PoliticaFrequenciaECG } 
 import { ecgsynAdapter } from './ecgsynAdapter'
 import { getPresetById, normalizePresetId } from './presets'
 import { transformarEm12Derivacoes } from './leadTransform'
+import { aplicarModificadoresPorDerivacao } from './leadModifiers'
 
 // ============================================================================
 // FUNÇÕES AUXILIARES
@@ -224,6 +225,16 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
 
   const dados12Derivacoes = transformarEm12Derivacoes(sinalProcessado, 60)
 
+  // Aplicar modificadores morfológicos por derivação (após a transformação em 12
+  // derivações, NUNCA no sinal base). Sem leadModifiers, retorna as derivações
+  // inalteradas (mesma referência) — comportamento anterior preservado.
+  const resultadoModificadores = aplicarModificadoresPorDerivacao(
+    dados12Derivacoes,
+    ecgPreset.leadModifiers,
+    parametrosECGSyn.frequenciaAmostragem,
+  )
+  const leadsFinais = resultadoModificadores.leads
+
   // IMPORTANTE: Manter todas as 12 derivações para renderização completa
   // Os selectedLeads são apenas para validação de eletrodos posicionados
   // A tela deve sempre exibir o ECG completo de 12 derivações
@@ -275,7 +286,7 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
   const resposta: RespostaGeracaoECG = {
     samplingRate: parametrosECGSyn.frequenciaAmostragem,
     duration: parametrosECGSyn.duracao,
-    leads: dados12Derivacoes as {
+    leads: leadsFinais as {
       [lead in ECGLead]?: number[]
     },
 
