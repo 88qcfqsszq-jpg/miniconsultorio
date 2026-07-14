@@ -16,9 +16,10 @@ import { rhythmPresets } from './rhythmPresets'
 import { artefactPresets } from './artefactPresets'
 import { conductionPresets } from './conductionPresets'
 import { arrhythmiaPresets } from './arrhythmiaPresets'
+import { ischemiaPresets } from './ischemiaPresets'
 
 /**
- * EXPORT ÚNICO: Todos os presets da Etapa 1 + Etapa 2
+ * EXPORT ÚNICO: Todos os presets da Etapa 1 + Etapa 2 + Etapa 3
  *
  * ETAPA 1 (13 presets):
  * - 6 normais por idade
@@ -29,7 +30,10 @@ import { arrhythmiaPresets } from './arrhythmiaPresets'
  * - 7 distúrbios de condução (BAV, bloqueios de ramo)
  * - 6 arritmias (extrassístoles, taquiarritmias)
  *
- * Total: 26 presets educacionais
+ * ETAPA 3 (1 preset):
+ * - 1 isquemia/infarto (IAM anterosseptal com supra de ST)
+ *
+ * Total: 27 presets educacionais
  */
 export const ALL_ECG_PRESETS: Record<string, ECGPreset> = {
   // Etapa 1
@@ -39,6 +43,8 @@ export const ALL_ECG_PRESETS: Record<string, ECGPreset> = {
   // Etapa 2
   ...conductionPresets,
   ...arrhythmiaPresets,
+  // Etapa 3
+  ...ischemiaPresets,
 }
 
 /**
