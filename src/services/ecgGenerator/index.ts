@@ -15,7 +15,7 @@
  */
 
 import type { ECGLead } from '@/lib/ecg/types'
-import type { ParametrosGeracaoECG, RespostaGeracaoECG } from './types'
+import type { ParametrosGeracaoECG, RespostaGeracaoECG, PoliticaFrequenciaECG } from './types'
 import { ecgsynAdapter } from './ecgsynAdapter'
 import { getPresetById, normalizePresetId } from './presets'
 import { transformarEm12Derivacoes } from './leadTransform'
@@ -23,6 +23,103 @@ import { transformarEm12Derivacoes } from './leadTransform'
 // ============================================================================
 // FUNÇÕES AUXILIARES
 // ============================================================================
+
+/**
+ * Presets sinusais adultos cuja NOMENCLATURA depende da frequência cardíaca.
+ * Apenas para estes o nome do ritmo é derivado inteiramente da FC clínica.
+ * NÃO inclui presets pediátricos (limiares 60/100 são adultos), arritmias,
+ * bloqueios, extrassístoles, arritmia sinusal respiratória ou artefatos —
+ * todos preservam o rótulo próprio do preset.
+ */
+const PRESETS_SINUSAIS_FC_DEPENDENTE_ADULTO: ReadonlySet<string> = new Set([
+  'normal_adulto',
+  'taquicardia_sinusal_adulto',
+  'bradicardia_sinusal',
+])
+
+/**
+ * Deriva o nome do ritmo a partir da FC clínica para presets sinusais adultos.
+ * Limiares adultos (inclusivos em 60 e 100 como ritmo sinusal):
+ *   FC < 60  → "Bradicardia sinusal"
+ *   60 ≤ FC ≤ 100 → "Ritmo sinusal"
+ *   FC > 100 → "Taquicardia sinusal"
+ * Para qualquer outro preset, mantém o rótulo próprio (rotuloBase).
+ */
+function classificarRitmoSinusalAdulto(presetId: string, fcClinica: number, rotuloBase: string): string {
+  if (!PRESETS_SINUSAIS_FC_DEPENDENTE_ADULTO.has(presetId)) return rotuloBase
+  if (fcClinica < 60) return 'Bradicardia sinusal'
+  if (fcClinica > 100) return 'Taquicardia sinusal'
+  return 'Ritmo sinusal'
+}
+
+/**
+ * Política de frequência por preset. Presets NÃO listados usam 'estado_clinico'
+ * (default seguro = comportamento herdado do estado clínico do paciente).
+ * Os 7 presets abaixo têm a FC/relação de condução como parte da própria
+ * definição do ritmo — patientHeartRate é ignorada para eles.
+ */
+const POLITICA_FREQUENCIA_POR_PRESET: Partial<Record<string, PoliticaFrequenciaECG>> = {
+  taquicardia_supraventricular: 'preset',
+  taquicardia_ventricular_monomorfica: 'preset',
+  flutter_atrial_2_1: 'preset',
+  bloqueio_av_2_1: 'preset',
+  bloqueio_av_mobitz_i: 'preset',
+  bloqueio_av_mobitz_ii: 'preset',
+  bloqueio_av_total: 'preset',
+}
+
+function getPoliticaFrequencia(presetId: string): PoliticaFrequenciaECG {
+  return POLITICA_FREQUENCIA_POR_PRESET[presetId] ?? 'estado_clinico'
+}
+
+interface ResolucaoFrequencia {
+  frequenciaAplicada: number
+  heartRateSource: 'patient' | 'preset'
+  politica: PoliticaFrequenciaECG
+  conflito?: { requested: number; applied: number; reason: string }
+}
+
+/**
+ * Resolvedor central da frequência clínica, respeitando a política do preset.
+ * - 'estado_clinico': patientHeartRate válida prevalece; senão, preset.heartRate.
+ * - 'preset' / 'contexto_exame': sempre preset.heartRate; se patientHeartRate válida
+ *   e diferente, registra conflito (não bloqueante). 'contexto_exame' ainda não tem
+ *   suporte contextual conectado ao runtime, portanto se comporta como 'preset'.
+ */
+function resolverFrequencia(
+  presetId: string,
+  presetHeartRate: number,
+  patientHeartRate: number | undefined,
+): ResolucaoFrequencia {
+  const politica = getPoliticaFrequencia(presetId)
+  const patientValida =
+    Number.isFinite(patientHeartRate) && (patientHeartRate as number) > 0
+
+  if (politica === 'estado_clinico') {
+    if (patientValida) {
+      return { frequenciaAplicada: patientHeartRate as number, heartRateSource: 'patient', politica }
+    }
+    return { frequenciaAplicada: presetHeartRate, heartRateSource: 'preset', politica }
+  }
+
+  // 'preset' ou 'contexto_exame': FC intrínseca ao preset.
+  const resolucao: ResolucaoFrequencia = {
+    frequenciaAplicada: presetHeartRate,
+    heartRateSource: 'preset',
+    politica,
+  }
+  if (patientValida && (patientHeartRate as number) !== presetHeartRate) {
+    resolucao.conflito = {
+      requested: patientHeartRate as number,
+      applied: presetHeartRate,
+      reason:
+        politica === 'contexto_exame'
+          ? 'FC do preset preservada: suporte a frequência contextual ainda não conectado ao runtime.'
+          : 'FC do preset preservada: a frequência/relação de condução faz parte da definição deste ritmo.',
+    }
+  }
+  return resolucao
+}
 
 function mapearGrupoIdade(ageGroup: string): "neonato" | "lactente" | "adolescente" | "adulto" | "crianca" | undefined {
   const mapas: Record<string, "neonato" | "lactente" | "adolescente" | "adulto" | "crianca" | undefined> = {
@@ -65,9 +162,19 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
     throw new Error(`Preset ECG não encontrado: ${params.presetId} (normalizado: ${normalizedId})`)
   }
 
+  // FC resolvida pela POLÍTICA do preset (não universal). Esta é a única FC
+  // clínica — usada para gerar o traçado, exibir ao aluno e classificar o ritmo.
+  // A FC medida no sinal fica só em metadata (rastreabilidade).
+  const resolucaoFC = resolverFrequencia(
+    normalizedId,
+    ecgPreset.heartRate,
+    params.patientHeartRate,
+  )
+  const frequenciaResolvida = resolucaoFC.frequenciaAplicada
+
   // Converter novo preset ECGPreset para parametrosECGSyn (compatibilidade)
   const parametrosECGSyn = {
-    frequenciaCardiaca: ecgPreset.heartRate,
+    frequenciaCardiaca: frequenciaResolvida,
     numeroIntervalos: 12,
     frequenciaAmostragem: 250,
     variacaoRR: ecgPreset.rrVariability,
@@ -173,8 +280,13 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
     },
 
     interpretation: {
-      frequenciaCardiaca: metricas.frequenciaCardiaca,
-      ritmo: ecgPreset.expectedInterpretation[0] || 'Sinusal',
+      // FC clínica (frequenciaResolvida), não a medida no sinal sintético.
+      frequenciaCardiaca: frequenciaResolvida,
+      ritmo: classificarRitmoSinusalAdulto(
+        normalizedId,
+        frequenciaResolvida,
+        ecgPreset.expectedInterpretation[0] || 'Sinusal',
+      ),
       eixoMedio: 60,
       intervalosPR,
       duracoesQRS,
@@ -196,6 +308,14 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
         'Goldberger AL, Amaral LAN, Glass L, Hausdorff JM, Ivanov PC, Mark RG, et al. PhysioBank, PhysioToolkit, and PhysioNet: Components of a new research resource for complex physiologic signals. Circulation. 2000;101(23):e215-e220.',
       ],
       fontePrincipal: 'Gerador Didático Inspirado em PhysioNet ECGSYN',
+
+      // Rastreabilidade da FC (Abordagem B): target é a FC clínica exibida;
+      // measured é a FC detectada no sinal sintético (só auditoria técnica).
+      targetHeartRate: frequenciaResolvida,
+      measuredHeartRate: metricas.frequenciaCardiaca,
+      heartRateSource: resolucaoFC.heartRateSource,
+      heartRatePolicy: resolucaoFC.politica,
+      ...(resolucaoFC.conflito ? { heartRateConflict: resolucaoFC.conflito } : {}),
     },
   }
 

@@ -59,6 +59,19 @@ export interface SinalECGSyn {
 // RESPOSTA DE GERAÇÃO DE ECG
 // ============================================================================
 
+/**
+ * Política que define de onde vem a frequência cardíaca de um preset.
+ * - 'estado_clinico': FC herda o estado clínico do paciente (patientHeartRate prevalece).
+ * - 'preset': FC é intrínseca ao ritmo/condução (TSV, TV, flutter 2:1, bloqueios avançados);
+ *   patientHeartRate é ignorada e um conflito é registrado se divergir.
+ * - 'contexto_exame': reservado para FC configurada por contexto (esforço, crise, reavaliação);
+ *   ainda NÃO conectado ao runtime — comporta-se como 'preset' nesta etapa.
+ */
+export type PoliticaFrequenciaECG =
+  | 'estado_clinico'
+  | 'preset'
+  | 'contexto_exame'
+
 export interface Dados12Derivacoes {
   [key: string]: number[] // chave: 'I', 'II', 'III', 'aVR', 'aVL', 'aVF', 'V1'-'V6'
 }
@@ -95,6 +108,20 @@ export interface RespostaGeracaoECG {
     avisoEducacional: string
     referências: string[]
     fontePrincipal: string // "PhysioNet ECGSYN 1.0.0"
+
+    // Rastreabilidade da frequência cardíaca (Abordagem B).
+    // A FC clínica exibida ao aluno é targetHeartRate; measuredHeartRate é a
+    // FC detectada no sinal sintético, mantida apenas para auditoria técnica.
+    targetHeartRate: number // FC clínica final (frequenciaAplicada) — a exibida
+    measuredHeartRate: number // FC medida no traçado sintético (metricas.frequenciaCardiaca)
+    heartRateSource: 'patient' | 'preset' // origem da FC aplicada
+    heartRatePolicy: PoliticaFrequenciaECG // política que determinou a FC aplicada
+    // Presente só quando a patientHeartRate foi ignorada por política 'preset'/'contexto_exame'.
+    heartRateConflict?: {
+      requested: number // patientHeartRate válida fornecida
+      applied: number // FC efetivamente usada (do preset)
+      reason: string
+    }
   }
 }
 
@@ -223,4 +250,10 @@ export interface ParametrosGeracaoECG {
   selectedLeads: ECGLead[]
   durationSeconds?: number
   samplingRate?: number
+  /**
+   * FC atual do paciente em bpm.
+   * Quando válida, é usada pelos presets com política "estado_clinico".
+   * Presets cuja frequência é intrínseca ao ritmo podem preservar a FC do preset.
+   */
+  patientHeartRate?: number
 }

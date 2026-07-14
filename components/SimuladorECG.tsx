@@ -122,12 +122,20 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
           .filter((el) => el.isPlaced)
           .map((el) => el.lead)
 
+        // FC atual do paciente — V2 (sinaisVitais.entrada) com fallbacks V1.
+        // sinaisVitais.entrada não existe no tipo base Caso (é campo dos dados V2) → cast.
+        const fcPaciente: number | undefined =
+          (caso as any)?.sinaisVitais?.entrada?.frequenciaCardiaca ??
+          caso?.sinaisVitaisCorretos?.frequenciaCardiaca ??
+          caso?.sinais_vitais?.corretos?.frequenciaCardiaca
+
         // Gerar ECG (normalizePresetId é feita automaticamente)
         const ecgData = generateECG({
           presetId: padraoSelecionado,
           selectedLeads,
           durationSeconds: 5,
           samplingRate: 250,
+          patientHeartRate: fcPaciente,
         })
 
         // Armazenar dados gerados
