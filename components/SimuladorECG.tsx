@@ -63,6 +63,13 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
   const patientImage = getPatientImage(caso)
   const electrodeProfile = getElectrodeProfileForCase(caso)
 
+  // Título clínico principal do painel de interpretação:
+  //   diagnosticoPrincipal (quando presente e não vazio) → para presets de isquemia
+  //   ritmo                                              → para todos os demais
+  const tituloInterpretacao = ecgDadosGerados
+    ? (ecgDadosGerados.interpretation.diagnosticoPrincipal?.trim() || ecgDadosGerados.interpretation.ritmo)
+    : ''
+
   // Debug: confirmar que está usando a mesma imagem que o exame físico
   useEffect(() => {
     if (process.env.NODE_ENV === 'development' && caso) {
@@ -600,6 +607,15 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
                   {/* Interpretação */}
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-3">
                     <h4 className="font-bold text-blue-900">📊 Interpretação Automática</h4>
+
+                    {/* Interpretação clínica principal — sempre visível.
+                        Usa diagnosticoPrincipal quando disponível (presets de isquemia);
+                        cai para ritmo nos demais (normal, arritmias, conduções). */}
+                    <div className="border-t border-blue-200 pt-3">
+                      <p className="text-blue-700 font-semibold text-xs uppercase tracking-wide mb-1">Interpretação clínica</p>
+                      <p className="text-blue-900 font-bold">{tituloInterpretacao}</p>
+                    </div>
+
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <p className="text-blue-700 font-semibold">FC (bpm)</p>
@@ -618,6 +634,49 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
                         <p className="text-blue-900">{ecgDadosGerados.interpretation.duracaoQTc}</p>
                       </div>
                     </div>
+
+                    {/* Laudo — somente quando string não vazia nem somente espaços */}
+                    {ecgDadosGerados.interpretation.laudo?.trim() && (
+                      <div className="border-t border-blue-200 pt-3">
+                        <p className="text-blue-700 font-semibold text-xs uppercase tracking-wide mb-1">Laudo</p>
+                        <p className="text-blue-800 text-sm leading-relaxed">{ecgDadosGerados.interpretation.laudo}</p>
+                      </div>
+                    )}
+
+                    {/* Achados — somente quando lista não vazia */}
+                    {ecgDadosGerados.interpretation.achados && ecgDadosGerados.interpretation.achados.length > 0 && (
+                      <div className="border-t border-blue-200 pt-3">
+                        <p className="text-blue-700 font-semibold text-xs uppercase tracking-wide mb-2">Achados</p>
+                        <ul className="text-sm text-blue-800 space-y-1">
+                          {ecgDadosGerados.interpretation.achados.map((achado, idx) => (
+                            <li key={idx} className="flex gap-2">
+                              <span className="shrink-0">•</span>
+                              <span>{achado}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Alterações do ST — somente quando lista não vazia */}
+                    {ecgDadosGerados.interpretation.alteracoesST && ecgDadosGerados.interpretation.alteracoesST.length > 0 && (
+                      <div className="border-t border-blue-200 pt-3">
+                        <p className="text-blue-700 font-semibold text-xs uppercase tracking-wide mb-2">Alterações do ST</p>
+                        <ul className="text-sm text-blue-800 space-y-1">
+                          {ecgDadosGerados.interpretation.alteracoesST.map((st, idx) => (
+                            <li key={idx} className="flex gap-2">
+                              <span className="shrink-0">•</span>
+                              <span>
+                                {st.derivacoes.join(', ')}: {st.tipo === 'elevation' ? 'elevação' : 'depressão'}
+                                {st.amplitudeMv !== undefined
+                                  ? ` de ${st.amplitudeMv.toFixed(2).replace('.', ',')} mV`
+                                  : ''}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
 
                   {/* Pontos de ensino */}
