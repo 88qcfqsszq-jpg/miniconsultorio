@@ -105,6 +105,24 @@ export function getPresetsByAgeGroup(ageGroup: AgeGroup): ECGPreset[] {
   return Object.values(ALL_ECG_PRESETS).filter((p) => p.ageGroup === ageGroup)
 }
 
+// Presets temporariamente ocultos do seletor (classificação D na auditoria visual — não exibir)
+const HIDDEN_PRESET_IDS = new Set([
+  'flutter_atrial_2_1',
+  'bloqueio_ramo_direito',
+])
+
+function isPresetVisible(presetId: string): boolean {
+  return !HIDDEN_PRESET_IDS.has(presetId)
+}
+
+/**
+ * Indica se um preset está oculto das escolhas do seletor.
+ * Presets ocultos permanecem resolvíveis por getPresetById().
+ */
+export function isPresetHidden(presetId: string): boolean {
+  return HIDDEN_PRESET_IDS.has(presetId)
+}
+
 /**
  * Retorna opções formatadas para select/dropdown do simulador
  * Agrupa por categoria para melhor UX
@@ -129,7 +147,7 @@ export function getPresetOptionsForSelect(): Array<{
 
   return categories
     .map((category) => {
-      const presets = getPresetsByCategory(category)
+      const presets = getPresetsByCategory(category).filter((p) => isPresetVisible(p.id))
       if (presets.length === 0) return null
 
       return {
@@ -155,6 +173,7 @@ export function getPresetOptionsFlat(): Array<{
   category: ECGPresetCategory
 }> {
   return Object.values(ALL_ECG_PRESETS)
+    .filter((p) => isPresetVisible(p.id))
     .sort((a, b) => {
       if (a.category !== b.category) return a.category.localeCompare(b.category)
       return a.label.localeCompare(b.label)

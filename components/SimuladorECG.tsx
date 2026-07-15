@@ -5,7 +5,7 @@ import { ECGLeadPosition, ECGLead } from '@/lib/ecg/types'
 import { validarPosicionamentoECG } from '@/lib/ecg/validarEletrodos'
 import { obterPadrao, PADROES_ECG } from '@/lib/ecg/padroesECG'
 import { generateECG } from '@/src/services/ecgGenerator'
-import { getPresetOptionsFlat, getPresetById } from '@/src/services/ecgGenerator/presets'
+import { getPresetOptionsFlat, getPresetById, isPresetHidden } from '@/src/services/ecgGenerator/presets'
 import { resolveECGPresetForCase } from '@/lib/ecg/ecg-case-mapping'
 import { getPatientImage, getElectrodeProfileForCase } from '@/lib/paciente/get-patient-image'
 import type { RespostaGeracaoECG } from '@/src/services/ecgGenerator'
@@ -365,6 +365,14 @@ export default function SimuladorECG({ padrao = 'ecg_pediatrico_normal', caso, o
               }}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
+              {isPresetHidden(padraoSelecionado) && (() => {
+                const preset = getPresetById(padraoSelecionado)
+                return preset ? (
+                  <option key={padraoSelecionado} value={padraoSelecionado} disabled>
+                    {preset.label} — temporariamente indisponível
+                  </option>
+                ) : null
+              })()}
               {getPresetOptionsFlat().map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
