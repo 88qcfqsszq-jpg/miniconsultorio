@@ -60,12 +60,35 @@ export interface ResultadoModificadoresDerivacao {
 const DERIVACAO_REFERENCIA: DerivacaoClinica = 'II'
 /** Ponto J aproximado após o pico R, em fração do RR local. */
 const FRACAO_PONTO_J = 0.06
-/** Fim da janela de modificação (transição para a onda T), em fração do RR local. */
-const FRACAO_FIM_ST = 0.30
-/** Fração da janela usada para subida/descida suave (raised cosine). */
-const FRACAO_RAMPA = 0.15
-/** Ponto de medição do desnível: J + 40 ms. */
-const MEDICAO_ST_MS = 40
+/**
+ * Fim da janela de modificação: pico da onda T, empiricamente R+0.22·RR no
+ * modelo gerarBatimento (centro gaussiana T = fase 0.45, pico R = fase 0.23;
+ * diferença = 0.22). Validado nas três frequências auditadas (60/108/150 bpm).
+ * Em u=1 (pico da T) o envelope vale 0 — a T natural absorve a transição.
+ */
+const FRACAO_FIM_ST    = 0.22
+/**
+ * Perfil de elevação de ST em quatro fases:
+ *
+ *   PRE_RAMPA_MS   : duração da pré-rampa antes do J, em ms.
+ *                    Converte para 2–3 amostras @ 250 Hz.
+ *                    Elimina o degrau abrupto no ponto J.
+ *   J_FLOOR        : nível do envelope no ponto J (u=0), como fração de 1.0.
+ *                    Mantém o J claramente elevado sem quina excessiva.
+ *   FRACAO_ACOMOD  : fração da janela positiva para subida J_FLOOR → 1.0.
+ *   FRACAO_PLATO_FIM: fração até onde o platô permanece em 1.0.
+ *   Fase D (fade)  : descida cossenoidal de 1.0 a 0.0 até o pico da T.
+ */
+const PRE_RAMPA_MS     = 10     // 10 ms → 3 amostras @ 250 Hz (clamped [2,3])
+const J_FLOOR          = 0.55   // 55% da amplitude em J (~0.19 mV em V2@0.35 mV); max Δ pré-rampa = 0.096 mV ≤ 0.10 mV
+const FRACAO_ACOMOD    = 0.12   // Fase B: J_FLOOR→1.0 em 12% da janela positiva
+const FRACAO_PLATO_FIM = 0.38   // Fase C: platô em 1.0 até 38% da janela positiva
+/**
+ * Ponto de medição adaptativo: fração da janela positiva J→pico_T.
+ * U=0.25 fica no centro da Fase C (platô, envelope=1.0) para FC 60–200 bpm @ 250 Hz.
+ * Substitui medição fixa em J+40ms, que saía do platô em taquicardias (FC ≥ ~120 bpm).
+ */
+const MEDICAO_FRACAO_JANELA = 0.25
 /**
  * Janela de baseline no segmento PR (isoelétrico, APÓS a onda P e ANTES da Q),
  * em fração do RR local. Validada empiricamente no sinal ECGSYN real: a fase
@@ -95,17 +118,33 @@ function mediana(valores: number[]): number | undefined {
   return ord.length % 2 !== 0 ? ord[meio] : (ord[meio - 1] + ord[meio]) / 2
 }
 
+/** Número de amostras da pré-rampa para a taxa de amostragem dada. */
+function nPreRampa(samplingRate: number): number {
+  return Math.min(3, Math.max(2, Math.round(PRE_RAMPA_MS / 1000 * samplingRate)))
+}
+
 /**
- * Envelope suave (raised cosine) sobre a janela ST normalizada u ∈ [0,1].
- * Sobe progressivamente, mantém platô e desce progressivamente — sem degrau.
- * Retorna 0 fora de [0,1] (offset zero fora da janela).
+ * Envelope ST — parte positiva, u ∈ [0, 1] (ponto J ao pico da T):
+ *
+ *   u=0 (J) → J_FLOOR  (pré-rampa garante continuidade; sem degrau)
+ *   Fase B [0, ACOMOD):      J_FLOOR → 1.0 (meio-coseno ascendente)
+ *   Fase C [ACOMOD, PLATO]:  platô em 1.0 — ST plano e reconhecível
+ *   Fase D (PLATO, 1):       1.0 → 0 (cossenoidal; o modificador decresce
+ *                            durante a subida da T e chega a 0 no pico)
+ *   u ≥ 1 → 0  (após pico T: descida da T e TP inalterados)
  */
-function envelopeST(u: number): number {
-  if (u <= 0 || u >= 1) return 0
-  const rampa = FRACAO_RAMPA
-  if (u < rampa) return 0.5 * (1 - Math.cos(Math.PI * (u / rampa)))
-  if (u > 1 - rampa) return 0.5 * (1 - Math.cos(Math.PI * ((1 - u) / rampa)))
-  return 1
+function envelopeSTPos(u: number): number {
+  if (u <= 0) return J_FLOOR
+  if (u >= 1) return 0
+  // Fase B: J_FLOOR → 1.0
+  if (u < FRACAO_ACOMOD)
+    return J_FLOOR + (1.0 - J_FLOOR) * 0.5 * (1 - Math.cos(Math.PI * u / FRACAO_ACOMOD))
+  // Fase C: platô
+  if (u <= FRACAO_PLATO_FIM)
+    return 1.0
+  // Fase D: descida cossenoidal até 0 no pico da T
+  const t = (u - FRACAO_PLATO_FIM) / (1.0 - FRACAO_PLATO_FIM)
+  return 0.5 * (1.0 + Math.cos(Math.PI * t))
 }
 
 /** Deriva a derivação de referência (DII) ou a primeira derivação válida disponível. */
@@ -121,32 +160,51 @@ function obterDerivacaoReferencia(leads: Dados12Derivacoes): number[] | undefine
 
 /**
  * Aplica o desvio de ST em UMA derivação, retornando um NOVO array (sem mutar).
- * Só modifica a janela [J, fimST] de cada batimento; P e QRS ficam intactos e a
- * linha de base fora da janela permanece inalterada.
+ *
+ * Janela de modificação por batimento:
+ *   Fase A (pré-rampa): [jIdx − N_PRE, jIdx)  — N_PRE=2–3 amostras, 0→J_FLOOR
+ *   Fases B-D (pos):    [jIdx, fimIdx]          — J_FLOOR→platô→0 no pico T
+ *
+ * P e maior parte do QRS ficam intactos. Apenas o terminal da onda S
+ * (N_PRE amostras) e o segmento ST-T são modificados.
  */
 function aplicarSTEmDerivacao(
   arr: number[],
   rPeaks: number[],
   tipo: 'elevation' | 'depression',
-  amplitudeMv: number
+  amplitudeMv: number,
+  samplingRate: number
 ): number[] {
-  const saida = arr.slice() // cópia — não muta a entrada
+  const saida = arr.slice()
   const sinal = tipo === 'depression' ? -1 : 1
+  const N_PRE = nPreRampa(samplingRate)
 
   for (let i = 0; i < rPeaks.length; i++) {
     const r = rPeaks[i]
     const rr = rrLocalAmostras(rPeaks, i)
     if (!(rr > 0)) continue
 
-    const jIdx = Math.round(r + FRACAO_PONTO_J * rr)
+    const jIdx  = Math.round(r + FRACAO_PONTO_J * rr)
     const fimIdx = Math.round(r + FRACAO_FIM_ST * rr)
     if (fimIdx <= jIdx) continue
 
+    const winLen = fimIdx - jIdx
+
+    // Fase A — pré-rampa: 0 → J_FLOOR (meio-coseno); nunca atinge o pico R.
+    const preStart = Math.max(r + 1, jIdx - N_PRE)
+    const actualNPre = jIdx - preStart
+    for (let k = preStart; k < jIdx; k++) {
+      const uPre = (k - preStart) / actualNPre  // [0, 1)
+      const envPre = J_FLOOR * 0.5 * (1 - Math.cos(Math.PI * uPre))
+      saida[Math.min(k, saida.length - 1)] += sinal * amplitudeMv * envPre
+    }
+
+    // Fases B-D — parte positiva: J_FLOOR → platô → 0 no pico T.
     const inicio = Math.max(0, jIdx)
     const fim = Math.min(saida.length - 1, fimIdx)
     for (let k = inicio; k <= fim; k++) {
-      const u = (k - jIdx) / (fimIdx - jIdx)
-      saida[k] += sinal * amplitudeMv * envelopeST(u)
+      const u = (k - jIdx) / winLen
+      saida[k] += sinal * amplitudeMv * envelopeSTPos(u)
     }
   }
 
@@ -167,7 +225,6 @@ export function medirDesnivelST(
   rPeaks: number[],
   samplingRate: number
 ): MedicaoST {
-  const offsetMedicao = Math.round((MEDICAO_ST_MS / 1000) * samplingRate)
   const desvios: number[] = []
 
   for (let i = 0; i < rPeaks.length; i++) {
@@ -175,7 +232,12 @@ export function medirDesnivelST(
     const rr = rrLocalAmostras(rPeaks, i)
     if (!(rr > 0)) continue
 
-    const jIdx = Math.round(r + FRACAO_PONTO_J * rr)
+    const jIdx   = Math.round(r + FRACAO_PONTO_J * rr)
+    const fimIdx = Math.round(r + FRACAO_FIM_ST * rr)
+    const winLen = fimIdx - jIdx
+    if (winLen <= 0) continue
+    // Centro do platô (Fase C): u=0.25 → envelope=1.0 para FC 60–200 bpm @ 250 Hz.
+    const offsetMedicao = Math.max(1, Math.round(MEDICAO_FRACAO_JANELA * winLen))
     const medIdx = jIdx + offsetMedicao
     // Baseline = mediana de uma janela isoelétrica no PR (após P, antes de Q).
     const baseInicio = Math.round(r - FRACAO_BASELINE_INICIO * rr)
@@ -264,7 +326,7 @@ export function aplicarModificadoresPorDerivacao(
       continue
     }
 
-    const modificada = aplicarSTEmDerivacao(arr, rPeaks, st.tipo, st.amplitudeMv)
+    const modificada = aplicarSTEmDerivacao(arr, rPeaks, st.tipo, st.amplitudeMv, samplingRate)
     novasLeads[leadName] = modificada
     modifiedLeads.push(leadName)
 
