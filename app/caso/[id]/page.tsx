@@ -844,7 +844,9 @@ function CasoPageContent() {
               onClick={() =>
                 aba.id === "exame"
                   ? abrirExameFisico("aba")
-                  : setAbaAtiva(aba.id)
+                  : aba.id === "ecg"
+                    ? setMenuAtivo("ecg") // ECG é modal (fixed inset-0); reutiliza o gate do desktop
+                    : setAbaAtiva(aba.id)
               }
               className={`flex items-center gap-1.5 px-3 py-3 text-xs font-semibold whitespace-nowrap border-b-2 transition-colors shrink-0 ${
                 abaAtiva === aba.id
@@ -959,7 +961,6 @@ function CasoPageContent() {
               </div>
             )}
 
-            {menuAtivo === "ecg" && <SimuladorECG padrao={caso?.ecg?.padrao} caso={caso} onClose={() => setMenuAtivo("paciente")} onECGGerado={handleECGGerado} initialState={ecgSimuladorState} onStateChange={setEcgSimuladorState} />}
             </div>
           </div>
 
@@ -1104,6 +1105,19 @@ function CasoPageContent() {
           achadosEncontrados={manobrasSolicitadas}
           onAchadoEncontrado={handleAchadoExameAdulto}
           onFechar={() => setModalExameAdultoAberto(false)}
+        />
+      )}
+
+      {/* Simulador de ECG — modal fixo (fixed inset-0), montado no nível superior para
+          funcionar em qualquer viewport (desktop e tablet/mobile). Gate único menuAtivo. */}
+      {menuAtivo === "ecg" && (
+        <SimuladorECG
+          padrao={caso?.ecg?.padrao}
+          caso={caso}
+          onClose={() => setMenuAtivo("paciente")}
+          onECGGerado={handleECGGerado}
+          initialState={ecgSimuladorState}
+          onStateChange={setEcgSimuladorState}
         />
       )}
     </div>
