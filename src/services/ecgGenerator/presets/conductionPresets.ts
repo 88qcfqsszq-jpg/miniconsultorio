@@ -337,14 +337,15 @@ export const conductionPresets: Record<string, ECGPreset> = {
     },
 
     leadModifiers: {
-      // R' positivo em V1 e V2 (padrão rSR' do BRD)
-      V1:  { rPrimeWave: { amplitudeMv: 0.30, delayMs: 50, widthMs: 30 } },
-      V2:  { rPrimeWave: { amplitudeMv: 0.20, delayMs: 50, widthMs: 30 } },
-      // Onda S larga nas derivações laterais (invert=true = deflexão negativa)
-      I:   { rPrimeWave: { amplitudeMv: 0.18, delayMs: 50, widthMs: 28, invert: true } },
-      aVL: { rPrimeWave: { amplitudeMv: 0.14, delayMs: 50, widthMs: 28, invert: true } },
-      V5:  { rPrimeWave: { amplitudeMv: 0.18, delayMs: 50, widthMs: 28, invert: true } },
-      V6:  { rPrimeWave: { amplitudeMv: 0.15, delayMs: 50, widthMs: 28, invert: true } },
+      // R' positivo em V1 e V2 (padrão rSR' do BRD). delay/width calibrados para
+      // que a duração do QRS medida no sinal caia em 120–160 ms (validado em 100 seeds).
+      V1:  { rPrimeWave: { amplitudeMv: 0.28, delayMs: 75, widthMs: 45 } },
+      V2:  { rPrimeWave: { amplitudeMv: 0.22, delayMs: 75, widthMs: 45 } },
+      // Onda S terminal larga nas derivações laterais (invert=true = deflexão negativa)
+      I:   { rPrimeWave: { amplitudeMv: 0.28, delayMs: 75, widthMs: 43, invert: true } },
+      aVL: { rPrimeWave: { amplitudeMv: 0.22, delayMs: 75, widthMs: 43, invert: true } },
+      V5:  { rPrimeWave: { amplitudeMv: 0.28, delayMs: 75, widthMs: 43, invert: true } },
+      V6:  { rPrimeWave: { amplitudeMv: 0.24, delayMs: 75, widthMs: 43, invert: true } },
     },
 
     expectedInterpretation: [
