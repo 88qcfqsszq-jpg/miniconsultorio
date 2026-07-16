@@ -106,9 +106,7 @@ export function getPresetsByAgeGroup(ageGroup: AgeGroup): ECGPreset[] {
 }
 
 // Presets temporariamente ocultos do seletor (classificação D na auditoria visual — não exibir)
-const HIDDEN_PRESET_IDS = new Set<string>([
-  'bloqueio_ramo_direito', // oculto até a duração do QRS medida em V1/V2 atingir 120–160 ms
-])
+const HIDDEN_PRESET_IDS = new Set<string>([])
 
 function isPresetVisible(presetId: string): boolean {
   return !HIDDEN_PRESET_IDS.has(presetId)
