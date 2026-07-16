@@ -336,6 +336,17 @@ export const conductionPresets: Record<string, ECGPreset> = {
       stSegment: 'normal',
     },
 
+    leadModifiers: {
+      // R' positivo em V1 e V2 (padrão rSR' do BRD)
+      V1:  { rPrimeWave: { amplitudeMv: 0.30, delayMs: 50, widthMs: 30 } },
+      V2:  { rPrimeWave: { amplitudeMv: 0.20, delayMs: 50, widthMs: 30 } },
+      // Onda S larga nas derivações laterais (invert=true = deflexão negativa)
+      I:   { rPrimeWave: { amplitudeMv: 0.18, delayMs: 50, widthMs: 28, invert: true } },
+      aVL: { rPrimeWave: { amplitudeMv: 0.14, delayMs: 50, widthMs: 28, invert: true } },
+      V5:  { rPrimeWave: { amplitudeMv: 0.18, delayMs: 50, widthMs: 28, invert: true } },
+      V6:  { rPrimeWave: { amplitudeMv: 0.15, delayMs: 50, widthMs: 28, invert: true } },
+    },
+
     expectedInterpretation: [
       'Bloqueio de ramo direito',
       'QRS alargado (≥ 120 ms)',
