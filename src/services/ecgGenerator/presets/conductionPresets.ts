@@ -337,15 +337,18 @@ export const conductionPresets: Record<string, ECGPreset> = {
     },
 
     leadModifiers: {
-      // R' positivo em V1 e V2 (padrão rSR' do BRD). delay/width calibrados para
-      // que a duração do QRS medida no sinal caia em 120–160 ms (validado em 100 seeds).
-      V1:  { rPrimeWave: { amplitudeMv: 0.28, delayMs: 75, widthMs: 45 } },
-      V2:  { rPrimeWave: { amplitudeMv: 0.22, delayMs: 75, widthMs: 45 } },
+      // R' positivo em V1 e V2 (padrão rSR' do BRD). delay/width calibrados para que
+      // a duração do QRS medida no sinal fique em 120–160 ms em TODA a faixa de FC
+      // clínica (60–150 bpm), já que o preset herda patientHeartRate (estado_clinico)
+      // e o QRS base encolhe com o RR — o R' precisa terminar tarde o bastante para
+      // sustentar ≥120 ms mesmo em taquicardia. Validado em 100 seeds × 5 frequências.
+      V1:  { rPrimeWave: { amplitudeMv: 0.28, delayMs: 80, widthMs: 50 } },
+      V2:  { rPrimeWave: { amplitudeMv: 0.22, delayMs: 80, widthMs: 50 } },
       // Onda S terminal larga nas derivações laterais (invert=true = deflexão negativa)
-      I:   { rPrimeWave: { amplitudeMv: 0.28, delayMs: 75, widthMs: 43, invert: true } },
-      aVL: { rPrimeWave: { amplitudeMv: 0.22, delayMs: 75, widthMs: 43, invert: true } },
-      V5:  { rPrimeWave: { amplitudeMv: 0.28, delayMs: 75, widthMs: 43, invert: true } },
-      V6:  { rPrimeWave: { amplitudeMv: 0.24, delayMs: 75, widthMs: 43, invert: true } },
+      I:   { rPrimeWave: { amplitudeMv: 0.28, delayMs: 80, widthMs: 48, invert: true } },
+      aVL: { rPrimeWave: { amplitudeMv: 0.22, delayMs: 80, widthMs: 48, invert: true } },
+      V5:  { rPrimeWave: { amplitudeMv: 0.28, delayMs: 80, widthMs: 48, invert: true } },
+      V6:  { rPrimeWave: { amplitudeMv: 0.24, delayMs: 80, widthMs: 48, invert: true } },
     },
 
     expectedInterpretation: [
