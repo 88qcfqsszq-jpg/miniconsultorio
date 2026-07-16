@@ -221,6 +221,13 @@ export const arrhythmiaPresets: Record<string, ECGPreset> = {
       stSegment: 'normal',
     },
 
+    leadModifiers: {
+      II:   { fWaveOverlay: { amplitudeMv: 0.20, frequencyBpm: 300, invert: true  } },
+      III:  { fWaveOverlay: { amplitudeMv: 0.18, frequencyBpm: 300, invert: true  } },
+      aVF:  { fWaveOverlay: { amplitudeMv: 0.18, frequencyBpm: 300, invert: true  } },
+      V1:   { fWaveOverlay: { amplitudeMv: 0.15, frequencyBpm: 300, invert: false } },
+    },
+
     expectedInterpretation: [
       'Flutter atrial com condução 2:1',
       'Taquicardia regular com QRS estreito',

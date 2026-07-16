@@ -16,7 +16,7 @@
  * A fiação com a metadata fica para uma etapa que possa alterar types.ts.
  */
 
-import type { Dados12Derivacoes, ModificadoresPorDerivacao, DerivacaoClinica } from './types'
+import type { Dados12Derivacoes, ModificadoresPorDerivacao, DerivacaoClinica, FWaveOverlay, RPrimeWave } from './types'
 import { detectarComplexosQRS } from './ecgsynAdapter'
 
 // ============================================================================
@@ -212,6 +212,73 @@ function aplicarSTEmDerivacao(
 }
 
 // ============================================================================
+// ONDA F (flutter atrial)
+// ============================================================================
+
+/**
+ * Sobrepõe um sinal de dente de serra contínuo a uma derivação, simulando ondas F.
+ * Forma: subida rápida (30% do ciclo) seguida de descida lenta (70%), ou invertida.
+ * A sobreposição é contínua e independente dos picos R.
+ */
+function aplicarFWaveEmDerivacao(
+  arr: number[],
+  overlay: FWaveOverlay,
+  samplingRate: number,
+): number[] {
+  const saida = arr.slice()
+  const { amplitudeMv, frequencyBpm, invert = false } = overlay
+  const sinal = invert ? -1 : 1
+  const periodAmostras = samplingRate * 60 / frequencyBpm  // 50 amostras @ 250 Hz para 300 bpm
+
+  for (let i = 0; i < saida.length; i++) {
+    const fase = (i / periodAmostras) % 1  // [0, 1)
+    let valor: number
+    if (fase < 0.3) {
+      // subida rápida: -1 → +1 em 30% do ciclo
+      valor = -1 + 2 * (fase / 0.3)
+    } else {
+      // descida lenta: +1 → -1 em 70% do ciclo
+      valor = 1 - 2 * ((fase - 0.3) / 0.7)
+    }
+    saida[i] += sinal * amplitudeMv * valor
+  }
+  return saida
+}
+
+// ============================================================================
+// ONDA R' (bloqueio de ramo direito)
+// ============================================================================
+
+/**
+ * Adiciona um pico gaussiano após cada QRS para simular a onda R' do BRD.
+ * Positivo em V1/V2 (R' alto); invert=true para deflexão negativa (onda S larga em I/aVL/V5/V6).
+ */
+function aplicarRPrimeEmDerivacao(
+  arr: number[],
+  rPeaks: number[],
+  rPrime: RPrimeWave,
+  samplingRate: number,
+): number[] {
+  const saida = arr.slice()
+  const { amplitudeMv, delayMs, widthMs, invert = false } = rPrime
+  const sinalDir = invert ? -1 : 1
+  const delayAmostras = delayMs / 1000 * samplingRate
+  const sigmaAmostras = (widthMs / 1000 * samplingRate) / 2.355  // FWHM → σ
+  const janelaAmostras = Math.ceil(sigmaAmostras * 4)  // ±4σ cobre >99.9% da gaussiana
+
+  for (const r of rPeaks) {
+    const centro = Math.round(r + delayAmostras)
+    const inicio = Math.max(0, centro - janelaAmostras)
+    const fim = Math.min(saida.length - 1, centro + janelaAmostras)
+    for (let k = inicio; k <= fim; k++) {
+      const d = k - centro
+      saida[k] += sinalDir * amplitudeMv * Math.exp(-0.5 * (d / sigmaAmostras) ** 2)
+    }
+  }
+  return saida
+}
+
+// ============================================================================
 // MEDIÇÃO DE ST (auditoria — não substitui o contrato do preset)
 // ============================================================================
 
@@ -275,76 +342,99 @@ export function aplicarModificadoresPorDerivacao(
   samplingRate: number
 ): ResultadoModificadoresDerivacao {
   const warnings: string[] = []
-
   const entradas = modifiers ? Object.entries(modifiers) : []
 
-  // tWavePolarity NÃO é implementado no 3b — registrar sem fingir aplicação.
+  // tWavePolarity ainda não implementado — registrar sem fingir aplicação.
   for (const [leadName, mod] of entradas) {
     if (mod?.tWavePolarity) {
+      warnings.push(`tWavePolarity em ${leadName} ainda não aplicado.`)
+    }
+  }
+
+  const ativosST = entradas.filter(([, mod]) => mod?.stShift)
+  const ativosFW = entradas.filter(([, mod]) => mod?.fWaveOverlay)
+  const ativosRP = entradas.filter(([, mod]) => mod?.rPrimeWave)
+
+  if (ativosST.length === 0 && ativosFW.length === 0 && ativosRP.length === 0) {
+    return {
+      leads,
+      audit: { applied: false, modifiedLeads: [], measurements: {}, warnings },
+    }
+  }
+
+  // Detectar picos R apenas quando stShift ou rPrimeWave precisam deles.
+  let rPeaks: number[] = []
+  if (ativosST.length > 0 || ativosRP.length > 0) {
+    const referencia = obterDerivacaoReferencia(leads)
+    rPeaks = referencia ? detectarComplexosQRS(referencia, samplingRate) : []
+    if (rPeaks.length < 2) {
       warnings.push(
-        `tWavePolarity em ${leadName} ainda não aplicado (Commit 3b implementa somente stShift).`
+        'Picos R insuficientes na derivação de referência; modificadores ST/R\' não aplicados.'
       )
     }
   }
 
-  const ativos = entradas.filter(([, mod]) => mod?.stShift)
-  if (ativos.length === 0) {
-    return {
-      leads,
-      audit: { applied: false, modifiedLeads: [], measurements: {}, warnings },
-    }
-  }
-
-  const referencia = obterDerivacaoReferencia(leads)
-  const rPeaks = referencia ? detectarComplexosQRS(referencia, samplingRate) : []
-  if (rPeaks.length < 2) {
-    warnings.push(
-      'Picos R insuficientes na derivação de referência; modificadores de ST não aplicados.'
-    )
-    return {
-      leads,
-      audit: { applied: false, modifiedLeads: [], measurements: {}, warnings },
-    }
-  }
-
+  // novasLeads inicia como cópia rasa; modificadores são encadeados em ordem.
   const novasLeads: Dados12Derivacoes = { ...leads }
   const measurements: Record<string, LeadModifierMeasurement> = {}
   const modifiedLeads: string[] = []
 
-  for (const [leadName, mod] of ativos) {
-    const arr = leads[leadName]
+  // ── stShift ──────────────────────────────────────────────────────────────
+  if (rPeaks.length >= 2) {
+    for (const [leadName, mod] of ativosST) {
+      const arr = novasLeads[leadName]
+      if (!Array.isArray(arr) || arr.length === 0) {
+        warnings.push(`Derivação ${leadName} ausente ou vazia; stShift ignorado.`)
+        continue
+      }
+      const st = mod!.stShift!
+      if (!Number.isFinite(st.amplitudeMv) || st.amplitudeMv <= 0) {
+        warnings.push(`amplitudeMv inválida (${st.amplitudeMv}) em ${leadName}; stShift ignorado.`)
+        continue
+      }
+      const original = leads[leadName]!
+      const modificada = aplicarSTEmDerivacao(arr, rPeaks, st.tipo, st.amplitudeMv, samplingRate)
+      novasLeads[leadName] = modificada
+      if (!modifiedLeads.includes(leadName)) modifiedLeads.push(leadName)
+      // Delta medido: cancela desnível pré-existente, isola o efeito aplicado.
+      const medOriginal = medirDesnivelST(original, rPeaks, samplingRate)
+      const medFinal = medirDesnivelST(modificada, rPeaks, samplingRate)
+      const baselineMv = medOriginal.measuredAmplitudeMv
+      const finalMv = medFinal.measuredAmplitudeMv
+      const deltaMv =
+        baselineMv !== undefined && finalMv !== undefined ? finalMv - baselineMv : undefined
+      measurements[leadName] = {
+        expectedType: st.tipo,
+        expectedAmplitudeMv: st.amplitudeMv,
+        baselineMeasurementMv: baselineMv,
+        finalMeasurementMv: finalMv,
+        appliedDeltaMv: deltaMv,
+        beatCount: medFinal.beatCount,
+      }
+    }
+  }
+
+  // ── fWaveOverlay ─────────────────────────────────────────────────────────
+  for (const [leadName, mod] of ativosFW) {
+    const arr = novasLeads[leadName]
     if (!Array.isArray(arr) || arr.length === 0) {
-      warnings.push(`Derivação ${leadName} ausente ou vazia; modificador ignorado.`)
+      warnings.push(`Derivação ${leadName} ausente ou vazia; fWaveOverlay ignorado.`)
       continue
     }
+    novasLeads[leadName] = aplicarFWaveEmDerivacao(arr, mod!.fWaveOverlay!, samplingRate)
+    if (!modifiedLeads.includes(leadName)) modifiedLeads.push(leadName)
+  }
 
-    const st = mod!.stShift!
-    if (!Number.isFinite(st.amplitudeMv) || st.amplitudeMv <= 0) {
-      warnings.push(
-        `amplitudeMv inválida (${st.amplitudeMv}) em ${leadName}; modificador ignorado.`
-      )
-      continue
-    }
-
-    const modificada = aplicarSTEmDerivacao(arr, rPeaks, st.tipo, st.amplitudeMv, samplingRate)
-    novasLeads[leadName] = modificada
-    modifiedLeads.push(leadName)
-
-    // Delta = desnível medido no modificado − desnível medido no original.
-    // Cancela qualquer desnível pré-existente do sinal, isolando o efeito aplicado.
-    const medOriginal = medirDesnivelST(arr, rPeaks, samplingRate)
-    const medFinal = medirDesnivelST(modificada, rPeaks, samplingRate)
-    const baselineMv = medOriginal.measuredAmplitudeMv
-    const finalMv = medFinal.measuredAmplitudeMv
-    const deltaMv =
-      baselineMv !== undefined && finalMv !== undefined ? finalMv - baselineMv : undefined
-    measurements[leadName] = {
-      expectedType: st.tipo,
-      expectedAmplitudeMv: st.amplitudeMv,
-      baselineMeasurementMv: baselineMv,
-      finalMeasurementMv: finalMv,
-      appliedDeltaMv: deltaMv,
-      beatCount: medFinal.beatCount,
+  // ── rPrimeWave ───────────────────────────────────────────────────────────
+  if (rPeaks.length >= 2) {
+    for (const [leadName, mod] of ativosRP) {
+      const arr = novasLeads[leadName]
+      if (!Array.isArray(arr) || arr.length === 0) {
+        warnings.push(`Derivação ${leadName} ausente ou vazia; rPrimeWave ignorado.`)
+        continue
+      }
+      novasLeads[leadName] = aplicarRPrimeEmDerivacao(arr, rPeaks, mod!.rPrimeWave!, samplingRate)
+      if (!modifiedLeads.includes(leadName)) modifiedLeads.push(leadName)
     }
   }
 

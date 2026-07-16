@@ -91,12 +91,37 @@ export interface DesvioSTDerivacao {
 }
 
 /**
+ * Overlay de onda F serrilhada para flutter atrial.
+ * Sobrepõe um sinal de dente de serra contínuo na derivação, independente dos picos R.
+ * Útil para reproduzir o padrão de flutter 2:1 em DII/DIII/aVF e V1.
+ */
+export interface FWaveOverlay {
+  amplitudeMv: number    // magnitude do sinal de onda F (sempre positiva)
+  frequencyBpm: number   // frequência atrial em bpm (tipicamente 300 para flutter)
+  invert?: boolean       // inverte a polaridade (true = descida rápida, subida lenta)
+}
+
+/**
+ * Onda R' terminal para bloqueio de ramo direito.
+ * Adiciona um pico gaussiano após o QRS principal em cada batimento.
+ * Positivo em V1/V2 (R' tall), negativo (invert=true) em I/aVL/V5/V6 (onda S larga).
+ */
+export interface RPrimeWave {
+  amplitudeMv: number    // amplitude do pico R' (sempre positiva)
+  delayMs: number        // atraso em ms do pico R para o centro do R'
+  widthMs: number        // largura FWHM do pico gaussiano em ms
+  invert?: boolean       // se true, adiciona deflexão negativa (onda S alargada)
+}
+
+/**
  * Modificador morfológico aplicável a uma derivação específica.
  * Referencia DerivacaoClinica (declarada adiante) via ModificadoresPorDerivacao.
  */
 export interface ModificadorDerivacaoECG {
   stShift?: DesvioSTDerivacao
   tWavePolarity?: 'positive' | 'negative' | 'biphasic'
+  fWaveOverlay?: FWaveOverlay
+  rPrimeWave?: RPrimeWave
 }
 
 export type ModificadoresPorDerivacao =
@@ -202,7 +227,8 @@ export interface ECGPreset {
   // Eixo e padrão
   axisProfile: AxisProfile
 
-  // Padrão de QRS (pode estar no nível raiz ou em morphology)
+  // Padrões morfológicos opcionais no nível raiz usados por alguns presets didáticos
+  pAmplitude?: number // Ex: 0 em ritmos sem onda P organizada
   qrsPattern?: string // Ex: "normal", "rsR_prime_V1", "broad_R_lateral"
 
   // Morfologia P-QRS-T (parâmetros relativos 0-1)
@@ -279,7 +305,7 @@ export interface ConfiguracaoDerivaçao {
   inversao: boolean
 }
 
-export type TransformacaoDerivacoesConfig = Partial<Record<DerivacaoClinica, ConfiguracaoDerivaçao>>
+export type TransformacaoDerivacoesConfig = Record<DerivacaoClinica, ConfiguracaoDerivaçao>
 
 // ============================================================================
 // PARÂMETROS DE GERAÇÃO
