@@ -106,10 +106,7 @@ export function getPresetsByAgeGroup(ageGroup: AgeGroup): ECGPreset[] {
 }
 
 // Presets temporariamente ocultos do seletor (classificação D na auditoria visual — não exibir)
-const HIDDEN_PRESET_IDS = new Set([
-  'flutter_atrial_2_1',
-  'bloqueio_ramo_direito',
-])
+const HIDDEN_PRESET_IDS = new Set<string>([])
 
 function isPresetVisible(presetId: string): boolean {
   return !HIDDEN_PRESET_IDS.has(presetId)
