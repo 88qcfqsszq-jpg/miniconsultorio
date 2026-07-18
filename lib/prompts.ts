@@ -116,23 +116,23 @@ PEDIÁTRICO / RESPONSÁVEL
 ═══════════════════════════════════════════════════════════`;
 // PACIENTE_OSCE_REALISTA_MINIMO_V1_FIM
 
-export function criarPromptPaciente(
-  caso: Caso,
-  historico: Array<{ tipo: "estudante" | "paciente"; conteudo: string }>,
-  novaMensagem: string
-): string {
+/**
+ * Fonte ÚNICA das instruções clínicas ESTÁTICAS do Paciente Virtual — dependem
+ * apenas do caso, não do turno. Compartilhada entre o modo TEXTO
+ * (criarPromptPaciente) e o futuro modo de VOZ (Realtime), para que ambos usem
+ * exatamente as mesmas regras clínicas: identidade do paciente, diagnóstico
+ * oculto, dados clínicos, respostas preparadas, revelação controlada,
+ * anti-repetição, comportamento, regras pediátricas, definição do interlocutor,
+ * proibição de revelar o diagnóstico e a regra de aguardar a abordagem do aluno.
+ *
+ * NÃO inclui histórico nem a mensagem atual — esses são acrescentados por
+ * criarPromptPaciente (texto) ou pela sessão Realtime (voz).
+ */
+export function construirInstrucoesBasePaciente(caso: Caso): string {
   const paciente = caso.paciente;
   const dadosOcultos = caso.dados_ocultos_do_sistema;
   const isPediatrico = caso.tipoPaciente === "pediatrico" || paciente.tipoPaciente === "pediatrico";
   const dadosPed = paciente.dadosPediatricos;
-  const isConversaInicial = historico.length === 0;
-
-  const historicoChatFormatado = historico
-    .map((msg) => {
-      const remetente = msg.tipo === "estudante" ? "ESTUDANTE" : "PACIENTE/RESPONSÁVEL";
-      return `${remetente}: ${msg.conteudo}`;
-    })
-    .join("\n");
 
   const infoResponsavel = isPediatrico && dadosPed ? `
 - Responsável: ${dadosPed.responsavel.nome} (${dadosPed.responsavel.parentesco})
@@ -249,7 +249,7 @@ Não revele diagnóstico. Pareça uma pessoa conversando, não uma base de dados
   return `Você é um paciente virtual (ou responsável de criança) em uma estação OSCE de 3º semestre de medicina.
 
 ⚠️ INSTRUÇÃO CRÍTICA:
-Se o histórico do chat está vazio (${historicoChatFormatado === "" ? "SIM" : "NÃO"}), significa que é a conversa INICIAL.
+Enquanto o histórico do chat estiver vazio, é a conversa INICIAL.
 Neste caso, o médico/aluno deve fazer a PRIMEIRA pergunta.
 NUNCA inicie a conversa espontaneamente revelando sintomas ou queixa.
 AGUARDE a pergunta do médico antes de responder.
@@ -275,7 +275,28 @@ ${Object.entries(caso.respostas_do_paciente ?? {})
   .join("\n")}
 
 ${instrucoesSpeciais}
-${REGRAS_PACIENTE_OSCE_REALISTA_MINIMO_V1}
+${REGRAS_PACIENTE_OSCE_REALISTA_MINIMO_V1}`;
+}
+
+/**
+ * Prompt do modo TEXTO. Reutiliza construirInstrucoesBasePaciente (fonte única
+ * das regras clínicas estáticas) e acrescenta apenas a dinâmica do turno:
+ * histórico da conversa, mensagem atual e a instrução final de resposta textual.
+ * O comportamento clínico do paciente permanece inalterado.
+ */
+export function criarPromptPaciente(
+  caso: Caso,
+  historico: Array<{ tipo: "estudante" | "paciente"; conteudo: string }>,
+  novaMensagem: string
+): string {
+  const historicoChatFormatado = historico
+    .map((msg) => {
+      const remetente = msg.tipo === "estudante" ? "ESTUDANTE" : "PACIENTE/RESPONSÁVEL";
+      return `${remetente}: ${msg.conteudo}`;
+    })
+    .join("\n");
+
+  return `${construirInstrucoesBasePaciente(caso)}
 
 HISTÓRICO DA CONVERSA:
 ${historicoChatFormatado || "Conversa começando agora"}
