@@ -329,6 +329,54 @@ As demais informações virão conforme o médico perguntar.`;
 }
 
 /**
+ * Faixas etárias pediátricas no formato canônico interno.
+ */
+export type FaixaEtariaPediatricaNormalizada =
+  | "neonato"
+  | "lactente"
+  | "pre_escolar"
+  | "escolar"
+  | "adolescente";
+
+/**
+ * Normaliza o valor de faixa etária pediátrica vindo dos casos para um formato
+ * canônico único. Os casos usam variantes ("pre_escolar" e "pré-escolar", além
+ * de minúsculas), enquanto o código comparava literais em MAIÚSCULAS — o que
+ * nunca casava. Esta função elimina a divergência:
+ *   - minúsculas + trim;
+ *   - remoção de acentos (pré → pre);
+ *   - hífen e espaço → "_";
+ *   - reconhece apenas as variantes realmente existentes no projeto;
+ *   - retorna null para valores desconhecidos (comportamento seguro).
+ */
+export function normalizarFaixaEtariaPediatrica(
+  valor: string | null | undefined
+): FaixaEtariaPediatricaNormalizada | null {
+  if (!valor || typeof valor !== "string") return null;
+  const chave = valor
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "") // remove acentos: "pré" → "pre"
+    .replace(/[\s-]+/g, "_"); // hífen e espaço → "_"
+  switch (chave) {
+    case "neonato":
+      return "neonato";
+    case "lactente":
+      return "lactente";
+    case "pre_escolar":
+    case "preescolar":
+      return "pre_escolar";
+    case "escolar":
+      return "escolar";
+    case "adolescente":
+      return "adolescente";
+    default:
+      return null;
+  }
+}
+
+/**
  * Instruções específicas para resposta inicial em caso pediátrico
  * Garante que a primeira fala seja breve e realista
  */
@@ -339,8 +387,9 @@ function obterInstrucoesRespostaInicialPediatrica(
 ): string {
   const queixaPrincipal = paciente.queixaPrincipal;
   const historicoResumo = paciente.historicoDoenca;
+  const faixaNormalizada = normalizarFaixaEtariaPediatrica(faixaEtaria);
 
-  if (faixaEtaria === "NEONATO" || faixaEtaria === "LACTENTE") {
+  if (faixaNormalizada === "neonato" || faixaNormalizada === "lactente") {
     return `Toda a fala deve vir SOMENTE do RESPONSÁVEL (mãe, pai ou cuidador).
 Deve ser uma RESPOSTA DIRETA à pergunta inicial do médico (ex: "O que o trouxe aqui?" ou "O que está acontecendo?").
 Exemplo CORRETO:
@@ -350,7 +399,7 @@ Exemplo INCORRETO (entrega tudo de uma vez):
   ❌ "Mãe: Oi, doutor(a). Trouxe o Ricardo. Ele tem febre desde segunda, tosse seca no começo e agora produtiva, vomitou ontem, a vacinação está em dia, não usa medicação..."
 
 Mantenha a primeira resposta em 1-2 frases simples. As demais informações virão conforme o médico perguntar.`;
-  } else if (faixaEtaria === "PRÉ-ESCOLAR") {
+  } else if (faixaNormalizada === "pre_escolar") {
     return `A primeira fala deve vir DO RESPONSÁVEL.
 Deve ser uma RESPOSTA DIRETA à pergunta do médico.
 Resumida: 1-2 frases mencionando queixa + contexto mínimo.
@@ -359,7 +408,7 @@ Exemplo CORRETO:
 
 NÃO entregue detalhes que não foram perguntados.
 Deixe o médico fazer as perguntas. A informação surgirá naturalmente.`;
-  } else if (faixaEtaria === "ESCOLAR") {
+  } else if (faixaNormalizada === "escolar") {
     return `A primeira fala pode ser do RESPONSÁVEL ou da CRIANÇA, mas como resposta clara à pergunta.
 Se o médico pergunta "O que aconteceu?", o RESPONSÁVEL responde com contexto.
 Se o médico pergunta "Como você se sente?", a CRIANÇA responde sobre sensações.
@@ -367,7 +416,7 @@ Exemplo CORRETO (responsável):
   "Mãe: Oi, doutor(a). Eu trouxe o João porque ele acordou com febre ontem e desde ontem ele está com tosse."
 
 Resumido, sem listar tudo. O resto vem com as perguntas subsequentes.`;
-  } else if (faixaEtaria === "ADOLESCENTE") {
+  } else if (faixaNormalizada === "adolescente") {
     return `A primeira fala deve ser do ADOLESCENTE respondendo a pergunta inicial.
 Exemplo CORRETO:
   "Oi, doutor(a). Eu vim porque estou com febre há alguns dias e comecei a tossir bastante."
