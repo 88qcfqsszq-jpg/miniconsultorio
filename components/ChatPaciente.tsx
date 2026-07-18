@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { MensagemChat, Caso } from "@/lib/types";
+import { useRealtimePaciente } from "@/hooks/useRealtimePaciente";
 
 interface ChatPacienteProps {
   nomePaciente: string;
@@ -33,6 +34,7 @@ export default function ChatPaciente({
   const [ouvindo, setOuvindo] = useState(false);
   const [erroVoz, setErroVoz] = useState("");
   const [suportaVoz, setSuportaVoz] = useState(true);
+  const [suportaVozRealtime, setSuportaVozRealtime] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
@@ -60,6 +62,22 @@ export default function ChatPaciente({
       recognitionRef.current?.abort();
     };
   }, []);
+
+  // Validar suporte a WebRTC/microfone para a voz Realtime (independente da STT acima).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const suportado =
+      typeof (window as any).RTCPeerConnection === "function" && !!navigator.mediaDevices?.getUserMedia;
+    setSuportaVozRealtime(suportado);
+  }, []);
+
+  // Integração de voz (Realtime) — hook isolado; nunca move a lógica de enviarTexto.
+  const { estadoVoz, erroVoz: erroVozRealtime, iniciarVoz, encerrarVoz } = useRealtimePaciente({
+    casoId,
+    onNovaMensagemVoz: (mensagemVoz) => {
+      setMensagens((prev) => [...prev, mensagemVoz]);
+    },
+  });
 
   // Notificar mudanças de mensagens
   useEffect(() => {
@@ -240,6 +258,39 @@ export default function ChatPaciente({
     enviarTexto(input);
   };
 
+  const vozConectadaOuConectando =
+    estadoVoz === "conectando" ||
+    estadoVoz === "ouvindo" ||
+    estadoVoz === "paciente_respondendo" ||
+    estadoVoz === "encerrando";
+
+  const rotuloEstadoVoz =
+    estadoVoz === "conectando"
+      ? "Conectando..."
+      : estadoVoz === "ouvindo"
+      ? "Voz ativa — ouvindo"
+      : estadoVoz === "paciente_respondendo"
+      ? "Paciente respondendo..."
+      : estadoVoz === "encerrando"
+      ? "Encerrando..."
+      : estadoVoz === "erro"
+      ? erroVozRealtime || "Erro na conexão de voz."
+      : "";
+
+  const rotuloBotaoVoz = vozConectadaOuConectando
+    ? "Encerrar voz"
+    : estadoVoz === "erro"
+    ? "Tentar novamente"
+    : "Falar com o paciente";
+
+  const alternarVoz = () => {
+    if (vozConectadaOuConectando) {
+      encerrarVoz();
+    } else {
+      iniciarVoz(mensagensRef.current);
+    }
+  };
+
   const sexoLabel =
     caso?.paciente?.sexo === "M" ? "masculino" : caso?.paciente?.sexo === "F" ? "feminino" : "";
   const subtituloPaciente = caso?.paciente
@@ -295,6 +346,33 @@ export default function ChatPaciente({
         {erroVoz && (
           <div className="mx-[22px] mt-3 px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700">
             {erroVoz}
+          </div>
+        )}
+        {suportaVozRealtime && (
+          <div className="mx-[22px] mt-3 flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={alternarVoz}
+              disabled={estadoVoz === "conectando" || estadoVoz === "encerrando"}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${
+                vozConectadaOuConectando
+                  ? "bg-red-50 border-red-200 text-red-700"
+                  : "bg-blue-50 border-blue-200 text-blue-700"
+              }`}
+            >
+              {rotuloBotaoVoz}
+            </button>
+            {rotuloEstadoVoz && (
+              <span
+                className={`px-3 py-1.5 rounded-lg text-xs border ${
+                  estadoVoz === "erro"
+                    ? "bg-red-50 border-red-200 text-red-700"
+                    : "bg-blue-50 border-blue-200 text-blue-700"
+                }`}
+              >
+                {rotuloEstadoVoz}
+              </span>
+            )}
           </div>
         )}
         <div className="medix-chat-input-row">
