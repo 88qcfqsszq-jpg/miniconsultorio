@@ -35,11 +35,26 @@ export type RealtimeConnectionState =
   | "disconnected"
   | "error";
 
-/** Evento sanitizado — SOMENTE o tipo do evento e o instante. Nunca conteúdo. */
+/**
+ * Evento sanitizado — SOMENTE o tipo do evento e o instante. Nunca conteúdo,
+ * EXCETO o campo opcional `transcript` (Etapa 5), presente unicamente nos dois
+ * eventos de TRANSCRIÇÃO FINAL (aluno ou paciente) — nunca em transcrições
+ * parciais (`.delta`) nem em qualquer outro tipo de evento (session.updated,
+ * error etc.), que continuam expondo somente {type, at}.
+ */
 export interface RealtimeSanitizedEvent {
   type: string;
   at: number;
+  transcript?: {
+    role: "estudante" | "paciente";
+    text: string;
+    itemId: string;
+  };
 }
+
+/** Tipos de evento de transcrição FINAL (ver contrato oficial no SDK `openai`). */
+const TIPO_TRANSCRICAO_ALUNO = "conversation.item.input_audio_transcription.completed";
+const TIPO_TRANSCRICAO_PACIENTE = "response.output_audio_transcript.done";
 
 export interface RealtimeClientOptions {
   /** Elemento de áudio onde a faixa remota será anexada (opcional). */
@@ -87,12 +102,31 @@ async function conectarWebRTCPadrao(clientSecret: string, offerSdp: string): Pro
   return await resposta.text();
 }
 
-/** Extrai SOMENTE o campo `type` de uma mensagem do data channel — nunca o resto do payload. */
-function sanitizarTipoEvento(raw: unknown): string {
-  if (raw && typeof raw === "object" && typeof (raw as Record<string, unknown>).type === "string") {
-    return (raw as Record<string, unknown>).type as string;
+/**
+ * Sanitiza uma mensagem do data channel: extrai SOMENTE `type` para qualquer
+ * evento, e ADICIONALMENTE `transcript` (texto + item_id do provedor) apenas
+ * para os dois eventos de transcrição FINAL — nunca para `.delta` (parcial)
+ * nem para nenhum outro tipo. Nenhum outro campo do payload bruto (instructions,
+ * diagnóstico, session config, usage, logprobs...) é repassado em hipótese alguma.
+ */
+function sanitizarEventoDataChannel(raw: unknown): Pick<RealtimeSanitizedEvent, "type" | "transcript"> {
+  if (!raw || typeof raw !== "object") return { type: "unknown" };
+  const obj = raw as Record<string, unknown>;
+  const tipo = typeof obj.type === "string" ? obj.type : "unknown";
+
+  const ehTranscricaoAluno = tipo === TIPO_TRANSCRICAO_ALUNO;
+  const ehTranscricaoPaciente = tipo === TIPO_TRANSCRICAO_PACIENTE;
+  if (ehTranscricaoAluno || ehTranscricaoPaciente) {
+    const texto = typeof obj.transcript === "string" ? obj.transcript : "";
+    const itemId = typeof obj.item_id === "string" ? obj.item_id : "";
+    if (texto.trim().length > 0) {
+      return {
+        type: tipo,
+        transcript: { role: ehTranscricaoAluno ? "estudante" : "paciente", text: texto, itemId },
+      };
+    }
   }
-  return "unknown";
+  return { type: tipo };
 }
 
 // ============================================================================
@@ -138,8 +172,12 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
     return state;
   }
 
-  function emitirEvento(tipo: string): void {
-    const evento: RealtimeSanitizedEvent = { type: tipo, at: Date.now() };
+  function emitirEvento(tipo: string, transcript?: RealtimeSanitizedEvent["transcript"]): void {
+    const evento: RealtimeSanitizedEvent = {
+      type: tipo,
+      at: Date.now(),
+      ...(transcript ? { transcript } : {}),
+    };
     eventLog.push(evento);
     if (eventLog.length > maxEventLog) eventLog.shift();
     for (const cb of eventListeners) cb(evento);
@@ -231,7 +269,8 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
         if (!aindaValida()) return;
         let payload: unknown = null;
         try { payload = JSON.parse(ev.data); } catch { payload = null; }
-        emitirEvento(sanitizarTipoEvento(payload));
+        const sanitizado = sanitizarEventoDataChannel(payload);
+        emitirEvento(sanitizado.type, sanitizado.transcript);
       };
 
       const offer = await pc.createOffer();

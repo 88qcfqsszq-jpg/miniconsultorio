@@ -358,6 +358,81 @@ test('16. flag desligada (endpoint retorna 403) → PoC não avança para mic/We
   assert.equal(micChamado, false)
 })
 
+// ── Sanitização de transcrição final (Etapa 5) ───────────────────────────────
+test('evento de transcrição FINAL do aluno popula "transcript" sanitizado (role/text/itemId)', async () => {
+  const pcFake = criarFakePeerConnection()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+  })
+  const eventos: any[] = []
+  cliente.onEvent((e) => eventos.push(e))
+  await cliente.connectRealtime('1')
+
+  pcFake._dataChannels[0].onmessage?.({
+    data: JSON.stringify({
+      type: 'conversation.item.input_audio_transcription.completed',
+      item_id: 'item_aluno_1',
+      transcript: 'O que o senhor sente?',
+    }),
+  } as MessageEvent)
+
+  const ultimo = eventos[eventos.length - 1]
+  assert.equal(ultimo.type, 'conversation.item.input_audio_transcription.completed')
+  assert.deepEqual(ultimo.transcript, { role: 'estudante', text: 'O que o senhor sente?', itemId: 'item_aluno_1' })
+})
+
+test('evento de transcrição FINAL do paciente popula "transcript" sanitizado', async () => {
+  const pcFake = criarFakePeerConnection()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+  })
+  const eventos: any[] = []
+  cliente.onEvent((e) => eventos.push(e))
+  await cliente.connectRealtime('1')
+
+  pcFake._dataChannels[0].onmessage?.({
+    data: JSON.stringify({
+      type: 'response.output_audio_transcript.done',
+      item_id: 'item_paciente_1',
+      response_id: 'resp_1',
+      transcript: 'Estou com dor no peito.',
+    }),
+  } as MessageEvent)
+
+  const ultimo = eventos[eventos.length - 1]
+  assert.equal(ultimo.type, 'response.output_audio_transcript.done')
+  assert.deepEqual(ultimo.transcript, { role: 'paciente', text: 'Estou com dor no peito.', itemId: 'item_paciente_1' })
+})
+
+test('evento PARCIAL (.delta) NÃO popula "transcript" — só type/at', async () => {
+  const pcFake = criarFakePeerConnection()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+  })
+  const eventos: any[] = []
+  cliente.onEvent((e) => eventos.push(e))
+  await cliente.connectRealtime('1')
+
+  for (const tipoParcial of ['conversation.item.input_audio_transcription.delta', 'response.output_audio_transcript.delta']) {
+    pcFake._dataChannels[0].onmessage?.({
+      data: JSON.stringify({ type: tipoParcial, item_id: 'item_x', delta: 'fragmento parcial' }),
+    } as MessageEvent)
+    const ultimo = eventos[eventos.length - 1]
+    assert.equal(ultimo.type, tipoParcial)
+    assert.equal(ultimo.transcript, undefined, `evento parcial "${tipoParcial}" não deveria ter transcript`)
+    assert.deepEqual(Object.keys(ultimo).sort(), ['at', 'type'])
+  }
+})
+
 // ── Contrato exato do endpoint WebRTC (conectarWebRTCPadrao, correção de URL) ─
 test('conectarWebRTCPadrao (default real, não mockado): POST em /v1/realtime/calls com contrato exato', async () => {
   const fetchDoGuard = globalThis.fetch // stub de guarda instalado pelo before() do arquivo
