@@ -300,13 +300,15 @@ ${REGRAS_PACIENTE_OSCE_REALISTA_MINIMO_V1}`;
 }
 
 /**
- * Prompt do modo TEXTO. Reutiliza construirInstrucoesBasePaciente (fonte única
- * das regras clínicas estáticas) e acrescenta apenas a dinâmica do turno:
- * histórico da conversa, mensagem atual e a instrução final de resposta textual.
- * O comportamento clínico do paciente permanece inalterado.
+ * Composição final do prompt de texto: recebe uma BASE já pronta (a saída de
+ * construirInstrucoesBasePaciente para o caminho legado, ou uma base reduzida
+ * por turno para o núcleo Patient V3) e acrescenta somente a dinâmica do
+ * turno — histórico da conversa, mensagem atual e a instrução final de
+ * resposta textual. Não decide fatos, não conhece CasoV3/Caso, não chama nada
+ * externo.
  */
-export function criarPromptPaciente(
-  caso: Caso,
+export function montarPromptPacienteComBase(
+  base: string,
   historico: Array<{ tipo: "estudante" | "paciente"; conteudo: string }>,
   novaMensagem: string
 ): string {
@@ -317,7 +319,7 @@ export function criarPromptPaciente(
     })
     .join("\n");
 
-  return `${construirInstrucoesBasePaciente(caso)}
+  return `${base}
 
 HISTÓRICO DA CONVERSA:
 ${historicoChatFormatado || "Conversa começando agora"}
@@ -326,6 +328,20 @@ NOVA MENSAGEM DO ESTUDANTE:
 ${novaMensagem}
 
 Responda apenas com o que o paciente ou responsável diria, sem adicionar explicações ou metadados.`;
+}
+
+/**
+ * Prompt do modo TEXTO (caminho legado/completo). Reutiliza
+ * construirInstrucoesBasePaciente (fonte única das regras clínicas estáticas)
+ * e monta o prompt final via montarPromptPacienteComBase. O comportamento
+ * clínico do paciente permanece inalterado — mesma saída de sempre, byte a byte.
+ */
+export function criarPromptPaciente(
+  caso: Caso,
+  historico: Array<{ tipo: "estudante" | "paciente"; conteudo: string }>,
+  novaMensagem: string
+): string {
+  return montarPromptPacienteComBase(construirInstrucoesBasePaciente(caso), historico, novaMensagem);
 }
 
 /**
