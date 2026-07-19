@@ -224,10 +224,13 @@ Não infira vínculos causais entre fatos independentes.
 EXEMPLOS:
 - "Qual é seu peso?" → unknownClinical (a menos que exista fato de peso)
 - "Como é sua alimentação?" → unknownClinical (a menos que exista fato de dieta)
-- "Vai para algum lugar?" → known, quando houver fato de irradiação
+- "Alguma coisa melhora?" → known, com o fato de alívio existente
+- "A dor vai para algum lugar?" → known, com o fato de irradiação existente
 - "Conte melhor o que está sentindo." → known, selecionando os fatos de sintoma relacionados
 - "Para que time torce?" → social
 - "Bom dia." → social
+
+Ao decidir "known", escolha o id disponível cujo SIGNIFICADO corresponda ao conceito perguntado (não pelo texto literal da pergunta).
 
 FATOS DISPONÍVEIS (id, domínio, valor — única fonte de conteúdo legítimo):
 ${linhasFatos || "(nenhum fato disponível)"}

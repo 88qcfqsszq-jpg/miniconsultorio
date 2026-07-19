@@ -103,6 +103,22 @@ test("7. prompt é genérico (sem diagnóstico/especialidade embutidos)", async 
   assert.ok(!chamadas[0].includes("infarto"));
 });
 
+// ── FASE 4C.5 — exemplos de alívio e irradiação no prompt do classificador ─
+
+test("7a. prompt contém exemplo de alívio", async () => {
+  const { deps, chamadas } = depsComResposta(JSON.stringify({ kind: "known", factIds: ["f1"] }));
+  await classificarTurno(inputPadrao("x"), deps);
+  assert.ok(chamadas[0].includes("Alguma coisa melhora?"));
+  assert.ok(chamadas[0].includes("fato de alívio existente"));
+});
+
+test("7b. prompt contém exemplo de irradiação", async () => {
+  const { deps, chamadas } = depsComResposta(JSON.stringify({ kind: "known", factIds: ["f1"] }));
+  await classificarTurno(inputPadrao("x"), deps);
+  assert.ok(chamadas[0].includes("A dor vai para algum lugar?"));
+  assert.ok(chamadas[0].includes("fato de irradiação existente"));
+});
+
 // ── 8–12. Categorias válidas ────────────────────────────────────────────
 
 test("8. known válido retorna fatos selecionados", async () => {
