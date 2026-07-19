@@ -26,15 +26,27 @@ function primeiroPediatrico(): Caso {
   assert.ok(c, 'nenhum caso pediátrico encontrado')
   return c!
 }
-function primeiroAdulto(): Caso {
-  const c = CASOS.find((x) => !(x.tipoPaciente === 'pediatrico' || x.paciente?.tipoPaciente === 'pediatrico'))
-  assert.ok(c, 'nenhum caso adulto encontrado')
+
+/**
+ * FASE 3 (Patient V3): o Caso 1 agora é servido pelo novo núcleo (ver
+ * lib/patient-v3/__tests__/wiringPacienteV3.test.mts para os testes
+ * específicos do Caso Ouro). Os testes deste arquivo verificam o
+ * COMPORTAMENTO LEGADO genérico — por isso usam um caso adulto por id
+ * EXPLÍCITO (nunca por seleção implícita como "primeiro adulto do array",
+ * que poderia voltar a resolver para o Caso Ouro). id "18": adulto, não
+ * registrado em data/casos-v3, sem alterações no working tree — o mesmo
+ * caso de controle usado na verificação de paridade da Fase 3.
+ */
+const CASO_CONTROLE_LEGADO_ID = '18'
+function casoLegadoDeControle(): Caso {
+  const c = CASOS.find((x) => x.id === CASO_CONTROLE_LEGADO_ID)
+  assert.ok(c, `caso de controle "${CASO_CONTROLE_LEGADO_ID}" não encontrado`)
   return c!
 }
 
 // ── 1. Regras clínicas estáticas continuam presentes na base ──────────────────
 test('base contém as regras clínicas essenciais', () => {
-  const base = construirInstrucoesBasePaciente(primeiroAdulto())
+  const base = construirInstrucoesBasePaciente(casoLegadoDeControle())
   for (const marcador of [
     'COMPORTAMENTO REALISTA DO PACIENTE',
     'REGRA DE REVELAÇÃO CLÍNICA CONTROLADA',
@@ -50,7 +62,7 @@ test('base contém as regras clínicas essenciais', () => {
 
 // ── 2. Diagnóstico continua oculto ────────────────────────────────────────────
 test('diagnóstico presente na base apenas sob instrução de NÃO REVELAR', () => {
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const base = construirInstrucoesBasePaciente(caso)
   const diag = caso.dados_ocultos_do_sistema?.diagnostico_principal
   assert.ok(base.includes('DIAGNÓSTICO (NÃO REVELE)'), 'faltou cabeçalho DIAGNÓSTICO (NÃO REVELE)')
@@ -64,7 +76,7 @@ test('diagnóstico presente na base apenas sob instrução de NÃO REVELAR', () 
 
 // ── 3. Regra de revelação controlada permanece ────────────────────────────────
 test('revelação controlada (1 dado novo por fala) permanece', () => {
-  const base = construirInstrucoesBasePaciente(primeiroAdulto())
+  const base = construirInstrucoesBasePaciente(casoLegadoDeControle())
   assert.ok(base.includes('NO MÁXIMO 1 (um) dado clínico novo'), 'faltou a regra de 1 dado novo por fala')
   assert.ok(base.includes('PROIBIDO'), 'faltaram os exemplos PROIBIDO de checklist')
 })
@@ -72,7 +84,7 @@ test('revelação controlada (1 dado novo por fala) permanece', () => {
 // ── 4. Regras pediátricas continuam presentes ─────────────────────────────────
 test('caso pediátrico contém o bloco de regras pediátricas; adulto contém o bloco adulto', () => {
   const basePed = construirInstrucoesBasePaciente(primeiroPediatrico())
-  const baseAdulto = construirInstrucoesBasePaciente(primeiroAdulto())
+  const baseAdulto = construirInstrucoesBasePaciente(casoLegadoDeControle())
   assert.ok(basePed.includes('REGRAS PARA CASOS PEDIÁTRICOS'), 'faltou bloco pediátrico no caso pediátrico')
   assert.ok(!basePed.includes('REGRAS PARA CASOS ADULTOS'), 'caso pediátrico não deveria ter bloco adulto')
   assert.ok(baseAdulto.includes('REGRAS PARA CASOS ADULTOS'), 'faltou bloco adulto no caso adulto')
@@ -96,7 +108,7 @@ test('base pediátrica define o interlocutor por faixa etária e informa a faixa
 
 // ── 6. Modo texto continua recebendo histórico e nova mensagem ────────────────
 test('criarPromptPaciente reutiliza a base e acrescenta histórico + nova mensagem', () => {
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const base = construirInstrucoesBasePaciente(caso)
   const historico = [
     { tipo: 'estudante' as const, conteudo: 'O que o trouxe aqui hoje?' },
@@ -116,7 +128,7 @@ test('criarPromptPaciente reutiliza a base e acrescenta histórico + nova mensag
 })
 
 test('conversa inicial (histórico vazio) usa "Conversa começando agora"', () => {
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const prompt = criarPromptPaciente(caso, [], 'Bom dia, o que o senhor sente?')
   assert.ok(prompt.includes('Conversa começando agora'), 'faltou marcador de conversa inicial')
   assert.ok(prompt.includes('AGUARDE a pergunta do médico'), 'faltou a regra de aguardar o médico')

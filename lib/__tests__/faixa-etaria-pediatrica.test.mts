@@ -107,11 +107,23 @@ test('os 16 casos pediátricos exportados normalizam e recebem instrução espec
 })
 
 // ── 17. Nenhum caso adulto é afetado ──────────────────────────────────────────
+// FASE 3 (Patient V3): o Caso 1 agora é servido pelo novo núcleo, então
+// "ADULTOS.slice(0, 5)" (que incluía o id "1" por ordem do array) deixou de
+// representar o comportamento LEGADO genérico que este teste verifica. Usa-se
+// um conjunto EXPLÍCITO e estável de ids adultos — nunca por posição/ordem do
+// array — que exclui o Caso Ouro ("1") e qualquer caso com arquivo modificado
+// no working tree ("4"). id "18" é o mesmo caso de controle usado na
+// verificação de paridade da Fase 3 (ver
+// lib/patient-v3/__tests__/wiringPacienteV3.test.mts para os testes
+// específicos do Caso Ouro).
+const IDS_ADULTOS_DE_CONTROLE = ['5', '18', '19']
 test('casos adultos não recebem instruções pediátricas de interlocutor', () => {
-  for (const caso of ADULTOS.slice(0, 5)) {
-    const base = construirInstrucoesBasePaciente(caso)
-    assert.ok(base.includes('REGRAS PARA CASOS ADULTOS'), `[${caso.id}] deveria ter bloco adulto`)
-    assert.ok(!base.includes(FRASE.neonato_lactente), `[${caso.id}] adulto não deveria ter instrução de responsável`)
-    assert.ok(!base.includes(FRASE.escolar), `[${caso.id}] adulto não deveria ter instrução de escolar`)
+  for (const id of IDS_ADULTOS_DE_CONTROLE) {
+    const caso = ADULTOS.find((c) => c.id === id)
+    assert.ok(caso, `caso de controle "${id}" não encontrado em casosAdultosV2`)
+    const base = construirInstrucoesBasePaciente(caso!)
+    assert.ok(base.includes('REGRAS PARA CASOS ADULTOS'), `[${caso!.id}] deveria ter bloco adulto`)
+    assert.ok(!base.includes(FRASE.neonato_lactente), `[${caso!.id}] adulto não deveria ter instrução de responsável`)
+    assert.ok(!base.includes(FRASE.escolar), `[${caso!.id}] adulto não deveria ter instrução de escolar`)
   }
 })

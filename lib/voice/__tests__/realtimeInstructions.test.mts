@@ -16,9 +16,21 @@ import type { Caso } from '@/lib/types'
 
 const CASOS = casosV2 as unknown as Caso[]
 
-function primeiroAdulto(): Caso {
-  const c = CASOS.find((x) => !(x.tipoPaciente === 'pediatrico' || x.paciente?.tipoPaciente === 'pediatrico'))
-  assert.ok(c, 'nenhum caso adulto encontrado')
+/**
+ * FASE 3 (Patient V3): o Caso 1 agora é servido pelo novo núcleo. Os testes
+ * abaixo verificam o COMPORTAMENTO LEGADO genérico de construirInstrucoesRealtime
+ * (como ela combina a base compartilhada com os metadados de voz) — por isso
+ * usam um caso adulto por id EXPLÍCITO, nunca por seleção implícita que
+ * poderia voltar a resolver para o Caso Ouro. id "18": adulto, não registrado
+ * em data/casos-v3, sem alterações no working tree — o mesmo caso de controle
+ * usado na verificação de paridade da Fase 3 (ver
+ * lib/patient-v3/__tests__/wiringPacienteV3.test.mts para os testes
+ * específicos do Caso Ouro em texto e voz).
+ */
+const CASO_CONTROLE_LEGADO_ID = '18'
+function casoLegadoDeControle(): Caso {
+  const c = CASOS.find((x) => x.id === CASO_CONTROLE_LEGADO_ID)
+  assert.ok(c, `caso de controle "${CASO_CONTROLE_LEGADO_ID}" não encontrado`)
   return c!
 }
 function primeiroPediatrico(): Caso {
@@ -28,14 +40,14 @@ function primeiroPediatrico(): Caso {
 }
 
 test('reutiliza a base clínica (fonte única) como prefixo das instruções', () => {
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const base = construirInstrucoesBasePaciente(caso)
   const { instructions } = construirInstrucoesRealtime(caso)
   assert.ok(instructions.startsWith(base), 'instructions deveria começar com a base clínica compartilhada')
 })
 
 test('não duplica regras clínicas: cada marcador da base aparece exatamente uma vez', () => {
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const { instructions } = construirInstrucoesRealtime(caso)
   for (const marcador of [
     'REGRA DE REVELAÇÃO CLÍNICA CONTROLADA',
@@ -48,7 +60,7 @@ test('não duplica regras clínicas: cada marcador da base aparece exatamente um
 })
 
 test('acrescenta bloco de metadados de voz sem repetir regra clínica', () => {
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const { instructions } = construirInstrucoesRealtime(caso)
   assert.ok(instructions.includes('METADADOS DE VOZ'), 'faltou o bloco de metadados de voz')
   assert.ok(instructions.includes('Quem fala:'), 'faltou papel do falante')
@@ -59,7 +71,7 @@ test('acrescenta bloco de metadados de voz sem repetir regra clínica', () => {
 })
 
 test('regra de áudio: não iniciar cumprimento antes do aluno falar', () => {
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const { instructions } = construirInstrucoesRealtime(caso)
   assert.ok(
     instructions.includes('não emita nenhuma fala, som ou cumprimento'),
@@ -70,7 +82,7 @@ test('regra de áudio: não iniciar cumprimento antes do aluno falar', () => {
 })
 
 test('retorna o VoiceProfile derivado (não um objeto vazio/parcial)', () => {
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const { voiceProfile } = construirInstrucoesRealtime(caso)
   assert.ok(voiceProfile.voiceId, 'voiceId ausente')
   assert.ok(voiceProfile.speakerRole, 'speakerRole ausente')
@@ -87,7 +99,7 @@ test('caso pediátrico produz metadados coerentes (caregiver/child, quando aplic
 })
 
 test('determinística: mesma entrada produz exatamente a mesma saída', () => {
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const a = construirInstrucoesRealtime(caso)
   const b = construirInstrucoesRealtime(caso)
   assert.equal(a.instructions, b.instructions)
@@ -97,10 +109,25 @@ test('determinística: mesma entrada produz exatamente a mesma saída', () => {
 test('não conhece HTTP/React/WebRTC (superfície de import da função é só dados)', () => {
   // Verificação estrutural: o módulo exporta apenas a função combinadora e o tipo de resultado —
   // não há qualquer referência a fetch/WebRTC/React na própria função (smoke test de import).
-  const caso = primeiroAdulto()
+  const caso = casoLegadoDeControle()
   const resultado = construirInstrucoesRealtime(caso)
   assert.equal(typeof resultado.instructions, 'string')
   assert.equal(typeof resultado.voiceProfile, 'object')
+})
+
+// ── Caso Ouro (Patient V3): metadados de voz preservados, sem diagnóstico ────
+test('Caso Ouro (id "1", Patient V3): metadados de voz continuam presentes e o diagnóstico legado não aparece', () => {
+  const casoOuro = CASOS.find((x) => x.id === '1')
+  assert.ok(casoOuro, 'Caso 1 (Ouro) não encontrado em casosV2')
+  const { instructions, voiceProfile } = construirInstrucoesRealtime(casoOuro!)
+
+  assert.ok(instructions.includes('METADADOS DE VOZ'), 'metadados de voz deveriam continuar presentes para o Caso Ouro')
+  assert.ok(
+    instructions.includes('não emita nenhuma fala, som ou cumprimento'),
+    'regra de áudio (não iniciar espontaneamente) deveria continuar presente para o Caso Ouro'
+  )
+  assert.ok(!instructions.includes('DIAGNÓSTICO (NÃO REVELE)'), 'Caso Ouro V3 não deveria mais conter o bloco legado de diagnóstico')
+  assert.ok(voiceProfile.voiceId && voiceProfile.speakerRole && voiceProfile.ageGroup, 'VoiceProfile deveria continuar completo')
 })
 
 test('todos os 76 casos exportados geram instruções e perfis válidos via construirInstrucoesRealtime', () => {

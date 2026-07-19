@@ -1,4 +1,8 @@
 import { Caso } from "@/lib/types";
+import { obterCasoV3PorId } from "@/data/casos-v3";
+import { construirPatientSafeContext } from "@/lib/patient-v3/patientContextBuilder";
+import { construirPromptBasePaciente } from "@/lib/patient-v3/promptBasePaciente";
+import type { PatientZoneInput } from "@/lib/patient-v3/casoV3.types";
 
 // PACIENTE_OSCE_REALISTA_MINIMO_V1_INICIO  (refinado em V1.1)
 // Bloco reversível: para reverter o comportamento, basta remover esta constante
@@ -129,6 +133,23 @@ PEDIÁTRICO / RESPONSÁVEL
  * criarPromptPaciente (texto) ou pela sessão Realtime (voz).
  */
 export function construirInstrucoesBasePaciente(caso: Caso): string {
+  // FASE 3 (Patient V3): se o caso tiver um CasoV3 nativo registrado, roteia
+  // pelo novo núcleo — SOMENTE a Zona do Paciente atravessa a fronteira
+  // (extração explícita, sem espalhar/serializar o CasoV3; ClinicalTruth e
+  // Examiner nunca são lidos aqui). Caso contrário, segue o corpo legado
+  // abaixo, inalterado.
+  const casoV3 = obterCasoV3PorId(caso.id);
+  if (casoV3) {
+    const patientZoneInput: PatientZoneInput = {
+      patientKnowledge: casoV3.patientKnowledge,
+      disclosurePolicy: casoV3.disclosurePolicy,
+      persona: casoV3.persona,
+      sessionStateInicial: casoV3.sessionStateInicial,
+    };
+    const safeContext = construirPatientSafeContext(patientZoneInput);
+    return construirPromptBasePaciente(safeContext);
+  }
+
   const paciente = caso.paciente;
   const dadosOcultos = caso.dados_ocultos_do_sistema;
   const isPediatrico = caso.tipoPaciente === "pediatrico" || paciente.tipoPaciente === "pediatrico";

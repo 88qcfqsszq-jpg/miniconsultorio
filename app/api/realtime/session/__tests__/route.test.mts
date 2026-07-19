@@ -23,6 +23,16 @@ import { casosV2 } from '@/data/casos-v2'
 
 const CASO_ID_VALIDO = '1' // canônico real (adulto) — ver auditoria da Etapa 3
 const CASO_ID_INEXISTENTE = '999999'
+/**
+ * FASE 3 (Patient V3): CASO_ID_VALIDO ("1") agora é servido pelo núcleo Patient
+ * V3 (ver testes 8 e 13 abaixo, atualizados para essa realidade). Para provar
+ * que o caminho LEGADO continua funcionando para ids não registrados em
+ * data/casos-v3, usa-se este id EXPLÍCITO e estável — nunca por seleção
+ * implícita. id "18": adulto, não registrado em data/casos-v3, sem alterações
+ * no working tree — o mesmo caso de controle usado na verificação de paridade
+ * da Fase 3 (ver lib/patient-v3/__tests__/wiringPacienteV3.test.mts).
+ */
+const CASO_ID_LEGADO_DE_CONTROLE = '18'
 
 // ── Guard global de rede (item 12) ───────────────────────────────────────────
 let fetchOriginal: typeof globalThis.fetch
@@ -152,7 +162,10 @@ test('7. caso canônico válido → 200 com client secret mockado', async () => 
 })
 
 // ── 8. Instruções construídas no servidor ────────────────────────────────────
-test('8. instruções são construídas no servidor a partir do caso (não do corpo)', async () => {
+// FASE 3 (Patient V3): CASO_ID_VALIDO ("1") agora é servido pelo núcleo V3 —
+// as instructions vêm da Zona do Paciente do CasoV3 (identidade real), não
+// mais do bloco legado "DIAGNÓSTICO (NÃO REVELE)".
+test('8. instruções são construídas no servidor a partir do caso (não do corpo) — Caso Ouro V3', async () => {
   const restore = aplicarEnv(ENV_BASE)
   try {
     const captura: { params?: any } = {}
@@ -161,7 +174,26 @@ test('8. instruções são construídas no servidor a partir do caso (não do co
       { criarClientSecret: mockClientSecret(captura) }
     )
     assert.ok(captura.params?.instructions?.length > 500, 'instructions ausente ou curta demais')
-    assert.ok(captura.params.instructions.includes('DIAGNÓSTICO (NÃO REVELE)'), 'instructions não contém a seção clínica esperada')
+    assert.ok(captura.params.instructions.includes('Carlos Silva'), 'instructions não refletem a identidade real do caso (V3)')
+    assert.ok(!captura.params.instructions.includes('DIAGNÓSTICO (NÃO REVELE)'), 'Caso Ouro V3 não deveria mais conter o bloco legado de diagnóstico')
+  } finally { restore() }
+})
+
+// Prova que o caminho LEGADO (id não registrado em data/casos-v3) continua
+// funcionando sem alteração — id explícito e estável, nunca implícito.
+test('8b. instruções para um caso LEGADO (id não registrado em data/casos-v3) continuam no formato antigo', async () => {
+  const restore = aplicarEnv(ENV_BASE)
+  try {
+    const captura: { params?: any } = {}
+    await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_LEGADO_DE_CONTROLE })),
+      { criarClientSecret: mockClientSecret(captura) }
+    )
+    assert.ok(captura.params?.instructions?.length > 500, 'instructions ausente ou curta demais')
+    assert.ok(
+      captura.params.instructions.includes('DIAGNÓSTICO (NÃO REVELE)'),
+      'caso legado (não registrado em data/casos-v3) deveria continuar usando o bloco legado de diagnóstico'
+    )
   } finally { restore() }
 })
 
@@ -219,7 +251,11 @@ test('12. cliente NÃO consegue sobrescrever voice', async () => {
   } finally { restore() }
 })
 
-test('13. cliente NÃO consegue sobrescrever diagnóstico', async () => {
+// FASE 3 (Patient V3): para o Caso Ouro, nem o diagnóstico REAL nem um forjado
+// aparecem em instructions — a Zona Reservada (ClinicalTruth) nunca atravessa
+// para o núcleo do paciente. Garantia de segurança reforçada (antes só se
+// provava que o forjado não vazava; agora prova-se que nenhum dos dois aparece).
+test('13. cliente NÃO consegue sobrescrever diagnóstico — Caso Ouro V3 não expõe nem o real nem o forjado', async () => {
   const restore = aplicarEnv(ENV_BASE)
   try {
     const captura: { params?: any } = {}
@@ -228,7 +264,8 @@ test('13. cliente NÃO consegue sobrescrever diagnóstico', async () => {
       { criarClientSecret: mockClientSecret(captura) }
     )
     assert.ok(!captura.params.instructions.includes('DIAGNOSTICO_FORJADO_PELO_CLIENTE'), 'diagnóstico forjado vazou para instructions')
-    assert.ok(captura.params.instructions.includes('DIAGNÓSTICO (NÃO REVELE)'), 'a seção real de diagnóstico oculto deveria continuar presente')
+    assert.ok(!captura.params.instructions.includes('DIAGNÓSTICO (NÃO REVELE)'), 'Caso Ouro V3 não deveria mais conter o bloco legado de diagnóstico')
+    assert.ok(!captura.params.instructions.includes('Síndrome Coronariana Aguda (SCA) - IAMCSST'), 'diagnóstico real não deveria aparecer nas instructions do Caso Ouro V3')
   } finally { restore() }
 })
 
