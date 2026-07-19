@@ -38,12 +38,16 @@ const CRITERIO_APROVACAO_EXCLUSIVO = "Nota mínima de 17 em 20 pontos.";
 const BLOCO_LEGADO = "DIAGNÓSTICO (NÃO REVELE)";
 
 // ── 1. Localizar o Caso 1 legado pela fonte atual usada pelo app ────────────
-const caso1Legado = casosV2.find((c: any) => c.id === "1") as unknown as Caso;
-const caso18Legado = casosV2.find((c: any) => c.id === "18") as unknown as Caso;
+// casosV2 é (CasoOSCEV2 | CasoPediatricoOSCEV2)[]; "id" é comum aos dois
+// membros da união, então nenhuma anotação é necessária no callback. A
+// asserção para Caso é de um único passo (sem "unknown"): CasoOSCEV2 declara
+// `[key: string]: any`, o que já torna a conversão estruturalmente válida.
+const caso1Legado = casosV2.find((c) => c.id === "1") as Caso;
+const caso18Legado = casosV2.find((c) => c.id === "18") as Caso;
 
 test("1. o Caso 1 legado é localizável pela fonte atual (casosV2)", () => {
   assert.ok(caso1Legado);
-  assert.equal((caso1Legado as any).id, "1");
+  assert.equal(caso1Legado.id, "1");
 });
 
 // ── 2. Igualdade entre o wiring e a composição explícita (garantia principal) ─
@@ -185,7 +189,7 @@ test("17. obterCasoV3PorId retorna null para id desconhecido, e o caso correspon
   // Todo caso cujo id não resolve no registro V3 deve seguir o corpo legado —
   // confirmado indiretamente pelo teste 15 (Caso 18) e por qualquer outro
   // caso legado presente em casosV2 além do id "1".
-  const outroCasoLegado = casosV2.find((c: any) => c.id === "19") as unknown as Caso;
+  const outroCasoLegado = casosV2.find((c) => c.id === "19") as Caso;
   if (outroCasoLegado) {
     const texto = construirInstrucoesBasePaciente(outroCasoLegado);
     assert.ok(texto.includes(BLOCO_LEGADO));
