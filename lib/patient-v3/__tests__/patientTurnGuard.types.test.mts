@@ -195,20 +195,32 @@ test("23. entrada de abertura rejeita ids vazios", () => {
 });
 
 // ── 24–28. resultado fechado do Guard ──────────────────────────────────────
-test("24. resultado opening aceita fatos selecionados", () => {
-  const r: PatientTurnGuardResult = {
+test("24. resultado opening aceita fatos selecionados (um e múltiplos)", () => {
+  const umFato: PatientTurnGuardResult = {
     decision: { kind: "opening", factIds: ["f_queixa_dor"] },
     selectedFacts: [fatoExemplo("f_queixa_dor")],
   };
-  assert.equal(r.selectedFacts.length, 1);
+  assert.equal(umFato.selectedFacts.length, 1);
+
+  const varios: PatientTurnGuardResult = {
+    decision: { kind: "opening", factIds: ["f_a", "f_b"] },
+    selectedFacts: [fatoExemplo("f_a"), fatoExemplo("f_b")],
+  };
+  assert.equal(varios.selectedFacts.length, 2);
 });
 
-test("25. resultado known aceita fatos selecionados", () => {
-  const r: PatientTurnGuardResult = {
+test("25. resultado known aceita fatos selecionados (um e múltiplos)", () => {
+  const umFato: PatientTurnGuardResult = {
     decision: { kind: "known", factIds: ["f_dor_caracter"] },
     selectedFacts: [fatoExemplo("f_dor_caracter")],
   };
-  assert.equal(r.selectedFacts.length, 1);
+  assert.equal(umFato.selectedFacts.length, 1);
+
+  const varios: PatientTurnGuardResult = {
+    decision: { kind: "known", factIds: ["f_dor_alivio", "f_dor_piora"] },
+    selectedFacts: [fatoExemplo("f_dor_alivio"), fatoExemplo("f_dor_piora")],
+  };
+  assert.equal(varios.selectedFacts.length, 2);
 });
 
 test("26. resultado unknownClinical exige selectedFacts vazio", () => {
@@ -241,6 +253,46 @@ test("29. resultado fechado rejeita fatos clínicos em categoria social (tempo d
   const invalido: PatientTurnGuardResult = {
     decision: { kind: "social" },
     selectedFacts: [fatoExemplo("f_dor_intensidade")],
+  };
+  assert.ok(invalido, "linha existe somente para o tsc avaliar o erro esperado acima");
+});
+
+// ── SUBFASE 3.4B.1 — resultado não vazio exigido em opening/known ──────────
+
+// ── 36–37. opening/known rejeitam selectedFacts vazio no resultado operacional ─
+test("36. resultado opening rejeita selectedFacts vazio (tempo de compilação)", () => {
+  // @ts-expect-error — selectedFacts: [] não satisfaz NonEmptySelectedFacts para "opening"
+  const invalido: PatientTurnGuardResult = {
+    decision: { kind: "opening", factIds: ["f_queixa_dor"] },
+    selectedFacts: [],
+  };
+  assert.ok(invalido, "linha existe somente para o tsc avaliar o erro esperado acima");
+});
+
+test("37. resultado known rejeita selectedFacts vazio (tempo de compilação)", () => {
+  // @ts-expect-error — selectedFacts: [] não satisfaz NonEmptySelectedFacts para "known"
+  const invalido: PatientTurnGuardResult = {
+    decision: { kind: "known", factIds: ["f_dor_caracter"] },
+    selectedFacts: [],
+  };
+  assert.ok(invalido, "linha existe somente para o tsc avaliar o erro esperado acima");
+});
+
+// ── 38–39. categorias fechadas restantes também rejeitam fatos clínicos ────
+test("38. resultado fechado rejeita fatos clínicos em unknownClinical (tempo de compilação)", () => {
+  // @ts-expect-error — selectedFacts para "unknownClinical" é readonly [] (tupla vazia fixa)
+  const invalido: PatientTurnGuardResult = {
+    decision: { kind: "unknownClinical" },
+    selectedFacts: [fatoExemplo("f_habito_tabagismo")],
+  };
+  assert.ok(invalido, "linha existe somente para o tsc avaliar o erro esperado acima");
+});
+
+test("39. resultado fechado rejeita fatos clínicos em reservedOrMeta (tempo de compilação)", () => {
+  // @ts-expect-error — selectedFacts para "reservedOrMeta" é readonly [] (tupla vazia fixa)
+  const invalido: PatientTurnGuardResult = {
+    decision: { kind: "reservedOrMeta" },
+    selectedFacts: [fatoExemplo("f_medicamento_regime")],
   };
   assert.ok(invalido, "linha existe somente para o tsc avaliar o erro esperado acima");
 });

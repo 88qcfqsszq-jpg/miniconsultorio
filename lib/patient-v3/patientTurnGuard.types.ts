@@ -31,6 +31,9 @@ import type { FatoPaciente } from "@/lib/patient-v3/casoV3.types";
 /** Lista de ids não vazia — usada onde o contrato exige ao menos um factId. */
 export type NonEmptyFactIds = readonly [string, ...string[]];
 
+/** Lista de fatos selecionados não vazia — usada onde o contrato exige ao menos um FatoPaciente. */
+export type NonEmptySelectedFacts = readonly [FatoPaciente, ...FatoPaciente[]];
+
 // ============================================================================
 // 2. CATEGORIAS CLASSIFICÁVEIS (sem "opening" — abertura é determinística)
 // ============================================================================
@@ -114,14 +117,16 @@ export interface PatientTurnOpeningInput {
 // ============================================================================
 
 /**
- * Resultado operacional do Guard: `opening`/`known` carregam os fatos
- * selecionados; as três categorias fechadas carregam `selectedFacts: []`
- * (tupla vazia fixa) — nunca os 25 fatos como fallback implícito.
+ * Resultado operacional do Guard: `opening`/`known` exigem ao menos um fato
+ * efetivamente selecionado (NonEmptySelectedFacts) — uma decisão não vazia
+ * (factIds não vazio) nunca pode coexistir com um resultado de contexto vazio.
+ * As três categorias fechadas exigem `selectedFacts: []` (tupla vazia fixa) —
+ * nunca os 25 fatos como fallback implícito.
  */
 export type PatientTurnGuardResult =
   | {
       decision: Extract<PatientTurnDecision, { kind: "opening" | "known" }>;
-      selectedFacts: readonly FatoPaciente[];
+      selectedFacts: NonEmptySelectedFacts;
     }
   | {
       decision: Extract<
