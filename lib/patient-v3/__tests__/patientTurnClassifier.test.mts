@@ -10,7 +10,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { classificarTurno } from "@/lib/patient-v3/patientTurnClassifier";
+import { classificarTurno, ehExplicitamenteSocial } from "@/lib/patient-v3/patientTurnClassifier";
 import type { FatoPaciente } from "@/lib/patient-v3/casoV3.types";
 import type { PatientTurnClassifierInput } from "@/lib/patient-v3/patientTurnGuard.types";
 
@@ -258,4 +258,112 @@ test("25. classificador nunca produz opening", async () => {
   const r = await classificarTurno(inputPadrao("x"), deps);
   assert.notEqual(r.decision.kind, "opening");
   assert.equal(r.decision.kind, "unknownClinical");
+});
+
+// ── FASE 4C.1 — "social" passa a ser categoria excepcional ─────────────────
+
+test("26. peso retornado como social pelo modelo vira unknownClinical", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Qual é seu peso?"), deps);
+  assert.equal(r.decision.kind, "unknownClinical");
+  assert.equal(r.selectedFacts.length, 0);
+});
+
+test("27. alimentação retornada como social vira unknownClinical", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Como é sua alimentação?"), deps);
+  assert.equal(r.decision.kind, "unknownClinical");
+  assert.equal(r.selectedFacts.length, 0);
+});
+
+test("28. cirurgia retornada como social vira unknownClinical", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Já fez alguma cirurgia?"), deps);
+  assert.equal(r.decision.kind, "unknownClinical");
+  assert.equal(r.selectedFacts.length, 0);
+});
+
+test("29. diabetes retornado como social vira unknownClinical", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Tem diabetes?"), deps);
+  assert.equal(r.decision.kind, "unknownClinical");
+  assert.equal(r.selectedFacts.length, 0);
+});
+
+test("30. medicamento retornado como social vira unknownClinical", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Toma algum outro remédio?"), deps);
+  assert.equal(r.decision.kind, "unknownClinical");
+  assert.equal(r.selectedFacts.length, 0);
+});
+
+test("31. 'Vai para algum lugar?' retornada como social vira unknownClinical (nunca geração livre)", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Vai para algum lugar?"), deps);
+  assert.equal(r.decision.kind, "unknownClinical");
+  assert.equal(r.selectedFacts.length, 0);
+});
+
+test("32. 'Conte melhor...' retornada como social vira unknownClinical (nunca reservedOrMeta nem social)", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Conte melhor o que está sentindo."), deps);
+  assert.equal(r.decision.kind, "unknownClinical");
+  assert.notEqual(r.decision.kind, "reservedOrMeta");
+  assert.notEqual(r.decision.kind, "social");
+});
+
+test("33. cumprimento social permanece social", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Bom dia! Como o senhor está?"), deps);
+  assert.equal(r.decision.kind, "social");
+});
+
+test("34. time de futebol permanece social", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Para que time o senhor torce?"), deps);
+  assert.equal(r.decision.kind, "social");
+});
+
+test("35. agradecimento permanece social", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Muito obrigado, doutor."), deps);
+  assert.equal(r.decision.kind, "social");
+});
+
+test("36. comentário cotidiano permanece social", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+  const r = await classificarTurno(inputPadrao("Está calor hoje, não é?"), deps);
+  assert.equal(r.decision.kind, "social");
+});
+
+test("37. zero fatos em todo fallback gerado pela regra de segurança", async () => {
+  const perguntasClinicas = [
+    "Qual é seu peso?",
+    "Como é sua alimentação?",
+    "Já fez cirurgia?",
+    "Tem diabetes?",
+    "Toma outro remédio?",
+    "Vai para algum lugar?",
+  ];
+  for (const pergunta of perguntasClinicas) {
+    const { deps } = depsComResposta(JSON.stringify({ kind: "social", factIds: [] }));
+    const r = await classificarTurno(inputPadrao(pergunta), deps);
+    assert.equal(r.selectedFacts.length, 0, `"${pergunta}" não deveria ter fatos`);
+  }
+});
+
+// ── 38. ehExplicitamenteSocial (função pura, testada diretamente) ──────────
+test("38. ehExplicitamenteSocial reconhece somente conversa claramente social", () => {
+  assert.equal(ehExplicitamenteSocial("Bom dia."), true);
+  assert.equal(ehExplicitamenteSocial("Para que time torce?"), true);
+  assert.equal(ehExplicitamenteSocial("Muito obrigado, doutor."), true);
+  assert.equal(ehExplicitamenteSocial("Está calor hoje, não é?"), true);
+
+  assert.equal(ehExplicitamenteSocial("Qual é seu peso?"), false);
+  assert.equal(ehExplicitamenteSocial("Como é sua alimentação?"), false);
+  assert.equal(ehExplicitamenteSocial("Já fez cirurgia?"), false);
+  assert.equal(ehExplicitamenteSocial("Tem diabetes?"), false);
+  assert.equal(ehExplicitamenteSocial("Toma algum medicamento?"), false);
+  assert.equal(ehExplicitamenteSocial("Vai para algum lugar?"), false);
+  assert.equal(ehExplicitamenteSocial("Conte melhor o que está sentindo."), false);
 });
