@@ -14,14 +14,24 @@
  *  - Zona Reservada: clinicalTruth, examiner — exigidas pelo contrato do CasoV3,
  *    porém NUNCA extraídas para a Zona do Paciente. metadata é neutra.
  *
- * Reúso de tipos legados: apenas SinaisVitais e ExameFisico (de @/lib/types) são
- * reaproveitados por corresponderem exatamente aos conceitos clínicos da Zona
- * Reservada. Nenhum tipo legado foi alterado. Os demais tipos clínicos são
- * declarados localmente em forma mínima e camelCase (os equivalentes legados
- * usam snake_case / campos extras que não correspondem ao contrato mínimo V1.2).
+ * Reúso de tipos legados: apenas SinaisVitais (de @/lib/types) é reaproveitado,
+ * por corresponder exatamente ao conceito clínico da Zona Reservada. Nenhum
+ * tipo legado foi alterado. Os demais tipos clínicos são declarados localmente
+ * em forma mínima e camelCase (os equivalentes legados usam snake_case / campos
+ * extras que não correspondem ao contrato mínimo V1.2).
+ *
+ * SUBFASE 2A.2: os tipos auxiliares da Zona Reservada (ClinicalTruth/Examiner)
+ * foram enriquecidos para preservar dados reais do Caso Ouro (exame físico por
+ * sistema, painéis laboratoriais com múltiplos analitos, pontuação máxima de
+ * rubrica, flag de erro evitável, escala/domínios ponderados/penalidades
+ * automáticas/modelo SOAP do feedback detalhado) — SEM alterar os sete blocos
+ * do schema V1.2 nem os campos diretamente nomeados em CasoV3/Metadata/
+ * ClinicalTruth/PatientKnowledge/DisclosurePolicy/Persona/SessionStateInicial/
+ * Examiner. A Zona do Paciente (PatientZoneInput/PatientSafeContext) não foi
+ * tocada nesta subfase.
  */
 
-import type { SinaisVitais, ExameFisico } from "@/lib/types";
+import type { SinaisVitais } from "@/lib/types";
 
 // ============================================================================
 // METADATA (neutra)
@@ -42,13 +52,69 @@ export interface Metadata {
 // ZONA RESERVADA — estruturas clínicas auxiliares (nunca chegam ao paciente)
 // ============================================================================
 
-/** Resultado de um exame complementar, com sua interpretação (dado do avaliador). */
-export interface ExameResultado {
+/**
+ * Achado de exame físico por sistema — genérico (não específico a nenhuma
+ * especialidade). Representa um par nome/valor observado (ex.: nome:
+ * "ausculta_cardiaca", valor: "Bulhas hipofonéticas, ritmo regular...").
+ */
+export interface AchadoExameFisico {
   nome: string;
-  resultado: string;
-  valorReferencia?: string;
-  interpretacao: string;
+  valor: string;
 }
+
+/**
+ * Seção de achados de um sistema do exame físico. `sistema` é texto livre
+ * (ex.: "Geral", "Cardiovascular") — deliberadamente genérico, sem propriedades
+ * fixas por especialidade (nenhum campo `cardiovascular`/`respiratorio`/etc.).
+ */
+export interface SecaoExameFisico {
+  sistema: string;
+  achados: AchadoExameFisico[];
+}
+
+/**
+ * Exame físico verdadeiro do caso — tipo V3 LOCAL (não reutiliza mais o
+ * ExameFisico legado de @/lib/types, que era achatado e não comportava achados
+ * por sistema). Mantém os campos achatados (compatibilidade com o resumo já
+ * usado) e acrescenta `porSistema`, genérico, para achados adicionais reais
+ * (ex.: exame_fisico_interativo do Caso 1 — geral/cardiovascular).
+ */
+export interface ExameFisicoAchados {
+  inspecao: string;
+  palpacao: string;
+  ausculta: string;
+  percussao: string;
+  observacoes: string;
+  regiao?: string;
+  achadosPositivos?: string[];
+  achadosNegativos?: string[];
+  porSistema?: SecaoExameFisico[];
+}
+
+/** Um analito dentro de um painel laboratorial (ex.: hemoglobina, troponinaI). */
+export interface AnalitoExame {
+  nome: string;
+  /** Valor já formatado como na fonte (ex.: "14,3 g/dL") — nunca separado em número+unidade. */
+  valor: string;
+  /** Valor de referência do analito, quando existir individualmente (ex.: valoresReferencia). */
+  referencia?: string;
+}
+
+interface ExameResultadoBase {
+  nome: string;
+  valorReferencia?: string;
+  interpretacao?: string;
+}
+
+/**
+ * Resultado de um exame complementar (dado do avaliador). `resultado` é usado
+ * para um exame simples ou um resumo textual; `itens` é usado para um painel
+ * com múltiplos analitos (ex.: hemograma). Os dois podem coexistir; ao menos
+ * um dos dois é exigido pela união abaixo.
+ */
+export type ExameResultado =
+  | (ExameResultadoBase & { resultado: string; itens?: AnalitoExame[] })
+  | (ExameResultadoBase & { resultado?: never; itens: AnalitoExame[] });
 
 /** ECG verdadeiro do caso — padrão e interpretação (dado do avaliador). */
 export interface EcgVerdadeiro {
@@ -81,7 +147,7 @@ export interface ClinicalTruth {
    * ao paciente; diagnóstico e interpretações pertencem somente aqui).
    */
   cronologiaVerdadeira: string;
-  exameFisicoVerdadeiro: ExameFisico; // reúso legado (corresponde ao conceito)
+  exameFisicoVerdadeiro: ExameFisicoAchados; // tipo V3 local (Subfase 2A.2)
   sinaisVitais: SinaisVitais;         // reúso legado (corresponde ao conceito)
   exames: ExameResultado[];
   ecg?: EcgVerdadeiro;
@@ -98,23 +164,82 @@ export interface RubricaItem {
   criterio: string;
   peso: number;
   descricao?: string;
+  /** Pontuação máxima do critério (ex.: rubrica_correcao[].pontuacao_maxima do legado). */
+  pontuacaoMaxima?: number;
 }
 
 export interface ChecklistItem {
   item: string;
   critico?: boolean;
+  /**
+   * Agrupamento opcional e genérico (ex.: "Subjetivo"/"Objetivo"/"Avaliação"/
+   * "Plano" para achatar um modelo SOAP, ou "Anamnese"/"Exame físico" para
+   * achatar um checklist categorizado). Não é estado de execução.
+   */
+  categoria?: string;
 }
 
 export interface ErroCritico {
   erro: string;
   descricao?: string;
   penalidade: number;
+  /** Se o erro era evitável (ex.: erros_criticos[].evitavel do legado). */
+  evitavel?: boolean;
+}
+
+/** Escala de avaliação (ex.: feedbackDetalhado.escala do legado). */
+export interface EscalaAvaliacao {
+  total: number;
+  minimoAprovacao: number;
+}
+
+/** Critério individual dentro de um domínio ponderado do feedback detalhado. */
+export interface CriterioPonderado {
+  item: string;
+  pontos: number;
+  critico?: boolean;
+}
+
+/** Domínio ponderado do feedback detalhado (ex.: feedbackDetalhado.dominios do legado). */
+export interface DominioPonderado {
+  nome: string;
+  pontos: number;
+  criterios: CriterioPonderado[];
+}
+
+/**
+ * Penalidade automática de escore (ex.: feedbackDetalhado.penalidadesAutomaticas
+ * do legado). Representa um conceito distinto de ErroCritico — não é fundida
+ * com errosCriticos.
+ */
+export interface PenalidadeAutomatica {
+  condicao: string;
+  penalidade: number;
+  justificativa: string;
+}
+
+/** Seção de um modelo SOAP esperado (ex.: modelo_soap.subjetivo do legado). */
+export interface SecaoModeloSoap {
+  componentesObrigatorios: string[];
+}
+
+/** Modelo SOAP esperado (ex.: modelo_soap do legado). */
+export interface ModeloSoap {
+  subjetivo: SecaoModeloSoap;
+  objetivo: SecaoModeloSoap;
+  avaliacao: SecaoModeloSoap;
+  plano: SecaoModeloSoap;
 }
 
 export interface FeedbackModelo {
   acertosEsperados: string[];
   errosComuns: string[];
   orientacoesPedagogicas: string[];
+  /** Feedback detalhado (opcional) — coexiste com os três campos simples acima. */
+  escalaAvaliacao?: EscalaAvaliacao;
+  dominiosPonderados?: DominioPonderado[];
+  penalidadesAutomaticas?: PenalidadeAutomatica[];
+  modeloSoap?: ModeloSoap;
 }
 
 export interface Examiner {
