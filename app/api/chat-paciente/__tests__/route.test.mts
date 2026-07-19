@@ -25,7 +25,7 @@ let fetchOriginal: typeof globalThis.fetch;
 let fetchFoiChamado = false;
 before(() => {
   fetchOriginal = globalThis.fetch;
-  (globalThis as any).fetch = async (...args: any[]) => {
+  globalThis.fetch = async (..._args: Parameters<typeof fetch>): ReturnType<typeof fetch> => {
     fetchFoiChamado = true;
     throw new Error("[GUARD] chamada de rede real detectada durante os testes do endpoint chat-paciente");
   };
