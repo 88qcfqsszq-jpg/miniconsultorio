@@ -124,28 +124,41 @@ function construirZoneInputReduzido(
 }
 
 /**
- * Instrução curta, exclusiva do turno "known" (FASE 4C.3B) — NÃO faz parte do
- * Prompt Base global (promptBasePaciente.ts não é alterado): existe apenas
- * aqui, concatenada à base já reduzida, só quando o Turn Guard selecionou o
- * fato que responde exatamente à pergunta atual. Corrige o padrão observado
- * na revalidação real (Fase 4C.2): o gerador às vezes recebia o fato certo e
- * ainda assim respondia de forma evasiva.
+ * Bloco final, exclusivo do turno "known" (FASE 4C.5) — substitui a antiga
+ * DIRETIVA_KNOWN (Fase 4C.3B), que era concatenada à BASE, antes do histórico
+ * e da mensagem atual (por isso podia ser dominada por uma leitura ambígua da
+ * pergunta mais recente). Este bloco é concatenado DEPOIS da composição
+ * completa (base + histórico + mensagem) — é a última informação do prompt —
+ * e relista, com id/domínio/valor, exclusivamente os fatos já selecionados
+ * pelo Turn Guard, para que esse significado resolvido prevaleça sobre
+ * qualquer ambiguidade da mensagem original. NÃO faz parte do Prompt Base
+ * global (promptBasePaciente.ts não é alterado).
  */
-const DIRETIVA_KNOWN = `
-INSTRUÇÃO ESPECÍFICA DESTE TURNO:
-Responda diretamente à pergunta atual usando os fatos selecionados acima. Se o dado perguntado está entre esses fatos, não diga que não sabe, não lembra ou não consegue informar. Não acrescente fatos que não estão nessa lista e não crie relação de causa entre eles.`;
+function construirAlvoClinico(selectedFacts: readonly FatoPaciente[]): string {
+  const linhasFatos = selectedFacts
+    .map((f) => {
+      const incerto = f.incerto ? " incerto:true" : "";
+      return `- id:"${f.id}" dominio:"${f.dominio}" valor:"${f.valor}"${incerto}`;
+    })
+    .join("\n");
+
+  return `
+ALVO CLÍNICO DESTE TURNO:
+A mensagem atual já foi classificada como referente exclusivamente aos fatos abaixo. Se a mensagem admitir mais de uma interpretação, o significado destes fatos prevalece. Responda diretamente usando esses fatos e não acrescente informações não selecionadas.
+${linhasFatos}`;
+}
 
 function gerarPromptComFatos(
   casoV3: CasoV3,
   selectedFacts: readonly FatoPaciente[],
   historico: HistoricoChat,
   mensagemAtual: string,
-  incluirDiretivaKnown: boolean
+  incluirAlvoClinico: boolean
 ): string {
   const zoneInputReduzido = construirZoneInputReduzido(casoV3, selectedFacts);
   const baseReduzida = construirPromptBasePaciente(construirPatientSafeContext(zoneInputReduzido));
-  const base = incluirDiretivaKnown ? `${baseReduzida}\n${DIRETIVA_KNOWN}` : baseReduzida;
-  return montarPromptPacienteComBase(base, historico, mensagemAtual);
+  const promptComposto = montarPromptPacienteComBase(baseReduzida, historico, mensagemAtual);
+  return incluirAlvoClinico ? `${promptComposto}\n${construirAlvoClinico(selectedFacts)}` : promptComposto;
 }
 
 /**

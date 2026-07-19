@@ -236,11 +236,12 @@ test("14. social produz prompt sem fatos clínicos", async () => {
   }
 });
 
-// ── FASE 4C.3B — diretiva de uso direto do fato, exclusiva de "known" ──────
+// ── FASE 4C.5 — alvo clínico ancorado ao FINAL do prompt, exclusivo de "known" ─
 
-const MARCADOR_DIRETIVA_KNOWN = "INSTRUÇÃO ESPECÍFICA DESTE TURNO";
+const MARCADOR_ALVO_CLINICO = "ALVO CLÍNICO DESTE TURNO";
+const MARCADOR_INSTRUCAO_FINAL_BASE = "Responda apenas com o que o paciente ou responsável diria";
 
-test("14a. a diretiva de uso direto do fato aparece em known", async () => {
+test("14a. em known, a mensagem atual aparece antes do bloco ALVO CLÍNICO", async () => {
   const { deps } = depsClassificando({
     decision: { kind: "known", factIds: ["f_dor_caracter"] },
     selectedFacts: [fato("f_dor_caracter")],
@@ -252,11 +253,52 @@ test("14a. a diretiva de uso direto do fato aparece em known", async () => {
   );
   assert.equal(r.kind, "generate");
   if (r.kind === "generate") {
-    assert.ok(r.prompt.includes(MARCADOR_DIRETIVA_KNOWN));
+    assert.ok(r.prompt.includes(MARCADOR_ALVO_CLINICO));
+    assert.ok(r.prompt.indexOf("Como é essa dor?") < r.prompt.indexOf(MARCADOR_ALVO_CLINICO));
   }
 });
 
-test("14b. a diretiva não aparece na abertura (opening)", async () => {
+test("14b. o bloco ALVO CLÍNICO é a última seção do prompt (depois da instrução final da base)", async () => {
+  const { deps } = depsClassificando({
+    decision: { kind: "known", factIds: ["f_dor_caracter"] },
+    selectedFacts: [fato("f_dor_caracter")],
+  });
+  const historico = [{ tipo: "estudante" as const, conteudo: "Bom dia." }];
+  const r = await prepararTurnoPacienteTexto(
+    { caso: casoOuroLegado, mensagemAtual: "Como é essa dor?", historico },
+    deps
+  );
+  assert.equal(r.kind, "generate");
+  if (r.kind === "generate") {
+    const indiceInstrucaoFinalBase = r.prompt.indexOf(MARCADOR_INSTRUCAO_FINAL_BASE);
+    const indiceAlvoClinico = r.prompt.indexOf(MARCADOR_ALVO_CLINICO);
+    assert.ok(indiceInstrucaoFinalBase >= 0);
+    assert.ok(indiceAlvoClinico > indiceInstrucaoFinalBase, "ALVO CLÍNICO deveria vir depois da instrução final da base");
+    assert.ok(r.prompt.trimEnd().endsWith(`valor:"${fato("f_dor_caracter").valor}"`));
+  }
+});
+
+test("14c. o bloco ALVO CLÍNICO contém somente selectedFacts, com id/domínio/valor", async () => {
+  const { deps } = depsClassificando({
+    decision: { kind: "known", factIds: ["f_dor_caracter"] },
+    selectedFacts: [fato("f_dor_caracter")],
+  });
+  const historico = [{ tipo: "estudante" as const, conteudo: "Bom dia." }];
+  const r = await prepararTurnoPacienteTexto(
+    { caso: casoOuroLegado, mensagemAtual: "Como é essa dor?", historico },
+    deps
+  );
+  assert.equal(r.kind, "generate");
+  if (r.kind === "generate") {
+    const blocoAlvo = r.prompt.slice(r.prompt.indexOf(MARCADOR_ALVO_CLINICO));
+    assert.ok(blocoAlvo.includes('id:"f_dor_caracter"'));
+    assert.ok(blocoAlvo.includes('dominio:"sintoma"'));
+    assert.ok(blocoAlvo.includes(fato("f_dor_caracter").valor));
+    assert.ok(!blocoAlvo.includes(fato("f_habito_tabagismo").valor), "fato não selecionado não deveria aparecer no bloco ALVO CLÍNICO");
+  }
+});
+
+test("14d. a diretiva não aparece na abertura (opening)", async () => {
   const { deps } = depsClassificando({ decision: { kind: "social" }, selectedFacts: [] });
   const r = await prepararTurnoPacienteTexto(
     { caso: casoOuroLegado, mensagemAtual: "O que trouxe o senhor aqui hoje?", historico: [] },
@@ -265,11 +307,11 @@ test("14b. a diretiva não aparece na abertura (opening)", async () => {
   assert.equal(r.kind, "generate");
   assert.equal(r.decision?.kind, "opening");
   if (r.kind === "generate") {
-    assert.ok(!r.prompt.includes(MARCADOR_DIRETIVA_KNOWN));
+    assert.ok(!r.prompt.includes(MARCADOR_ALVO_CLINICO));
   }
 });
 
-test("14c. a diretiva não aparece em social", async () => {
+test("14e. a diretiva não aparece em social", async () => {
   const { deps } = depsClassificando({ decision: { kind: "social" }, selectedFacts: [] });
   const historico = [{ tipo: "estudante" as const, conteudo: "Bom dia." }];
   const r = await prepararTurnoPacienteTexto(
@@ -278,7 +320,7 @@ test("14c. a diretiva não aparece em social", async () => {
   );
   assert.equal(r.kind, "generate");
   if (r.kind === "generate") {
-    assert.ok(!r.prompt.includes(MARCADOR_DIRETIVA_KNOWN));
+    assert.ok(!r.prompt.includes(MARCADOR_ALVO_CLINICO));
   }
 });
 
