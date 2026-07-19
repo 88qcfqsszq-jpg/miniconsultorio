@@ -236,6 +236,52 @@ test("14. social produz prompt sem fatos clínicos", async () => {
   }
 });
 
+// ── FASE 4C.3B — diretiva de uso direto do fato, exclusiva de "known" ──────
+
+const MARCADOR_DIRETIVA_KNOWN = "INSTRUÇÃO ESPECÍFICA DESTE TURNO";
+
+test("14a. a diretiva de uso direto do fato aparece em known", async () => {
+  const { deps } = depsClassificando({
+    decision: { kind: "known", factIds: ["f_dor_caracter"] },
+    selectedFacts: [fato("f_dor_caracter")],
+  });
+  const historico = [{ tipo: "estudante" as const, conteudo: "Bom dia." }];
+  const r = await prepararTurnoPacienteTexto(
+    { caso: casoOuroLegado, mensagemAtual: "Como é essa dor?", historico },
+    deps
+  );
+  assert.equal(r.kind, "generate");
+  if (r.kind === "generate") {
+    assert.ok(r.prompt.includes(MARCADOR_DIRETIVA_KNOWN));
+  }
+});
+
+test("14b. a diretiva não aparece na abertura (opening)", async () => {
+  const { deps } = depsClassificando({ decision: { kind: "social" }, selectedFacts: [] });
+  const r = await prepararTurnoPacienteTexto(
+    { caso: casoOuroLegado, mensagemAtual: "O que trouxe o senhor aqui hoje?", historico: [] },
+    deps
+  );
+  assert.equal(r.kind, "generate");
+  assert.equal(r.decision?.kind, "opening");
+  if (r.kind === "generate") {
+    assert.ok(!r.prompt.includes(MARCADOR_DIRETIVA_KNOWN));
+  }
+});
+
+test("14c. a diretiva não aparece em social", async () => {
+  const { deps } = depsClassificando({ decision: { kind: "social" }, selectedFacts: [] });
+  const historico = [{ tipo: "estudante" as const, conteudo: "Bom dia." }];
+  const r = await prepararTurnoPacienteTexto(
+    { caso: casoOuroLegado, mensagemAtual: "Para que time torce?", historico },
+    deps
+  );
+  assert.equal(r.kind, "generate");
+  if (r.kind === "generate") {
+    assert.ok(!r.prompt.includes(MARCADOR_DIRETIVA_KNOWN));
+  }
+});
+
 // ── 15–16. Robustez a dependência malformada ───────────────────────────────
 
 test("15. erro do classificador falha fechado (resposta direta, nunca exceção)", async () => {

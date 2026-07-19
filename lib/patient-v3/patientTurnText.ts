@@ -123,14 +123,28 @@ function construirZoneInputReduzido(
   };
 }
 
+/**
+ * Instrução curta, exclusiva do turno "known" (FASE 4C.3B) — NÃO faz parte do
+ * Prompt Base global (promptBasePaciente.ts não é alterado): existe apenas
+ * aqui, concatenada à base já reduzida, só quando o Turn Guard selecionou o
+ * fato que responde exatamente à pergunta atual. Corrige o padrão observado
+ * na revalidação real (Fase 4C.2): o gerador às vezes recebia o fato certo e
+ * ainda assim respondia de forma evasiva.
+ */
+const DIRETIVA_KNOWN = `
+INSTRUÇÃO ESPECÍFICA DESTE TURNO:
+Responda diretamente à pergunta atual usando os fatos selecionados acima. Se o dado perguntado está entre esses fatos, não diga que não sabe, não lembra ou não consegue informar. Não acrescente fatos que não estão nessa lista e não crie relação de causa entre eles.`;
+
 function gerarPromptComFatos(
   casoV3: CasoV3,
   selectedFacts: readonly FatoPaciente[],
   historico: HistoricoChat,
-  mensagemAtual: string
+  mensagemAtual: string,
+  incluirDiretivaKnown: boolean
 ): string {
   const zoneInputReduzido = construirZoneInputReduzido(casoV3, selectedFacts);
-  const base = construirPromptBasePaciente(construirPatientSafeContext(zoneInputReduzido));
+  const baseReduzida = construirPromptBasePaciente(construirPatientSafeContext(zoneInputReduzido));
+  const base = incluirDiretivaKnown ? `${baseReduzida}\n${DIRETIVA_KNOWN}` : baseReduzida;
   return montarPromptPacienteComBase(base, historico, mensagemAtual);
 }
 
@@ -159,7 +173,7 @@ export async function prepararTurnoPacienteTexto(
       openingFactIds: paraFactIdsNaoVazio(casoV3.disclosurePolicy.aberturaFactIds),
       availableFacts: casoV3.patientKnowledge.fatos,
     });
-    const prompt = gerarPromptComFatos(casoV3, resultado.selectedFacts, historico, mensagemAtual);
+    const prompt = gerarPromptComFatos(casoV3, resultado.selectedFacts, historico, mensagemAtual, false);
     return { kind: "generate", prompt, decision: resultado.decision };
   }
 
@@ -194,7 +208,8 @@ export async function prepararTurnoPacienteTexto(
   }
 
   // known ou social — known carrega selectedFacts não vazio; social é sempre [].
-  const selectedFacts = resultado.decision.kind === "known" ? resultado.selectedFacts : [];
-  const prompt = gerarPromptComFatos(casoV3, selectedFacts, historico, mensagemAtual);
+  const ehKnown = resultado.decision.kind === "known";
+  const selectedFacts = ehKnown ? resultado.selectedFacts : [];
+  const prompt = gerarPromptComFatos(casoV3, selectedFacts, historico, mensagemAtual, ehKnown);
   return { kind: "generate", prompt, decision: resultado.decision };
 }
