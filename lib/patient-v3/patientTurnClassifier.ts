@@ -15,6 +15,7 @@
 
 import { openai } from "@/lib/openai";
 import { validarSaidaClassificador } from "@/lib/patient-v3/patientTurnGuard";
+import type { FatoPaciente } from "@/lib/patient-v3/casoV3.types";
 import type {
   PatientTurnClassifierInput,
   PatientTurnClassifierKind,
@@ -22,8 +23,15 @@ import type {
   PatientTurnGuardResult,
 } from "@/lib/patient-v3/patientTurnGuard.types";
 
+/**
+ * `availableFacts` é repassado à dependência (não só o prompt) porque a
+ * implementação padrão (FASE 4C.3A) usa Structured Outputs (`response_format:
+ * json_schema`) com um enum DINÂMICO de `factIds` restrito aos ids realmente
+ * disponíveis — a restrição estrutural depende de saber quais ids existem
+ * neste turno, não apenas do texto do prompt.
+ */
 export interface PatientTurnClassifierDeps {
-  requestClassification: (prompt: string) => Promise<string>;
+  requestClassification: (prompt: string, availableFacts: readonly FatoPaciente[]) => Promise<string>;
 }
 
 const FALLBACK_FECHADO: PatientTurnGuardResult = {
@@ -238,7 +246,44 @@ Regras da saída:
 - Nunca inclua texto explicativo, resposta ao paciente, confiança numérica ou justificativa — apenas o JSON acima.`;
 }
 
-async function chamarClassificadorPadrao(prompt: string): Promise<string> {
+/**
+ * Monta um JSON Schema fechado (Structured Outputs, `strict: true`) cujo
+ * `factIds.items.enum` contém EXCLUSIVAMENTE os ids de `availableFacts` deste
+ * turno — o modelo não pode retornar um id inexistente (ex.: "f_dor_queixa_dor")
+ * porque o esquema não o inclui na enumeração; a restrição é estrutural, não
+ * apenas textual. `additionalProperties: false` proíbe qualquer campo extra.
+ * Quando não há fatos disponíveis, `factIds` é fixado a array vazio
+ * (`maxItems: 0`) — não há nada para enumerar.
+ */
+export function construirSchemaClassificador(availableFacts: readonly FatoPaciente[]) {
+  const idsDisponiveis = availableFacts.map((f) => f.id);
+
+  return {
+    type: "json_schema",
+    json_schema: {
+      name: "patient_turn_classification",
+      strict: true,
+      schema: {
+        type: "object",
+        properties: {
+          kind: { type: "string", enum: [...KINDS_CLASSIFICAVEIS] },
+          factIds: {
+            type: "array",
+            items: { type: "string", enum: idsDisponiveis },
+            maxItems: idsDisponiveis.length > 0 ? 6 : 0,
+          },
+        },
+        required: ["kind", "factIds"],
+        additionalProperties: false,
+      },
+    },
+  } as const;
+}
+
+async function chamarClassificadorPadrao(
+  prompt: string,
+  availableFacts: readonly FatoPaciente[]
+): Promise<string> {
   if (!openai) {
     throw new Error("[patient-v3] OPENAI_API_KEY ausente — classificador indisponível.");
   }
@@ -247,7 +292,7 @@ async function chamarClassificadorPadrao(prompt: string): Promise<string> {
     messages: [{ role: "user", content: prompt }],
     temperature: 0,
     max_tokens: 150,
-    response_format: { type: "json_object" },
+    response_format: construirSchemaClassificador(availableFacts),
   });
   return resposta.choices[0]?.message?.content ?? "";
 }
@@ -269,7 +314,7 @@ export async function classificarTurno(
 
   let respostaBruta: string;
   try {
-    respostaBruta = await deps.requestClassification(prompt);
+    respostaBruta = await deps.requestClassification(prompt, input.availableFacts);
   } catch {
     return FALLBACK_FECHADO;
   }

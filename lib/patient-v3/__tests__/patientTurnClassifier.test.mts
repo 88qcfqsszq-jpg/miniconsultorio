@@ -10,7 +10,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { classificarTurno, ehExplicitamenteSocial } from "@/lib/patient-v3/patientTurnClassifier";
+import {
+  classificarTurno,
+  ehExplicitamenteSocial,
+  construirSchemaClassificador,
+} from "@/lib/patient-v3/patientTurnClassifier";
 import type { FatoPaciente } from "@/lib/patient-v3/casoV3.types";
 import type { PatientTurnClassifierInput } from "@/lib/patient-v3/patientTurnGuard.types";
 
@@ -366,4 +370,67 @@ test("38. ehExplicitamenteSocial reconhece somente conversa claramente social", 
   assert.equal(ehExplicitamenteSocial("Toma algum medicamento?"), false);
   assert.equal(ehExplicitamenteSocial("Vai para algum lugar?"), false);
   assert.equal(ehExplicitamenteSocial("Conte melhor o que está sentindo."), false);
+});
+
+// ── FASE 4C.3A — saída fechada do classificador (Structured Outputs) ──────
+
+test("39. o schema contém exclusivamente os ids fornecidos", () => {
+  const schema = construirSchemaClassificador(FATOS);
+  const enumFactIds = schema.json_schema.schema.properties.factIds.items.enum;
+  assert.deepEqual([...enumFactIds].sort(), FATOS.map((f) => f.id).sort());
+});
+
+test("40. id inventado não pode ser aceito (não está no enum do schema)", () => {
+  const schema = construirSchemaClassificador(FATOS);
+  const enumFactIds = schema.json_schema.schema.properties.factIds.items.enum;
+  assert.ok(!enumFactIds.includes("f_dor_queixa_dor"));
+  assert.ok(!enumFactIds.includes("id_qualquer_inventado"));
+});
+
+test("41. ids de outro caso não podem ser aceitos (não estão no enum deste turno)", () => {
+  const fatoDeOutroCaso: FatoPaciente = { id: "f_de_outro_caso_totalmente_diferente", dominio: "sintoma", valor: "x" };
+  const schema = construirSchemaClassificador(FATOS);
+  const enumFactIds = schema.json_schema.schema.properties.factIds.items.enum;
+  assert.ok(!enumFactIds.includes(fatoDeOutroCaso.id));
+});
+
+test("42. schema proíbe campos extras (additionalProperties: false)", () => {
+  const schema = construirSchemaClassificador(FATOS);
+  assert.equal(schema.json_schema.schema.additionalProperties, false);
+});
+
+test("43. schema limita factIds a no máximo 6 itens quando há fatos disponíveis", () => {
+  const schema = construirSchemaClassificador(FATOS);
+  assert.equal(schema.json_schema.schema.properties.factIds.maxItems, 6);
+});
+
+test("44. schema com zero fatos disponíveis fixa factIds a array vazio (maxItems 0)", () => {
+  const schema = construirSchemaClassificador([]);
+  assert.equal(schema.json_schema.schema.properties.factIds.maxItems, 0);
+  assert.deepEqual(schema.json_schema.schema.properties.factIds.items.enum, []);
+});
+
+test("45. known válido continua funcionando (mesmo comportamento de sempre)", async () => {
+  const saida = JSON.stringify({ kind: "known", factIds: ["f1", "f2"] });
+  const { deps } = depsComResposta(saida);
+  const r = await classificarTurno(inputPadrao("x"), deps);
+  assert.equal(r.decision.kind, "known");
+  assert.deepEqual(r.selectedFacts.map((f) => f.id), ["f1", "f2"]);
+});
+
+test("46. categorias fechadas continuam aceitando somente factIds vazio", async () => {
+  for (const kind of ["unknownClinical", "reservedOrMeta", "social"] as const) {
+    const { deps } = depsComResposta(JSON.stringify({ kind, factIds: [] }));
+    const mensagem = kind === "social" ? "Bom dia." : "x";
+    const r = await classificarTurno(inputPadrao(mensagem), deps);
+    assert.equal(r.decision.kind, kind);
+    assert.equal(r.selectedFacts.length, 0);
+  }
+});
+
+test("47. fallback fechado continua intacto para id inexistente vindo da dependência", async () => {
+  const { deps } = depsComResposta(JSON.stringify({ kind: "known", factIds: ["f_dor_queixa_dor"] }));
+  const r = await classificarTurno(inputPadrao("x"), deps);
+  assert.equal(r.decision.kind, "unknownClinical");
+  assert.equal(r.selectedFacts.length, 0);
 });
