@@ -12,7 +12,7 @@ import assert from "node:assert/strict";
 import { casoSCAOuroV3 } from "@/data/casos-v3/001-sca-ouro";
 import { construirPatientSafeContext } from "@/lib/patient-v3/patientContextBuilder";
 import { construirPromptBasePaciente } from "@/lib/patient-v3/promptBasePaciente";
-import type { PatientZoneInput } from "@/lib/patient-v3/casoV3.types";
+import type { FatoPaciente, PatientZoneInput } from "@/lib/patient-v3/casoV3.types";
 
 const caso = casoSCAOuroV3;
 
@@ -175,8 +175,8 @@ test("18. tratamento correto está completo (imediata/curtoPrazo/longoPrazo/enca
 
 // ── 19–22. PatientKnowledge ────────────────────────────────────────────────
 
-test("19. PatientKnowledge possui exatamente 15 fatos", () => {
-  assert.equal(caso.patientKnowledge.fatos.length, 15);
+test("19. PatientKnowledge possui exatamente 25 fatos", () => {
+  assert.equal(caso.patientKnowledge.fatos.length, 25);
 });
 
 test("20. ids dos fatos são únicos", () => {
@@ -188,13 +188,23 @@ test("21. não existe f_medo_ansiedade", () => {
   assert.ok(!caso.patientKnowledge.fatos.some((f) => f.id === "f_medo_ansiedade"));
 });
 
-test("22. nenhum fato contém diagnóstico ou interpretação médica", () => {
-  const termosProibidos = ["IAMCSST", "Síndrome Coronariana Aguda", "Infarto Agudo do Miocárdio", "troponina", "necrose miocárdica"];
+test("22. nenhum fato contém diagnóstico, interpretação de exame ou conduta reservada", () => {
+  const termosProibidos = [
+    "IAMCSST",
+    "Síndrome Coronariana Aguda",
+    "Infarto Agudo do Miocárdio",
+    "troponina",
+    "necrose miocárdica",
+    "elevação do segmento ST",
+    "angioplastia",
+    "cateterismo",
+    "aspirina",
+  ];
   for (const f of caso.patientKnowledge.fatos) {
     for (const termo of termosProibidos) {
       assert.ok(
         !f.valor.toLowerCase().includes(termo.toLowerCase()),
-        `fato "${f.id}" não deveria conter termo diagnóstico "${termo}": "${f.valor}"`
+        `fato "${f.id}" não deveria conter termo diagnóstico/conduta "${termo}": "${f.valor}"`
       );
     }
   }
@@ -202,8 +212,8 @@ test("22. nenhum fato contém diagnóstico ou interpretação médica", () => {
 
 // ── 23–25. DisclosurePolicy ─────────────────────────────────────────────────
 
-test("23. disclosurePolicy possui exatamente 15 regras", () => {
-  assert.equal(caso.disclosurePolicy.regras.length, 15);
+test("23. disclosurePolicy possui exatamente 25 regras", () => {
+  assert.equal(caso.disclosurePolicy.regras.length, 25);
 });
 
 test("24. não existe política sensivel", () => {
@@ -217,6 +227,181 @@ test("24. não existe política sensivel", () => {
 
 test("25. aberturaFactIds é exatamente ['f_queixa_dor']", () => {
   assert.deepEqual(caso.disclosurePolicy.aberturaFactIds, ["f_queixa_dor"]);
+});
+
+// ── Fase 3.3B — completude editorial (10 fatos novos, 10 regras novas) ──────
+
+function fato(id: string): FatoPaciente {
+  // Alargado para FatoPaciente: o "satisfies CasoV3" na origem estreita cada
+  // fato ao literal exato usado (sem "incerto" nos que não o declaram); o
+  // mesmo padrão do teste 24 (politicas: string[]) é aplicado aqui para
+  // permitir checar `.incerto` em runtime sem erro de tipo em tempo de build.
+  const fatos: FatoPaciente[] = caso.patientKnowledge.fatos;
+  const f = fatos.find((x) => x.id === id);
+  assert.ok(f, `fato "${id}" deveria existir`);
+  return f!;
+}
+
+function regra(factId: string) {
+  const r = caso.disclosurePolicy.regras.find((x) => x.factId === factId);
+  assert.ok(r, `regra para "${factId}" deveria existir`);
+  return r!;
+}
+
+test("38. cada um dos 25 fatos possui exatamente uma regra de disclosurePolicy (correspondência 1:1)", () => {
+  const idsFatos = caso.patientKnowledge.fatos.map((f) => f.id);
+  const factIdsRegras = caso.disclosurePolicy.regras.map((r) => r.factId);
+  assert.equal(new Set(factIdsRegras).size, factIdsRegras.length, "não deveria haver regra duplicada para o mesmo fato");
+  assert.deepEqual([...idsFatos].sort(), [...factIdsRegras].sort(), "todo fato deveria ter exatamente uma regra correspondente, e vice-versa");
+});
+
+test("39. nenhum dos 10 fatos novos participa da abertura", () => {
+  const idsNovos = [
+    "f_dor_caracter",
+    "f_dor_alivio",
+    "f_dor_piora",
+    "f_medicamento_regime",
+    "f_habito_tabagismo",
+    "f_habito_alcool",
+    "f_habito_outras_substancias",
+    "f_habito_atividade_fisica",
+    "f_preocupacao_quadro",
+    "f_objetivo_consulta",
+  ];
+  for (const id of idsNovos) {
+    assert.ok(!caso.disclosurePolicy.aberturaFactIds.includes(id), `"${id}" não deveria estar em aberturaFactIds`);
+  }
+  assert.deepEqual(caso.disclosurePolicy.aberturaFactIds, ["f_queixa_dor"]);
+});
+
+test("40. f_dor_caracter contém o valor aprovado (pressão/aperto) com política perguntaAberta", () => {
+  assert.equal(fato("f_dor_caracter").valor, "Dor descrita como pressão ou aperto.");
+  assert.equal(regra("f_dor_caracter").politica, "perguntaAberta");
+});
+
+test("41. f_dor_alivio contém o valor aprovado (nada alivia) com política perguntaDireta", () => {
+  assert.equal(fato("f_dor_alivio").valor, "Nada alivia a dor.");
+  assert.equal(regra("f_dor_alivio").politica, "perguntaDireta");
+});
+
+test("42. f_dor_piora contém o valor aprovado (sem fator específico) e não declara movimento/esforço/respiração/palpação/alimentação como piora", () => {
+  const f = fato("f_dor_piora");
+  assert.equal(f.valor, "Não percebeu fator específico que piore a dor.");
+  for (const termo of ["movimento", "esforço", "respiração", "palpação", "alimentação"]) {
+    assert.ok(!f.valor.toLowerCase().includes(termo), `f_dor_piora não deveria mencionar "${termo}"`);
+  }
+  assert.equal(regra("f_dor_piora").politica, "perguntaDireta");
+});
+
+test("43. f_medicamento_regime contém frequência, horário e adesão aprovados, sem novo medicamento", () => {
+  const f = fato("f_medicamento_regime");
+  assert.equal(
+    f.valor,
+    "Usa a Losartana uma vez ao dia pela manhã e costuma tomá-la regularmente, sem esquecimentos frequentes."
+  );
+  assert.equal(regra("f_medicamento_regime").politica, "perguntaDireta");
+  // f_medicamento_losartana (identificação/dose) permanece intacto e único fato de identificação do medicamento.
+  assert.equal(fato("f_medicamento_losartana").valor, "Usa Losartana 50 mg para a pressão.");
+});
+
+test("44. f_habito_tabagismo é uma negação explícita, sem carga tabágica", () => {
+  const f = fato("f_habito_tabagismo");
+  assert.equal(f.valor, "Nega tabagismo atual ou prévio.");
+  assert.ok(!/\d/.test(f.valor), "não deveria conter número (carga tabágica)");
+  assert.equal(regra("f_habito_tabagismo").politica, "perguntaDireta");
+});
+
+test("45. f_habito_alcool contém uso social ocasional, sem dose/frequência/bebida/abuso", () => {
+  const f = fato("f_habito_alcool");
+  assert.equal(f.valor, "Consome bebida alcoólica ocasionalmente, em situações sociais.");
+  assert.ok(!/\d/.test(f.valor), "não deveria conter número de doses");
+  assert.equal(regra("f_habito_alcool").politica, "perguntaDireta");
+});
+
+test("46. f_habito_outras_substancias nega cocaína e drogas recreativas, sem citar medicamentos prescritos", () => {
+  const f = fato("f_habito_outras_substancias");
+  assert.equal(f.valor, "Nega uso de cocaína ou outras drogas recreativas.");
+  assert.ok(!f.valor.toLowerCase().includes("losartana"));
+  assert.equal(regra("f_habito_outras_substancias").politica, "perguntaDireta");
+});
+
+test("47. f_habito_atividade_fisica representa sedentarismo, sem IMC/peso/dieta/obesidade", () => {
+  const f = fato("f_habito_atividade_fisica");
+  assert.equal(f.valor, "É sedentário e não pratica atividade física regularmente.");
+  for (const termo of ["imc", "peso", "dieta", "obes"]) {
+    assert.ok(!f.valor.toLowerCase().includes(termo), `f_habito_atividade_fisica não deveria mencionar "${termo}"`);
+  }
+  assert.equal(regra("f_habito_atividade_fisica").politica, "perguntaDireta");
+});
+
+test("48. f_preocupacao_quadro contém apenas a preocupação aprovada, sem ligação explícita à morte do pai", () => {
+  const f = fato("f_preocupacao_quadro");
+  assert.equal(f.valor, "Tem medo de que a dor seja sinal de algo grave.");
+  assert.ok(!f.valor.toLowerCase().includes("pai"));
+  assert.equal(regra("f_preocupacao_quadro").politica, "perguntaDireta");
+  assert.ok(!caso.disclosurePolicy.aberturaFactIds.includes("f_preocupacao_quadro"));
+});
+
+test("49. f_objetivo_consulta não menciona diagnóstico nem tratamento específico", () => {
+  const f = fato("f_objetivo_consulta");
+  assert.equal(f.valor, "Quer entender o que está causando a dor e receber tratamento para melhorar.");
+  for (const termo of ["angioplastia", "trombólise", "iamcsst", "síndrome coronariana"]) {
+    assert.ok(!f.valor.toLowerCase().includes(termo), `f_objetivo_consulta não deveria mencionar "${termo}"`);
+  }
+  assert.equal(regra("f_objetivo_consulta").politica, "perguntaDireta");
+});
+
+test("50. os 10 fatos novos usam apenas os domínios aprovados (sintoma/medicamento/habito/preocupacao/objetivo)", () => {
+  const dominiosPorId: Record<string, string> = {
+    f_dor_caracter: "sintoma",
+    f_dor_alivio: "sintoma",
+    f_dor_piora: "sintoma",
+    f_medicamento_regime: "medicamento",
+    f_habito_tabagismo: "habito",
+    f_habito_alcool: "habito",
+    f_habito_outras_substancias: "habito",
+    f_habito_atividade_fisica: "habito",
+    f_preocupacao_quadro: "preocupacao",
+    f_objetivo_consulta: "objetivo",
+  };
+  for (const [id, dominioEsperado] of Object.entries(dominiosPorId)) {
+    assert.equal(fato(id).dominio, dominioEsperado, `"${id}" deveria ter domínio "${dominioEsperado}"`);
+  }
+});
+
+test("51. nenhum dos 10 fatos novos é incerto (todos são positivos/negativos definidos, não fatos vagos)", () => {
+  const idsNovos = [
+    "f_dor_caracter",
+    "f_dor_alivio",
+    "f_dor_piora",
+    "f_medicamento_regime",
+    "f_habito_tabagismo",
+    "f_habito_alcool",
+    "f_habito_outras_substancias",
+    "f_habito_atividade_fisica",
+    "f_preocupacao_quadro",
+    "f_objetivo_consulta",
+  ];
+  for (const id of idsNovos) {
+    assert.ok(!fato(id).incerto, `"${id}" não deveria ser incerto`);
+  }
+});
+
+test("52. os 15 fatos previamente aprovados permanecem com o mesmo valor (nenhuma alteração retroativa)", () => {
+  assert.equal(fato("f_queixa_dor").valor, "Dor no peito, iniciada há aproximadamente 2 horas.");
+  assert.equal(fato("f_contexto_inicio").valor, "Início súbito, em repouso, enquanto assistia à televisão.");
+  assert.equal(fato("f_dor_localizacao").valor, "Dor localizada no centro do peito (região retroesternal).");
+  assert.equal(fato("f_dor_irradiacao").valor, "A dor às vezes irradia para o braço esquerdo.");
+  assert.equal(fato("f_dor_intensidade").valor, "Intensidade da dor entre 8 e 9 em uma escala de 0 a 10.");
+  assert.equal(fato("f_sudorese").valor, "Presença de sudorese (suor intenso) e tremor.");
+  assert.equal(fato("f_dispneia").valor, "Falta de ar (dispneia).");
+  assert.equal(fato("f_tontura").valor, "Tontura leve.");
+  assert.equal(fato("f_nausea").valor, "Náusea leve (enjoo).");
+  assert.equal(fato("f_antecedente_hipertensao").valor, "Tem hipertensão arterial (pressão alta).");
+  assert.equal(fato("f_historia_familiar_infarto").valor, "O pai faleceu de infarto.");
+  assert.equal(fato("f_alergias").valor, "Nega alergias conhecidas.");
+  assert.equal(fato("f_contexto_profissao").valor, "Trabalha como engenheiro.");
+  assert.equal(fato("f_contexto_estado_civil").valor, "É casado.");
 });
 
 // ── 26–27. Persona e SessionStateInicial ───────────────────────────────────

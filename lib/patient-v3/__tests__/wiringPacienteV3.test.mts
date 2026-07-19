@@ -106,12 +106,12 @@ test("9. contém a identidade legítima do paciente", () => {
   assert.ok(texto.includes("52"));
 });
 
-test("10. contém os 15 fatos legítimos do PatientKnowledge", () => {
+test("10. contém os 25 fatos legítimos do PatientKnowledge", () => {
   const texto = construirInstrucoesBasePaciente(caso1Legado);
   for (const fato of casoSCAOuroV3.patientKnowledge.fatos) {
     assert.ok(texto.includes(fato.valor), `deveria conter o valor do fato "${fato.id}"`);
   }
-  assert.equal(casoSCAOuroV3.patientKnowledge.fatos.length, 15);
+  assert.equal(casoSCAOuroV3.patientKnowledge.fatos.length, 25);
 });
 
 test("11. contém a abertura e as políticas de revelação", () => {

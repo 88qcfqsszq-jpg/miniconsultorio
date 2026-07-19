@@ -4,10 +4,16 @@
  *
  * Fonte primária ÚNICA: data/casos-v2/adultos/cardiovascular/001-dor-toracica-
  * sindrome-coronariana-aguda.ts (Caso 1 legado). Nenhum outro caso foi usado
- * para preencher lacunas. Nenhum dado clínico ausente na fonte foi inventado —
- * onde a fonte não sustentava um valor (caráter da dor, fatores de melhora/
- * piora, dose/horário/adesão do medicamento, hábitos, objetivo da consulta),
- * o dado simplesmente não foi criado.
+ * para preencher lacunas.
+ *
+ * Fase 3.3B — completude editorial: 10 fatos (caráter da dor, fator de
+ * alívio, fator de piora, regime/adesão da Losartana, tabagismo, álcool,
+ * outras substâncias, atividade física, preocupação, objetivo da consulta)
+ * NÃO estão sustentados pela fonte legada — são decisões humanas explícitas
+ * de autoria clínica (não extração), aprovadas para fechar lacunas que a
+ * bateria comportamental das Fases 3.1/3.2 mostrou levarem o modelo a
+ * inventar dados ao serem perguntadas. Ver relatório da entrega da Fase 3.3B
+ * para a justificativa de cada valor.
  *
  * Este arquivo é autoral e estático — não importa nem espalha o objeto legado
  * em runtime. É uma representação própria e explícita do mesmo caso clínico,
@@ -291,6 +297,37 @@ export const casoSCAOuroV3 = {
       { id: "f_alergias", dominio: "alergia", valor: "Nega alergias conhecidas." },
       { id: "f_contexto_profissao", dominio: "contextoSocial", valor: "Trabalha como engenheiro." },
       { id: "f_contexto_estado_civil", dominio: "contextoSocial", valor: "É casado." },
+
+      // Fase 3.3B — decisões humanas explícitas de autoria clínica (não
+      // extraídas da fonte legada), resolvendo lacunas identificadas nas
+      // Fases 3.1/3.2/3.3A. Ver relatório da entrega para a justificativa
+      // de cada valor.
+      { id: "f_dor_caracter", dominio: "sintoma", valor: "Dor descrita como pressão ou aperto." },
+      { id: "f_dor_alivio", dominio: "sintoma", valor: "Nada alivia a dor." },
+      { id: "f_dor_piora", dominio: "sintoma", valor: "Não percebeu fator específico que piore a dor." },
+      {
+        id: "f_medicamento_regime",
+        dominio: "medicamento",
+        valor: "Usa a Losartana uma vez ao dia pela manhã e costuma tomá-la regularmente, sem esquecimentos frequentes.",
+      },
+      { id: "f_habito_tabagismo", dominio: "habito", valor: "Nega tabagismo atual ou prévio." },
+      { id: "f_habito_alcool", dominio: "habito", valor: "Consome bebida alcoólica ocasionalmente, em situações sociais." },
+      {
+        id: "f_habito_outras_substancias",
+        dominio: "habito",
+        valor: "Nega uso de cocaína ou outras drogas recreativas.",
+      },
+      {
+        id: "f_habito_atividade_fisica",
+        dominio: "habito",
+        valor: "É sedentário e não pratica atividade física regularmente.",
+      },
+      { id: "f_preocupacao_quadro", dominio: "preocupacao", valor: "Tem medo de que a dor seja sinal de algo grave." },
+      {
+        id: "f_objetivo_consulta",
+        dominio: "objetivo",
+        valor: "Quer entender o que está causando a dor e receber tratamento para melhorar.",
+      },
     ],
   },
 
@@ -315,6 +352,18 @@ export const casoSCAOuroV3 = {
       { factId: "f_alergias", politica: "perguntaDireta" },
       { factId: "f_contexto_profissao", politica: "perguntaDireta" },
       { factId: "f_contexto_estado_civil", politica: "perguntaDireta" },
+
+      // Fase 3.3B — regras dos 10 novos fatos (ver acima).
+      { factId: "f_dor_caracter", politica: "perguntaAberta" },
+      { factId: "f_dor_alivio", politica: "perguntaDireta" },
+      { factId: "f_dor_piora", politica: "perguntaDireta" },
+      { factId: "f_medicamento_regime", politica: "perguntaDireta" },
+      { factId: "f_habito_tabagismo", politica: "perguntaDireta" },
+      { factId: "f_habito_alcool", politica: "perguntaDireta" },
+      { factId: "f_habito_outras_substancias", politica: "perguntaDireta" },
+      { factId: "f_habito_atividade_fisica", politica: "perguntaDireta" },
+      { factId: "f_preocupacao_quadro", politica: "perguntaDireta" },
+      { factId: "f_objetivo_consulta", politica: "perguntaDireta" },
     ],
   },
 
