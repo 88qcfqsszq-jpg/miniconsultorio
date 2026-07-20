@@ -21,11 +21,15 @@
 import type { Caso } from "@/lib/types";
 import { criarPromptPaciente, montarPromptPacienteComBase } from "@/lib/prompts";
 import { obterCasoV3PorId } from "@/data/casos-v3";
-import { construirPatientSafeContext } from "@/lib/patient-v3/patientContextBuilder";
-import { construirPromptBasePaciente } from "@/lib/patient-v3/promptBasePaciente";
 import { criarDecisaoAbertura } from "@/lib/patient-v3/patientTurnGuard";
 import { classificarTurno } from "@/lib/patient-v3/patientTurnClassifier";
-import type { CasoV3, FatoPaciente, PatientKnowledge, PatientZoneInput } from "@/lib/patient-v3/casoV3.types";
+import {
+  construirAlvoClinico,
+  construirBaseReduzida,
+  escolherRespostaReservedOrMeta,
+  escolherRespostaUnknownClinical,
+} from "@/lib/patient-v3/patientTurnResponse";
+import type { CasoV3, FatoPaciente } from "@/lib/patient-v3/casoV3.types";
 import type {
   NonEmptyFactIds,
   PatientTurnClassifierInput,
@@ -60,25 +64,6 @@ export interface PatientTurnTextDeps {
 
 const DEPS_PADRAO: PatientTurnTextDeps = { classificarTurno };
 
-const FRASES_UNKNOWN_CLINICAL = [
-  "Não sei dizer isso com certeza.",
-  "Não me lembro desse detalhe agora.",
-  "Não consigo informar isso direito.",
-] as const;
-
-const FRASES_RESERVED_OR_META = [
-  "Isso eu não saberia dizer, isso é com o médico.",
-  "Não sei explicar isso, só sei como estou me sentindo.",
-  "Não tenho como informar isso.",
-] as const;
-
-/** Escolhe uma frase de forma determinística a partir da mensagem — nunca aleatória. */
-function escolherFraseDeterministica(mensagem: string, frases: readonly string[]): string {
-  let soma = 0;
-  for (let i = 0; i < mensagem.length; i++) soma += mensagem.charCodeAt(i);
-  return frases[soma % frases.length];
-}
-
 /** Converte um array (já comprovadamente não vazio) numa tupla NonEmptyFactIds, sem cast. */
 function paraFactIdsNaoVazio(ids: readonly string[]): NonEmptyFactIds {
   if (ids.length === 0) {
@@ -89,65 +74,13 @@ function paraFactIdsNaoVazio(ids: readonly string[]): NonEmptyFactIds {
 }
 
 /**
- * Constrói um PatientZoneInput REDUZIDO: identidade/interlocutor/responsável/
- * persona/sessionStateInicial originais, mas `patientKnowledge.fatos` contém
- * SOMENTE `selectedFacts` — nunca os demais fatos do caso. `disclosurePolicy`
- * é filtrada para referenciar somente ids presentes em `selectedFacts`
- * (exigido pelo Builder, que rejeita regra/abertura apontando para fato
- * inexistente). Para `social`, chamar com `selectedFacts: []` produz
- * naturalmente zero regras e abertura vazia.
- */
-function construirZoneInputReduzido(
-  casoV3: CasoV3,
-  selectedFacts: readonly FatoPaciente[]
-): PatientZoneInput {
-  const idsSelecionados = new Set(selectedFacts.map((f) => f.id));
-
-  const patientKnowledge: PatientKnowledge = {
-    identidade: casoV3.patientKnowledge.identidade,
-    interlocutor: casoV3.patientKnowledge.interlocutor,
-    fatos: [...selectedFacts],
-  };
-  if (casoV3.patientKnowledge.responsavel) {
-    patientKnowledge.responsavel = casoV3.patientKnowledge.responsavel;
-  }
-
-  return {
-    patientKnowledge,
-    disclosurePolicy: {
-      aberturaFactIds: casoV3.disclosurePolicy.aberturaFactIds.filter((id) => idsSelecionados.has(id)),
-      regras: casoV3.disclosurePolicy.regras.filter((r) => idsSelecionados.has(r.factId)),
-    },
-    persona: casoV3.persona,
-    sessionStateInicial: casoV3.sessionStateInicial,
-  };
-}
-
-/**
- * Bloco final, exclusivo do turno "known" (FASE 4C.5) — substitui a antiga
+ * Bloco final "ALVO CLÍNICO" (FASE 4C.5, núcleo compartilhado desde a Fase
+ * 4D.2 — ver lib/patient-v3/patientTurnResponse.ts) — substitui a antiga
  * DIRETIVA_KNOWN (Fase 4C.3B), que era concatenada à BASE, antes do histórico
  * e da mensagem atual (por isso podia ser dominada por uma leitura ambígua da
- * pergunta mais recente). Este bloco é concatenado DEPOIS da composição
- * completa (base + histórico + mensagem) — é a última informação do prompt —
- * e relista, com id/domínio/valor, exclusivamente os fatos já selecionados
- * pelo Turn Guard, para que esse significado resolvido prevaleça sobre
- * qualquer ambiguidade da mensagem original. NÃO faz parte do Prompt Base
- * global (promptBasePaciente.ts não é alterado).
+ * pergunta mais recente). Aqui continua concatenado DEPOIS da composição
+ * completa (base + histórico + mensagem) — é a última informação do prompt.
  */
-function construirAlvoClinico(selectedFacts: readonly FatoPaciente[]): string {
-  const linhasFatos = selectedFacts
-    .map((f) => {
-      const incerto = f.incerto ? " incerto:true" : "";
-      return `- id:"${f.id}" dominio:"${f.dominio}" valor:"${f.valor}"${incerto}`;
-    })
-    .join("\n");
-
-  return `
-ALVO CLÍNICO DESTE TURNO:
-A mensagem atual já foi classificada como referente exclusivamente aos fatos abaixo. Se a mensagem admitir mais de uma interpretação, o significado destes fatos prevalece. Responda diretamente usando esses fatos e não acrescente informações não selecionadas.
-${linhasFatos}`;
-}
-
 function gerarPromptComFatos(
   casoV3: CasoV3,
   selectedFacts: readonly FatoPaciente[],
@@ -155,8 +88,7 @@ function gerarPromptComFatos(
   mensagemAtual: string,
   incluirAlvoClinico: boolean
 ): string {
-  const zoneInputReduzido = construirZoneInputReduzido(casoV3, selectedFacts);
-  const baseReduzida = construirPromptBasePaciente(construirPatientSafeContext(zoneInputReduzido));
+  const baseReduzida = construirBaseReduzida(casoV3, selectedFacts);
   const promptComposto = montarPromptPacienteComBase(baseReduzida, historico, mensagemAtual);
   return incluirAlvoClinico ? `${promptComposto}\n${construirAlvoClinico(selectedFacts)}` : promptComposto;
 }
@@ -212,12 +144,11 @@ export async function prepararTurnoPacienteTexto(
   }
 
   if (resultado.decision.kind === "unknownClinical" || resultado.decision.kind === "reservedOrMeta") {
-    const frases = resultado.decision.kind === "unknownClinical" ? FRASES_UNKNOWN_CLINICAL : FRASES_RESERVED_OR_META;
-    return {
-      kind: "direct",
-      response: escolherFraseDeterministica(mensagemAtual, frases),
-      decision: resultado.decision,
-    };
+    const response =
+      resultado.decision.kind === "unknownClinical"
+        ? escolherRespostaUnknownClinical(mensagemAtual)
+        : escolherRespostaReservedOrMeta(mensagemAtual);
+    return { kind: "direct", response, decision: resultado.decision };
   }
 
   // known ou social — known carrega selectedFacts não vazio; social é sempre [].
