@@ -55,6 +55,95 @@ export interface RealtimeSanitizedEvent {
 /** Tipos de evento de transcrição FINAL (ver contrato oficial no SDK `openai`). */
 const TIPO_TRANSCRICAO_ALUNO = "conversation.item.input_audio_transcription.completed";
 const TIPO_TRANSCRICAO_PACIENTE = "response.output_audio_transcript.done";
+/** Evento parcial da fala do paciente — usado aqui só para medir "1º evento da resposta" (latência local). */
+const TIPO_RESPOSTA_PACIENTE_PARCIAL = "response.output_audio_transcript.delta";
+
+// ============================================================================
+// FASE 4D.3 — GATE MANUAL (turnGuardMode:"manual") conectado ao cliente
+// ============================================================================
+
+/**
+ * Espelha `TurnGuardMode` de lib/voice/realtimeTurnGuardConfig.ts (não
+ * importado aqui para não acoplar este módulo cliente a um módulo server-only
+ * — o valor chega apenas como string no corpo JSON de /api/realtime/session).
+ */
+export type RealtimeTurnGuardMode = "disabled" | "manual";
+
+interface HistoricoItemManual {
+  role: "estudante" | "paciente";
+  content: string;
+}
+
+/**
+ * Instructions fixas para fala não inteligível OU falha fechada do endpoint —
+ * o mesmo texto em ambos os casos, por design (o aluno não deve perceber
+ * diferença entre "não entendi o som" e "o Turn Guard falhou").
+ */
+const INSTRUCTIONS_NAO_ENTENDI =
+  'Diga exatamente: Desculpe, não entendi. Pode repetir a pergunta?\nNão acrescente nenhuma outra informação.';
+
+/** Timeout padrão da chamada a /api/realtime/turn-guard — configurável só para testes (ver RealtimeClientOptions). */
+const TURN_GUARD_TIMEOUT_MS_PADRAO = 6000;
+
+/** Máximo de itens de histórico local enviados como `recentHistory` — curto e seguro, nunca a conversa inteira. */
+const HISTORICO_MANUAL_MAX_ITENS = 12;
+
+/**
+ * Termos que, sozinhos, indicam anotação de ruído/interjeição não linguística
+ * (o próprio provedor de transcrição às vezes emite esses tokens para áudio
+ * sem fala real: pigarro, tosse, respiração, silêncio, música de fundo...).
+ */
+const INTERJEICOES_NAO_LINGUISTICAS = new Set([
+  "hmm", "hum", "humm", "ah", "ahn", "hã", "uh", "uhm", "eh", "ééé", "oh", "ihh", "hmpf",
+]);
+
+/**
+ * Decide se uma transcrição final representa uma fala inteligível (pergunta
+ * real) ou apenas ruído/som isolado/interjeição/anotação — função PURA, sem
+ * rede, exportada para teste direto.
+ */
+export function ehFalaInteligivel(transcript: string): boolean {
+  const normalizado = transcript.trim();
+  if (!normalizado) return false;
+  // Anotações de ruído entre parênteses/colchetes, ex.: "(tosse)", "[ruído]".
+  if (/^[([].*[)\]]$/.test(normalizado)) return false;
+  const somenteLetras = normalizado.toLowerCase().replace(/[^\p{L}]/gu, "");
+  if (somenteLetras.length < 2) return false; // só pontuação/símbolos ou uma única letra
+  const palavras = normalizado.toLowerCase().split(/\s+/).filter(Boolean);
+  if (palavras.length === 1) {
+    const palavraLimpa = palavras[0].replace(/[^\p{L}]/gu, "");
+    if (INTERJEICOES_NAO_LINGUISTICAS.has(palavraLimpa)) return false;
+  }
+  return true;
+}
+
+interface RespostaTurnGuard {
+  responseInstructions: string;
+}
+
+function ehRespostaTurnGuardValida(valor: unknown): valor is RespostaTurnGuard {
+  return (
+    !!valor &&
+    typeof valor === "object" &&
+    typeof (valor as Record<string, unknown>).responseInstructions === "string"
+  );
+}
+
+interface ResponseCreateClientEvent {
+  type: "response.create";
+  response?: { instructions: string };
+}
+
+/** Envia `response.create` pelo data channel — nunca lança (best-effort, canal pode já estar fechado). */
+function enviarResponseCreate(dc: RTCDataChannel, instructions?: string): void {
+  const evento: ResponseCreateClientEvent =
+    instructions !== undefined ? { type: "response.create", response: { instructions } } : { type: "response.create" };
+  try {
+    dc.send(JSON.stringify(evento));
+  } catch {
+    /* canal já fechado — best-effort */
+  }
+}
 
 /**
  * Superfície mínima de um "elemento de áudio" usada pelo cliente para reprodução
@@ -93,6 +182,10 @@ export interface RealtimeClientOptions {
   criarElementoAudio?: () => RealtimeAudioSink;
   /** Constrói um MediaStream a partir de uma track solta (fallback de `ontrack` sem `event.streams[0]`). */
   criarMediaStreamDeTrack?: (track: MediaStreamTrack) => MediaStream;
+  /** POST a /api/realtime/turn-guard (modo manual) — testes injetam um mock; nunca chamado em turnGuardMode:"disabled". */
+  fetchTurnGuard?: typeof fetch;
+  /** Timeout (ms) da chamada a /api/realtime/turn-guard — configurável só para tornar os testes determinísticos e rápidos. */
+  turnGuardTimeoutMs?: number;
 }
 
 export interface RealtimeClient {
@@ -207,6 +300,8 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
   const conectarWebRTC = options.conectarWebRTC ?? conectarWebRTCPadrao;
   const criarElementoAudio = options.criarElementoAudio ?? criarElementoAudioPadrao;
   const criarMediaStreamDeTrack = options.criarMediaStreamDeTrack ?? criarMediaStreamDeTrackPadrao;
+  const fetchTurnGuard = options.fetchTurnGuard ?? fetch;
+  const turnGuardTimeoutMs = options.turnGuardTimeoutMs ?? TURN_GUARD_TIMEOUT_MS_PADRAO;
 
   let state: RealtimeConnectionState = "idle";
   let lastError: string | null = null;
@@ -266,6 +361,126 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
     const minhaTentativa = ++tentativaAtual;
     const aindaValida = () => minhaTentativa === tentativaAtual;
 
+    // Estado do GATE MANUAL (Fase 4D.3) — escopado a ESTA tentativa/sessão
+    // (nunca sobrevive a uma reconexão). Em turnGuardMode:"disabled" (o único
+    // caminho em produção hoje), nenhuma destas variáveis é lida — o fluxo
+    // direto/automático permanece byte a byte como antes desta fase.
+    let turnGuardMode: RealtimeTurnGuardMode = "disabled";
+    const historicoManual: HistoricoItemManual[] = [];
+    const itemsProcessados = new Set<string>();
+    let respostaEmAndamento = false;
+    let primeiroTurnoInteligivelConcluido = false;
+    let tsTranscricaoFinal: number | null = null;
+    let tsResponseCreateEnviado: number | null = null;
+    let tsPrimeiroEventoResposta: number | null = null;
+
+    /** Latência local do turno atual — só console.debug, nunca UI, nunca telemetria externa. */
+    function registrarLatenciaLocal(): void {
+      if (tsTranscricaoFinal === null || tsResponseCreateEnviado === null || tsPrimeiroEventoResposta === null) return;
+      console.debug("[realtimeClient] latência do turno manual (ms):", {
+        transcricaoParaResponseCreate: tsResponseCreateEnviado - tsTranscricaoFinal,
+        responseCreateParaPrimeiroEvento: tsPrimeiroEventoResposta - tsResponseCreateEnviado,
+      });
+    }
+
+    /** POST /api/realtime/turn-guard com timeout — nunca lança; retorna null em qualquer falha (falha fechada). */
+    async function solicitarInstructionsTurnGuard(mensagem: string): Promise<string | null> {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), turnGuardTimeoutMs);
+      try {
+        const resposta = await fetchTurnGuard("/api/realtime/turn-guard", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            casoId,
+            mensagem,
+            recentHistory: historicoManual.slice(-HISTORICO_MANUAL_MAX_ITENS),
+          }),
+          signal: controller.signal,
+        });
+        if (!resposta.ok) return null;
+        const json: unknown = await resposta.json();
+        if (!ehRespostaTurnGuardValida(json)) return null;
+        return json.responseInstructions;
+      } catch {
+        return null;
+      } finally {
+        clearTimeout(timeoutId);
+      }
+    }
+
+    /** Dispara `response.create` e marca o início do turno (bloqueia turnos simultâneos até a resposta concluir). */
+    function dispararResponseCreate(dc: RTCDataChannel, instructions?: string): void {
+      respostaEmAndamento = true;
+      tsResponseCreateEnviado = Date.now();
+      tsPrimeiroEventoResposta = null;
+      enviarResponseCreate(dc, instructions);
+    }
+
+    /** Decide e dispara a resposta para um turno já validado como não duplicado/não simultâneo. */
+    async function tratarTurnoManual(transcript: string, dc: RTCDataChannel): Promise<void> {
+      if (!aindaValida()) return;
+
+      if (!ehFalaInteligivel(transcript)) {
+        // Item 2 (SOM/FALA NÃO INTELIGÍVEL): nunca chama o endpoint.
+        dispararResponseCreate(dc, INSTRUCTIONS_NAO_ENTENDI);
+        return;
+      }
+
+      if (!primeiroTurnoInteligivelConcluido) {
+        // PRIMEIRO TURNO INTELIGÍVEL: nunca chama o endpoint; usa as
+        // instructions de abertura já configuradas na sessão (sem override).
+        primeiroTurnoInteligivelConcluido = true;
+        dispararResponseCreate(dc);
+        return;
+      }
+
+      // TURNOS INTELIGÍVEIS SEGUINTES: consulta o Turn Guard já construído.
+      const instructions = await solicitarInstructionsTurnGuard(transcript);
+      if (!aindaValida()) return;
+      dispararResponseCreate(dc, instructions ?? INSTRUCTIONS_NAO_ENTENDI);
+    }
+
+    /** Processa cada evento do data channel relevante ao gate manual (chamado somente quando turnGuardMode:"manual"). */
+    function processarEventoManual(payload: unknown, dc: RTCDataChannel): void {
+      if (!payload || typeof payload !== "object") return;
+      const obj = payload as Record<string, unknown>;
+      const tipo = typeof obj.type === "string" ? obj.type : "";
+
+      if (tipo === TIPO_RESPOSTA_PACIENTE_PARCIAL) {
+        if (respostaEmAndamento && tsPrimeiroEventoResposta === null) {
+          tsPrimeiroEventoResposta = Date.now();
+          registrarLatenciaLocal();
+        }
+        return;
+      }
+
+      if (tipo === TIPO_TRANSCRICAO_PACIENTE) {
+        const textoPaciente = typeof obj.transcript === "string" ? obj.transcript : "";
+        if (textoPaciente.trim()) historicoManual.push({ role: "paciente", content: textoPaciente });
+        respostaEmAndamento = false;
+        return;
+      }
+
+      if (tipo === "response.done" || tipo === "error") {
+        respostaEmAndamento = false;
+        return;
+      }
+
+      if (tipo !== TIPO_TRANSCRICAO_ALUNO) return;
+
+      const itemId = typeof obj.item_id === "string" ? obj.item_id : "";
+      const transcript = typeof obj.transcript === "string" ? obj.transcript : "";
+      if (!itemId || itemsProcessados.has(itemId)) return; // item 10: evento duplicado do mesmo item
+      itemsProcessados.add(itemId);
+
+      if (respostaEmAndamento) return; // item 11: duas respostas simultâneas — este turno é ignorado
+
+      tsTranscricaoFinal = Date.now();
+      historicoManual.push({ role: "estudante", content: transcript });
+      void tratarTurnoManual(transcript, dc);
+    }
+
     lastError = null;
     setState("requesting_secret");
 
@@ -287,6 +502,7 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
         throw new Error("Resposta do servidor não contém segredo válido.");
       }
       secret = json.clientSecret;
+      turnGuardMode = json.turnGuardMode === "manual" ? "manual" : "disabled";
     } catch (erro) {
       if (!aindaValida()) return;
       lastError = erro instanceof Error ? erro.message : "Falha ao solicitar sessão.";
@@ -372,6 +588,12 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
         try { payload = JSON.parse(ev.data); } catch { payload = null; }
         const sanitizado = sanitizarEventoDataChannel(payload);
         emitirEvento(sanitizado.type, sanitizado.transcript);
+
+        // Fase 4D.3 — gate manual: só processa quando turnGuardMode:"manual"
+        // (fluxo direto continua sem nenhum processamento adicional aqui).
+        if (turnGuardMode === "manual") {
+          processarEventoManual(payload, dc);
+        }
       };
 
       const offer = await pc.createOffer();

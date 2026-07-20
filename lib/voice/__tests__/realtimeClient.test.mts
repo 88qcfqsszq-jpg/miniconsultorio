@@ -13,7 +13,7 @@
 import { test, before, after } from 'node:test'
 import assert from 'node:assert/strict'
 
-import { criarRealtimeClient, type RealtimeConnectionState } from '@/lib/voice/realtimeClient'
+import { criarRealtimeClient, ehFalaInteligivel, type RealtimeConnectionState } from '@/lib/voice/realtimeClient'
 
 // ── Guard global de rede (nenhuma chamada real à OpenAI) ─────────────────────
 let fetchOriginal: typeof globalThis.fetch
@@ -55,6 +55,18 @@ function mockFetchSucesso(captura?: { chamadas: Array<{ url: string; body: strin
   }
 }
 
+/** Mock de fetch para /api/realtime/session com turnGuardMode:"manual" (gate manual — Fase 4D.3). */
+function mockFetchSucessoManual() {
+  return async () =>
+    respostaFake(200, {
+      clientSecret: SECRET_FAKE,
+      expiresAt: 1999999999,
+      sessionId: 'sess_teste_manual',
+      profile: { voiceId: 'adult-male', speakerRole: 'patient', ageGroup: 'adult' },
+      turnGuardMode: 'manual',
+    })
+}
+
 function mockFetchErro(status: number) {
   return async () => respostaFake(status, { error: 'recurso não habilitado (mensagem sanitizada do servidor)' })
 }
@@ -75,6 +87,8 @@ function criarFakePeerConnection() {
         onerror: null as null | (() => void),
         onmessage: null as null | ((ev: MessageEvent) => void),
         _closed: false,
+        _enviados: [] as string[],
+        send(data: string) { this._enviados.push(data) },
         close() { this._closed = true; this.onclose?.() },
       }
       this._dataChannels.push(dc)
@@ -830,3 +844,275 @@ test('áudio 12. nenhum áudio, blob ou segredo é persistido (localStorage/sess
     if (temSessionStorage) (globalThis as any).sessionStorage.setItem = originalSessionSetItem
   }
 })
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FASE 4D.3 — Gate manual conectado ao cliente (turnGuardMode)
+// ═══════════════════════════════════════════════════════════════════════════
+
+function mockTurnGuardSucesso(instructions = 'INSTR_TURN_GUARD') {
+  return (async () => respostaFake(200, { turnGuardMode: 'manual', decisionKind: 'known', selectedFactIds: [], responseInstructions: instructions })) as any
+}
+
+function eventoTranscricaoAluno(itemId: string, transcript: string) {
+  return { type: 'conversation.item.input_audio_transcription.completed', item_id: itemId, transcript }
+}
+
+function eventoTranscricaoPaciente(itemId: string, transcript: string) {
+  return { type: 'response.output_audio_transcript.done', item_id: itemId, transcript }
+}
+
+function enviarDataChannel(dc: any, payload: unknown) {
+  dc.onmessage?.({ data: JSON.stringify(payload) } as MessageEvent)
+}
+
+// ── ehFalaInteligivel — função pura, testada diretamente ────────────────────
+test('ehFalaInteligivel: perguntas reais são inteligíveis; ruído/interjeição/vazio não são', () => {
+  assert.equal(ehFalaInteligivel('Alguma coisa melhora a dor?'), true)
+  assert.equal(ehFalaInteligivel('Bom dia'), true)
+  assert.equal(ehFalaInteligivel(''), false)
+  assert.equal(ehFalaInteligivel('   '), false)
+  assert.equal(ehFalaInteligivel('...'), false)
+  assert.equal(ehFalaInteligivel('(tosse)'), false)
+  assert.equal(ehFalaInteligivel('[ruído]'), false)
+  assert.equal(ehFalaInteligivel('Hmm'), false)
+  assert.equal(ehFalaInteligivel('ahn'), false)
+})
+
+// ── 1. disabled preserva o fluxo atual ──────────────────────────────────────
+test('4D.3-1. turnGuardMode "disabled": nenhuma chamada ao Turn Guard, nenhum response.create, mesmo após transcrição', async () => {
+  const pcFake = criarFakePeerConnection()
+  let turnGuardChamado = false
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any, // sem turnGuardMode no corpo → "disabled"
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    fetchTurnGuard: (async () => { turnGuardChamado = true; return respostaFake(200, { responseInstructions: 'x' }) }) as any,
+  })
+  await cliente.connectRealtime('1')
+  const dc = pcFake._dataChannels[0]
+  enviarDataChannel(dc, eventoTranscricaoAluno('i1', 'Alguma coisa melhora a dor?'))
+  await esperarMicro()
+  assert.equal(turnGuardChamado, false, 'endpoint não deveria ser chamado em modo disabled')
+  assert.equal(dc._enviados.length, 0, 'nenhum response.create deveria ser enviado em modo disabled')
+  assert.equal(cliente.getConnectionState(), 'connected')
+})
+
+// ── 2. manual não responde antes da transcrição ─────────────────────────────
+test('4D.3-2. modo manual: nenhum response.create antes de qualquer transcrição final', async () => {
+  const pcFake = criarFakePeerConnection()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucessoManual() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    fetchTurnGuard: mockTurnGuardSucesso(),
+  })
+  await cliente.connectRealtime('1')
+  const dc = pcFake._dataChannels[0]
+  assert.equal(dc._enviados.length, 0)
+})
+
+// ── 3. transcrição vazia não chama o endpoint ───────────────────────────────
+test('4D.3-3. transcrição vazia: não chama o endpoint e envia somente o pedido de repetição', async () => {
+  const pcFake = criarFakePeerConnection()
+  let turnGuardChamado = false
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucessoManual() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    fetchTurnGuard: (async () => { turnGuardChamado = true; return respostaFake(200, { responseInstructions: 'x' }) }) as any,
+  })
+  await cliente.connectRealtime('1')
+  const dc = pcFake._dataChannels[0]
+  enviarDataChannel(dc, eventoTranscricaoAluno('i1', '   '))
+  await esperarMicro()
+  assert.equal(turnGuardChamado, false)
+  assert.equal(dc._enviados.length, 1)
+  const enviado = JSON.parse(dc._enviados[0])
+  assert.equal(enviado.type, 'response.create')
+  assert.ok(enviado.response.instructions.includes('Desculpe, não entendi. Pode repetir a pergunta?'))
+})
+
+// ── 4. ruído gera somente pedido de repetição ───────────────────────────────
+test('4D.3-4. ruído/interjeição (ex.: "(tosse)"): não chama o endpoint e envia somente o pedido de repetição', async () => {
+  const pcFake = criarFakePeerConnection()
+  let turnGuardChamado = false
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucessoManual() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    fetchTurnGuard: (async () => { turnGuardChamado = true; return respostaFake(200, { responseInstructions: 'x' }) }) as any,
+  })
+  await cliente.connectRealtime('1')
+  const dc = pcFake._dataChannels[0]
+  enviarDataChannel(dc, eventoTranscricaoAluno('i1', '(tosse)'))
+  await esperarMicro()
+  assert.equal(turnGuardChamado, false)
+  const enviado = JSON.parse(dc._enviados[0])
+  assert.equal(enviado.type, 'response.create')
+  assert.equal(
+    enviado.response.instructions,
+    'Diga exatamente: Desculpe, não entendi. Pode repetir a pergunta?\nNão acrescente nenhuma outra informação.'
+  )
+})
+
+// ── 5-6. primeiro turno inteligível ─────────────────────────────────────────
+test('4D.3-5-6. primeiro turno inteligível: não chama o endpoint e o response.create não sobrescreve instructions (usa a abertura)', async () => {
+  const pcFake = criarFakePeerConnection()
+  let turnGuardChamado = false
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucessoManual() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    fetchTurnGuard: (async () => { turnGuardChamado = true; return respostaFake(200, { responseInstructions: 'x' }) }) as any,
+  })
+  await cliente.connectRealtime('1')
+  const dc = pcFake._dataChannels[0]
+  enviarDataChannel(dc, eventoTranscricaoAluno('i1', 'Bom dia, doutor'))
+  await esperarMicro()
+  assert.equal(turnGuardChamado, false, 'o primeiro turno inteligível não deveria chamar o endpoint')
+  assert.equal(dc._enviados.length, 1)
+  const enviado = JSON.parse(dc._enviados[0])
+  assert.equal(enviado.type, 'response.create')
+  assert.equal(enviado.response, undefined, 'não deveria sobrescrever instructions — usa as de abertura já configuradas')
+})
+
+// ── 7-8, 12. segundo turno chama o endpoint uma vez, usa responseInstructions, nunca envia fatos ─
+test('4D.3-7-8-12. segundo turno inteligível chama o endpoint uma vez, usa responseInstructions e nunca envia fatos/CasoV3', async () => {
+  const pcFake = criarFakePeerConnection()
+  let chamadasTurnGuard = 0
+  let corpoEnviado: any = null
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucessoManual() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    fetchTurnGuard: (async (_url: string, init: any) => {
+      chamadasTurnGuard++
+      corpoEnviado = JSON.parse(init.body)
+      return respostaFake(200, {
+        turnGuardMode: 'manual',
+        decisionKind: 'known',
+        selectedFactIds: ['f_dor_alivio'],
+        responseInstructions: 'INSTR_TURN_GUARD',
+      })
+    }) as any,
+  })
+  await cliente.connectRealtime('1')
+  const dc = pcFake._dataChannels[0]
+
+  // 1º turno inteligível — abertura, sem chamar o endpoint.
+  enviarDataChannel(dc, eventoTranscricaoAluno('i1', 'Bom dia'))
+  await esperarMicro()
+  // Conclui a 1ª resposta (libera o gate para o próximo turno).
+  enviarDataChannel(dc, eventoTranscricaoPaciente('r1', 'Bom dia, doutor'))
+  await esperarMicro()
+
+  // 2º turno inteligível — deve chamar o endpoint.
+  enviarDataChannel(dc, eventoTranscricaoAluno('i2', 'Alguma coisa melhora a dor?'))
+  await esperarMicro()
+
+  assert.equal(chamadasTurnGuard, 1, 'o endpoint deveria ter sido chamado exatamente uma vez')
+  assert.equal(corpoEnviado.casoId, '1')
+  assert.equal(corpoEnviado.mensagem, 'Alguma coisa melhora a dor?')
+  assert.ok(Array.isArray(corpoEnviado.recentHistory))
+  assert.deepEqual(
+    Object.keys(corpoEnviado).sort(),
+    ['casoId', 'mensagem', 'recentHistory'],
+    'o cliente nunca deveria enviar fatos/CasoV3 — só casoId/mensagem/recentHistory'
+  )
+
+  const enviados = dc._enviados.map((s: string) => JSON.parse(s))
+  const ultimo = enviados[enviados.length - 1]
+  assert.equal(ultimo.type, 'response.create')
+  assert.equal(ultimo.response.instructions, 'INSTR_TURN_GUARD', 'response.create deveria usar responseInstructions do endpoint')
+})
+
+// ── 9. timeout falha fechada ─────────────────────────────────────────────────
+test('4D.3-9. timeout do endpoint falha fechado (pedido de repetição), nunca lança', async () => {
+  const pcFake = criarFakePeerConnection()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucessoManual() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    turnGuardTimeoutMs: 15,
+    fetchTurnGuard: ((_url: string, init: any) =>
+      new Promise((_resolve, reject) => {
+        init.signal.addEventListener('abort', () => reject(new Error('aborted')))
+      })) as any,
+  })
+  await cliente.connectRealtime('1')
+  const dc = pcFake._dataChannels[0]
+
+  enviarDataChannel(dc, eventoTranscricaoAluno('i1', 'Bom dia'))
+  await esperarMicro()
+  enviarDataChannel(dc, eventoTranscricaoPaciente('r1', 'Bom dia, doutor'))
+  await esperarMicro()
+
+  enviarDataChannel(dc, eventoTranscricaoAluno('i2', 'Alguma coisa melhora a dor?'))
+  await new Promise((r) => setTimeout(r, 60)) // aguarda o timeout real (15ms) vencer
+
+  const enviados = dc._enviados.map((s: string) => JSON.parse(s))
+  const ultimo = enviados[enviados.length - 1]
+  assert.equal(ultimo.type, 'response.create')
+  assert.ok(ultimo.response.instructions.includes('Desculpe, não entendi. Pode repetir a pergunta?'))
+})
+
+// ── 10. evento duplicado não cria duas respostas ────────────────────────────
+test('4D.3-10. evento duplicado do mesmo item não dispara um segundo response.create', async () => {
+  const pcFake = criarFakePeerConnection()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucessoManual() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    fetchTurnGuard: mockTurnGuardSucesso(),
+  })
+  await cliente.connectRealtime('1')
+  const dc = pcFake._dataChannels[0]
+  const evento = eventoTranscricaoAluno('dup1', 'Bom dia')
+  enviarDataChannel(dc, evento)
+  await esperarMicro()
+  enviarDataChannel(dc, evento) // mesmo item_id, duplicado
+  await esperarMicro()
+  assert.equal(dc._enviados.length, 1, 'o evento duplicado não deveria gerar um segundo response.create')
+})
+
+// ── 11. duas respostas simultâneas são bloqueadas ───────────────────────────
+test('4D.3-11. um turno enquanto a resposta anterior ainda está em andamento é ignorado; libera após a conclusão', async () => {
+  const pcFake = criarFakePeerConnection()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucessoManual() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    fetchTurnGuard: mockTurnGuardSucesso(),
+  })
+  await cliente.connectRealtime('1')
+  const dc = pcFake._dataChannels[0]
+
+  enviarDataChannel(dc, eventoTranscricaoAluno('i1', 'Bom dia'))
+  await esperarMicro()
+  assert.equal(dc._enviados.length, 1, '1º turno deveria ter disparado response.create')
+
+  // Sem sinalizar a conclusão da resposta anterior — este turno deve ser ignorado.
+  enviarDataChannel(dc, eventoTranscricaoAluno('i2', 'Alguma coisa melhora a dor?'))
+  await esperarMicro()
+  assert.equal(dc._enviados.length, 1, 'resposta simultânea não deveria ter sido disparada')
+
+  // Ao concluir a 1ª resposta, o cliente volta a aceitar novos turnos.
+  enviarDataChannel(dc, eventoTranscricaoPaciente('r1', 'Bom dia, doutor'))
+  await esperarMicro()
+  enviarDataChannel(dc, eventoTranscricaoAluno('i3', 'E a dor irradia?'))
+  await esperarMicro()
+  assert.equal(dc._enviados.length, 2, 'após a conclusão da resposta anterior, um novo turno deveria ser aceito')
+})
+
+// ── 13. nenhuma chamada real nos testes ─────────────────────────────────────
+// (garantido pelo guard global de fetch no topo do arquivo — nenhum teste
+// acima deixou fetchTurnGuard cair no default global; ver assert final em after())
