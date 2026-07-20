@@ -60,14 +60,14 @@ const ROTULO_ESFORCO: Record<VoiceProfile["respiratoryEffort"], string> = {
 };
 
 /**
- * Constrói as instruções completas para a sessão Realtime de um caso: a base
- * clínica (fonte única, idêntica ao modo texto) + um bloco de metadados de voz
- * que NÃO repete regra clínica alguma — apenas orienta tom/ritmo/comportamento
- * de áudio e reforça (de forma específica ao áudio) que a fala não deve começar
- * antes do aluno.
+ * Combina uma BASE já pronta (a saída de construirInstrucoesBasePaciente para
+ * o caminho legado/completo, OU uma base reduzida — ex.: só os fatos de
+ * abertura, Fase 4D.1 — para o gate manual do Realtime) com os metadados de
+ * voz. Extraído de construirInstrucoesRealtime para permitir uma base
+ * alternativa sem duplicar a lógica de metadados — mesmo padrão já usado em
+ * lib/prompts.ts (montarPromptPacienteComBase) para o modo texto.
  */
-export function construirInstrucoesRealtime(caso: Caso): RealtimeInstructionsResult {
-  const instructionsBase = construirInstrucoesBasePaciente(caso);
+export function combinarBaseComMetadadosDeVoz(base: string, caso: Caso): RealtimeInstructionsResult {
   const voiceProfile = derivarVoiceProfile(caso);
 
   const metadadosVoz = `
@@ -86,7 +86,19 @@ antes que o aluno fale primeiro. Não inicie a sessão falando sozinho(a).
 ═══════════════════════════════════════════════════════════`.trim();
 
   return {
-    instructions: `${instructionsBase}\n\n${metadadosVoz}`,
+    instructions: `${base}\n\n${metadadosVoz}`,
     voiceProfile,
   };
+}
+
+/**
+ * Constrói as instruções completas para a sessão Realtime de um caso: a base
+ * clínica (fonte única, idêntica ao modo texto) + um bloco de metadados de voz
+ * que NÃO repete regra clínica alguma — apenas orienta tom/ritmo/comportamento
+ * de áudio e reforça (de forma específica ao áudio) que a fala não deve começar
+ * antes do aluno.
+ */
+export function construirInstrucoesRealtime(caso: Caso): RealtimeInstructionsResult {
+  const instructionsBase = construirInstrucoesBasePaciente(caso);
+  return combinarBaseComMetadadosDeVoz(instructionsBase, caso);
 }

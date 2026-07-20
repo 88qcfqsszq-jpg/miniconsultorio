@@ -17,8 +17,8 @@ import { test, before, after } from 'node:test'
 import assert from 'node:assert/strict'
 import { NextRequest } from 'next/server'
 
-import { handleCriarSessaoRealtime } from '@/app/api/realtime/session/route'
-import { RealtimeConfigError } from '@/lib/voice/createRealtimeClientSecret'
+import { handleCriarSessaoRealtime, type CriarSessaoRealtimeResponseBody } from '@/app/api/realtime/session/route'
+import { RealtimeConfigError, type RealtimeClientSecretParams } from '@/lib/voice/createRealtimeClientSecret'
 import { casosV2 } from '@/data/casos-v2'
 
 const CASO_ID_VALIDO = '1' // canônico real (adulto) — ver auditoria da Etapa 3
@@ -295,7 +295,7 @@ test('15. prompt clínico completo nunca aparece na resposta', async () => {
     // A resposta deve conter SOMENTE as chaves esperadas.
     const json = JSON.parse(textoResposta)
     const chaves = Object.keys(json).sort()
-    assert.deepEqual(chaves, ['clientSecret', 'expiresAt', 'profile', 'sessionId'].sort())
+    assert.deepEqual(chaves, ['clientSecret', 'expiresAt', 'profile', 'sessionId', 'turnGuardMode'].sort())
   } finally { restore() }
 })
 
@@ -418,4 +418,105 @@ test('corpo maior que o limite máximo → 400', async () => {
     const res = await handleCriarSessaoRealtime(requisicao(corpoEnorme))
     assert.equal(res.status, 400)
   } finally { restore() }
+})
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FASE 4D.1 — Gate manual reversível do Realtime (feature flag)
+// ═══════════════════════════════════════════════════════════════════════════
+
+test('4D.1-1. flag do Turn Guard desligada → fluxo atual preservado (turnGuardMode:"disabled")', async () => {
+  const restore = aplicarEnv(ENV_BASE) // ENV_BASE não define PATIENT_V3_REALTIME_TURN_GUARD
+  try {
+    const res = await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
+      { criarClientSecret: mockClientSecret() }
+    )
+    const json = await res.json()
+    assert.equal(res.status, 200)
+    assert.equal(json.turnGuardMode, 'disabled')
+  } finally { restore() }
+})
+
+test('4D.1-2. flag desligada não altera as instructions (idênticas ao caminho V3 completo de sempre)', async () => {
+  const restore = aplicarEnv(ENV_BASE)
+  try {
+    const captura: { params?: RealtimeClientSecretParams } = {}
+    await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
+      { criarClientSecret: mockClientSecret(captura) }
+    )
+    // Os 25 fatos do Caso Ouro devem continuar presentes — prova de que a
+    // flag desligada não reduz o contexto de forma alguma.
+    assert.ok(captura.params!.instructions.includes('Losartana'))
+    assert.ok(captura.params!.instructions.includes('sedentário') || captura.params!.instructions.includes('sedentario'))
+  } finally { restore() }
+})
+
+test('4D.1-3. casos legados ignoram a flag mesmo ligada (permanecem "disabled")', async () => {
+  const restore = aplicarEnv({ ...ENV_BASE, PATIENT_V3_REALTIME_TURN_GUARD: 'true' })
+  try {
+    const res = await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_LEGADO_DE_CONTROLE })),
+      { criarClientSecret: mockClientSecret() }
+    )
+    const json = await res.json()
+    assert.equal(json.turnGuardMode, 'disabled')
+  } finally { restore() }
+})
+
+test('4D.1-4. Caso Ouro com a flag ligada retorna turnGuardMode:"manual" e instructions reduzidas', async () => {
+  const restore = aplicarEnv({ ...ENV_BASE, PATIENT_V3_REALTIME_TURN_GUARD: 'true' })
+  try {
+    const captura: { params?: RealtimeClientSecretParams } = {}
+    const res = await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
+      { criarClientSecret: mockClientSecret(captura) }
+    )
+    const json = await res.json()
+    assert.equal(res.status, 200)
+    assert.equal(json.turnGuardMode, 'manual')
+    // Fato de abertura presente, fato claramente fora da abertura ausente.
+    assert.ok(captura.params!.instructions.includes('Dor no peito, iniciada há aproximadamente 2 horas.'))
+    assert.ok(!captura.params!.instructions.includes('Losartana'))
+  } finally { restore() }
+})
+
+test('4D.1-5. nenhuma tool é declarada nos parâmetros repassados ao provedor', async () => {
+  const restore = aplicarEnv({ ...ENV_BASE, PATIENT_V3_REALTIME_TURN_GUARD: 'true' })
+  try {
+    const captura: { params?: RealtimeClientSecretParams } = {}
+    await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
+      { criarClientSecret: mockClientSecret(captura) }
+    )
+    assert.deepEqual(Object.keys(captura.params!).sort(), ['expiresAfterSeconds', 'instructions', 'model'])
+  } finally { restore() }
+})
+
+test('4D.1-6. rollback depende somente da flag: ligar e desligar restaura o comportamento exatamente', async () => {
+  const capturaLigada: { params?: RealtimeClientSecretParams } = {}
+  const restoreLigada = aplicarEnv({ ...ENV_BASE, PATIENT_V3_REALTIME_TURN_GUARD: 'true' })
+  let jsonLigada: CriarSessaoRealtimeResponseBody
+  try {
+    const res = await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
+      { criarClientSecret: mockClientSecret(capturaLigada) }
+    )
+    jsonLigada = await res.json()
+  } finally { restoreLigada() }
+
+  const capturaDesligada: { params?: RealtimeClientSecretParams } = {}
+  const restoreDesligada = aplicarEnv(ENV_BASE)
+  let jsonDesligada: CriarSessaoRealtimeResponseBody
+  try {
+    const res = await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
+      { criarClientSecret: mockClientSecret(capturaDesligada) }
+    )
+    jsonDesligada = await res.json()
+  } finally { restoreDesligada() }
+
+  assert.equal(jsonLigada.turnGuardMode, 'manual')
+  assert.equal(jsonDesligada.turnGuardMode, 'disabled')
+  assert.ok(capturaLigada.params!.instructions.length < capturaDesligada.params!.instructions.length)
 })

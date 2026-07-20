@@ -26,7 +26,8 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { casosV2 } from "@/data/casos-v2";
-import { construirInstrucoesRealtime } from "@/lib/voice/realtimeInstructions";
+import { construirInstrucoesRealtime, combinarBaseComMetadadosDeVoz } from "@/lib/voice/realtimeInstructions";
+import { decidirSessaoRealtime, type TurnGuardMode } from "@/lib/voice/realtimeTurnGuardConfig";
 import {
   createRealtimeClientSecret,
   isRealtimeVoiceEnabled,
@@ -65,6 +66,13 @@ export interface CriarSessaoRealtimeResponseBody {
     speakerRole: "patient" | "caregiver" | "companion";
     ageGroup: "child" | "adolescent" | "adult" | "elderly";
   };
+  /**
+   * FASE 4D.1 — "disabled" (padrão/casos legados) preserva o fluxo atual
+   * exatamente; "manual" (só Caso Ouro, com PATIENT_V3_REALTIME_TURN_GUARD
+   * ligada) indica que as instructions enviadas foram reduzidas aos fatos de
+   * abertura. Nesta fase o cliente ainda NÃO consome este campo.
+   */
+  turnGuardMode: TurnGuardMode;
 }
 
 /** Dependências injetáveis (produção usa os defaults; testes injetam mocks). */
@@ -185,7 +193,21 @@ export async function handleCriarSessaoRealtime(
 
   // 9. Construir instruções + perfil de voz NO SERVIDOR — fonte única, o corpo
   //    do cliente não influencia em NADA este resultado além do casoId.
-  const { instructions, voiceProfile } = construirInstrucoesRealtime(caso);
+  //
+  // FASE 4D.1 — gate manual reversível: decidirSessaoRealtime(casoId) só
+  // retorna "manual" para o Caso Ouro (CasoV3 registrado) com a flag
+  // PATIENT_V3_REALTIME_TURN_GUARD ligada; qualquer outro caso, ou a mesma
+  // flag desligada, preserva EXATAMENTE o caminho atual (construirInstrucoesRealtime
+  // completo, com os 25 fatos). Em "manual", as instructions enviadas contêm
+  // SOMENTE os fatos de abertura — classificarTurno NUNCA é chamado aqui, e
+  // create_response/interrupt_response (calculados por decidirSessaoRealtime)
+  // ainda NÃO são repassados ao provedor nesta fase (ver nota no próprio
+  // módulo de configuração).
+  const decisaoTurnGuard = decidirSessaoRealtime(casoId);
+  const { instructions, voiceProfile } =
+    decisaoTurnGuard.turnGuardMode === "manual"
+      ? combinarBaseComMetadadosDeVoz(decisaoTurnGuard.instructionsAbertura, caso)
+      : construirInstrucoesRealtime(caso);
   const expiresAfterSeconds = resolverSessionMaxSeconds();
 
   // 10. Emitir segredo efêmero.
@@ -209,6 +231,7 @@ export async function handleCriarSessaoRealtime(
         speakerRole: voiceProfile.speakerRole,
         ageGroup: voiceProfile.ageGroup,
       },
+      turnGuardMode: decisaoTurnGuard.turnGuardMode,
     };
     return NextResponse.json(resposta, { status: 200 });
   } catch (erro) {
