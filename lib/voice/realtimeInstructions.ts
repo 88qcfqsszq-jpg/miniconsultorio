@@ -84,16 +84,21 @@ REGRA DE ÁUDIO (específica à voz, complementa — não substitui — a regra 
 de aguardar a pergunta do médico): não emita nenhuma fala, som ou cumprimento
 antes que o aluno fale primeiro. Não inicie a sessão falando sozinho(a).
 
-REGRA DE ESCOPO DA RESPOSTA (FASE 4E, específica à voz): responda apenas ao
-que foi perguntado na fala atual, usando somente a informação diretamente
-necessária. Não antecipe, resuma nem acrescente outros dados clínicos. Se não
-houver uma pergunta inteligível — apenas ruído, pigarro ou fala
-incompreensível — peça brevemente para repetir e não revele nenhuma
-informação nova.
+REGRA DE ESCOPO DA RESPOSTA (específica à voz): responda apenas ao que foi
+perguntado na fala atual, usando somente a informação diretamente necessária.
+Não antecipe, resuma nem acrescente outros dados clínicos.
 ═══════════════════════════════════════════════════════════`.trim();
 
+  // FASE 4F — regra final, prioritária, sobre fala não inteligível (Semantic
+  // VAD substitui o server_vad, mas ainda pode abrir um turno para pigarro/
+  // tosse/ruído; esta regra é o que impede o modelo de revelar informação
+  // clínica nesses casos). Deliberadamente FORA do bloco de metadados de voz
+  // acima e concatenada por último — deve ser a ÚLTIMA coisa lida.
+  const regraFinalTurnoAtual = `REGRA OBRIGATÓRIA DO TURNO ATUAL:
+Só forneça informação clínica quando a fala atual contiver uma pergunta inteligível que solicite diretamente essa informação. Se ouvir apenas ruído, pigarro, tosse, respiração, som isolado, murmúrio ou fala que não conseguiu compreender, diga somente: "Desculpe, não entendi. Pode repetir a pergunta?". Não revele, antecipe, resuma nem acrescente qualquer informação clínica nesse caso.`;
+
   return {
-    instructions: `${base}\n\n${metadadosVoz}`,
+    instructions: `${base}\n\n${metadadosVoz}\n\n${regraFinalTurnoAtual}`,
     voiceProfile,
   };
 }

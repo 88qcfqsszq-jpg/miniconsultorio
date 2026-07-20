@@ -134,23 +134,74 @@ test('Caso Ouro (id "1", Patient V3): metadados de voz continuam presentes e o d
 // FASE 4E — regra curta de escopo da resposta (voz)
 // ═══════════════════════════════════════════════════════════════════════════
 
-test('10. regra curta de escopo da resposta aparece exatamente uma vez nas instructions Realtime', () => {
+test('regra de escopo da resposta (voz) aparece exatamente uma vez', () => {
   const caso = casoLegadoDeControle()
   const { instructions } = construirInstrucoesRealtime(caso)
   const marcador = 'REGRA DE ESCOPO DA RESPOSTA'
   const ocorrencias = instructions.split(marcador).length - 1
   assert.equal(ocorrencias, 1, `marcador "${marcador}" apareceu ${ocorrencias}x (esperado 1x)`)
   assert.ok(instructions.includes('responda apenas ao'), 'faltou o início da regra de escopo da resposta')
-  assert.ok(instructions.includes('peça brevemente para repetir'), 'faltou a instrução de pedir para repetir')
 })
 
-test('11. a regra curta de escopo da resposta NÃO aparece no Prompt Base do texto (só na composição de voz)', () => {
+test('a regra de escopo da resposta (voz) NÃO aparece no Prompt Base do texto (só na composição de voz)', () => {
   const caso = casoLegadoDeControle()
   const baseTexto = construirInstrucoesBasePaciente(caso)
   assert.ok(
     !baseTexto.includes('REGRA DE ESCOPO DA RESPOSTA'),
     'Prompt Base do texto não deveria conter a regra específica de voz da Fase 4E'
   )
+})
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FASE 4F — Semantic VAD + regra final obrigatória sobre fala não inteligível
+// ═══════════════════════════════════════════════════════════════════════════
+
+test('10. regra "REGRA OBRIGATÓRIA DO TURNO ATUAL" aparece exatamente uma vez', () => {
+  const caso = casoLegadoDeControle()
+  const { instructions } = construirInstrucoesRealtime(caso)
+  const marcador = 'REGRA OBRIGATÓRIA DO TURNO ATUAL'
+  const ocorrencias = instructions.split(marcador).length - 1
+  assert.equal(ocorrencias, 1, `marcador "${marcador}" apareceu ${ocorrencias}x (esperado 1x)`)
+})
+
+test('11. a regra do turno atual encerra as instructions (é o último bloco, depois dos metadados de voz)', () => {
+  const caso = casoLegadoDeControle()
+  const { instructions } = construirInstrucoesRealtime(caso)
+  const marcador = 'REGRA OBRIGATÓRIA DO TURNO ATUAL'
+  const indice = instructions.indexOf(marcador)
+  assert.ok(indice >= 0, 'marcador da regra do turno atual não encontrado')
+  // Nada depois do bloco da regra final além do próprio texto da regra —
+  // ela é literalmente a última coisa nas instructions.
+  const restante = instructions.slice(indice)
+  assert.equal(instructions.indexOf(marcador, indice + 1), -1, 'a regra não deveria se repetir depois de si mesma')
+  assert.ok(restante.endsWith('Não revele, antecipe, resuma nem acrescente qualquer informação clínica nesse caso.'))
+})
+
+test('12. a frase obrigatória de repetição está presente, verbatim', () => {
+  const caso = casoLegadoDeControle()
+  const { instructions } = construirInstrucoesRealtime(caso)
+  assert.ok(
+    instructions.includes('Desculpe, não entendi. Pode repetir a pergunta?'),
+    'frase obrigatória de repetição ausente ou alterada'
+  )
+})
+
+test('a regra do turno atual não contém exemplos clínicos nem lista extensa de respostas alternativas', () => {
+  const caso = casoLegadoDeControle()
+  const { instructions } = construirInstrucoesRealtime(caso)
+  const marcador = 'REGRA OBRIGATÓRIA DO TURNO ATUAL'
+  const indice = instructions.indexOf(marcador)
+  const blocoRegra = instructions.slice(indice)
+  // Só uma frase entre aspas (a de repetição) — nenhuma outra resposta alternativa listada.
+  const ocorrenciasDeAspas = (blocoRegra.match(/"/g) ?? []).length
+  assert.equal(ocorrenciasDeAspas, 2, 'a regra deveria conter apenas uma frase entre aspas (a de repetição)')
+})
+
+test('13. a regra do turno atual NÃO aparece no Prompt Base do texto', () => {
+  const caso = casoLegadoDeControle()
+  const baseTexto = construirInstrucoesBasePaciente(caso)
+  assert.ok(!baseTexto.includes('REGRA OBRIGATÓRIA DO TURNO ATUAL'))
+  assert.ok(!baseTexto.includes('Desculpe, não entendi. Pode repetir a pergunta?'))
 })
 
 test('todos os 76 casos exportados geram instruções e perfis válidos via construirInstrucoesRealtime', () => {

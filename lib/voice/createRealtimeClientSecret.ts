@@ -26,11 +26,15 @@
  * {type:"server_vad", create_response, interrupt_response}`.
  *
  * FASE 4E — sem `turnDetection` (fluxo direto/automático, hoje o único em
- * produção — Turn Guard desligado), a sessão passa a enviar um VAD explícito
- * (ver VAD_DIRETO_PADRAO abaixo), menos sensível a ruído curto/pigarro, sem
- * interromper a resposta em andamento, mais redução de ruído para microfone
- * integrado (far_field). O modo manual do Turn Guard (`turnDetection`
+ * produção — Turn Guard desligado), a sessão passa a enviar um VAD explícito,
+ * sem interromper a resposta em andamento, mais redução de ruído para
+ * microfone integrado (far_field). O modo manual do Turn Guard (`turnDetection`
  * presente) não é alterado por esta fase.
+ *
+ * FASE 4F — o VAD do fluxo direto passou de `server_vad` (baseado só em
+ * volume, sujeito a disparar com pigarro/ruído curto) para `semantic_vad`
+ * (ver VAD_DIRETO_PADRAO abaixo) — usa um modelo de turn detection para
+ * estimar se a fala realmente terminou, não apenas o volume/silêncio.
  */
 
 import OpenAI from "openai";
@@ -162,6 +166,7 @@ type RealtimeAudioParamsOficial = NonNullable<RealtimeSessionRealtimeOficial["au
 type RealtimeAudioInputParamsOficial = NonNullable<RealtimeAudioParamsOficial["input"]>;
 type RealtimeTurnDetectionParamsOficial = NonNullable<RealtimeAudioInputParamsOficial["turn_detection"]>;
 type RealtimeServerVadParamsOficial = Extract<RealtimeTurnDetectionParamsOficial, { type: "server_vad" }>;
+type RealtimeSemanticVadParamsOficial = Extract<RealtimeTurnDetectionParamsOficial, { type: "semantic_vad" }>;
 type RealtimeNoiseReductionParamsOficial = NonNullable<RealtimeAudioInputParamsOficial["noise_reduction"]>;
 
 /** Constrói `session.audio.input.turn_detection`, usando exclusivamente a tipagem oficial do SDK. */
@@ -174,18 +179,19 @@ function construirServerVadOficial(turnDetection: RealtimeTurnDetectionConfig): 
 }
 
 /**
- * FASE 4E — VAD explícito do fluxo DIRETO/automático (Turn Guard desligado):
- * threshold mais alto (0.65) para reduzir ativação por pigarro/ruído curto;
- * `interrupt_response:false` para que ruído não corte a resposta do paciente
- * em andamento; `create_response:true` preserva a resposta automática (baixa
- * latência); `prefix_padding_ms`/`silence_duration_ms` mantidos nos valores
- * atuais do provedor (300/500) nesta primeira tentativa.
+ * FASE 4F — VAD explícito do fluxo DIRETO/automático (Turn Guard desligado):
+ * `semantic_vad` com `eagerness:"auto"` — usa um modelo de turn detection
+ * (não apenas volume/silêncio) para estimar se a fala realmente terminou,
+ * reduzindo a ativação por pigarro/ruído curto que o `server_vad` (Fase 4E)
+ * ainda disparava. `interrupt_response:false` para que ruído não corte a
+ * resposta do paciente em andamento; `create_response:true` preserva a
+ * resposta automática (baixa latência). `threshold`/`prefix_padding_ms`/
+ * `silence_duration_ms` não existem no contrato de `semantic_vad` (são
+ * exclusivos de `server_vad`) — omitidos aqui, nunca enviados.
  */
-const VAD_DIRETO_PADRAO: RealtimeServerVadParamsOficial = {
-  type: "server_vad",
-  threshold: 0.65,
-  prefix_padding_ms: 300,
-  silence_duration_ms: 500,
+const VAD_DIRETO_PADRAO: RealtimeSemanticVadParamsOficial = {
+  type: "semantic_vad",
+  eagerness: "auto",
   create_response: true,
   interrupt_response: false,
 };
