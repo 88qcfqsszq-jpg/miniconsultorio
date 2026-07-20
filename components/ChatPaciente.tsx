@@ -4,6 +4,21 @@ import { useState, useRef, useEffect } from "react";
 import { MensagemChat, Caso } from "@/lib/types";
 import { useRealtimePaciente } from "@/hooks/useRealtimePaciente";
 
+/**
+ * Traduz o erro técnico de `realtimeClient.ts` (status HTTP, texto interno)
+ * em uma mensagem curta e amigável — nunca expõe JSON, status internos,
+ * clientSecret, API key ou SDP.
+ */
+function traduzirErroVoz(erro: string | null): string {
+  if (erro?.includes("429")) {
+    return "Créditos da API indisponíveis. Verifique o faturamento.";
+  }
+  if (erro?.toLowerCase().includes("microfone")) {
+    return "Permissão do microfone não concedida.";
+  }
+  return "Não foi possível iniciar a chamada. Tente novamente.";
+}
+
 interface ChatPacienteProps {
   nomePaciente: string;
   casoId: string;
@@ -72,12 +87,13 @@ export default function ChatPaciente({
   }, []);
 
   // Integração de voz (Realtime) — hook isolado; nunca move a lógica de enviarTexto.
-  const { estadoVoz, erroVoz: erroVozRealtime, iniciarVoz, encerrarVoz } = useRealtimePaciente({
-    casoId,
-    onNovaMensagemVoz: (mensagemVoz) => {
-      setMensagens((prev) => [...prev, mensagemVoz]);
-    },
-  });
+  const { estadoVoz, erroVoz: erroVozRealtime, audioBloqueado, iniciarVoz, encerrarVoz, ativarAudioRemoto } =
+    useRealtimePaciente({
+      casoId,
+      onNovaMensagemVoz: (mensagemVoz) => {
+        setMensagens((prev) => [...prev, mensagemVoz]);
+      },
+    });
 
   // Notificar mudanças de mensagens
   useEffect(() => {
@@ -264,6 +280,11 @@ export default function ChatPaciente({
     estadoVoz === "paciente_respondendo" ||
     estadoVoz === "encerrando";
 
+  // `erroVozRealtime` (não `estadoVoz === "erro"`) é o que decide se a mensagem
+  // amigável aparece: o controller já transita para "encerrado" logo após um
+  // erro (desconexão automática), e `erroVozRealtime` só é limpo no início da
+  // PRÓXIMA tentativa — por isso a mensagem permanece visível tempo suficiente
+  // para ser lida, mesmo depois de o estado sair de "erro".
   const rotuloEstadoVoz =
     estadoVoz === "conectando"
       ? "Conectando..."
@@ -273,15 +294,26 @@ export default function ChatPaciente({
       ? "Paciente respondendo..."
       : estadoVoz === "encerrando"
       ? "Encerrando..."
-      : estadoVoz === "erro"
-      ? erroVozRealtime || "Erro na conexão de voz."
+      : erroVozRealtime
+      ? traduzirErroVoz(erroVozRealtime)
       : "";
 
   const rotuloBotaoVoz = vozConectadaOuConectando
     ? "Encerrar voz"
-    : estadoVoz === "erro"
+    : erroVozRealtime
     ? "Tentar novamente"
     : "Falar com o paciente";
+
+  const vozEmEscuta = estadoVoz === "ouvindo" || estadoVoz === "paciente_respondendo";
+  const iconeVoz = vozEmEscuta ? "🎙️" : "📞";
+  const classeBotaoVoz = [
+    "medix-voice-button",
+    vozEmEscuta ? "medix-voice-active" : "",
+    estadoVoz === "conectando" || estadoVoz === "encerrando" ? "medix-voice-connecting" : "",
+    erroVozRealtime ? "medix-voice-error" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const alternarVoz = () => {
     if (vozConectadaOuConectando) {
@@ -348,32 +380,37 @@ export default function ChatPaciente({
             {erroVoz}
           </div>
         )}
-        {suportaVozRealtime && (
-          <div className="mx-[22px] mt-3 flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={alternarVoz}
-              disabled={estadoVoz === "conectando" || estadoVoz === "encerrando"}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${
-                vozConectadaOuConectando
-                  ? "bg-red-50 border-red-200 text-red-700"
-                  : "bg-blue-50 border-blue-200 text-blue-700"
+        {suportaVozRealtime && rotuloEstadoVoz && (
+          <div
+            className={`mx-[22px] mt-3 px-3 py-2 rounded-lg text-xs font-semibold border flex items-center gap-2 ${
+              erroVozRealtime
+                ? "bg-red-50 border-red-200 text-red-700"
+                : vozEmEscuta
+                ? "bg-emerald-50 border-emerald-200 text-emerald-700"
+                : "bg-blue-50 border-blue-200 text-blue-700"
+            }`}
+          >
+            <span
+              className={`w-2 h-2 rounded-full shrink-0 ${
+                erroVozRealtime
+                  ? "bg-red-500"
+                  : vozEmEscuta
+                  ? "bg-emerald-500 animate-pulse"
+                  : "bg-blue-500 animate-pulse"
               }`}
-            >
-              {rotuloBotaoVoz}
-            </button>
-            {rotuloEstadoVoz && (
-              <span
-                className={`px-3 py-1.5 rounded-lg text-xs border ${
-                  estadoVoz === "erro"
-                    ? "bg-red-50 border-red-200 text-red-700"
-                    : "bg-blue-50 border-blue-200 text-blue-700"
-                }`}
-              >
-                {rotuloEstadoVoz}
-              </span>
-            )}
+            ></span>
+            {rotuloEstadoVoz}
           </div>
+        )}
+        {suportaVozRealtime && audioBloqueado && (
+          <button
+            type="button"
+            onClick={ativarAudioRemoto}
+            className="mx-[22px] mt-3 px-3 py-2 rounded-lg text-xs font-semibold border bg-amber-50 border-amber-200 text-amber-800 flex items-center gap-2 text-left w-[calc(100%-44px)]"
+          >
+            <span className="w-2 h-2 rounded-full shrink-0 bg-amber-500"></span>
+            Áudio do paciente bloqueado pelo navegador. Clique para ativar o som.
+          </button>
         )}
         <div className="medix-chat-input-row">
           <input
@@ -392,6 +429,17 @@ export default function ChatPaciente({
               className={`medix-mic-button ${ouvindo ? "medix-mic-active" : ""}`}
             >
               🎙️
+            </button>
+          )}
+          {suportaVozRealtime && (
+            <button
+              type="button"
+              onClick={alternarVoz}
+              disabled={estadoVoz === "conectando" || estadoVoz === "encerrando"}
+              title={rotuloEstadoVoz || rotuloBotaoVoz}
+              className={classeBotaoVoz}
+            >
+              {iconeVoz}
             </button>
           )}
           <button

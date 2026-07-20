@@ -56,8 +56,28 @@ export interface RealtimeSanitizedEvent {
 const TIPO_TRANSCRICAO_ALUNO = "conversation.item.input_audio_transcription.completed";
 const TIPO_TRANSCRICAO_PACIENTE = "response.output_audio_transcript.done";
 
+/**
+ * Superfície mínima de um "elemento de áudio" usada pelo cliente para reprodução
+ * remota — um HTMLAudioElement real satisfaz esta interface. Definida à parte
+ * (em vez de usar o tipo DOM diretamente) para permitir injeção de um objeto
+ * falso nos testes, já que não há jsdom/HTMLAudioElement disponível em node:test.
+ */
+export interface RealtimeAudioSink {
+  autoplay: boolean;
+  playsInline?: boolean;
+  muted: boolean;
+  volume: number;
+  srcObject: MediaStream | null;
+  play(): Promise<void>;
+  pause(): void;
+}
+
 export interface RealtimeClientOptions {
-  /** Elemento de áudio onde a faixa remota será anexada (opcional). */
+  /**
+   * Elemento de áudio explícito onde a faixa remota será anexada (opcional).
+   * Quando omitido, o cliente cria o seu próprio elemento EM MEMÓRIA (nunca
+   * inserido na árvore do DOM) — ver `criarElementoAudioPadrao`.
+   */
   audioElement?: HTMLAudioElement | null;
   /** Máximo de eventos mantidos no histórico visual (default 50). */
   maxEventLog?: number;
@@ -69,6 +89,10 @@ export interface RealtimeClientOptions {
   obterMicrofone?: () => Promise<MediaStream>;
   /** POST do SDP-offer ao provedor; retorna o SDP-answer (texto). */
   conectarWebRTC?: (clientSecret: string, offerSdp: string) => Promise<string>;
+  /** Fábrica do "sink" de áudio remoto — testes injetam um objeto falso. */
+  criarElementoAudio?: () => RealtimeAudioSink;
+  /** Constrói um MediaStream a partir de uma track solta (fallback de `ontrack` sem `event.streams[0]`). */
+  criarMediaStreamDeTrack?: (track: MediaStreamTrack) => MediaStream;
 }
 
 export interface RealtimeClient {
@@ -79,6 +103,12 @@ export interface RealtimeClient {
   getEventLog(): RealtimeSanitizedEvent[];
   onStateChange(cb: (state: RealtimeConnectionState) => void): () => void;
   onEvent(cb: (event: RealtimeSanitizedEvent) => void): () => void;
+  /**
+   * Tenta (re)iniciar a reprodução do áudio remoto já anexado, SEM criar uma
+   * nova sessão — usado quando o navegador (tipicamente Safari) bloqueou o
+   * autoplay. No-op seguro se não houver sessão ativa.
+   */
+  ativarAudioRemoto(): Promise<void>;
 }
 
 // ============================================================================
@@ -100,6 +130,39 @@ async function conectarWebRTCPadrao(clientSecret: string, offerSdp: string): Pro
     throw new Error(`Falha na negociação WebRTC (status ${resposta.status}).`);
   }
   return await resposta.text();
+}
+
+/**
+ * Cria o elemento de áudio padrão para reprodução remota — EM MEMÓRIA, nunca
+ * inserido no DOM (sem `document.body.appendChild`). Uma referência é mantida
+ * viva na closure de `criarRealtimeClient` durante toda a sessão para evitar
+ * que o Safari colete o elemento (o que interromperia a reprodução).
+ */
+function criarElementoAudioPadrao(): RealtimeAudioSink {
+  // Ambiente sem suporte a áudio de navegador (ex.: SSR, node:test sem DOM) —
+  // devolve um "sink" inofensivo em vez de lançar. Em produção (navegador real,
+  // dentro de connectRealtime() disparado por clique do usuário) `Audio` sempre existe.
+  if (typeof Audio === "undefined") {
+    return {
+      autoplay: true,
+      playsInline: true,
+      muted: false,
+      volume: 1,
+      srcObject: null,
+      play: async () => {},
+      pause: () => {},
+    };
+  }
+  const el = new Audio();
+  el.autoplay = true;
+  (el as unknown as { playsInline?: boolean }).playsInline = true;
+  el.muted = false;
+  el.volume = 1;
+  return el as unknown as RealtimeAudioSink;
+}
+
+function criarMediaStreamDeTrackPadrao(track: MediaStreamTrack): MediaStream {
+  return new MediaStream([track]);
 }
 
 /**
@@ -142,6 +205,8 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
     options.obterMicrofone ??
     (() => navigator.mediaDevices.getUserMedia({ audio: true, video: false }));
   const conectarWebRTC = options.conectarWebRTC ?? conectarWebRTCPadrao;
+  const criarElementoAudio = options.criarElementoAudio ?? criarElementoAudioPadrao;
+  const criarMediaStreamDeTrack = options.criarMediaStreamDeTrack ?? criarMediaStreamDeTrackPadrao;
 
   let state: RealtimeConnectionState = "idle";
   let lastError: string | null = null;
@@ -155,6 +220,10 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
   let dataChannel: RTCDataChannel | null = null;
   let micStream: MediaStream | null = null;
   let clientSecretAtual: string | null = null;
+  // Elemento de áudio da sessão ativa — nunca grava/persiste áudio, apenas
+  // reproduz a faixa remota ao vivo. Um elemento novo por sessão (nunca reutilizado
+  // entre chamadas de connectRealtime, mesmo dentro do mesmo cliente).
+  let elementoAudioAtual: RealtimeAudioSink | null = null;
 
   // Contador de tentativa — permite abortar com segurança um connectRealtime()
   // em andamento quando disconnectRealtime() é chamado (ex.: desmontagem durante
@@ -170,6 +239,13 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
   // várias chamadas a setState() ao longo da função (mutação indireta via closure).
   function obterEstadoAtual(): RealtimeConnectionState {
     return state;
+  }
+
+  /** Para a reprodução e solta a referência ao MediaStream — nunca lança. */
+  function pararElementoAudio(el: RealtimeAudioSink | null | undefined): void {
+    if (!el) return;
+    try { el.pause(); } catch { /* best-effort */ }
+    try { el.srcObject = null; } catch { /* best-effort */ }
   }
 
   function emitirEvento(tipo: string, transcript?: RealtimeSanitizedEvent["transcript"]): void {
@@ -238,14 +314,39 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
 
     // 3) RTCPeerConnection + data channel + negociação SDP.
     let pc: RTCPeerConnection | undefined;
+    // Elemento de áudio desta tentativa — criado cedo (antes da negociação SDP)
+    // porque `ontrack` pode disparar assim que `setRemoteDescription` processa a
+    // resposta, mesmo antes do ponto de "commit" dos demais recursos abaixo.
+    let elementoAudio: RealtimeAudioSink | undefined;
     try {
       pc = criarPeerConnection();
       for (const track of mic.getTracks()) pc.addTrack(track, mic);
 
+      elementoAudio = options.audioElement
+        ? (options.audioElement as unknown as RealtimeAudioSink)
+        : criarElementoAudio();
+      elementoAudio.autoplay = true;
+      elementoAudio.muted = false;
+      elementoAudio.volume = 1;
+      if ("playsInline" in elementoAudio) elementoAudio.playsInline = true;
+
       pc.ontrack = (ev: RTCTrackEvent) => {
-        if (options.audioElement && ev.streams[0]) {
-          options.audioElement.srcObject = ev.streams[0];
-        }
+        if (!aindaValida() || !elementoAudio) return;
+        const track = ev.track;
+        const streamRemoto = ev.streams && ev.streams[0] ? ev.streams[0] : (track ? criarMediaStreamDeTrack(track) : null);
+        if (!streamRemoto) return;
+        elementoAudio.srcObject = streamRemoto;
+        elementoAudio
+          .play()
+          .then(() => {
+            if (aindaValida()) emitirEvento("audio.autoplay_resumed");
+          })
+          .catch(() => {
+            // Bloqueio de autoplay (tipicamente Safari) — a sessão continua ativa
+            // (data channel/transcrição seguem funcionando); apenas sinalizamos o
+            // bloqueio de forma sanitizada para a UI oferecer uma retentativa manual.
+            if (aindaValida()) emitirEvento("audio.autoplay_blocked");
+          });
       };
 
       pc.onconnectionstatechange = () => {
@@ -275,13 +376,13 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
 
       const offer = await pc.createOffer();
       await pc.setLocalDescription(offer);
-      if (!aindaValida()) { try { pc.close(); } catch {} try { mic.getTracks().forEach((t) => t.stop()); } catch {} return; }
+      if (!aindaValida()) { try { pc.close(); } catch {} try { mic.getTracks().forEach((t) => t.stop()); } catch {} pararElementoAudio(elementoAudio); return; }
 
       const answerSdp = await conectarWebRTC(secret, offer.sdp ?? "");
-      if (!aindaValida()) { try { pc.close(); } catch {} try { mic.getTracks().forEach((t) => t.stop()); } catch {} return; }
+      if (!aindaValida()) { try { pc.close(); } catch {} try { mic.getTracks().forEach((t) => t.stop()); } catch {} pararElementoAudio(elementoAudio); return; }
 
       await pc.setRemoteDescription({ type: "answer", sdp: answerSdp } as RTCSessionDescriptionInit);
-      if (!aindaValida()) { try { pc.close(); } catch {} try { mic.getTracks().forEach((t) => t.stop()); } catch {} return; }
+      if (!aindaValida()) { try { pc.close(); } catch {} try { mic.getTracks().forEach((t) => t.stop()); } catch {} pararElementoAudio(elementoAudio); return; }
 
       // Só agora, com a tentativa ainda válida, comprometemos os recursos ao estado
       // compartilhado (evita que uma tentativa obsoleta sobrescreva uma desconexão já em curso).
@@ -289,12 +390,14 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
       peerConnection = pc;
       dataChannel = dc;
       clientSecretAtual = secret;
+      elementoAudioAtual = elementoAudio;
       if (obterEstadoAtual() !== "connected") setState("connected");
     } catch (erro) {
       if (!aindaValida()) return;
       lastError = erro instanceof Error ? erro.message : "Falha na negociação WebRTC.";
       try { pc?.close(); } catch { /* best-effort */ }
       try { mic.getTracks().forEach((t) => t.stop()); } catch { /* best-effort */ }
+      pararElementoAudio(elementoAudio);
       setState("error");
       return;
     }
@@ -305,10 +408,23 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
     dataChannel = null;
     try { micStream?.getTracks().forEach((t) => t.stop()); } catch { /* best-effort */ }
     micStream = null;
+    if (peerConnection) { try { peerConnection.ontrack = null; } catch { /* best-effort */ } }
     try { peerConnection?.close(); } catch { /* best-effort */ }
     peerConnection = null;
+    pararElementoAudio(elementoAudioAtual);
+    elementoAudioAtual = null;
     // O segredo nunca foi persistido — apenas liberado da memória aqui.
     clientSecretAtual = null;
+  }
+
+  async function ativarAudioRemoto(): Promise<void> {
+    if (!elementoAudioAtual) return;
+    try {
+      await elementoAudioAtual.play();
+      emitirEvento("audio.autoplay_resumed");
+    } catch {
+      emitirEvento("audio.autoplay_blocked");
+    }
   }
 
   async function disconnectRealtime(): Promise<void> {
@@ -329,5 +445,6 @@ export function criarRealtimeClient(options: RealtimeClientOptions = {}): Realti
     getEventLog: () => [...eventLog],
     onStateChange: (cb) => { stateListeners.add(cb); return () => stateListeners.delete(cb); },
     onEvent: (cb) => { eventListeners.add(cb); return () => eventListeners.delete(cb); },
+    ativarAudioRemoto,
   };
 }

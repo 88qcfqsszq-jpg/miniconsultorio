@@ -553,3 +553,280 @@ test('desmontagem DURANTE a conexão (disconnect chamado enquanto connect ainda 
 
 // ── Sanidade de tipos/erros: casoId inválido é responsabilidade do endpoint ──
 // (o cliente apenas repassa; a validação de formato já é coberta pelos testes do endpoint, Etapa 3)
+
+// ============================================================================
+// REPRODUÇÃO DO ÁUDIO REMOTO (correção: pc.ontrack nunca alimentava um sink real)
+// ============================================================================
+
+/** "Sink" de áudio falso — expõe contadores/estado para os testes inspecionarem. */
+function criarFakeAudioSink() {
+  return {
+    autoplay: false,
+    playsInline: false,
+    muted: true,
+    volume: 0,
+    srcObject: null as any,
+    _playChamadas: 0,
+    _pauseChamadas: 0,
+    _playDeveRejeitar: false,
+    play(): Promise<void> {
+      this._playChamadas++
+      if (this._playDeveRejeitar) {
+        return Promise.reject(new Error("NotAllowedError: play() failed because the user didn't interact with the document first."))
+      }
+      return Promise.resolve()
+    },
+    pause() { this._pauseChamadas++ },
+  }
+}
+
+test('áudio 1. pc.ontrack associa event.streams[0] ao srcObject do sink de áudio', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+  })
+  await cliente.connectRealtime('1')
+
+  const streamRemotoFake = { _marca: 'stream-remoto' } as any
+  pcFake.ontrack?.({ streams: [streamRemotoFake], track: { kind: 'audio' } } as any)
+  await esperarMicro()
+
+  assert.equal(sinkFake.srcObject, streamRemotoFake)
+})
+
+test('áudio 2. fallback com event.track quando event.streams[0] está ausente', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  const streamDeFallback = { _marca: 'stream-via-fallback' } as any
+  const trackFake = { kind: 'audio' } as any
+  let trackRecebidaNoFallback: any = null
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+    criarMediaStreamDeTrack: (track: any) => { trackRecebidaNoFallback = track; return streamDeFallback },
+  })
+  await cliente.connectRealtime('1')
+
+  pcFake.ontrack?.({ streams: [], track: trackFake } as any)
+  await esperarMicro()
+
+  assert.equal(sinkFake.srcObject, streamDeFallback, 'deveria ter usado o MediaStream construído a partir de event.track')
+  assert.equal(trackRecebidaNoFallback, trackFake)
+})
+
+test('áudio 3. o sink nunca fica mutado (muted=false)', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+  })
+  await cliente.connectRealtime('1')
+  assert.equal(sinkFake.muted, false)
+})
+
+test('áudio 4. o volume do sink é definido como 1', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+  })
+  await cliente.connectRealtime('1')
+  assert.equal(sinkFake.volume, 1)
+})
+
+test('áudio 5. autoplay e playsInline são ativados no sink', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+  })
+  await cliente.connectRealtime('1')
+  assert.equal(sinkFake.autoplay, true)
+  assert.equal(sinkFake.playsInline, true)
+})
+
+test('áudio 6. play() é chamado após o stream remoto ser associado', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+  })
+  await cliente.connectRealtime('1')
+  pcFake.ontrack?.({ streams: [{ _marca: 's' }], track: { kind: 'audio' } } as any)
+  await esperarMicro()
+  assert.equal(sinkFake._playChamadas, 1)
+})
+
+test('áudio 7. rejeição de play() (autoplay bloqueado) não derruba a conexão', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  sinkFake._playDeveRejeitar = true
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+  })
+  await cliente.connectRealtime('1')
+  pcFake.ontrack?.({ streams: [{ _marca: 's' }], track: { kind: 'audio' } } as any)
+  await esperarMicro()
+  assert.equal(cliente.getConnectionState(), 'connected', 'a sessão deveria continuar ativa mesmo com autoplay bloqueado')
+})
+
+test('áudio 8. bloqueio de autoplay gera um evento sanitizado ("audio.autoplay_blocked")', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  sinkFake._playDeveRejeitar = true
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+  })
+  const eventos: any[] = []
+  cliente.onEvent((e) => eventos.push(e))
+  await cliente.connectRealtime('1')
+  pcFake.ontrack?.({ streams: [{ _marca: 's' }], track: { kind: 'audio' } } as any)
+  await esperarMicro()
+
+  const ultimo = eventos[eventos.length - 1]
+  assert.equal(ultimo.type, 'audio.autoplay_blocked')
+  assert.deepEqual(Object.keys(ultimo).sort(), ['at', 'type'], 'o evento de bloqueio não deveria carregar nenhum dado além de type/at')
+})
+
+test('áudio 9. o cleanup (disconnectRealtime) chama pause() no sink de áudio', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+  })
+  await cliente.connectRealtime('1')
+  await cliente.disconnectRealtime()
+  assert.equal(sinkFake._pauseChamadas, 1)
+})
+
+test('áudio 10. o cleanup (disconnectRealtime) remove o srcObject do sink de áudio', async () => {
+  const pcFake = criarFakePeerConnection()
+  const sinkFake = criarFakeAudioSink()
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcFake,
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: () => sinkFake as any,
+  })
+  await cliente.connectRealtime('1')
+  pcFake.ontrack?.({ streams: [{ _marca: 's' }], track: { kind: 'audio' } } as any)
+  await esperarMicro()
+  assert.notEqual(sinkFake.srcObject, null)
+
+  await cliente.disconnectRealtime()
+  assert.equal(sinkFake.srcObject, null)
+})
+
+test('áudio 11. a sessão seguinte (mesmo cliente) cria um elemento de áudio novo e limpo (nunca reaproveita o anterior)', async () => {
+  const sinksCriados: ReturnType<typeof criarFakeAudioSink>[] = []
+  const fabricarSink = () => { const s = criarFakeAudioSink(); sinksCriados.push(s); return s }
+  const pcsCriadas = [criarFakePeerConnection(), criarFakePeerConnection()]
+  let indicePc = 0
+
+  const cliente = criarRealtimeClient({
+    fetchSessao: mockFetchSucesso() as any,
+    criarPeerConnection: () => pcsCriadas[indicePc++],
+    obterMicrofone: async () => criarFakeMediaStream() as any,
+    conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+    criarElementoAudio: fabricarSink,
+  })
+
+  // Primeira sessão.
+  await cliente.connectRealtime('1')
+  pcsCriadas[0].ontrack?.({ streams: [{ _marca: 's1' }], track: { kind: 'audio' } } as any)
+  await esperarMicro()
+  await cliente.disconnectRealtime()
+
+  assert.equal(sinksCriados.length, 1)
+  const primeiroSink = sinksCriados[0]
+  assert.equal(primeiroSink.srcObject, null, 'o primeiro sink deveria ter sido limpo ao desconectar')
+
+  // Segunda sessão, no MESMO cliente.
+  await cliente.connectRealtime('1')
+  pcsCriadas[1].ontrack?.({ streams: [{ _marca: 's2' }], track: { kind: 'audio' } } as any)
+  await esperarMicro()
+
+  assert.equal(sinksCriados.length, 2, 'uma segunda sessão deveria criar um segundo sink, nunca reaproveitar o primeiro')
+  assert.equal(primeiroSink.srcObject, null, 'o primeiro sink não deveria ser afetado pela segunda sessão')
+  assert.equal((sinksCriados[1].srcObject as any)._marca, 's2')
+})
+
+test('áudio 12. nenhum áudio, blob ou segredo é persistido (localStorage/sessionStorage) pelo cliente', async () => {
+  const temLocalStorage = typeof (globalThis as any).localStorage !== 'undefined'
+  const temSessionStorage = typeof (globalThis as any).sessionStorage !== 'undefined'
+  const chamadasStorage: string[] = []
+  const originalLocalSetItem = temLocalStorage ? (globalThis as any).localStorage.setItem : null
+  const originalSessionSetItem = temSessionStorage ? (globalThis as any).sessionStorage.setItem : null
+  if (temLocalStorage) {
+    ;(globalThis as any).localStorage.setItem = (...args: any[]) => { chamadasStorage.push('local:' + args[0]) }
+  }
+  if (temSessionStorage) {
+    ;(globalThis as any).sessionStorage.setItem = (...args: any[]) => { chamadasStorage.push('session:' + args[0]) }
+  }
+
+  try {
+    const pcFake = criarFakePeerConnection()
+    const sinkFake = criarFakeAudioSink()
+    const cliente = criarRealtimeClient({
+      fetchSessao: mockFetchSucesso() as any,
+      criarPeerConnection: () => pcFake,
+      obterMicrofone: async () => criarFakeMediaStream() as any,
+      conectarWebRTC: async () => 'FAKE_ANSWER_SDP',
+      criarElementoAudio: () => sinkFake as any,
+    })
+    await cliente.connectRealtime('1')
+    pcFake.ontrack?.({ streams: [{ _marca: 's' }], track: { kind: 'audio' } } as any)
+    await esperarMicro()
+    await cliente.disconnectRealtime()
+
+    assert.deepEqual(chamadasStorage, [], 'nenhuma chamada a localStorage/sessionStorage deveria ter ocorrido')
+
+    const superficie = JSON.stringify({
+      estado: cliente.getConnectionState(),
+      erro: cliente.getLastError(),
+      eventos: cliente.getEventLog(),
+    })
+    assert.ok(!superficie.includes(SECRET_FAKE), 'o segredo não deveria vazar na superfície pública')
+    assert.ok(!superficie.includes('_marca'), 'nenhum dado do stream/áudio deveria vazar na superfície pública')
+  } finally {
+    if (temLocalStorage) (globalThis as any).localStorage.setItem = originalLocalSetItem
+    if (temSessionStorage) (globalThis as any).sessionStorage.setItem = originalSessionSetItem
+  }
+})

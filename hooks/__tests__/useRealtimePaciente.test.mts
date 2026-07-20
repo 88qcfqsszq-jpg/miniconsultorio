@@ -54,6 +54,7 @@ after(() => {
 interface FakeRealtimeClient extends RealtimeClient {
   conectarChamadas: () => number
   desconectarChamadas: () => number
+  ativarAudioRemotoChamadas: () => number
   emitirEstado: (estado: RealtimeConnectionState) => void
   emitirEvento: (evento: RealtimeSanitizedEvent) => void
   setLastError: (msg: string | null) => void
@@ -64,6 +65,7 @@ function criarFakeRealtimeClient(): FakeRealtimeClient {
   let lastError: string | null = null
   let conectarChamadas = 0
   let desconectarChamadas = 0
+  let ativarAudioRemotoChamadas = 0
   const stateListeners = new Set<(s: RealtimeConnectionState) => void>()
   const eventListeners = new Set<(e: RealtimeSanitizedEvent) => void>()
 
@@ -81,10 +83,12 @@ function criarFakeRealtimeClient(): FakeRealtimeClient {
     getConnectionState: () => estado,
     getLastError: () => lastError,
     getEventLog: () => [],
+    ativarAudioRemoto: async () => { ativarAudioRemotoChamadas++ },
     onStateChange: (cb) => { stateListeners.add(cb); return () => stateListeners.delete(cb) },
     onEvent: (cb) => { eventListeners.add(cb); return () => eventListeners.delete(cb) },
     conectarChamadas: () => conectarChamadas,
     desconectarChamadas: () => desconectarChamadas,
+    ativarAudioRemotoChamadas: () => ativarAudioRemotoChamadas,
     emitirEstado: (s) => { estado = s; for (const cb of stateListeners) cb(s) },
     emitirEvento: (e) => { for (const cb of eventListeners) cb(e) },
     setLastError: (msg) => { lastError = msg },
@@ -365,4 +369,29 @@ test('16. o client secret nunca vaza na superfície pública do controller (esta
     !superficieSemErro.includes(SEGREDO_FAKE),
     'o segredo não deveria vazar em nenhum campo estrutural (estado/mensagens) do controller'
   )
+})
+
+// ── 17. Bloqueio de autoplay é repassado ao consumidor do controller ────────
+test('17. evento "audio.autoplay_blocked" do cliente aciona onAudioBloqueado(true), e "audio.autoplay_resumed" aciona onAudioBloqueado(false)', () => {
+  const { fabricar, instancias } = criarFabricaFake()
+  const chamadasAudioBloqueado: boolean[] = []
+  const controller = criarRealtimePacienteController({
+    criarClient: fabricar,
+    onAudioBloqueado: (b) => chamadasAudioBloqueado.push(b),
+  })
+  controller.iniciar('1', [])
+  instancias[0].emitirEvento({ type: 'audio.autoplay_blocked', at: Date.now() })
+  instancias[0].emitirEvento({ type: 'audio.autoplay_resumed', at: Date.now() })
+  assert.deepEqual(chamadasAudioBloqueado, [false, true, false], 'onAudioBloqueado(false) inicial (ao iniciar) + bloqueado + retomado')
+})
+
+// ── 18. ativarAudioRemoto() repassa ao cliente ativo, sem criar nova sessão ──
+test('18. ativarAudioRemoto() chama o cliente ativo sem iniciar uma nova sessão', () => {
+  const { fabricar, instancias } = criarFabricaFake()
+  const controller = criarRealtimePacienteController({ criarClient: fabricar })
+  controller.iniciar('1', [])
+  controller.ativarAudioRemoto()
+  assert.equal(instancias.length, 1, 'não deveria criar uma nova sessão/cliente')
+  assert.equal(instancias[0].ativarAudioRemotoChamadas(), 1)
+  assert.equal(instancias[0].conectarChamadas(), 1, 'connectRealtime não deveria ser chamado novamente')
 })

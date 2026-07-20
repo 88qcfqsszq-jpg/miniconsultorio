@@ -60,6 +60,14 @@ export type EstadoVozPaciente =
 const TIPO_RESPOSTA_PACIENTE_PARCIAL = "response.output_audio_transcript.delta";
 const TIPO_RESPOSTA_PACIENTE_FINAL = "response.output_audio_transcript.done";
 
+/**
+ * Emitidos por realtimeClient.ts quando o navegador (tipicamente Safari) bloqueia
+ * ou libera a reprodução automática do áudio remoto — nunca carregam dados além
+ * de {type, at} (mesmo contrato sanitizado dos demais eventos).
+ */
+const TIPO_AUDIO_BLOQUEADO = "audio.autoplay_blocked";
+const TIPO_AUDIO_RETOMADO = "audio.autoplay_resumed";
+
 function mapearEstado(base: RealtimeConnectionState, pacienteRespondendo: boolean): EstadoVozPaciente {
   switch (base) {
     case "idle":
@@ -93,6 +101,8 @@ export interface RealtimePacienteControllerOptions {
   onMensagem?: (mensagem: MensagemChat) => void;
   onEstadoChange?: (estado: EstadoVozPaciente) => void;
   onErro?: (mensagem: string | null) => void;
+  /** Chamado quando o navegador bloqueia (true) ou libera (false) o autoplay do áudio remoto. */
+  onAudioBloqueado?: (bloqueado: boolean) => void;
   /** Injeção para testes — produção usa os defaults reais (sem rede/DOM fake). */
   criarClient?: (options?: RealtimeClientOptions) => RealtimeClient;
   criarMessageSync?: () => RealtimeMessageSync;
@@ -105,6 +115,8 @@ export interface RealtimePacienteController {
   encerrar(): void;
   /** Encerra e impede qualquer reinício futuro deste controller (uso: desmontagem). */
   destruir(): void;
+  /** Tenta retomar o áudio remoto bloqueado — sem criar nova sessão. No-op se não houver sessão ativa. */
+  ativarAudioRemoto(): void;
   getEstado(): EstadoVozPaciente;
   getErro(): string | null;
 }
@@ -162,6 +174,7 @@ export function criarRealtimePacienteController(
     const client = fabricarClient();
     clienteAtivo = client;
     notificarErro(null);
+    options.onAudioBloqueado?.(false);
 
     client.onStateChange((novoEstadoBase) => {
       if (!aindaValida()) return;
@@ -193,6 +206,12 @@ export function criarRealtimePacienteController(
         });
         if (nova) options.onMensagem?.(nova as MensagemChat);
       }
+
+      if (evento.type === TIPO_AUDIO_BLOQUEADO) {
+        options.onAudioBloqueado?.(true);
+      } else if (evento.type === TIPO_AUDIO_RETOMADO) {
+        options.onAudioBloqueado?.(false);
+      }
     });
 
     void client.connectRealtime(casoId);
@@ -210,10 +229,17 @@ export function criarRealtimePacienteController(
     destruida = true;
   }
 
+  /** Retoma o áudio remoto bloqueado, sem criar nova sessão nem novo clientSecret. */
+  function ativarAudioRemoto(): void {
+    if (destruida) return;
+    void clienteAtivo?.ativarAudioRemoto();
+  }
+
   return {
     iniciar,
     encerrar,
     destruir,
+    ativarAudioRemoto,
     getEstado: () => estado,
     getErro: () => erro,
   };
@@ -232,9 +258,13 @@ export interface UseRealtimePacienteParams {
 export interface UseRealtimePacienteResultado {
   estadoVoz: EstadoVozPaciente;
   erroVoz: string | null;
+  /** true quando o navegador (tipicamente Safari) bloqueou o autoplay do áudio remoto. */
+  audioBloqueado: boolean;
   /** Inicia a sessão de voz, semeando com o histórico textual atual (sem apagá-lo). */
   iniciarVoz: (mensagensAtuais: MensagemChat[]) => void;
   encerrarVoz: () => void;
+  /** Tenta retomar o áudio remoto bloqueado — não cria nova sessão nem novo clientSecret. */
+  ativarAudioRemoto: () => void;
 }
 
 export function useRealtimePaciente({
@@ -243,6 +273,7 @@ export function useRealtimePaciente({
 }: UseRealtimePacienteParams): UseRealtimePacienteResultado {
   const [estadoVoz, setEstadoVoz] = useState<EstadoVozPaciente>("inativo");
   const [erroVoz, setErroVoz] = useState<string | null>(null);
+  const [audioBloqueado, setAudioBloqueado] = useState(false);
   const controllerRef = useRef<RealtimePacienteController | null>(null);
   const onNovaMensagemVozRef = useRef(onNovaMensagemVoz);
   onNovaMensagemVozRef.current = onNovaMensagemVoz;
@@ -254,10 +285,12 @@ export function useRealtimePaciente({
       onMensagem: (msg) => onNovaMensagemVozRef.current(msg),
       onEstadoChange: setEstadoVoz,
       onErro: setErroVoz,
+      onAudioBloqueado: setAudioBloqueado,
     });
     controllerRef.current = controller;
     setEstadoVoz("inativo");
     setErroVoz(null);
+    setAudioBloqueado(false);
 
     return () => {
       controller.destruir();
@@ -276,5 +309,9 @@ export function useRealtimePaciente({
     controllerRef.current?.encerrar();
   }, []);
 
-  return { estadoVoz, erroVoz, iniciarVoz, encerrarVoz };
+  const ativarAudioRemoto = useCallback(() => {
+    controllerRef.current?.ativarAudioRemoto();
+  }, []);
+
+  return { estadoVoz, erroVoz, audioBloqueado, iniciarVoz, encerrarVoz, ativarAudioRemoto };
 }
