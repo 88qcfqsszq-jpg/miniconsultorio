@@ -23,9 +23,14 @@
  * SUBFASE 4D.1.1 — quando `params.turnDetection` é fornecido (hoje, só pelo
  * gate manual do Realtime, ver lib/voice/realtimeTurnGuardConfig.ts), a sessão
  * enviada ao provedor ganha `session.audio.input.turn_detection =
- * {type:"server_vad", create_response, interrupt_response}`. Sem
- * `turnDetection`, o payload permanece EXATAMENTE igual ao anterior (sem a
- * chave `audio`).
+ * {type:"server_vad", create_response, interrupt_response}`.
+ *
+ * FASE 4E — sem `turnDetection` (fluxo direto/automático, hoje o único em
+ * produção — Turn Guard desligado), a sessão passa a enviar um VAD explícito
+ * (ver VAD_DIRETO_PADRAO abaixo), menos sensível a ruído curto/pigarro, sem
+ * interromper a resposta em andamento, mais redução de ruído para microfone
+ * integrado (far_field). O modo manual do Turn Guard (`turnDetection`
+ * presente) não é alterado por esta fase.
  */
 
 import OpenAI from "openai";
@@ -138,9 +143,8 @@ export interface RealtimeClientSecretParams {
    * SUBFASE 4D.1.1 — quando presente (só no gate manual do Realtime, Caso
    * Ouro + flag ligada), é repassado ao SDK como
    * `session.audio.input.turn_detection = {type:"server_vad", create_response,
-   * interrupt_response}`. Quando ausente (todo o resto do sistema, hoje),
-   * NENHUMA configuração de audio.input é adicionada — o payload enviado ao
-   * provedor permanece byte a byte igual ao fluxo atual.
+   * interrupt_response}`. Quando ausente (fluxo direto/automático, FASE 4E),
+   * é usado o VAD explícito padrão do fluxo direto (VAD_DIRETO_PADRAO).
    */
   turnDetection?: RealtimeTurnDetectionConfig;
 }
@@ -158,6 +162,7 @@ type RealtimeAudioParamsOficial = NonNullable<RealtimeSessionRealtimeOficial["au
 type RealtimeAudioInputParamsOficial = NonNullable<RealtimeAudioParamsOficial["input"]>;
 type RealtimeTurnDetectionParamsOficial = NonNullable<RealtimeAudioInputParamsOficial["turn_detection"]>;
 type RealtimeServerVadParamsOficial = Extract<RealtimeTurnDetectionParamsOficial, { type: "server_vad" }>;
+type RealtimeNoiseReductionParamsOficial = NonNullable<RealtimeAudioInputParamsOficial["noise_reduction"]>;
 
 /** Constrói `session.audio.input.turn_detection`, usando exclusivamente a tipagem oficial do SDK. */
 function construirServerVadOficial(turnDetection: RealtimeTurnDetectionConfig): RealtimeServerVadParamsOficial {
@@ -169,9 +174,32 @@ function construirServerVadOficial(turnDetection: RealtimeTurnDetectionConfig): 
 }
 
 /**
- * Constrói o objeto `session` oficial. Sem `turnDetection`, devolve EXATAMENTE
- * o mesmo objeto de antes (sem a chave `audio`) — preservando byte a byte o
- * payload do fluxo atual.
+ * FASE 4E — VAD explícito do fluxo DIRETO/automático (Turn Guard desligado):
+ * threshold mais alto (0.65) para reduzir ativação por pigarro/ruído curto;
+ * `interrupt_response:false` para que ruído não corte a resposta do paciente
+ * em andamento; `create_response:true` preserva a resposta automática (baixa
+ * latência); `prefix_padding_ms`/`silence_duration_ms` mantidos nos valores
+ * atuais do provedor (300/500) nesta primeira tentativa.
+ */
+const VAD_DIRETO_PADRAO: RealtimeServerVadParamsOficial = {
+  type: "server_vad",
+  threshold: 0.65,
+  prefix_padding_ms: 300,
+  silence_duration_ms: 500,
+  create_response: true,
+  interrupt_response: false,
+};
+
+/** FASE 4E — redução de ruído compatível com microfone integrado de Mac/iPad. */
+const NOISE_REDUCTION_DIRETO_PADRAO: RealtimeNoiseReductionParamsOficial = {
+  type: "far_field",
+};
+
+/**
+ * Constrói o objeto `session` oficial. Com `turnDetection` (gate manual do
+ * Turn Guard, inalterado nesta fase): só `turn_detection`, sem
+ * `noise_reduction`. Sem `turnDetection` (fluxo direto/automático, FASE 4E):
+ * VAD explícito + redução de ruído padrão do fluxo direto.
  */
 function construirSessaoOficial(params: RealtimeClientSecretParams): RealtimeSessionRealtimeOficial {
   const sessaoBase: RealtimeSessionRealtimeOficial = {
@@ -179,14 +207,24 @@ function construirSessaoOficial(params: RealtimeClientSecretParams): RealtimeSes
     model: params.model,
     instructions: params.instructions,
   };
-  if (!params.turnDetection) {
-    return sessaoBase;
+
+  if (params.turnDetection) {
+    return {
+      ...sessaoBase,
+      audio: {
+        input: {
+          turn_detection: construirServerVadOficial(params.turnDetection),
+        },
+      },
+    };
   }
+
   return {
     ...sessaoBase,
     audio: {
       input: {
-        turn_detection: construirServerVadOficial(params.turnDetection),
+        turn_detection: VAD_DIRETO_PADRAO,
+        noise_reduction: NOISE_REDUCTION_DIRETO_PADRAO,
       },
     },
   };

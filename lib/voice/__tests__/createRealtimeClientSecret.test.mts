@@ -12,6 +12,7 @@
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 
 import {
   createRealtimeClientSecret,
@@ -133,8 +134,14 @@ interface CorpoRealtimeCapturado {
       input?: {
         turn_detection?: {
           type: string
+          threshold?: number
+          prefix_padding_ms?: number
+          silence_duration_ms?: number
           create_response?: boolean
           interrupt_response?: boolean
+        }
+        noise_reduction?: {
+          type: string
         }
       }
     }
@@ -156,7 +163,8 @@ function mockCapturandoCorpo(): { client: RealtimeClientSecretsClient; obterCorp
   return { client, obterCorpo: () => corpoRecebido }
 }
 
-test('1-2. SEM turnDetection: payload idêntico ao fluxo atual (sem a chave audio)', async () => {
+// ── FASE 4E — VAD explícito do fluxo direto/automático (Turn Guard desligado) ─
+test('1-7. SEM turnDetection (fluxo direto): server_vad, threshold 0.65, prefix 300ms, silence 500ms, create_response:true, interrupt_response:false, noise_reduction far_field', async () => {
   const { client, obterCorpo } = mockCapturandoCorpo()
   await createRealtimeClientSecret({ instructions: 'instr', model: 'gpt-realtime-teste', expiresAfterSeconds: 120 }, client)
   const corpo = obterCorpo()
@@ -164,11 +172,24 @@ test('1-2. SEM turnDetection: payload idêntico ao fluxo atual (sem a chave audi
   assert.equal(corpo!.session.type, 'realtime')
   assert.equal(corpo!.session.model, 'gpt-realtime-teste')
   assert.equal(corpo!.session.instructions, 'instr')
-  assert.equal(corpo!.session.audio, undefined, 'sem turnDetection, a chave audio não deveria existir no payload')
-  assert.deepEqual(Object.keys(corpo!.session).sort(), ['instructions', 'model', 'type'])
+
+  const turnDetection = corpo!.session.audio?.input?.turn_detection
+  assert.ok(turnDetection, 'session.audio.input.turn_detection ausente no fluxo direto')
+  assert.equal(turnDetection!.type, 'server_vad') // 1. fluxo direto usa server_vad
+  assert.equal(turnDetection!.threshold, 0.65) // 2. threshold é 0.65
+  assert.equal(turnDetection!.prefix_padding_ms, 300) // 3. prefix_padding_ms é 300
+  assert.equal(turnDetection!.silence_duration_ms, 500) // 4. silence_duration_ms permanece 500
+  assert.equal(turnDetection!.create_response, true) // 5. create_response permanece true
+  assert.equal(turnDetection!.interrupt_response, false) // 6. interrupt_response é false
+
+  const noiseReduction = corpo!.session.audio?.input?.noise_reduction
+  assert.ok(noiseReduction, 'session.audio.input.noise_reduction ausente no fluxo direto')
+  assert.equal(noiseReduction!.type, 'far_field') // 7. noise_reduction é far_field
+
+  assert.deepEqual(Object.keys(corpo!.session.audio!.input!).sort(), ['noise_reduction', 'turn_detection'])
 })
 
-test('3-5. COM turnDetection: session.audio.input.turn_detection = {type:"server_vad", create_response:false, interrupt_response:false}', async () => {
+test('8. COM turnDetection (modo manual do Turn Guard): session.audio.input.turn_detection = {type:"server_vad", create_response:false, interrupt_response:false} — inalterado por esta fase', async () => {
   const { client, obterCorpo } = mockCapturandoCorpo()
   await createRealtimeClientSecret(
     {
@@ -199,6 +220,14 @@ test('turnDetection não afeta noise_reduction/transcription/voz/instructions/mo
   )
   const corpo = obterCorpo()
   assert.deepEqual(Object.keys(corpo!.session.audio!.input!).sort(), ['turn_detection'])
+})
+
+// ── 12. nenhum endpoint/response.create foi integrado por esta fase ────────
+test('12. módulo nunca envia response.create nem integra o endpoint Turn Guard', async () => {
+  const codigoFonte = readFileSync(new URL('../createRealtimeClientSecret.ts', import.meta.url), 'utf8')
+  assert.ok(!codigoFonte.includes('response.create'))
+  assert.ok(!codigoFonte.includes('response_create'))
+  assert.ok(!codigoFonte.includes('turn-guard'))
 })
 
 test('createRealtimeClientSecret SEM client e SEM chave: RealtimeConfigError, ANTES de qualquer rede', async () => {

@@ -83,6 +83,13 @@ METADADOS DE VOZ (SESSÃO REALTIME) — comportamento de áudio, não regra clí
 REGRA DE ÁUDIO (específica à voz, complementa — não substitui — a regra acima
 de aguardar a pergunta do médico): não emita nenhuma fala, som ou cumprimento
 antes que o aluno fale primeiro. Não inicie a sessão falando sozinho(a).
+
+REGRA DE ESCOPO DA RESPOSTA (FASE 4E, específica à voz): responda apenas ao
+que foi perguntado na fala atual, usando somente a informação diretamente
+necessária. Não antecipe, resuma nem acrescente outros dados clínicos. Se não
+houver uma pergunta inteligível — apenas ruído, pigarro ou fala
+incompreensível — peça brevemente para repetir e não revele nenhuma
+informação nova.
 ═══════════════════════════════════════════════════════════`.trim();
 
   return {

@@ -130,6 +130,29 @@ test('Caso Ouro (id "1", Patient V3): metadados de voz continuam presentes e o d
   assert.ok(voiceProfile.voiceId && voiceProfile.speakerRole && voiceProfile.ageGroup, 'VoiceProfile deveria continuar completo')
 })
 
+// ═══════════════════════════════════════════════════════════════════════════
+// FASE 4E — regra curta de escopo da resposta (voz)
+// ═══════════════════════════════════════════════════════════════════════════
+
+test('10. regra curta de escopo da resposta aparece exatamente uma vez nas instructions Realtime', () => {
+  const caso = casoLegadoDeControle()
+  const { instructions } = construirInstrucoesRealtime(caso)
+  const marcador = 'REGRA DE ESCOPO DA RESPOSTA'
+  const ocorrencias = instructions.split(marcador).length - 1
+  assert.equal(ocorrencias, 1, `marcador "${marcador}" apareceu ${ocorrencias}x (esperado 1x)`)
+  assert.ok(instructions.includes('responda apenas ao'), 'faltou o início da regra de escopo da resposta')
+  assert.ok(instructions.includes('peça brevemente para repetir'), 'faltou a instrução de pedir para repetir')
+})
+
+test('11. a regra curta de escopo da resposta NÃO aparece no Prompt Base do texto (só na composição de voz)', () => {
+  const caso = casoLegadoDeControle()
+  const baseTexto = construirInstrucoesBasePaciente(caso)
+  assert.ok(
+    !baseTexto.includes('REGRA DE ESCOPO DA RESPOSTA'),
+    'Prompt Base do texto não deveria conter a regra específica de voz da Fase 4E'
+  )
+})
+
 test('todos os 76 casos exportados geram instruções e perfis válidos via construirInstrucoesRealtime', () => {
   assert.ok(CASOS.length >= 70, `esperado ≥70 casos, encontrado ${CASOS.length}`)
   for (const caso of CASOS) {
