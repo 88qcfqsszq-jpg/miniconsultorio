@@ -211,12 +211,18 @@ export async function handleCriarSessaoRealtime(
   const expiresAfterSeconds = resolverSessionMaxSeconds();
 
   // 10. Emitir segredo efêmero.
+  //
+  // SUBFASE 4D.1.1 — em turnGuardMode:"manual", repassa create_response:false/
+  // interrupt_response:false (já computados por decidirSessaoRealtime) para que
+  // cheguem de fato à sessão Realtime da OpenAI. Em "disabled", turnDetection
+  // é omitido — o payload permanece idêntico ao fluxo atual.
+  const parametrosClientSecret: RealtimeClientSecretParams =
+    decisaoTurnGuard.turnGuardMode === "manual"
+      ? { instructions, model: modelo, expiresAfterSeconds, turnDetection: decisaoTurnGuard.turnDetection }
+      : { instructions, model: modelo, expiresAfterSeconds };
+
   try {
-    const resultado = await criarClientSecret({
-      instructions,
-      model: modelo,
-      expiresAfterSeconds,
-    });
+    const resultado = await criarClientSecret(parametrosClientSecret);
 
     console.log(
       `[realtime/session] sucesso casoId=${casoId} duracaoMs=${Date.now() - inicio} sessionId=${resultado.sessionId ?? "n/a"}`

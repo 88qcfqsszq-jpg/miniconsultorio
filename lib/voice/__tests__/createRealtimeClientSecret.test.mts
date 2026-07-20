@@ -120,6 +120,87 @@ test('createRealtimeClientSecret com client injetado: nunca toca env nem rede', 
   assert.equal((corpoRecebido as any).session.type, 'realtime')
 })
 
+// ── SUBFASE 4D.1.1 — turnDetection chegando ao payload oficial do SDK ───────
+
+/** Formato do corpo realmente recebido pelo SDK — só para leitura em asserções de teste. */
+interface CorpoRealtimeCapturado {
+  expires_after: { anchor: string; seconds: number }
+  session: {
+    type: string
+    model: string
+    instructions: string
+    audio?: {
+      input?: {
+        turn_detection?: {
+          type: string
+          create_response?: boolean
+          interrupt_response?: boolean
+        }
+      }
+    }
+  }
+}
+
+function mockCapturandoCorpo(): { client: RealtimeClientSecretsClient; obterCorpo: () => CorpoRealtimeCapturado | null } {
+  let corpoRecebido: CorpoRealtimeCapturado | null = null
+  const client: RealtimeClientSecretsClient = {
+    realtime: {
+      clientSecrets: {
+        create: async (body: unknown) => {
+          corpoRecebido = body as CorpoRealtimeCapturado
+          return { value: 'ek_test_mock_turndetection', expires_at: 1234567890, session: { id: 'sess_mock_td' } }
+        },
+      },
+    },
+  }
+  return { client, obterCorpo: () => corpoRecebido }
+}
+
+test('1-2. SEM turnDetection: payload idêntico ao fluxo atual (sem a chave audio)', async () => {
+  const { client, obterCorpo } = mockCapturandoCorpo()
+  await createRealtimeClientSecret({ instructions: 'instr', model: 'gpt-realtime-teste', expiresAfterSeconds: 120 }, client)
+  const corpo = obterCorpo()
+  assert.ok(corpo)
+  assert.equal(corpo!.session.type, 'realtime')
+  assert.equal(corpo!.session.model, 'gpt-realtime-teste')
+  assert.equal(corpo!.session.instructions, 'instr')
+  assert.equal(corpo!.session.audio, undefined, 'sem turnDetection, a chave audio não deveria existir no payload')
+  assert.deepEqual(Object.keys(corpo!.session).sort(), ['instructions', 'model', 'type'])
+})
+
+test('3-5. COM turnDetection: session.audio.input.turn_detection = {type:"server_vad", create_response:false, interrupt_response:false}', async () => {
+  const { client, obterCorpo } = mockCapturandoCorpo()
+  await createRealtimeClientSecret(
+    {
+      instructions: 'instr reduzida',
+      model: 'gpt-realtime-teste',
+      expiresAfterSeconds: 120,
+      turnDetection: { createResponse: false, interruptResponse: false },
+    },
+    client
+  )
+  const corpo = obterCorpo()
+  assert.ok(corpo)
+  const turnDetection = corpo!.session.audio?.input?.turn_detection
+  assert.ok(turnDetection, 'session.audio.input.turn_detection ausente')
+  assert.equal(turnDetection!.type, 'server_vad')
+  assert.equal(turnDetection!.create_response, false)
+  assert.equal(turnDetection!.interrupt_response, false)
+  // Instructions/model/expires_after continuam intactos, sem nenhuma sobrescrita.
+  assert.equal(corpo!.session.instructions, 'instr reduzida')
+  assert.equal(corpo!.expires_after.seconds, 120)
+})
+
+test('turnDetection não afeta noise_reduction/transcription/voz/instructions/modelo já existentes (nenhuma outra chave de audio.input é tocada)', async () => {
+  const { client, obterCorpo } = mockCapturandoCorpo()
+  await createRealtimeClientSecret(
+    { instructions: 'x', model: 'm', expiresAfterSeconds: 60, turnDetection: { createResponse: false, interruptResponse: false } },
+    client
+  )
+  const corpo = obterCorpo()
+  assert.deepEqual(Object.keys(corpo!.session.audio!.input!).sort(), ['turn_detection'])
+})
+
 test('createRealtimeClientSecret SEM client e SEM chave: RealtimeConfigError, ANTES de qualquer rede', async () => {
   const fetchOriginal = globalThis.fetch
   let fetchChamado = false

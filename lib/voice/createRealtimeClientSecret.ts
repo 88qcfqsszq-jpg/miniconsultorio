@@ -19,9 +19,17 @@
  *     session: { type: "realtime", model, instructions, ... }
  *   })
  *   → { value: string /* "ek_..." *\/, expires_at: number, session: {...} }
+ *
+ * SUBFASE 4D.1.1 — quando `params.turnDetection` é fornecido (hoje, só pelo
+ * gate manual do Realtime, ver lib/voice/realtimeTurnGuardConfig.ts), a sessão
+ * enviada ao provedor ganha `session.audio.input.turn_detection =
+ * {type:"server_vad", create_response, interrupt_response}`. Sem
+ * `turnDetection`, o payload permanece EXATAMENTE igual ao anterior (sem a
+ * chave `audio`).
  */
 
 import OpenAI from "openai";
+import type { RealtimeTurnDetectionConfig } from "@/lib/voice/realtimeTurnGuardConfig";
 
 // ============================================================================
 // CONFIGURAÇÃO (variáveis server-only, validadas)
@@ -126,6 +134,62 @@ export interface RealtimeClientSecretParams {
   instructions: string;
   model: string;
   expiresAfterSeconds: number;
+  /**
+   * SUBFASE 4D.1.1 — quando presente (só no gate manual do Realtime, Caso
+   * Ouro + flag ligada), é repassado ao SDK como
+   * `session.audio.input.turn_detection = {type:"server_vad", create_response,
+   * interrupt_response}`. Quando ausente (todo o resto do sistema, hoje),
+   * NENHUMA configuração de audio.input é adicionada — o payload enviado ao
+   * provedor permanece byte a byte igual ao fluxo atual.
+   */
+  turnDetection?: RealtimeTurnDetectionConfig;
+}
+
+// ============================================================================
+// TIPAGEM OFICIAL DO SDK — derivada por indexed access de
+// OpenAI.Realtime.ClientSecretCreateParams (o único tipo de request reexportado
+// publicamente pelo pacote para este endpoint), sem importar caminhos internos
+// não reexportados e sem nenhum `any`/cast.
+// ============================================================================
+
+type RealtimeSessionParamsOficial = NonNullable<OpenAI.Realtime.ClientSecretCreateParams["session"]>;
+type RealtimeSessionRealtimeOficial = Extract<RealtimeSessionParamsOficial, { type: "realtime" }>;
+type RealtimeAudioParamsOficial = NonNullable<RealtimeSessionRealtimeOficial["audio"]>;
+type RealtimeAudioInputParamsOficial = NonNullable<RealtimeAudioParamsOficial["input"]>;
+type RealtimeTurnDetectionParamsOficial = NonNullable<RealtimeAudioInputParamsOficial["turn_detection"]>;
+type RealtimeServerVadParamsOficial = Extract<RealtimeTurnDetectionParamsOficial, { type: "server_vad" }>;
+
+/** Constrói `session.audio.input.turn_detection`, usando exclusivamente a tipagem oficial do SDK. */
+function construirServerVadOficial(turnDetection: RealtimeTurnDetectionConfig): RealtimeServerVadParamsOficial {
+  return {
+    type: "server_vad",
+    create_response: turnDetection.createResponse,
+    interrupt_response: turnDetection.interruptResponse,
+  };
+}
+
+/**
+ * Constrói o objeto `session` oficial. Sem `turnDetection`, devolve EXATAMENTE
+ * o mesmo objeto de antes (sem a chave `audio`) — preservando byte a byte o
+ * payload do fluxo atual.
+ */
+function construirSessaoOficial(params: RealtimeClientSecretParams): RealtimeSessionRealtimeOficial {
+  const sessaoBase: RealtimeSessionRealtimeOficial = {
+    type: "realtime",
+    model: params.model,
+    instructions: params.instructions,
+  };
+  if (!params.turnDetection) {
+    return sessaoBase;
+  }
+  return {
+    ...sessaoBase,
+    audio: {
+      input: {
+        turn_detection: construirServerVadOficial(params.turnDetection),
+      },
+    },
+  };
 }
 
 export interface RealtimeClientSecretResult {
@@ -172,14 +236,11 @@ export async function createRealtimeClientSecret(
 
   const cliente = client ?? construirClienteOficial();
 
-  const resposta = await cliente.realtime.clientSecrets.create({
+  const corpoRequisicao: OpenAI.Realtime.ClientSecretCreateParams = {
     expires_after: { anchor: "created_at", seconds: params.expiresAfterSeconds },
-    session: {
-      type: "realtime",
-      model: params.model,
-      instructions: params.instructions,
-    },
-  });
+    session: construirSessaoOficial(params),
+  };
+  const resposta = await cliente.realtime.clientSecrets.create(corpoRequisicao);
 
   return {
     clientSecret: resposta.value,

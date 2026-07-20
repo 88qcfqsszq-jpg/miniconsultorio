@@ -489,7 +489,66 @@ test('4D.1-5. nenhuma tool é declarada nos parâmetros repassados ao provedor',
       requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
       { criarClientSecret: mockClientSecret(captura) }
     )
+    // SUBFASE 4D.1.1: em modo manual, turnDetection agora É repassado — mas
+    // continua sem NENHUM campo de tool (tools/tool_choice inexistentes).
+    assert.deepEqual(Object.keys(captura.params!).sort(), ['expiresAfterSeconds', 'instructions', 'model', 'turnDetection'])
+    assert.ok(!('tools' in captura.params!), 'tools não deveria existir nos parâmetros')
+    assert.ok(!('tool_choice' in captura.params!), 'tool_choice não deveria existir nos parâmetros')
+  } finally { restore() }
+})
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SUBFASE 4D.1.1 — turnDetection efetivamente repassado ao criador do client secret
+// ═══════════════════════════════════════════════════════════════════════════
+
+test('4D.1.1-1. modo "disabled" NÃO envia turnDetection a criarClientSecret', async () => {
+  const restore = aplicarEnv(ENV_BASE) // flag do Turn Guard desligada
+  try {
+    const captura: { params?: RealtimeClientSecretParams } = {}
+    await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
+      { criarClientSecret: mockClientSecret(captura) }
+    )
+    assert.equal(captura.params!.turnDetection, undefined)
     assert.deepEqual(Object.keys(captura.params!).sort(), ['expiresAfterSeconds', 'instructions', 'model'])
+  } finally { restore() }
+})
+
+test('4D.1.1-2. modo "manual" envia turnDetection:{createResponse:false, interruptResponse:false}', async () => {
+  const restore = aplicarEnv({ ...ENV_BASE, PATIENT_V3_REALTIME_TURN_GUARD: 'true' })
+  try {
+    const captura: { params?: RealtimeClientSecretParams } = {}
+    await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
+      { criarClientSecret: mockClientSecret(captura) }
+    )
+    assert.deepEqual(captura.params!.turnDetection, { createResponse: false, interruptResponse: false })
+  } finally { restore() }
+})
+
+test('4D.1.1-3. caso legado com a flag ligada: modo "disabled", sem turnDetection', async () => {
+  const restore = aplicarEnv({ ...ENV_BASE, PATIENT_V3_REALTIME_TURN_GUARD: 'true' })
+  try {
+    const captura: { params?: RealtimeClientSecretParams } = {}
+    await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_LEGADO_DE_CONTROLE })),
+      { criarClientSecret: mockClientSecret(captura) }
+    )
+    assert.equal(captura.params!.turnDetection, undefined)
+  } finally { restore() }
+})
+
+test('4D.1.1-4. nenhum response.create/response_create é enviado (estrutural, sem chamada real)', async () => {
+  const restore = aplicarEnv({ ...ENV_BASE, PATIENT_V3_REALTIME_TURN_GUARD: 'true' })
+  try {
+    const captura: { params?: RealtimeClientSecretParams } = {}
+    await handleCriarSessaoRealtime(
+      requisicao(JSON.stringify({ casoId: CASO_ID_VALIDO })),
+      { criarClientSecret: mockClientSecret(captura) }
+    )
+    const corpoSerializado = JSON.stringify(captura.params)
+    assert.ok(!corpoSerializado.includes('response.create'))
+    assert.ok(!corpoSerializado.includes('response_create'))
   } finally { restore() }
 })
 
