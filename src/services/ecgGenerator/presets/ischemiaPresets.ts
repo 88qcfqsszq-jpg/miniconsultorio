@@ -89,4 +89,85 @@ export const ischemiaPresets: Record<string, ECGPreset> = {
     warning:
       'Padrão sintético educacional para fins de ensino em OSCE. Não usar para diagnóstico clínico real.',
   },
+
+  /**
+   * IAM com Supra de ST — Inferior (DII, DIII, aVF)
+   *
+   * Padrão clínico:
+   * - Território inferior, geralmente relacionado à Artéria Coronária Direita
+   *   (ou circunflexa, em dominância esquerda)
+   * - Supra de ST em DII, DIII, aVF (≥ 0.1 mV), com DIII tipicamente ≥ DII
+   *   (padrão sugestivo de artéria coronária direita vs. circunflexa)
+   * - Alterações recíprocas em DI e aVL (infradesnivelamento de ST)
+   * - Ritmo sinusal mantido (exceto se evolução com bloqueio AV — fora deste preset;
+   *   IAM inferior tem associação conhecida com bradiarritmias/BAV, não modelado aqui)
+   * - FC varia conforme estado clínico do paciente (política estado_clinico)
+   *
+   * O que este preset representa:
+   * - Fase hiperaguda/aguda de IAM inferior com supradesnivelamento de ST
+   * - Q patológica em DII/DIII/aVF não renderizada (além do escopo atual do gerador)
+   * - tWavePolarity não configurada nesta etapa
+   *
+   * Política de frequência: estado_clinico
+   * - patientHeartRate prevalece quando fornecida (FC do caso clínico)
+   * - Fallback: 75 bpm (FC de repouso adulto)
+   */
+  iam_inferior: {
+    id: 'iam_inferior',
+    label: 'IAM com Supra de ST — Inferior',
+    category: 'isquemia',
+    ageGroup: 'adulto',
+    description:
+      'Infarto inferior com supradesnivelamento de ST em DII, DIII e aVF, e alterações recíprocas em DI e aVL. Padrão compatível com acometimento do território inferior. Ritmo sinusal.',
+
+    // Fallback de FC. A política estado_clinico faz patientHeartRate prevalecer.
+    heartRate: 75,
+    rrVariability: 0.04,
+    prIntervalMs: 160,
+    qrsDurationMs: 90,
+    qtIntervalMs: 400,
+
+    axisProfile: 'normal',
+
+    morphology: {
+      pAmplitude: 0.12,
+      qAmplitude: 0.03,
+      rAmplitude: 0.85,
+      sAmplitude: 0.18,
+      tAmplitude: 0.35,
+      tPolarity: 'positive',
+      stSegment: 'elevation', // descrição global; os valores por derivação estão em leadModifiers
+    },
+
+    // Modificadores morfológicos por derivação — aplicados em runtime pelo pipeline 3b.
+    // DIII recebe a maior elevação (padrão sugestivo de artéria coronária direita).
+    // DI/aVL recebem depressão recíproca (achado clássico de IAM inferior).
+    leadModifiers: {
+      II:  { stShift: { tipo: 'elevation', amplitudeMv: 0.30 } },
+      III: { stShift: { tipo: 'elevation', amplitudeMv: 0.35 } },
+      aVF: { stShift: { tipo: 'elevation', amplitudeMv: 0.30 } },
+      I:   { stShift: { tipo: 'depression', amplitudeMv: 0.10 } },
+      aVL: { stShift: { tipo: 'depression', amplitudeMv: 0.15 } },
+    },
+
+    expectedInterpretation: [
+      'IAM com supra de ST inferior',
+      'Ritmo sinusal',
+      'Supradesnivelamento de ST em DII, DIII, aVF',
+      'DIII com maior elevação de ST que DII',
+      'Infradesnivelamento recíproco em DI e aVL',
+    ],
+
+    teachingPoints: [
+      'Supradesnivelamento de ST em DII, DIII, aVF é padrão compatível com acometimento do território inferior, geralmente relacionado à Artéria Coronária Direita',
+      'DIII com elevação maior que DII sugere artéria coronária direita como vaso culpado (vs. circunflexa quando DII≥DIII)',
+      'Infradesnivelamento recíproco em DI e aVL é achado de apoio para IAM inferior (aumenta especificidade)',
+      'IAM inferior tem associação conhecida com bradiarritmias e bloqueio AV (envolvimento do nó AV pela artéria coronária direita) — não modelado neste preset',
+      'Considerar sempre derivações direitas (V3R-V4R) para rastrear infarto de ventrículo direito associado',
+      'Diagnóstico de IAMCSST exige contexto clínico (dor, troponina, evolução)',
+    ],
+
+    warning:
+      'Padrão sintético educacional para fins de ensino em OSCE. Não usar para diagnóstico clínico real.',
+  },
 }

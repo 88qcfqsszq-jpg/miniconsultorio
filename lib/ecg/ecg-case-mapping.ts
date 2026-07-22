@@ -5,7 +5,8 @@
  * baseado em tema, diagnóstico e apresentação.
  */
 
-import type { EsperadoExame } from '../types'
+import type { EsperadoExame, EsperadosExames } from '../types'
+import { resolveECGPresetByCaseId } from './ecg-case-id-mapping'
 
 /**
  * Mapeamento de temas clínicos para ECG esperados
@@ -278,7 +279,15 @@ export interface ECGResolucaoCaso {
   presetId: string
   /** Nota educacional quando o ECG é normal mas não exclui o diagnóstico. */
   laudoContextual?: string
-  origem: 'esperado' | 'tema' | 'diagnostico' | 'idade'
+  origem: 'esperado' | 'id' | 'tema' | 'diagnostico' | 'idade'
+  /** true quando o preset foi curado/validado especificamente para este caso
+   *  (origem 'esperado' ou 'id'); false/undefined quando veio de um nível
+   *  genérico (tema/idade) ou de um match textual de diagnóstico não revisado
+   *  território a território. */
+  clinicallyValidated?: boolean
+  /** Preenchido apenas quando a resolução caiu num nível genérico (tema ou
+   *  idade), explicando por que não havia preset mais específico. */
+  fallbackReason?: string
 }
 
 /** Presets patológicos disponíveis mapeados por palavra-chave de diagnóstico.
@@ -302,23 +311,47 @@ const DIAGNOSTICO_PRESET: Array<[RegExp, string]> = [
 /** Diagnósticos cardíacos em que um ECG normal NÃO exclui a doença. */
 const DIAGNOSTICO_CARDIACO_CONTEXTO = /cardiopatia|cianotic|tetralogia|fallot|transposi|\btga\b|congenit.*cardi|cardi.*congenit|sopro|comunicac.*(interventricular|interatrial)|\bciv\b|\bcia\b|persistencia.*ducto|\bpca\b|coarctac|estenose (aortic|mitral|pulmonar)|insuficiencia (mitral|aortic|cardiac)|\bicc\b|pericardite|miocardite|endocardite|valvopatia|hipertrofia|arritmia|prolapso/
 
+/** IDs (combinados com o nível de fallback) já avisados nesta sessão do
+ *  processo — evita spam do console a cada re-render do SimuladorECG
+ *  (resolveECGPresetForCase roda de novo em todo render do componente). */
+const casosJaAvisados = new Set<string>()
+
+/** Loga (só em desenvolvimento, uma única vez por caso+nível) quando o ECG
+ *  cai num nível genérico de resolução, para que a lacuna fique visível a
+ *  quem está desenvolvendo — nunca ao usuário final (nenhum erro/aviso
+ *  técnico é exibido na tela). Não registra nenhum dado clínico do
+ *  paciente — só o ID do caso (identificador técnico) e o preset escolhido. */
+function logFallbackDev(casoId: unknown, nivel: 'tema' | 'idade', presetId: string): void {
+  if (process.env.NODE_ENV === 'production') return
+  const chave = `${String(casoId ?? '(sem id)')}:${nivel}`
+  if (casosJaAvisados.has(chave)) return
+  casosJaAvisados.add(chave)
+  // eslint-disable-next-line no-console
+  console.warn(
+    `[ECG] Caso "${String(casoId ?? '(sem id)')}" sem preset específico (ID/diagnóstico) — ` +
+      `resolvido por ${nivel === 'tema' ? 'TEMA genérico' : 'IDADE (fallback normal)'}: "${presetId}". ` +
+      `Considere adicionar entrada em lib/ecg/ecg-case-id-mapping.ts se o achado de ECG do caso for específico.`
+  )
+}
+
 export function resolveECGPresetForCase(caso: any): ECGResolucaoCaso {
-  // 1. Expectativa explícita do caso.
-  if (caso?.esperadosExames?.ecg?.presetId) {
-    return { presetId: caso.esperadosExames.ecg.presetId, origem: 'esperado' }
+  // 1. Expectativa explícita do caso (máxima prioridade). Leitura tipada
+  //    (sem propagar `any`): o shape lido é exatamente EsperadosExames.
+  const esperado = (caso as { esperadosExames?: EsperadosExames } | null | undefined)
+    ?.esperadosExames?.ecg?.presetId
+  if (esperado) {
+    return { presetId: esperado, origem: 'esperado', clinicallyValidated: true }
   }
 
-  // 2. Tema mapeado (comportamento existente).
-  if (caso?.tema) {
-    try {
-      const exp = getECGExpectationForCaseTheme(caso.tema)
-      if (exp?.presetId) return { presetId: exp.presetId, origem: 'tema' }
-    } catch {
-      /* ignora e segue para diagnóstico */
-    }
+  // 2. Mapping por ID do caso — resolução específica quando o achado de ECG
+  //    do próprio caso exige um território/padrão que tema/diagnóstico
+  //    genéricos não distinguem (ex.: IAM inferior vs. anterosseptal).
+  const presetPorId = resolveECGPresetByCaseId(caso?.id)
+  if (presetPorId) {
+    return { presetId: presetPorId, origem: 'id', clinicallyValidated: true }
   }
 
-  // 3. Diagnóstico do caso.
+  // 3. Diagnóstico do caso (mais específico que tema).
   const diag = normalizar(
     caso?.diagnosticoCorreto ??
       caso?.dados_ocultos_do_sistema?.diagnostico_principal ??
@@ -330,18 +363,45 @@ export function resolveECGPresetForCase(caso: any): ECGResolucaoCaso {
     for (const [re, preset] of DIAGNOSTICO_PRESET) {
       if (re.test(diag)) return { presetId: preset, origem: 'diagnostico' }
     }
-    // Cardíaco sem preset específico → normal por idade, mas CONTEXTUALIZADO.
-    if (DIAGNOSTICO_CARDIACO_CONTEXTO.test(diag)) {
-      return {
-        presetId: presetNormalPorIdade(caso),
-        origem: 'diagnostico',
-        laudoContextual:
-          'ECG sem alterações específicas neste simulador. Um ECG normal NÃO exclui o diagnóstico — ' +
-          'correlacionar com ecocardiograma, radiografia e o quadro clínico.',
+  }
+
+  // 4. Tema mapeado (genérico — só chega aqui se diagnóstico não resolveu).
+  if (caso?.tema) {
+    try {
+      const exp = getECGExpectationForCaseTheme(caso.tema)
+      if (exp?.presetId) {
+        logFallbackDev(caso?.id, 'tema', exp.presetId)
+        return {
+          presetId: exp.presetId,
+          origem: 'tema',
+          fallbackReason: 'Sem preset específico por ID ou diagnóstico; resolvido por tema genérico do caso.',
+        }
       }
+    } catch {
+      /* ignora e segue para idade */
     }
   }
 
-  // 4. Idade (normal padrão).
-  return { presetId: presetNormalPorIdade(caso), origem: 'idade' }
+  // Cardíaco sem preset específico → normal por idade, mas CONTEXTUALIZADO.
+  if (diag && DIAGNOSTICO_CARDIACO_CONTEXTO.test(diag)) {
+    const presetId = presetNormalPorIdade(caso)
+    logFallbackDev(caso?.id, 'idade', presetId)
+    return {
+      presetId,
+      origem: 'diagnostico',
+      laudoContextual:
+        'ECG sem alterações específicas neste simulador. Um ECG normal NÃO exclui o diagnóstico — ' +
+        'correlacionar com ecocardiograma, radiografia e o quadro clínico.',
+      fallbackReason: 'Diagnóstico cardíaco sem preset específico; ECG normal não exclui a doença — laudo contextualizado.',
+    }
+  }
+
+  // 5. Idade (normal padrão) — último nível.
+  const presetId = presetNormalPorIdade(caso)
+  logFallbackDev(caso?.id, 'idade', presetId)
+  return {
+    presetId,
+    origem: 'idade',
+    fallbackReason: 'Sem preset específico por ID, diagnóstico ou tema; resolvido por idade (ECG normal padrão).',
+  }
 }
