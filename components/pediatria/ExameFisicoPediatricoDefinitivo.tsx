@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { Caso } from "@/lib/types";
+import { useImagemRect } from "@/lib/pediatria/use-imagem-rect";
+import "./ExameFisicoPediatricoDefinitivo.css";
 import {
   REGIOES_EXAME_PEDIATRICO,
   FAIXAS_ETARIAS_PEDIATRICAS,
@@ -49,6 +51,14 @@ export default function ExameFisicoPediatricoDefinitivo({
     null
   );
   const [imagemAchadoErro, setImagemAchadoErro] = useState(false);
+
+  const imagemContainerRef = useRef<HTMLDivElement>(null);
+  const imagemRef = useRef<HTMLImageElement>(null);
+  const { retangulo: retanguloImagem, recalcular: recalcularRetanguloImagem } = useImagemRect(
+    imagemContainerRef,
+    imagemRef,
+    [imagemFrontal]
+  );
 
   // Obter regiões e ações da região selecionada
   const regiao = REGIOES_EXAME_PEDIATRICO.find((r) => r.id === regiaoSelecionada);
@@ -101,7 +111,7 @@ export default function ExameFisicoPediatricoDefinitivo({
 
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
+    <div className="efpdv-overlay">
       {/* Fundo com gradiente radial */}
       <div
         className="absolute inset-0 -z-10 rounded-3xl"
@@ -115,9 +125,7 @@ export default function ExameFisicoPediatricoDefinitivo({
       />
 
       {/* Modal principal */}
-      <div className="relative w-[90vw] h-[85vh] flex flex-col bg-white/45 backdrop-blur-xl rounded-3xl border border-white/60 overflow-hidden" style={{
-        boxShadow: "0 20px 60px rgba(15,23,42,0.12)"
-      }}>
+      <div className="efpdv-caixa">
         {/* CABEÇALHO AZUL */}
         <div className="flex flex-col bg-gradient-to-r from-blue-700 via-blue-600 to-sky-500 border-b border-blue-800/30">
           {/* Linha 1: Título e Faixa etária */}
@@ -186,26 +194,24 @@ export default function ExameFisicoPediatricoDefinitivo({
         </div>
 
         {/* CORPO PRINCIPAL - 3 OU 4 COLUNAS */}
-        <div className="flex-1 grid gap-4 overflow-hidden p-4" style={{
-          gridTemplateColumns: deveMostrarExameInterativo
-            ? "380px 225px 320px 1fr"
-            : "380px 225px 320px"
-        }}>
+        <div className="efpdv-conteudo">
+          <div className={`efpdv-grid ${deveMostrarExameInterativo ? "efpdv-grid--interativo" : ""}`}>
           {/* COLUNA 1: IMAGEM DO PACIENTE */}
-          <div className="relative flex items-center justify-center bg-white/35 backdrop-blur-lg rounded-2xl border border-white/60 overflow-hidden" style={{
+          <div className="efpdv-coluna-imagem relative bg-white/35 backdrop-blur-lg rounded-2xl border border-white/60 overflow-hidden" style={{
             boxShadow: "0 8px 24px rgba(15,23,42,0.08)"
           }}>
-            <div className="absolute inset-0 flex items-center justify-center p-1.5">
+            <div ref={imagemContainerRef} className="efpdv-imagem-wrap">
               <img
+                ref={imagemRef}
                 src={imagemFrontal}
                 alt={`Corpo ${faixaEtaria}`}
-                className="max-h-[68vh] w-auto object-contain"
+                onLoad={recalcularRetanguloImagem}
               />
-            </div>
 
-            {/* Hotspots overlay */}
-            <div className="absolute inset-0 pointer-events-none">
-                {REGIOES_EXAME_PEDIATRICO.map((r) => {
+              {/* Hotspots overlay — alinhados à área real da imagem (object-fit: contain),
+                  não ao contêiner inteiro, para não desalinhar em proporções diferentes. */}
+              {retanguloImagem &&
+                REGIOES_EXAME_PEDIATRICO.map((r) => {
                   const hotspot = r.hotspots[faixaEtaria];
                   if (!hotspot) return null;
 
@@ -222,20 +228,16 @@ export default function ExameFisicoPediatricoDefinitivo({
                   };
 
                   const offset = offsetMap[r.id] || { x: 0, y: 0 };
+                  const left = retanguloImagem.left + (hotspot.x / 100) * retanguloImagem.width + offset.x;
+                  const top = retanguloImagem.top + (hotspot.y / 100) * retanguloImagem.height + offset.y;
 
                   return (
                     <button
                       key={r.id}
                       onClick={() => setRegiaoSelecionada(r.id)}
                       aria-label={`Região: ${r.label}`}
-                      className="absolute flex items-center justify-center pointer-events-auto cursor-pointer transition-all group"
-                      style={{
-                        left: `calc(${hotspot.x}% + ${offset.x}px)`,
-                        top: `calc(${hotspot.y}% + ${offset.y}px)`,
-                        minWidth: "44px",
-                        minHeight: "44px",
-                        transform: "translate(-50%, -50%)",
-                      }}
+                      className="efpdv-hotspot group"
+                      style={{ left, top }}
                       title={r.label}
                     >
                       {/* Marca visual - reduzida para 12-14px */}
@@ -257,7 +259,7 @@ export default function ExameFisicoPediatricoDefinitivo({
           </div>
 
           {/* COLUNA 2: AÇÕES */}
-          <div className="flex flex-col bg-white/45 backdrop-blur-xl rounded-2xl border border-white/60 overflow-hidden" style={{
+          <div className="efpdv-coluna-acoes flex flex-col bg-white/45 backdrop-blur-xl rounded-2xl border border-white/60 overflow-hidden" style={{
             boxShadow: "0 8px 24px rgba(15,23,42,0.08)"
           }}>
               <div className="px-4 py-3 bg-white/50 border-b border-white/30">
@@ -296,7 +298,7 @@ export default function ExameFisicoPediatricoDefinitivo({
             </div>
 
           {/* COLUNA 3: ACHADOS */}
-          <div className="flex flex-col gap-4 overflow-hidden">
+          <div className="efpdv-coluna-achados">
             {/* PAINEL ACHADO ATUAL */}
             {achadoAtual ? (
               <div className="flex flex-col bg-gradient-to-b from-green-100/35 to-emerald-100/30 backdrop-blur-xl rounded-2xl border border-green-200/50 overflow-hidden" style={{
@@ -424,7 +426,7 @@ export default function ExameFisicoPediatricoDefinitivo({
 
           {/* COLUNA 4: EXAME INTERATIVO - CONDICIONAL - RENDERIZADO À DIREITA */}
           {deveMostrarExameInterativo && (
-          <div className="flex flex-col bg-white/45 backdrop-blur-xl rounded-2xl border border-white/60 overflow-hidden" style={{
+          <div className="efpdv-coluna-interativo flex flex-col bg-white/45 backdrop-blur-xl rounded-2xl border border-white/60 overflow-hidden" style={{
             boxShadow: "0 8px 24px rgba(15,23,42,0.08)"
           }}>
             <div className="px-4 py-3 bg-white/50 border-b border-white/30">
@@ -562,6 +564,7 @@ export default function ExameFisicoPediatricoDefinitivo({
             </div>
           </div>
           )}
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,252 @@
+/* ==========================================================================
+   ExameFisicoPediatricoDefinitivo — modal do exame físico pediátrico com
+   imagem interativa (versão com abas de região no cabeçalho).
+   CSS escopado sob .efpdv-* para não afetar o resto do app.
+
+   Breakpoints:
+     desktop         (>=1300px)                       : layout horizontal
+     tablet paisagem (641-1299px, orientation:landscape): horizontal compacto
+     tablet retrato   (<=1299px, orientation:portrait)  : grade 2x2
+     mobile           (<=640px, qualquer orientação)    : empilhado 1 coluna
+
+   iPad em paisagem (1024x768) cai em "tablet paisagem" — layout horizontal,
+   nunca empilhado. iPad em retrato (768x1024) cai em "tablet retrato".
+
+   Em nenhum breakpoint o corpo usa overflow:hidden que corte informação —
+   cada painel individual tem sua própria rolagem vertical.
+   ========================================================================== */
+
+.efpdv-overlay,
+.efpdv-overlay * {
+  box-sizing: border-box;
+}
+
+.efpdv-overlay {
+  position: fixed;
+  inset: 0;
+  /* Acima da sidebar global (.app-sidebar, z-index:60) e de seu backdrop
+     mobile (z-index:65) — apenas como reforço; o posicionamento real (abaixo)
+     já reserva a faixa da sidebar, então não há sobreposição a esconder. */
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(6px, 2vw, 16px);
+}
+
+/* A partir de 1024px a sidebar global vira fixa e permanente (ver
+   .app-sidebar / .app-main em AppShell.css: 16px margem + 82px de largura +
+   respiro = 104px reservados à esquerda). O modal precisa começar depois
+   dessa faixa — nunca por cima dela via z-index. */
+@media (min-width: 1024px) {
+  .efpdv-overlay {
+    left: 104px;
+  }
+}
+
+.efpdv-caixa {
+  position: relative;
+  width: 100%;
+  max-width: 1520px;
+  height: 100%;
+  max-height: min(92vh, 92dvh);
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Conteúdo — nunca usa overflow:hidden que corte informação; rola
+   verticalmente apenas quando o conteúdo realmente não cabe (retrato /
+   mobile). Em paisagem o corpo ocupa exatamente a altura restante. */
+.efpdv-conteudo {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: clamp(8px, 1.2vw, 16px);
+}
+
+/* ---------- Base = layout horizontal (desktop) ---------- */
+.efpdv-grid {
+  display: grid;
+  gap: clamp(8px, 1vw, 16px);
+  height: 100%;
+  min-height: 100%;
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(260px, 380px) minmax(190px, 225px) minmax(260px, 320px);
+  grid-template-areas: "imagem acoes achados";
+}
+.efpdv-grid--interativo {
+  grid-template-columns: minmax(260px, 380px) minmax(190px, 225px) minmax(260px, 320px) minmax(260px, 1fr);
+  grid-template-areas: "imagem acoes achados interativo";
+}
+
+.efpdv-coluna-imagem {
+  grid-area: imagem;
+  min-height: 0;
+  min-width: 0;
+}
+.efpdv-coluna-acoes {
+  grid-area: acoes;
+  min-height: 0;
+  min-width: 0;
+}
+.efpdv-coluna-achados {
+  grid-area: achados;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1vw, 16px);
+}
+.efpdv-coluna-interativo {
+  grid-area: interativo;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* Contêiner da imagem: altura definida herdada da linha do grid, para que
+   a <img> com object-fit:contain (width/height 100%) tenha uma base de
+   cálculo real e não "infle" pela proporção intrínseca da imagem. */
+.efpdv-imagem-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+}
+.efpdv-imagem-wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.efpdv-hotspot {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   TABLET EM PAISAGEM — cobre o iPad 1024x768 (e telas landscape entre
+   mobile e desktop). Mantém a MESMA organização horizontal do desktop,
+   só que com colunas mais compactas (minmax flexível, sem larguras fixas)
+   e espaçamento reduzido. Uma única linha: grid-template-rows: minmax(0,1fr).
+   ========================================================================== */
+@media (min-width: 641px) and (max-width: 1299px) and (orientation: landscape) {
+  .efpdv-conteudo {
+    padding: 8px;
+  }
+  .efpdv-grid {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    gap: 8px;
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: minmax(220px, 1.3fr) minmax(160px, 0.9fr) minmax(220px, 1.4fr);
+    grid-template-areas: "imagem acoes achados";
+  }
+  .efpdv-grid--interativo {
+    grid-template-columns:
+      minmax(200px, 1.2fr) minmax(145px, 0.8fr) minmax(185px, 1fr)
+      minmax(165px, 0.9fr);
+    grid-template-areas: "imagem acoes achados interativo";
+  }
+  .efpdv-imagem-wrap {
+    min-height: 0;
+  }
+}
+
+/* ==========================================================================
+   TABLET EM RETRATO — cobre o iPad 768x1024. Aqui sim a imagem não cabe
+   lado a lado com 3-4 painéis de texto, então empilha: imagem no topo,
+   grade 2x2 abaixo. O corpo rola verticalmente quando não couber.
+   ========================================================================== */
+@media (max-width: 1299px) and (orientation: portrait) {
+  .efpdv-grid,
+  .efpdv-grid--interativo {
+    /* "auto" nunca deve ser forçado a um total fixo: com height:100%, o
+       algoritmo de grid comprime as linhas "auto" abaixo do conteúdo quando
+       a soma excede o espaço disponível, cortando painéis silenciosamente.
+       Aqui a grade cresce pelo conteúdo e quem rola é o .efpdv-conteudo
+       (ancestral com overflow-y:auto). */
+    height: auto;
+    min-height: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(280px, 44vh) auto auto;
+    grid-template-areas:
+      "imagem imagem"
+      "acoes achados";
+  }
+  .efpdv-grid--interativo {
+    grid-template-rows: minmax(280px, 40vh) auto auto;
+    grid-template-areas:
+      "imagem imagem"
+      "acoes achados"
+      "interativo interativo";
+  }
+  .efpdv-coluna-acoes,
+  .efpdv-coluna-achados,
+  .efpdv-coluna-interativo {
+    max-height: 46vh;
+  }
+}
+
+/* ==========================================================================
+   MOBILE — <=640px (qualquer orientação): tudo empilhado em coluna única,
+   com rolagem vertical. Prevalece sobre as regras de tablet acima porque
+   vem depois no arquivo (mesma especificidade, media features mais
+   restritivas vencem por ordem de declaração).
+   ========================================================================== */
+@media (max-width: 640px) {
+  .efpdv-overlay {
+    left: 0;
+  }
+  .efpdv-caixa {
+    border-radius: 0;
+    max-height: 100dvh;
+    height: 100dvh;
+  }
+  .efpdv-conteudo {
+    padding: 8px;
+  }
+  .efpdv-grid,
+  .efpdv-grid--interativo {
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(240px, 38vh) auto auto;
+    grid-template-areas:
+      "imagem"
+      "acoes"
+      "achados";
+  }
+  .efpdv-grid--interativo {
+    grid-template-rows: minmax(240px, 34vh) auto auto auto;
+    grid-template-areas:
+      "imagem"
+      "acoes"
+      "achados"
+      "interativo";
+  }
+  .efpdv-coluna-acoes,
+  .efpdv-coluna-achados,
+  .efpdv-coluna-interativo {
+    max-height: none;
+  }
+}
