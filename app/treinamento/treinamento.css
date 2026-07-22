@@ -1,0 +1,695 @@
+/* ==========================================================================
+   Treinamento Direcionado — estilos escopados sob .treinamento-page
+   Segue a estética de GuiaPage / DashboardLanding: azul-gelo + glassmorphism.
+   Destaque principal: roxo (--t-purple).
+   Não afeta outras páginas.
+   ========================================================================== */
+
+.treinamento-page {
+  --t-purple:   #7c3aed;
+  --t-purple-2: #6d28d9;
+  --t-indigo:   #4f46e5;
+  --t-blue:     #1f7bff;
+  --t-bg:       #f3f8ff;
+  --t-ink:      #0b1f4d;
+  --t-ink-2:    #5c6d8a;
+  --t-border:   rgba(120, 170, 230, 0.24);
+
+  min-height: 100vh;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  color: var(--t-ink);
+  background:
+    radial-gradient(1200px 600px at 82% -10%, rgba(192, 200, 255, 0.50), transparent 60%),
+    radial-gradient(900px 500px at -6% 112%,  rgba(214, 220, 255, 0.50), transparent 60%),
+    var(--t-bg);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------- glass primitive ---------- */
+.treinamento-page .t-glass {
+  background: linear-gradient(145deg, rgba(255,255,255,0.74), rgba(232,238,255,0.48));
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid var(--t-border);
+  box-shadow:
+    0 18px 55px rgba(72, 80, 170, 0.12),
+    inset 0 1px 0 rgba(255,255,255,0.85);
+  border-radius: 26px;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.treinamento-page .t-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 30px;
+  padding: 52px 48px;
+  color: #fff;
+  background:
+    radial-gradient(720px 320px at 90% -30%, rgba(180,160,255,0.40), transparent 60%),
+    linear-gradient(120deg, #7c3aed 0%, #6d28d9 42%, #4f46e5 100%);
+  box-shadow: 0 26px 70px rgba(109, 40, 217, 0.32);
+}
+.treinamento-page .t-hero::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.16), transparent 62%);
+  z-index: -1;
+}
+.treinamento-page .t-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.28);
+  backdrop-filter: blur(8px);
+}
+.treinamento-page .t-hero-badge i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #d4bcff;
+  box-shadow: 0 0 10px rgba(196,160,255,0.9);
+}
+.treinamento-page .t-hero h1 {
+  margin: 18px 0 0;
+  font-size: 46px;
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  font-weight: 850;
+}
+.treinamento-page .t-hero p {
+  margin: 16px 0 0;
+  max-width: 600px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.84);
+}
+.treinamento-page .t-hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.treinamento-page .t-hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.treinamento-page .t-hero-stat strong {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.treinamento-page .t-hero-stat span {
+  font-size: 12px;
+  color: rgba(255,255,255,0.68);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   BOTÃO "GERAR NOVO CASO COM IA"
+   ========================================================================== */
+.treinamento-page .t-btn-ia {
+  position: relative;
+  width: 100%;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(120deg, #7c3aed 0%, #6d28d9 50%, #4f46e5 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow:
+    0 14px 30px rgba(109, 40, 217, 0.28),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.treinamento-page .t-btn-ia:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 20px 40px rgba(109, 40, 217, 0.36),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+}
+.treinamento-page .t-btn-ia:active {
+  transform: scale(0.99);
+}
+.treinamento-page .t-btn-ia-lock {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.9;
+  width: 16px;
+  height: 16px;
+}
+
+/* ==========================================================================
+   PAINEL GERADOR (wrapper glass ao redor de PainelGerarCaso)
+   ========================================================================== */
+.treinamento-page .t-gerador-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.74), rgba(232,238,255,0.48));
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid var(--t-border);
+  box-shadow: 0 18px 55px rgba(72,80,170,0.12), inset 0 1px 0 rgba(255,255,255,0.85);
+}
+.treinamento-page .t-gerador-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.treinamento-page .t-gerador-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--t-ink);
+}
+.treinamento-page .t-gerador-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1px solid var(--t-border);
+  background: rgba(255,255,255,0.72);
+  color: var(--t-ink-2);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+.treinamento-page .t-gerador-close:hover {
+  background: rgba(124,58,237,0.08);
+  border-color: rgba(124,58,237,0.24);
+  color: var(--t-purple);
+}
+
+/* ==========================================================================
+   GRID DE CARDS
+   ========================================================================== */
+.treinamento-page .t-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* ==========================================================================
+   CASO CARD — aplica quando .t-card está dentro de .treinamento-page
+   ========================================================================== */
+.treinamento-page .t-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, rgba(255,255,255,0.84), rgba(240,238,255,0.52));
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  border: 1px solid rgba(160,150,230,0.20);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 6px 22px rgba(80,70,170,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.92);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.treinamento-page .t-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 18px 42px rgba(80,70,170,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.92);
+  border-color: rgba(124,58,237,0.22);
+}
+.treinamento-page .t-card-lock {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  z-index: 10;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid var(--t-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--t-ink-2);
+  box-shadow: 0 2px 8px rgba(72,80,170,0.10);
+}
+.treinamento-page .t-card-body {
+  padding: 20px 20px 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.treinamento-page .t-card-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.treinamento-page .t-card-icon {
+  font-size: 22px;
+  flex: none;
+  margin-top: 1px;
+  line-height: 1;
+}
+.treinamento-page .t-card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--t-ink);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.treinamento-page .t-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.treinamento-page .t-card-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+}
+.treinamento-page .t-card-info {
+  background: rgba(248,246,255,0.70);
+  border: 1px solid rgba(160,150,230,0.16);
+  border-radius: 13px;
+  padding: 10px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.treinamento-page .t-card-info p {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--t-ink-2);
+  line-height: 1.4;
+}
+.treinamento-page .t-card-info strong {
+  color: var(--t-ink);
+  font-weight: 700;
+}
+.treinamento-page .t-card-footer {
+  padding: 0 20px 20px;
+}
+
+/* botão "Iniciar Atendimento" */
+.treinamento-page .t-btn-iniciar {
+  display: block;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(120deg, #2563eb 0%, #1f7bff 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(31,123,255,0.22);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.treinamento-page .t-btn-iniciar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(31,123,255,0.30);
+}
+.treinamento-page .t-btn-iniciar:active {
+  transform: scale(0.98);
+}
+
+/* botão "Desbloquear" */
+.treinamento-page .t-btn-desbloquear {
+  display: flex;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--t-border);
+  background: rgba(255,255,255,0.68);
+  color: var(--t-ink-2);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+.treinamento-page .t-btn-desbloquear:hover {
+  background: rgba(124,58,237,0.06);
+  border-color: rgba(124,58,237,0.22);
+  color: var(--t-purple);
+}
+
+/* ==========================================================================
+   COMO USAR
+   ========================================================================== */
+.treinamento-page .t-como-usar {
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.treinamento-page .t-como-usar h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--t-ink);
+}
+.treinamento-page .t-como-usar-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.treinamento-page .t-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.treinamento-page .t-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  flex: none;
+  margin-top: 1px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.14), rgba(79,70,229,0.10));
+  border: 1px solid rgba(124,58,237,0.20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--t-purple);
+}
+.treinamento-page .t-step-title {
+  margin: 0 0 3px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--t-ink);
+}
+.treinamento-page .t-step-desc {
+  margin: 0;
+  font-size: 12px;
+  color: var(--t-ink-2);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   RESPONSIVO
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .treinamento-page .t-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .treinamento-page .t-hero h1 {
+    font-size: 36px;
+  }
+  .treinamento-page {
+    padding: 20px;
+  }
+}
+@media (max-width: 640px) {
+  .treinamento-page {
+    padding: 16px;
+    gap: 18px;
+  }
+  .treinamento-page .t-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .treinamento-page .t-como-usar-steps {
+    grid-template-columns: 1fr;
+  }
+  .treinamento-page .t-hero {
+    padding: 36px 24px;
+    border-radius: 22px;
+  }
+  .treinamento-page .t-hero h1 {
+    font-size: 28px;
+  }
+  .treinamento-page .t-hero p {
+    font-size: 14px;
+  }
+  .treinamento-page .t-hero-stats {
+    gap: 20px;
+  }
+  .treinamento-page .t-hero-stat strong {
+    font-size: 20px;
+  }
+  .treinamento-page .t-como-usar {
+    padding: 24px 20px;
+  }
+}
+
+/* ==========================================================================
+   PAINEL GERADOR DE CASOS IA — prefixo .pgc-*
+   Escopado sob .treinamento-page — não afeta nenhuma outra tela.
+   ========================================================================== */
+
+/* wrapper interno: sem fundo próprio, o t-gerador-wrap já é o card glass */
+.treinamento-page .pgc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- cabeçalho --- */
+.treinamento-page .pgc-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.treinamento-page .pgc-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--t-ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.treinamento-page .pgc-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--t-ink-2);
+  line-height: 1.5;
+}
+
+/* --- campos --- */
+.treinamento-page .pgc-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.treinamento-page .pgc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.treinamento-page .pgc-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--t-ink);
+  letter-spacing: 0.01em;
+}
+
+/* --- selects --- */
+.treinamento-page .pgc-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(124, 58, 237, 0.20);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.80);
+  color: var(--t-ink);
+  font-size: 13.5px;
+  font-weight: 500;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237c3aed' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  box-shadow: 0 1px 4px rgba(72, 80, 170, 0.06);
+}
+.treinamento-page .pgc-select:focus {
+  outline: none;
+  border-color: var(--t-purple);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.14), 0 1px 4px rgba(72, 80, 170, 0.06);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+.treinamento-page .pgc-select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background-color: rgba(248, 246, 255, 0.60);
+}
+
+/* --- grupos de botões toggle --- */
+.treinamento-page .pgc-btn-group {
+  display: grid;
+  gap: 8px;
+}
+.treinamento-page .pgc-btn-group-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.treinamento-page .pgc-btn-group-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.treinamento-page .pgc-toggle-btn {
+  padding: 9px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--t-ink-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 120ms ease;
+  box-shadow: 0 1px 3px rgba(72, 80, 170, 0.06);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.treinamento-page .pgc-toggle-btn:hover:not(:disabled) {
+  border-color: rgba(124, 58, 237, 0.34);
+  background: rgba(243, 232, 255, 0.55);
+  color: var(--t-purple);
+}
+.treinamento-page .pgc-toggle-btn.ativo {
+  background: linear-gradient(120deg, var(--t-purple) 0%, var(--t-purple-2) 55%, var(--t-indigo) 100%);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.28);
+  transform: translateY(-1px);
+}
+.treinamento-page .pgc-toggle-btn:disabled {
+  opacity: 0.50;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- erro --- */
+.treinamento-page .pgc-erro {
+  padding: 12px 16px;
+  border-radius: 13px;
+  background: rgba(254, 226, 226, 0.70);
+  border: 1px solid rgba(239, 68, 68, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.treinamento-page .pgc-erro-title {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #b91c1c;
+}
+.treinamento-page .pgc-erro-msg {
+  margin: 0;
+  font-size: 12.5px;
+  color: #dc2626;
+  line-height: 1.45;
+}
+
+/* --- botão principal "Gerar Novo Caso" --- */
+.treinamento-page .pgc-gerar-btn {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(120deg, var(--t-purple) 0%, var(--t-purple-2) 50%, var(--t-indigo) 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 10px 28px rgba(109, 40, 217, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+.treinamento-page .pgc-gerar-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 36px rgba(109, 40, 217, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.treinamento-page .pgc-gerar-btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+.treinamento-page .pgc-gerar-btn.carregando {
+  opacity: 0.80;
+  cursor: wait;
+}
+.treinamento-page .pgc-gerar-btn.desabilitado {
+  background: rgba(148, 163, 184, 0.55);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.treinamento-page .pgc-gerar-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.treinamento-page .pgc-spin {
+  display: inline-block;
+  animation: pgc-rotate 1s linear infinite;
+}
+@keyframes pgc-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* --- rodapé discreto --- */
+.treinamento-page .pgc-footer {
+  margin: 0;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--t-ink-2);
+  opacity: 0.72;
+  letter-spacing: 0.01em;
+}
+
+/* --- responsivo --- */
+@media (max-width: 640px) {
+  .treinamento-page .pgc-btn-group-3 {
+    grid-template-columns: 1fr;
+  }
+  .treinamento-page .pgc-toggle-btn {
+    text-overflow: unset;
+    white-space: normal;
+  }
+}

@@ -816,7 +816,7 @@ function CasoPageContent() {
     { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "📊" },
     { id: "exame" as const, label: "Exame", icon: "🥼" },
     { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "🖼️" },
-    { id: "exames" as const, label: "Exames", icon: "🧪" },
+    { id: "exames" as const, label: "Solicitar Exames", icon: "🧪" },
     { id: "laboratorio" as const, label: "Exames Laboratoriais", icon: "🧬" },
     { id: "ecg" as const, label: "ECG", icon: "📈" },
   ];
@@ -877,7 +877,7 @@ function CasoPageContent() {
                   { id: "sinaisVitais" as const, label: "Sinais Vitais", icon: "icon-sinais-vitais.png" },
                   { id: "exame" as const, label: "Exame Físico", icon: "icon-exame-fisico.png" },
                   { id: "imagemRadiologica" as const, label: "Exames de Imagem", icon: "icon-exames-imagem.png" },
-                  { id: "exames" as const, label: "Exames", icon: "icon-exames.png" },
+                  { id: "exames" as const, label: "Solicitar Exames", icon: "icon-exames.png" },
                   { id: "laboratorio" as const, label: "Exames Laboratoriais", icon: "exames-laboratoriais.png" },
                   { id: "ecg" as const, label: "ECG", icon: "icon-ecg.png" },
                 ].map((item) => (
@@ -905,7 +905,7 @@ function CasoPageContent() {
             </nav>
 
             {/* Chat */}
-            <div className="h-[420px] flex flex-col medix-chat-slot">
+            <div className="flex flex-col medix-chat-slot">
               <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} mensagensIniciais={progressoRestauradoRef.current?.mensagens} />
             </div>
 

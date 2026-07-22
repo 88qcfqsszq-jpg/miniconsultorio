@@ -11,10 +11,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import "./DashboardLanding.css";
 import { todosCasosAdultos, todosCasosPediatricos } from "@/data/casos-v2";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { displayName, initials } from "@/lib/userProfile";
+import { useIniciarOsce } from "@/hooks/useIniciarOsce";
 
 const ASSET_BASE = "/assets/dashboard";
 
@@ -80,6 +82,8 @@ const FRESH_HERO_SLIDES = [
     description:
       "Experimente encontros clínicos sem atrito, voz a voz, alimentados por nossa IA avançada.",
     button: "Iniciar A Simulação ↗",
+    // Reaproveita a mesma porta única de início de OSCE usada na sidebar.
+    action: "adulto" as const,
   },
   {
     image: "/assets/dashboard/hero-slide-2.png",
@@ -89,6 +93,7 @@ const FRESH_HERO_SLIDES = [
     description:
       "Treine raciocínio clínico, anamnese, exame físico e conduta em ambiente seguro.",
     button: "Ver Casos Clínicos ↗",
+    action: "casos" as const,
   },
   {
     image: "/assets/dashboard/hero-slide-3.png",
@@ -98,14 +103,25 @@ const FRESH_HERO_SLIDES = [
     description:
       "Pratique entrevistas clínicas realistas com pacientes virtuais e receba feedback inteligente em tempo real.",
     button: "Iniciar Simulação ↗",
+    action: "pediatrico" as const,
   },
 ];
 
 function FreshHeroCarousel() {
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const router = useRouter();
+  const { iniciarOSCE, accessModal } = useIniciarOsce();
 
   const slide = FRESH_HERO_SLIDES[index] ?? FRESH_HERO_SLIDES[0];
+
+  const handleCta = () => {
+    if (slide.action === "casos") {
+      router.push("/treinamento");
+      return;
+    }
+    iniciarOSCE(slide.action);
+  };
 
   useEffect(() => {
     if (isPaused || FRESH_HERO_SLIDES.length <= 1) return;
@@ -153,7 +169,15 @@ function FreshHeroCarousel() {
           <strong>{slide.titleBottom}</strong>
         </h1>
         <p className="fresh-hero-description">{slide.description}</p>
-        <button type="button" className="fresh-hero-cta">
+        <button
+          type="button"
+          className="fresh-hero-cta"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            handleCta();
+          }}
+        >
           {slide.button}
         </button>
       </div>
@@ -198,6 +222,8 @@ function FreshHeroCarousel() {
           />
         ))}
       </div>
+
+      {accessModal}
     </section>
   );
 }

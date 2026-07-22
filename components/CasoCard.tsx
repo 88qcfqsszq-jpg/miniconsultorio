@@ -13,85 +13,128 @@ interface CasoCardProps {
   tipo?: "adulto" | "pediatrico";
 }
 
-const CONFIG_SISTEMA: Record<string, { icon: string; cor: string; badge: string }> = {
-  Cardiovascular: { icon: "❤️", cor: "border-rose-400", badge: "bg-rose-50 text-rose-700" },
-  Respiratório:   { icon: "🫁", cor: "border-sky-400",  badge: "bg-sky-50 text-sky-700" },
-  Infectologia:   { icon: "🦠", cor: "border-amber-400", badge: "bg-amber-50 text-amber-700" },
-  Semiologia:     { icon: "🩺", cor: "border-violet-400", badge: "bg-violet-50 text-violet-700" },
+const CONFIG_SISTEMA: Record<string, {
+  icon: string;
+  accentColor: string;
+  tagBg: string;
+  tagColor: string;
+}> = {
+  Cardiovascular: { icon: "❤️", accentColor: "#f87171", tagBg: "rgba(254,226,226,0.82)", tagColor: "#b91c1c" },
+  Cardiologia:    { icon: "❤️", accentColor: "#f87171", tagBg: "rgba(254,226,226,0.82)", tagColor: "#b91c1c" },
+  Respiratório:   { icon: "🫁", accentColor: "#38bdf8", tagBg: "rgba(224,242,254,0.82)", tagColor: "#0369a1" },
+  "Respiratório/Infectologia": { icon: "🫁", accentColor: "#38bdf8", tagBg: "rgba(224,242,254,0.82)", tagColor: "#0369a1" },
+  "ORL/Respiratório":          { icon: "🫁", accentColor: "#38bdf8", tagBg: "rgba(224,242,254,0.82)", tagColor: "#0369a1" },
+  Infectologia:   { icon: "🦠", accentColor: "#fbbf24", tagBg: "rgba(254,243,199,0.82)", tagColor: "#b45309" },
+  Hematologia:    { icon: "🩸", accentColor: "#fb7185", tagBg: "rgba(255,228,230,0.82)", tagColor: "#9f1239" },
+  Hematológico:   { icon: "🩸", accentColor: "#fb7185", tagBg: "rgba(255,228,230,0.82)", tagColor: "#9f1239" },
+  Endocrinologia: { icon: "⚗️", accentColor: "#f59e0b", tagBg: "rgba(255,251,235,0.82)", tagColor: "#92400e" },
+  Nefrologia:     { icon: "🫘", accentColor: "#2dd4bf", tagBg: "rgba(204,251,241,0.82)", tagColor: "#0f766e" },
+  Neurológico:    { icon: "🧠", accentColor: "#818cf8", tagBg: "rgba(238,242,255,0.82)", tagColor: "#4338ca" },
+  Imunologia:     { icon: "🛡️", accentColor: "#a78bfa", tagBg: "rgba(243,232,255,0.82)", tagColor: "#6d28d9" },
+  Semiologia:     { icon: "🩺", accentColor: "#a78bfa", tagBg: "rgba(243,232,255,0.82)", tagColor: "#6d28d9" },
+  Vascular:       { icon: "🩻", accentColor: "#60a5fa", tagBg: "rgba(219,234,254,0.82)", tagColor: "#1d4ed8" },
+  "Geral/Infeccioso":  { icon: "🦠", accentColor: "#fbbf24", tagBg: "rgba(254,243,199,0.82)", tagColor: "#b45309" },
+  "Geral/Puericultura":{ icon: "🍼", accentColor: "#34d399", tagBg: "rgba(209,250,229,0.82)", tagColor: "#065f46" },
+  "Geral/Proteção":    { icon: "🛡️", accentColor: "#a78bfa", tagBg: "rgba(243,232,255,0.82)", tagColor: "#6d28d9" },
 };
 
-const NIVEL_BADGE: Record<string, string> = {
-  iniciante:    "bg-emerald-50 text-emerald-700",
-  intermediario: "bg-blue-50 text-blue-700",
-  avancado:     "bg-purple-50 text-purple-700",
+const FALLBACK_CFG = {
+  icon: "📋",
+  accentColor: "#94a3b8",
+  tagBg: "rgba(241,245,249,0.82)",
+  tagColor: "#475569",
 };
+
+const NIVEL_CFG: Record<string, { bg: string; color: string; label: string }> = {
+  iniciante:     { bg: "rgba(220,252,231,0.82)", color: "#15803d", label: "Iniciante" },
+  intermediario: { bg: "rgba(219,234,254,0.82)", color: "#1d4ed8", label: "Intermediário" },
+  avancado:      { bg: "rgba(243,232,255,0.82)", color: "#7c3aed", label: "Avançado" },
+};
+
+const FALLBACK_NIVEL = { bg: "rgba(241,245,249,0.82)", color: "#475569", label: "—" };
 
 export default function CasoCard({ caso, locked = false, onLockedClick, tipo }: CasoCardProps) {
-  const cfg = CONFIG_SISTEMA[caso.sistema] ?? { icon: "📋", cor: "border-slate-300", badge: "bg-slate-50 text-slate-600" };
-  const nivelClass = NIVEL_BADGE[caso.nivel] ?? "bg-slate-50 text-slate-600";
-  const nivelLabel = caso.nivel === "iniciante" ? "Iniciante" : caso.nivel === "intermediario" ? "Intermediário" : "Avançado";
+  const cfg = CONFIG_SISTEMA[caso.sistema] ?? FALLBACK_CFG;
+  const nivelCfg = NIVEL_CFG[caso.nivel] ?? FALLBACK_NIVEL;
 
   // Tipo do paciente (deriva do caso se não for informado).
   const tipoPaciente: "adulto" | "pediatrico" =
     tipo ?? ((caso as any)?.tipoPaciente === "pediatrico" || (caso as any)?.paciente?.tipoPaciente === "pediatrico" ? "pediatrico" : "adulto");
   const href = `/caso/${caso.id}?modo=treinamento&tipo=${tipoPaciente}`;
 
+  const tipoBg    = tipoPaciente === "pediatrico" ? "rgba(204,251,241,0.82)" : "rgba(241,245,249,0.82)";
+  const tipoColor = tipoPaciente === "pediatrico" ? "#0f766e" : "#475569";
+  const tipoLabel = tipoPaciente === "pediatrico" ? "Pediátrico" : "Adulto";
+
   return (
-    <div className={`relative bg-white rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-slate-300 transition-all flex flex-col overflow-hidden border-t-4 ${cfg.cor}`}>
+    <div
+      className="t-card"
+      style={{ borderTop: `4px solid ${cfg.accentColor}` }}
+    >
       {locked && (
         <span
-          className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-500 shadow-sm"
+          className="t-card-lock"
           aria-label="Conteúdo bloqueado"
           title="Conteúdo bloqueado"
         >
-          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11v3m-6 5h12a1 1 0 001-1v-7a1 1 0 00-1-1H6a1 1 0 00-1 1v7a1 1 0 001 1zm9-9V7a4 4 0 10-8 0v3" />
           </svg>
         </span>
       )}
-      <div className="p-5 flex-1">
-        <div className="flex items-start gap-3 mb-3">
-          <span className="text-2xl shrink-0 mt-0.5">{cfg.icon}</span>
-          <div className="min-w-0">
-            <h3 className="font-bold text-slate-800 text-sm sm:text-base leading-snug line-clamp-2">{caso.titulo}</h3>
-          </div>
+
+      <div className="t-card-body">
+        <div className="t-card-title-row">
+          <span className="t-card-icon">{cfg.icon}</span>
+          <h3 className="t-card-title">{caso.titulo}</h3>
         </div>
 
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${cfg.badge}`}>{caso.sistema}</span>
-          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${nivelClass}`}>{nivelLabel}</span>
-          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${tipoPaciente === "pediatrico" ? "bg-teal-50 text-teal-700" : "bg-slate-100 text-slate-600"}`}>
-            {tipoPaciente === "pediatrico" ? "Pediátrico" : "Adulto"}
+        <div className="t-card-tags">
+          <span
+            className="t-card-tag"
+            style={{ background: cfg.tagBg, color: cfg.tagColor }}
+          >
+            {caso.sistema}
+          </span>
+          <span
+            className="t-card-tag"
+            style={{ background: nivelCfg.bg, color: nivelCfg.color }}
+          >
+            {nivelCfg.label}
+          </span>
+          <span
+            className="t-card-tag"
+            style={{ background: tipoBg, color: tipoColor }}
+          >
+            {tipoLabel}
           </span>
         </div>
 
-        <div className="bg-slate-50 rounded-xl p-3 space-y-1 border border-slate-100">
-          <p className="text-xs text-slate-600">
-            <span className="font-semibold text-slate-700">Paciente:</span> {caso.paciente.nome}, {caso.paciente.idade} anos
+        <div className="t-card-info">
+          <p>
+            <strong>Paciente:</strong> {caso.paciente.nome}, {caso.paciente.idade} anos
           </p>
-          <p className="text-xs text-slate-600 line-clamp-2">
-            <span className="font-semibold text-slate-700">Queixa:</span> {caso.paciente.queixaPrincipal}
+          <p style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+            <strong>Queixa:</strong> {caso.paciente.queixaPrincipal}
           </p>
         </div>
       </div>
 
-      <div className="px-5 pb-5">
+      <div className="t-card-footer">
         {locked ? (
           <button
             type="button"
             onClick={onLockedClick}
-            className="w-full bg-slate-100 hover:bg-slate-200 active:scale-[0.98] text-slate-600 font-semibold py-2.5 px-4 rounded-xl transition-all text-sm flex items-center justify-center gap-2"
+            className="t-btn-desbloquear"
           >
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11v3m-6 5h12a1 1 0 001-1v-7a1 1 0 00-1-1H6a1 1 0 00-1 1v7a1 1 0 001 1zm9-9V7a4 4 0 10-8 0v3" />
             </svg>
             Desbloquear
           </button>
         ) : (
-          <Link href={href}>
-            <button className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-2.5 px-4 rounded-xl transition-all text-sm">
-              Iniciar Atendimento
-            </button>
+          <Link href={href} className="t-btn-iniciar">
+            Iniciar Atendimento
           </Link>
         )}
       </div>

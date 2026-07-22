@@ -1,64 +1,45 @@
 /* ==========================================================================
-   GuiaPage — página "Guia OSCE" (estética do DashboardLanding).
+   GuiaPage — layout aprovado (referência: guiatest.png).
    Todo o CSS está ESCOPADO sob .guia-page para não afetar outras páginas.
-   O espaçamento lateral da sidebar vem do AppShell (.app-main). Aqui só
-   cuidamos do conteúdo.
+   Estilo claro/plano/denso: cards brancos, fundo azul-gelo, sombras sutis.
+   O espaçamento lateral da sidebar vem do AppShell (.app-main).
    ========================================================================== */
 
+.guia-page,
+.guia-page * {
+  box-sizing: border-box;
+}
 .guia-page {
-  --g-bg: #f3f8ff;
+  --g-bg: #eef3fa;
   --g-primary: #1f7bff;
   --g-primary-2: #4f9bff;
   --g-ink: #0b1f4d;
   --g-ink-2: #5c6d8a;
-  --g-border: rgba(120, 170, 230, 0.24);
+  --g-border: #e2ebf6;
+  --g-card: #ffffff;
 
+  width: 100%;
+  min-width: 0;
   min-height: 100vh;
-  padding: 28px;
+  padding: 16px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 16px;
   color: var(--g-ink);
-  background:
-    radial-gradient(1200px 600px at 82% -10%, rgba(192, 222, 255, 0.5), transparent 60%),
-    radial-gradient(900px 500px at -6% 112%, rgba(214, 235, 255, 0.5), transparent 60%),
-    var(--g-bg);
+  background: var(--g-bg);
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
-
-/* ---------- glass primitive ---------- */
-.guia-page .g-glass {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.74), rgba(232, 243, 255, 0.48));
-  backdrop-filter: blur(24px) saturate(145%);
-  -webkit-backdrop-filter: blur(24px) saturate(145%);
-  border: 1px solid var(--g-border);
-  box-shadow: 0 18px 55px rgba(72, 116, 170, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
-  border-radius: 26px;
+.guia-page * {
+  min-width: 0;
 }
 
-/* ---------- section header ---------- */
-.guia-page .g-section-head {
-  margin: 4px 2px 2px;
-}
-.guia-page .g-section-eyebrow {
-  margin: 0 0 6px;
+.guia-page .g-heading {
+  margin: 2px 0 10px 2px;
   font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--g-primary);
-}
-.guia-page .g-section-title {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--g-ink);
-}
-.guia-page .g-section-sub {
-  margin: 6px 0 0;
-  font-size: 14px;
-  color: var(--g-ink-2);
 }
 
 /* ==========================================================================
@@ -67,311 +48,587 @@
 .guia-page .g-hero {
   position: relative;
   overflow: hidden;
-  isolation: isolate;
-  border-radius: 30px;
-  padding: 54px 48px;
+  height: 215px;
+  border-radius: 18px;
+  padding: 26px 34px;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-items: center;
   color: #fff;
-  background:
-    radial-gradient(720px 320px at 88% -30%, rgba(120, 190, 255, 0.55), transparent 60%),
-    linear-gradient(120deg, #1f7bff 0%, #2e86ff 42%, #6aa8ff 100%);
-  box-shadow: 0 26px 70px rgba(31, 92, 190, 0.34);
+  background: linear-gradient(115deg, #1f7bff 0%, #2e86ff 44%, #5fa0ff 100%);
+  box-shadow: 0 18px 46px rgba(31, 92, 190, 0.3);
 }
-.guia-page .g-hero::after {
-  content: "";
-  position: absolute;
-  right: -60px;
-  top: -60px;
-  width: 340px;
-  height: 340px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 62%);
-  z-index: -1;
+.guia-page .g-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
 }
-.guia-page .g-hero-badge {
+.guia-page .g-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
+  gap: 7px;
+  padding: 5px 12px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   background: rgba(255, 255, 255, 0.16);
   border: 1px solid rgba(255, 255, 255, 0.32);
-  backdrop-filter: blur(8px);
 }
-.guia-page .g-hero-badge i {
-  width: 8px;
-  height: 8px;
+.guia-page .g-badge i {
+  width: 7px;
+  height: 7px;
   border-radius: 999px;
   background: #7dffc0;
-  box-shadow: 0 0 10px rgba(125, 255, 192, 0.9);
+  box-shadow: 0 0 8px #7dffc0;
 }
-.guia-page .g-hero h1 {
-  margin: 18px 0 0;
-  font-size: 46px;
-  line-height: 1.03;
-  letter-spacing: -0.04em;
+.guia-page .g-hero-content h1 {
+  margin-top: 10px;
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   font-weight: 850;
 }
-.guia-page .g-hero p {
-  margin: 16px 0 0;
-  max-width: 640px;
-  font-size: 17px;
-  line-height: 1.65;
+.guia-page .g-hero-content p {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.5;
   color: rgba(255, 255, 255, 0.92);
 }
+.guia-page .g-hero-art {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 62%;
+  height: 100%;
+  pointer-events: none;
+}
+.guia-page .g-hero-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 100%);
+}
 
 /* ==========================================================================
-   Grade de cards genérica
+   COMO USAR — jornada em célula única
    ========================================================================== */
-.guia-page .g-grid {
+.guia-page .g-journey {
   display: grid;
-  gap: 18px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  background: var(--g-card);
+  border: 1px solid var(--g-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(72, 116, 170, 0.06);
 }
-.guia-page .g-grid-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.guia-page .g-jit {
+  position: relative;
+  padding: 16px;
+  border-right: 1px solid var(--g-border);
 }
-.guia-page .g-grid-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.guia-page .g-jit:last-child {
+  border-right: 0;
 }
-
-.guia-page .g-card {
-  padding: 22px;
-  border-radius: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+.guia-page .g-jmk {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
 }
-.guia-page .g-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(31, 123, 255, 0.3);
-  box-shadow: 0 24px 60px rgba(72, 116, 170, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-.guia-page .g-card-ico {
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
+.guia-page .g-jico {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  flex: 0 0 auto;
   color: var(--g-primary);
-  background: rgba(231, 243, 255, 0.9);
+  background: #eaf3ff;
   border: 1px solid var(--g-border);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
-.guia-page .g-card-ico svg {
+.guia-page .g-jico svg {
+  width: 19px;
+  height: 19px;
+}
+.guia-page .g-jnum {
+  position: absolute;
+  top: -7px;
+  left: -7px;
   width: 22px;
   height: 22px;
-}
-.guia-page .g-card h3 {
-  margin: 2px 0 0;
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--g-ink);
-}
-.guia-page .g-card p {
-  margin: 0;
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: var(--g-ink-2);
-}
-.guia-page .g-card .g-card-step {
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--g-primary);
-  letter-spacing: 0.04em;
-}
-
-/* ==========================================================================
-   Fluxo ideal do OSCE (etapas)
-   ========================================================================== */
-.guia-page .g-flow {
-  padding: 26px;
-  border-radius: 26px;
-}
-.guia-page .g-flow-track {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 12px;
-}
-.guia-page .g-flow-step {
-  position: relative;
-  padding: 16px 12px;
-  border-radius: 18px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.66);
-  border: 1px solid var(--g-border);
-  box-shadow: 0 10px 26px rgba(72, 116, 170, 0.08);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-.guia-page .g-flow-step:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 40px rgba(72, 116, 170, 0.16);
-}
-.guia-page .g-flow-num {
-  width: 34px;
-  height: 34px;
-  margin: 0 auto 10px;
   border-radius: 999px;
   display: grid;
   place-items: center;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 900;
   color: #fff;
-  background: linear-gradient(135deg, var(--g-primary-2), var(--g-primary));
-  box-shadow: 0 10px 22px rgba(31, 123, 255, 0.28);
+  background: linear-gradient(135deg, #4f9bff, #1f7bff);
+  box-shadow: 0 5px 12px rgba(31, 123, 255, 0.35);
 }
-.guia-page .g-flow-step span {
-  font-size: 13px;
-  font-weight: 750;
-  color: var(--g-ink);
-  line-height: 1.25;
-}
-.guia-page .g-flow-step::after {
-  content: "→";
-  position: absolute;
-  right: -11px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
+.guia-page .g-jit h3 {
+  font-size: 14px;
   font-weight: 800;
-  color: rgba(31, 123, 255, 0.55);
+  line-height: 1.2;
 }
-.guia-page .g-flow-step:last-child::after {
-  display: none;
+.guia-page .g-jit p {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--g-ink-2);
+}
+.guia-page .g-jarrow {
+  position: absolute;
+  right: -7px;
+  top: 28px;
+  color: var(--g-primary);
+  font-weight: 800;
+  font-size: 15px;
 }
 
 /* ==========================================================================
-   Dicas (cards curtos)
+   FLUXO — timeline conectada
    ========================================================================== */
-.guia-page .g-tip {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 18px;
-  border-radius: 18px;
+.guia-page .g-timeline {
+  padding: 6px 4px;
 }
-.guia-page .g-tip .g-tip-check {
+.guia-page .g-track {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.guia-page .g-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.guia-page .g-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #1f7bff, #4f9bff);
+  z-index: 0;
+}
+.guia-page .g-dot {
+  position: relative;
+  z-index: 1;
   width: 30px;
   height: 30px;
   flex: 0 0 auto;
-  border-radius: 10px;
+  border-radius: 999px;
   display: grid;
   place-items: center;
-  color: #147a52;
-  background: rgba(220, 250, 235, 0.85);
-  border: 1px solid rgba(120, 210, 170, 0.4);
+  font-size: 13px;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(135deg, #4f9bff, #1f7bff);
+  box-shadow: 0 7px 16px rgba(31, 123, 255, 0.3);
 }
-.guia-page .g-tip .g-tip-check svg {
-  width: 16px;
-  height: 16px;
+.guia-page .g-slabel {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 11px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  background: var(--g-card);
+  border: 1px solid var(--g-border);
+  box-shadow: 0 5px 14px rgba(72, 116, 170, 0.07);
 }
-.guia-page .g-tip strong {
-  font-size: 14px;
-  font-weight: 750;
-  color: var(--g-ink);
+.guia-page .g-slabel svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  color: var(--g-primary);
 }
 
 /* ==========================================================================
-   CTA final
+   MODOS DE TREINO
    ========================================================================== */
-.guia-page .g-cta {
-  padding: 34px;
-  border-radius: 28px;
+.guia-page .g-modes {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+.guia-page .g-mode {
+  background: var(--g-card);
+  border: 1px solid var(--g-border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(72, 116, 170, 0.05);
+}
+.guia-page .g-mrow {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 8px;
-  text-align: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
 }
-.guia-page .g-cta h2 {
-  margin: 0;
-  font-size: 26px;
-  font-weight: 850;
-  letter-spacing: -0.02em;
-  color: var(--g-ink);
+.guia-page .g-mico {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  color: var(--g-primary);
+  background: #eaf3ff;
+  border: 1px solid var(--g-border);
 }
-.guia-page .g-cta p {
-  margin: 2px 0 0;
-  font-size: 15px;
+.guia-page .g-mico svg {
+  width: 16px;
+  height: 16px;
+}
+.guia-page .g-mode h3 {
+  font-size: 13.5px;
+  font-weight: 800;
+}
+.guia-page .g-tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 9.5px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.guia-page .g-tag-blue {
+  color: #5c6d8a;
+  background: #eef2f8;
+}
+.guia-page .g-tag-green {
+  color: #1aa06d;
+  background: rgba(26, 160, 109, 0.12);
+}
+.guia-page .g-tag-pink {
+  color: #ec4899;
+  background: rgba(236, 72, 153, 0.12);
+}
+.guia-page .g-tag-amber {
+  color: #b45309;
+  background: rgba(217, 119, 6, 0.12);
+}
+.guia-page .g-mode p {
+  font-size: 12px;
+  line-height: 1.45;
   color: var(--g-ink-2);
 }
-.guia-page .g-cta-actions {
-  margin-top: 18px;
+
+/* ==========================================================================
+   BLOCO DUPLO — Dicas (42%) + Recursos (58%)
+   ========================================================================== */
+.guia-page .g-dual {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  gap: 24px;
+}
+.guia-page .g-tips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+.guia-page .g-tip {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.guia-page .g-tico {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+}
+.guia-page .g-tico svg {
+  width: 15px;
+  height: 15px;
+}
+.guia-page .g-tip-boa-pratica .g-tico {
+  color: #1aa06d;
+  background: rgba(26, 160, 109, 0.13);
+}
+.guia-page .g-tip-estrategia .g-tico {
+  color: #eab308;
+  background: rgba(234, 179, 8, 0.16);
+}
+.guia-page .g-tip-alerta .g-tico {
+  color: #d97706;
+  background: rgba(217, 119, 6, 0.14);
+}
+.guia-page .g-tip span {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--g-ink);
+}
+.guia-page .g-encontra {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.guia-page .g-ecard {
+  background: var(--g-card);
+  border: 1px solid var(--g-border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(72, 116, 170, 0.05);
+}
+.guia-page .g-eico {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 10px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  color: var(--g-primary);
+  background: #eaf3ff;
+  border: 1px solid var(--g-border);
+}
+.guia-page .g-eico svg {
+  width: 18px;
+  height: 18px;
+}
+.guia-page .g-ecard h3 {
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.guia-page .g-ecard p {
+  margin-top: 5px;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--g-ink-2);
+}
+
+/* ==========================================================================
+   CTA FINAL — barra horizontal
+   ========================================================================== */
+.guia-page .g-cta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 22px;
+  border-radius: 16px;
+  background: #eaf1fb;
+  border: 1px solid var(--g-border);
+}
+.guia-page .g-cta-ill {
+  flex: 0 0 auto;
+  width: 96px;
+  height: 66px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--g-primary);
+  background: linear-gradient(135deg, #d6e6ff, #eaf3ff);
+}
+.guia-page .g-cta-ill svg {
+  width: 34px;
+  height: 34px;
+}
+.guia-page .g-cta-txt {
+  flex: 1;
+  min-width: 0;
+}
+.guia-page .g-cta-txt h2 {
+  font-size: 19px;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+}
+.guia-page .g-cta-txt p {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--g-ink-2);
+}
+.guia-page .g-cta-act {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
 }
 .guia-page .g-btn {
   border: 0;
   cursor: pointer;
-  border-radius: 14px;
-  padding: 14px 24px;
-  font-size: 14.5px;
+  border-radius: 11px;
+  padding: 12px 18px;
+  font-size: 13px;
   font-weight: 800;
-  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
 }
-.guia-page .g-btn-primary {
+.guia-page .g-btn svg {
+  width: 15px;
+  height: 15px;
+}
+.guia-page .g-btn-pri {
   color: #fff;
-  background: linear-gradient(135deg, #4aa3ff, #1f7bff);
-  box-shadow: 0 14px 30px rgba(31, 123, 255, 0.28);
+  background: #1f7bff;
+  box-shadow: 0 8px 20px rgba(31, 123, 255, 0.26);
 }
-.guia-page .g-btn-primary:hover {
+.guia-page .g-btn-pri:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 38px rgba(31, 123, 255, 0.34);
 }
 .guia-page .g-btn-ped {
   color: #fff;
-  background: linear-gradient(135deg, #f472b6, #ec4899);
-  box-shadow: 0 14px 30px rgba(236, 72, 153, 0.28);
+  background: #ec4899;
+  box-shadow: 0 8px 20px rgba(236, 72, 153, 0.26);
 }
 .guia-page .g-btn-ped:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 38px rgba(236, 72, 153, 0.34);
 }
-.guia-page .g-btn-ghost {
+.guia-page .g-btn-gho {
   color: var(--g-primary);
-  background: rgba(255, 255, 255, 0.78);
+  background: #fff;
   border: 1px solid var(--g-border);
 }
-.guia-page .g-btn-ghost:hover {
+.guia-page .g-btn-gho:hover {
   transform: translateY(-2px);
-  background: rgba(231, 243, 255, 0.95);
 }
 
 /* ==========================================================================
-   Responsivo
+   Responsivo — até 1200px (iPad retrato E paisagem) e 760px (iPhone).
+   Corte em 1200px para o iPad paisagem (1194px) também receber o layout
+   confortável de tablet (jornada 3×2, timeline rolável, modos 3×2, bloco
+   duplo empilhado) em vez do desktop denso espremido. Desktop denso (igual
+   ao mockup) fica para telas >1200px, incl. iPad Pro 12.9" paisagem (1366).
    ========================================================================== */
-@media (max-width: 1180px) {
-  .guia-page .g-grid-3 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (max-width: 1200px) {
+  .guia-page .g-hero {
+    height: auto;
+    min-height: 190px;
+    grid-template-columns: 44% 56%;
   }
-  .guia-page .g-flow-track {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .guia-page .g-hero-content h1 {
+    font-size: 36px;
   }
-  .guia-page .g-flow-step::after {
+
+  .guia-page .g-journey {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .guia-page .g-jit:nth-child(3),
+  .guia-page .g-jit:nth-child(6) {
+    border-right: 0;
+  }
+  .guia-page .g-jit:nth-child(-n + 3) {
+    border-bottom: 1px solid var(--g-border);
+  }
+  .guia-page .g-jit:nth-child(3n) .g-jarrow {
     display: none;
   }
-}
-@media (max-width: 760px) {
-  .guia-page {
-    padding: 18px;
-    gap: 20px;
+
+  .guia-page .g-track {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    gap: 22px;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(120, 170, 230, 0.45) transparent;
   }
-  .guia-page .g-hero {
-    padding: 36px 24px;
+  .guia-page .g-step {
+    flex: 0 0 auto;
+    width: 108px;
+    scroll-snap-align: start;
   }
-  .guia-page .g-hero h1 {
-    font-size: 34px;
+  .guia-page .g-step::after {
+    width: 130px;
   }
-  .guia-page .g-grid-3,
-  .guia-page .g-grid-2 {
+
+  .guia-page .g-modes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .guia-page .g-dual {
     grid-template-columns: 1fr;
   }
-  .guia-page .g-flow-track {
+  .guia-page .g-encontra {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .guia-page .g-cta {
+    flex-wrap: wrap;
+  }
+  .guia-page .g-cta-act {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 760px) {
+  .guia-page {
+    padding: 12px 14px 14px;
+    gap: 12px;
+  }
+  .guia-page .g-hero {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: 22px 20px 128px;
+  }
+  .guia-page .g-hero-content {
+    max-width: none;
+  }
+  .guia-page .g-hero-content h1 {
+    font-size: 32px;
+  }
+  .guia-page .g-hero-art {
+    width: 100%;
+    height: 128px;
+    top: auto;
+    bottom: 0;
+  }
+  .guia-page .g-hero-art img {
+    object-position: 68% center;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
+  }
+
+  .guia-page .g-journey {
+    grid-template-columns: 1fr;
+  }
+  .guia-page .g-jit {
+    border-right: 0;
+    border-bottom: 1px solid var(--g-border);
+  }
+  .guia-page .g-jit:last-child {
+    border-bottom: 0;
+  }
+  .guia-page .g-jarrow {
+    display: none;
+  }
+
+  .guia-page .g-modes {
+    grid-template-columns: 1fr;
+  }
+  .guia-page .g-tips {
+    grid-template-columns: 1fr;
+  }
+  .guia-page .g-encontra {
+    grid-template-columns: 1fr;
+  }
+
+  .guia-page .g-cta {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .guia-page .g-cta-ill {
+    margin: 0 auto;
+  }
+  .guia-page .g-cta-act {
+    flex-direction: column;
+  }
+  .guia-page .g-btn {
+    justify-content: center;
   }
 }

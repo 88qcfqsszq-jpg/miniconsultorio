@@ -32,6 +32,7 @@ export default function FormularioSOAP({
         plano: "",
       }
   );
+  const [erroValidacao, setErroValidacao] = useState<string | null>(null);
 
   useEffect(() => {
     if (onChange) {
@@ -47,9 +48,10 @@ export default function FormularioSOAP({
       !soap.avaliacao.trim() ||
       !soap.plano.trim()
     ) {
-      alert("Por favor, preencha todos os campos do SOAP");
+      setErroValidacao("Por favor, preencha todos os campos do SOAP");
       return;
     }
+    setErroValidacao(null);
     if (onSubmit) {
       onSubmit(soap);
     }
@@ -90,7 +92,10 @@ export default function FormularioSOAP({
             </div>
             <textarea
               value={soap[field.key]}
-              onChange={(e) => setSOAP((prev) => ({ ...prev, [field.key]: e.target.value }))}
+              onChange={(e) => {
+                setSOAP((prev) => ({ ...prev, [field.key]: e.target.value }));
+                setErroValidacao(null);
+              }}
               placeholder={field.placeholder}
               disabled={desabilitado}
               rows={3}
@@ -99,6 +104,11 @@ export default function FormularioSOAP({
         ))}
       </div>
 
+      {erroValidacao && (
+        <p className="medix-soap-erro" role="alert">
+          {erroValidacao}
+        </p>
+      )}
     </Wrapper>
   );
 }

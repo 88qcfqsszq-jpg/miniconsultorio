@@ -426,7 +426,7 @@ body.is-consultorio-medix-page > nav {
 }
 .consultorio-medix .medix-chat-input-row {
   display: grid;
-  grid-template-columns: 1fr 52px 92px;
+  grid-template-columns: 1fr auto auto auto;
   gap: 12px;
   padding: 18px 22px 14px;
   background: rgba(246, 251, 255, 0.72);
@@ -467,6 +467,40 @@ body.is-consultorio-medix-page > nav {
   color: #fff;
   border-color: #ef4444;
   animation: pulse 1.2s ease-in-out infinite;
+}
+.consultorio-medix .medix-voice-button {
+  width: 52px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 190, 245, 0.34);
+  background: rgba(255, 255, 255, 0.82);
+  color: #1f7bff;
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.consultorio-medix .medix-voice-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.consultorio-medix .medix-voice-button.medix-voice-connecting {
+  background: rgba(31, 123, 255, 0.16);
+  color: #1f7bff;
+  border-color: rgba(31, 123, 255, 0.45);
+}
+.consultorio-medix .medix-voice-button.medix-voice-active {
+  background: #16a34a;
+  color: #fff;
+  border-color: #16a34a;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.consultorio-medix .medix-voice-button.medix-voice-error {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
 }
 .consultorio-medix .medix-send-button {
   height: 48px;
@@ -519,7 +553,7 @@ body.is-consultorio-medix-page > nav {
     max-width: 86%;
   }
   .consultorio-medix .medix-chat-input-row {
-    grid-template-columns: 1fr 48px;
+    grid-template-columns: 1fr auto auto;
   }
   .consultorio-medix .medix-send-button {
     grid-column: 1 / -1;
@@ -818,6 +852,26 @@ body.is-consultorio-medix-page > nav {
 }
 .consultorio-medix .medix-diagnosis-chip-x:hover {
   opacity: 1;
+}
+.consultorio-medix .medix-soap-erro {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #b91c1c;
+  font-size: 13px;
+  font-weight: 600;
+}
+.consultorio-medix .medix-diagnosis-erro {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #b91c1c;
+  font-size: 13px;
+  font-weight: 600;
 }
 .consultorio-medix .medix-diagnosis-submit {
   margin-top: 18px;
@@ -1470,29 +1524,19 @@ body.is-consultorio-medix-page > nav {
 }
 
 /* ==========================================================================
-   AJUSTE — Chat sempre compacto no Atendimento MEDIX (inclusive aba Paciente)
+   AJUSTE — Chat compacto quando há painel complementar aberto (aba ≠ Paciente).
+   Escopado a .medix-center-has-panel: a aba Paciente usa a altura cheia do
+   chat definida em PASSO 2 (min-height: calc(100vh - 150px)).
    ========================================================================== */
-.consultorio-medix .medix-chat-slot {
-  height: auto !important;
-}
-.consultorio-medix .medix-chat-card {
-  min-height: 420px !important;
-  height: auto !important;
-  flex: 0 0 auto;
-}
-.consultorio-medix .medix-chat-messages {
-  min-height: 230px !important;
-  max-height: 340px;
-}
-.consultorio-medix .medix-chat-note {
-  display: none !important;
+.consultorio-medix .medix-center-has-panel .medix-chat-note {
+  display: none;
 }
 @media (max-width: 900px) {
-  .consultorio-medix .medix-chat-card {
-    min-height: auto !important;
+  .consultorio-medix .medix-center-has-panel .medix-chat-card {
+    min-height: auto;
   }
-  .consultorio-medix .medix-chat-messages {
-    min-height: 220px !important;
+  .consultorio-medix .medix-center-has-panel .medix-chat-messages {
+    min-height: 220px;
     max-height: none;
   }
 }

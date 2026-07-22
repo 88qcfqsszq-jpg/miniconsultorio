@@ -716,6 +716,190 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* ==========================================================================
+   Faixa compacta em paisagem — 1024–1280px, orientation: landscape.
+   Cobre QUALQUER viewport nessa faixa (iPads em paisagem — mini/10.2"/Air/
+   Pro 11" — e também janelas de desktop redimensionadas para essa largura).
+   Não é detecção de iPad por user-agent; é só largura + orientação.
+   Mantém a arquitetura do desktop ("desktop compacto"): Hero + Casos lado a
+   lado, 5 indicadores na mesma linha — em vez do empilhamento do breakpoint
+   genérico acima (≤1280px, qualquer orientação). Não afeta iPad em retrato
+   (ex.: 12.9" 1024x1366, orientation: portrait) nem o desktop amplo (>1280px
+   ou 1366×1024 em paisagem, que já cai fora desta faixa).
+   ========================================================================== */
+@media (min-width: 1024px) and (max-width: 1280px) and (orientation: landscape) {
+  /* ---- Altura útil: hero calculado a partir da viewport real, com fallback
+     100vh -> 100dvh (navegadores sem suporte a dvh simplesmente ignoram a
+     2ª declaração e ficam com a 1ª). Constante subtraída (216px) = cabeçalho
+     (64px) + paddings verticais do dl-body (16+16=32px) + gap dl-body (12px)
+     + gap dl-main (12px) + altura fixa das métricas (96px) = 216px. */
+  .dashboard-landing {
+    --dl-hero-h: clamp(410px, calc(100vh - 216px), 440px);
+    --dl-hero-h: clamp(410px, calc(100dvh - 216px), 440px);
+  }
+
+  /* ---- Layout geral: reduz gaps/paddings externos antes de comprimir conteúdo ---- */
+  .dashboard-landing .dl-body {
+    padding: 16px 20px;
+    gap: 12px;
+  }
+  .dashboard-landing .dl-header {
+    padding: 10px 16px;
+  }
+  .dashboard-landing .dl-content {
+    grid-template-columns: minmax(0, 1fr) 310px;
+    gap: 16px;
+    /* Mesma altura total de hero + gap + métricas: a coluna de Casos
+       (esticada por align-items: stretch) fica com o topo alinhado ao
+       hero e a base alinhada à base das métricas. */
+    height: calc(var(--dl-hero-h) + 108px);
+    align-items: stretch;
+  }
+  .dashboard-landing .dl-main {
+    gap: 12px;
+  }
+  .dashboard-landing .dl-right {
+    padding: 12px;
+    gap: 8px;
+    /* A altura vem do stretch do grid (mesma da coluna hero+métricas);
+       nada de max-height arbitrário desconectado do layout. min-height:0
+       permite que o painel encolha até essa altura calculada em vez de
+       crescer para caber os 79 casos (isso é papel só da lista abaixo). */
+    min-height: 0;
+  }
+  .dashboard-landing .dl-right h3 {
+    flex: none;
+  }
+  .dashboard-landing .dl-right-cases {
+    /* Rolagem some SÓ aqui: o painel (.dl-right) e o título ficam fixos;
+       a lista tem sua própria barra de rolagem, sem cortar conteúdo. */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(120, 170, 230, 0.45) transparent;
+  }
+  .dashboard-landing .dl-right-cases .dl-case:focus-visible {
+    outline: 2px solid var(--dl-primary);
+    outline-offset: 2px;
+  }
+
+  /* ---- Hero: título/descrição compactados, seta afastada do texto ---- */
+  .dashboard-landing .fresh-hero {
+    height: var(--dl-hero-h);
+  }
+  .dashboard-landing .fresh-hero-content {
+    width: min(360px, 48%);
+    padding: 56px 0 0 76px;
+  }
+  .dashboard-landing .fresh-hero-eyebrow {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .dashboard-landing .fresh-hero-content h1 {
+    font-size: 32px;
+    line-height: 1.14;
+  }
+  .dashboard-landing .fresh-hero-description {
+    margin-top: 14px;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .dashboard-landing .fresh-hero-cta {
+    margin-top: 20px;
+    padding: 13px 24px;
+    font-size: 14px;
+  }
+  /* Seta esquerda recuada para a borda interna do Hero, sem invadir o texto
+     (o texto passa a começar em 76px; a seta fica em 12px + 40px = 52px,
+     24px de folga entre as duas). */
+  .dashboard-landing .fresh-hero-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+  }
+  .dashboard-landing .fresh-hero-arrow-left {
+    left: 12px;
+  }
+  .dashboard-landing .fresh-hero-arrow-right {
+    right: 12px;
+  }
+  .dashboard-landing .fresh-hero-dots {
+    right: 24px;
+    bottom: 20px;
+  }
+
+  /* ---- Casos recomendados: cards menores, texto com mais área e sem corte ---- */
+  .dashboard-landing .dl-case {
+    padding: 10px;
+    gap: 10px;
+    min-height: 84px;
+  }
+  .dashboard-landing .dl-case-ico {
+    width: 68px;
+    height: 60px;
+    min-width: 68px;
+    border-radius: 16px;
+  }
+  .dashboard-landing .dl-case-ico img {
+    width: 56px;
+    height: 50px;
+  }
+  .dashboard-landing .dl-case-ico.is-virus img {
+    width: 52px;
+    height: 52px;
+  }
+  .dashboard-landing .dl-case-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .dashboard-landing .dl-case-body h5 {
+    font-size: 13px;
+    line-height: 1.28;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .dashboard-landing .dl-case-body span {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+  }
+
+  /* ---- Métricas: 5 na mesma linha, sem cortar rótulo/valor/variação ---- */
+  .dashboard-landing .dl-metrics {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .dashboard-landing .dl-metric {
+    /* Altura fixa (96px) — é a mesma constante usada no cálculo de
+       --dl-hero-h acima, para o hero e as métricas somarem exatamente a
+       altura da coluna de Casos, sem sobra nem corte. */
+    padding: 8px 8px;
+    min-width: 0;
+    height: 96px;
+    justify-content: center;
+  }
+  .dashboard-landing .dl-metric .dl-metric-label {
+    font-size: 11px;
+    line-height: 1.25;
+    white-space: normal;
+  }
+  .dashboard-landing .dl-metric .dl-metric-value {
+    font-size: 21px;
+  }
+  .dashboard-landing .dl-metric .dl-metric-delta {
+    font-size: 10px;
+    line-height: 1.3;
+    white-space: normal;
+    overflow: visible;
+  }
+}
+
 @media (max-width: 920px) {
   .dashboard-landing {
     grid-template-columns: 1fr;

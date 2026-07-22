@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   PadraoMembrosInferiores,
   AchadoMembrosInferiores,
@@ -24,6 +24,14 @@ export default function ModalMembrosInferiores({
   const [draggedPulso, setDraggedPulso] = useState<PulsoArterialMI | null>(null)
   const [erroPulso, setErroPulso] = useState<string | null>(null)
   const [resetCounter, setResetCounter] = useState(0)
+  const [copiadoOk, setCopiadoOk] = useState(false)
+  const copiadoTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (copiadoTimeoutRef.current) clearTimeout(copiadoTimeoutRef.current)
+    }
+  }, [])
 
   // Resetar achados quando padrão muda
   useEffect(() => {
@@ -114,6 +122,8 @@ export default function ModalMembrosInferiores({
     setDraggedPulso(null)
     setErroPulso(null)
     setResetCounter(c => c + 1)
+    if (copiadoTimeoutRef.current) clearTimeout(copiadoTimeoutRef.current)
+    setCopiadoOk(false)
   }
 
   const handleCopiar = () => {
@@ -125,7 +135,9 @@ export default function ModalMembrosInferiores({
       })
       .join('\n\n')
     navigator.clipboard.writeText(todosAchados)
-    alert('Achados copiados para a área de transferência!')
+    if (copiadoTimeoutRef.current) clearTimeout(copiadoTimeoutRef.current)
+    setCopiadoOk(true)
+    copiadoTimeoutRef.current = setTimeout(() => setCopiadoOk(false), 2500)
   }
 
   return (
@@ -217,7 +229,12 @@ export default function ModalMembrosInferiores({
           </div>
 
           {/* Botões inferiores */}
-          <div className="flex gap-3 justify-end pt-4 border-t border-slate-200">
+          <div className="flex items-center gap-3 justify-end pt-4 border-t border-slate-200">
+            {copiadoOk && (
+              <p className="text-sm text-green-700" role="status">
+                Achados copiados para a área de transferência!
+              </p>
+            )}
             <button
               onClick={handleResetar}
               disabled={achados.length === 0}

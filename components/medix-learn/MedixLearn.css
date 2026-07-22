@@ -1,0 +1,156 @@
+/* ==========================================================================
+   MEDIX Learn — home. CSS escopado sob .medix-learn (não afeta outras páginas).
+   Estilo claro/plano: cards brancos, grade de 2 colunas, ícones em círculo.
+   O shell/hero (LearnShell/LearnHero) permanecem com estilo próprio.
+   ========================================================================== */
+
+.medix-learn {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* cabeçalho da seção "Sistemas" */
+.medix-learn .ml-sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.medix-learn .ml-sec-head h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+.medix-learn .ml-sec-head span {
+  font-size: 12.5px;
+  color: #94a3b8;
+}
+
+/* grade de sistemas — 2 colunas */
+.medix-learn .ml-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.medix-learn .ml-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.medix-learn .ml-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e4ecf7;
+  box-shadow: 0 6px 18px rgba(72, 116, 170, 0.05);
+  transition: box-shadow 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+}
+.medix-learn .ml-card-link:hover .ml-card {
+  box-shadow: 0 14px 34px rgba(59, 130, 246, 0.14);
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
+}
+.medix-learn .ml-card-off {
+  background: rgba(241, 245, 249, 0.7);
+  border-color: rgba(120, 130, 180, 0.14);
+  opacity: 0.7;
+}
+.medix-learn .ml-ico {
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: #eef4ff;
+  font-size: 30px;
+  line-height: 1;
+}
+.medix-learn .ml-body {
+  flex: 1;
+  min-width: 0;
+}
+.medix-learn .ml-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.medix-learn .ml-body h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: #0b1f4d;
+}
+.medix-learn .ml-soon {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+.medix-learn .ml-body p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #5c6d8a;
+  line-height: 1.45;
+}
+.medix-learn .ml-arrow {
+  flex: 0 0 auto;
+  display: inline-flex;
+  color: #3b82f6;
+}
+.medix-learn .ml-arrow svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* caixa "Como funciona" */
+.medix-learn .ml-bridge {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: rgba(124, 58, 237, 0.05);
+  border: 1px solid rgba(124, 58, 237, 0.16);
+}
+.medix-learn .ml-bridge-ico {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #6d28d9;
+  background: rgba(124, 58, 237, 0.1);
+}
+.medix-learn .ml-bridge-ico svg {
+  width: 22px;
+  height: 22px;
+}
+.medix-learn .ml-bridge p {
+  margin: 0;
+  font-size: 13.5px;
+  color: #5c6d8a;
+  line-height: 1.6;
+}
+.medix-learn .ml-bridge strong {
+  color: #6d28d9;
+}
+
+/* iPhone: 1 coluna */
+@media (max-width: 760px) {
+  .medix-learn .ml-grid {
+    grid-template-columns: 1fr;
+  }
+}

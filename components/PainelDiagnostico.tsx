@@ -36,6 +36,7 @@ export default function PainelDiagnostico({
 
   const [novoDiferencial, setNovoDiferencial] = useState("");
   const [novoExame, setNovoExame] = useState("");
+  const [erroValidacao, setErroValidacao] = useState<string | null>(null);
 
   useEffect(() => {
     if (onChange) {
@@ -82,15 +83,22 @@ export default function PainelDiagnostico({
     }));
   };
 
+  // Proteção defensiva: um `valorInicial` restaurado de progresso salvo mais
+  // antigo pode não trazer `diagnosticosDiferenciais` como array (ver
+  // normalizarDiagnostico em lib/attendanceProgress.ts, que já corrige a
+  // origem) — este fallback evita o crash mesmo assim, sem mascarar o tipo.
+  const diagnosticosDiferenciais = diagnostico.diagnosticosDiferenciais ?? [];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (
       !diagnostico.hipotesePrincipal.trim() ||
       !diagnostico.conduta.trim()
     ) {
-      alert("Por favor, preencha Hipótese Principal e Conduta");
+      setErroValidacao("Por favor, preencha Hipótese Principal e Conduta");
       return;
     }
+    setErroValidacao(null);
     onSubmit(diagnostico);
   };
 
@@ -113,7 +121,10 @@ export default function PainelDiagnostico({
         <input
           type="text"
           value={diagnostico.hipotesePrincipal}
-          onChange={(e) => setDiagnostico((prev) => ({ ...prev, hipotesePrincipal: e.target.value }))}
+          onChange={(e) => {
+            setDiagnostico((prev) => ({ ...prev, hipotesePrincipal: e.target.value }));
+            setErroValidacao(null);
+          }}
           placeholder="Ex: Síndrome Coronariana Aguda"
           disabled={desabilitado}
         />
@@ -135,7 +146,7 @@ export default function PainelDiagnostico({
           </button>
         </div>
         <div className="medix-diagnosis-list">
-          {diagnostico.diagnosticosDiferenciais.map((diff, idx) => (
+          {diagnosticosDiferenciais.map((diff, idx) => (
             <span key={idx} className="medix-diagnosis-chip">
               {diff}
               <button type="button" onClick={() => handleRemoverDiferencial(idx)} disabled={desabilitado} className="medix-diagnosis-chip-x">×</button>
@@ -173,7 +184,10 @@ export default function PainelDiagnostico({
         <label>Conduta</label>
         <textarea
           value={diagnostico.conduta}
-          onChange={(e) => setDiagnostico((prev) => ({ ...prev, conduta: e.target.value }))}
+          onChange={(e) => {
+            setDiagnostico((prev) => ({ ...prev, conduta: e.target.value }));
+            setErroValidacao(null);
+          }}
           placeholder="Plano de tratamento, encaminhamentos, acompanhamento..."
           disabled={desabilitado}
           rows={3}
@@ -188,10 +202,16 @@ export default function PainelDiagnostico({
             aria-expanded={soapAberto}
             className="medix-soap-toggle"
           >
-            Deseja realizar SOAP?
+            Preencher SOAP
           </button>
           {soapAberto && <div className="medix-soap-embed">{soapSlot}</div>}
         </div>
+      )}
+
+      {erroValidacao && (
+        <p className="medix-diagnosis-erro" role="alert">
+          {erroValidacao}
+        </p>
       )}
 
       <button type="submit" disabled={desabilitado} className="medix-diagnosis-submit">

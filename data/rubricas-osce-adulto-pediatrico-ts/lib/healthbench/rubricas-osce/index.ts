@@ -1,0 +1,6 @@
+export * from './types'
+export * from './rubrica-adulto-generica'
+export * from './rubrica-pediatrica-generica'
+export * from './resolver-rubrica-osce'
+export * from './perfis-casos/adultos'
+export * from './perfis-casos/pediatricos'

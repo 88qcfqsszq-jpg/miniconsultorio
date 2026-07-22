@@ -21,7 +21,7 @@ interface GrupoExame {
   evidencias: string[];
 }
 const GRUPOS_EXAME: GrupoExame[] = [
-  { gatilho: /hemograma|leucograma|serie (vermelha|branca)|eritrograma|plaquetograma/, evidencias: ["hemograma", "hemoglobina", "hematocrito", "leucocitos", "leucograma", "plaquetas", "hemoconcentracao", "serie vermelha", "serie branca"] },
+  { gatilho: /hemograma|leucograma|serie (vermelha|branca)|eritrograma|plaquetograma/, evidencias: ["hemograma", "hemoglobina", "hematocrito", "leucocitos", "leucograma", "plaquetas", "neutrofilos", "linfocitos", "hemoconcentracao", "serie vermelha", "serie branca"] },
   { gatilho: /marcador.*inflamat|\bpcr\b|proteina c reativa|\bvhs\b|procalciton|hemossedimenta/, evidencias: ["marcadores inflamatorios", "pcr", "proteina c reativa", "vhs", "procalcitonina"] },
   { gatilho: /coagulograma|coagulacao|\btap\b|\btp\b|\binr\b|\bttpa\b|protrombina|tromboplastina|d-?dimero/, evidencias: ["coagulograma", "tap", "tp", "inr", "ttpa", "tempo de protrombina", "d-dimero"] },
   { gatilho: /\burina\b|\beas\b|urina tipo|sumario de urina|parcial de urina|urina 1/, evidencias: ["urina", "eas", "urina tipo 1", "sumario de urina"] },
@@ -53,6 +53,7 @@ const EXAME_FISICO_REGRAS: Array<[RegExp, string]> = [
   [/ausculta.*card|bulhas|sopro|precordio|ausculta cardiaca/, "realizou ausculta cardíaca"],
   [/cardiovascular|precordio|bulhas|ictus/, "realizou exame cardiovascular"],
   [/membros|extremidades|edema|panturrilha/, "avaliou membros/extremidades"],
+  [/neurolog|glasgow|pupilas|deficit focal|sinal focal|reflexo|forca muscular|sensibilidade|coordena[çc]|marcha|orienta[çc]|consciencia|escala de coma/, "realizou exame neurológico"],
 ];
 
 export interface ManobraLog { categoria?: string; textDigitado?: string; resposta?: string; local?: string }

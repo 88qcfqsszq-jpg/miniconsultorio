@@ -26,7 +26,8 @@ const NAV_ITEMS: Array<{ key: string; label: string; icon: string; href: string 
   { key: "dashboard", label: "Dashboard", icon: "icon-dashboard.png", href: "/dashboard-landing" },
   { key: "guia", label: "Guia Clínico", icon: "icon-conteudos.png", href: "/guia" },
   { key: "learn", label: "MEDIX Learn", icon: "icon-simulacao.png", href: "/learn" },
-  { key: "desempenho", label: "Desempenho", icon: "icon-desempenho.png", href: "#" },
+  // "Desempenho" oculto temporariamente: sem rota própria (href="#", inerte).
+  // { key: "desempenho", label: "Desempenho", icon: "icon-desempenho.png", href: "#" },
   { key: "centro-clinico", label: "Centro Clínico", icon: "icon-biblioteca.png", href: "/centro-clinico" },
   // Entrada paralela discreta para o módulo beta (não substitui nenhum fluxo atual).
   { key: "casos-dinamicos", label: "Casos Dinâmicos Beta", icon: "icon-simulacao.png", href: "/casos-dinamicos" },

@@ -36,6 +36,24 @@ function reviveTimestamps(arr?: any[]): any[] | undefined {
   );
 }
 
+/**
+ * Normaliza um `diagnostico` restaurado do localStorage. Snapshots salvos por
+ * uma versão antiga do app podem ter a chave com o typo legado
+ * `diagnosticosDisferenciais` (em vez de `diagnosticosDiferenciais`), ou não
+ * ter `diagnosticosDiferenciais` como array algum — nesses casos, sempre
+ * volta a ser `diagnosticosDiferenciais: []`, nunca `undefined`.
+ */
+function normalizarDiagnostico(bruto: unknown): unknown {
+  if (!bruto || typeof bruto !== "object") return bruto;
+  const objeto = bruto as Record<string, unknown>;
+  const diagnosticosDiferenciais = Array.isArray(objeto.diagnosticosDiferenciais)
+    ? objeto.diagnosticosDiferenciais
+    : Array.isArray(objeto.diagnosticosDisferenciais) // compat: typo legado de versões antigas
+    ? objeto.diagnosticosDisferenciais
+    : [];
+  return { ...objeto, diagnosticosDiferenciais };
+}
+
 export function getAttendanceProgress(caseId: string): AttendanceSnapshot | null {
   if (typeof window === "undefined" || !caseId) return null;
   try {
@@ -44,6 +62,7 @@ export function getAttendanceProgress(caseId: string): AttendanceSnapshot | null
     const snap = JSON.parse(raw) as AttendanceSnapshot;
     snap.mensagens = reviveTimestamps(snap.mensagens);
     snap.exames = reviveTimestamps(snap.exames);
+    snap.diagnostico = normalizarDiagnostico(snap.diagnostico);
     return snap;
   } catch {
     return null;

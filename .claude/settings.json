@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo \"--- exit code: $? ---\")",
+      "Bash(git checkout *)",
+      "Bash(echo \"--- exit: $? ---\")",
+      "Bash(git stash *)",
+      "Bash(echo \"exit code no HEAD: $?\")",
+      "Bash(tee \"/private/tmp/claude-501/-Users-marceloalmeida-Projetos-mini-consultorio-osce/b0bee331-516b-4dd2-8d2b-e7f62293d7ae/scratchpad/revalidacao-fase33c.log\")",
+      "Bash(tee \"/private/tmp/claude-501/-Users-marceloalmeida-Projetos-mini-consultorio-osce/b0bee331-516b-4dd2-8d2b-e7f62293d7ae/scratchpad/revalidacao-fase4c.log\")",
+      "Bash(tee \"/private/tmp/claude-501/-Users-marceloalmeida-Projetos-mini-consultorio-osce/b0bee331-516b-4dd2-8d2b-e7f62293d7ae/scratchpad/revalidacao-fase4c2.log\")",
+      "Bash(tee \"/private/tmp/claude-501/-Users-marceloalmeida-Projetos-mini-consultorio-osce/b0bee331-516b-4dd2-8d2b-e7f62293d7ae/scratchpad/revalidacao-fase4c4.log\")"
+    ]
+  }
+}

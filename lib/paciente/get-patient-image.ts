@@ -42,6 +42,27 @@ export function getPatientImage(caso?: Caso | null): PatientImageProfile {
     const faixaEtaria = caso.paciente?.dadosPediatricos?.faixaEtaria
     const imagemPediatrica = obterImagemPacientePediatrico(faixaEtaria)
 
+    // obterImagemPacientePediatrico() retorna crianca-frente.png (menino) para
+    // pré-escolar/escolar/adolescente independente do sexo. Para paciente
+    // feminino, usar a imagem feminina equivalente já existente no projeto.
+    const sexoPediatrico = (
+      (caso as any)?.sexo ||
+      (caso as any)?.dados_visiveis_ao_estudante?.sexo ||
+      caso.paciente?.sexo ||
+      ''
+    )
+      .toString()
+      .trim()
+      .toLowerCase()
+
+    if (imagemPediatrica === '/images/pediatria/crianca-frente.png' && sexoPediatrico.startsWith('f')) {
+      return {
+        imageSrc: '/images/pediatria/corpo/escolar-frontal.png',
+        ageGroup: faixaEtaria,
+        source: 'pediatrico',
+      }
+    }
+
     return {
       imageSrc: imagemPediatrica,
       ageGroup: faixaEtaria,

@@ -61,3 +61,52 @@ export interface ECGZone {
   descricao: string
   tolerancia: number
 }
+
+// ============================================================================
+// CONTRATO UNIFICADO DE ECG POR CASO
+// Etapa 2 — apenas tipos. Não conectado ao runtime.
+// Migração dos casos e integração ao resolvedor: fase futura.
+// ============================================================================
+
+/** De onde vem a FC para o traçado e a interpretação. */
+export type FonteFrequencia =
+  | 'estado_atual'    // sinaisVitais.frequenciaCardiaca do caso naquele momento
+  | 'entrada'         // FC aferida na chegada (sinaisVitaisCorretos)
+  | 'especifica'      // valor numérico explícito em frequenciaEspecifica
+
+/** Contexto clínico em que o ECG é realizado. */
+export type ContextoECG =
+  | 'repouso'
+  | 'durante_sintomas'
+  | 'esforco'
+  | 'pos_intervencao'
+
+/**
+ * Especificação de ECG esperado para um contexto clínico de um caso.
+ * Desacopla morfologia (preset) de FC (fonte dinâmica).
+ */
+export interface ECGEsperado {
+  indicado: boolean
+  contexto: ContextoECG
+  /** ID do preset morfológico (forma do traçado: P-QRS-T, ST, onda). */
+  presetMorfologicoId: string
+  /** Como resolver a FC para geração e interpretação. */
+  fonteFrequencia: FonteFrequencia
+  /** FC em bpm — obrigatório quando fonteFrequencia === 'especifica'. */
+  frequenciaEspecifica?: number
+  /** Texto de ritmo esperado para validação e laudo (ex.: "Ritmo sinusal, FC 78 bpm"). */
+  ritmoEsperado?: string
+  /** Laudo completo esperado para comparação e exportação PDF. */
+  laudoEsperado?: string
+}
+
+/**
+ * Conjunto de ECGs esperados para os diferentes momentos clínicos de um caso.
+ * Futura substituição da estrutura esperadosExames.ecg.
+ */
+export interface ECGsDoCaso {
+  repouso?: ECGEsperado
+  duranteSintomas?: ECGEsperado
+  esforco?: ECGEsperado
+  posIntervencao?: ECGEsperado
+}

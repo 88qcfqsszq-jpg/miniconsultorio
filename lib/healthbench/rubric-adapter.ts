@@ -1,12 +1,12 @@
 /**
  * Rubric Adapter — converte a rubrica OSCE existente do caso em HealthBenchRubricItem[].
  *
- * FONTE OFICIAL (não cria rubrica paralela):
- * - Caso.rubrica_correcao: { criterio, peso, descricao, pontuacao_maxima }
- * - Caso.checklist_osce:    { item, realizado, critico? }
- * - Caso.erros_criticos:    { erro, descricao, penalidade }
- *
- * Mapeamento conservador de tags por eixo (axis:*) quando a rubrica não as tem.
+ * FONTES (prioridade decrescente):
+ * 1. PerfilRubricaCaso definitivo (data/rubricas-osce-adulto-pediatrico-ts/…)
+ *    → itens caso-específicos por domínio (anamnese, exame, exames, diagnóstico, conduta, segurança)
+ * 2. Caso.rubrica_correcao / checklist_osce / erros_criticos (rubrica genérica do caso)
+ * 3. DIAGNOSIS_MICROCRITERIA (microcritérios específicos por diagnóstico)
+ * 4. CARDS_CONFIG.criteriosMinimos (mínimos genéricos por card — apenas onde faltar cobertura)
  */
 
 import type { Caso } from "@/lib/types";
@@ -18,6 +18,7 @@ import {
   AXIS_PARA_CAMPO,
   type DiagnosticoRubricaKey,
 } from "./diagnosis-microcriteria";
+import { carregarPerfilRubrica, converterPerfilParaItens } from "./perfil-rubrica-loader";
 
 /**
  * Eixo PRIMÁRIO do critério (um dos 6 cards, exceto segurança que é tag adicional).
@@ -105,7 +106,7 @@ function slug(s: string, fallback: string): string {
 
 /**
  * Converte a rubrica oficial do caso para o formato HealthBench.
- * Inclui critérios positivos (rubrica_correcao + checklist) e negativos (erros_criticos).
+ * Inclui critérios positivos (rubrica_correcao + checklist + perfil definitivo) e negativos (erros_criticos).
  */
 export function adaptarRubricaDoCaso(caso: Caso): HealthBenchRubricItem[] {
   const itens: HealthBenchRubricItem[] = [];
@@ -117,6 +118,19 @@ export function adaptarRubricaDoCaso(caso: Caso): HealthBenchRubricItem[] {
     caso?.tipoPaciente === "pediatrico" || (Number.isFinite(idade) && idade < 14)
       ? "paciente pediatrico crianca"
       : "paciente adulto";
+
+  // 0. PerfilRubricaCaso definitivo — itens caso-específicos por domínio.
+  //    Quando disponível, são adicionados PRIMEIRO para que garantirCoberturaMinima
+  //    os reconheça como cobertura real e adicione menos genéricos.
+  const perfil = carregarPerfilRubrica(caso.id, caso.tipoPaciente);
+  if (perfil) {
+    const perfilItens = converterPerfilParaItens(perfil);
+    // Propaga theme tag para itens do perfil quando aplicável
+    if (theme) {
+      perfilItens.forEach((it) => { it.tags = [...(it.tags ?? []), theme]; });
+    }
+    itens.push(...perfilItens);
+  }
 
   // Identificar diagnóstico para rubrica específica (fallback genérico se não houver).
   const diagKey = identificarDiagnosticoRubrica(
@@ -153,8 +167,6 @@ export function adaptarRubricaDoCaso(caso: Caso): HealthBenchRubricItem[] {
     const item = c?.item || `Item ${i + 1}`;
     const axis = inferirAxisPrimario(item);
     const tags = [axis];
-    // Segurança como tag adicional APENAS por conteúdo (não para todo item crítico,
-    // senão segurança canibaliza os demais cards na partição por card único).
     if (temSeguranca(item) && axis !== AXIS_TAGS.seguranca) {
       tags.push(AXIS_TAGS.seguranca);
     }
@@ -187,9 +199,8 @@ export function adaptarRubricaDoCaso(caso: Caso): HealthBenchRubricItem[] {
     });
   });
 
-  // 4. COBERTURA MÍNIMA por MICROCRITÉRIOS: garantir que cada card tenha critérios
-  // positivos ATÔMICOS suficientes (minimoCobertura), permitindo pontuação parcial.
-  // Prioriza microcritérios ESPECÍFICOS do diagnóstico; genéricos como fallback.
+  // 4. COBERTURA MÍNIMA por MICROCRITÉRIOS: apenas completa onde o perfil definitivo
+  //    não cobriu (quando há perfil, a maioria dos cards já terá cobertura suficiente).
   garantirCoberturaMinima(itens, diagKey);
 
   const comSeguranca = itens.filter((it) =>
