@@ -194,7 +194,7 @@ export interface RespostaGeracaoECG {
 
 export type AgeGroup = 'neonato' | 'lactente' | 'pre_escolar' | 'escolar' | 'adolescente' | 'adulto'
 
-export type ECGPresetCategory = 'normal' | 'ritmo' | 'isquemia' | 'conducao' | 'sobrecarga' | 'eletrolitos' | 'artefato'
+export type ECGPresetCategory = 'normal' | 'ritmo' | 'isquemia' | 'conducao' | 'sobrecarga' | 'eletrolitos' | 'artefato' | 'inflamatoria'
 
 export type AxisProfile = 'normal' | 'rightward' | 'leftward' | 'extreme'
 

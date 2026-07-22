@@ -17,6 +17,7 @@ import { artefactPresets } from './artefactPresets'
 import { conductionPresets } from './conductionPresets'
 import { arrhythmiaPresets } from './arrhythmiaPresets'
 import { ischemiaPresets } from './ischemiaPresets'
+import { inflammatoryPresets } from './inflammatoryPresets'
 
 /**
  * EXPORT ÚNICO: Todos os presets da Etapa 1 + Etapa 2 + Etapa 3
@@ -45,6 +46,8 @@ export const ALL_ECG_PRESETS: Record<string, ECGPreset> = {
   ...arrhythmiaPresets,
   // Etapa 3
   ...ischemiaPresets,
+  // Microetapa ECG-2
+  ...inflammatoryPresets,
 }
 
 /**
@@ -130,12 +133,13 @@ export function getPresetOptionsForSelect(): Array<{
   label: string
   options: Array<{ value: string; label: string }>
 }> {
-  const categories: ECGPresetCategory[] = ['normal', 'ritmo', 'isquemia', 'conducao', 'sobrecarga', 'eletrolitos', 'artefato']
+  const categories: ECGPresetCategory[] = ['normal', 'ritmo', 'isquemia', 'inflamatoria', 'conducao', 'sobrecarga', 'eletrolitos', 'artefato']
 
   const categoryLabels: Record<ECGPresetCategory, string> = {
     normal: 'Normais por Idade',
     ritmo: 'Ritmos',
     isquemia: 'Isquemia / Infarto',
+    inflamatoria: 'Inflamatórias / Pericárdicas',
     conducao: 'Distúrbios de Condução',
     sobrecarga: 'Sobrecargas / Hipertrofias',
     eletrolitos: 'Alterações Eletrolíticas',

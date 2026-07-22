@@ -297,10 +297,12 @@ export function generateECG(params: ParametrosGeracaoECG): RespostaGeracaoECG {
     duracaoQTc: Math.round(QTc),
   }
 
-  // Augmentação estruturada para presets de isquemia com modificadores por derivação.
+  // Augmentação estruturada para presets de isquemia/inflamatórios com modificadores por
+  // derivação (ambas as categorias usam achados de ST/T por derivação como achado central —
+  // ex.: pericardite tem ST difuso, não territorial, mas ainda descrito por derivação).
   // O campo `ritmo` descreve o mecanismo sinusal; `diagnosticoPrincipal` carrega o diagnóstico.
-  // Presets sem `category === 'isquemia'` ou sem `leadModifiers` não entram aqui.
-  if (ecgPreset.category === 'isquemia' && ecgPreset.leadModifiers) {
+  // Presets sem essas categorias ou sem `leadModifiers` não entram aqui.
+  if ((ecgPreset.category === 'isquemia' || ecgPreset.category === 'inflamatoria') && ecgPreset.leadModifiers) {
     const ei = ecgPreset.expectedInterpretation
     // [0] = diagnóstico principal; [1] = descrição do ritmo; [2..] = achados específicos
     interpretacao.diagnosticoPrincipal = ei[0]
