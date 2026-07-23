@@ -868,7 +868,7 @@ function CasoPageContent() {
             SOAP não é renderizado nesta organização (componente preservado). */}
         <div className="consultorio-medix-grid hidden lg:grid lg:grid-cols-[minmax(0,1fr)_320px] gap-4 items-start">
           {/* Coluna esquerda/central: barra Atendimento + chat + painéis */}
-          <div className={`min-w-0 space-y-4 consultorio-medix-center${menuAtivo !== "paciente" ? " medix-center-has-panel" : ""}`}>
+          <div className="min-w-0 space-y-4 consultorio-medix-center medix-center-has-panel">
             {/* Barra Atendimento horizontal (mesmos botões/ícones/labels) */}
             <nav className="attendance-bar" aria-label="Atendimento">
               <div className="attendance-bar-list">
