@@ -152,8 +152,11 @@ function CasoPageContent() {
   // Restaura o progresso salvo do atendimento (se houver) para retomar de onde parou.
   const restaurarProgresso = () => {
     const snap = getAttendanceProgress(casoId);
-    if (!snap) return;
+    // Sempre reflete o progresso do caso ATUAL (ou nenhum) — nunca deixa
+    // resquício do snapshot de um caso anterior quando o novo caso não tem
+    // progresso salvo (evita vazar mensagens/estado antigos para o chat).
     progressoRestauradoRef.current = snap;
+    if (!snap) return;
     if (snap.mensagens) setMensagens(snap.mensagens);
     if (snap.manobras) setManobrasSolicitadas(snap.manobras);
     if (snap.exames) setExamesSolicitados(snap.exames);
@@ -168,6 +171,11 @@ function CasoPageContent() {
 
   // Carregar caso
   useEffect(() => {
+    // O chat pertence exclusivamente ao caso atual: zera o histórico de
+    // imediato a cada troca de casoId (restaurarProgresso() abaixo repõe as
+    // mensagens salvas do NOVO caso, se houver).
+    setMensagens([]);
+
     // 1. Verificar sessionStorage primeiro (para casos gerados)
     try {
       const casoGerado = sessionStorage.getItem("casoGerado");
@@ -906,7 +914,7 @@ function CasoPageContent() {
 
             {/* Chat */}
             <div className="flex flex-col medix-chat-slot">
-              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} mensagensIniciais={progressoRestauradoRef.current?.mensagens} />
+              <ChatPaciente key={casoId} nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} mensagensIniciais={progressoRestauradoRef.current?.mensagens} />
             </div>
 
             {/* Conteúdo Dinâmico (Exames Solicitados / painéis) — abaixo do chat */}
@@ -992,7 +1000,7 @@ function CasoPageContent() {
           <div className={abaAtiva === "paciente" ? "block" : "hidden"}>
             {/* Bloco informativo pediátrico removido da tela do aluno (ver desktop). */}
             <div className="h-[calc(100dvh-200px)] min-h-80 flex flex-col">
-              <ChatPaciente nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} mensagensIniciais={progressoRestauradoRef.current?.mensagens} />
+              <ChatPaciente key={casoId} nomePaciente={caso.paciente.nome} casoId={casoId} caso={caso} onMensagensChange={setMensagens} mensagensIniciais={progressoRestauradoRef.current?.mensagens} />
             </div>
           </div>
           <div className={abaAtiva === "exame" ? "block" : "hidden"}>
